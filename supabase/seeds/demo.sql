@@ -501,7 +501,10 @@ on conflict do nothing;
 insert into volunteer_applications
   (volunteer_role_id, user_id, full_name, email, phone, region, university, career_cycle,
    motivation, completed_courses, status, created_at)
-select vr.id, a.uid, a.name, a.email, a.phone, a.region, a.uni, a.cycle, a.mot, a.courses, a.st, a.created
+-- `a.st` sale de un VALUES, así que Postgres lo tipa como text:
+-- hay que castearlo explícitamente al enum.
+select vr.id, a.uid, a.name, a.email, a.phone, a.region, a.uni, a.cycle,
+       a.mot, a.courses, a.st::application_status, a.created
 from volunteer_roles vr,
 (values
   ('mentor', 'b1000000-0000-4000-8000-000000000011'::uuid, 'Ricardo Mamani Ccama', 'ricardo@demo.sep.pe',

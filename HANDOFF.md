@@ -4,16 +4,36 @@ Repo: https://github.com/tamoil-0/Sep · rama `main` · Next.js 16 + Supabase + 
 
 ---
 
-## ⚠️ LO PRIMERO QUE DEBE HACER LA SIGUIENTE IA
+## ✅ SQL EJECUTADO Y VALIDADO EN LOCAL
 
-**El SQL nunca se ejecutó.** Se escribió y revisó estáticamente (Docker no estaba
-disponible). Antes de tocar código nuevo:
+Las 10 migraciones aplican limpias y el seed carga. Verificado con Postgres real:
 
-```bash
-supabase start && supabase db reset
+```
+usuarios: 15 | roles: 23 | cursos: 5 | sesiones: 24 | inscripciones: 9
+certificados: 4 | pagos: 5 | talleres: 7 | escolares: 130 | diagnóstico: 1350
 ```
 
-Si falla, arreglar la migración que rompa. Es lo único bloqueante.
+**Pruebas de seguridad pasadas** (Kevin, estudiante):
+- `grant_role` sobre sí mismo → `FORBIDDEN`
+- `review_payment` → `FORBIDDEN`
+- `insert into certificates` → violación de RLS
+- Ve **1 perfil de 15** y **1 pago de 5**
+
+**Flujo de negocio pasado:** inscripción bloqueada en curso cerrado → marcar
+6 sesiones → progreso 100% → `create_order` con precio de la BD (S/50) →
+voucher → admin aprueba → certificado `SEP-2026-B1708B` emitido + job PDF
+encolado + notificación + auditoría.
+
+**App verificada** contra la BD real: `/cursos`, `/colegios`, `/speakers`,
+`/eventos` renderizan datos del seed. Login OK con las 3 cuentas probadas.
+
+### Arrancar en local
+```bash
+npx supabase@latest start     # necesita Docker Desktop abierto
+npm run dev
+```
+Las claves locales ya están en `.env.local` (no versionado). Si lo pierdes,
+`npx supabase@latest status` las vuelve a imprimir.
 
 ---
 
