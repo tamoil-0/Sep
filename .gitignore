@@ -11,9 +11,16 @@
 next-env.d.ts
 
 # entorno — NUNCA versionar claves
+# Patrones amplios: cualquier archivo que empiece o termine en "env" queda fuera,
+# sin importar la carpeta. Un .gitignore estrecho ya casi publica las claves una vez.
 .env
-.env.local
-.env*.local
+.env.*
+*.env
+.env*
+**/.env*
+**/*envsupabase*
+**/credenciales*
+**/secrets*
 
 # supabase local
 /supabase/.branches
