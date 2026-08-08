@@ -8,7 +8,7 @@ import { Logo } from "@/components/brand/logo";
 import { appNav } from "@/config/navigation";
 import { ROLE_META, type UserRole } from "@/types/roles";
 import { cn, initials } from "@/lib/utils";
-import { logoutAction } from "@/server/actions/auth";
+import { LogoutDialog } from "@/components/app/logout-dialog";
 
 type IconName = keyof typeof Icons;
 
@@ -113,15 +113,9 @@ export function AppSidebar({
           </span>
         </Link>
 
-        <form action={logoutAction}>
-          <button
-            type="submit"
-            className="mt-1 flex w-full items-center gap-2.5 rounded-[8px] px-3 py-2 text-[0.8125rem] text-white/50 transition-colors hover:bg-white/8 hover:text-white"
-          >
-            <Icons.LogOut className="size-4" />
-            Cerrar sesión
-          </button>
-        </form>
+        <div className="mt-1">
+          <LogoutDialog userName={fullName || email} />
+        </div>
       </div>
     </>
   );

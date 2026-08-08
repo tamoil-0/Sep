@@ -614,7 +614,66 @@ export interface Database {
         created_at: string;
       }>;
     };
-    Views: Record<string, never>;
+    /** Vistas de analítica (migración 0009). Solo lectura. */
+    Views: {
+      course_stats: Table<{
+        id: string;
+        slug: string;
+        title: string;
+        status: CourseStatusDb;
+        audience: CourseAudienceDb;
+        category: string | null;
+        sessions_count: number;
+        enrollments: number;
+        completions: number;
+        avg_progress: number;
+        completion_rate: number;
+      }>;
+      region_stats: Table<{
+        region: string;
+        users: number;
+        students: number;
+        teachers: number;
+        mentors: number;
+      }>;
+      certificate_stats: Table<{
+        id: string;
+        name: string;
+        issuer: string;
+        price_cents: number;
+        total: number;
+        issued: number;
+        pending: number;
+        revoked: number;
+        revenue_cents: number;
+      }>;
+      revenue_by_month: Table<{
+        month: string;
+        item_type: string;
+        transactions: number;
+        total_cents: number;
+      }>;
+      school_impact: Table<{
+        institution_id: string;
+        name: string;
+        region: string;
+        province: string | null;
+        workshops_done: number;
+        students_reached: number;
+        facilitators: number;
+        last_workshop: string | null;
+      }>;
+      volunteer_leaderboard: Table<{
+        user_id: string;
+        full_name: string;
+        region: string | null;
+        type: VolunteerType;
+        started_at: string;
+        approved_hours: number;
+        pending_hours: number;
+        mentees: number;
+      }>;
+    };
     Functions: {
       /* ── Helpers de RBAC (0005) ── */
       has_role: { Args: { check_role: UserRole }; Returns: boolean };
