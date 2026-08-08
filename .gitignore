@@ -34,3 +34,5 @@ Thumbs.db
 npm-debug.log*
 yarn-error.log*
 .vercel
+.demo-pass.txt
+docs/CUENTAS-DEMO.md
