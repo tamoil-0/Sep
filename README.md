@@ -1,3 +1,4 @@
+| [`docs/SUPABASE-PASO-A-PASO.md`](./docs/SUPABASE-PASO-A-PASO.md) | **Empieza aquí.** Crear la cuenta de Supabase, migrar el esquema y subir los datos, campo por campo |
 # Plataforma SEP
 
 **Semillero de Emprendedores Perú** — *¡Emprende hoy, lidera mañana!*
