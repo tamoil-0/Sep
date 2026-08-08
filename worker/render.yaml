@@ -1,0 +1,61 @@
+# ═══════════════════════════════════════════════════════════
+# SEP · Render — Plan Maestro §11.4
+#
+# Render NO es necesario para el MVP. Se activa cuando aparezca
+# alguna de estas necesidades, que Vercel no puede cubrir:
+#
+#   · Generar 200+ certificados PDF en lote      → timeout en Vercel
+#   · Enviar el newsletter a 1,200+ suscriptores → riesgo de corte
+#   · Reporte anual de impacto (agregaciones)    → timeout en Vercel
+#   · Reprocesar imágenes de talleres            → CPU sostenida
+#
+# El worker consume la tabla `job_queue` de Supabase (patrón outbox):
+# la web encola, el worker procesa y marca done/failed con reintento
+# exponencial. Usa la service-role key, así que salta RLS: mantener
+# sus permisos al mínimo indispensable.
+# ═══════════════════════════════════════════════════════════
+
+services:
+  # ── Worker permanente: procesa la cola de trabajos ────────
+  - type: worker
+    name: sep-worker
+    runtime: node
+    plan: starter # $7/mes
+    region: oregon
+    branch: main
+    rootDir: worker
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false
+      - key: SITE_URL
+        sync: false
+      - key: POLL_INTERVAL_MS
+        value: "5000"
+
+  # ── Cron mensual: reporte de impacto ─────────────────────
+  - type: cron
+    name: sep-impact-report
+    runtime: node
+    plan: starter
+    region: oregon
+    branch: main
+    rootDir: worker
+    schedule: "0 6 1 * *" # 1.º de cada mes, 06:00 UTC (01:00 Perú)
+    buildCommand: npm ci && npm run build
+    startCommand: node dist/jobs/impact-report.js
+    envVars:
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: RESEND_API_KEY
+        sync: false

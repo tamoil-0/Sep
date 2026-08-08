@@ -1,0 +1,80 @@
+import Link from "next/link";
+import { ArrowLeft, Award, Globe, Sprout, Users } from "lucide-react";
+import { Logo } from "@/components/brand/logo";
+
+const highlights = [
+  { icon: Sprout, text: "Cursos 100 % gratuitos, siempre" },
+  { icon: Globe, text: "Presencia en 10+ regiones del Perú" },
+  { icon: Award, text: "Certificación nacional e internacional" },
+  { icon: Users, text: "Comunidad de 75+ jóvenes formados" },
+];
+
+export default function AuthLayout({ children }: { children: React.ReactNode }) {
+  return (
+    <div className="grid min-h-screen lg:grid-cols-2">
+      {/* Panel de marca */}
+      <aside className="relative hidden overflow-hidden sep-gradient lg:flex lg:flex-col lg:justify-between lg:p-12">
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.14]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+        <div
+          aria-hidden
+          className="pointer-events-none absolute -bottom-40 -left-24 size-[440px] rounded-full bg-white/10 blur-3xl"
+        />
+
+        <Link href="/" className="relative">
+          <Logo className="h-8" variant="white" showTagline />
+        </Link>
+
+        <div className="relative">
+          <h2 className="max-w-md font-display text-[2.25rem] font-bold leading-[1.15] text-white">
+            El talento está en regiones.
+            <br />
+            <span className="text-gold-500">Aquí empieza tu camino.</span>
+          </h2>
+
+          <ul className="mt-9 space-y-3.5">
+            {highlights.map((h) => (
+              <li key={h.text} className="flex items-center gap-3 text-white/80">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/12 ring-1 ring-inset ring-white/15">
+                  <h.icon className="size-4 text-gold-500" />
+                </span>
+                <span className="text-[0.9375rem]">{h.text}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="relative text-xs text-white/45">
+          Organización juvenil reconocida por SENAJU · Desde Áncash, 2024
+        </p>
+      </aside>
+
+      {/* Formulario */}
+      <main className="flex flex-col px-5 py-8 sm:px-10 lg:px-16 lg:py-12">
+        <div className="flex items-center justify-between">
+          <Link href="/" className="lg:hidden">
+            <Logo className="h-7" />
+          </Link>
+          <Link
+            href="/"
+            className="ml-auto inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+          >
+            <ArrowLeft className="size-4" />
+            Volver al inicio
+          </Link>
+        </div>
+
+        <div className="flex flex-1 items-center justify-center py-10">
+          <div className="w-full max-w-[420px]">{children}</div>
+        </div>
+      </main>
+    </div>
+  );
+}
