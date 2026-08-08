@@ -1,16 +1,35 @@
 import type { NextConfig } from "next";
 
+const isDev = process.env.NODE_ENV !== "production";
+
+/**
+ * En desarrollo React necesita `eval()` para el hot reload y para reconstruir
+ * los stack traces. En producción nunca lo usa, así que la directiva se añade
+ * solo en dev: el build desplegado mantiene la CSP estricta.
+ */
+const scriptSrc = [
+  "'self'",
+  "'unsafe-inline'",
+  isDev ? "'unsafe-eval'" : "",
+  "https://*.supabase.co",
+  "https://checkout.culqi.com",
+  "https://js.hcaptcha.com",
+  "https://va.vercel-scripts.com",
+]
+  .filter(Boolean)
+  .join(" ");
+
 /** Cabeceras de seguridad — Plan Maestro §9.4 */
 const securityHeaders = [
   {
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
-      "script-src 'self' 'unsafe-inline' https://*.supabase.co https://checkout.culqi.com https://js.hcaptcha.com https://va.vercel-scripts.com",
+      `script-src ${scriptSrc}`,
       "style-src 'self' 'unsafe-inline'",
       "img-src 'self' data: blob: https://*.supabase.co",
       "font-src 'self' data:",
-      "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.culqi.com https://hcaptcha.com https://*.hcaptcha.com",
+      `connect-src 'self' ${isDev ? "ws://localhost:* http://127.0.0.1:*" : ""} https://*.supabase.co wss://*.supabase.co https://api.culqi.com https://hcaptcha.com https://*.hcaptcha.com`,
       "frame-src https://checkout.culqi.com https://hcaptcha.com https://*.hcaptcha.com",
       "frame-ancestors 'none'",
       "base-uri 'self'",
