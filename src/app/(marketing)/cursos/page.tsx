@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, Sprout } from "lucide-react";
 import { getCatalog } from "@/server/queries/courses";
+import { CourseCover } from "@/components/brand/illustrations";
 import { Badge, Card, Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { COURSE_FORMAT } from "@/config/courses";
@@ -13,6 +14,9 @@ export const metadata: Metadata = {
   description:
     "Design Thinking, Scrum para proyectos sociales, liderazgo regional y metodologías activas para docentes. 8 horas, 6 sesiones en vivo, 100 % virtual y gratuito.",
 };
+
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
 
 export default async function CursosPage() {
   const courses = await getCatalog();
@@ -59,11 +63,23 @@ export default async function CursosPage() {
                 <Card
                   key={c.id}
                   interactive
-                  className="flex flex-col p-6"
+                  className="flex flex-col p-4"
                   as={Link}
-                  {...{ href: `/cursos/${c.slug}` }}
+                  {...{ href: `/cursos/${c.slug}`, prefetch: false }}
                 >
-                  <div className="flex flex-wrap items-center gap-1.5">
+                  <CourseCover
+                    pattern={
+                      c.category === "SILP"
+                        ? "silp"
+                        : c.category === "Liderazgo"
+                          ? "liderazgo"
+                          : c.category === "Para docentes"
+                            ? "docentes"
+                            : "agiles"
+                    }
+                    className="mb-4 aspect-[16/9] w-full"
+                  />
+                  <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (
                       <Badge tone="seed">Disponible</Badge>
                     ) : (
@@ -73,6 +89,7 @@ export default async function CursosPage() {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
+                  <div className="px-1">
                   <h2 className="mt-4 font-display text-[1.125rem] font-semibold leading-snug text-ink">
                     {c.title}
                   </h2>
@@ -104,6 +121,7 @@ export default async function CursosPage() {
                       <ArrowRight className="size-3.5" />
                     </span>
                   </p>
+                  </div>
                 </Card>
               );
             })}

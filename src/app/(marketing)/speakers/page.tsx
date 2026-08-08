@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Globe, Mic, Users } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -19,8 +19,11 @@ export const metadata: Metadata = {
     "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 10+ regiones del Perú.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 export default async function SpeakersPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data: speakers } = await supabase
     .from("speaker_profiles")

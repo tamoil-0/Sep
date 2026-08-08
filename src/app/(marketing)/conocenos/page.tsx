@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import { DiagnosticWizard } from "./wizard";
 
 export const metadata: Metadata = {
@@ -8,8 +8,11 @@ export const metadata: Metadata = {
     "3 minutos, sin crear cuenta. Ayúdanos a construir lo que realmente necesitas: qué te frena, qué sueñas y qué te haría falta.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 export default async function ConocenosPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data: questions } = await supabase
     .from("survey_questions")

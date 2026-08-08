@@ -1,10 +1,12 @@
 import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 /** Catálogo público. Solo cursos publicados; RLS lo garantiza. */
 export const getCatalog = cache(async () => {
-  const supabase = await createClient();
+  // Cliente público: sin cookies, así la página puede ser estática con ISR.
+  const supabase = createPublicClient();
   const { data } = await supabase
     .from("courses")
     .select(
@@ -17,7 +19,7 @@ export const getCatalog = cache(async () => {
 });
 
 export const getCourseBySlug = cache(async (slug: string) => {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data } = await supabase
     .from("courses")
     .select("*")

@@ -18,6 +18,9 @@ export const metadata: Metadata = {
     "Demo Days, ferias de innovación escolar, webinars y talleres abiertos de SEP. Participación gratuita desde cualquier región.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 const kindLabels: Record<string, string> = {
   demo_day: "Demo Day",
   webinar: "Webinar",

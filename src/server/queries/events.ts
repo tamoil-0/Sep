@@ -1,6 +1,6 @@
 import "server-only";
 import { cache } from "react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 
 /**
  * Eventos publicados, ya separados en próximos y pasados.
@@ -9,7 +9,7 @@ import { createClient } from "@/lib/supabase/server";
  * puro y deja una sola fuente de verdad para «qué cuenta como próximo».
  */
 export const getPublishedEvents = cache(async () => {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const nowIso = new Date().toISOString();
 
   const [{ data: upcoming }, { data: past }] = await Promise.all([

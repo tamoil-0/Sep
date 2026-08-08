@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, PenLine } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -18,8 +18,11 @@ export const metadata: Metadata = {
     "Aprendizajes, metodologías y crónicas del ecosistema de innovación social en regiones del Perú.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 export default async function BlogPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data: posts } = await supabase
     .from("blog_posts")

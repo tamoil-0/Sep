@@ -36,10 +36,12 @@ export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   href?: string;
+  /** Precarga la ruta al entrar en viewport. Solo aplica a enlaces internos. */
+  prefetch?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, href, ...props }, ref) => {
+  ({ className, variant, size, href, prefetch, ...props }, ref) => {
     const classes = cn(buttonVariants({ variant, size }), className);
 
     if (href) {
@@ -58,6 +60,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       return (
         <Link
           href={href}
+          prefetch={prefetch}
           className={classes}
           {...(props as React.AnchorHTMLAttributes<HTMLAnchorElement>)}
         />

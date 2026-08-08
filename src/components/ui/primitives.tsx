@@ -109,6 +109,113 @@ export function SectionHeader({
   );
 }
 
+/**
+ * Cabecera de página.
+ *
+ * Existe para que todas las pantallas respiren igual: mismo alto, misma
+ * jerarquía y mismo lugar para las métricas. Antes cada página inventaba
+ * su propio hero y el sitio se sentía como cinco sitios distintos.
+ */
+export function PageHero({
+  eyebrow,
+  title,
+  description,
+  stats,
+  action,
+  aside,
+  tone = "muted",
+}: {
+  eyebrow?: React.ReactNode;
+  title: React.ReactNode;
+  description?: React.ReactNode;
+  stats?: { value: string; label: string }[];
+  action?: React.ReactNode;
+  aside?: React.ReactNode;
+  tone?: "muted" | "gradient";
+}) {
+  const inverted = tone === "gradient";
+
+  return (
+    <section
+      className={cn(
+        "relative overflow-hidden",
+        inverted ? "sep-gradient" : "border-b border-line bg-surface-1",
+      )}
+    >
+      {inverted && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          style={{
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+            backgroundSize: "32px 32px",
+          }}
+        />
+      )}
+
+      <Container size="wide" className="relative py-16 sm:py-20">
+        <div
+          className={cn(
+            "grid items-center gap-12",
+            aside && "lg:grid-cols-[1.2fr_1fr]",
+          )}
+        >
+          <div className="max-w-2xl">
+            {eyebrow}
+            <h1
+              className={cn(
+                "mt-5 font-display text-[2.5rem] font-bold leading-[1.06] tracking-[-0.03em] sm:text-[3.25rem]",
+                inverted ? "text-white" : "text-ink",
+              )}
+            >
+              {title}
+            </h1>
+            {description && (
+              <p
+                className={cn(
+                  "mt-5 text-lg leading-relaxed",
+                  inverted ? "text-white/75" : "text-slate-ui",
+                )}
+              >
+                {description}
+              </p>
+            )}
+            {action && <div className="mt-8">{action}</div>}
+          </div>
+
+          {aside && <div className="mx-auto w-full max-w-xs lg:max-w-none">{aside}</div>}
+        </div>
+
+        {stats && stats.length > 0 && (
+          <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dd
+                  className={cn(
+                    "tabular font-display text-[2rem] font-semibold leading-none",
+                    inverted ? "text-gold-500" : "sep-gradient-text",
+                  )}
+                >
+                  {s.value}
+                </dd>
+                <dt
+                  className={cn(
+                    "mt-2 text-[0.8125rem] leading-snug",
+                    inverted ? "text-white/65" : "text-slate-ui",
+                  )}
+                >
+                  {s.label}
+                </dt>
+              </div>
+            ))}
+          </dl>
+        )}
+      </Container>
+    </section>
+  );
+}
+
 /* ── Superficies ──────────────────────────────────────────── */
 
 type CardProps = {

@@ -11,12 +11,21 @@ import {
   Repeat,
   Video,
 } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
-import { getCourseBySlug } from "@/server/queries/courses";
+import { createPublicClient } from "@/lib/supabase/public";
+import { getCatalog, getCourseBySlug } from "@/server/queries/courses";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+
+/** ISR: se regenera cada 5 min en lugar de consultar la BD en cada visita. */
+export const revalidate = 300;
+
+/** Prerrenderiza una página por curso en el build; las nuevas se generan al vuelo. */
+export async function generateStaticParams() {
+  const courses = await getCatalog();
+  return courses.map((c) => ({ slug: c.slug }));
+}
 
 export async function generateMetadata({
   params,
@@ -43,7 +52,7 @@ export default async function CursoPublicoPage({
   const course = await getCourseBySlug(slug);
   if (!course) notFound();
 
-  const supabase = await createClient();
+  const supabase = createPublicClient();
   const { data: sessions } = await supabase
     .from("course_sessions")
     .select("id, number, week, title, subtitle, description")

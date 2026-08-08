@@ -1,21 +1,11 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  Award,
   BadgeCheck,
   Building2,
-  CalendarDays,
   Check,
-  Clock,
-  GraduationCap,
-  Globe,
-  Handshake,
-  Lightbulb,
-  MessageCircle,
-  Mic,
   School,
   Sparkles,
-  Sprout,
   Users,
 } from "lucide-react";
 
@@ -28,100 +18,104 @@ import {
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
+import {
+  AvatarStack,
+  CourseCover,
+  DotGrid,
+  HeroIllustration,
+  ImpactChainIllustration,
+  StatBlock,
+  type CoursePattern,
+} from "@/components/brand/illustrations";
 import { CountUp } from "@/components/marketing/count-up";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
-import {
-  faqs,
-  impactChain,
-  impactStats,
-  partners,
-  problemStats,
-  siteConfig,
-} from "@/config/site";
-import { courses, silp } from "@/config/courses";
-import { certificateTypes } from "@/config/pricing";
-import { schoolBenefits, volunteerRoles } from "@/config/volunteering";
+import { faqs, impactStats, partners, siteConfig } from "@/config/site";
+import { getCatalog } from "@/server/queries/courses";
 import { formatSoles } from "@/lib/utils";
 
-export default function HomePage() {
+/** ISR: la portada se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
+const patternFor = (category: string | null): CoursePattern => {
+  if (category === "SILP") return "silp";
+  if (category === "Liderazgo") return "liderazgo";
+  if (category === "Para docentes") return "docentes";
+  return "agiles";
+};
+
+export default async function HomePage() {
+  const catalog = await getCatalog();
+  const courses = catalog.filter((c) => c.category !== "SILP").slice(0, 4);
+
   return (
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
       <section className="relative overflow-hidden sep-gradient">
+        <DotGrid tone="dark" className="opacity-90" />
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-32 -top-32 size-[520px] rounded-full bg-white/10 blur-3xl"
+          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-white/10 blur-3xl"
         />
 
-        <Container size="wide" className="relative py-20 sm:py-28">
-          <div className="max-w-3xl">
-            <Badge tone="white">
-              <BadgeCheck className="size-3.5" />
-              Reconocidos por SENAJU · Desde Áncash para el Perú
-            </Badge>
+        <Container size="wide" className="relative">
+          <div className="grid items-center gap-12 py-20 lg:grid-cols-[1.15fr_1fr] lg:py-28">
+            <div>
+              <Badge tone="white">
+                <BadgeCheck className="size-3.5" />
+                Reconocidos por SENAJU
+              </Badge>
 
-            <h1 className="mt-6 font-display text-[2.75rem] font-bold leading-[1.05] tracking-[-0.03em] text-white sm:text-[4rem] lg:text-[4.5rem]">
-              Emprende hoy,
-              <br />
-              <span className="text-gold-500">lidera mañana.</span>
-            </h1>
+              <h1 className="mt-6 font-display text-[2.75rem] font-bold leading-[1.02] tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[4.5rem]">
+                Emprende hoy,
+                <br />
+                <span className="text-gold-500">lidera mañana.</span>
+              </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/80 sm:text-xl">
-              Democratizamos metodologías ágiles para jóvenes universitarios y docentes de
-              todas las regiones del Perú.{" "}
-              <strong className="font-semibold text-white">
-                100 % virtual y gratuito, siempre.
-              </strong>
-            </p>
+              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/75">
+                Formación en metodologías ágiles para jóvenes de todas las regiones del
+                Perú. Gratis, siempre.
+              </p>
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-              <Button href="/registro" variant="gold" size="lg">
-                Empezar gratis
-                <ArrowRight className="size-4" />
-              </Button>
-              <Button href="/cursos" variant="outline-white" size="lg">
-                Ver los cursos
-              </Button>
+              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+                <Button href="/registro" variant="gold" size="lg" prefetch>
+                  Empezar gratis
+                  <ArrowRight className="size-4" />
+                </Button>
+                <Button href="/cursos" variant="outline-white" size="lg" prefetch>
+                  Ver los cursos
+                </Button>
+              </div>
+
+              <div className="mt-10 flex items-center gap-4">
+                <AvatarStack initials={["AN", "RM", "LV", "KQ"]} extra={131} />
+                <p className="text-sm text-white/65">
+                  <strong className="font-semibold text-white">+135 jóvenes</strong> ya
+                  se formaron con SEP
+                </p>
+              </div>
             </div>
 
-            <p className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-white/60">
-              <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-gold-500" /> Sin costo de acceso
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-gold-500" /> Desde cualquier región
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-gold-500" /> Certificado opcional
-              </span>
-            </p>
+            <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
+              <HeroIllustration />
+            </div>
           </div>
         </Container>
 
-        {/* ═══ 2 · MÉTRICAS ══════════════════════════════════ */}
+        {/* ═══ 2 · MÉTRICAS ════════════════════════════════ */}
         <div className="relative border-t border-white/12">
           <Container size="wide">
             <dl className="grid grid-cols-2 gap-y-8 py-10 sm:grid-cols-3 lg:grid-cols-5">
               {impactStats.map((stat) => (
                 <div key={stat.label}>
-                  <dd className="tabular font-display text-[2rem] font-semibold leading-none text-gold-500 sm:text-[2.25rem]">
+                  <dd className="tabular font-display text-[1.875rem] font-semibold leading-none text-gold-500">
                     <CountUp
                       value={stat.value}
                       prefix={"prefix" in stat ? stat.prefix : ""}
                       suffix={"suffix" in stat ? stat.suffix : ""}
                     />
                   </dd>
-                  <dt className="mt-2 text-[0.8125rem] leading-snug text-white/65">
+                  <dt className="mt-2 text-[0.8125rem] leading-snug text-white/60">
                     {stat.label}
                   </dt>
                 </div>
@@ -131,678 +125,404 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ═══ 3 · EL PROBLEMA ═════════════════════════════════ */}
+      {/* ═══ 3 · EL PROBLEMA — cifras, no párrafos ═════════ */}
       <Section>
         <Container size="wide">
           <SectionHeader
-            eyebrow="El problema que resolvemos"
+            eyebrow="Por qué existimos"
             title={
               <>
-                El talento está en regiones. Las{" "}
-                <GoldUnderline>oportunidades</GoldUnderline> se quedan en Lima.
+                El talento está en regiones.
+                <br />
+                Las <GoldUnderline>oportunidades</GoldUnderline> se quedan en Lima.
               </>
             }
-            description="Tres brechas que dejan fuera a miles de jóvenes cada año. Datos del ecosistema peruano de innovación."
           />
 
-          <div className="mt-12 grid gap-5 md:grid-cols-3">
-            {problemStats.map((item) => (
-              <Card key={item.title} className="flex flex-col">
-                <p className="tabular font-display text-[3rem] font-bold leading-none sep-gradient-text">
-                  {item.figure}
-                </p>
-                <h3 className="mt-5 text-lg font-semibold text-ink">{item.title}</h3>
-                <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate-ui">
-                  {item.body}
-                </p>
-              </Card>
-            ))}
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            <StatBlock
+              figure="80%"
+              label="Concentración en Lima"
+              detail="De los programas de innovación del país."
+            />
+            <StatBlock
+              figure="9×"
+              label="Menos probabilidad de éxito"
+              detail="Para un emprendedor fuera de la capital."
+              tone="gold"
+            />
+            <StatBlock
+              figure="70%"
+              label="Del talento vive en regiones"
+              detail="Sin acceso a mentores ni referentes cercanos."
+              tone="seed"
+            />
           </div>
         </Container>
       </Section>
 
-      {/* ═══ 4 · CADENA DE IMPACTO ═══════════════════════════ */}
+      {/* ═══ 4 · CADENA DE IMPACTO — un solo gráfico ══════ */}
       <Section tone="muted">
         <Container size="wide">
           <SectionHeader
-            eyebrow="Cómo generamos impacto"
-            title="Un modelo de impacto en cadena"
-            description="Formamos universitarios en su propia región. Ellos vuelven a los colegios de su comunidad como mentores. El conocimiento se multiplica sin que nadie tenga que migrar a Lima."
+            eyebrow="Cómo funciona"
+            title="Formamos a quien formará a diez más"
+            description="Los universitarios que capacitamos vuelven como mentores a los colegios de su propia comunidad."
             align="center"
           />
 
-          <ol className="mt-14 grid gap-4 md:grid-cols-4">
-            {impactChain.map((node, i) => (
-              <li key={node.step} className="relative">
-                <div className="h-full rounded-[14px] border border-line bg-white p-6">
-                  <span className="tabular text-xs font-semibold tracking-[0.14em] text-gold-600">
-                    0{i + 1}
-                  </span>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-ink">
-                    {node.step}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-ui">
-                    {node.detail}
+          <div className="mx-auto mt-12 max-w-4xl">
+            <ImpactChainIllustration />
+            <ol className="mt-4 grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
+              {[
+                ["SEP", "Plataforma virtual"],
+                ["Universitarios", "De cualquier región"],
+                ["Escolares", "En sus comunidades"],
+                ["Impacto", "Que se sostiene solo"],
+              ].map(([title, detail]) => (
+                <li key={title}>
+                  <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                    {title}
                   </p>
-                </div>
-
-                {i < impactChain.length - 1 && (
-                  <ArrowRight
-                    aria-hidden
-                    className="absolute -right-3.5 top-1/2 hidden size-6 -translate-y-1/2 text-gold-500 md:block"
-                  />
-                )}
-              </li>
-            ))}
-          </ol>
-
-          <p className="mx-auto mt-8 max-w-2xl text-center text-sm text-slate-ui">
-            Los universitarios también crean proyectos propios de innovación social e
-            integran las áreas funcionales de SEP: formación, alianzas, comunicación y
-            gestión.
-          </p>
+                  <p className="mt-0.5 text-xs text-slate-ui">{detail}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
         </Container>
       </Section>
 
-      {/* ═══ 5 · CURSOS ══════════════════════════════════════ */}
-      <Section id="cursos">
+      {/* ═══ 5 · CURSOS — con portada visual ═══════════════ */}
+      <Section>
         <Container size="wide">
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeader
               eyebrow="Catálogo"
               title="Cursos gratuitos, siempre"
-              description="2 semanas · interdiario · 2 h por sesión · 8 horas totales · 100 % virtual. El curso no cuesta nada; el certificado es opcional."
+              description="8 horas · 6 sesiones en vivo · 100 % virtual."
             />
-            <Button href="/cursos" variant="outline">
-              Ver catálogo completo
+            <Button href="/cursos" variant="outline" prefetch>
+              Ver catálogo
               <ArrowRight className="size-4" />
             </Button>
           </div>
 
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {courses.map((course) => (
               <Card
-                key={course.slug}
+                key={course.id}
                 interactive
-                className="flex flex-col p-5"
+                className="flex flex-col p-4"
                 as={Link}
-                {...{ href: `/cursos/${course.slug}` }}
+                {...{ href: `/cursos/${course.slug}`, prefetch: false }}
               >
-                <div className="flex items-center gap-2">
-                  {course.status === "disponible" ? (
-                    <Badge tone="seed">Disponible</Badge>
-                  ) : (
-                    <Badge tone="neutral">Próximamente</Badge>
-                  )}
-                  {course.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
+                <CourseCover
+                  pattern={patternFor(course.category)}
+                  className="aspect-[16/9] w-full"
+                />
+
+                <div className="mt-4 flex flex-1 flex-col px-1 pb-1">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {course.status === "disponible" ? (
+                      <Badge tone="seed">Disponible</Badge>
+                    ) : (
+                      <Badge tone="neutral">Pronto</Badge>
+                    )}
+                    {course.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
+                  </div>
+
+                  <h3 className="mt-3 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
+                    {course.title}
+                  </h3>
+                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
+                    {course.subtitle}
+                  </p>
+
+                  <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-sm">
+                    <span className="font-medium text-seed-700">Gratuito</span>
+                    <span className="text-xs text-slate-ui">
+                      {course.total_hours} h · {course.sessions_count} sesiones
+                    </span>
+                  </p>
                 </div>
-
-                <h3 className="mt-4 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
-                  {course.title}
-                </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
-                  {course.description}
-                </p>
-
-                <dl className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 text-xs text-slate-ui">
-                  <div className="inline-flex items-center gap-1.5">
-                    <Clock className="size-3.5 text-mist" />
-                    {course.totalHours} h
-                  </div>
-                  <div className="inline-flex items-center gap-1.5">
-                    <CalendarDays className="size-3.5 text-mist" />
-                    {course.sessionsCount} sesiones
-                  </div>
-                  <div className="inline-flex items-center gap-1.5">
-                    <Sprout className="size-3.5 text-mist" />
-                    {course.weeks} semanas
-                  </div>
-                </dl>
-
-                <p className="mt-3 text-xs font-medium text-seed-700">
-                  Gratuito · Certificado desde {formatSoles(3000)}
-                </p>
               </Card>
             ))}
           </div>
         </Container>
       </Section>
 
-      {/* ═══ 6 · SILP ════════════════════════════════════════ */}
-      <Section tone="muted" className="py-14 sm:py-16">
+      {/* ═══ 6 · SILP ═════════════════════════════════════ */}
+      <Section tone="muted" className="py-14">
         <Container size="wide">
-          <div className="overflow-hidden rounded-[18px] border border-line bg-white">
-            <div className="grid items-center gap-8 p-8 sm:p-10 lg:grid-cols-[1.7fr_1fr]">
-              <div>
+          <div className="overflow-hidden rounded-[20px] border border-line bg-white">
+            <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
+              <div className="p-8 sm:p-10">
                 <Badge tone="gold">
                   <Sparkles className="size-3.5" />
                   Programa insignia
                 </Badge>
-                <h2 className="mt-4 font-display text-[1.75rem] font-semibold leading-tight text-ink sm:text-[2rem]">
-                  {silp.title}
+                <h2 className="mt-4 font-display text-[1.875rem] font-semibold leading-tight text-ink">
+                  Social Impact Leadership Program
                 </h2>
-                <p className="mt-3 max-w-xl text-[0.9375rem] leading-relaxed text-slate-ui">
-                  {silp.description}
+                <p className="mt-3 max-w-lg text-[0.9375rem] leading-relaxed text-slate-ui">
+                  Seis semanas para pasar de una idea a un proyecto que funciona en tu
+                  región, con mentoría uno a uno.
                 </p>
-                <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-graphite">
-                  <li className="inline-flex items-center gap-1.5">
-                    <Check className="size-4 text-seed-500" /> 6 semanas
-                  </li>
-                  <li className="inline-flex items-center gap-1.5">
-                    <Check className="size-4 text-seed-500" /> Proyecto de impacto real
-                  </li>
-                  <li className="inline-flex items-center gap-1.5">
-                    <Check className="size-4 text-seed-500" /> Mentoría 1:1
-                  </li>
-                  <li className="inline-flex items-center gap-1.5">
-                    <Check className="size-4 text-seed-500" /> Certificado incluido
-                  </li>
-                </ul>
+
+                <div className="mt-6 flex flex-wrap items-center gap-6">
+                  <div>
+                    <p className="tabular font-display text-[1.75rem] font-bold leading-none sep-gradient-text">
+                      {formatSoles(20000)}
+                    </p>
+                    <p className="mt-1 text-xs text-slate-ui">Tarifa social</p>
+                  </div>
+                  <Button href="/silp" variant="gradient" prefetch>
+                    Ver el programa
+                    <ArrowRight className="size-4" />
+                  </Button>
+                </div>
               </div>
 
-              <div className="rounded-[14px] border border-line bg-surface-1 p-6 text-center">
-                <p className="text-xs uppercase tracking-[0.12em] text-slate-ui">
-                  Tarifa social
-                </p>
-                <p className="tabular mt-1.5 font-display text-[2.5rem] font-bold leading-none sep-gradient-text">
-                  {formatSoles(silp.priceCents ?? 20000)}
-                </p>
-                <p className="mt-1.5 text-xs text-slate-ui">
-                  Gratis para voluntarios activos
-                </p>
-                <Button href="/silp" variant="gradient" className="mt-5 w-full">
-                  Ver el programa
-                </Button>
-              </div>
+              <CourseCover pattern="silp" className="h-full min-h-[200px] rounded-none" />
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* ═══ 7 · CÓMO FUNCIONA ═══════════════════════════════ */}
+      {/* ═══ 7 · CERTIFICADOS ═════════════════════════════ */}
       <Section>
-        <Container size="wide">
-          <SectionHeader
-            eyebrow="Cómo funciona"
-            title="De la inscripción al certificado en 2 semanas"
-            align="center"
-          />
-
-          <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: Users,
-                title: "Crea tu cuenta gratis",
-                body: "Sin costo, sin filtros. Solo necesitas tu correo y tu región.",
-              },
-              {
-                icon: GraduationCap,
-                title: "Elige tu curso",
-                body: "Design Thinking, Scrum social o liderazgo. Todos abiertos.",
-              },
-              {
-                icon: CalendarDays,
-                title: "6 sesiones en vivo",
-                body: "2 horas cada una, interdiario, con facilitadores de SEP.",
-              },
-              {
-                icon: Award,
-                title: "Obtén tu certificado",
-                body: "Opcional: SEP por S/30 o internacional por S/50.",
-              },
-            ].map((step, i) => (
-              <li key={step.title} className="relative">
-                <div className="flex size-11 items-center justify-center rounded-[12px] bg-sep-50 text-sep-600">
-                  <step.icon className="size-5" />
-                </div>
-                <p className="tabular mt-4 text-xs font-semibold tracking-[0.14em] text-gold-600">
-                  PASO {i + 1}
-                </p>
-                <h3 className="mt-1.5 font-display text-lg font-semibold text-ink">
-                  {step.title}
-                </h3>
-                <p className="mt-2 text-sm leading-relaxed text-slate-ui">{step.body}</p>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
-
-      {/* ═══ 8 · CERTIFICADOS ════════════════════════════════ */}
-      <Section tone="muted" id="certificados">
         <Container size="wide">
           <SectionHeader
             eyebrow="Certificación"
             title="Aprender es gratis. Acreditarlo, opcional."
-            description="Al completar las 6 sesiones puedes obtener tu certificado. Es la forma en que SEP se sostiene sin cobrar por la formación."
+            description="Es lo que sostiene a SEP sin cobrar por la formación."
             align="center"
           />
 
-          <div className="mx-auto mt-12 grid max-w-3xl gap-5 sm:grid-cols-2">
-            {certificateTypes.map((cert) => (
+          <div className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-2">
+            {[
+              {
+                name: "Certificado SEP",
+                issuer: "Reconocido por SENAJU",
+                price: 3000,
+              },
+              {
+                name: "Certificado Internacional",
+                issuer: "Instituto Internacional de Ingeniería",
+                price: 5000,
+                recommended: true,
+              },
+            ].map((c) => (
               <Card
-                key={cert.slug}
+                key={c.name}
                 className={
-                  cert.recommended
+                  c.recommended
                     ? "relative border-sep-200 shadow-[0_8px_32px_rgba(46,11,232,.09)]"
                     : ""
                 }
               >
-                {cert.recommended && (
+                {c.recommended && (
                   <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-[0.6875rem] font-semibold text-ink">
                     Recomendado
                   </span>
                 )}
-
-                <h3 className="font-display text-lg font-semibold text-ink">
-                  {cert.name}
-                </h3>
-                <p className="mt-1 text-xs text-slate-ui">{cert.issuer}</p>
-
-                <p className="tabular mt-5 font-display text-[2.25rem] font-bold leading-none text-ink">
-                  {formatSoles(cert.priceCents)}
+                <p className="tabular font-display text-[2.25rem] font-bold leading-none text-ink">
+                  {formatSoles(c.price)}
                 </p>
-
-                <ul className="mt-5 space-y-2.5">
-                  {cert.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
+                <h3 className="mt-4 font-display text-[1.0625rem] font-semibold text-ink">
+                  {c.name}
+                </h3>
+                <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
+                <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-xs text-slate-ui">
+                  <Check className="size-3.5 text-seed-500" />
+                  Código de verificación público
+                </p>
               </Card>
             ))}
           </div>
-
-          <p className="mx-auto mt-8 max-w-xl text-center text-sm text-slate-ui">
-            ¿Quieres el detalle completo de precios, membresías y programas
-            institucionales?{" "}
-            <Link href="/precios" className="font-medium text-sep-600 hover:underline">
-              Ver todos los precios
-            </Link>
-          </p>
         </Container>
       </Section>
 
-      {/* ═══ 9 · DOCENTES + 10 · COLEGIOS ════════════════════ */}
+      {/* ═══ 8 · TRES CAMINOS ═════════════════════════════ */}
+      <Section tone="muted">
+        <Container size="wide">
+          <SectionHeader
+            eyebrow="Súmate"
+            title="Hay más de una forma de entrar"
+            align="center"
+          />
+
+          <div className="mt-12 grid gap-4 md:grid-cols-3">
+            {[
+              {
+                icon: Users,
+                title: "Sé voluntario",
+                body: "Mentor, community manager u organizador. Con certificación y carta de recomendación.",
+                cta: "Ver los 3 roles",
+                href: "/voluntariado",
+                tone: "gold" as const,
+              },
+              {
+                icon: School,
+                title: "Inscribe tu colegio",
+                body: "Universitarios de tu región dictan talleres a tus estudiantes. Gratis.",
+                cta: "Inscribir colegio",
+                href: "/colegios",
+                tone: "seed" as const,
+              },
+              {
+                icon: Building2,
+                title: "Alía tu empresa",
+                body: "Convierte tu inversión RSE en métricas verificables alineadas a los ODS.",
+                cta: "Hablar con el equipo",
+                href: "/empresas",
+                tone: "brand" as const,
+              },
+            ].map((c) => (
+              <Card key={c.title} interactive className="flex flex-col p-7">
+                <span
+                  className={`flex size-11 items-center justify-center rounded-[12px] ${
+                    c.tone === "gold"
+                      ? "bg-gold-500/15 text-gold-700"
+                      : c.tone === "seed"
+                        ? "bg-seed-500/15 text-seed-700"
+                        : "bg-sep-50 text-sep-600"
+                  }`}
+                >
+                  <c.icon className="size-5" />
+                </span>
+
+                <h3 className="mt-5 font-display text-[1.25rem] font-semibold text-ink">
+                  {c.title}
+                </h3>
+                <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-slate-ui">
+                  {c.body}
+                </p>
+
+                <Link
+                  href={c.href}
+                  prefetch={false}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
+                >
+                  {c.cta}
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ═══ 9 · TESTIMONIO + ALIADOS ═════════════════════ */}
       <Section>
         <Container size="wide">
-          <div className="grid gap-5 lg:grid-cols-2">
-            {/* Docentes */}
-            <div className="flex flex-col rounded-[18px] border border-line bg-white p-8">
-              <div className="flex size-11 items-center justify-center rounded-[12px] bg-gold-500/15 text-gold-700">
-                <GraduationCap className="size-5" />
-              </div>
-              <h2 className="mt-5 font-display text-[1.6rem] font-semibold leading-tight text-ink">
-                ¿Enseñas? Lleva metodologías activas a tu aula
-              </h2>
-              <p className="mt-3 flex-1 text-[0.9375rem] leading-relaxed text-slate-ui">
-                Programa gratuito para docentes de colegios, institutos y universidades.
-                Design Thinking y Scrum aplicados al entorno escolar, con guías y
-                plantillas listas para usar el lunes siguiente.
+          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+            <Card className="p-8 sm:p-10">
+              <p className="font-display text-[1.375rem] leading-relaxed text-ink">
+                “Compartí mi prototipo con mi colegio y los escolares llegaron con ideas
+                increíbles para su barrio. Nunca subestimen a un chico de 15 años con una
+                hoja en blanco.”
               </p>
-              <div className="mt-6">
-                <Button href="/docentes" variant="outline">
-                  Conocer el programa docente
-                  <ArrowRight className="size-4" />
-                </Button>
+              <div className="mt-7 flex items-center gap-3 border-t border-line pt-6">
+                <span className="flex size-11 items-center justify-center rounded-full sep-gradient text-sm font-semibold text-white">
+                  AN
+                </span>
+                <div>
+                  <p className="text-sm font-medium text-ink">Andrea Núñez</p>
+                  <p className="text-xs text-slate-ui">Mentora SEP · Arequipa</p>
+                </div>
               </div>
-            </div>
+              <Link
+                href="/testimonios"
+                prefetch={false}
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
+              >
+                Ver más historias
+                <ArrowRight className="size-3.5" />
+              </Link>
+            </Card>
 
-            {/* Colegios */}
-            <div className="flex flex-col rounded-[18px] border border-line bg-white p-8">
-              <div className="flex size-11 items-center justify-center rounded-[12px] bg-seed-500/15 text-seed-700">
-                <School className="size-5" />
-              </div>
-              <h2 className="mt-5 font-display text-[1.6rem] font-semibold leading-tight text-ink">
-                Inscribe tu colegio a la red SEP
-              </h2>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate-ui">
-                Universitarios de tu propia región dictan talleres de innovación social a
-                tus estudiantes. <strong className="text-ink">Completamente gratuito.</strong>
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-ui">
+                Respaldo y alianzas
               </p>
-
-              <ul className="mt-5 flex-1 space-y-2">
-                {schoolBenefits.slice(0, 3).map((b) => (
-                  <li key={b.title} className="flex items-start gap-2.5 text-sm text-graphite">
-                    <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
-                    {b.title}
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {partners.map((p) => (
+                  <li
+                    key={p.name}
+                    className="rounded-full border border-line bg-white px-3.5 py-2 text-[0.8125rem] text-graphite"
+                  >
+                    {p.name}
                   </li>
                 ))}
               </ul>
-
-              <div className="mt-6">
-                <Button href="/colegios" variant="outline">
-                  Inscribir mi colegio
-                  <ArrowRight className="size-4" />
-                </Button>
-              </div>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* ═══ 11 · VOLUNTARIADO ═══════════════════════════════ */}
-      <Section tone="muted" id="voluntariado">
-        <Container size="wide">
-          <SectionHeader
-            eyebrow="Voluntariado"
-            title="Forma parte del equipo que democratiza la innovación"
-            description="Tres roles abiertos. Todos incluyen certificación formal, carta de recomendación y acceso gratuito a todos los cursos SEP."
-          />
-
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {volunteerRoles.map((role) => (
-              <Card key={role.slug} interactive className="flex flex-col">
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex size-10 items-center justify-center rounded-[10px] bg-sep-50 text-sep-600">
-                    {role.type === "mentor_junior" ? (
-                      <Users className="size-5" />
-                    ) : role.type === "community_manager" ? (
-                      <MessageCircle className="size-5" />
-                    ) : (
-                      <CalendarDays className="size-5" />
-                    )}
-                  </div>
-                  <Badge tone="gold">
-                    {role.openPositions}{" "}
-                    {role.openPositions === 1 ? "vacante" : "vacantes"}
-                  </Badge>
-                </div>
-
-                <h3 className="mt-4 font-display text-lg font-semibold text-ink">
-                  {role.name}
-                </h3>
-                {role.exclusive && (
-                  <p className="mt-1 text-xs font-medium text-gold-700">{role.exclusive}</p>
-                )}
-                <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-ui">
-                  {role.description}
-                </p>
-
-                <p className="mt-4 text-xs text-slate-ui">
-                  <Clock className="mr-1.5 inline size-3.5 text-mist" />
-                  {role.hoursPerWeek} h por semana
-                </p>
-
-                <Button
-                  href={`/voluntariado/${role.slug}`}
-                  variant="outline"
-                  size="sm"
-                  className="mt-5 w-full"
-                >
-                  Postular
-                </Button>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 12 · TESTIMONIOS ════════════════════════════════ */}
-      <Section>
-        <Container size="wide">
-          <SectionHeader
-            eyebrow="La comunidad"
-            title="75+ jóvenes ya están construyendo desde sus regiones"
-            align="center"
-          />
-
-          <div className="mt-12 grid gap-5 lg:grid-cols-3">
-            {[
-              {
-                quote:
-                  "Compartí mi prototipo de Design Thinking con mi colegio esta semana. Los escolares llegaron con ideas increíbles para mejorar la biblioteca del barrio.",
-                name: "Andrea N.",
-                region: "Arequipa",
-                role: "Mentora SEP",
-              },
-              {
-                quote:
-                  "Vengo de una región sin recursos y la innovación social fue mi trampolín. Hoy hablo en conferencias de todo Latam.",
-                name: "Valeria R.",
-                region: "Bogotá, Colombia",
-                role: "Speaker · Scrum",
-              },
-              {
-                quote:
-                  "Llegué sin experiencia. Hoy tengo mi propio programa y fui speaker en Star Lima.",
-                name: "Jorge M.",
-                region: "Arequipa",
-                role: "Liderazgo social",
-              },
-            ].map((t) => (
-              <Card key={t.name} className="flex flex-col">
-                <p className="flex-1 text-[0.9375rem] leading-relaxed text-graphite">
-                  “{t.quote}”
-                </p>
-                <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
-                    {t.name
-                      .split(" ")
-                      .map((w) => w[0])
-                      .join("")}
-                  </span>
-                  <div>
-                    <p className="text-sm font-medium text-ink">{t.name}</p>
-                    <p className="text-xs text-slate-ui">
-                      {t.region} · {t.role}
-                    </p>
-                  </div>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 13 · ALIADOS ════════════════════════════════════ */}
-      <section className="border-y border-line bg-surface-1 py-12">
-        <Container size="wide">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.14em] text-slate-ui">
-            Respaldo, alianzas y redes
-          </p>
-        </Container>
-
-        <div className="relative mt-7 overflow-hidden">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 left-0 z-10 w-24 bg-gradient-to-r from-surface-1 to-transparent"
-          />
-          <div
-            aria-hidden
-            className="pointer-events-none absolute inset-y-0 right-0 z-10 w-24 bg-gradient-to-l from-surface-1 to-transparent"
-          />
-
-          <ul className="flex w-max animate-marquee gap-10">
-            {[...partners, ...partners].map((p, i) => (
-              <li
-                key={`${p.name}-${i}`}
-                className="whitespace-nowrap font-display text-[1.0625rem] font-semibold text-mist transition-colors hover:text-graphite"
-              >
-                {p.name}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-
-      {/* ═══ 14 · EMPRESAS / RSE ═════════════════════════════ */}
-      <Section id="empresas">
-        <Container size="wide">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div>
-              <Badge tone="brand">
-                <Building2 className="size-3.5" />
-                Para empresas y organizaciones
-              </Badge>
-              <h2 className="mt-5 font-display text-[2rem] font-semibold leading-tight text-ink sm:text-[2.5rem]">
-                Convierte tu inversión social en{" "}
-                <GoldUnderline>resultados medibles</GoldUnderline>
-              </h2>
-              <p className="mt-5 text-[1.0625rem] leading-relaxed text-slate-ui">
-                Somos el aliado que ejecuta en regiones donde tu empresa quiere estar y
-                te entrega las métricas que tu directorio necesita ver.
-              </p>
-
-              <div className="mt-8">
-                <Button href="/empresas" variant="gradient" size="lg">
-                  Hablar con el equipo
-                  <ArrowRight className="size-4" />
-                </Button>
-              </div>
-            </div>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {[
-                {
-                  icon: Globe,
-                  title: "Alcance regional real",
-                  body: "10+ regiones fuera de Lima, con presencia validada en Áncash.",
-                },
-                {
-                  icon: Lightbulb,
-                  title: "Métricas claras",
-                  body: "Jóvenes formados, proyectos, horas y colegios impactados.",
-                },
-                {
-                  icon: Handshake,
-                  title: "Alineación con ODS",
-                  body: "Reporte trimestral mapeado a los Objetivos de Desarrollo Sostenible.",
-                },
-                {
-                  icon: Users,
-                  title: "Pipeline de talento",
-                  body: "Acceso a jóvenes formados en liderazgo y metodologías ágiles.",
-                },
-              ].map((f) => (
-                <Card key={f.title} className="p-5">
-                  <f.icon className="size-5 text-sep-600" />
-                  <h3 className="mt-3.5 text-[0.9375rem] font-semibold text-ink">
-                    {f.title}
-                  </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{f.body}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 15 · DIAGNÓSTICO + 16 · SPEAKERS ════════════════ */}
+      {/* ═══ 10 · FAQ + NEWSLETTER ════════════════════════ */}
       <Section tone="muted">
         <Container size="wide">
-          <div className="grid gap-5 lg:grid-cols-2">
-            <div className="rounded-[18px] border border-line bg-white p-8">
-              <Badge tone="seed">3 minutos · sin crear cuenta</Badge>
-              <h2 className="mt-4 font-display text-[1.6rem] font-semibold leading-tight text-ink">
-                Estamos construyendo esto para ti. Ayúdanos a hacerlo bien.
-              </h2>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate-ui">
-                Antes de abrir las puertas queremos entender tu realidad: qué te frena, qué
-                sueñas y qué necesitas. Tus respuestas definen qué construimos primero.
-              </p>
-              <Button href="/conocenos" variant="primary" className="mt-6">
-                Quiero participar — es gratis
-                <ArrowRight className="size-4" />
-              </Button>
-            </div>
-
-            <div className="rounded-[18px] border border-line bg-white p-8">
-              <div className="flex size-11 items-center justify-center rounded-[12px] bg-sep-50 text-sep-600">
-                <Mic className="size-5" />
+          <div className="grid gap-12 lg:grid-cols-[1.3fr_1fr]">
+            <div>
+              <SectionHeader eyebrow="Preguntas frecuentes" title="Lo que suelen preguntarnos" />
+              <div className="mt-8">
+                <FaqAccordion items={faqs.slice(0, 5)} />
               </div>
-              <h2 className="mt-5 font-display text-[1.6rem] font-semibold leading-tight text-ink">
-                ¿Tienes algo que contar?
-              </h2>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate-ui">
-                Únete a nuestra base de 48 speakers e inspira a más de 1,000 jóvenes desde
-                tu región y tu historia. Especialistas en metodologías, referentes de
-                impacto y voces de toda Latinoamérica.
-              </p>
-              <Button href="/speakers" variant="outline" className="mt-6">
-                Unirme a la red de speakers
-                <ArrowRight className="size-4" />
-              </Button>
+              <Link
+                href="/faq"
+                prefetch={false}
+                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
+              >
+                Ver todas
+                <ArrowRight className="size-3.5" />
+              </Link>
+            </div>
+
+            <div>
+              <Card className="lg:sticky lg:top-24">
+                <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+                  Newsletter SEP
+                </h2>
+                <p className="mt-2 text-sm leading-relaxed text-slate-ui">
+                  Convocatorias, becas y eventos. Te enteras 48 horas antes que en redes.
+                </p>
+                <div className="mt-5">
+                  <NewsletterForm />
+                </div>
+                <p className="mt-4 text-xs text-mist">
+                  1,200+ suscriptores · 2 ediciones al mes
+                </p>
+              </Card>
             </div>
           </div>
         </Container>
       </Section>
 
-      {/* ═══ 17 · NEWSLETTER ═════════════════════════════════ */}
-      <Section>
-        <Container size="narrow">
-          <div className="text-center">
-            <SectionHeader
-              eyebrow="Newsletter SEP"
-              title="No importa tu región"
-              description="Recibe las últimas oportunidades, eventos y recursos directamente en tu inbox. Sé el primero en enterarte de nuevas cohortes, becas, ferias y llamados a voluntarios."
-              align="center"
-            />
-            <div className="mx-auto mt-8 max-w-lg">
-              <NewsletterForm />
-            </div>
-            <p className="mt-6 text-xs text-mist">
-              1,200+ suscriptores · 2 ediciones al mes · 48 h antes del anuncio público
-            </p>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 18 · FAQ ════════════════════════════════════════ */}
-      <Section tone="muted" id="faq">
-        <Container size="narrow">
-          <SectionHeader
-            eyebrow="Preguntas frecuentes"
-            title="Lo que suelen preguntarnos"
-            align="center"
-          />
-          <div className="mt-10">
-            <FaqAccordion items={faqs} />
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 19 · CTA FINAL ══════════════════════════════════ */}
+      {/* ═══ CTA FINAL ════════════════════════════════════ */}
       <section className="relative overflow-hidden sep-gradient">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-        <Container size="wide" className="relative py-20 text-center sm:py-24">
-          <Sprout className="mx-auto size-9 text-gold-500" />
-          <h2 className="mx-auto mt-6 max-w-2xl font-display text-[2.25rem] font-bold leading-tight text-white sm:text-[3rem]">
+        <DotGrid tone="dark" />
+        <Container size="wide" className="relative py-20 text-center">
+          <h2 className="mx-auto max-w-2xl font-display text-[2.25rem] font-bold leading-tight text-white sm:text-[3rem]">
             ¿Listos para sembrar el cambio?
           </h2>
-          <p className="mx-auto mt-5 max-w-lg text-lg text-white/75">
-            Crea tu cuenta gratis y empieza tu primer curso esta semana. Sin importar tu
-            región, tu carrera o tu punto de partida.
+          <p className="mx-auto mt-5 max-w-md text-lg text-white/70">
+            Crea tu cuenta y empieza tu primer curso esta semana.
           </p>
 
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/registro" variant="gold" size="lg">
+            <Button href="/registro" variant="gold" size="lg" prefetch>
               Crear cuenta gratis
               <ArrowRight className="size-4" />
             </Button>
-            <Button
-              href={siteConfig.contact.whatsappUrl}
-              variant="outline-white"
-              size="lg"
-            >
-              <MessageCircle className="size-4" />
+            <Button href={siteConfig.contact.whatsappUrl} variant="outline-white" size="lg">
               Escríbenos por WhatsApp
             </Button>
           </div>
         </Container>
       </section>
 
-      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -822,20 +542,6 @@ export default function HomePage() {
               addressCountry: "PE",
             },
             sameAs: Object.values(siteConfig.social),
-          }),
-        }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faqs.map((f) => ({
-              "@type": "Question",
-              name: f.q,
-              acceptedAnswer: { "@type": "Answer", text: f.a },
-            })),
           }),
         }}
       />

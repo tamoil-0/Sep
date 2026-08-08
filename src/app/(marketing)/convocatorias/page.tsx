@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { ArrowRight, CalendarDays, Mic, School, Users } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -17,8 +17,11 @@ export const metadata: Metadata = {
     "Todo lo que está abierto ahora mismo en SEP: cursos, voluntariado, red de speakers y red de colegios.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 export default async function ConvocatoriasPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const [{ data: courses }, { data: roles }] = await Promise.all([
     supabase

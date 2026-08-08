@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Quote } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -16,6 +16,9 @@ export const metadata: Metadata = {
   description:
     "Historias reales de jóvenes de regiones del Perú que pasaron por SEP y hoy están construyendo en sus propias comunidades.",
 };
+
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
 
 const stories = [
   {
@@ -63,7 +66,7 @@ const stories = [
 ];
 
 export default async function TestimoniosPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const { data: projects } = await supabase
     .from("projects")

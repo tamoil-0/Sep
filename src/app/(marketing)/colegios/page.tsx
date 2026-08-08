@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Check, School } from "lucide-react";
-import { createClient } from "@/lib/supabase/server";
+import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -18,8 +18,11 @@ export const metadata: Metadata = {
     "Inscribe tu colegio a la red SEP y recibe talleres gratuitos de innovación social dictados por universitarios de tu propia región.",
 };
 
+/** ISR: la página se sirve estática y se regenera cada 5 min. */
+export const revalidate = 300;
+
 export default async function ColegiosPage() {
-  const supabase = await createClient();
+  const supabase = createPublicClient();
 
   const [{ data: schools }, { count: workshops }, { count: students }] =
     await Promise.all([
