@@ -1,4 +1,3 @@
-| [`docs/SUPABASE-PASO-A-PASO.md`](./docs/SUPABASE-PASO-A-PASO.md) | **Empieza aquí.** Crear la cuenta de Supabase, migrar el esquema y subir los datos, campo por campo |
 # Plataforma SEP
 
 **Semillero de Emprendedores Perú** — *¡Emprende hoy, lidera mañana!*
@@ -44,7 +43,8 @@ El recorrido guiado está en [`docs/PUESTA-EN-MARCHA.md`](./docs/PUESTA-EN-MARCH
 
 | Documento | Contenido |
 |---|---|
-| [`docs/PUESTA-EN-MARCHA.md`](./docs/PUESTA-EN-MARCHA.md) | **Empieza aquí.** De cero a producción: local → Supabase → Vercel → pagos |
+| [`docs/SUPABASE-PASO-A-PASO.md`](./docs/SUPABASE-PASO-A-PASO.md) | **Empieza aquí.** Crear la cuenta de Supabase y migrar los datos, campo por campo |
+| [`docs/PUESTA-EN-MARCHA.md`](./docs/PUESTA-EN-MARCHA.md) | De cero a producción: local → Supabase → Vercel → pagos |
 | [`docs/PLAN-MAESTRO-SEP.md`](./docs/PLAN-MAESTRO-SEP.md) | Documento único de verdad: marca, paleta, roles, modelo de datos, precios |
 | [`docs/DEPLOY.md`](./docs/DEPLOY.md) | Referencia operativa de despliegue y checklist de lanzamiento |
 | [`docs/SECURITY.md`](./docs/SECURITY.md) | Reglas de seguridad innegociables y cumplimiento legal |
@@ -93,7 +93,7 @@ src/
 └── proxy.ts             Refresco de sesión + protección de rutas
 
 supabase/
-├── migrations/          7 migraciones: enums → tablas → funciones → RLS → storage
+├── migrations/          10 migraciones: enums → tablas → funciones → RLS → storage
 └── seed.sql             Cursos, sesiones, planes, aliados, 45 preguntas del diagnóstico
 
 worker/                  Servicio opcional en Render para lotes pesados
