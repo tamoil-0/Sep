@@ -24,6 +24,11 @@ export const metadata: Metadata = {
   },
   description: siteConfig.description,
   applicationName: siteConfig.shortName,
+  icons: {
+    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
+    shortcut: "/icon",
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+  },
   keywords: [
     "Semillero de Emprendedores Perú",
     "SEP",

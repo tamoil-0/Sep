@@ -1,14 +1,16 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import * as Icons from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { appNav } from "@/config/navigation";
 import { ROLE_META, type UserRole } from "@/types/roles";
 import { cn, initials } from "@/lib/utils";
 import { LogoutDialog } from "@/components/app/logout-dialog";
+import { AppLoadingSplash } from "@/components/app/app-loading-splash";
 
 type IconName = keyof typeof Icons;
 
@@ -31,9 +33,20 @@ export function AppSidebar({
   email: string;
 }) {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [navigatingTo, setNavigatingTo] = React.useState<string | null>(null);
   const items = appNav[activeRole] ?? [];
   const otherRoles = roles.filter((r) => r !== activeRole && appNav[r]?.length);
+
+  function prepareNavigation(href: string) {
+    if (href !== pathname) router.prefetch(href);
+  }
+
+  function startNavigation(href: string) {
+    if (href !== pathname) setNavigatingTo(href);
+    setMobileOpen(false);
+  }
 
   const content = (
     <>
@@ -56,7 +69,9 @@ export function AppSidebar({
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  onClick={() => setMobileOpen(false)}
+                  onPointerEnter={() => prepareNavigation(item.href)}
+                  onFocus={() => prepareNavigation(item.href)}
+                  onClick={() => startNavigation(item.href)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
                     "flex items-center gap-2.5 rounded-[8px] border-l-2 px-3 py-2 text-[0.875rem] transition-colors",
@@ -83,7 +98,9 @@ export function AppSidebar({
                 <li key={r}>
                   <Link
                     href={ROLE_META[r].home}
-                    onClick={() => setMobileOpen(false)}
+                    onPointerEnter={() => prepareNavigation(ROLE_META[r].home)}
+                    onFocus={() => prepareNavigation(ROLE_META[r].home)}
+                    onClick={() => startNavigation(ROLE_META[r].home)}
                     className="flex items-center gap-2.5 rounded-[8px] px-3 py-2 text-[0.8125rem] text-white/50 transition-colors hover:bg-white/8 hover:text-white"
                   >
                     <Icons.Repeat className="size-4" />
@@ -99,7 +116,9 @@ export function AppSidebar({
       <div className="border-t border-white/10 p-3">
         <Link
           href="/cuenta"
-          onClick={() => setMobileOpen(false)}
+          onPointerEnter={() => prepareNavigation("/cuenta")}
+          onFocus={() => prepareNavigation("/cuenta")}
+          onClick={() => startNavigation("/cuenta")}
           className="flex items-center gap-2.5 rounded-[8px] px-2 py-2 transition-colors hover:bg-white/8"
         >
           <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-[0.6875rem] font-semibold text-ink">
@@ -155,6 +174,11 @@ export function AppSidebar({
       >
         {content}
       </aside>
+
+      {navigatingTo !== null &&
+        navigatingTo !== pathname &&
+        typeof document !== "undefined" &&
+        createPortal(<AppLoadingSplash overlay />, document.body)}
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
 import { LogOut, X } from "lucide-react";
 import { logoutAction } from "@/server/actions/auth";
@@ -18,7 +19,7 @@ import { cn } from "@/lib/utils";
  * sesión de verdad. No es una espera decorativa.
  */
 
-const FAREWELL_MS = 3000;
+const FAREWELL_MS = 1600;
 
 export function LogoutDialog({ userName }: { userName: string }) {
   const router = useRouter();
@@ -74,7 +75,9 @@ export function LogoutDialog({ userName }: { userName: string }) {
       </button>
 
       {/* ── Confirmación ── */}
-      {state === "confirm" && (
+      {state === "confirm" &&
+        typeof document !== "undefined" &&
+        createPortal(
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-ink/50 p-4 backdrop-blur-sm animate-fade-in sm:p-5"
           onClick={() => setState("idle")}
@@ -131,11 +134,14 @@ export function LogoutDialog({ userName }: { userName: string }) {
               </button>
             </div>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
 
       {/* ── Despedida ── */}
-      {state === "leaving" && (
+      {state === "leaving" &&
+        typeof document !== "undefined" &&
+        createPortal(
         <div
           className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden sep-gradient px-5 text-center animate-fade-in"
           role="status"
@@ -178,7 +184,8 @@ export function LogoutDialog({ userName }: { userName: string }) {
 
             <p className="mt-4 text-xs text-white/50">Cerrando tu sesión…</p>
           </div>
-        </div>
+        </div>,
+        document.body,
       )}
     </>
   );
