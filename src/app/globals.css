@@ -114,6 +114,7 @@
 html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
+  overflow-x: clip;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -137,6 +138,22 @@ body {
   line-height: 1.625;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  min-width: 320px;
+  overflow-wrap: break-word;
+}
+
+img,
+svg,
+video,
+canvas {
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 ::selection {

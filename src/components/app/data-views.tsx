@@ -35,8 +35,8 @@ export function DataTable<T>({
   if (rows.length === 0) return <>{empty}</>;
 
   return (
-    <Card className="overflow-hidden p-0">
-      <div className="overflow-x-auto">
+    <Card className="max-w-full overflow-hidden p-0">
+      <div className="max-w-full overflow-x-auto overscroll-x-contain" tabIndex={0}>
         <table className="w-full min-w-[560px] text-left">
           {caption && <caption className="sr-only">{caption}</caption>}
           <thead className="border-b border-line bg-surface-1">
@@ -178,7 +178,7 @@ export function ComingSoon({
   bullets?: string[];
 }) {
   return (
-    <Card className="p-8">
+    <Card className="p-5 sm:p-8">
       <div className="mx-auto max-w-lg text-center">
         <span className="mx-auto flex size-12 items-center justify-center rounded-[14px] bg-sep-50 text-sep-600">
           {icon}

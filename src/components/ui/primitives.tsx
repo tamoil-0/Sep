@@ -235,7 +235,7 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "rounded-[14px] border border-line bg-white p-6",
+        "min-w-0 rounded-[14px] border border-line bg-white p-4 sm:p-6",
         interactive &&
           "transition-all duration-200 hover:border-sep-200 hover:shadow-[0_8px_28px_rgba(46,11,232,.08)]",
         className,
@@ -303,7 +303,7 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-[14px] border border-dashed border-line bg-surface-1 px-6 py-14 text-center">
+    <div className="flex flex-col items-center justify-center rounded-[14px] border border-dashed border-line bg-surface-1 px-4 py-10 text-center sm:px-6 sm:py-14">
       {icon && (
         <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-white text-slate-ui shadow-[0_1px_3px_rgba(18,16,28,.06)]">
           {icon}

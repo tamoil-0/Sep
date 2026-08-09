@@ -11,9 +11,9 @@ const highlights = [
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid min-h-screen lg:grid-cols-2">
+    <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(360px,0.9fr)_minmax(520px,1.1fr)]">
       {/* Panel de marca */}
-      <aside className="relative hidden overflow-hidden sep-gradient lg:flex lg:flex-col lg:justify-between lg:p-12">
+      <aside className="relative hidden min-h-dvh overflow-hidden sep-gradient lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-14">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.14]"
@@ -57,8 +57,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       </aside>
 
       {/* Formulario */}
-      <main className="flex flex-col px-5 py-8 sm:px-10 lg:px-16 lg:py-12">
-        <div className="flex items-center justify-between">
+      <main id="contenido" className="flex min-h-dvh min-w-0 flex-col px-4 py-5 sm:px-8 sm:py-7 lg:px-10 xl:px-16">
+        <div className="mx-auto flex w-full max-w-xl items-center justify-between">
           <Link href="/" className="lg:hidden">
             <Logo className="h-7" />
           </Link>
@@ -71,8 +71,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-center py-10">
-          <div className="w-full max-w-[420px]">{children}</div>
+        <div className="flex flex-1 items-center justify-center py-8 sm:py-10">
+          <div className="w-full max-w-[440px]">{children}</div>
         </div>
       </main>
     </div>

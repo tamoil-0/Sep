@@ -123,14 +123,14 @@ export function AppSidebar({
   return (
     <>
       {/* Barra móvil */}
-      <div className="sticky top-0 z-40 flex h-14 items-center justify-between border-b border-line bg-white px-4 lg:hidden">
+      <div className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-line bg-white/95 px-4 backdrop-blur lg:hidden">
         <Link href="/" aria-label="Inicio">
           <Logo className="h-6" />
         </Link>
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="rounded-lg p-2 text-ink"
+          className="flex size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-surface-2"
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={mobileOpen}
         >
@@ -148,7 +148,7 @@ export function AppSidebar({
 
       <aside
         className={cn(
-          "z-50 flex w-[232px] shrink-0 flex-col bg-sep-800 py-4",
+          "z-50 flex w-[min(82vw,280px)] shrink-0 flex-col bg-sep-800 py-4 shadow-2xl lg:w-[232px] lg:shadow-none",
           "fixed inset-y-0 left-0 transition-transform duration-250 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}

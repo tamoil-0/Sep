@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { useRouter } from "next/navigation";
 import { LogOut, X } from "lucide-react";
 import { logoutAction } from "@/server/actions/auth";
 import { Logo } from "@/components/brand/logo";
@@ -20,6 +21,7 @@ import { cn } from "@/lib/utils";
 const FAREWELL_MS = 3000;
 
 export function LogoutDialog({ userName }: { userName: string }) {
+  const router = useRouter();
   const [state, setState] = React.useState<"idle" | "confirm" | "leaving">("idle");
   const dialogRef = React.useRef<HTMLDivElement>(null);
 
@@ -46,10 +48,16 @@ export function LogoutDialog({ userName }: { userName: string }) {
     setState("leaving");
     // La despedida y el cierre de sesión corren a la vez; nos vamos cuando
     // ambos terminen, así nunca se ve un salto brusco ni una espera vacía.
-    await Promise.all([
-      logoutAction().catch(() => {}),
+    const [logoutResult] = await Promise.allSettled([
+      logoutAction(),
       new Promise((r) => setTimeout(r, FAREWELL_MS)),
     ]);
+    if (logoutResult.status === "rejected") {
+      setState("idle");
+      return;
+    }
+    router.replace("/");
+    router.refresh();
   }
 
   const firstName = userName.trim().split(/\s+/)[0] || "";
@@ -68,7 +76,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
       {/* ── Confirmación ── */}
       {state === "confirm" && (
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-ink/50 p-5 backdrop-blur-sm animate-fade-in"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-ink/50 p-4 backdrop-blur-sm animate-fade-in sm:p-5"
           onClick={() => setState("idle")}
         >
           <div
@@ -78,7 +86,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
             aria-modal="true"
             aria-labelledby="logout-title"
             onClick={(e) => e.stopPropagation()}
-            className="w-full max-w-sm rounded-[18px] bg-white p-7 shadow-[0_24px_64px_-16px_rgba(18,16,28,.35)] outline-none animate-scale-in"
+            className="my-auto w-full max-w-sm rounded-[18px] bg-white p-5 shadow-[0_24px_64px_-16px_rgba(18,16,28,.35)] outline-none animate-scale-in sm:p-7"
           >
             <div className="flex items-start justify-between gap-4">
               <span className="flex size-11 items-center justify-center rounded-[12px] bg-danger-bg text-danger">
@@ -129,7 +137,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
       {/* ── Despedida ── */}
       {state === "leaving" && (
         <div
-          className="fixed inset-0 z-[110] flex flex-col items-center justify-center sep-gradient animate-fade-in"
+          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden sep-gradient px-5 text-center animate-fade-in"
           role="status"
           aria-live="polite"
         >
