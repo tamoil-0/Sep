@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, PenLine } from "lucide-react";
-import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -11,6 +10,8 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/utils";
+import { getPublishedPosts } from "@/server/queries/public-content";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -22,29 +23,32 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function BlogPage() {
-  const supabase = createPublicClient();
-
-  const { data: posts } = await supabase
-    .from("blog_posts")
-    .select("id, slug, title, excerpt, tags, published_at, profiles(full_name)")
-    .eq("is_published", true)
-    .order("published_at", { ascending: false });
+  const posts = await getPublishedPosts();
 
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container size="wide" className="py-16">
+        <Container size="wide" className="py-14 sm:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
             eyebrow="Blog"
             title="Lo que vamos aprendiendo"
             description="Metodologías, crónicas de campo y decisiones que tomamos en voz alta."
           />
+          <RealPhoto
+            src={SEP_PHOTOS.methodology}
+            alt="Equipo de jóvenes analizando ideas durante una sesión de SEP"
+            priority
+            label="Conocimiento construido en equipo"
+            className="aspect-[16/10] min-h-0"
+          />
+          </div>
         </Container>
       </section>
 
       <Section>
         <Container size="wide">
-          {!posts?.length ? (
+          {!posts.length ? (
             <EmptyState
               icon={<PenLine className="size-5" />}
               title="Todavía no hay publicaciones"

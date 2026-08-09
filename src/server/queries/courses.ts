@@ -1,10 +1,11 @@
 import "server-only";
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createPublicClient } from "@/lib/supabase/public";
 
 /** Catálogo público. Solo cursos publicados; RLS lo garantiza. */
-export const getCatalog = cache(async () => {
+export const getCatalog = unstable_cache(async () => {
   // Cliente público: sin cookies, así la página puede ser estática con ISR.
   const supabase = createPublicClient();
   const { data } = await supabase
@@ -16,9 +17,9 @@ export const getCatalog = cache(async () => {
     .order("order_index");
 
   return data ?? [];
-});
+}, ["public-course-catalog-v1"], { revalidate: 300, tags: ["public-courses"] });
 
-export const getCourseBySlug = cache(async (slug: string) => {
+export const getCourseBySlug = unstable_cache(async (slug: string) => {
   const supabase = createPublicClient();
   const { data } = await supabase
     .from("courses")
@@ -27,7 +28,7 @@ export const getCourseBySlug = cache(async (slug: string) => {
     .maybeSingle();
 
   return data;
-});
+}, ["public-course-by-slug-v1"], { revalidate: 300, tags: ["public-courses"] });
 
 /**
  * Curso con sus sesiones y el progreso del usuario actual.

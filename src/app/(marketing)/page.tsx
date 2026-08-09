@@ -22,7 +22,6 @@ import {
   AvatarStack,
   CourseCover,
   DotGrid,
-  HeroIllustration,
   ImpactChainIllustration,
   StatBlock,
   type CoursePattern,
@@ -30,6 +29,7 @@ import {
 import { CountUp } from "@/components/marketing/count-up";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
+import { ExperienceGallery, HeroPhoto } from "@/components/marketing/real-photo";
 import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
 import { formatSoles } from "@/lib/utils";
@@ -59,7 +59,7 @@ export default async function HomePage() {
         />
 
         <Container size="wide" className="relative">
-          <div className="grid items-center gap-12 py-20 lg:grid-cols-[1.15fr_1fr] lg:py-28">
+          <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:py-24">
             <div>
               <Badge tone="white">
                 <BadgeCheck className="size-3.5" />
@@ -96,8 +96,8 @@ export default async function HomePage() {
               </div>
             </div>
 
-            <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
-              <HeroIllustration />
+            <div className="relative mt-2 w-full lg:mt-0">
+              <HeroPhoto />
             </div>
           </div>
         </Container>
@@ -162,7 +162,25 @@ export default async function HomePage() {
       </Section>
 
       {/* ═══ 4 · CADENA DE IMPACTO — un solo gráfico ══════ */}
-      <Section tone="muted">
+      <Section tone="muted" className="overflow-hidden">
+        <Container size="wide">
+          <div className="grid items-end gap-6 sm:grid-cols-[1fr_auto]">
+            <SectionHeader
+              eyebrow="Esto es SEP"
+              title="Ideas que salen del papel"
+              description="Talleres, equipos y proyectos construidos por jóvenes desde sus propias regiones. Personas reales aprendiendo juntas, no fotografías de catálogo."
+            />
+            <Badge tone="seed" className="w-fit sm:mb-1">
+              Experiencias reales
+            </Badge>
+          </div>
+          <div className="mt-10 sm:mt-12">
+            <ExperienceGallery />
+          </div>
+        </Container>
+      </Section>
+
+      <Section>
         <Container size="wide">
           <SectionHeader
             eyebrow="Cómo funciona"
@@ -214,7 +232,7 @@ export default async function HomePage() {
                 interactive
                 className="flex flex-col p-4"
                 as={Link}
-                {...{ href: `/cursos/${course.slug}`, prefetch: false }}
+                {...{ href: `/cursos/${course.slug}`, prefetch: true }}
               >
                 <CourseCover
                   pattern={patternFor(course.category)}

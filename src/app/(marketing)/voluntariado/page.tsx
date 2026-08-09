@@ -19,6 +19,7 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import {
   commonVolunteerBenefits,
   volunteerProcess,
@@ -66,6 +67,16 @@ export default function VoluntariadoPage() {
               certificación formal, red nacional y formación continua sin costo.
             </p>
           </div>
+
+          <RealPhoto
+            src={SEP_PHOTOS.team}
+            alt="Voluntarios y participantes de SEP trabajando como equipo"
+            priority
+            label="Una comunidad que construye"
+            className="mt-10 aspect-[16/7] min-h-52 border border-white/20"
+            imageClassName="object-[50%_42%]"
+            sizes="(min-width: 1280px) 1152px, 100vw"
+          />
 
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
             {[

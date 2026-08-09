@@ -10,6 +10,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { silpPricing } from "@/config/pricing";
 import { formatSoles } from "@/lib/utils";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "SILP — Social Impact Leadership Program",
@@ -93,6 +94,15 @@ export default function SilpPage() {
                   </li>
                 ))}
               </ul>
+              <RealPhoto
+                src={SEP_PHOTOS.workshop}
+                alt="Participantes de SEP desarrollando un reto colaborativo"
+                priority
+                label="Liderazgo en acción"
+                className="mt-8 aspect-[16/7] min-h-48 border border-white/20"
+                imageClassName="object-[50%_42%]"
+                sizes="(min-width: 1024px) 55vw, 100vw"
+              />
             </div>
 
             <Card className="lg:sticky lg:top-24 lg:self-start">

@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { b2bPackages } from "@/config/pricing";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Para empresas y organizaciones",
@@ -32,7 +33,8 @@ export default function EmpresasPage() {
     <>
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 sm:py-20">
-          <div className="max-w-2xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
+            <div className="max-w-2xl">
             <Badge tone="brand">
               <Building2 className="size-3.5" />
               Alianzas RSE
@@ -54,6 +56,15 @@ export default function EmpresasPage() {
               Hablar con el equipo
               <ArrowRight className="size-4" />
             </Button>
+            </div>
+            <RealPhoto
+              src={SEP_PHOTOS.alliance}
+              alt="SEP presentado junto a organizaciones aliadas del ecosistema peruano"
+              priority
+              label="Ecosistema y alianzas"
+              className="aspect-[4/3] min-h-0"
+              imageClassName="object-[50%_64%]"
+            />
           </div>
         </Container>
       </section>

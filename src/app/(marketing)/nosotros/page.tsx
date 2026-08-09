@@ -9,6 +9,7 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { impactChain, partners, problemStats, siteConfig } from "@/config/site";
 import { initials } from "@/lib/utils";
 
@@ -43,7 +44,8 @@ export default function NosotrosPage() {
           }}
         />
         <Container size="wide" className="relative py-16 sm:py-24">
-          <div className="max-w-2xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
+            <div className="max-w-2xl">
             <Badge tone="white">Desde Casma, Áncash · 7 de abril de 2024</Badge>
             <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-white sm:text-[3.25rem]">
               Llevamos la innovación al{" "}
@@ -54,6 +56,15 @@ export default function NosotrosPage() {
               emprendimiento juvenil e innovación científico-tecnológica nacida fuera de
               Lima y pensada para regiones.
             </p>
+            </div>
+            <RealPhoto
+              src={SEP_PHOTOS.team}
+              alt="Equipo de jóvenes de SEP durante una jornada de trabajo"
+              priority
+              label="Jóvenes construyendo SEP"
+              className="aspect-[4/3] min-h-0 border border-white/20"
+              imageClassName="object-[50%_44%]"
+            />
           </div>
         </Container>
       </section>

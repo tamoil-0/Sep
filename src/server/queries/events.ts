@@ -1,5 +1,5 @@
 import "server-only";
-import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
 
 /**
@@ -8,7 +8,7 @@ import { createPublicClient } from "@/lib/supabase/public";
  * El corte temporal se calcula aquí y no en el componente: mantiene el render
  * puro y deja una sola fuente de verdad para «qué cuenta como próximo».
  */
-export const getPublishedEvents = cache(async () => {
+export const getPublishedEvents = unstable_cache(async () => {
   const supabase = createPublicClient();
   const nowIso = new Date().toISOString();
 
@@ -29,4 +29,4 @@ export const getPublishedEvents = cache(async () => {
   ]);
 
   return { upcoming: upcoming ?? [], past: past ?? [] };
-});
+}, ["public-events-v1"], { revalidate: 300, tags: ["public-events"] });

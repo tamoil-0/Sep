@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Quote } from "lucide-react";
-import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -10,6 +9,8 @@ import {
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { initials } from "@/lib/utils";
+import { getPublicProjects } from "@/server/queries/public-content";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Testimonios",
@@ -66,23 +67,27 @@ const stories = [
 ];
 
 export default async function TestimoniosPage() {
-  const supabase = createPublicClient();
-
-  const { data: projects } = await supabase
-    .from("projects")
-    .select("id, title, problem, solution, region")
-    .eq("is_public", true)
-    .limit(6);
+  const projects = await getPublicProjects();
 
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container size="wide" className="py-16">
+        <Container size="wide" className="py-14 sm:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <SectionHeader
             eyebrow="La comunidad"
             title="Lo que dicen quienes ya pasaron por aquí"
             description="Sin retoques ni testimonios de stock. Personas reales de regiones reales."
           />
+          <RealPhoto
+            src={SEP_PHOTOS.community}
+            alt="Comunidad SEP reunida al terminar una experiencia de aprendizaje"
+            priority
+            label="La comunidad detrás de las historias"
+            className="aspect-[16/10] min-h-0"
+            imageClassName="object-[50%_76%]"
+          />
+          </div>
         </Container>
       </section>
 
@@ -91,7 +96,8 @@ export default async function TestimoniosPage() {
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stories.map((s) => (
               <li key={s.name}>
-                <Card className="flex h-full flex-col p-6">
+                <Card className="relative flex h-full flex-col overflow-hidden p-6 shadow-[0_10px_34px_-28px_rgba(18,16,28,.5)]">
+                  <span className="absolute left-0 top-0 h-full w-1 sep-gradient" />
                   <Quote className="size-5 text-gold-500" />
                   <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-graphite">
                     {s.quote}
@@ -114,7 +120,7 @@ export default async function TestimoniosPage() {
         </Container>
       </Section>
 
-      {(projects?.length ?? 0) > 0 && (
+      {projects.length > 0 && (
         <Section tone="muted">
           <Container size="wide">
             <SectionHeader
@@ -124,7 +130,7 @@ export default async function TestimoniosPage() {
             />
 
             <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {(projects ?? []).map((p) => (
+              {projects.map((p) => (
                 <li key={p.id}>
                   <Card className="flex h-full flex-col p-6">
                     {p.region && <Badge tone="brand">{p.region}</Badge>}

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { Check, School } from "lucide-react";
-import { createPublicClient } from "@/lib/supabase/public";
 import {
   Badge,
   Card,
@@ -11,6 +10,8 @@ import {
 } from "@/components/ui/primitives";
 import { schoolBenefits, schoolProcess } from "@/config/volunteering";
 import { SchoolForm } from "./school-form";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
+import { getSchoolNetwork } from "@/server/queries/public-content";
 
 export const metadata: Metadata = {
   title: "Red de colegios",
@@ -22,33 +23,16 @@ export const metadata: Metadata = {
 export const revalidate = 300;
 
 export default async function ColegiosPage() {
-  const supabase = createPublicClient();
+  const { schools, workshops, students } = await getSchoolNetwork();
 
-  const [{ data: schools }, { count: workshops }, { count: students }] =
-    await Promise.all([
-      supabase
-        .from("institutions")
-        .select("id, name, region, province")
-        .eq("type", "colegio")
-        .eq("is_verified", true)
-        .limit(12),
-      supabase
-        .from("workshops")
-        .select("id", { count: "exact", head: true })
-        .eq("status", "realizado"),
-      supabase
-        .from("workshop_attendees")
-        .select("id", { count: "exact", head: true })
-        .eq("attended", true),
-    ]);
-
-  const regions = new Set((schools ?? []).map((s) => s.region));
+  const regions = new Set(schools.map((s) => s.region));
 
   return (
     <>
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 sm:py-20">
-          <div className="max-w-2xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
+            <div className="max-w-2xl">
             <Badge tone="seed">100 % gratuito para el colegio</Badge>
             <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-ink sm:text-[3.25rem]">
               Conectamos colegios con{" "}
@@ -58,11 +42,19 @@ export default async function ColegiosPage() {
               Universitarios formados por SEP dictan talleres de innovación social a tus
               estudiantes. Sin costo, en su propio idioma y desde su propia realidad.
             </p>
+            </div>
+            <RealPhoto
+              src={SEP_PHOTOS.workshop}
+              alt="Jóvenes participando en un taller práctico de SEP"
+              priority
+              label="Taller presencial SEP"
+              className="aspect-[4/3] min-h-0"
+            />
           </div>
 
           <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
             {[
-              [String(schools?.length ?? 0), "Colegios aliados"],
+              [String(schools.length), "Colegios aliados"],
               [String(students ?? 0), "Estudiantes impactados"],
               [String(workshops ?? 0), "Talleres realizados"],
               [String(regions.size), "Regiones activas"],
@@ -129,13 +121,13 @@ export default async function ColegiosPage() {
               </div>
 
               {/* Colegios activos */}
-              {(schools?.length ?? 0) > 0 && (
+              {schools.length > 0 && (
                 <div className="mt-12">
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
                     Colegios en la red
                   </p>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
-                    {(schools ?? []).map((s) => (
+                    {schools.map((s) => (
                       <li
                         key={s.id}
                         className="flex items-center gap-3 rounded-[10px] border border-line bg-white px-4 py-3"

@@ -72,7 +72,11 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="es-PE" className={`${inter.variable} ${poppins.variable}`}>
+    <html
+      lang="es-PE"
+      data-scroll-behavior="smooth"
+      className={`${inter.variable} ${poppins.variable}`}
+    >
       <body className="antialiased">
         <a
           href="#contenido"

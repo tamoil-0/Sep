@@ -9,6 +9,7 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Programa para docentes",
@@ -30,7 +31,8 @@ export default function DocentesPage() {
     <>
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 sm:py-20">
-          <div className="max-w-2xl">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
+            <div className="max-w-2xl">
             <Badge tone="gold">
               <GraduationCap className="size-3.5" />
               Gratuito para docentes
@@ -47,6 +49,14 @@ export default function DocentesPage() {
               Crear mi cuenta de docente
               <ArrowRight className="size-4" />
             </Button>
+            </div>
+            <RealPhoto
+              src={SEP_PHOTOS.methodology}
+              alt="Jóvenes aplicando metodologías activas durante un taller"
+              priority
+              label="Metodologías que se practican"
+              className="aspect-[4/3] min-h-0"
+            />
           </div>
         </Container>
       </section>

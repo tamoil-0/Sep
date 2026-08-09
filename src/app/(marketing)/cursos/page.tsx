@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { COURSE_FORMAT } from "@/config/courses";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Cursos gratuitos",
@@ -25,6 +26,7 @@ export default async function CursosPage() {
     <>
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 sm:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <div className="max-w-2xl">
             <Badge tone="seed">Catálogo abierto</Badge>
             <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.1] text-ink sm:text-[3.25rem]">
@@ -36,7 +38,16 @@ export default async function CursosPage() {
             </p>
           </div>
 
-          <dl className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <RealPhoto
+            src={SEP_PHOTOS.virtual}
+            alt="Participantes de distintas regiones conectados a una formación virtual de SEP"
+            priority
+            label="Aula virtual SEP"
+            className="aspect-[16/10] min-h-0"
+          />
+          </div>
+
+          <dl className="mt-10 grid gap-6 rounded-[16px] border border-line bg-white p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
             {[
               ["Duración", `${COURSE_FORMAT.weeks} semanas`],
               ["Frecuencia", COURSE_FORMAT.frequency],
@@ -63,9 +74,9 @@ export default async function CursosPage() {
                 <Card
                   key={c.id}
                   interactive
-                  className="flex flex-col p-4"
+                  className="group flex flex-col overflow-hidden border-transparent p-3 shadow-[0_8px_30px_-22px_rgba(18,16,28,.4)] hover:bg-surface-1/40 sm:p-4"
                   as={Link}
-                  {...{ href: `/cursos/${c.slug}`, prefetch: false }}
+                  {...{ href: `/cursos/${c.slug}`, prefetch: true }}
                 >
                   <CourseCover
                     pattern={
@@ -77,7 +88,7 @@ export default async function CursosPage() {
                             ? "docentes"
                             : "agiles"
                     }
-                    className="mb-4 aspect-[16/9] w-full"
+                    className="mb-4 aspect-[16/9] w-full transition-transform duration-500 group-hover:scale-[1.015]"
                   />
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (

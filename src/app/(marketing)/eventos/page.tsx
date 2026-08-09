@@ -11,6 +11,7 @@ import {
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { formatDateTime } from "@/lib/utils";
+import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
   title: "Eventos",
@@ -34,12 +35,22 @@ export default async function EventosPage() {
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container size="wide" className="py-16">
+        <Container size="wide" className="py-14 sm:py-20">
+          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
             eyebrow="Agenda"
             title="Eventos SEP"
             description="Demo Days, ferias escolares, webinars y talleres abiertos. Participar es gratis y no importa desde dónde te conectes."
           />
+          <RealPhoto
+            src={SEP_PHOTOS.alliance}
+            alt="Presentación de SEP junto a comunidades y organizaciones aliadas"
+            priority
+            label="Conexiones que abren oportunidades"
+            className="aspect-[16/10] min-h-0"
+            imageClassName="object-[50%_60%]"
+          />
+          </div>
         </Container>
       </section>
 
@@ -59,7 +70,8 @@ export default async function EventosPage() {
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
               {upcoming.map((e) => (
-                <Card key={e.id} className="flex flex-col p-6">
+                <Card key={e.id} className="relative flex flex-col overflow-hidden border-sep-100 p-6 shadow-[0_12px_36px_-26px_rgba(46,11,232,.45)]">
+                  <span className="absolute inset-x-0 top-0 h-1 sep-gradient" />
                   <div className="flex flex-wrap items-center gap-2">
                     <Badge tone="brand">{kindLabels[e.kind ?? ""] ?? "Evento"}</Badge>
                     {e.is_online ? (
