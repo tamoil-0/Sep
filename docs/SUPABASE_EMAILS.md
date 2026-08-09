@@ -4,6 +4,11 @@ Las plantillas versionadas están en:
 
 - `supabase/templates/confirmation.html`
 - `supabase/templates/recovery.html`
+- `supabase/templates/invite.html`
+- `supabase/templates/magic-link.html`
+- `supabase/templates/email-change.html`
+- `supabase/templates/reauthentication.html`
+- `supabase/templates/password-changed.html`
 
 `supabase/config.toml` las carga automáticamente en Supabase local después de
 reiniciar los servicios.
@@ -19,6 +24,10 @@ migración SQL. Para publicar el diseño:
 3. En **Reset password**, usa el asunto `Crea una nueva contraseña · SEP` y
    pega el contenido de `supabase/templates/recovery.html`.
 4. Guarda ambos cambios y envía un correo de prueba a Gmail y Outlook.
+
+Repite el mismo proceso para **Invite user**, **Magic link or OTP**, **Change
+email address**, **Reauthentication** y la notificación **Password changed**.
+Los asuntos correspondientes están declarados en `supabase/config.toml`.
 
 Las plantillas usan `{{ .TokenHash }}`, `{{ .SiteURL }}` y `{{ .Email }}`,
 variables oficiales de Supabase. El enlace llega a `/auth/confirm`, donde el

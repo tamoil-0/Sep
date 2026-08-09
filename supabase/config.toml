@@ -63,6 +63,27 @@ content_path = "./supabase/templates/confirmation.html"
 subject = "Crea una nueva contraseña · SEP"
 content_path = "./supabase/templates/recovery.html"
 
+[auth.email.template.invite]
+subject = "Te invitaron a formar parte de SEP"
+content_path = "./supabase/templates/invite.html"
+
+[auth.email.template.magic_link]
+subject = "Tu acceso seguro a SEP"
+content_path = "./supabase/templates/magic-link.html"
+
+[auth.email.template.email_change]
+subject = "Confirma tu nuevo correo · SEP"
+content_path = "./supabase/templates/email-change.html"
+
+[auth.email.template.reauthentication]
+subject = "{{ .Token }} es tu código de seguridad SEP"
+content_path = "./supabase/templates/reauthentication.html"
+
+[auth.email.notification.password_changed]
+enabled = true
+subject = "Tu contraseña de SEP fue actualizada"
+content_path = "./supabase/templates/password-changed.html"
+
 [auth.mfa]
 max_enrolled_factors = 3
 
