@@ -32,7 +32,7 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
 
   if (error || !user) return null;
 
-  const [{ data: profile }, { data: roleRows }] = await Promise.all([
+  const [profileResult, rolesResult] = await Promise.all([
     supabase
       .from("profiles")
       .select("full_name, avatar_url, region, onboarding_done")
@@ -41,13 +41,25 @@ export const getSessionUser = cache(async (): Promise<SessionUser | null> => {
     supabase.from("user_roles").select("role").eq("user_id", user.id).is("revoked_at", null),
   ]);
 
+  if (profileResult.error || rolesResult.error) {
+    console.error("[sep] no se pudo resolver el contexto de sesión:", {
+      profile: profileResult.error?.code,
+      roles: rolesResult.error?.code,
+    });
+  }
+
+  const profile = profileResult.data;
+  const roleRows = rolesResult.data;
+
   return {
     id: user.id,
     email: user.email ?? "",
     fullName: profile?.full_name ?? user.email?.split("@")[0] ?? "",
     avatarUrl: profile?.avatar_url ?? null,
     region: profile?.region ?? null,
-    roles: (roleRows?.map((r) => r.role) ?? ["estudiante"]) as UserRole[],
+    // Nunca inventamos un rol cuando la consulta falla. Las pantallas con
+    // requireRole deben denegar el acceso si no hay una asignación real.
+    roles: (roleRows?.map((r) => r.role) ?? []) as UserRole[],
     onboardingDone: profile?.onboarding_done ?? false,
   };
 });

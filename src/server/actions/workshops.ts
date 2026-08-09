@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { fail, fromPostgrestError, fromZodError, ok, type ActionResult } from "@/lib/result";
 import { checkRateLimit } from "@/lib/rate-limit";
 
@@ -33,7 +33,7 @@ export async function requestWorkshopAction(
   _prev: ActionResult<unknown> | null,
   formData: FormData,
 ): Promise<ActionResult<string>> {
-  const user = await requireUser();
+  const user = await requireRole(["docente", "institucion", "admin", "super_admin"]);
 
   if (!checkRateLimit(`workshop:${user.id}`, 6, 24 * 60 * 60 * 1000)) {
     return fail("Ya enviaste varias solicitudes hoy. Escríbenos si es urgente.");

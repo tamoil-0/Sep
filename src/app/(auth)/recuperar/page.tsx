@@ -7,7 +7,12 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export default function RecuperarPage() {
+export default async function RecuperarPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ error?: string }>;
+}) {
+  const { error } = await searchParams;
   return (
     <div>
       <h1 className="font-display text-[2rem] font-semibold text-ink">
@@ -18,7 +23,13 @@ export default function RecuperarPage() {
       </p>
 
       <div className="mt-8">
-        <ForgotForm />
+        <ForgotForm
+          initialError={
+            error
+              ? "El enlace venció, ya fue utilizado o no es válido. Solicita uno nuevo."
+              : undefined
+          }
+        />
       </div>
 
       <p className="mt-8 text-center text-sm text-slate-ui">

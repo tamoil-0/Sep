@@ -11,15 +11,28 @@ export async function GET(request: NextRequest) {
   const safeNext = next?.startsWith("/") && !next.startsWith("//") ? next : "/panel";
 
   if (!code) {
-    return NextResponse.redirect(`${origin}/login?error=missing_code`);
+    const target = safeNext === "/nueva-contrasena" ? "/recuperar?error=invalid_link" : "/login?error=missing_code";
+    return NextResponse.redirect(`${origin}${target}`);
   }
 
   const supabase = await createClient();
   const { error } = await supabase.auth.exchangeCodeForSession(code);
 
   if (error) {
-    return NextResponse.redirect(`${origin}/login?error=auth_failed`);
+    const target = safeNext === "/nueva-contrasena" ? "/recuperar?error=expired_link" : "/login?error=auth_failed";
+    return NextResponse.redirect(`${origin}${target}`);
   }
 
-  return NextResponse.redirect(`${origin}${safeNext}`);
+  const response = NextResponse.redirect(`${origin}${safeNext}`);
+  if (safeNext === "/nueva-contrasena") {
+    response.cookies.set("sep_password_recovery", "1", {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 10 * 60,
+      path: "/",
+    });
+  }
+
+  return response;
 }

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { MapPin, Users } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Feed } from "./feed";
@@ -8,7 +8,7 @@ import { Feed } from "./feed";
 export const metadata: Metadata = { title: "Comunidad SEP" };
 
 export default async function ComunidadPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
   const [{ data: posts }, { count: members }, { data: regionRows }, { data: myLikes }] =

@@ -11,9 +11,15 @@ export const metadata: Metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ next?: string }>;
+  searchParams: Promise<{ next?: string; password?: string; error?: string }>;
 }) {
-  const { next } = await searchParams;
+  const { next, password, error } = await searchParams;
+  const notice =
+    password === "updated"
+      ? { tone: "success" as const, text: "Tu contraseña fue actualizada. Ya puedes iniciar sesión." }
+      : error
+        ? { tone: "error" as const, text: "El enlace de acceso no es válido o ya venció. Inténtalo nuevamente." }
+        : undefined;
 
   return (
     <div>
@@ -25,7 +31,7 @@ export default async function LoginPage({
       </p>
 
       <div className="mt-8">
-        <LoginForm next={next} />
+        <LoginForm next={next} notice={notice} />
       </div>
 
       <p className="mt-8 text-center text-sm text-slate-ui">

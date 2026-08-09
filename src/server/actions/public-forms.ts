@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { getSessionUser } from "@/lib/auth/session";
 import { fail, fromPostgrestError, fromZodError, ok, type ActionResult } from "@/lib/result";
 import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
@@ -40,7 +40,7 @@ export async function applyVolunteerAction(
   const parsed = volunteerSchema.safeParse(Object.fromEntries(formData.entries()));
   if (!parsed.success) return fromZodError(parsed.error.flatten().fieldErrors);
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
   const { data: role } = await supabase
     .from("volunteer_roles")
@@ -119,7 +119,7 @@ export async function registerSpeakerAction(
   if (!parsed.success) return fromZodError(parsed.error.flatten().fieldErrors);
 
   const user = await getSessionUser();
-  const supabase = await createClient();
+  const supabase = createAdminClient();
 
   const { data, error } = await supabase
     .from("speaker_profiles")
@@ -181,7 +181,7 @@ export async function registerSchoolAction(
 
   if (!parsed.success) return fromZodError(parsed.error.flatten().fieldErrors);
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("school_applications")
     .insert({
@@ -246,7 +246,7 @@ export async function submitDiagnosticAction(input: {
     return fail(parsed.error.issues[0]?.message ?? "Revisa tus respuestas.");
   }
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data, error } = await supabase.rpc("submit_diagnostic", {
     p_email: parsed.data.email,
     p_profile: parsed.data.profile,
@@ -259,11 +259,20 @@ export async function submitDiagnosticAction(input: {
 
   // El diagnóstico también suma al newsletter, con consentimiento implícito
   // en el copy del formulario («te avisamos del piloto»).
-  await supabase.from("newsletter_subscribers").insert({
-    email: parsed.data.email,
-    region: parsed.data.region ?? null,
-    source: "diagnostico",
-  });
+  const { error: newsletterError } = await supabase
+    .from("newsletter_subscribers")
+    .upsert(
+      {
+        email: parsed.data.email,
+        region: parsed.data.region ?? null,
+        source: "diagnostico",
+      },
+      { onConflict: "email", ignoreDuplicates: true },
+    );
+
+  if (newsletterError) {
+    console.error("[sep] no se pudo sincronizar el newsletter:", newsletterError.message);
+  }
 
   return ok(data as string);
 }
@@ -300,7 +309,7 @@ export async function createDonationAction(
 
   if (!parsed.success) return fromZodError(parsed.error.flatten().fieldErrors);
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { data, error } = await supabase
     .from("donations")
     .insert({

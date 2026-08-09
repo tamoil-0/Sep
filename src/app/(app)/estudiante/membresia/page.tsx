@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Check, Sprout } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { getActiveMembership, getMembershipPlans } from "@/server/queries/payments";
 import { PageHeader } from "@/components/app/page-header";
 import { Badge, Card } from "@/components/ui/primitives";
@@ -10,7 +10,7 @@ import { formatDate, formatSoles } from "@/lib/utils";
 export const metadata: Metadata = { title: "Mi membresía" };
 
 export default async function MembresiaPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const [membership, plans] = await Promise.all([
     getActiveMembership(user.id),
     getMembershipPlans(),
@@ -92,4 +92,3 @@ export default async function MembresiaPage() {
     </>
   );
 }
-

@@ -725,6 +725,14 @@ export interface Database {
       };
       grant_role: { Args: { p_user_id: string; p_role: UserRole }; Returns: undefined };
       revoke_role: { Args: { p_user_id: string; p_role: UserRole }; Returns: undefined };
+      review_school_application: {
+        Args: { p_application_id: string; p_status: ApplicationStatusDb };
+        Returns: undefined;
+      };
+      review_speaker_profile: {
+        Args: { p_speaker_id: string; p_approve: boolean };
+        Returns: undefined;
+      };
       submit_diagnostic: {
         Args: {
           p_email: string;

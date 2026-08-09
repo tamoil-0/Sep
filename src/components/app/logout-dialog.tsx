@@ -24,6 +24,7 @@ const FAREWELL_MS = 1600;
 export function LogoutDialog({ userName }: { userName: string }) {
   const router = useRouter();
   const [state, setState] = React.useState<"idle" | "confirm" | "leaving">("idle");
+  const [logoutError, setLogoutError] = React.useState<string | null>(null);
   const dialogRef = React.useRef<HTMLDivElement>(null);
 
   // Escape cierra la confirmación (pero no la despedida, que ya es irreversible).
@@ -46,6 +47,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
   }, [state]);
 
   async function confirmLogout() {
+    setLogoutError(null);
     setState("leaving");
     // La despedida y el cierre de sesión corren a la vez; nos vamos cuando
     // ambos terminen, así nunca se ve un salto brusco ni una espera vacía.
@@ -53,8 +55,13 @@ export function LogoutDialog({ userName }: { userName: string }) {
       logoutAction(),
       new Promise((r) => setTimeout(r, FAREWELL_MS)),
     ]);
-    if (logoutResult.status === "rejected") {
-      setState("idle");
+    if (logoutResult.status === "rejected" || !logoutResult.value.ok) {
+      setLogoutError(
+        logoutResult.status === "fulfilled"
+          ? (logoutResult.value.error ?? "No pudimos cerrar tu sesión. Inténtalo nuevamente.")
+          : "No pudimos cerrar tu sesión. Inténtalo nuevamente.",
+      );
+      setState("confirm");
       return;
     }
     router.replace("/");
@@ -115,6 +122,12 @@ export function LogoutDialog({ userName }: { userName: string }) {
               Cerrarás tu sesión en este dispositivo. Tu progreso queda guardado
               y podrás volver cuando quieras.
             </p>
+
+            {logoutError && (
+              <p role="alert" className="mt-4 rounded-xl bg-danger-bg px-3.5 py-3 text-sm text-danger">
+                {logoutError}
+              </p>
+            )}
 
             <div className="mt-7 flex flex-col-reverse gap-2.5 sm:flex-row">
               <button

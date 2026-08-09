@@ -1,6 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
-import { createClient } from "@/lib/supabase/server";
+import { createAdminClient } from "@/lib/supabase/admin";
 import { checkRateLimit } from "@/lib/rate-limit";
 
 const bodySchema = z.object({
@@ -13,8 +13,14 @@ const bodySchema = z.object({
 export async function POST(request: NextRequest) {
   // Verificación de origen — protección CSRF para endpoints de API (§9.4)
   const origin = request.headers.get("origin");
-  if (origin && new URL(origin).host !== request.nextUrl.host) {
-    return NextResponse.json({ error: "Origen no permitido" }, { status: 403 });
+  if (origin) {
+    try {
+      if (new URL(origin).host !== request.nextUrl.host) {
+        return NextResponse.json({ error: "Origen no permitido" }, { status: 403 });
+      }
+    } catch {
+      return NextResponse.json({ error: "Origen no permitido" }, { status: 403 });
+    }
   }
 
   const ip =
@@ -40,7 +46,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Correo no válido" }, { status: 400 });
   }
 
-  const supabase = await createClient();
+  const supabase = createAdminClient();
   const { error } = await supabase.from("newsletter_subscribers").insert({
     email: parsed.data.email,
     full_name: parsed.data.fullName ?? null,

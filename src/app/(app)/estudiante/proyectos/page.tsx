@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Lightbulb, MapPin } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
@@ -10,7 +10,7 @@ import { formatDate } from "@/lib/utils";
 export const metadata: Metadata = { title: "Mis proyectos" };
 
 export default async function ProyectosPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
   const [{ data: mine }, { data: others }] = await Promise.all([
@@ -94,4 +94,3 @@ export default async function ProyectosPage() {
     </>
   );
 }
-

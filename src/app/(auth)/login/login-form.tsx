@@ -21,7 +21,13 @@ function SubmitButton() {
   );
 }
 
-export function LoginForm({ next }: { next?: string }) {
+export function LoginForm({
+  next,
+  notice,
+}: {
+  next?: string;
+  notice?: { tone: "success" | "error"; text: string };
+}) {
   const [state, action] = useActionState<ActionState | null, FormData>(
     loginAction,
     null,
@@ -31,6 +37,7 @@ export function LoginForm({ next }: { next?: string }) {
     <form action={action} className="space-y-4">
       {next && <input type="hidden" name="next" value={next} />}
 
+      {notice && <FormAlert tone={notice.tone}>{notice.text}</FormAlert>}
       {state?.error && <FormAlert tone="error">{state.error}</FormAlert>}
 
       <Field label="Correo electrónico" htmlFor="email" error={state?.fieldErrors?.email} required>

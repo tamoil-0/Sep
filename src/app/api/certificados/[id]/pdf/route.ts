@@ -2,6 +2,7 @@ import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { buildCertificatePdf } from "@/lib/pdf/certificate";
 import { siteConfig } from "@/config/site";
+import { z } from "zod";
 
 /**
  * Descarga del certificado en PDF.
@@ -15,6 +16,10 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+
+  if (!z.string().uuid().safeParse(id).success) {
+    return NextResponse.json({ error: "Certificado no encontrado" }, { status: 404 });
+  }
 
   const supabase = await createClient();
   const {
@@ -54,16 +59,25 @@ export async function GET(
   const course =
     enrollment && (Array.isArray(enrollment.courses) ? enrollment.courses[0] : enrollment.courses);
 
-  const bytes = await buildCertificatePdf({
-    holderName: profile?.full_name ?? "Participante SEP",
-    courseTitle: course?.title ?? "Programa SEP",
-    certificateName: type?.name ?? "Certificado SEP",
-    issuer: type?.issuer ?? "Semillero de Emprendedores Perú",
-    verificationCode: cert.verification_code,
-    issuedAt: cert.issued_at ? new Date(cert.issued_at) : new Date(),
-    hours: Number(course?.total_hours ?? 8),
-    verifyUrl: `${siteConfig.url.replace(/^https?:\/\//, "")}/verificar`,
-  });
+  let bytes: Uint8Array;
+  try {
+    bytes = await buildCertificatePdf({
+      holderName: profile?.full_name ?? "Participante SEP",
+      courseTitle: course?.title ?? "Programa SEP",
+      certificateName: type?.name ?? "Certificado SEP",
+      issuer: type?.issuer ?? "Semillero de Emprendedores Perú",
+      verificationCode: cert.verification_code,
+      issuedAt: cert.issued_at ? new Date(cert.issued_at) : new Date(),
+      hours: Number(course?.total_hours ?? 8),
+      verifyUrl: `${siteConfig.url.replace(/^https?:\/\//, "")}/verificar`,
+    });
+  } catch (pdfError) {
+    console.error("[sep] no se pudo generar el certificado PDF:", pdfError);
+    return NextResponse.json(
+      { error: "No pudimos generar el PDF. Inténtalo nuevamente." },
+      { status: 500 },
+    );
+  }
 
   const filename = `Certificado-SEP-${cert.verification_code}.pdf`;
 

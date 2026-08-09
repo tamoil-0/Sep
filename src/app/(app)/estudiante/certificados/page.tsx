@@ -8,7 +8,7 @@ import {
   Lock,
   ShieldCheck,
 } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { getMyCertificates, getCertificateTypes } from "@/server/queries/payments";
 import { getMyEnrollments } from "@/server/queries/courses";
 import { PageHeader } from "@/components/app/page-header";
@@ -22,7 +22,7 @@ import { RequestCertificateButtons } from "./request-buttons";
 export const metadata: Metadata = { title: "Mis certificados" };
 
 export default async function CertificadosPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
 
   const [certificates, types, enrollments] = await Promise.all([
     getMyCertificates(user.id),

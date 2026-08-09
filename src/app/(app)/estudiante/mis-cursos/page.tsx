@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, Clock } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { getMyEnrollments } from "@/server/queries/courses";
 import { PageHeader } from "@/components/app/page-header";
 import { Badge, Card, EmptyState, ProgressBar } from "@/components/ui/primitives";
@@ -11,7 +11,7 @@ import { formatDate } from "@/lib/utils";
 export const metadata: Metadata = { title: "Mis cursos" };
 
 export default async function MisCursosPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const enrollments = await getMyEnrollments(user.id);
 
   const active = enrollments.filter((e) => e.status === "activo");

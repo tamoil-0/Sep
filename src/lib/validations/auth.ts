@@ -26,7 +26,7 @@ const region = z.enum(REGION_OPTIONS, { message: "Elige tu región" });
 export const loginSchema = z.object({
   email,
   password: z.string().min(1, "Escribe tu contraseña"),
-  next: z.string().optional(),
+  next: z.string().max(500).optional(),
 });
 
 const baseSignup = z.object({

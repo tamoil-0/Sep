@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { CalendarDays, MapPin, Video } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { now } from "@/lib/time";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
@@ -12,7 +12,7 @@ import { formatDateTime } from "@/lib/utils";
 export const metadata: Metadata = { title: "Eventos" };
 
 export default async function EstudianteEventosPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
   const [{ data: events }, { data: mine }] = await Promise.all([

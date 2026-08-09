@@ -189,10 +189,19 @@ export async function getVoucherUrlAction(
 ): Promise<ActionResult<string>> {
   await requireRole(["admin", "super_admin"]);
 
+  const validPath = z
+    .string()
+    .trim()
+    .min(1)
+    .max(300)
+    .regex(/^[0-9a-f-]{36}\/[0-9a-f-]{36}-\d+\.(jpg|jpeg|png|webp|pdf)$/i)
+    .safeParse(path);
+  if (!validPath.success) return fail("Ruta de comprobante no válida.");
+
   const supabase = await createClient();
   const { data, error } = await supabase.storage
     .from("vouchers")
-    .createSignedUrl(path, 300); // 5 minutos
+    .createSignedUrl(validPath.data, 300); // 5 minutos
 
   if (error || !data) return fail("No pudimos abrir el comprobante.");
   return ok(data.signedUrl);

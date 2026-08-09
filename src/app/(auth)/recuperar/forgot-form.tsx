@@ -20,7 +20,7 @@ function SubmitButton() {
   );
 }
 
-export function ForgotForm() {
+export function ForgotForm({ initialError }: { initialError?: string }) {
   const [state, action] = useActionState<ActionState | null, FormData>(
     forgotPasswordAction,
     null,
@@ -32,9 +32,16 @@ export function ForgotForm() {
 
   return (
     <form action={action} className="space-y-4">
-      {state?.error && <FormAlert tone="error">{state.error}</FormAlert>}
+      {(state?.error || initialError) && (
+        <FormAlert tone="error">{state?.error ?? initialError}</FormAlert>
+      )}
 
-      <Field label="Correo electrónico" htmlFor="email" required>
+      <Field
+        label="Correo electrónico"
+        htmlFor="email"
+        error={state?.fieldErrors?.email}
+        required
+      >
         <Input
           id="email"
           name="email"
@@ -42,6 +49,7 @@ export function ForgotForm() {
           autoComplete="email"
           placeholder="tu@correo.com"
           required
+          invalid={!!state?.fieldErrors?.email}
         />
       </Field>
 

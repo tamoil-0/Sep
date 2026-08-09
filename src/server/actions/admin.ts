@@ -115,6 +115,9 @@ export async function updateApplicationStatusAction(
 ): Promise<ActionResult<void>> {
   const admin = await requireRole(["admin", "super_admin"]);
 
+  if (!z.string().uuid().safeParse(applicationId).success) {
+    return fail("Postulación no válida.");
+  }
   if (!APPLICATION_STATES.includes(status)) return fail("Estado no válido.");
 
   // Aprobar tiene efectos secundarios (otorga rol): pasa por el RPC.
@@ -124,12 +127,15 @@ export async function updateApplicationStatusAction(
   }
 
   const supabase = await createClient();
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("volunteer_applications")
     .update({ status, reviewer_notes: notes ?? null, reviewed_by: admin.id })
-    .eq("id", applicationId);
+    .eq("id", applicationId)
+    .select("id")
+    .maybeSingle();
 
   if (error) return fromPostgrestError(error);
+  if (!data) return fail("No encontramos esa postulación.");
 
   revalidatePath("/admin/postulaciones");
   return ok(undefined, "Estado actualizado.");
@@ -142,48 +148,16 @@ export async function updateSchoolApplicationAction(
   status: (typeof APPLICATION_STATES)[number],
 ): Promise<ActionResult<void>> {
   const admin = await requireRole(["admin", "super_admin"]);
-  const supabase = await createClient();
-
-  // Al aprobar, se crea la institución en la red.
-  if (status === "aprobada") {
-    const { data: app } = await supabase
-      .from("school_applications")
-      .select("*")
-      .eq("id", applicationId)
-      .single();
-
-    if (app && !app.institution_id) {
-      const { data: institution } = await supabase
-        .from("institutions")
-        .insert({
-          name: app.school_name,
-          type: "colegio",
-          region: app.region,
-          province: app.province,
-          contact_name: app.director_name,
-          contact_role: "Director(a)",
-          contact_email: app.contact_email,
-          contact_phone: app.contact_phone,
-          students_count: app.students_3to5,
-          is_verified: true,
-          created_by: admin.id,
-        })
-        .select("id")
-        .single();
-
-      if (institution) {
-        await supabase
-          .from("school_applications")
-          .update({ institution_id: institution.id })
-          .eq("id", applicationId);
-      }
-    }
+  if (!z.string().uuid().safeParse(applicationId).success) {
+    return fail("Solicitud no válida.");
   }
+  if (!APPLICATION_STATES.includes(status)) return fail("Estado no válido.");
 
-  const { error } = await supabase
-    .from("school_applications")
-    .update({ status, reviewed_by: admin.id })
-    .eq("id", applicationId);
+  const supabase = await createClient();
+  const { error } = await supabase.rpc("review_school_application", {
+    p_application_id: applicationId,
+    p_status: status,
+  });
 
   if (error) return fromPostgrestError(error);
 
@@ -210,28 +184,18 @@ export async function approveSpeakerAction(
   approve: boolean,
 ): Promise<ActionResult<void>> {
   const admin = await requireRole(["admin", "super_admin"]);
+  if (!z.string().uuid().safeParse(speakerId).success) {
+    return fail("Perfil de speaker no válido.");
+  }
+
   const supabase = await createClient();
 
-  const { data: speaker } = await supabase
-    .from("speaker_profiles")
-    .select("user_id")
-    .eq("id", speakerId)
-    .single();
-
-  const { error } = await supabase
-    .from("speaker_profiles")
-    .update({ is_approved: approve, is_public: approve })
-    .eq("id", speakerId);
+  const { error } = await supabase.rpc("review_speaker_profile", {
+    p_speaker_id: speakerId,
+    p_approve: approve,
+  });
 
   if (error) return fromPostgrestError(error);
-
-  // Si tiene cuenta, se le otorga el rol de speaker.
-  if (approve && speaker?.user_id) {
-    await supabase.rpc("grant_role", {
-      p_user_id: speaker.user_id,
-      p_role: "speaker",
-    });
-  }
 
   await audit({
     actorId: admin.id,
@@ -255,14 +219,21 @@ export async function approveHoursAction(
   hoursId: string,
 ): Promise<ActionResult<void>> {
   const admin = await requireRole(["admin", "super_admin"]);
+  if (!z.string().uuid().safeParse(hoursId).success) {
+    return fail("Registro de horas no válido.");
+  }
+
   const supabase = await createClient();
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("volunteer_hours")
     .update({ approved_by: admin.id, approved_at: new Date().toISOString() })
-    .eq("id", hoursId);
+    .eq("id", hoursId)
+    .select("id")
+    .maybeSingle();
 
   if (error) return fromPostgrestError(error);
+  if (!data) return fail("No encontramos ese registro de horas.");
 
   revalidatePath("/admin/postulaciones");
   return ok(undefined, "Horas aprobadas.");
@@ -276,21 +247,28 @@ export async function revokeCertificateAction(
 ): Promise<ActionResult<void>> {
   const admin = await requireRole(["admin", "super_admin"]);
 
+  if (!z.string().uuid().safeParse(certificateId).success) {
+    return fail("Certificado no válido.");
+  }
+
   if (reason.trim().length < 10) {
     return fail("Explica en al menos 10 caracteres por qué revocas el certificado.");
   }
 
   const supabase = await createClient();
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("certificates")
     .update({
       status: "revocado",
       revoked_at: new Date().toISOString(),
       revoked_reason: reason,
     })
-    .eq("id", certificateId);
+    .eq("id", certificateId)
+    .select("id")
+    .maybeSingle();
 
   if (error) return fromPostgrestError(error);
+  if (!data) return fail("No encontramos ese certificado.");
 
   await audit({
     actorId: admin.id,

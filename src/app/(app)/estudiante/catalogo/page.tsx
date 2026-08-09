@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { getCatalog, getMyEnrollments } from "@/server/queries/courses";
 import { PageHeader } from "@/components/app/page-header";
 import { CourseCatalog } from "@/components/app/course-catalog";
@@ -7,7 +7,7 @@ import { CourseCatalog } from "@/components/app/course-catalog";
 export const metadata: Metadata = { title: "Catálogo de cursos" };
 
 export default async function CatalogoPage() {
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const [courses, enrollments] = await Promise.all([
     getCatalog(),
     getMyEnrollments(user.id),

@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole, requireUser } from "@/lib/auth/session";
 import { fail, fromPostgrestError, ok, type ActionResult } from "@/lib/result";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { clientIp } from "@/lib/audit";
@@ -216,7 +216,7 @@ export async function logHoursAction(
   _prev: ActionResult<unknown> | null,
   formData: FormData,
 ): Promise<ActionResult<string>> {
-  await requireUser();
+  await requireRole(["mentor", "admin", "super_admin"]);
 
   const parsed = hoursSchema.safeParse({
     date: formData.get("date"),

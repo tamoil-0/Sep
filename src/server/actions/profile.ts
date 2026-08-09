@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { requireUser } from "@/lib/auth/session";
 import { fail, fromPostgrestError, fromZodError, ok, type ActionResult } from "@/lib/result";
 import { REGION_OPTIONS } from "@/config/regions";
+import { siteConfig } from "@/config/site";
+import { checkRateLimit, RATE_LIMITS } from "@/lib/rate-limit";
 
 const schema = z.object({
   fullName: z.string().trim().min(3, "Escribe tu nombre completo.").max(120),
@@ -96,10 +98,21 @@ export async function markAllReadAction(): Promise<ActionResult<void>> {
 /** Envía el correo para restablecer la contraseña del propio usuario. */
 export async function requestPasswordChangeAction(): Promise<ActionResult<void>> {
   const user = await requireUser();
+
+  if (
+    !checkRateLimit(
+      `password-reset-account:${user.id}`,
+      RATE_LIMITS.login.limit,
+      RATE_LIMITS.login.windowMs,
+    )
+  ) {
+    return fail("Solicitaste varios enlaces. Espera 15 minutos y vuelve a intentarlo.");
+  }
+
   const supabase = await createClient();
 
   const { error } = await supabase.auth.resetPasswordForEmail(user.email, {
-    redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL}/nueva-contrasena`,
+    redirectTo: `${siteConfig.url.replace(/\/$/, "")}/auth/callback?next=/nueva-contrasena`,
   });
 
   if (error) return fail("No pudimos enviar el correo. Inténtalo de nuevo.");

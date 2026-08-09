@@ -9,7 +9,7 @@ import {
   Repeat,
   Video,
 } from "lucide-react";
-import { requireUser } from "@/lib/auth/session";
+import { requireRole } from "@/lib/auth/session";
 import { getCourseWithProgress } from "@/server/queries/courses";
 import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,7 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const data = await getCourseWithProgress(slug, user.id);
   return { title: data?.course.title ?? "Curso" };
 }
@@ -34,7 +34,7 @@ export default async function CursoPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const user = await requireUser();
+  const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
 
   const data = await getCourseWithProgress(slug, user.id);
   if (!data) notFound();
