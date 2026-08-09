@@ -57,11 +57,15 @@ export function SignupForm({ role }: { role: SignupRole }) {
           Revisa tu correo
         </p>
         <p className="mt-2 text-sm leading-relaxed text-graphite">{state.message}</p>
+        <p className="mt-3 text-xs leading-relaxed text-slate-ui">
+          El enlace puede tardar unos minutos. No cierres esta pestaña si quieres volver a
+          revisar la dirección que registraste.
+        </p>
         <Link
-          href="/login"
+          href="/"
           className="mt-5 inline-flex h-10 items-center justify-center rounded-[10px] bg-white px-5 text-sm font-medium text-ink ring-1 ring-inset ring-line"
         >
-          Ir a iniciar sesión
+          Volver al inicio
         </Link>
       </div>
     );

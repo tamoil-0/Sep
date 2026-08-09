@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Nueva contraseña · SEP</title>
+  </head>
+  <body style="margin:0;padding:0;background:#f5f3fb;font-family:Arial,Helvetica,sans-serif;color:#171326;">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+      Usa este enlace seguro para crear una nueva contraseña en SEP.
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f5f3fb;">
+      <tr>
+        <td align="center" style="padding:28px 14px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #e5e0f0;border-radius:22px;overflow:hidden;">
+            <tr>
+              <td style="background:#3210c7;padding:30px 34px;color:#ffffff;font-size:34px;line-height:38px;font-weight:800;letter-spacing:-2px;">sep</td>
+            </tr>
+            <tr>
+              <td style="padding:38px 34px 18px;">
+                <div style="display:inline-block;padding:7px 12px;border-radius:999px;background:#fff6d8;color:#8a6200;font-size:12px;line-height:16px;font-weight:700;">ENLACE SEGURO</div>
+                <h1 style="margin:20px 0 12px;font-size:28px;line-height:35px;letter-spacing:-0.6px;color:#171326;">Crea una contraseña nueva</h1>
+                <p style="margin:0;font-size:16px;line-height:26px;color:#615b76;">Recibimos una solicitud para cambiar la contraseña de <strong style="color:#171326;">{{ .Email }}</strong>.</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:18px 34px 24px;">
+                <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=recovery&amp;next=/nueva-contrasena" style="display:inline-block;background:#3210c7;color:#ffffff;text-decoration:none;font-size:16px;line-height:20px;font-weight:700;padding:16px 28px;border-radius:12px;">Crear nueva contraseña</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 34px 34px;font-size:14px;line-height:23px;color:#615b76;">
+                Este enlace es temporal y solo puede utilizarse una vez. Si no solicitaste el cambio, ignora este correo; tu contraseña seguirá siendo la misma.
+              </td>
+            </tr>
+            <tr>
+              <td style="border-top:1px solid #eeeaf5;padding:22px 34px;font-size:12px;line-height:19px;color:#8a849d;">Semillero de Emprendedores Perú · Tu seguridad también forma parte del camino.</td>
+            </tr>
+          </table>
+          <p style="margin:18px auto 0;max-width:540px;font-size:11px;line-height:17px;color:#918ba4;">Si el botón no funciona, copia y pega este enlace en tu navegador:<br><span style="word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=recovery&amp;next=/nueva-contrasena</span></p>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

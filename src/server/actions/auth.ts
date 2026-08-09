@@ -136,7 +136,9 @@ export async function signupAction(
     email: data.email,
     password: data.password,
     options: {
-      emailRedirectTo: `${siteConfig.url}/auth/callback?next=/onboarding`,
+      // El formulario ya recoge el perfil completo. Tras confirmar el correo,
+      // cada persona entra directamente al panel correspondiente a su rol.
+      emailRedirectTo: `${siteConfig.url.replace(/\/$/, "")}/auth/callback?next=/panel`,
       // El trigger `handle_new_user` solo acepta los 3 tipos de cuenta
       // con registro abierto: nadie puede autoasignarse `admin` (§9.3).
       data: {
@@ -162,7 +164,7 @@ export async function signupAction(
   return {
     ok: true,
     message:
-      "¡Cuenta creada! Te enviamos un correo para confirmar tu dirección. Revisa también la carpeta de spam.",
+      "¡Tu perfil ya está listo! Confirma tu correo y entrarás directamente a tu panel, sin volver a llenar tus datos. Revisa también spam o promociones.",
   };
 }
 

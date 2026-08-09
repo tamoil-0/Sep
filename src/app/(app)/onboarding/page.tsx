@@ -12,13 +12,9 @@ export const metadata: Metadata = {
 };
 
 /**
- * Primer paso tras confirmar el correo.
- *
- * El registro pide lo mínimo para no espantar a nadie; aquí completamos lo que
- * de verdad usamos: la región (para conectar a la gente con su comunidad) y
- * los intereses (para recomendar cursos).
- *
- * Si el perfil ya está completo, no hacemos perder el tiempo: al panel.
+ * Respaldo exclusivo para cuentas antiguas o perfiles realmente incompletos.
+ * El flujo de registro actual guarda el perfil completo y entra al panel tras
+ * confirmar el correo, por lo que una cuenta nueva nunca repite estos campos.
  */
 export default async function OnboardingPage() {
   const user = await requireUser();
@@ -46,8 +42,8 @@ export default async function OnboardingPage() {
           ¡Bienvenid@ a SEP{profile?.full_name ? `, ${profile.full_name.split(" ")[0]}` : ""}!
         </h1>
         <p className="mx-auto mt-3 max-w-sm text-[0.9375rem] leading-relaxed text-slate-ui">
-          Tu correo quedó confirmado. Solo faltan un par de datos para conectarte con
-          gente de tu región y recomendarte los cursos correctos.
+          Encontramos una cuenta anterior con información pendiente. Completa únicamente
+          estos datos y entrarás a tu panel.
         </p>
       </div>
 

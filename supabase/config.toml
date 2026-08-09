@@ -56,7 +56,12 @@ enable_confirmations = true
 secure_password_change = true
 # Mínimo 10 caracteres — Plan Maestro §9.1
 [auth.email.template.confirmation]
-subject = "Confirma tu correo · SEP"
+subject = "Confirma tu correo y empieza en SEP"
+content_path = "./supabase/templates/confirmation.html"
+
+[auth.email.template.recovery]
+subject = "Crea una nueva contraseña · SEP"
+content_path = "./supabase/templates/recovery.html"
 
 [auth.mfa]
 max_enrolled_factors = 3
