@@ -215,14 +215,37 @@ export async function forgotPasswordAction(
   });
 
   if (error) {
-    console.error("[sep] no se pudo solicitar recuperación de contraseña:", error.message);
+    const reason = `${error.code ?? ""} ${error.message}`.toLowerCase();
+    console.error("[sep] no se pudo solicitar recuperación de contraseña:", {
+      code: error.code,
+      status: error.status,
+      message: error.message,
+    });
+
+    if (
+      error.status === 429 ||
+      reason.includes("rate limit") ||
+      reason.includes("email rate")
+    ) {
+      return {
+        ok: false,
+        error:
+          "Debes esperar al menos 60 segundos entre correos de recuperación. Inténtalo nuevamente en un momento.",
+      };
+    }
+
+    return {
+      ok: false,
+      error:
+        "Gmail no pudo enviar el mensaje. Revisa la contraseña de aplicación y la configuración SMTP en Supabase.",
+    };
   }
 
   // Respuesta idéntica exista o no la cuenta: evita enumerar usuarios.
   return {
     ok: true,
     message:
-      "Si existe una cuenta con ese correo, te enviamos un enlace para restablecer tu contraseña.",
+      "Si existe una cuenta con ese correo, el enlace llegará en uno o dos minutos. Revisa también spam y promociones.",
   };
 }
 
