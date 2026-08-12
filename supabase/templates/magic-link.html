@@ -1,16 +1,52 @@
 <!doctype html>
 <html lang="es">
-  <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acceso seguro · SEP</title></head>
-  <body style="margin:0;padding:0;background:#f5f3fb;font-family:Arial,Helvetica,sans-serif;color:#171326;">
-    <div style="display:none;max-height:0;overflow:hidden;opacity:0;">Entra a SEP con este enlace seguro de un solo uso.</div>
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f5f3fb;"><tr><td align="center" style="padding:28px 14px;">
-      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;background:#fff;border:1px solid #e5e0f0;border-radius:22px;overflow:hidden;">
-        <tr><td align="center" style="background:#f7f5ff;padding:18px 34px;border-bottom:1px solid #e5e0f0;"><img src="{{ .SiteURL }}/img/new_images/logo_original.png" width="112" alt="SEP · Semillero de Emprendedores Perú" style="display:block;width:112px;max-width:100%;height:auto;border:0;"></td></tr>
-        <tr><td style="padding:38px 34px 18px;"><div style="display:inline-block;padding:7px 12px;border-radius:999px;background:#fff6d8;color:#8a6200;font-size:12px;font-weight:700;">ACCESO DE UN SOLO USO</div><h1 style="margin:20px 0 12px;font-size:28px;line-height:35px;color:#171326;">Entra de forma segura</h1><p style="margin:0;font-size:16px;line-height:26px;color:#615b76;">Usa el botón para acceder a tu panel. El enlace vence pronto y solo funciona una vez.</p></td></tr>
-        <tr><td align="center" style="padding:18px 34px 28px;"><a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=magiclink&amp;next=/panel" style="display:inline-block;background:#3210c7;color:#fff;text-decoration:none;font-size:16px;font-weight:700;padding:16px 28px;border-radius:12px;">Entrar a SEP</a></td></tr>
-        <tr><td style="padding:0 34px 30px;font-size:14px;line-height:23px;color:#615b76;">Si no solicitaste este acceso, ignora el mensaje. Nadie podrá entrar sin utilizar el enlace.</td></tr>
-        <tr><td style="border-top:1px solid #eeeaf5;padding:22px 34px;font-size:12px;color:#8a849d;">Semillero de Emprendedores Perú</td></tr>
-      </table>
-    </td></tr></table>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
+    <title>Acceso seguro · SEP</title>
+  </head>
+  <body style="margin:0;padding:0;background-color:#f5f3fb;font-family:Arial,Helvetica,sans-serif;color:#171326;">
+    <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
+      Entra a tu cuenta SEP con este enlace seguro de un solo uso.
+    </div>
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f5f3fb" style="width:100%;background-color:#f5f3fb;">
+      <tr>
+        <td align="center" style="padding:28px 14px;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e5e0f0;border-radius:22px;overflow:hidden;">
+            <tr>
+              <td align="center" bgcolor="#f7f5ff" style="background-color:#f7f5ff;padding:18px 24px;border-bottom:1px solid #e5e0f0;">
+                <img src="{{ .SiteURL }}/img/new_images/logo_original.png" width="112" alt="SEP · Semillero de Emprendedores Perú" style="display:block;width:112px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none;">
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:38px 28px 16px;">
+                <span style="display:inline-block;padding:7px 12px;border-radius:999px;background-color:#fff6de;color:#8a6200;font-size:12px;line-height:16px;font-weight:700;">ACCESO DE UN SOLO USO</span>
+                <h1 style="margin:20px 0 12px;font-size:28px;line-height:35px;letter-spacing:-0.5px;color:#171326;">Entra de forma segura</h1>
+                <p style="margin:0;font-size:16px;line-height:26px;color:#615b76;">Solicitaron un acceso para <strong style="color:#171326;">{{ .Email }}</strong>. Pulsa el botón para entrar a SEP sin escribir tu contraseña.</p>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="padding:18px 28px 24px;">
+                <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=magiclink&amp;next=/panel" style="display:inline-block;background-color:#3210c7;color:#ffffff;text-decoration:none;font-size:16px;line-height:20px;font-weight:700;padding:16px 28px;border-radius:12px;">Entrar a SEP</a>
+              </td>
+            </tr>
+            <tr>
+              <td style="padding:0 28px 32px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#faf9fd" style="width:100%;background-color:#faf9fd;border-radius:14px;">
+                  <tr>
+                    <td style="padding:17px 18px;font-size:14px;line-height:23px;color:#615b76;"><strong style="color:#171326;">Enlace temporal</strong><br>Solo funciona una vez y vence pronto. No lo reenvíes ni lo compartas con nadie.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td style="border-top:1px solid #eeeaf5;padding:22px 28px;font-size:12px;line-height:19px;color:#8a849d;">Si no solicitaste este acceso, ignora el mensaje.<br>Semillero de Emprendedores Perú · Acceso protegido</td>
+            </tr>
+          </table>
+          <p style="margin:18px auto 0;max-width:540px;font-size:11px;line-height:17px;color:#918ba4;">Si el botón no funciona, copia y pega este enlace en tu navegador:<br><span style="word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=magiclink&amp;next=/panel</span></p>
+        </td>
+      </tr>
+    </table>
   </body>
 </html>

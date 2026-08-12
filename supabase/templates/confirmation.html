@@ -3,53 +3,48 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light">
     <title>Confirma tu correo · SEP</title>
   </head>
-  <body style="margin:0;padding:0;background:#f5f3fb;font-family:Arial,Helvetica,sans-serif;color:#171326;">
+  <body style="margin:0;padding:0;background-color:#f5f3fb;font-family:Arial,Helvetica,sans-serif;color:#171326;">
     <div style="display:none;max-height:0;overflow:hidden;opacity:0;color:transparent;">
-      Tu perfil SEP ya está listo. Confirma tu correo para entrar a tu panel.
+      Tu cuenta SEP está casi lista. Confirma tu correo para completar tu diagnóstico de entrada.
     </div>
-    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;background:#f5f3fb;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#f5f3fb" style="width:100%;background-color:#f5f3fb;">
       <tr>
         <td align="center" style="padding:28px 14px;">
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="width:100%;max-width:600px;background:#ffffff;border:1px solid #e5e0f0;border-radius:22px;overflow:hidden;">
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#ffffff" style="width:100%;max-width:600px;background-color:#ffffff;border:1px solid #e5e0f0;border-radius:22px;overflow:hidden;">
             <tr>
-              <td align="center" style="background:#f7f5ff;padding:18px 34px;border-bottom:1px solid #e5e0f0;">
-                <img src="{{ .SiteURL }}/img/new_images/logo_original.png" width="112" alt="SEP · Semillero de Emprendedores Perú" style="display:block;width:112px;max-width:100%;height:auto;border:0;">
+              <td align="center" bgcolor="#f7f5ff" style="background-color:#f7f5ff;padding:18px 24px;border-bottom:1px solid #e5e0f0;">
+                <img src="{{ .SiteURL }}/img/new_images/logo_original.png" width="112" alt="SEP · Semillero de Emprendedores Perú" style="display:block;width:112px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none;">
               </td>
             </tr>
             <tr>
-              <td style="padding:38px 34px 18px;">
-                <div style="display:inline-block;padding:7px 12px;border-radius:999px;background:#f1edff;color:#4a22d5;font-size:12px;line-height:16px;font-weight:700;">TU CUENTA ESTÁ CASI LISTA</div>
-                <h1 style="margin:20px 0 12px;font-size:28px;line-height:35px;letter-spacing:-0.6px;color:#171326;">Confirma tu correo y comienza</h1>
+              <td style="padding:38px 28px 16px;">
+                <span style="display:inline-block;padding:7px 12px;border-radius:999px;background-color:#f1edff;color:#4a22d5;font-size:12px;line-height:16px;font-weight:700;">TU CUENTA ESTÁ CASI LISTA</span>
+                <h1 style="margin:20px 0 12px;font-size:28px;line-height:35px;letter-spacing:-0.5px;color:#171326;">Confirma tu correo y comienza</h1>
                 <p style="margin:0;font-size:16px;line-height:26px;color:#615b76;">Ya guardamos los datos de tu perfil. Solo necesitamos verificar que <strong style="color:#171326;">{{ .Email }}</strong> te pertenece.</p>
               </td>
             </tr>
             <tr>
-              <td align="center" style="padding:18px 34px 22px;">
-                <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email&amp;next=/panel" style="display:inline-block;background:#3210c7;color:#ffffff;text-decoration:none;font-size:16px;line-height:20px;font-weight:700;padding:16px 28px;border-radius:12px;">Confirmar mi correo</a>
+              <td align="center" style="padding:18px 28px 24px;">
+                <a href="{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email&amp;next=/onboarding" style="display:inline-block;background-color:#3210c7;color:#ffffff;text-decoration:none;font-size:16px;line-height:20px;font-weight:700;padding:16px 28px;border-radius:12px;">Confirmar mi correo</a>
               </td>
             </tr>
             <tr>
-              <td style="padding:0 34px 34px;">
-                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#faf9fd;border-radius:14px;">
+              <td style="padding:0 28px 32px;">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" bgcolor="#faf9fd" style="width:100%;background-color:#faf9fd;border-radius:14px;">
                   <tr>
-                    <td style="padding:18px 20px;font-size:14px;line-height:22px;color:#615b76;">
-                      <strong style="color:#171326;">¿Qué ocurrirá después?</strong><br>
-                      Entrarás directamente a tu panel SEP. No tendrás que volver a completar los datos del registro.
-                    </td>
+                    <td style="padding:17px 18px;font-size:14px;line-height:23px;color:#615b76;"><strong style="color:#171326;">¿Qué ocurrirá después?</strong><br>Completarás un diagnóstico breve de 15 preguntas, dividido en 3 módulos cómodos. Después ingresarás a tu panel SEP.</td>
                   </tr>
                 </table>
               </td>
             </tr>
             <tr>
-              <td style="border-top:1px solid #eeeaf5;padding:22px 34px;font-size:12px;line-height:19px;color:#8a849d;">
-                Si no creaste esta cuenta, puedes ignorar este mensaje con seguridad.<br>
-                Semillero de Emprendedores Perú · Desde Áncash para todo el Perú
-              </td>
+              <td style="border-top:1px solid #eeeaf5;padding:22px 28px;font-size:12px;line-height:19px;color:#8a849d;">Si no creaste esta cuenta, puedes ignorar este mensaje con seguridad.<br>Semillero de Emprendedores Perú · Desde Áncash para todo el Perú</td>
             </tr>
           </table>
-          <p style="margin:18px auto 0;max-width:540px;font-size:11px;line-height:17px;color:#918ba4;">Si el botón no funciona, copia y pega este enlace en tu navegador:<br><span style="word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email&amp;next=/panel</span></p>
+          <p style="margin:18px auto 0;max-width:540px;font-size:11px;line-height:17px;color:#918ba4;">Si el botón no funciona, copia y pega este enlace en tu navegador:<br><span style="word-break:break-all;">{{ .SiteURL }}/auth/confirm?token_hash={{ .TokenHash }}&amp;type=email&amp;next=/onboarding</span></p>
         </td>
       </tr>
     </table>
