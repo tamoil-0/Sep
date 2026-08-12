@@ -2,10 +2,13 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/config/site";
 import { courses } from "@/config/courses";
 import { volunteerRoles } from "@/config/volunteering";
+import { getPublishedPosts } from "@/server/queries/public-content";
 
-export default function sitemap(): MetadataRoute.Sitemap {
+const SITE_UPDATED_AT = new Date("2026-08-12T00:00:00-05:00");
+
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url;
-  const now = new Date();
+  const posts = await getPublishedPosts().catch(() => []);
 
   const staticRoutes = [
     { path: "", priority: 1 },
@@ -35,21 +38,27 @@ export default function sitemap(): MetadataRoute.Sitemap {
   return [
     ...staticRoutes.map((r) => ({
       url: `${base}${r.path}`,
-      lastModified: now,
+      lastModified: SITE_UPDATED_AT,
       changeFrequency: "weekly" as const,
       priority: r.priority,
     })),
     ...courses.map((c) => ({
       url: `${base}/cursos/${c.slug}`,
-      lastModified: now,
+      lastModified: SITE_UPDATED_AT,
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
     ...volunteerRoles.map((r) => ({
       url: `${base}/voluntariado/${r.slug}`,
-      lastModified: now,
+      lastModified: SITE_UPDATED_AT,
       changeFrequency: "monthly" as const,
       priority: 0.6,
+    })),
+    ...posts.map((post) => ({
+      url: `${base}/blog/${post.slug}`,
+      lastModified: post.published_at ? new Date(post.published_at) : SITE_UPDATED_AT,
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
     })),
   ];
 }

@@ -1,6 +1,11 @@
 import Link from "next/link";
+import type { Metadata } from "next";
 import { ArrowLeft, Award, Globe, Sprout, Users } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false, nocache: true },
+};
 
 const highlights = [
   { icon: Sprout, text: "Cursos virtuales de acceso gratuito" },

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { Globe, Mic, Users } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
 import {
@@ -13,11 +13,13 @@ import { speakerBenefits } from "@/config/volunteering";
 import { initials } from "@/lib/utils";
 import { SpeakerForm } from "./speaker-form";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Red de speakers",
   description:
     "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 10+ regiones del Perú.",
-};
+  path: "/speakers",
+  keywords: ["speakers Perú", "ponentes emprendimiento", "red de mentores Perú"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

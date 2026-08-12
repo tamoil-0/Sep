@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, Check, FolderOpen, GraduationCap, School } from "lucide-react";
 import {
   Badge,
@@ -11,11 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
-  title: "Programa para docentes",
+export const metadata = createPageMetadata({
+  title: "Programa gratuito para docentes",
   description:
     "Metodologías activas listas para tu aula: Design Thinking, ABP y Scrum aplicados al entorno escolar. 8 horas, 100 % virtual y gratuito.",
-};
+  path: "/docentes",
+  keywords: ["capacitación docente gratis Perú", "metodologías activas", "Design Thinking educación"],
+});
 
 const resources = [
   "Guía de sesión de Design Thinking para 90 minutos",

@@ -4,7 +4,8 @@ export const siteConfig = {
   tagline: "¡Emprende hoy, lidera mañana!",
   description:
     "SEP impulsa el emprendimiento y liderazgo juvenil en el Perú: forma a jóvenes y universitarios, conecta talleres con escolares y articula a docentes, colegios y aliados.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sep.edu.pe",
+  // Debe coincidir con el dominio canónico configurado en Vercel.
+  url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://sep-drab.vercel.app").replace(/\/$/, ""),
   locale: "es-PE",
   founded: "2024-04-07",
   foundedPlace: "Casma, Áncash",
@@ -21,7 +22,23 @@ export const siteConfig = {
     facebook: "https://facebook.com/Semillerodeemprendedoresperu",
     instagram: "https://instagram.com/semillerodemprendedoresperu",
     tiktok: "https://tiktok.com/@semillerodeemprendedores",
-    linkedin: "https://linkedin.com/company/semilleroemprendedoresperu",
+    linkedin: "https://www.linkedin.com/company/semillero-de-emprendedores-per-sep",
+  },
+  seo: {
+    title: "SEP | Semillero de Emprendedores Perú",
+    description:
+      "Semillero de Emprendedores Perú (SEP) forma jóvenes y universitarios en emprendimiento, innovación y liderazgo con cursos, mentorías y proyectos de impacto regional.",
+    keywords: [
+      "Semillero de Emprendedores Perú",
+      "Semillero de Emprendedores del Perú",
+      "SEP Perú",
+      "emprendimiento juvenil Perú",
+      "cursos de emprendimiento gratis",
+      "liderazgo juvenil Perú",
+      "innovación social Perú",
+      "Design Thinking Perú",
+      "voluntariado juvenil Perú",
+    ],
   },
 } as const;
 

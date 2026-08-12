@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, Check, HeartHandshake, Info, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -19,11 +19,13 @@ import {
 } from "@/config/pricing";
 import { formatSoles } from "@/lib/utils";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Precios y certificados",
   description:
     "Los cursos de SEP no tienen costo de acceso. Certificado SEP S/30, certificado internacional S/50, SILP desde S/200, membresías y programas institucionales.",
-};
+  path: "/precios",
+  keywords: ["cursos gratis emprendimiento", "certificado Design Thinking", "precios SEP"],
+});
 
 function ProposedTag() {
   return (

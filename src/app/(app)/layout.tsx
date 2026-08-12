@@ -1,7 +1,12 @@
 import { AppSidebar } from "@/components/app/app-sidebar";
+import type { Metadata } from "next";
 import { requireUser } from "@/lib/auth/session";
 import { redirect } from "next/navigation";
 import { primaryRole } from "@/types/roles";
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false, nocache: true },
+};
 
 export default async function AppLayout({
   children,

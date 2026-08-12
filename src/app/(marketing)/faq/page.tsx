@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { faqs, siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Preguntas frecuentes",
   description:
     "Todo lo que suelen preguntarnos sobre voluntariado, cursos, certificados y alianzas con SEP.",
-};
+  path: "/faq",
+  keywords: ["preguntas SEP", "certificados SEP", "cursos SEP"],
+});
 
 export default function FaqPage() {
   return (
@@ -45,7 +47,7 @@ export default function FaqPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@type": "FAQPage",
             mainEntity: faqs.map((f) => ({

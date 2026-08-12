@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container, Section } from "@/components/ui/primitives";
 import { siteConfig } from "@/config/site";
+import { createPageMetadata } from "@/lib/seo";
 
 const DOCS = ["terminos", "privacidad", "cookies"] as const;
 type Doc = (typeof DOCS)[number];
@@ -32,8 +33,11 @@ export async function generateMetadata({
   params: Promise<{ doc: string }>;
 }): Promise<Metadata> {
   const { doc } = await params;
-  if (!DOCS.includes(doc as Doc)) return { title: "Documento legal" };
-  return meta[doc as Doc];
+  if (!DOCS.includes(doc as Doc)) return { title: "Documento legal", robots: { index: false } };
+  return createPageMetadata({
+    ...meta[doc as Doc],
+    path: `/legal/${doc}`,
+  });
 }
 
 const content: Record<Doc, { heading: string; body: string }[]> = {

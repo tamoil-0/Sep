@@ -1,13 +1,15 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ShieldCheck } from "lucide-react";
 import { Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { VerifyForm } from "./verify-form";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Verificar certificado",
   description:
     "Comprueba la autenticidad de un certificado emitido por el Semillero de Emprendedores Perú con su código de verificación.",
-};
+  path: "/verificar",
+  keywords: ["verificar certificado SEP", "certificado Semillero de Emprendedores Perú"],
+});
 
 export default function VerificarPage() {
   return (

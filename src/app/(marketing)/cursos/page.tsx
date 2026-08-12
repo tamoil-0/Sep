@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, Sprout } from "lucide-react";
 import { getCatalog } from "@/server/queries/courses";
@@ -10,11 +10,13 @@ import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
-  title: "Cursos y programas",
+export const metadata = createPageMetadata({
+  title: "Cursos de emprendimiento y liderazgo",
   description:
     "Cursos y programas de Design Thinking, Scrum, liderazgo regional y metodologías activas para docentes. Revisa la modalidad, disponibilidad y condiciones de cada propuesta.",
-};
+  path: "/cursos",
+  keywords: ["cursos de emprendimiento", "Design Thinking Perú", "Scrum Perú"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;
@@ -180,7 +182,7 @@ export default async function CursosPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@type": "ItemList",
             itemListElement: courses.map((c, i) => ({

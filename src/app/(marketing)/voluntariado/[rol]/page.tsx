@@ -5,6 +5,7 @@ import { ArrowLeft, Check, Clock } from "lucide-react";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { volunteerProcess, volunteerRoles } from "@/config/volunteering";
 import { VolunteerForm } from "./volunteer-form";
+import { createPageMetadata } from "@/lib/seo";
 
 export function generateStaticParams() {
   return volunteerRoles.map((r) => ({ rol: r.slug }));
@@ -17,12 +18,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { rol } = await params;
   const role = volunteerRoles.find((r) => r.slug === rol);
-  if (!role) return { title: "Rol no encontrado" };
+  if (!role) return { title: "Rol no encontrado", robots: { index: false } };
 
-  return {
+  return createPageMetadata({
     title: `Postular como ${role.name}`,
     description: role.description,
-  };
+    path: `/voluntariado/${role.slug}`,
+    keywords: [role.name, "voluntariado juvenil Perú", "voluntariado SEP"],
+  });
 }
 
 export default async function PostularPage({

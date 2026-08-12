@@ -1,12 +1,13 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { createPublicClient } from "@/lib/supabase/public";
 import { DiagnosticWizard } from "./wizard";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Queremos conocerte",
   description:
     "3 minutos, sin crear cuenta. Ayúdanos a construir lo que realmente necesitas: qué te frena, qué sueñas y qué te haría falta.",
-};
+  path: "/conocenos",
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

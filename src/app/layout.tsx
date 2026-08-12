@@ -19,28 +19,17 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${siteConfig.shortName} | ${siteConfig.name}`,
+    default: siteConfig.seo.title,
     template: `%s | ${siteConfig.shortName}`,
   },
-  description: siteConfig.description,
+  description: siteConfig.seo.description,
   applicationName: siteConfig.shortName,
   icons: {
     icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
     shortcut: "/icon",
     apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
   },
-  keywords: [
-    "Semillero de Emprendedores Perú",
-    "SEP",
-    "Design Thinking Perú",
-    "Scrum",
-    "liderazgo juvenil",
-    "innovación social",
-    "cursos gratuitos Perú",
-    "emprendimiento regiones",
-    "SILP",
-    "certificación Design Thinking",
-  ],
+  keywords: [...siteConfig.seo.keywords],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
   creator: siteConfig.name,
   openGraph: {
@@ -48,20 +37,27 @@ export const metadata: Metadata = {
     locale: "es_PE",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title: `${siteConfig.shortName} | ${siteConfig.name}`,
-    description: siteConfig.description,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
   twitter: {
     card: "summary_large_image",
-    title: `${siteConfig.shortName} | ${siteConfig.name}`,
-    description: siteConfig.description,
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
   },
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true, "max-image-preview": "large" },
   },
-  alternates: { canonical: "/" },
+  category: "education",
+  classification: "Educación, emprendimiento e innovación social",
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
+      ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
+      : undefined,
+  },
 };
 
 export const viewport: Viewport = {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { Quote } from "lucide-react";
 import {
   Badge,
@@ -12,11 +12,13 @@ import { initials } from "@/lib/utils";
 import { getPublicProjects } from "@/server/queries/public-content";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Testimonios",
   description:
     "Historias reales de jóvenes de regiones del Perú que pasaron por SEP y hoy están construyendo en sus propias comunidades.",
-};
+  path: "/testimonios",
+  keywords: ["jóvenes emprendedores Perú", "historias de emprendimiento", "testimonios SEP"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

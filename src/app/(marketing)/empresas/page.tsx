@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import {
   ArrowRight,
   Building2,
@@ -22,11 +22,13 @@ import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Para empresas y organizaciones",
   description:
     "Convierte tu inversión RSE en resultados medibles. Cohortes patrocinadas, becas, voluntariado corporativo y reportes de impacto alineados a los ODS.",
-};
+  path: "/empresas",
+  keywords: ["responsabilidad social empresarial Perú", "voluntariado corporativo", "inversión social juvenil"],
+});
 
 export default function EmpresasPage() {
   return (

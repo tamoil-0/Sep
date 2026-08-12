@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -26,11 +26,13 @@ import {
   volunteerRoles,
 } from "@/config/volunteering";
 
-export const metadata: Metadata = {
-  title: "Voluntariado",
+export const metadata = createPageMetadata({
+  title: "Voluntariado juvenil en Perú",
   description:
     "Tres roles abiertos en SEP: Mentor, Community Manager y Organizador de eventos. Certificación formal, carta de recomendación y acceso gratuito a todos los cursos.",
-};
+  path: "/voluntariado",
+  keywords: ["voluntariado juvenil Perú", "voluntariado universitario", "voluntariado SEP"],
+});
 
 const roleIcons = {
   mentor_junior: Users,

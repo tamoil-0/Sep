@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, CalendarDays, Mic, School, Users } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
 import {
@@ -11,11 +11,13 @@ import {
 import { Button } from "@/components/ui/button";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Convocatorias abiertas",
   description:
     "Todo lo que está abierto ahora mismo en SEP: cursos, voluntariado, red de speakers y red de colegios.",
-};
+  path: "/convocatorias",
+  keywords: ["convocatorias para jóvenes Perú", "convocatorias emprendimiento", "oportunidades universitarios Perú"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

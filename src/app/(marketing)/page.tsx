@@ -38,6 +38,15 @@ import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
 import { getPublishedPosts } from "@/server/queries/public-content";
 import { formatSoles } from "@/lib/utils";
+import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
+
+export const metadata = createPageMetadata({
+  title: siteConfig.seo.title,
+  description: siteConfig.seo.description,
+  path: "/",
+  keywords: [...siteConfig.seo.keywords],
+  absoluteTitle: true,
+});
 
 /** ISR: la portada se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;
@@ -675,22 +684,52 @@ export default async function HomePage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
-            "@type": "EducationalOrganization",
-            name: siteConfig.name,
-            alternateName: siteConfig.shortName,
-            url: siteConfig.url,
-            email: siteConfig.contact.email,
-            telephone: siteConfig.contact.whatsapp,
-            foundingDate: siteConfig.founded,
-            description: siteConfig.description,
-            address: {
-              "@type": "PostalAddress",
-              addressRegion: "Áncash",
-              addressCountry: "PE",
-            },
-            sameAs: Object.values(siteConfig.social),
+            "@graph": [
+              {
+                "@type": "EducationalOrganization",
+                "@id": `${siteConfig.url}/#organization`,
+                name: siteConfig.name,
+                alternateName: [siteConfig.shortName, "Semillero de Emprendedores del Perú"],
+                url: siteConfig.url,
+                logo: {
+                  "@type": "ImageObject",
+                  url: `${siteConfig.url}/img/new_images/logo_original.png`,
+                },
+                email: siteConfig.contact.email,
+                telephone: siteConfig.contact.whatsapp,
+                foundingDate: siteConfig.founded,
+                foundingLocation: {
+                  "@type": "Place",
+                  name: siteConfig.foundedPlace,
+                },
+                description: siteConfig.seo.description,
+                areaServed: { "@type": "Country", name: "Perú" },
+                address: {
+                  "@type": "PostalAddress",
+                  addressRegion: "Áncash",
+                  addressCountry: "PE",
+                },
+                contactPoint: {
+                  "@type": "ContactPoint",
+                  contactType: "información y programas",
+                  email: siteConfig.contact.email,
+                  telephone: siteConfig.contact.whatsapp,
+                  availableLanguage: "Spanish",
+                },
+                sameAs: Object.values(siteConfig.social),
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${siteConfig.url}/#website`,
+                url: siteConfig.url,
+                name: siteConfig.name,
+                alternateName: siteConfig.shortName,
+                inLanguage: "es-PE",
+                publisher: { "@id": `${siteConfig.url}/#organization` },
+              },
+            ],
           }),
         }}
       />

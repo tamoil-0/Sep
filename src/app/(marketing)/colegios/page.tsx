@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { Check, School } from "lucide-react";
 import {
   Badge,
@@ -13,11 +13,13 @@ import { SchoolForm } from "./school-form";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { getSchoolNetwork } from "@/server/queries/public-content";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Red de colegios",
   description:
     "Inscribe tu colegio a la red SEP y recibe talleres gratuitos de innovación social dictados por universitarios de tu propia región.",
-};
+  path: "/colegios",
+  keywords: ["talleres gratuitos para colegios", "innovación escolar Perú", "red de colegios SEP"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

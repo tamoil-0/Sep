@@ -1,14 +1,16 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { Mail, MapPin, MessageCircle } from "lucide-react";
 import { Card, Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "Contacto",
   description:
     "Escríbenos por WhatsApp, correo o redes. Respondemos personas, no bots.",
-};
+  path: "/contacto",
+  keywords: ["contacto SEP Perú", "Semillero de Emprendedores contacto"],
+});
 
 const channels = [
   {

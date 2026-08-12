@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, Award, Check, Sparkles, Users } from "lucide-react";
 import {
   Badge,
@@ -12,11 +12,13 @@ import { silpPricing } from "@/config/pricing";
 import { formatSoles } from "@/lib/utils";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
+export const metadata = createPageMetadata({
   title: "SILP — Social Impact Leadership Program",
   description:
     "Seis semanas de formación en liderazgo social. Diseñas y ejecutas un proyecto de impacto real en tu región con acompañamiento de mentores. Tarifa social S/200.",
-};
+  path: "/silp",
+  keywords: ["liderazgo social Perú", "SILP", "proyectos de impacto social"],
+});
 
 const modules = [
   {

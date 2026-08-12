@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { CourseMedia } from "@/components/marketing/course-media";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 
 /** ISR: se regenera cada 5 min en lugar de consultar la BD en cada visita. */
 export const revalidate = 300;
@@ -35,13 +36,15 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const course = await getCourseBySlug(slug);
-  if (!course) return { title: "Curso no encontrado" };
+  if (!course) return { title: "Curso no encontrado", robots: { index: false } };
 
-  return {
+  return createPageMetadata({
     title: course.title,
-    description: course.description ?? undefined,
-    alternates: { canonical: `/cursos/${slug}` },
-  };
+    description:
+      course.description ?? `Curso de ${siteConfig.name} para jóvenes y universitarios del Perú.`,
+    path: `/cursos/${slug}`,
+    keywords: [course.title, "cursos de emprendimiento", "SEP Perú"],
+  });
 }
 
 export default async function CursoPublicoPage({
@@ -240,7 +243,7 @@ export default async function CursoPublicoPage({
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
+          __html: serializeJsonLd({
             "@context": "https://schema.org",
             "@type": "Course",
             name: course.title,

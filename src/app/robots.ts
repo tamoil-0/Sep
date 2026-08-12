@@ -10,6 +10,9 @@ export default function robots(): MetadataRoute.Robots {
         disallow: [
           "/api/",
           "/auth/",
+          "/registro",
+          "/onboarding",
+          "/apoya-hoy",
           "/panel",
           "/estudiante",
           "/docente",

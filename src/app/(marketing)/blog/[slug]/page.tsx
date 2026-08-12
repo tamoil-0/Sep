@@ -5,6 +5,8 @@ import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Badge, Container, Section } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/utils";
+import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
+import { siteConfig } from "@/config/site";
 
 export async function generateMetadata({
   params,
@@ -20,12 +22,13 @@ export async function generateMetadata({
     .eq("is_published", true)
     .maybeSingle();
 
-  if (!data) return { title: "Artículo no encontrado" };
-  return {
+  if (!data) return { title: "Artículo no encontrado", robots: { index: false } };
+  return createPageMetadata({
     title: data.title,
-    description: data.excerpt ?? undefined,
-    alternates: { canonical: `/blog/${slug}` },
-  };
+    description: data.excerpt ?? `Artículo de ${siteConfig.name} sobre emprendimiento e innovación.`,
+    path: `/blog/${slug}`,
+    type: "article",
+  });
 }
 
 export default async function BlogPostPage({
@@ -94,6 +97,33 @@ export default async function BlogPostPage({
           </div>
         </article>
       </Container>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: serializeJsonLd({
+            "@context": "https://schema.org",
+            "@type": "Article",
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.published_at,
+            inLanguage: "es-PE",
+            mainEntityOfPage: `${siteConfig.url}/blog/${slug}`,
+            author: {
+              "@type": "Person",
+              name: author?.full_name ?? "Equipo SEP",
+            },
+            publisher: {
+              "@type": "EducationalOrganization",
+              "@id": `${siteConfig.url}/#organization`,
+              name: siteConfig.name,
+              logo: {
+                "@type": "ImageObject",
+                url: `${siteConfig.url}/img/new_images/logo_original.png`,
+              },
+            },
+          }),
+        }}
+      />
     </Section>
   );
 }

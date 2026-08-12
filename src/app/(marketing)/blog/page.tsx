@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { PenLine } from "lucide-react";
 import {
   Container,
@@ -10,11 +10,13 @@ import { getPublishedPosts } from "@/server/queries/public-content";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { NewsCard } from "@/components/marketing/news-card";
 
-export const metadata: Metadata = {
-  title: "Blog",
+export const metadata = createPageMetadata({
+  title: "Blog de emprendimiento e innovación",
   description:
     "Aprendizajes, metodologías y crónicas del ecosistema de innovación social en regiones del Perú.",
-};
+  path: "/blog",
+  keywords: ["blog de emprendimiento Perú", "innovación social", "liderazgo juvenil"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

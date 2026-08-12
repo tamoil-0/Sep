@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { HeartHandshake, School, Sprout, Users } from "lucide-react";
 import {
   Card,
@@ -9,11 +9,13 @@ import {
 } from "@/components/ui/primitives";
 import { DonationForm } from "./donation-form";
 
-export const metadata: Metadata = {
-  title: "Donar",
+export const metadata = createPageMetadata({
+  title: "Dona y apoya a jóvenes emprendedores",
   description:
     "Tu donación lleva formación, mentoría y talleres a jóvenes de regiones del Perú que nadie más está atendiendo.",
-};
+  path: "/donaciones",
+  keywords: ["donar educación Perú", "apoyar jóvenes emprendedores", "donaciones SEP"],
+});
 
 const impact = [
   {

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { CalendarDays, MapPin, Video } from "lucide-react";
 import { getPublishedEvents } from "@/server/queries/events";
 import {
@@ -13,11 +13,13 @@ import { Button } from "@/components/ui/button";
 import { formatDateTime } from "@/lib/utils";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
-export const metadata: Metadata = {
-  title: "Eventos",
+export const metadata = createPageMetadata({
+  title: "Eventos de emprendimiento e innovación",
   description:
     "Demo Days, ferias de innovación escolar, webinars y talleres abiertos de SEP. Participación gratuita desde cualquier región.",
-};
+  path: "/eventos",
+  keywords: ["eventos de emprendimiento Perú", "webinars gratuitos", "ferias de innovación"],
+});
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;

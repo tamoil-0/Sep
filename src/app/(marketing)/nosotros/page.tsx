@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import { createPageMetadata } from "@/lib/seo";
 import { ArrowRight, Sprout } from "lucide-react";
 import {
   Badge,
@@ -13,11 +13,13 @@ import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { impactChain, partners, problemStats, siteConfig } from "@/config/site";
 import { initials } from "@/lib/utils";
 
-export const metadata: Metadata = {
-  title: "Nosotros",
+export const metadata = createPageMetadata({
+  title: "Quiénes somos",
   description:
     "SEP nació el 7 de abril de 2024 en Casma, Áncash. Democratizamos metodologías ágiles para jóvenes de todas las regiones del Perú.",
-};
+  path: "/nosotros",
+  keywords: ["Semillero de Emprendedores Perú", "SEP Perú", "emprendimiento Áncash"],
+});
 
 const team = [
   { name: "Celeste Ulloa Jara", role: "Managing Director · Founder" },
