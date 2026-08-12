@@ -19,7 +19,7 @@ export function Footer() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2.7fr]">
           {/* Marca */}
           <div>
-            <Logo className="h-8" variant="white" showTagline />
+            <Logo className="h-14" variant="white" />
 
             <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
               Democratizamos metodologías ágiles para jóvenes de todas las regiones del Perú.

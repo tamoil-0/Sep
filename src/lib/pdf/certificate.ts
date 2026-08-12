@@ -1,4 +1,5 @@
 import "server-only";
+import { readFile } from "node:fs/promises";
 import { PDFDocument, StandardFonts, rgb, type PDFFont } from "pdf-lib";
 
 /**
@@ -64,7 +65,10 @@ export async function buildCertificatePdf(
 
   const bold = await pdf.embedFont(StandardFonts.HelveticaBold);
   const regular = await pdf.embedFont(StandardFonts.Helvetica);
-  const oblique = await pdf.embedFont(StandardFonts.HelveticaOblique);
+  const logoBytes = await readFile(
+    new URL("../../../public/img/new_images/logo_original.png", import.meta.url),
+  );
+  const logo = await pdf.embedPng(logoBytes);
 
   // ── Banda superior: degradado simulado en franjas ──
   const bandH = 92;
@@ -84,21 +88,20 @@ export async function buildCertificatePdf(
     });
   }
 
-  // Wordmark
-  page.drawText("sep", {
-    x: 56,
-    y: H - 62,
-    size: 38,
-    font: bold,
+  // Logotipo oficial sobre una base clara para conservar sus colores originales.
+  page.drawRectangle({
+    x: 46,
+    y: H - 79,
+    width: 88,
+    height: 64,
     color: rgb(1, 1, 1),
+    opacity: 0.96,
   });
-  page.drawText("¡Emprende hoy, lidera manana!", {
-    x: 58,
-    y: H - 80,
-    size: 8,
-    font: oblique,
-    color: rgb(1, 1, 1),
-    opacity: 0.75,
+  page.drawImage(logo, {
+    x: 42,
+    y: H - 94,
+    width: 96,
+    height: 96,
   });
 
   page.drawText("CERTIFICADO", {

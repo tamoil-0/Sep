@@ -1,9 +1,16 @@
+/* eslint-disable @next/next/no-img-element -- ImageResponse necesita un elemento img serializable. */
+import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
 
 export const size = { width: 180, height: 180 };
 export const contentType = "image/png";
 
-export default function AppleIcon() {
+export default async function AppleIcon() {
+  const logo = await readFile(
+    new URL("../../public/img/new_images/logo_original.png", import.meta.url),
+  );
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     <div
       style={{
@@ -12,29 +19,11 @@ export default function AppleIcon() {
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        position: "relative",
         borderRadius: 40,
-        background: "linear-gradient(135deg, #2e0be8 0%, #6a0dd9 58%, #a50fc6 100%)",
-        color: "white",
-        fontSize: 78,
-        fontWeight: 800,
-        letterSpacing: "-6px",
-        fontFamily: "Arial, sans-serif",
+        background: "#ffffff",
       }}
     >
-      sep
-      <div
-        style={{
-          position: "absolute",
-          right: 24,
-          top: 24,
-          width: 22,
-          height: 22,
-          borderRadius: 999,
-          background: "#ffc629",
-          boxShadow: "0 0 0 8px rgba(255,255,255,.18)",
-        }}
-      />
+      <img src={logoSrc} width={180} height={180} alt="SEP" />
     </div>,
     size,
   );

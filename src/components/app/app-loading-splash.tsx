@@ -20,7 +20,7 @@ export function AppLoadingSplash({ overlay = false }: { overlay?: boolean }) {
           <span className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-r-sep-300 border-t-sep-600" />
           <span className="absolute inset-2 animate-[spin_1.4s_linear_infinite_reverse] rounded-full border border-transparent border-b-gold-500" />
           <span className="flex size-[66px] items-center justify-center rounded-full bg-white shadow-[0_8px_30px_rgba(46,11,232,.14)]">
-            <Logo className="h-7" />
+            <Logo className="h-9" />
           </span>
         </div>
         <p className="mt-5 font-display text-sm font-semibold text-ink">Preparando tu panel</p>

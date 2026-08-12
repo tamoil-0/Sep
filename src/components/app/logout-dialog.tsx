@@ -172,7 +172,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
 
           <div className="relative flex flex-col items-center">
             <div className="animate-float">
-              <Logo className="h-11" variant="white" />
+              <Logo className="h-16" variant="white" />
             </div>
 
             <p className="mt-8 font-display text-[1.5rem] font-semibold text-white animate-fade-up">

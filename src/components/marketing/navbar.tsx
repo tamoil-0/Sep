@@ -102,7 +102,7 @@ export function Navbar() {
             className="shrink-0 transition-opacity hover:opacity-80"
             aria-label="Inicio — SEP"
           >
-            <Logo className="h-7" />
+            <Logo className="h-10" />
           </Link>
 
           {/* ── Escritorio ── */}

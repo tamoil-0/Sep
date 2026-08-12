@@ -29,7 +29,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         />
 
         <Link href="/" className="relative">
-          <Logo className="h-8" variant="white" showTagline />
+          <Logo className="h-14" variant="white" />
         </Link>
 
         <div className="relative">
@@ -60,7 +60,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       <main id="contenido" className="flex min-h-dvh min-w-0 flex-col px-4 py-5 sm:px-8 sm:py-7 lg:px-10 xl:px-16">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between">
           <Link href="/" className="lg:hidden">
-            <Logo className="h-7" />
+            <Logo className="h-9" />
           </Link>
           <Link
             href="/"

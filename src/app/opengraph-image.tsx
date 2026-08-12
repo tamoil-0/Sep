@@ -1,10 +1,17 @@
+/* eslint-disable @next/next/no-img-element -- ImageResponse necesita un elemento img serializable. */
+import { readFile } from "node:fs/promises";
 import { ImageResponse } from "next/og";
 
 export const alt = "SEP | Semillero de Emprendedores Perú";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
-export default function OpenGraphImage() {
+export default async function OpenGraphImage() {
+  const logo = await readFile(
+    new URL("../../public/img/new_images/logo_original.png", import.meta.url),
+  );
+  const logoSrc = `data:image/png;base64,${logo.toString("base64")}`;
+
   return new ImageResponse(
     <div
       style={{
@@ -34,7 +41,19 @@ export default function OpenGraphImage() {
         }}
       />
       <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-        <span style={{ fontSize: 92, fontWeight: 800, letterSpacing: -7 }}>sep</span>
+        <span
+          style={{
+            display: "flex",
+            height: 150,
+            width: 150,
+            alignItems: "center",
+            justifyContent: "center",
+            borderRadius: 28,
+            background: "white",
+          }}
+        >
+          <img src={logoSrc} width={142} height={142} alt="SEP" />
+        </span>
         <span
           style={{
             display: "flex",

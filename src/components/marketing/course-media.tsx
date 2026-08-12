@@ -1,5 +1,6 @@
 import Image from "next/image";
 
+import { Logo } from "@/components/brand/logo";
 import { SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { cn } from "@/lib/utils";
 
@@ -96,7 +97,7 @@ export function CourseMedia({
           {category ?? "Programa SEP"}
         </span>
         <div>
-          <p className="font-display text-2xl font-bold tracking-[-0.04em]">sep</p>
+          <Logo className="h-12" variant="white" />
           <p className="mt-1 max-w-[85%] text-sm font-medium leading-snug text-white/90">
             {title}
           </p>

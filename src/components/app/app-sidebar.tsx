@@ -52,7 +52,7 @@ export function AppSidebar({
     <>
       <div className="px-4 pb-5 pt-1">
         <Link href="/" aria-label="Inicio">
-          <Logo className="h-7" variant="white" />
+          <Logo className="h-11" variant="white" />
         </Link>
         <p className="mt-2 text-[0.6875rem] uppercase tracking-[0.12em] text-white/40">
           {ROLE_META[activeRole].shortLabel}
@@ -144,7 +144,7 @@ export function AppSidebar({
       {/* Barra móvil */}
       <div className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-line bg-white/95 px-4 backdrop-blur lg:hidden">
         <Link href="/" aria-label="Inicio">
-          <Logo className="h-6" />
+          <Logo className="h-9" />
         </Link>
         <button
           type="button"
