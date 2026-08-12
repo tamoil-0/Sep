@@ -58,12 +58,12 @@ export default function NosotrosPage() {
             </p>
             </div>
             <RealPhoto
-              src={SEP_PHOTOS.team}
-              alt="Equipo de jóvenes de SEP durante una jornada de trabajo"
+              src={SEP_PHOTOS.communityGroup}
+              alt="Comunidad de jóvenes reunida junto a un panel de SEP"
               priority
-              label="Jóvenes construyendo SEP"
+              label="Una comunidad construida desde las regiones"
               className="aspect-[4/3] min-h-0 border border-white/20"
-              imageClassName="object-[50%_44%]"
+              imageClassName="object-[50%_48%]"
             />
           </div>
         </Container>

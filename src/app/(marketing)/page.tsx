@@ -20,18 +20,18 @@ import {
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
-import {
-  CourseCover,
-  DotGrid,
-  ImpactChainIllustration,
-  StatBlock,
-  type CoursePattern,
-} from "@/components/brand/illustrations";
+import { DotGrid, ImpactChainIllustration, StatBlock } from "@/components/brand/illustrations";
 import { CountUp } from "@/components/marketing/count-up";
+import { CourseMedia } from "@/components/marketing/course-media";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
-import { ExperienceGallery, SEP_PHOTOS } from "@/components/marketing/real-photo";
+import {
+  ExperienceGallery,
+  HeroPhoto,
+  MediaImage,
+  SEP_PHOTOS,
+} from "@/components/marketing/real-photo";
 import { OrganizationLockup } from "@/components/brand/logo";
 import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
@@ -41,18 +41,19 @@ import { formatSoles } from "@/lib/utils";
 /** ISR: la portada se sirve estática y se regenera cada 5 min. */
 export const revalidate = 300;
 
-const patternFor = (category: string | null): CoursePattern => {
-  if (category === "SILP") return "silp";
-  if (category === "Liderazgo") return "liderazgo";
-  if (category === "Para docentes") return "docentes";
-  return "agiles";
-};
+const partnerCategoryLabels = {
+  red: "Red",
+  alianza: "Colaboración",
+  mentoria: "Mentoría",
+  premio: "Reconocimiento",
+  aval: "Aval",
+} as const;
 
 export default async function HomePage() {
   const [catalog, posts] = await Promise.all([getCatalog(), getPublishedPosts()]);
   const courses = catalog.filter((c) => c.category !== "SILP").slice(0, 4);
   const latestPosts = posts.slice(0, 3);
-  const newsFallbacks = [SEP_PHOTOS.alliance, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop];
+  const newsFallbacks = [SEP_PHOTOS.community, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop];
 
   return (
     <>
@@ -65,45 +66,49 @@ export default async function HomePage() {
         />
 
         <Container size="wide" className="relative">
-          <div className="mx-auto flex max-w-4xl flex-col items-center py-12 text-center sm:py-16 lg:py-20">
-            <OrganizationLockup variant="white" />
+          <div className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:py-20">
+            <div className="max-w-2xl">
+              <OrganizationLockup variant="white" />
 
-            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-gold-500 sm:text-sm">
-              Emprendimiento y liderazgo juvenil desde las regiones del Perú
-            </p>
-
-            <h1 className="mt-4 font-display text-[2.35rem] font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-[3.7rem] lg:text-[4.25rem]">
-              Ideas jóvenes que se convierten en
-              <span className="text-gold-500"> proyectos con impacto.</span>
-            </h1>
-
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/78 sm:text-lg">
-              Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
-              ese talento con escolares, docentes y comunidades de todo el Perú.
-            </p>
-
-            <div className="mt-8 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
-              <Button href="/cursos" variant="gold" size="lg" prefetch>
-                Conoce nuestros programas
-                <ArrowRight className="size-4" />
-              </Button>
-              <Button href="/eventos" variant="outline-white" size="lg" prefetch>
-                Explora oportunidades
-              </Button>
-            </div>
-
-            <div className="mt-7 flex max-w-2xl items-start gap-3 rounded-[14px] border border-white/20 bg-white/10 px-4 py-3 text-left backdrop-blur-sm sm:items-center sm:px-5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sep-700">
-                <BadgeCheck className="size-4" />
-              </span>
-              <p className="text-sm leading-relaxed text-white/80">
-                Organización juvenil reconocida por la
-                <strong className="font-semibold text-white">
-                  {" "}Secretaría Nacional de la Juventud (SENAJU)
-                </strong>
-                .
+              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-gold-500 sm:text-sm">
+                Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
+
+              <h1 className="mt-4 font-display text-[2.35rem] font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-[3.35rem] lg:text-[3.65rem]">
+                Ideas jóvenes que se convierten en
+                <span className="text-gold-500"> proyectos con impacto.</span>
+              </h1>
+
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/78 sm:text-lg">
+                Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
+                ese talento con escolares, docentes y comunidades de todo el Perú.
+              </p>
+
+              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+                <Button href="/nosotros" variant="gold" size="lg" prefetch>
+                  Conoce SEP
+                  <ArrowRight className="size-4" />
+                </Button>
+                <Button href="/cursos" variant="outline-white" size="lg" prefetch>
+                  Ver programas
+                </Button>
+              </div>
+
+              <div className="mt-7 flex max-w-xl items-start gap-3 rounded-[14px] border border-white/20 bg-white/10 px-4 py-3 text-left backdrop-blur-sm sm:items-center sm:px-5">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sep-700">
+                  <BadgeCheck className="size-4" />
+                </span>
+                <p className="text-sm leading-relaxed text-white/80">
+                  Organización juvenil reconocida por la
+                  <strong className="font-semibold text-white">
+                    {" "}Secretaría Nacional de la Juventud (SENAJU)
+                  </strong>
+                  .
+                </p>
+              </div>
             </div>
+
+            <HeroPhoto />
           </div>
         </Container>
 
@@ -130,48 +135,45 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══ 3 · ACTUALIDAD ═══════════════════════════════════════════════ */}
-      <Section id="actualidad" className="py-14 sm:py-20">
-        <Container size="wide">
-          <div className="flex flex-wrap items-end justify-between gap-5">
-            <SectionHeader
-              eyebrow="Actualidad"
-              title="Lo último en SEP"
-              description="Noticias, aprendizajes y actividades recientes de nuestra comunidad."
-            />
-            <Button href="/blog" variant="outline" prefetch>
-              Ver todas las noticias
-              <ArrowRight className="size-4" />
-            </Button>
-          </div>
-
-          {latestPosts.length > 0 ? (
-            <div className="mt-9 grid gap-5 md:grid-cols-3">
-              {latestPosts.map((post, index) => (
-                <NewsCard
-                  key={post.id}
-                  post={post}
-                  fallbackImage={newsFallbacks[index % newsFallbacks.length]}
-                />
-              ))}
-            </div>
-          ) : (
-            <Card className="mt-9 flex flex-wrap items-center justify-between gap-4 bg-surface-1 p-6">
-              <div>
-                <h3 className="font-display text-lg font-semibold text-ink">
-                  Estamos preparando nuevas historias
-                </h3>
-                <p className="mt-1 text-sm text-slate-ui">
-                  Suscríbete para recibir noticias, convocatorias y próximos eventos.
-                </p>
-              </div>
-              <Button href="#newsletter" variant="primary">
-                Recibir novedades
+      {/* ═══ 3 · ACTUALIDAD — solo aparece cuando hay contenido publicado ═ */}
+      {latestPosts.length > 0 && (
+        <Section id="actualidad" className="py-14 sm:py-20">
+          <Container size="wide">
+            <div className="flex flex-wrap items-end justify-between gap-5">
+              <SectionHeader
+                eyebrow="Actualidad"
+                title="Lo último en SEP"
+                description="Noticias, aprendizajes y actividades recientes de nuestra comunidad."
+              />
+              <Button href="/blog" variant="outline" prefetch>
+                Ver todas las noticias
+                <ArrowRight className="size-4" />
               </Button>
-            </Card>
-          )}
-        </Container>
-      </Section>
+            </div>
+
+            <div className="mt-9">
+              <NewsCard
+                post={latestPosts[0]}
+                fallbackImage={newsFallbacks[0]}
+                priority
+                variant="featured"
+              />
+            </div>
+
+            {latestPosts.length > 1 && (
+              <div className="mt-5 grid gap-5 md:grid-cols-2">
+                {latestPosts.slice(1).map((post, index) => (
+                  <NewsCard
+                    key={post.id}
+                    post={post}
+                    fallbackImage={newsFallbacks[index + 1]}
+                  />
+                ))}
+              </div>
+            )}
+          </Container>
+        </Section>
+      )}
 
       {/* ═══ 4 · PÚBLICOS ═════════════════════════════════════════════════ */}
       <Section id="publicos" tone="muted">
@@ -346,8 +348,11 @@ export default async function HomePage() {
                 as={Link}
                 {...{ href: `/cursos/${course.slug}`, prefetch: true }}
               >
-                <CourseCover
-                  pattern={patternFor(course.category)}
+                <CourseMedia
+                  slug={course.slug}
+                  title={course.title}
+                  category={course.category}
+                  coverUrl={course.cover_url}
                   className="aspect-[16/9] w-full"
                 />
 
@@ -369,7 +374,9 @@ export default async function HomePage() {
                   </p>
 
                   <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-sm">
-                    <span className="font-medium text-seed-700">Gratuito</span>
+                    <span className="font-medium text-seed-700">
+                      {course.is_free ? "Acceso sin costo" : formatSoles(course.price_cents)}
+                    </span>
                     <span className="text-xs text-slate-ui">
                       {course.total_hours} h · {course.sessions_count} sesiones
                     </span>
@@ -413,7 +420,12 @@ export default async function HomePage() {
                 </div>
               </div>
 
-              <CourseCover pattern="silp" className="h-full min-h-[200px] rounded-none" />
+              <CourseMedia
+                slug="silp"
+                title="Social Impact Leadership Program"
+                category="Programa insignia"
+                className="h-full min-h-[220px] rounded-none"
+              />
             </div>
           </div>
         </Container>
@@ -433,7 +445,7 @@ export default async function HomePage() {
             {[
               {
                 name: "Certificado SEP",
-                issuer: "Reconocido por SENAJU",
+                issuer: "Semillero de Emprendedores Perú",
                 price: 3000,
               },
               {
@@ -543,50 +555,55 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      {/* ═══ 9 · TESTIMONIO + ALIADOS ═════════════════════ */}
-      <Section>
+      {/* ═══ 9 · PRESENCIA EN EL ECOSISTEMA ═══════════════ */}
+      <Section id="ecosistema" className="scroll-mt-20">
         <Container size="wide">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
-            <Card className="p-8 sm:p-10">
-              <p className="font-display text-[1.375rem] leading-relaxed text-ink">
-                “Compartí mi prototipo con mi colegio y los escolares llegaron con ideas
-                increíbles para su barrio. Nunca subestimen a un chico de 15 años con una
-                hoja en blanco.”
-              </p>
-              <div className="mt-7 flex items-center gap-3 border-t border-line pt-6">
-                <span className="flex size-11 items-center justify-center rounded-full sep-gradient text-sm font-semibold text-white">
-                  AN
-                </span>
-                <div>
-                  <p className="text-sm font-medium text-ink">Andrea Núñez</p>
-                  <p className="text-xs text-slate-ui">Mentora SEP · Arequipa</p>
-                </div>
-              </div>
-              <Link
-                href="/testimonios"
-                prefetch={false}
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
-              >
-                Ver más historias
-                <ArrowRight className="size-3.5" />
-              </Link>
-            </Card>
+          <SectionHeader
+            eyebrow="Ecosistema emprendedor"
+            title="Conectados con iniciativas que movilizan talento"
+            description="Estas piezas registran la participación de SEP como media partner. Los demás vínculos se muestran por tipo para no confundir colaboración, mentoría, aval o reconocimiento."
+          />
 
-            <div>
+          <div className="mt-10 grid gap-8 lg:grid-cols-[0.92fr_1.08fr] lg:items-start">
+            <div className="grid gap-4 sm:grid-cols-2">
+              <MediaImage
+                src={SEP_PHOTOS.northStarMediaPartner}
+                alt="Pieza oficial de North Star Fest que incluye a SEP como media partner"
+                kind="poster"
+                label="North Star Fest · Media partner"
+                className="aspect-[4/5] min-h-0"
+                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 46vw, 92vw"
+              />
+              <MediaImage
+                src={SEP_PHOTOS.innovationMediaPartner}
+                alt="Pieza oficial de Innovation Challenge que presenta a SEP como media partner"
+                kind="poster"
+                label="Innovation Challenge · Media partner"
+                className="aspect-[4/5] min-h-0"
+                sizes="(min-width: 1024px) 22vw, (min-width: 640px) 46vw, 92vw"
+              />
+            </div>
+
+            <Card className="p-6 sm:p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-ui">
-                Respaldo y alianzas
+                Vínculos registrados por SEP
               </p>
-              <ul className="mt-5 flex flex-wrap gap-2">
-                {partners.map((p) => (
+              <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
+                {partners.map((partner) => (
                   <li
-                    key={p.name}
-                    className="rounded-full border border-line bg-white px-3.5 py-2 text-[0.8125rem] text-graphite"
+                    key={partner.name}
+                    className="flex min-w-0 items-center justify-between gap-3 rounded-[10px] border border-line bg-surface-1 px-3.5 py-3"
                   >
-                    {p.name}
+                    <span className="min-w-0 text-sm font-medium text-graphite">
+                      {partner.name}
+                    </span>
+                    <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-[0.6875rem] font-medium text-sep-700 ring-1 ring-inset ring-sep-100">
+                      {partnerCategoryLabels[partner.category]}
+                    </span>
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
           </div>
         </Container>
       </Section>
@@ -616,13 +633,13 @@ export default async function HomePage() {
                   Newsletter SEP
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-ui">
-                  Convocatorias, becas y eventos. Te enteras 48 horas antes que en redes.
+                  Convocatorias, becas, actividades y novedades de la comunidad SEP.
                 </p>
                 <div className="mt-5">
                   <NewsletterForm />
                 </div>
                 <p className="mt-4 text-xs text-mist">
-                  1,200+ suscriptores · 2 ediciones al mes
+                  Puedes darte de baja cuando quieras.
                 </p>
               </Card>
             </div>

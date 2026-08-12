@@ -43,12 +43,12 @@ export default async function EventosPage() {
             description="Demo Days, ferias escolares, webinars y talleres abiertos. Participar es gratis y no importa desde dónde te conectes."
           />
           <RealPhoto
-            src={SEP_PHOTOS.alliance}
-            alt="Presentación de SEP junto a comunidades y organizaciones aliadas"
+            src={SEP_PHOTOS.eventPresence}
+            alt="Espacio de un encuentro de innovación con presencia visual de SEP"
             priority
-            label="Conexiones que abren oportunidades"
+            label="Participación en el ecosistema emprendedor"
             className="aspect-[16/10] min-h-0"
-            imageClassName="object-[50%_60%]"
+            imageClassName="object-[50%_50%]"
           />
           </div>
         </Container>
@@ -64,7 +64,7 @@ export default async function EventosPage() {
             <EmptyState
               icon={<CalendarDays className="size-5" />}
               title="No hay eventos programados por ahora"
-              description="Suscríbete al newsletter y te avisamos 48 horas antes del anuncio público."
+              description="Suscríbete al newsletter para conocer las próximas actividades."
               action={<Button href="/#newsletter">Suscribirme</Button>}
             />
           ) : (

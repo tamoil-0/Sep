@@ -15,6 +15,7 @@ import { createPublicClient } from "@/lib/supabase/public";
 import { getCatalog, getCourseBySlug } from "@/server/queries/courses";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { CourseMedia } from "@/components/marketing/course-media";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 
@@ -118,43 +119,57 @@ export default async function CursoPublicoPage({
               </dl>
             </div>
 
-            <Card className="lg:sticky lg:top-24 lg:self-start">
-              <p className="tabular font-display text-[2.25rem] font-bold leading-none text-ink">
-                {course.is_free ? "Gratis" : formatSoles(course.price_cents)}
-              </p>
-              <p className="mt-1.5 text-sm text-slate-ui">
-                {course.is_free
-                  ? "Acceso completo sin costo"
-                  : "Tarifa social para la red SEP"}
-              </p>
+            <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">
+              <CourseMedia
+                slug={course.slug}
+                title={course.title}
+                category={course.category}
+                coverUrl={course.cover_url}
+                priority
+                className="aspect-[16/10] w-full"
+              />
+              <Card>
+                <p className="tabular font-display text-[2.25rem] font-bold leading-none text-ink">
+                  {course.is_free ? "Gratis" : formatSoles(course.price_cents)}
+                </p>
+                <p className="mt-1.5 text-sm text-slate-ui">
+                  {course.is_free
+                    ? "Acceso completo sin costo"
+                    : "Tarifa social para la red SEP"}
+                </p>
 
-              <ul className="mt-5 space-y-2.5 border-y border-line py-5">
-                {[
-                  "Sesiones en vivo con facilitadores",
-                  "Materiales y plantillas descargables",
-                  "Acceso a la comunidad SEP",
-                  "Certificado opcional desde S/30",
-                ].map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-sm text-graphite">
-                    <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
+                <ul className="mt-5 space-y-2.5 border-y border-line py-5">
+                  {[
+                    "Sesiones en vivo con facilitadores",
+                    "Materiales y plantillas descargables",
+                    "Acceso a la comunidad SEP",
+                    "Certificado opcional desde S/30",
+                  ].map((f) => (
+                    <li key={f} className="flex items-start gap-2.5 text-sm text-graphite">
+                      <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                      {f}
+                    </li>
+                  ))}
+                </ul>
 
               <Button
                 href="/registro"
                 variant={available ? "gradient" : "outline"}
                 className="mt-5 w-full"
               >
-                {available ? "Inscribirme gratis" : "Avísenme cuando abra"}
-                <ArrowRight className="size-4" />
-              </Button>
+                  {available
+                    ? course.is_free
+                      ? "Inscribirme gratis"
+                      : "Crear cuenta y continuar"
+                    : "Avísenme cuando abra"}
+                  <ArrowRight className="size-4" />
+                </Button>
 
-              <p className="mt-3 text-center text-xs text-mist">
-                Necesitas una cuenta gratuita de SEP.
-              </p>
-            </Card>
+                <p className="mt-3 text-center text-xs text-mist">
+                  Necesitas una cuenta gratuita de SEP.
+                </p>
+              </Card>
+            </div>
           </div>
         </Container>
       </section>

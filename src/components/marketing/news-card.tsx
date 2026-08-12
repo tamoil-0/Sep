@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import { Badge, Card } from "@/components/ui/primitives";
-import { formatDate } from "@/lib/utils";
+import { cn, formatDate } from "@/lib/utils";
 
 export type NewsCardPost = {
   id: string;
@@ -19,18 +19,31 @@ export function NewsCard({
   post,
   fallbackImage,
   priority = false,
+  variant = "default",
 }: {
   post: NewsCardPost;
   fallbackImage: string;
   priority?: boolean;
+  variant?: "default" | "featured";
 }) {
   const category = post.tags[0] ?? "Actualidad SEP";
+  const featured = variant === "featured";
 
   return (
-    <Card as="article" interactive className="group flex h-full flex-col overflow-hidden p-3 sm:p-4">
+    <Card
+      as="article"
+      interactive
+      className={cn(
+        "group h-full overflow-hidden p-3 sm:p-4",
+        featured ? "grid gap-2 md:grid-cols-[1.25fr_0.75fr]" : "flex flex-col",
+      )}
+    >
       <Link
         href={`/blog/${post.slug}`}
-        className="relative block aspect-[16/9] overflow-hidden rounded-[11px] bg-surface-2"
+        className={cn(
+          "relative block overflow-hidden rounded-[11px] bg-surface-2",
+          featured ? "aspect-[16/10] md:aspect-auto md:min-h-[320px]" : "aspect-[16/9]",
+        )}
         aria-label={`Leer ${post.title}`}
       >
         <Image
@@ -38,13 +51,17 @@ export function NewsCard({
           alt=""
           fill
           priority={priority}
-          sizes="(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 92vw"
+          sizes={
+            featured
+              ? "(min-width: 1024px) 60vw, (min-width: 768px) 55vw, 92vw"
+              : "(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 92vw"
+          }
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/20 to-transparent" />
       </Link>
 
-      <div className="flex flex-1 flex-col px-1 pb-1 pt-4">
+      <div className={cn("flex flex-1 flex-col px-1 pb-1 pt-4", featured && "md:p-6")}>
         <div className="flex flex-wrap items-center justify-between gap-2">
           <Badge tone="brand" className="capitalize">
             {category}
@@ -56,7 +73,12 @@ export function NewsCard({
           )}
         </div>
 
-        <h3 className="mt-3 font-display text-[1.125rem] font-semibold leading-snug text-ink">
+        <h3
+          className={cn(
+            "mt-3 font-display font-semibold leading-snug text-ink",
+            featured ? "text-[1.5rem] md:text-[1.75rem]" : "text-[1.125rem]",
+          )}
+        >
           <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">
             {post.title}
           </Link>

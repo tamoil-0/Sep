@@ -7,6 +7,7 @@ import { CalendarDays, Check, Clock, Loader2, Search, Sprout } from "lucide-reac
 import { enrollAction } from "@/server/actions/learning";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Input } from "@/components/forms/field";
+import { CourseMedia } from "@/components/marketing/course-media";
 import { formatSoles, cn } from "@/lib/utils";
 
 export interface CatalogCourse {
@@ -23,6 +24,7 @@ export interface CatalogCourse {
   weeks: number;
   isFree: boolean;
   priceCents: number;
+  coverUrl: string | null;
   enrolled: boolean;
 }
 
@@ -107,79 +109,89 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
           {visible.map((c) => {
             const available = c.status === "disponible";
             return (
-              <Card key={c.id} className="flex flex-col p-5">
-                <div className="flex flex-wrap items-center gap-1.5">
-                  {c.enrolled ? (
-                    <Badge tone="brand">
-                      <Check className="size-3.5" />
-                      Inscrito
-                    </Badge>
-                  ) : available ? (
-                    <Badge tone="seed">Disponible</Badge>
-                  ) : (
-                    <Badge tone="neutral">Próximamente</Badge>
-                  )}
-                  {c.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
-                  {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
-                </div>
+              <Card key={c.id} className="flex flex-col overflow-hidden p-3">
+                <CourseMedia
+                  slug={c.slug}
+                  title={c.title}
+                  category={c.category}
+                  coverUrl={c.coverUrl}
+                  className="aspect-[16/9] w-full"
+                />
 
-                <h3 className="mt-3.5 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
-                  {c.title}
-                </h3>
-                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
-                  {c.description}
-                </p>
+                <div className="flex flex-1 flex-col p-2 pt-4">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {c.enrolled ? (
+                      <Badge tone="brand">
+                        <Check className="size-3.5" />
+                        Inscrito
+                      </Badge>
+                    ) : available ? (
+                      <Badge tone="seed">Disponible</Badge>
+                    ) : (
+                      <Badge tone="neutral">Próximamente</Badge>
+                    )}
+                    {c.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
+                    {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
+                  </div>
 
-                <dl className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-xs text-slate-ui">
-                  <span className="inline-flex items-center gap-1.5">
-                    <Clock className="size-3.5 text-mist" />
-                    {c.totalHours} h
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <CalendarDays className="size-3.5 text-mist" />
-                    {c.sessionsCount} sesiones
-                  </span>
-                  <span className="inline-flex items-center gap-1.5">
-                    <Sprout className="size-3.5 text-mist" />
-                    {c.weeks} sem.
-                  </span>
-                </dl>
+                  <h3 className="mt-3.5 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
+                    {c.title}
+                  </h3>
+                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
+                    {c.description}
+                  </p>
 
-                <p className="mt-3 text-sm font-medium text-ink">
-                  {c.isFree ? (
-                    <span className="text-seed-700">Gratuito</span>
-                  ) : (
-                    formatSoles(c.priceCents)
-                  )}
-                </p>
+                  <dl className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-xs text-slate-ui">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="size-3.5 text-mist" />
+                      {c.totalHours} h
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <CalendarDays className="size-3.5 text-mist" />
+                      {c.sessionsCount} sesiones
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Sprout className="size-3.5 text-mist" />
+                      {c.weeks} sem.
+                    </span>
+                  </dl>
 
-                <div className="mt-4">
-                  {c.enrolled ? (
-                    <Link
-                      href={`/estudiante/curso/${c.slug}`}
-                      className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-white text-sm font-medium text-ink transition-colors hover:bg-surface-2"
-                    >
-                      Ir al curso
-                    </Link>
-                  ) : available ? (
-                    <button
-                      type="button"
-                      onClick={() => enroll(c.slug)}
-                      disabled={busy !== null}
-                      className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-[8px] bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
-                    >
-                      {busy === c.slug && <Loader2 className="size-4 animate-spin" />}
-                      Inscribirme gratis
-                    </button>
-                  ) : (
-                    <button
-                      type="button"
-                      disabled
-                      className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-surface-1 text-sm text-mist"
-                    >
-                      Próximamente
-                    </button>
-                  )}
+                  <p className="mt-3 text-sm font-medium text-ink">
+                    {c.isFree ? (
+                      <span className="text-seed-700">Gratuito</span>
+                    ) : (
+                      formatSoles(c.priceCents)
+                    )}
+                  </p>
+
+                  <div className="mt-4">
+                    {c.enrolled ? (
+                      <Link
+                        href={`/estudiante/curso/${c.slug}`}
+                        className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-white text-sm font-medium text-ink transition-colors hover:bg-surface-2"
+                      >
+                        Ir al curso
+                      </Link>
+                    ) : available ? (
+                      <button
+                        type="button"
+                        onClick={() => enroll(c.slug)}
+                        disabled={busy !== null}
+                        className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-[8px] bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+                      >
+                        {busy === c.slug && <Loader2 className="size-4 animate-spin" />}
+                        {c.isFree ? "Inscribirme gratis" : "Continuar"}
+                      </button>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled
+                        className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-surface-1 text-sm text-mist"
+                      >
+                        Próximamente
+                      </button>
+                    )}
+                  </div>
                 </div>
               </Card>
             );

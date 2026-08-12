@@ -21,7 +21,7 @@ export default async function CatalogoPage() {
     <>
       <PageHeader
         title="Catálogo de cursos"
-        description="Todos gratuitos. 8 horas, 6 sesiones en vivo, 100 % virtual. El certificado es opcional."
+        description="Formación práctica para llevar ideas a la acción. Revisa la modalidad, disponibilidad y condiciones de cada curso."
       />
       <CourseCatalog
         courses={courses.map((c) => ({
@@ -38,6 +38,7 @@ export default async function CatalogoPage() {
           weeks: c.weeks,
           isFree: c.is_free,
           priceCents: c.price_cents,
+          coverUrl: c.cover_url,
           enrolled: enrolledIds.has(c.id),
         }))}
       />

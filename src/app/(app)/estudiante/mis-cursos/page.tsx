@@ -34,7 +34,7 @@ export default async function MisCursosPage() {
         <EmptyState
           icon={<BookOpen className="size-5" />}
           title="Aún no estás en ningún curso"
-          description="Todos los cursos de SEP son gratuitos. Empieza por Design Thinking aplicado: 6 sesiones, 2 semanas."
+          description="Explora el catálogo y revisa la modalidad, disponibilidad y condiciones de cada curso."
           action={<Button href="/estudiante/catalogo">Ver el catálogo</Button>}
         />
       ) : (

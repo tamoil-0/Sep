@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, CalendarDays, Clock, Sprout } from "lucide-react";
 import { getCatalog } from "@/server/queries/courses";
-import { CourseCover } from "@/components/brand/illustrations";
+import { CourseMedia } from "@/components/marketing/course-media";
 import { Badge, Card, Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { COURSE_FORMAT } from "@/config/courses";
@@ -11,9 +11,9 @@ import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata: Metadata = {
-  title: "Cursos gratuitos",
+  title: "Cursos y programas",
   description:
-    "Design Thinking, Scrum para proyectos sociales, liderazgo regional y metodologías activas para docentes. 8 horas, 6 sesiones en vivo, 100 % virtual y gratuito.",
+    "Cursos y programas de Design Thinking, Scrum, liderazgo regional y metodologías activas para docentes. Revisa la modalidad, disponibilidad y condiciones de cada propuesta.",
 };
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
@@ -34,16 +34,17 @@ export default async function CursosPage() {
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-ui">
               Metodologías ágiles y liderazgo llevados al terreno de la innovación social.
-              Sin costo de acceso, sin importar tu región ni tu carrera.
+              Encuentra opciones abiertas a distintas regiones y etapas de aprendizaje.
             </p>
           </div>
 
           <RealPhoto
-            src={SEP_PHOTOS.virtual}
-            alt="Participantes de distintas regiones conectados a una formación virtual de SEP"
+            src={SEP_PHOTOS.communityTeam}
+            alt="Comunidad juvenil reunida durante una actividad de formación"
             priority
-            label="Aula virtual SEP"
+            label="Formación dentro y fuera del aula"
             className="aspect-[16/10] min-h-0"
+            imageClassName="object-[50%_46%]"
           />
           </div>
 
@@ -78,16 +79,11 @@ export default async function CursosPage() {
                   as={Link}
                   {...{ href: `/cursos/${c.slug}`, prefetch: true }}
                 >
-                  <CourseCover
-                    pattern={
-                      c.category === "SILP"
-                        ? "silp"
-                        : c.category === "Liderazgo"
-                          ? "liderazgo"
-                          : c.category === "Para docentes"
-                            ? "docentes"
-                            : "agiles"
-                    }
+                  <CourseMedia
+                    slug={c.slug}
+                    title={c.title}
+                    category={c.category}
+                    coverUrl={c.cover_url}
                     className="mb-4 aspect-[16/9] w-full transition-transform duration-500 group-hover:scale-[1.015]"
                   />
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
@@ -144,8 +140,8 @@ export default async function CursosPage() {
         <Container size="wide">
           <SectionHeader
             eyebrow="Certificación"
-            title="El curso es gratis. El certificado, opcional."
-            description="Al completar las 6 sesiones puedes acreditar tu aprendizaje. Es lo que sostiene a SEP sin cobrar por la formación."
+            title="En los cursos gratuitos, el certificado es opcional."
+            description="Al completar las sesiones puedes acreditar tu aprendizaje según las condiciones de cada curso."
             align="center"
           />
 

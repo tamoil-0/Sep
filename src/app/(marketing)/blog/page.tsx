@@ -52,21 +52,30 @@ export default async function BlogPage() {
               description="Estamos escribiendo las primeras. Suscríbete al newsletter para enterarte."
             />
           ) : (
-            <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post, index) => (
-                <li key={post.id}>
-                  <NewsCard
-                    post={post}
-                    fallbackImage={
-                      [SEP_PHOTOS.alliance, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop][
-                        index % 3
-                      ]
-                    }
-                    priority={index < 3}
-                  />
-                </li>
-              ))}
-            </ul>
+            <div>
+              <NewsCard
+                post={posts[0]}
+                fallbackImage={SEP_PHOTOS.communityGroup}
+                priority
+                variant="featured"
+              />
+              {posts.length > 1 && (
+                <ul className="mt-5 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+                  {posts.slice(1).map((post, index) => (
+                    <li key={post.id}>
+                      <NewsCard
+                        post={post}
+                        fallbackImage={
+                          [SEP_PHOTOS.methodology, SEP_PHOTOS.workshop, SEP_PHOTOS.community][
+                            index % 3
+                          ]
+                        }
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           )}
         </Container>
       </Section>
