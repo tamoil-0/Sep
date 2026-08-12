@@ -525,7 +525,8 @@ export interface Database {
       survey_leads: Table<{
         id: string;
         user_id: string | null;
-        email: string;
+        full_name: string | null;
+        email: string | null;
         profile: SurveyProfileDb;
         region: string | null;
         utm_source: string | null;
@@ -747,6 +748,10 @@ export interface Database {
       };
       submit_account_diagnostic: {
         Args: { p_answers: Json };
+        Returns: string;
+      };
+      submit_fair_diagnostic: {
+        Args: { p_full_name: string; p_answers: Json; p_source?: string };
         Returns: string;
       };
 

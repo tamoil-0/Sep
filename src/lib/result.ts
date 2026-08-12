@@ -66,6 +66,7 @@ const PG_ERRORS: Record<string, string> = {
   INCOMPLETE_DIAGNOSTIC: "Completa las 15 preguntas antes de finalizar.",
   INVALID_ANSWER: "Una respuesta ya no coincide con las opciones disponibles. Revísala.",
   DIAGNOSTIC_ALREADY_COMPLETED: "Este diagnóstico ya fue completado.",
+  INVALID_NAME: "Escribe tu nombre para continuar.",
 };
 
 /** Errores nativos de Postgres que sí conviene traducir. */

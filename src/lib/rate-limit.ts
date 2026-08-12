@@ -54,4 +54,6 @@ export const RATE_LIMITS = {
   publicForm: { limit: 5, windowMs: 60 * 60 * 1000 },
   newsletter: { limit: 3, windowMs: 60 * 60 * 1000 },
   diagnostic: { limit: 2, windowMs: 24 * 60 * 60 * 1000 },
+  // En ferias muchas personas comparten el mismo wifi o red móvil.
+  fair: { limit: 300, windowMs: 12 * 60 * 60 * 1000 },
 } as const;

@@ -5,8 +5,10 @@ import {
   ChartPie,
   ChevronRight,
   ClipboardCheck,
+  HeartHandshake,
   Mail,
   MapPin,
+  Search,
   Sparkles,
   UserRound,
   Users,
@@ -49,26 +51,26 @@ function formatAnswer(answer: Json) {
 export default async function AdminDiagnosticoPage({
   searchParams,
 }: {
-  searchParams: Promise<{ perfil?: string; lead?: string }>;
+  searchParams: Promise<{ perfil?: string; lead?: string; origen?: string; q?: string }>;
 }) {
   await requireRole(["admin", "super_admin"]);
-  const { perfil, lead: requestedLead } = await searchParams;
+  const { perfil, lead: requestedLead, origen, q } = await searchParams;
   const active: ProfileKey =
     PROFILES.find((profile) => profile.key === perfil)?.key ?? "universitario";
   const activeMeta = PROFILES.find((profile) => profile.key === active)!;
   const supabase = await createClient();
 
   const [allLeadsResult, leadsResult, resultsResult, questionsResult] = await Promise.all([
-    supabase.from("survey_leads").select("profile, completed, user_id"),
+    supabase.from("survey_leads").select("profile, completed, user_id, utm_source"),
     supabase
       .from("survey_leads")
       .select(
-        "id, user_id, email, profile, region, utm_source, completed, completed_at, created_at",
+        "id, user_id, full_name, email, profile, region, utm_source, completed, completed_at, created_at",
       )
       .eq("profile", active)
       .eq("completed", true)
       .order("completed_at", { ascending: false, nullsFirst: false })
-      .limit(150),
+      .limit(500),
     supabase.rpc("diagnostic_results", { p_profile: active }),
     supabase
       .from("survey_questions")
@@ -78,10 +80,10 @@ export default async function AdminDiagnosticoPage({
   ]);
 
   const allLeads = allLeadsResult.data ?? [];
-  const leads = leadsResult.data ?? [];
+  const rawLeads = leadsResult.data ?? [];
   const results = resultsResult.data ?? [];
   const questions = questionsResult.data ?? [];
-  const userIds = [...new Set(leads.flatMap((lead) => (lead.user_id ? [lead.user_id] : [])))];
+  const userIds = [...new Set(rawLeads.flatMap((lead) => (lead.user_id ? [lead.user_id] : [])))];
 
   const { data: profileRows } = userIds.length
     ? await supabase
@@ -106,6 +108,26 @@ export default async function AdminDiagnosticoPage({
   const institutions = new Map(
     (institutionRows ?? []).map((institution) => [institution.id, institution.name]),
   );
+  const activeOrigin = ["feria", "cuenta", "publico"].includes(origen ?? "")
+    ? origen
+    : "todos";
+  const search = q?.trim().toLocaleLowerCase("es") ?? "";
+  const leads = rawLeads.filter((lead) => {
+    const isFair = lead.utm_source === "apoya_hoy" || lead.utm_source === "feria";
+    const matchesOrigin =
+      activeOrigin === "todos" ||
+      (activeOrigin === "feria" && isFair) ||
+      (activeOrigin === "cuenta" && Boolean(lead.user_id)) ||
+      (activeOrigin === "publico" && !lead.user_id && !isFair);
+
+    if (!matchesOrigin) return false;
+    if (!search) return true;
+
+    const account = lead.user_id ? profiles.get(lead.user_id) : null;
+    return [account?.full_name, lead.full_name, lead.email, account?.region, lead.region]
+      .filter(Boolean)
+      .some((value) => value!.toLocaleLowerCase("es").includes(search));
+  });
   const selectedLead = requestedLead
     ? leads.find((lead) => lead.id === requestedLead) ?? null
     : null;
@@ -142,6 +164,10 @@ export default async function AdminDiagnosticoPage({
   }
 
   const accountResponses = allLeads.filter((lead) => lead.completed && lead.user_id).length;
+  const fairResponses = allLeads.filter(
+    (lead) =>
+      lead.completed && (lead.utm_source === "apoya_hoy" || lead.utm_source === "feria"),
+  ).length;
 
   return (
     <>
@@ -161,6 +187,12 @@ export default async function AdminDiagnosticoPage({
           value={accountResponses}
           hint="Vinculadas a un perfil SEP"
           icon={<Users className="size-4" />}
+        />
+        <Kpi
+          label="Participaciones de feria"
+          value={fairResponses}
+          hint="Ingreso rápido · Apoya hoy"
+          icon={<HeartHandshake className="size-4" />}
         />
         {PROFILES.map((profile) => (
           <Kpi
@@ -202,14 +234,58 @@ export default async function AdminDiagnosticoPage({
               {leads.length} {leads.length === 1 ? "respuesta completa" : "respuestas completas"} en {activeMeta.label.toLowerCase()}.
             </p>
           </div>
-          <Badge tone="brand">Últimas 150 respuestas</Badge>
+          <Badge tone="brand">Hasta 500 respuestas</Badge>
         </div>
+
+        <form
+          method="get"
+          className="mb-4 grid gap-2 rounded-[14px] border border-line bg-white p-3 sm:grid-cols-[minmax(0,1fr)_180px_auto] sm:p-4"
+        >
+          <input type="hidden" name="perfil" value={active} />
+          <label className="relative block">
+            <span className="sr-only">Buscar participante</span>
+            <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-mist" />
+            <input
+              type="search"
+              name="q"
+              defaultValue={q ?? ""}
+              placeholder="Buscar nombre, correo o región"
+              className="h-11 w-full rounded-[10px] border border-line bg-surface-1 pl-10 pr-3 text-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+            />
+          </label>
+          <label>
+            <span className="sr-only">Filtrar por origen</span>
+            <select
+              name="origen"
+              defaultValue={activeOrigin}
+              className="h-11 w-full rounded-[10px] border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+            >
+              <option value="todos">Todos los orígenes</option>
+              <option value="feria">Feria · Apoya hoy</option>
+              <option value="cuenta">Cuenta SEP</option>
+              <option value="publico">Diagnóstico público</option>
+            </select>
+          </label>
+          <button
+            type="submit"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-sep-600 px-5 text-sm font-medium text-white transition hover:bg-sep-700"
+          >
+            Aplicar filtros
+          </button>
+        </form>
 
         {leads.length === 0 ? (
           <EmptyState
             icon={<UserRound className="size-5" />}
-            title={`Aún no hay respuestas de ${activeMeta.label.toLowerCase()}`}
-            description="Aparecerán aquí cuando una persona termine los tres módulos."
+            title={search || activeOrigin !== "todos" ? "No encontramos coincidencias" : `Aún no hay respuestas de ${activeMeta.label.toLowerCase()}`}
+            description={search || activeOrigin !== "todos" ? "Prueba otro nombre o muestra todos los orígenes." : "Aparecerán aquí cuando una persona termine los tres módulos."}
+            action={
+              search || activeOrigin !== "todos" ? (
+                <Link href={`/admin/diagnostico?perfil=${active}`} className="text-sm font-medium text-sep-600 hover:underline">
+                  Limpiar filtros
+                </Link>
+              ) : undefined
+            }
           />
         ) : (
           <Card className="overflow-hidden p-0">
@@ -223,12 +299,13 @@ export default async function AdminDiagnosticoPage({
               {leads.map((lead) => {
                 const account = lead.user_id ? profiles.get(lead.user_id) : null;
                 const selected = selectedLead?.id === lead.id;
-                const displayName = account?.full_name?.trim() || "Participante público";
+                const isFair = lead.utm_source === "apoya_hoy" || lead.utm_source === "feria";
+                const displayName = account?.full_name?.trim() || lead.full_name?.trim() || "Participante público";
 
                 return (
                   <li key={lead.id}>
                     <Link
-                      href={`/admin/diagnostico?perfil=${active}&lead=${lead.id}`}
+                      href={`/admin/diagnostico?perfil=${active}&lead=${lead.id}${activeOrigin !== "todos" ? `&origen=${activeOrigin}` : ""}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
                       aria-current={selected ? "true" : undefined}
                       className={cn(
                         "group grid gap-2 px-5 py-4 transition-colors hover:bg-surface-1 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] md:items-center md:gap-4",
@@ -238,14 +315,16 @@ export default async function AdminDiagnosticoPage({
                       <span className="min-w-0">
                         <span className="flex items-center gap-2 font-medium text-ink">
                           <span className="truncate">{displayName}</span>
-                          {lead.user_id ? (
+                          {isFair ? (
+                            <Badge tone="gold" className="shrink-0">Feria</Badge>
+                          ) : lead.user_id ? (
                             <Badge tone="seed" className="shrink-0">Cuenta SEP</Badge>
                           ) : (
                             <Badge tone="neutral" className="shrink-0">Público</Badge>
                           )}
                         </span>
                         <span className="mt-0.5 block truncate text-xs text-slate-ui">
-                          {lead.email}
+                          {lead.email || "Participación rápida · sin cuenta"}
                         </span>
                       </span>
                       <span className="flex items-center gap-1.5 text-sm text-graphite">
@@ -276,11 +355,11 @@ export default async function AdminDiagnosticoPage({
                     Respuesta individual · {activeMeta.singular}
                   </p>
                   <h2 id="response-detail-title" className="mt-1.5 font-display text-2xl font-semibold">
-                    {selectedProfile?.full_name?.trim() || selectedLead.email}
+                    {selectedProfile?.full_name?.trim() || selectedLead.full_name?.trim() || selectedLead.email || "Participante"}
                   </h2>
                 </div>
                 <Link
-                  href={`/admin/diagnostico?perfil=${active}`}
+                  href={`/admin/diagnostico?perfil=${active}${activeOrigin !== "todos" ? `&origen=${activeOrigin}` : ""}${q ? `&q=${encodeURIComponent(q)}` : ""}`}
                   aria-label="Cerrar detalle"
                   className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white/10 text-white transition-colors hover:bg-white/20"
                 >
@@ -289,9 +368,15 @@ export default async function AdminDiagnosticoPage({
               </div>
 
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/75">
-                <span className="inline-flex items-center gap-1.5">
-                  <Mail className="size-4 text-gold-500" /> {selectedLead.email}
-                </span>
+                {selectedLead.email ? (
+                  <span className="inline-flex items-center gap-1.5">
+                    <Mail className="size-4 text-gold-500" /> {selectedLead.email}
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-1.5">
+                    <HeartHandshake className="size-4 text-gold-500" /> Participación de feria
+                  </span>
+                )}
                 <span className="inline-flex items-center gap-1.5">
                   <MapPin className="size-4 text-gold-500" />
                   {selectedProfile?.region || selectedLead.region || "Región no indicada"}

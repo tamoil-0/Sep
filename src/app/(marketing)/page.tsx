@@ -5,6 +5,7 @@ import {
   Building2,
   Check,
   GraduationCap,
+  HeartHandshake,
   Presentation,
   School,
   Sparkles,
@@ -85,12 +86,13 @@ export default async function HomePage() {
               </p>
 
               <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <Button href="/nosotros" variant="gold" size="lg" prefetch>
-                  Conoce SEP
+                <Button href="/apoya-hoy" variant="gold" size="lg" prefetch>
+                  <HeartHandshake className="size-5" />
+                  Apoya hoy
                   <ArrowRight className="size-4" />
                 </Button>
-                <Button href="/cursos" variant="outline-white" size="lg" prefetch>
-                  Ver programas
+                <Button href="/nosotros" variant="outline-white" size="lg" prefetch>
+                  Conoce SEP
                 </Button>
               </div>
 
