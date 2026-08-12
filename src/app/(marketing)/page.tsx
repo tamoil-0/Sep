@@ -4,6 +4,8 @@ import {
   BadgeCheck,
   Building2,
   Check,
+  GraduationCap,
+  Presentation,
   School,
   Sparkles,
   Users,
@@ -19,7 +21,6 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import {
-  AvatarStack,
   CourseCover,
   DotGrid,
   ImpactChainIllustration,
@@ -28,10 +29,13 @@ import {
 } from "@/components/brand/illustrations";
 import { CountUp } from "@/components/marketing/count-up";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
+import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
-import { ExperienceGallery, HeroPhoto } from "@/components/marketing/real-photo";
+import { ExperienceGallery, SEP_PHOTOS } from "@/components/marketing/real-photo";
+import { OrganizationLockup } from "@/components/brand/logo";
 import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
+import { getPublishedPosts } from "@/server/queries/public-content";
 import { formatSoles } from "@/lib/utils";
 
 /** ISR: la portada se sirve estática y se regenera cada 5 min. */
@@ -45,8 +49,10 @@ const patternFor = (category: string | null): CoursePattern => {
 };
 
 export default async function HomePage() {
-  const catalog = await getCatalog();
+  const [catalog, posts] = await Promise.all([getCatalog(), getPublishedPosts()]);
   const courses = catalog.filter((c) => c.category !== "SILP").slice(0, 4);
+  const latestPosts = posts.slice(0, 3);
+  const newsFallbacks = [SEP_PHOTOS.alliance, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop];
 
   return (
     <>
@@ -59,45 +65,44 @@ export default async function HomePage() {
         />
 
         <Container size="wide" className="relative">
-          <div className="grid items-center gap-12 py-14 sm:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:py-24">
-            <div>
-              <Badge tone="white">
-                <BadgeCheck className="size-3.5" />
-                Reconocidos por SENAJU
-              </Badge>
+          <div className="mx-auto flex max-w-4xl flex-col items-center py-12 text-center sm:py-16 lg:py-20">
+            <OrganizationLockup variant="white" />
 
-              <h1 className="mt-6 font-display text-[2.75rem] font-bold leading-[1.02] tracking-[-0.035em] text-white sm:text-[4rem] lg:text-[4.5rem]">
-                Emprende hoy,
-                <br />
-                <span className="text-gold-500">lidera mañana.</span>
-              </h1>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-gold-500 sm:text-sm">
+              Emprendimiento y liderazgo juvenil desde las regiones del Perú
+            </p>
 
-              <p className="mt-6 max-w-md text-lg leading-relaxed text-white/75">
-                Formación en metodologías ágiles para jóvenes de todas las regiones del
-                Perú. Gratis, siempre.
-              </p>
+            <h1 className="mt-4 font-display text-[2.35rem] font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-[3.7rem] lg:text-[4.25rem]">
+              Ideas jóvenes que se convierten en
+              <span className="text-gold-500"> proyectos con impacto.</span>
+            </h1>
 
-              <div className="mt-9 flex flex-col gap-3 sm:flex-row">
-                <Button href="/registro" variant="gold" size="lg" prefetch>
-                  Empezar gratis
-                  <ArrowRight className="size-4" />
-                </Button>
-                <Button href="/cursos" variant="outline-white" size="lg" prefetch>
-                  Ver los cursos
-                </Button>
-              </div>
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/78 sm:text-lg">
+              Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
+              ese talento con escolares, docentes y comunidades de todo el Perú.
+            </p>
 
-              <div className="mt-10 flex items-center gap-4">
-                <AvatarStack initials={["AN", "RM", "LV", "KQ"]} extra={131} />
-                <p className="text-sm text-white/65">
-                  <strong className="font-semibold text-white">+135 jóvenes</strong> ya
-                  se formaron con SEP
-                </p>
-              </div>
+            <div className="mt-8 flex w-full flex-col justify-center gap-3 sm:w-auto sm:flex-row">
+              <Button href="/cursos" variant="gold" size="lg" prefetch>
+                Conoce nuestros programas
+                <ArrowRight className="size-4" />
+              </Button>
+              <Button href="/eventos" variant="outline-white" size="lg" prefetch>
+                Explora oportunidades
+              </Button>
             </div>
 
-            <div className="relative mt-2 w-full lg:mt-0">
-              <HeroPhoto />
+            <div className="mt-7 flex max-w-2xl items-start gap-3 rounded-[14px] border border-white/20 bg-white/10 px-4 py-3 text-left backdrop-blur-sm sm:items-center sm:px-5">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sep-700">
+                <BadgeCheck className="size-4" />
+              </span>
+              <p className="text-sm leading-relaxed text-white/80">
+                Organización juvenil reconocida por la
+                <strong className="font-semibold text-white">
+                  {" "}Secretaría Nacional de la Juventud (SENAJU)
+                </strong>
+                .
+              </p>
             </div>
           </div>
         </Container>
@@ -125,7 +130,114 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ═══ 3 · EL PROBLEMA — cifras, no párrafos ═════════ */}
+      {/* ═══ 3 · ACTUALIDAD ═══════════════════════════════════════════════ */}
+      <Section id="actualidad" className="py-14 sm:py-20">
+        <Container size="wide">
+          <div className="flex flex-wrap items-end justify-between gap-5">
+            <SectionHeader
+              eyebrow="Actualidad"
+              title="Lo último en SEP"
+              description="Noticias, aprendizajes y actividades recientes de nuestra comunidad."
+            />
+            <Button href="/blog" variant="outline" prefetch>
+              Ver todas las noticias
+              <ArrowRight className="size-4" />
+            </Button>
+          </div>
+
+          {latestPosts.length > 0 ? (
+            <div className="mt-9 grid gap-5 md:grid-cols-3">
+              {latestPosts.map((post, index) => (
+                <NewsCard
+                  key={post.id}
+                  post={post}
+                  fallbackImage={newsFallbacks[index % newsFallbacks.length]}
+                />
+              ))}
+            </div>
+          ) : (
+            <Card className="mt-9 flex flex-wrap items-center justify-between gap-4 bg-surface-1 p-6">
+              <div>
+                <h3 className="font-display text-lg font-semibold text-ink">
+                  Estamos preparando nuevas historias
+                </h3>
+                <p className="mt-1 text-sm text-slate-ui">
+                  Suscríbete para recibir noticias, convocatorias y próximos eventos.
+                </p>
+              </div>
+              <Button href="#newsletter" variant="primary">
+                Recibir novedades
+              </Button>
+            </Card>
+          )}
+        </Container>
+      </Section>
+
+      {/* ═══ 4 · PÚBLICOS ═════════════════════════════════════════════════ */}
+      <Section id="publicos" tone="muted">
+        <Container size="wide">
+          <SectionHeader
+            eyebrow="Una comunidad, distintas rutas"
+            title="¿Para quién es SEP?"
+            description="Impulsamos el emprendimiento desde la etapa escolar hasta la universidad y articulamos a quienes hacen posible ese recorrido."
+            align="center"
+          />
+
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              {
+                icon: GraduationCap,
+                title: "Jóvenes y universitarios",
+                body: "Cursos, mentoría, voluntariado y programas para convertir una idea en un proyecto de impacto.",
+                cta: "Explorar cursos",
+                href: "/cursos",
+              },
+              {
+                icon: School,
+                title: "Escolares",
+                body: "Talleres prácticos de innovación social que llegan a sus aulas a través de la red de colegios SEP.",
+                cta: "Conocer la red",
+                href: "/colegios",
+              },
+              {
+                icon: Presentation,
+                title: "Docentes y colegios",
+                body: "Formación, recursos y facilitadores de su propia región para fortalecer experiencias de aprendizaje.",
+                cta: "Ver programa docente",
+                href: "/docentes",
+              },
+              {
+                icon: Building2,
+                title: "Empresas y aliados",
+                body: "Programas de impacto juvenil con alcance regional, alianzas y resultados verificables.",
+                cta: "Crear una alianza",
+                href: "/empresas",
+              },
+            ].map((audience) => (
+              <Card key={audience.title} interactive className="flex h-full flex-col p-6">
+                <span className="flex size-11 items-center justify-center rounded-[12px] bg-sep-50 text-sep-700">
+                  <audience.icon className="size-5" />
+                </span>
+                <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                  {audience.title}
+                </h3>
+                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
+                  {audience.body}
+                </p>
+                <Link
+                  href={audience.href}
+                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
+                >
+                  {audience.cta}
+                  <ArrowRight className="size-3.5" />
+                </Link>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+      {/* ═══ 5 · EL PROBLEMA ══════════════════════════════════════════════ */}
       <Section>
         <Container size="wide">
           <SectionHeader
@@ -216,7 +328,7 @@ export default async function HomePage() {
           <div className="flex flex-wrap items-end justify-between gap-6">
             <SectionHeader
               eyebrow="Catálogo"
-              title="Cursos gratuitos, siempre"
+              title="Formación práctica para empezar"
               description="8 horas · 6 sesiones en vivo · 100 % virtual."
             />
             <Button href="/cursos" variant="outline" prefetch>
@@ -499,7 +611,7 @@ export default async function HomePage() {
             </div>
 
             <div>
-              <Card className="lg:sticky lg:top-24">
+              <Card id="newsletter" className="scroll-mt-24 lg:sticky lg:top-24">
                 <h2 className="font-display text-[1.25rem] font-semibold text-ink">
                   Newsletter SEP
                 </h2>

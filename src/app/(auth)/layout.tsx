@@ -3,7 +3,7 @@ import { ArrowLeft, Award, Globe, Sprout, Users } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 
 const highlights = [
-  { icon: Sprout, text: "Cursos 100 % gratuitos, siempre" },
+  { icon: Sprout, text: "Cursos virtuales de acceso gratuito" },
   { icon: Globe, text: "Presencia en 10+ regiones del Perú" },
   { icon: Award, text: "Certificación nacional e internacional" },
   { icon: Users, text: "Comunidad de 75+ jóvenes formados" },

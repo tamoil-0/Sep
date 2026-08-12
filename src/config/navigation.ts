@@ -17,7 +17,7 @@ export const marketingNav: NavItem[] = [
       {
         label: "Cursos gratuitos",
         href: "/cursos",
-        description: "Design Thinking, Scrum, Liderazgo. 8 h, 100% virtual, siempre gratis.",
+        description: "Design Thinking, Scrum y Liderazgo. 8 h, 100 % virtual y sin costo de acceso.",
       },
       {
         label: "SILP",

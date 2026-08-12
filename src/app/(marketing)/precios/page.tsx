@@ -22,7 +22,7 @@ import { formatSoles } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Precios y certificados",
   description:
-    "Los cursos de SEP son gratuitos siempre. Certificado SEP S/30, certificado internacional S/50, SILP desde S/200, membresías y programas institucionales.",
+    "Los cursos de SEP no tienen costo de acceso. Certificado SEP S/30, certificado internacional S/50, SILP desde S/200, membresías y programas institucionales.",
 };
 
 function ProposedTag() {
@@ -42,11 +42,11 @@ export default function PreciosPage() {
         <Container size="wide" className="py-16 text-center sm:py-20">
           <Badge tone="seed">Transparencia total</Badge>
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-[2.5rem] font-bold leading-[1.1] text-ink sm:text-[3.25rem]">
-            Aprender es <GoldUnderline>gratis</GoldUnderline>. Siempre.
+            Formación clara, <GoldUnderline>precios transparentes</GoldUnderline>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-ui">
-            Nunca cobramos por la formación. Lo que se paga es la acreditación, la
-            profundidad o el servicio institucional — y eso es lo que sostiene a SEP.
+            El catálogo de cursos no tiene costo de acceso. Los pagos corresponden a la
+            acreditación, programas avanzados o servicios institucionales.
           </p>
         </Container>
       </section>
@@ -160,7 +160,7 @@ export default function PreciosPage() {
           <SectionHeader
             eyebrow="Membresías"
             title="Crece con acompañamiento"
-            description="La membresía Semilla es gratuita para siempre. Los planes de pago añaden certificados incluidos y mentoría."
+            description="La membresía Semilla no tiene costo. Los planes de pago añaden certificados incluidos y mentoría."
             align="center"
           />
 
@@ -191,7 +191,7 @@ export default function PreciosPage() {
                   </p>
                   <p className="mt-1 text-xs text-slate-ui">
                     {plan.months === 0
-                      ? "Para siempre"
+                      ? "Plan base"
                       : `${plan.months} meses · ${formatSoles(
                           Math.round(plan.priceCents / plan.months),
                         )}/mes`}
@@ -278,7 +278,7 @@ export default function PreciosPage() {
           <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-[#F5FBEF]">
             <div>
               <h3 className="font-display text-lg font-semibold text-ink">
-                Colegios de la red SEP: siempre gratis
+                Talleres sin costo para colegios de la red SEP
               </h3>
               <p className="mt-1.5 max-w-2xl text-sm text-slate-ui">
                 Si tu colegio se suma a la red sin patrocinio, los talleres no cuestan

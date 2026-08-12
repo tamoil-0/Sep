@@ -22,7 +22,7 @@ export default async function MembresiaPage() {
     <>
       <PageHeader
         title="Mi membresía"
-        description="Los cursos son gratis siempre. La membresía añade certificados incluidos y mentoría."
+        description="Los cursos no tienen costo de acceso. La membresía añade certificados incluidos y mentoría."
       />
 
       <Card className="overflow-hidden p-0">
@@ -34,7 +34,7 @@ export default async function MembresiaPage() {
           <p className="mt-1 text-sm text-white/75">
             {membership
               ? `Vigente hasta el ${formatDate(membership.ends_at)}`
-              : "Gratuito, para siempre"}
+              : "Plan base sin costo"}
           </p>
         </div>
       </Card>
@@ -58,7 +58,7 @@ export default async function MembresiaPage() {
                   {p.price_cents === 0 ? "Gratis" : formatSoles(p.price_cents)}
                 </p>
                 <p className="mt-1 text-xs text-slate-ui">
-                  {p.duration_months === 0 ? "Para siempre" : `${p.duration_months} meses`}
+                  {p.duration_months === 0 ? "Plan base" : `${p.duration_months} meses`}
                 </p>
 
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-4">

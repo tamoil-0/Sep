@@ -39,7 +39,7 @@ export default async function CertificadosPage() {
     <>
       <PageHeader
         title="Mis certificados"
-        description="El curso siempre es gratis. El certificado es opcional y acredita lo que aprendiste."
+        description="El curso no tiene costo de acceso. El certificado es opcional y acredita lo que aprendiste."
       />
 
       {/* ── Emitidos ── */}

@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowRight, PenLine } from "lucide-react";
+import { PenLine } from "lucide-react";
 import {
-  Badge,
-  Card,
   Container,
   EmptyState,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
-import { formatDate } from "@/lib/utils";
 import { getPublishedPosts } from "@/server/queries/public-content";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
+import { NewsCard } from "@/components/marketing/news-card";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -55,45 +52,20 @@ export default async function BlogPage() {
               description="Estamos escribiendo las primeras. Suscríbete al newsletter para enterarte."
             />
           ) : (
-            <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((p) => {
-                const author = Array.isArray(p.profiles) ? p.profiles[0] : p.profiles;
-                return (
-                  <li key={p.id}>
-                    <Card
-                      interactive
-                      className="flex h-full flex-col p-6"
-                      as={Link}
-                      {...{ href: `/blog/${p.slug}` }}
-                    >
-                      {p.tags?.length > 0 && (
-                        <div className="flex flex-wrap gap-1.5">
-                          {p.tags.slice(0, 2).map((t) => (
-                            <Badge key={t} tone="neutral">
-                              {t}
-                            </Badge>
-                          ))}
-                        </div>
-                      )}
-
-                      <h2 className="mt-3.5 font-display text-[1.125rem] font-semibold leading-snug text-ink">
-                        {p.title}
-                      </h2>
-                      <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
-                        {p.excerpt}
-                      </p>
-
-                      <p className="mt-5 flex items-center justify-between border-t border-line pt-3.5 text-xs text-slate-ui">
-                        <span>
-                          {author?.full_name ?? "Equipo SEP"}
-                          {p.published_at && ` · ${formatDate(p.published_at)}`}
-                        </span>
-                        <ArrowRight className="size-3.5 text-sep-600" />
-                      </p>
-                    </Card>
-                  </li>
-                );
-              })}
+            <ul className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {posts.map((post, index) => (
+                <li key={post.id}>
+                  <NewsCard
+                    post={post}
+                    fallbackImage={
+                      [SEP_PHOTOS.alliance, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop][
+                        index % 3
+                      ]
+                    }
+                    priority={index < 3}
+                  />
+                </li>
+              ))}
             </ul>
           )}
         </Container>

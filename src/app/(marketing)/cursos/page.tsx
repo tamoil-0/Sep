@@ -30,7 +30,7 @@ export default async function CursosPage() {
           <div className="max-w-2xl">
             <Badge tone="seed">Catálogo abierto</Badge>
             <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.1] text-ink sm:text-[3.25rem]">
-              Cursos gratuitos, siempre
+              Cursos para convertir ideas en acción
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-ui">
               Metodologías ágiles y liderazgo llevados al terreno de la innovación social.

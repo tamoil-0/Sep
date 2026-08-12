@@ -68,6 +68,38 @@ export function Logo({
   );
 }
 
+/**
+ * Lockup institucional para espacios donde la sigla necesita presentarse con
+ * el nombre completo. Mantiene el isotipo oficial y evita que "SEP" aparezca
+ * sin contexto ante una persona que llega por primera vez.
+ */
+export function OrganizationLockup({
+  className,
+  variant = "color",
+}: {
+  className?: string;
+  variant?: "color" | "white" | "ink";
+}) {
+  const inverted = variant === "white";
+
+  return (
+    <span className={cn("inline-flex items-center gap-3 sm:gap-4", className)}>
+      <Logo className="h-11 shrink-0 sm:h-14" variant={variant} />
+      <span
+        aria-hidden
+        className={cn(
+          "border-l pl-3 text-left font-display text-[0.72rem] font-semibold uppercase leading-[1.35] tracking-[0.08em] sm:pl-4 sm:text-[0.82rem]",
+          inverted ? "border-white/30 text-white/90" : "border-line text-graphite",
+        )}
+      >
+        Semillero de
+        <br />
+        Emprendedores Perú
+      </span>
+    </span>
+  );
+}
+
 /** Isotipo compacto para avatares, favicons y el sidebar colapsado. */
 export function Isotipo({ className }: { className?: string }) {
   return (

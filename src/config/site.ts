@@ -3,7 +3,7 @@ export const siteConfig = {
   shortName: "SEP",
   tagline: "¡Emprende hoy, lidera mañana!",
   description:
-    "Democratizamos metodologías ágiles para jóvenes universitarios y docentes de todas las regiones del Perú. Cursos 100% virtuales y gratuitos, con certificación nacional e internacional.",
+    "SEP impulsa el emprendimiento y liderazgo juvenil en el Perú: forma a jóvenes y universitarios, conecta talleres con escolares y articula a docentes, colegios y aliados.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://sep.edu.pe",
   locale: "es-PE",
   founded: "2024-04-07",
@@ -90,7 +90,7 @@ export const faqs = [
   },
   {
     q: "¿Los cursos tienen algún costo?",
-    a: "No. Todos los cursos del catálogo son 100% gratuitos, siempre. Lo único opcional es el certificado: S/30 el certificado SEP y S/50 el certificado con aval del Instituto Internacional de Ingeniería.",
+    a: "No. Los cursos del catálogo no tienen costo de acceso. Lo único opcional es el certificado: S/30 el certificado SEP y S/50 el certificado con aval del Instituto Internacional de Ingeniería.",
   },
   {
     q: "¿Cómo puedo apoyar la misión de la comunidad SEP?",

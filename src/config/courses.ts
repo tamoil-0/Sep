@@ -41,7 +41,7 @@ export const COURSE_FORMAT = {
   totalHours: 8,
   sessionsCount: 6,
   modality: "100% virtual — Plataforma SEP",
-  access: "Acceso gratuito siempre",
+  access: "Acceso sin costo",
 } as const;
 
 export const courses: Course[] = [

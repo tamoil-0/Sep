@@ -7,12 +7,12 @@ export const getPublishedPosts = unstable_cache(
     const supabase = createPublicClient();
     const { data } = await supabase
       .from("blog_posts")
-      .select("id, slug, title, excerpt, tags, published_at, profiles(full_name)")
+      .select("id, slug, title, excerpt, cover_url, tags, published_at")
       .eq("is_published", true)
       .order("published_at", { ascending: false });
     return data ?? [];
   },
-  ["public-blog-posts-v1"],
+  ["public-blog-posts-v2"],
   { revalidate: 300, tags: ["public-blog"] },
 );
 
