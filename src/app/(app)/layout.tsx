@@ -1,5 +1,6 @@
 import { AppSidebar } from "@/components/app/app-sidebar";
 import { requireUser } from "@/lib/auth/session";
+import { redirect } from "next/navigation";
 import { primaryRole } from "@/types/roles";
 
 export default async function AppLayout({
@@ -8,6 +9,7 @@ export default async function AppLayout({
   children: React.ReactNode;
 }) {
   const user = await requireUser();
+  if (!user.onboardingDone) redirect("/onboarding");
   const active = primaryRole(user.roles);
 
   return (

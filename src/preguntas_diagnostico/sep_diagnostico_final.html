@@ -1,0 +1,276 @@
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.dg{font-family:var(--font-sans);color:var(--text-primary);font-size:13px}
+.dg-banner{background:#1A5C38;border-radius:12px;padding:14px 18px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.dg-banner-t{font-size:13px;font-weight:500;color:#fff}
+.dg-banner-s{font-size:11px;color:rgba(255,255,255,.6);margin-top:2px}
+.dg-tabs{display:flex;gap:2px;border-bottom:0.5px solid var(--border);margin-bottom:14px}
+.dg-tab{padding:9px 14px;font-size:12px;color:var(--text-secondary);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;user-select:none}
+.dg-tab.on{color:#1A5C38;border-bottom-color:#1A5C38;font-weight:500}
+.dg-view{display:block}
+.dg-hyp{background:var(--surface-1);border-left:3px solid #1A5C38;border-radius:0 8px 8px 0;padding:10px 13px;margin-bottom:14px}
+.dg-hyp-l{font-size:9.5px;font-weight:500;color:#1A5C38;text-transform:uppercase;letter-spacing:.07em;margin-bottom:3px}
+.dg-hyp-t{font-size:12px;color:var(--text-secondary);line-height:1.5}
+.dg-block{border:0.5px solid var(--border);border-radius:12px;margin-bottom:12px;overflow:hidden}
+.dg-block-head{padding:9px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border)}
+.dg-block-tag{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:500;padding:3px 9px;border-radius:20px}
+.dg-block-count{font-size:10px;color:var(--text-muted)}
+.dg-q{padding:10px 14px;border-bottom:0.5px solid var(--border)}
+.dg-q:last-child{border-bottom:none}
+.dg-q-top{display:flex;gap:8px;align-items:flex-start;margin-bottom:7px}
+.dg-num{width:22px;height:22px;border-radius:50%;background:var(--surface-1);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:var(--text-secondary);flex-shrink:0;margin-top:1px}
+.dg-num.k{background:#E1F5EE;color:#085041}
+.dg-q-text{font-size:12.5px;color:var(--text-primary);line-height:1.45;flex:1}
+.dg-q-meta{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:6px;padding-left:30px}
+.dg-type{padding:2px 7px;border-radius:var(--radius);font-size:10px;font-weight:500}
+.tc{background:var(--bg-success);color:var(--text-success)}
+.tm{background:#FAEEDA;color:#633806}
+.ts{background:var(--bg-pro);color:var(--text-pro)}
+.key-f{background:#E1F5EE;color:#085041;padding:2px 7px;border-radius:var(--radius);font-size:10px;font-weight:500}
+.dg-opts{display:flex;flex-wrap:wrap;gap:5px;padding-left:30px}
+.dg-opt{padding:3px 9px;background:var(--surface-1);border:0.5px solid var(--border);border-radius:20px;font-size:10.5px;color:var(--text-secondary)}
+.dg-opt.other{border-style:dashed;color:var(--text-muted)}
+.dg-val{font-size:10.5px;color:var(--text-secondary);padding-left:30px;margin-top:5px;font-style:italic}
+.dg-val span{color:#1A5C38;font-style:normal;font-weight:500}
+</style>
+<h2 class="sr-only">Diagnóstico de validación SEP — 15 preguntas por perfil con opciones de respuesta para Google Form. Incluye preguntas sobre presupuesto en educación, cursos deseados y disposición de pago. Perfiles: universitarios, docentes, empresas.</h2>
+<div class="dg">
+<div class="dg-banner">
+  <div>
+    <div class="dg-banner-t">Diagnóstico de validación SEP — listo para Google Form</div>
+    <div class="dg-banner-s">15 preguntas por perfil · Solo opciones · Sin campos de texto libre · Incluye presupuesto y cursos deseados</div>
+  </div>
+  <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 12px;text-align:center;flex-shrink:0">
+    <div style="font-size:16px;font-weight:500;color:#E8A020">45</div>
+    <div style="font-size:9.5px;color:rgba(255,255,255,.55)">preguntas totales</div>
+  </div>
+</div>
+
+<div class="dg-tabs">
+  <div class="dg-tab on" onclick="sv('uni',this)"><i class="ti ti-school" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Universitarios y jóvenes</div>
+  <div class="dg-tab" onclick="sv('doc',this)"><i class="ti ti-chalkboard" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Docentes</div>
+  <div class="dg-tab" onclick="sv('emp',this)"><i class="ti ti-building" style="font-size:13px;vertical-align:-2px;margin-right:4px" aria-hidden="true"></i>Empresas y org.</div>
+</div>
+
+<!-- ═══ UNIVERSITARIOS ═══ -->
+<div id="vw-uni" class="dg-view">
+<div class="dg-hyp">
+  <div class="dg-hyp-l">Hipótesis que valida este diagnóstico</div>
+  <div class="dg-hyp-t">Los jóvenes de regiones no acceden a formación práctica en liderazgo e innovación, están dispuestos a pagar por un certificado accesible y quieren replicar ese conocimiento en su comunidad.</div>
+</div>
+
+<div class="dg-block">
+  <div class="dg-block-head">
+    <div class="dg-block-tag" style="background:var(--surface-1);color:var(--text-secondary)"><i class="ti ti-map-pin" style="font-size:12px" aria-hidden="true"></i>Bloque 1 — ¿Quién eres?</div>
+    <div class="dg-block-count">Preguntas 1–3 · Contexto</div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">1</div><div class="dg-q-text">¿De qué región del Perú eres? (o si eres de otro país, indícalo)</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div>
+    <div class="dg-opts"><div class="dg-opt">Áncash</div><div class="dg-opt">Cusco</div><div class="dg-opt">Arequipa</div><div class="dg-opt">La Libertad</div><div class="dg-opt">Piura</div><div class="dg-opt">Junín</div><div class="dg-opt">Puno</div><div class="dg-opt">Lima</div><div class="dg-opt">Huánuco</div><div class="dg-opt">Otro departamento del Perú</div><div class="dg-opt other">Soy de otro país</div></div>
+    <div class="dg-val">Valida: <span>distribución geográfica — confirma que la demanda existe fuera de Lima</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">2</div><div class="dg-q-text">¿Cuál es tu situación actual?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div>
+    <div class="dg-opts"><div class="dg-opt">Universitario (1er al 3er ciclo)</div><div class="dg-opt">Universitario (4to ciclo en adelante)</div><div class="dg-opt">Egresado reciente (menos de 2 años)</div><div class="dg-opt">Emprendedor</div><div class="dg-opt">Trabajo y estudio a la vez</div><div class="dg-opt other">Otro</div></div>
+    <div class="dg-val">Valida: <span>perfil predominante — define en qué ciclo concentrar el piloto</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">3</div><div class="dg-q-text">¿Cuántas horas libres tienes a la semana fuera de clases o trabajo?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div>
+    <div class="dg-opts"><div class="dg-opt">Menos de 2 horas</div><div class="dg-opt">Entre 2 y 4 horas</div><div class="dg-opt">Entre 4 y 6 horas</div><div class="dg-opt">Más de 6 horas</div></div>
+    <div class="dg-val">Valida: <span>viabilidad del formato de 2h por sesión interdiario</span></div>
+  </div>
+</div>
+
+<div class="dg-block">
+  <div class="dg-block-head">
+    <div class="dg-block-tag" style="background:#FEF3C7;color:#633806"><i class="ti ti-alert-circle" style="font-size:12px" aria-hidden="true"></i>Bloque 2 — El dolor</div>
+    <div class="dg-block-count">Preguntas 4–7 · Barreras reales</div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">4</div><div class="dg-q-text">¿Qué tan fácil es acceder a formación en liderazgo e innovación desde donde vives?</div></div>
+    <div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span><span class="key-f">Pregunta clave</span></div>
+    <div class="dg-opts"><div class="dg-opt">1 — Casi imposible</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Muy accesible</div></div>
+    <div class="dg-val">Valida: <span>brecha de acceso geográfico — hipótesis central de SEP</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">5</div><div class="dg-q-text">¿Cuál es el mayor obstáculo que sientes para crecer profesionalmente hoy?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Pregunta clave</span></div>
+    <div class="dg-opts"><div class="dg-opt">Vivo lejos de Lima y hay pocas oportunidades</div><div class="dg-opt">Los programas de calidad son muy caros</div><div class="dg-opt">Mi universidad no me prepara para la realidad</div><div class="dg-opt">No tengo red de contactos</div><div class="dg-opt">No sé por dónde empezar</div><div class="dg-opt">Miedo a hablar o destacar en público</div><div class="dg-opt other">Otro</div></div>
+    <div class="dg-val">Valida: <span>cuál barrera domina — define el argumento principal del copy de SEP</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">6</div><div class="dg-q-text">¿Sientes que tu universidad te está preparando para el mundo laboral que viene?</div></div>
+    <div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div>
+    <div class="dg-opts"><div class="dg-opt">1 — Para nada</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Totalmente</div></div>
+    <div class="dg-val">Valida: <span>brecha universidad–mercado como argumento de entrada al programa</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">7</div><div class="dg-q-text">¿Cuánto gastas actualmente en cursos, talleres o formación adicional por mes?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Presupuesto</span></div>
+    <div class="dg-opts"><div class="dg-opt">Nada, no puedo pagar</div><div class="dg-opt">Menos de S/50</div><div class="dg-opt">Entre S/50 y S/150</div><div class="dg-opt">Entre S/150 y S/300</div><div class="dg-opt">Más de S/300</div></div>
+    <div class="dg-val">Valida: <span>capacidad de pago real — calibra el precio del certificado y el SILP</span></div>
+  </div>
+</div>
+
+<div class="dg-block">
+  <div class="dg-block-head">
+    <div class="dg-block-tag" style="background:#E1F5EE;color:#085041"><i class="ti ti-rocket" style="font-size:12px" aria-hidden="true"></i>Bloque 3 — Aspiraciones y demanda de contenido</div>
+    <div class="dg-block-count">Preguntas 8–11 · Sueños + cursos deseados</div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">8</div><div class="dg-q-text">¿Cuál es tu mayor meta personal o profesional en los próximos 2 a 3 años?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Pregunta clave</span></div>
+    <div class="dg-opts"><div class="dg-opt">Conseguir un buen trabajo o prácticas</div><div class="dg-opt">Emprender mi propio proyecto</div><div class="dg-opt">Generar impacto en mi comunidad o región</div><div class="dg-opt">Seguir estudios de posgrado o especializarme</div><div class="dg-opt">Desarrollar habilidades de liderazgo</div><div class="dg-opt">Ser referente o speaker en mi campo</div><div class="dg-opt other">Otro</div></div>
+    <div class="dg-val">Valida: <span>si las aspiraciones se alinean con lo que SEP ofrece</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">9</div><div class="dg-q-text">¿Qué habilidades sientes que te hacen más falta hoy?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span></div>
+    <div class="dg-opts"><div class="dg-opt">Liderazgo y toma de decisiones</div><div class="dg-opt">Hablar en público y presentar ideas</div><div class="dg-opt">Gestión de proyectos</div><div class="dg-opt">Pensamiento creativo e innovación</div><div class="dg-opt">Emprendimiento social</div><div class="dg-opt">Red de contactos y visibilidad</div><div class="dg-opt other">Otra</div></div>
+    <div class="dg-val">Valida: <span>demanda específica de habilidades — prioridad del catálogo de cursos SEP</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">10</div><div class="dg-q-text">¿Qué cursos te gustaría tomar si los tuvieras disponibles ahora mismo?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span><span class="key-f">Demanda de cursos</span></div>
+    <div class="dg-opts"><div class="dg-opt">Design Thinking</div><div class="dg-opt">Scrum y gestión ágil</div><div class="dg-opt">Lean Startup</div><div class="dg-opt">Liderazgo e impacto social</div><div class="dg-opt">Oratoria y comunicación</div><div class="dg-opt">Gestión de proyectos sociales</div><div class="dg-opt">Emprendimiento desde cero</div><div class="dg-opt">Cómo dictar talleres y capacitar</div><div class="dg-opt other">Otro</div></div>
+    <div class="dg-val">Valida: <span>qué cursos lanzar primero y en qué orden — define el roadmap del catálogo</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">11</div><div class="dg-q-text">Si completaras un curso en línea, ¿cuánto estarías dispuesto a pagar por un certificado que valide tu aprendizaje?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Willingness to pay</span></div>
+    <div class="dg-opts"><div class="dg-opt">Nada, no pagaría por un certificado</div><div class="dg-opt">Hasta S/20</div><div class="dg-opt">Entre S/20 y S/40</div><div class="dg-opt">Entre S/40 y S/60</div><div class="dg-opt">Entre S/60 y S/100</div><div class="dg-opt">Más de S/100 si el aval es reconocido</div></div>
+    <div class="dg-val">Valida: <span>precio óptimo para el certificado — confirma o ajusta el S/30 y S/50 de SEP</span></div>
+  </div>
+</div>
+
+<div class="dg-block">
+  <div class="dg-block-head">
+    <div class="dg-block-tag" style="background:var(--bg-pro);color:var(--text-pro)"><i class="ti ti-star" style="font-size:12px" aria-hidden="true"></i>Bloque 4 — Experiencia previa</div>
+    <div class="dg-block-count">Preguntas 12–13</div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">12</div><div class="dg-q-text">¿Has dado charlas, talleres o presentaciones frente a otras personas?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div>
+    <div class="dg-opts"><div class="dg-opt">Nunca, y me da mucho miedo</div><div class="dg-opt">Nunca, pero quiero empezar</div><div class="dg-opt">Sí, una o dos veces</div><div class="dg-opt">Sí, varias veces</div><div class="dg-opt">Es algo habitual en mí</div></div>
+    <div class="dg-val">Valida: <span>nivel de experiencia en oratoria — calibra el punto de partida del programa</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">13</div><div class="dg-q-text">¿Has participado en proyectos de voluntariado o iniciativas de impacto social?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div>
+    <div class="dg-opts"><div class="dg-opt">Sí, tengo experiencia activa</div><div class="dg-opt">Sí, participé alguna vez</div><div class="dg-opt">No, pero me interesa mucho</div><div class="dg-opt">No lo he considerado</div></div>
+    <div class="dg-val">Valida: <span>sensibilidad al impacto social como motivador de inscripción</span></div>
+  </div>
+</div>
+
+<div class="dg-block">
+  <div class="dg-block-head">
+    <div class="dg-block-tag" style="background:#E1F5EE;color:#1A5C38"><i class="ti ti-heart-handshake" style="font-size:12px" aria-hidden="true"></i>Bloque 5 — Disposición</div>
+    <div class="dg-block-count">Preguntas 14–15 · Filtro SILP</div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num k">14</div><div class="dg-q-text">Si aprendieras metodologías de innovación, ¿estarías dispuesto a enseñárselas a jóvenes de tu comunidad o colegio?</div></div>
+    <div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Filtro SILP</span></div>
+    <div class="dg-opts"><div class="dg-opt">Sí, es exactamente lo que quiero hacer</div><div class="dg-opt">Me gustaría intentarlo cuando me sienta listo</div><div class="dg-opt">No lo había pensado, pero me parece interesante</div><div class="dg-opt">Prefiero solo formarme a mí mismo por ahora</div></div>
+    <div class="dg-val">Valida: <span>disposición al efecto multiplicador — auto-selección natural para el SILP</span></div>
+  </div>
+  <div class="dg-q">
+    <div class="dg-q-top"><div class="dg-num">15</div><div class="dg-q-text">¿Qué tan comprometido estás con generar un cambio real en tu entorno, aunque nadie te lo pida?</div></div>
+    <div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div>
+    <div class="dg-opts"><div class="dg-opt">1 — Aún no lo veo claro</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Es una prioridad para mí</div></div>
+    <div class="dg-val">Valida: <span>motivación intrínseca — predice adherencia y completación del programa</span></div>
+  </div>
+</div>
+</div>
+
+<!-- ═══ DOCENTES ═══ -->
+<div id="vw-doc" class="dg-view" style="display:none">
+<div class="dg-hyp">
+  <div class="dg-hyp-l">Hipótesis a validar</div>
+  <div class="dg-hyp-t">Los docentes no tienen acceso a formación en metodologías activas, están dispuestos a pagar por un certificado que les dé reconocimiento institucional y aceptarían que universitarios lleguen a sus aulas.</div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:var(--surface-1);color:var(--text-secondary)"><i class="ti ti-map-pin" style="font-size:12px" aria-hidden="true"></i>Bloque 1 — ¿Quién eres?</div><div class="dg-block-count">Preguntas 1–3</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">1</div><div class="dg-q-text">¿En qué región y nivel educativo enseñas?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Secundaria — Región fuera de Lima</div><div class="dg-opt">Secundaria — Lima</div><div class="dg-opt">Primaria — Región fuera de Lima</div><div class="dg-opt">Primaria — Lima</div><div class="dg-opt">Instituto o educación superior</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>perfil geográfico y nivel — confirma foco en secundaria de regiones</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">2</div><div class="dg-q-text">¿Cuántos estudiantes tienes aproximadamente a tu cargo?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Menos de 30</div><div class="dg-opt">Entre 30 y 60</div><div class="dg-opt">Entre 60 y 100</div><div class="dg-opt">Más de 100</div></div><div class="dg-val">Valida: <span>tamaño del impacto indirecto por docente formado</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">3</div><div class="dg-q-text">¿Cuántas horas a la semana podrías dedicar a tu propia formación?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Menos de 2 horas</div><div class="dg-opt">2 a 4 horas</div><div class="dg-opt">4 a 6 horas</div><div class="dg-opt">Más de 6 horas</div></div><div class="dg-val">Valida: <span>viabilidad del formato de 8h total del programa docente</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#FEF3C7;color:#633806"><i class="ti ti-alert-circle" style="font-size:12px" aria-hidden="true"></i>Bloque 2 — El dolor</div><div class="dg-block-count">Preguntas 4–7</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">4</div><div class="dg-q-text">¿Qué tan accesible es la formación docente en metodologías innovadoras desde tu región?</div></div><div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div><div class="dg-opts"><div class="dg-opt">1 — Casi no existe</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Muy accesible</div></div><div class="dg-val">Valida: <span>brecha de acceso docente a innovación pedagógica</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">5</div><div class="dg-q-text">¿Cuál es el mayor obstáculo para innovar en tu aula hoy?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Pregunta clave</span></div><div class="dg-opts"><div class="dg-opt">No conozco metodologías nuevas</div><div class="dg-opt">No tengo tiempo para formarme</div><div class="dg-opt">Las capacitaciones disponibles son muy caras</div><div class="dg-opt">No sé cómo aplicarlas en mi clase</div><div class="dg-opt">Mi institución no apoya la innovación</div><div class="dg-opt">No tengo materiales ni recursos</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>tipo de barrera dominante — define el ángulo del programa docente SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">6</div><div class="dg-q-text">¿Tus estudiantes te piden formas de aprender más dinámicas o prácticas?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Sí, constantemente</div><div class="dg-opt">A veces</div><div class="dg-opt">Rara vez</div><div class="dg-opt">No lo manifiestan</div></div><div class="dg-val">Valida: <span>presión desde el estudiante como motivador del docente</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">7</div><div class="dg-q-text">¿Cuánto inviertes en tu formación docente continua al año?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Presupuesto</span></div><div class="dg-opts"><div class="dg-opt">Nada, no tengo presupuesto para eso</div><div class="dg-opt">Menos de S/100 al año</div><div class="dg-opt">Entre S/100 y S/300</div><div class="dg-opt">Entre S/300 y S/600</div><div class="dg-opt">Más de S/600</div></div><div class="dg-val">Valida: <span>capacidad de inversión en formación — calibra el precio del programa docente</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#E1F5EE;color:#085041"><i class="ti ti-rocket" style="font-size:12px" aria-hidden="true"></i>Bloque 3 — Aspiraciones y cursos deseados</div><div class="dg-block-count">Preguntas 8–11</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">8</div><div class="dg-q-text">¿Qué cursos o formaciones te gustaría tomar para mejorar tu práctica docente?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span><span class="key-f">Demanda de cursos</span></div><div class="dg-opts"><div class="dg-opt">Design Thinking aplicado al aula</div><div class="dg-opt">Aprendizaje basado en proyectos (ABP)</div><div class="dg-opt">Scrum para gestión de clases</div><div class="dg-opt">Liderazgo estudiantil</div><div class="dg-opt">Evaluación por competencias</div><div class="dg-opt">Herramientas digitales educativas</div><div class="dg-opt">Cómo motivar a estudiantes en regiones</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>qué módulos priorizar en el programa docente SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">9</div><div class="dg-q-text">¿Qué tanto mejoraría tu posición institucional obtener un certificado en metodologías innovadoras?</div></div><div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div><div class="dg-opts"><div class="dg-opt">1 — No cambia nada</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Me abre puertas importantes</div></div><div class="dg-val">Valida: <span>valor percibido del certificado — argumento de conversión</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">10</div><div class="dg-q-text">¿Cuánto pagarías por ese certificado si el programa es virtual, práctico y con aval reconocido?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Willingness to pay</span></div><div class="dg-opts"><div class="dg-opt">Nada, debería ser gratuito</div><div class="dg-opt">Hasta S/30</div><div class="dg-opt">Entre S/30 y S/60</div><div class="dg-opt">Entre S/60 y S/100</div><div class="dg-opt">Más de S/100 si el aval es sólido</div></div><div class="dg-val">Valida: <span>precio óptimo del certificado docente — ¿supera el S/50 o se queda en S/30?</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">11</div><div class="dg-q-text">¿Qué habilidades priorizarías desarrollar este año como docente?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span></div><div class="dg-opts"><div class="dg-opt">Metodologías activas e innovadoras</div><div class="dg-opt">Gestión emocional del aula</div><div class="dg-opt">Liderazgo y motivación de grupos</div><div class="dg-opt">Tecnología educativa</div><div class="dg-opt">Comunicación efectiva</div><div class="dg-opt other">Otra</div></div><div class="dg-val">Valida: <span>demanda específica de contenido — complementa el catálogo de cursos SEP</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:var(--bg-pro);color:var(--text-pro)"><i class="ti ti-star" style="font-size:12px" aria-hidden="true"></i>Bloque 4 — Experiencia</div><div class="dg-block-count">Preguntas 12–13</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">12</div><div class="dg-q-text">¿Has recibido formación docente en metodologías innovadoras en los últimos 2 años?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Sí, frecuentemente</div><div class="dg-opt">Sí, alguna vez</div><div class="dg-opt">No, no tuve acceso</div><div class="dg-opt">No, no lo prioricé</div></div><div class="dg-val">Valida: <span>qué tan activo es el docente en su formación continua</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">13</div><div class="dg-q-text">¿Qué tan familiarizado estás con metodologías como Design Thinking o aprendizaje basado en proyectos?</div></div><div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div><div class="dg-opts"><div class="dg-opt">1 — No las conozco</div><div class="dg-opt">2 — Las he escuchado</div><div class="dg-opt">3 — Las entiendo básicamente</div><div class="dg-opt">4 — Las aplico a veces</div><div class="dg-opt">5 — Las uso regularmente</div></div><div class="dg-val">Valida: <span>nivel de conocimiento previo — calibra nivel de inicio del programa</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#E1F5EE;color:#1A5C38"><i class="ti ti-heart-handshake" style="font-size:12px" aria-hidden="true"></i>Bloque 5 — Disposición</div><div class="dg-block-count">Preguntas 14–15 · Red de colegios</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">14</div><div class="dg-q-text">¿Aceptarías que universitarios formados en innovación social dicten talleres gratuitos en tu colegio?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Red de colegios</span></div><div class="dg-opts"><div class="dg-opt">Sí, sería excelente para mis estudiantes</div><div class="dg-opt">Sí, si tienen respaldo institucional</div><div class="dg-opt">Lo evaluaría según el tema del taller</div><div class="dg-opt">Necesitaría aprobación de la dirección</div><div class="dg-opt">No por ahora</div></div><div class="dg-val">Valida: <span>apertura al modelo de red de colegios — escalabilidad del programa</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">15</div><div class="dg-q-text">Si el programa fuera 100% virtual, con sesiones de 2 horas los martes o jueves, ¿lo tomarías?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Validación de formato</span></div><div class="dg-opts"><div class="dg-opt">Sí, encaja con mi horario</div><div class="dg-opt">Sí, si puedo recuperar sesiones que pierda</div><div class="dg-opt">Depende de la carga del programa</div><div class="dg-opt">Prefiero fines de semana</div><div class="dg-opt">No puedo comprometer ese horario</div></div><div class="dg-val">Valida: <span>viabilidad del formato horario para docentes — informa el calendario del programa</span></div></div>
+</div>
+</div>
+
+<!-- ═══ EMPRESAS ═══ -->
+<div id="vw-emp" class="dg-view" style="display:none">
+<div class="dg-hyp">
+  <div class="dg-hyp-l">Hipótesis a validar</div>
+  <div class="dg-hyp-t">Las empresas necesitan demostrar impacto social en regiones con métricas claras y buscan aliados que conviertan su inversión RSE en resultados medibles con jóvenes reales fuera de Lima.</div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:var(--surface-1);color:var(--text-secondary)"><i class="ti ti-building" style="font-size:12px" aria-hidden="true"></i>Bloque 1 — ¿Quién eres?</div><div class="dg-block-count">Preguntas 1–3</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">1</div><div class="dg-q-text">¿En qué sector opera tu empresa u organización?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Minería o energía</div><div class="dg-opt">Educación</div><div class="dg-opt">Tecnología</div><div class="dg-opt">Servicios o consultoría</div><div class="dg-opt">ONG o fundación</div><div class="dg-opt">Sector público</div><div class="dg-opt">Retail o consumo masivo</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>qué sectores muestran mayor afinidad con el modelo de impacto de SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">2</div><div class="dg-q-text">¿En qué regiones del Perú tienen presencia o interés de impacto social?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span></div><div class="dg-opts"><div class="dg-opt">Áncash</div><div class="dg-opt">Cusco</div><div class="dg-opt">Arequipa</div><div class="dg-opt">La Libertad</div><div class="dg-opt">Piura</div><div class="dg-opt">Junín</div><div class="dg-opt">Solo Lima</div><div class="dg-opt">A nivel nacional</div><div class="dg-opt other">Otra región</div></div><div class="dg-val">Valida: <span>alineación geográfica con el alcance de SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">3</div><div class="dg-q-text">¿Tu empresa tiene actualmente un programa de responsabilidad social activo?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Sí, robusto y con presupuesto definido</div><div class="dg-opt">Sí, pero limitado o informal</div><div class="dg-opt">Estamos construyéndolo este año</div><div class="dg-opt">No tenemos aún</div></div><div class="dg-val">Valida: <span>madurez de RSE — define si son leads inmediatos o a mediano plazo</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#FEF3C7;color:#633806"><i class="ti ti-alert-circle" style="font-size:12px" aria-hidden="true"></i>Bloque 2 — El dolor</div><div class="dg-block-count">Preguntas 4–7</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">4</div><div class="dg-q-text">¿Cuál es el mayor desafío al ejecutar programas de impacto social en regiones?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Pregunta clave</span></div><div class="dg-opts"><div class="dg-opt">Encontrar aliados confiables fuera de Lima</div><div class="dg-opt">Medir el impacto real generado</div><div class="dg-opt">Llegar a los jóvenes correctos</div><div class="dg-opt">Justificar la inversión internamente</div><div class="dg-opt">Escalar sin perder calidad</div><div class="dg-opt">No tenemos experiencia en esto</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>dolor principal — define cómo SEP se posiciona como solución</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">5</div><div class="dg-q-text">¿Qué tan satisfechos están con los resultados de sus iniciativas de impacto social actuales?</div></div><div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div><div class="dg-opts"><div class="dg-opt">1 — Muy insatisfechos</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Muy satisfechos</div></div><div class="dg-val">Valida: <span>nivel de frustración con el status quo — apertura a nuevos modelos como SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">6</div><div class="dg-q-text">¿Han tenido dificultades para encontrar jóvenes talentosos de regiones para sus programas?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Sí, es un problema constante</div><div class="dg-opt">A veces</div><div class="dg-opt">No lo hemos intentado aún</div><div class="dg-opt">No aplica a nuestro modelo</div></div><div class="dg-val">Valida: <span>SEP como pipeline de talento regional — argumento adicional de valor</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">7</div><div class="dg-q-text">¿Cuánto presupuesto destinan anualmente a iniciativas de RSE o inversión social?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Presupuesto</span></div><div class="dg-opts"><div class="dg-opt">Menos de S/10,000</div><div class="dg-opt">Entre S/10,000 y S/50,000</div><div class="dg-opt">Entre S/50,000 y S/200,000</div><div class="dg-opt">Más de S/200,000</div><div class="dg-opt">No tenemos presupuesto definido</div></div><div class="dg-val">Valida: <span>capacidad financiera real — segmenta leads y define el modelo de precios de alianza</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#E1F5EE;color:#085041"><i class="ti ti-rocket" style="font-size:12px" aria-hidden="true"></i>Bloque 3 — Aspiraciones</div><div class="dg-block-count">Preguntas 8–10</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">8</div><div class="dg-q-text">¿Qué tipo de impacto social quisieran demostrar en los próximos 2 años?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span><span class="key-f">Pregunta clave</span></div><div class="dg-opts"><div class="dg-opt">Jóvenes capacitados en habilidades del futuro</div><div class="dg-opt">Reducir brechas educativas en regiones</div><div class="dg-opt">Crear oportunidades para talentos fuera de Lima</div><div class="dg-opt">Apoyar el emprendimiento juvenil regional</div><div class="dg-opt">Alinearse con los ODS de la ONU</div><div class="dg-opt">Mejorar su imagen ante stakeholders</div><div class="dg-opt other">Otro</div></div><div class="dg-val">Valida: <span>si la visión de impacto de la empresa se alinea con lo que SEP ejecuta</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">9</div><div class="dg-q-text">¿Qué valoran más en un aliado de impacto social?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span></div><div class="dg-opts"><div class="dg-opt">Trayectoria y acreditaciones</div><div class="dg-opt">Alcance geográfico en regiones</div><div class="dg-opt">Métricas e indicadores de impacto claros</div><div class="dg-opt">Alineación con los ODS</div><div class="dg-opt">Transparencia en el uso de fondos</div><div class="dg-opt">Acceso a talento joven formado</div><div class="dg-opt">Co-branding y visibilidad de la empresa</div></div><div class="dg-val">Valida: <span>criterios de selección de aliados — informa el pitch de SEP a empresas</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">10</div><div class="dg-q-text">¿Qué tan importante es para su organización poder reportar el impacto social a directivos o accionistas?</div></div><div class="dg-q-meta"><span class="dg-type ts">Escala 1–5</span></div><div class="dg-opts"><div class="dg-opt">1 — No es relevante</div><div class="dg-opt">2</div><div class="dg-opt">3</div><div class="dg-opt">4</div><div class="dg-opt">5 — Es crítico para nuestra estrategia</div></div><div class="dg-val">Valida: <span>necesidad de reportes de impacto — informa los KPIs que SEP debe ofrecer</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:var(--bg-pro);color:var(--text-pro)"><i class="ti ti-star" style="font-size:12px" aria-hidden="true"></i>Bloque 4 — Experiencia</div><div class="dg-block-count">Preguntas 11–12</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">11</div><div class="dg-q-text">¿Han trabajado antes con organizaciones juveniles o educativas en regiones del Perú?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span></div><div class="dg-opts"><div class="dg-opt">Sí, con buena experiencia</div><div class="dg-opt">Sí, con resultados mixtos</div><div class="dg-opt">No, pero lo hemos evaluado</div><div class="dg-opt">No, es territorio nuevo para nosotros</div></div><div class="dg-val">Valida: <span>experiencia previa — madurez como aliado potencial de SEP</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num">12</div><div class="dg-q-text">¿Qué formatos de inversión social han usado hasta ahora?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span></div><div class="dg-opts"><div class="dg-opt">Donaciones directas a ONGs</div><div class="dg-opt">Programas propios de RSE</div><div class="dg-opt">Voluntariado corporativo</div><div class="dg-opt">Becas o financiamiento educativo</div><div class="dg-opt">Patrocinio de eventos</div><div class="dg-opt">Ninguno aún</div></div><div class="dg-val">Valida: <span>modelos ya conocidos — facilita la propuesta de alianza de SEP</span></div></div>
+</div>
+<div class="dg-block">
+  <div class="dg-block-head"><div class="dg-block-tag" style="background:#E1F5EE;color:#1A5C38"><i class="ti ti-heart-handshake" style="font-size:12px" aria-hidden="true"></i>Bloque 5 — Disposición</div><div class="dg-block-count">Preguntas 13–15</div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">13</div><div class="dg-q-text">Si existiera un programa que forma a 100 jóvenes por año en regiones con métricas claras, ¿lo co-financiarían?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Intención de alianza</span></div><div class="dg-opts"><div class="dg-opt">Sí, definitivamente</div><div class="dg-opt">Probablemente sí</div><div class="dg-opt">Necesitaríamos ver resultados primero</div><div class="dg-opt">No es prioridad este año</div><div class="dg-opt">No se alinea con nuestra estrategia</div></div><div class="dg-val">Valida: <span>intención de compra real — diferencia leads tibios de aliados potenciales</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">14</div><div class="dg-q-text">¿Qué formato de alianza les resultaría más natural con una organización juvenil?</div></div><div class="dg-q-meta"><span class="dg-type tm">Múltiple opción</span><span class="key-f">Modelo de colaboración</span></div><div class="dg-opts"><div class="dg-opt">Patrocinio económico de cohortes con co-branding</div><div class="dg-opt">Financiamiento de becas para jóvenes de su región</div><div class="dg-opt">Voluntariado corporativo en talleres SEP</div><div class="dg-opt">Prácticas o empleo para egresados SEP</div><div class="dg-opt">Donación de herramientas o licencias</div><div class="dg-opt other">Otro formato</div></div><div class="dg-val">Valida: <span>menú de alianzas que SEP debe ofertar — informa la propuesta comercial</span></div></div>
+  <div class="dg-q"><div class="dg-q-top"><div class="dg-num k">15</div><div class="dg-q-text">¿En qué plazo estarían en posición de concretar una alianza?</div></div><div class="dg-q-meta"><span class="dg-type tc">Opción única</span><span class="key-f">Urgencia</span></div><div class="dg-opts"><div class="dg-opt">Este mes, estamos listos</div><div class="dg-opt">En los próximos 3 meses</div><div class="dg-opt">En 6 meses o más</div><div class="dg-opt">Dependemos de la aprobación de un área</div><div class="dg-opt">Primero necesitamos conocer más</div></div><div class="dg-val">Valida: <span>urgencia y ciclo de venta — define con quién hacer seguimiento inmediato</span></div></div>
+</div>
+</div>
+
+</div>
+<script>
+function sv(id,el){
+  ['uni','doc','emp'].forEach(function(v){document.getElementById('vw-'+v).style.display='none'});
+  document.getElementById('vw-'+id).style.display='block';
+  document.querySelectorAll('.dg-tab').forEach(function(t){t.classList.remove('on')});
+  el.classList.add('on');
+}
+document.addEventListener('DOMContentLoaded',function(){
+  ['doc','emp'].forEach(function(v){document.getElementById('vw-'+v).style.display='none'});
+});
+</script>

@@ -524,11 +524,13 @@ export interface Database {
 
       survey_leads: Table<{
         id: string;
+        user_id: string | null;
         email: string;
         profile: SurveyProfileDb;
         region: string | null;
         utm_source: string | null;
         completed: boolean;
+        completed_at: string | null;
         created_at: string;
       }>;
 
@@ -741,6 +743,10 @@ export interface Database {
           p_answers: Json;
           p_utm?: string | null;
         };
+        Returns: string;
+      };
+      submit_account_diagnostic: {
+        Args: { p_answers: Json };
         Returns: string;
       };
 

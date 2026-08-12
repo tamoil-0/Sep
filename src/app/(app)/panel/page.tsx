@@ -5,5 +5,6 @@ import { roleHome } from "@/types/roles";
 /** Punto de entrada único: redirige a cada quien a su panel (§5.2). */
 export default async function PanelRedirect() {
   const user = await requireUser();
+  if (!user.onboardingDone) redirect("/onboarding");
   redirect(roleHome(user.roles));
 }

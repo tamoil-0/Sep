@@ -136,9 +136,9 @@ export async function signupAction(
     email: data.email,
     password: data.password,
     options: {
-      // El formulario ya recoge el perfil completo. Tras confirmar el correo,
-      // cada persona entra directamente al panel correspondiente a su rol.
-      emailRedirectTo: `${siteConfig.url.replace(/\/$/, "")}/auth/callback?next=/panel`,
+      // Tras confirmar el correo, las tres cuentas completan su diagnóstico
+      // de entrada antes de habilitar el panel correspondiente a su rol.
+      emailRedirectTo: `${siteConfig.url.replace(/\/$/, "")}/auth/callback?next=/onboarding`,
       // El trigger `handle_new_user` solo acepta los 3 tipos de cuenta
       // con registro abierto: nadie puede autoasignarse `admin` (§9.3).
       data: {
@@ -164,7 +164,7 @@ export async function signupAction(
   return {
     ok: true,
     message:
-      "¡Tu perfil ya está listo! Confirma tu correo y entrarás directamente a tu panel, sin volver a llenar tus datos. Revisa también spam o promociones.",
+      "¡Tu cuenta fue creada! Confirma tu correo y completa un diagnóstico breve para personalizar tu experiencia en SEP. Revisa también spam o promociones.",
   };
 }
 

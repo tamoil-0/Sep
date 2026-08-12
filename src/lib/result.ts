@@ -60,6 +60,12 @@ const PG_ERRORS: Record<string, string> = {
 
   INVALID_EMAIL: "Ese correo no parece válido.",
   NO_ANSWERS: "No recibimos ninguna respuesta.",
+  PROFILE_NOT_FOUND: "No encontramos el perfil asociado a tu cuenta.",
+  DIAGNOSTIC_NOT_CONFIGURED:
+    "El diagnóstico todavía no está disponible para tu tipo de cuenta.",
+  INCOMPLETE_DIAGNOSTIC: "Completa las 15 preguntas antes de finalizar.",
+  INVALID_ANSWER: "Una respuesta ya no coincide con las opciones disponibles. Revísala.",
+  DIAGNOSTIC_ALREADY_COMPLETED: "Este diagnóstico ya fue completado.",
 };
 
 /** Errores nativos de Postgres que sí conviene traducir. */
