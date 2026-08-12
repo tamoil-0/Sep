@@ -53,7 +53,9 @@ export const metadata: Metadata = {
   category: "education",
   classification: "Educación, emprendimiento e innovación social",
   verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || undefined,
+    google:
+      process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
+      "ASPpML06eHafXbHbnTxObZ6R-pE9dkDgyxwTCjtIRfA",
     other: process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION
       ? { "msvalidate.01": process.env.NEXT_PUBLIC_BING_SITE_VERIFICATION }
       : undefined,
