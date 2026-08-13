@@ -5,7 +5,6 @@ import {
   Building2,
   Check,
   GraduationCap,
-  HeartHandshake,
   Presentation,
   School,
   Sparkles,
@@ -27,6 +26,7 @@ import { CourseMedia } from "@/components/marketing/course-media";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
+import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
 import {
   ExperienceGallery,
   HeroPhoto,
@@ -95,11 +95,7 @@ export default async function HomePage() {
               </p>
 
               <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <Button href="/apoya-hoy" variant="gold" size="lg" prefetch>
-                  <HeartHandshake className="size-5" />
-                  Apoya hoy
-                  <ArrowRight className="size-4" />
-                </Button>
+                <SupportQrDialog />
                 <Button href="/nosotros" variant="outline-white" size="lg" prefetch>
                   Conoce SEP
                 </Button>
