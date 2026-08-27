@@ -7,6 +7,7 @@ import { LogOut, X } from "lucide-react";
 import { logoutAction } from "@/server/actions/auth";
 import { Logo } from "@/components/brand/logo";
 import { cn } from "@/lib/utils";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 
 /**
  * Cierre de sesión en tres tiempos.
@@ -25,24 +26,18 @@ export function LogoutDialog({ userName }: { userName: string }) {
   const router = useRouter();
   const [state, setState] = React.useState<"idle" | "confirm" | "leaving">("idle");
   const [logoutError, setLogoutError] = React.useState<string | null>(null);
-  const dialogRef = React.useRef<HTMLDivElement>(null);
-
-  // Escape cierra la confirmación (pero no la despedida, que ya es irreversible).
-  React.useEffect(() => {
-    if (state !== "confirm") return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setState("idle");
-    };
-    window.addEventListener("keydown", onKey);
-    dialogRef.current?.focus();
-    return () => window.removeEventListener("keydown", onKey);
-  }, [state]);
+  const dialogRef = useDialogA11y<HTMLDivElement>({
+    open: state === "confirm",
+    onClose: () => setState("idle"),
+  });
 
   // Bloquea el scroll de fondo mientras hay algo encima.
   React.useEffect(() => {
-    document.body.style.overflow = state === "idle" ? "" : "hidden";
+    if (state !== "leaving") return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [state]);
 
@@ -75,7 +70,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
       <button
         type="button"
         onClick={() => setState("confirm")}
-        className="flex w-full items-center gap-2.5 rounded-[8px] px-3 py-2 text-[0.8125rem] text-white/50 transition-colors hover:bg-white/8 hover:text-white"
+        className="flex min-h-control w-full items-center gap-2.5 rounded-sm px-3 py-2 text-body-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white"
       >
         <LogOut className="size-4" />
         Cerrar sesión
@@ -86,7 +81,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
         typeof document !== "undefined" &&
         createPortal(
         <div
-          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-ink/50 p-4 backdrop-blur-sm animate-fade-in sm:p-5"
+          className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-ink/50 p-4  animate-fade-in sm:p-5"
           onClick={() => setState("idle")}
         >
           <div
@@ -95,17 +90,18 @@ export function LogoutDialog({ userName }: { userName: string }) {
             role="alertdialog"
             aria-modal="true"
             aria-labelledby="logout-title"
+            aria-describedby="logout-description"
             onClick={(e) => e.stopPropagation()}
-            className="my-auto w-full max-w-sm rounded-[18px] bg-white p-5 shadow-[0_24px_64px_-16px_rgba(18,16,28,.35)] outline-none animate-scale-in sm:p-7"
+            className="my-auto w-full max-w-sm rounded-lg bg-white p-5 shadow-elevated outline-none animate-scale-in sm:p-7"
           >
             <div className="flex items-start justify-between gap-4">
-              <span className="flex size-11 items-center justify-center rounded-[12px] bg-danger-bg text-danger">
+              <span className="flex size-11 items-center justify-center rounded-md bg-danger-bg text-danger">
                 <LogOut className="size-5" />
               </span>
               <button
                 type="button"
                 onClick={() => setState("idle")}
-                className="-mr-1.5 -mt-1.5 rounded-lg p-1.5 text-slate-ui transition-colors hover:bg-surface-2 hover:text-ink"
+                className="-mr-1.5 -mt-1.5 flex size-control items-center justify-center rounded-sm text-slate-ui transition-colors hover:bg-surface-2 hover:text-ink"
                 aria-label="Cancelar"
               >
                 <X className="size-4" />
@@ -114,11 +110,11 @@ export function LogoutDialog({ userName }: { userName: string }) {
 
             <h2
               id="logout-title"
-              className="mt-5 font-display text-[1.25rem] font-semibold text-ink"
+              className="mt-5 font-display text-h4 font-semibold text-ink"
             >
-              ¿Seguro que quieres salir?
+              Cerrar sesión en este dispositivo
             </h2>
-            <p className="mt-2 text-[0.9375rem] leading-relaxed text-slate-ui">
+            <p id="logout-description" className="mt-2 text-body-sm text-slate-ui">
               Cerrarás tu sesión en este dispositivo. Tu progreso queda guardado
               y podrás volver cuando quieras.
             </p>
@@ -133,14 +129,14 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <button
                 type="button"
                 onClick={() => setState("idle")}
-                className="inline-flex h-11 flex-1 items-center justify-center rounded-[10px] border border-line bg-white text-[0.9375rem] font-medium text-ink transition-colors hover:bg-surface-1"
+                className="inline-flex h-control flex-1 items-center justify-center rounded-sm border border-line bg-white text-body-sm font-medium text-ink transition-colors hover:bg-surface-1"
               >
                 Quedarme
               </button>
               <button
                 type="button"
                 onClick={confirmLogout}
-                className="inline-flex h-11 flex-1 items-center justify-center gap-2 rounded-[10px] bg-danger text-[0.9375rem] font-medium text-white transition-opacity hover:opacity-90"
+                className="inline-flex h-control flex-1 items-center justify-center gap-2 rounded-sm bg-danger text-body-sm font-medium text-white transition-colors hover:bg-[#852d31]"
               >
                 <LogOut className="size-4" />
                 Sí, salir
@@ -156,7 +152,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
         typeof document !== "undefined" &&
         createPortal(
         <div
-          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden sep-gradient px-5 text-center animate-fade-in"
+          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-sep-800 px-5 text-center animate-fade-in"
           role="status"
           aria-live="polite"
         >
@@ -175,11 +171,11 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <Logo className="h-16" variant="white" />
             </div>
 
-            <p className="mt-8 font-display text-[1.5rem] font-semibold text-white animate-fade-up">
+            <p className="mt-8 font-display text-h3 font-semibold text-white animate-fade-up">
               {firstName ? `Hasta pronto, ${firstName}` : "Hasta pronto"}
             </p>
             <p
-              className="mt-2 text-[0.9375rem] text-white/70 animate-fade-up"
+              className="mt-2 text-body-sm text-white/70 animate-fade-up"
               style={{ animationDelay: "120ms" }}
             >
               Emprende hoy, lidera mañana.

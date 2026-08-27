@@ -14,10 +14,10 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] sep-gradient text-[0.9375rem] font-medium text-white shadow-[0_4px_16px_rgba(46,11,232,.22)] transition-all hover:shadow-[0_8px_24px_rgba(46,11,232,.3)] disabled:opacity-60"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Enviar postulación
+      {pending ? "Enviando postulación…" : "Enviar postulación"}
     </button>
   );
 }
@@ -36,9 +36,9 @@ export function VolunteerForm({
 
   if (state?.ok) {
     return (
-      <div className="rounded-[12px] border border-success/25 bg-success-bg p-6 text-center">
+      <div className="rounded-md border border-success/25 bg-success-bg p-6 text-center">
         <CircleCheck className="mx-auto size-8 text-success" />
-        <p className="mt-3 font-display text-[1.0625rem] font-semibold text-ink">
+        <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Postulación enviada!
         </p>
         <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
@@ -52,7 +52,7 @@ export function VolunteerForm({
     <form action={action} className="space-y-4">
       <input type="hidden" name="roleSlug" value={roleSlug} />
 
-      {state && !state.ok && state.error && !e && (
+      {state && !state.ok && state.error && (
         <FormAlert tone="error">{state.error}</FormAlert>
       )}
 

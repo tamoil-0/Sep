@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { AlertTriangle, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ContextualHelp } from "@/components/ui/contextual-help";
 
 export default function AppError({
   error,
@@ -12,12 +13,15 @@ export default function AppError({
   reset: () => void;
 }) {
   useEffect(() => {
-    console.error("[sep] error no controlado en el panel:", error);
-  }, [error]);
+    console.error("[sep] error no controlado en el panel:", {
+      name: error.name,
+      digest: error.digest,
+    });
+  }, [error.digest, error.name]);
 
   return (
     <section className="mx-auto flex min-h-[60dvh] max-w-xl items-center justify-center py-10">
-      <div className="w-full rounded-3xl border border-line bg-white p-6 text-center shadow-[0_18px_60px_rgba(46,11,232,.08)] sm:p-9">
+      <div className="w-full rounded-lg border border-line bg-white p-6 text-center sm:p-9">
         <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-red-50 text-danger">
           <AlertTriangle className="size-6" />
         </span>
@@ -25,8 +29,8 @@ export default function AppError({
           No pudimos cargar esta sección
         </h1>
         <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-ui">
-          Tus datos están seguros. Puede ser un problema temporal de conexión; vuelve a
-          intentarlo o regresa al panel principal.
+          No mostramos datos incompletos. Puede ser un problema temporal de conexión;
+          vuelve a intentarlo o regresa al panel principal.
         </p>
 
         {error.digest && (
@@ -42,6 +46,11 @@ export default function AppError({
             Volver a mi panel
           </Button>
         </div>
+        <ContextualHelp
+          className="mt-6"
+          title="¿El problema continúa?"
+          description="Escríbenos indicando qué sección abrías y, si aparece, el código de incidente."
+        />
       </div>
     </section>
   );

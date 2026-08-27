@@ -20,8 +20,9 @@ export const metadata = createPageMetadata({
   keywords: ["jóvenes emprendedores Perú", "historias de emprendimiento", "testimonios SEP"],
 });
 
+export const dynamic = "force-dynamic";
+
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
 
 const stories = [
   {
@@ -98,14 +99,14 @@ export default async function TestimoniosPage() {
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stories.map((s) => (
               <li key={s.name}>
-                <Card className="relative flex h-full flex-col overflow-hidden p-6 shadow-[0_10px_34px_-28px_rgba(18,16,28,.5)]">
+                <Card className="relative flex h-full flex-col overflow-hidden p-6 ">
                   <span className="absolute left-0 top-0 h-full w-1 sep-gradient" />
                   <Quote className="size-5 text-gold-500" />
-                  <p className="mt-4 flex-1 text-[0.9375rem] leading-relaxed text-graphite">
+                  <p className="mt-4 flex-1 text-body-sm leading-relaxed text-graphite">
                     {s.quote}
                   </p>
                   <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                       {initials(s.name)}
                     </span>
                     <div className="min-w-0">
@@ -136,7 +137,7 @@ export default async function TestimoniosPage() {
                 <li key={p.id}>
                   <Card className="flex h-full flex-col p-6">
                     {p.region && <Badge tone="brand">{p.region}</Badge>}
-                    <h3 className="mt-3.5 font-display text-[1.0625rem] font-semibold text-ink">
+                    <h3 className="mt-3.5 font-display text-body font-semibold text-ink">
                       {p.title}
                     </h3>
                     {p.problem && (
@@ -170,10 +171,10 @@ export default async function TestimoniosPage() {
       <Section className="py-14">
         <Container size="narrow">
           <Card className="text-center">
-            <h2 className="font-display text-[1.5rem] font-semibold text-ink">
+            <h2 className="font-display text-h3 font-semibold text-ink">
               La próxima historia puede ser la tuya
             </h2>
-            <p className="mx-auto mt-2.5 max-w-md text-[0.9375rem] text-slate-ui">
+            <p className="mx-auto mt-2.5 max-w-md text-body-sm text-slate-ui">
               Los cursos son gratuitos y empiezan cada mes. No importa tu región ni tu
               punto de partida.
             </p>

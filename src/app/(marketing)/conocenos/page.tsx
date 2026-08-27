@@ -1,6 +1,7 @@
 import { createPageMetadata } from "@/lib/seo";
 import { createPublicClient } from "@/lib/supabase/public";
 import { DiagnosticWizard } from "./wizard";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata = createPageMetadata({
   title: "Queremos conocerte",
@@ -9,17 +10,18 @@ export const metadata = createPageMetadata({
   path: "/conocenos",
 });
 
-/** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function ConocenosPage() {
   const supabase = createPublicClient();
 
-  const { data: questions } = await supabase
+  const result = await supabase
     .from("survey_questions")
     .select("profile, block, block_title, number, question, input_type, options, tag, is_key")
     .order("profile")
     .order("number");
+  assertQueryResults("publico:diagnostico", result);
+  const questions = result.data;
 
   type Q = {
     number: number;

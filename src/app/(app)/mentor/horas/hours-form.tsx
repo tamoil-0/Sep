@@ -15,10 +15,10 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-[10px] bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Registrar
+      {pending ? "Registrando horas…" : "Registrar"}
     </button>
   );
 }

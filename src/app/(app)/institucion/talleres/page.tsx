@@ -8,6 +8,7 @@ import { PanelSection, StatusBadge } from "@/components/app/data-views";
 
 import { Presentation } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Talleres" };
 
@@ -15,8 +16,10 @@ export default async function InstitucionTalleresPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles").select("institution_id").eq("id", user.id).maybeSingle();
+  assertQueryResults("institucion:talleres:perfil", profileResult);
+  const profile = profileResult.data;
 
   if (!profile?.institution_id) {
     return (
@@ -31,11 +34,13 @@ export default async function InstitucionTalleresPage() {
     );
   }
 
-  const { data: workshops } = await supabase
+  const workshopsResult = await supabase
     .from("workshops")
     .select("id, title, topic, scheduled_at, modality, grade, students_count, status")
     .eq("institution_id", profile.institution_id)
     .order("scheduled_at", { ascending: false });
+  assertQueryResults("institucion:talleres", workshopsResult);
+  const workshops = workshopsResult.data;
 
   const rows = workshops ?? [];
   const done = rows.filter((w) => w.status === "realizado");
@@ -86,4 +91,3 @@ export default async function InstitucionTalleresPage() {
     </>
   );
 }
-

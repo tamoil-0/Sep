@@ -6,18 +6,19 @@ import Link from "next/link";
 import { Loader2 } from "lucide-react";
 import { loginAction, type ActionState } from "@/server/actions/auth";
 import { Field, FormAlert, Input } from "@/components/forms/field";
+import { Button } from "@/components/ui/button";
 
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button
+    <Button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-sep-600 text-[0.9375rem] font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="w-full"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Iniciar sesión
-    </button>
+      {pending ? "Ingresando…" : "Iniciar sesión"}
+    </Button>
   );
 }
 

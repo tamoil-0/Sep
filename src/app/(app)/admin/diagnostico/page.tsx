@@ -121,14 +121,14 @@ export default async function AdminDiagnosticoPage({
           <div className="flex flex-wrap gap-2">
             <a
               href={`/api/admin/diagnostico/export?${query()}`}
-              className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-sep-600 px-4 text-sm font-medium text-white transition-colors hover:bg-sep-700"
+              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-sm font-medium text-white transition-colors hover:bg-sep-700"
             >
               <FileSpreadsheet className="size-4" />
               Descargar Excel
             </a>
             <a
               href={`/api/admin/diagnostico/export?${query({ perfil: "todos" })}`}
-              className="inline-flex h-10 items-center gap-2 rounded-[10px] bg-white px-4 text-sm font-medium text-graphite ring-1 ring-inset ring-line transition-colors hover:bg-surface-1"
+              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-white px-4 text-sm font-medium text-graphite ring-1 ring-inset ring-line transition-colors hover:bg-surface-1"
             >
               Los tres perfiles
             </a>
@@ -203,7 +203,7 @@ export default async function AdminDiagnosticoPage({
 
         <form
           method="get"
-          className="mb-4 grid gap-2 rounded-[14px] border border-line bg-white p-3 sm:grid-cols-2 sm:p-4 lg:grid-cols-[minmax(0,1fr)_180px_210px_auto]"
+          className="mb-4 grid gap-2 rounded-md border border-line bg-white p-3 sm:grid-cols-2 sm:p-4 lg:grid-cols-[minmax(0,1fr)_180px_210px_auto]"
         >
           <input type="hidden" name="perfil" value={active} />
           <label className="relative block">
@@ -214,7 +214,7 @@ export default async function AdminDiagnosticoPage({
               name="q"
               defaultValue={search}
               placeholder="Buscar nombre, correo o región"
-              className="h-11 w-full rounded-[10px] border border-line bg-surface-1 pl-10 pr-3 text-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             />
           </label>
           <label>
@@ -222,7 +222,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="origen"
               defaultValue={origin}
-              className="h-11 w-full rounded-[10px] border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="todos">Todos los orígenes</option>
               <option value="feria">{ORIGIN_LABELS.feria}</option>
@@ -235,7 +235,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="datos"
               defaultValue={dataset}
-              className="h-11 w-full rounded-[10px] border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="reales">Solo respuestas reales</option>
               <option value="todos">Incluir datos de demostración</option>
@@ -243,7 +243,7 @@ export default async function AdminDiagnosticoPage({
           </label>
           <button
             type="submit"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-sep-600 px-5 text-sm font-medium text-white transition hover:bg-sep-700"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-medium text-white transition hover:bg-sep-700"
           >
             Aplicar filtros
           </button>
@@ -337,8 +337,8 @@ export default async function AdminDiagnosticoPage({
 
       {selected && (
         <section className="mt-6" aria-labelledby="response-detail-title">
-          <Card className="overflow-hidden border-sep-200 p-0 shadow-[0_12px_36px_rgba(46,11,232,.08)]">
-            <div className="sep-gradient px-5 py-6 text-white sm:px-7">
+          <Card className="overflow-hidden border-sep-200 p-0">
+            <div className="bg-sep-800 px-5 py-6 text-white sm:px-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
@@ -417,7 +417,7 @@ export default async function AdminDiagnosticoPage({
                         return (
                           <div
                             key={question.id}
-                            className="rounded-[11px] border border-line bg-surface-1 px-4 py-3.5"
+                            className="rounded-md border border-line bg-surface-1 px-4 py-3.5"
                           >
                             <dt className="text-sm leading-relaxed text-slate-ui">
                               <span className="tabular mr-1.5 font-semibold text-sep-600">
@@ -468,7 +468,7 @@ export default async function AdminDiagnosticoPage({
                       <p className="tabular text-xs font-semibold text-gold-600">
                         PREGUNTA {number}
                       </p>
-                      <h3 className="mt-1.5 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
+                      <h3 className="mt-1.5 font-display text-body font-semibold leading-snug text-ink">
                         {question.question}
                       </h3>
                     </div>
@@ -496,7 +496,7 @@ export default async function AdminDiagnosticoPage({
                           <div
                             className={cn(
                               "h-full rounded-full",
-                              option.votes === max ? "sep-gradient" : "bg-sep-200",
+                              option.votes === max ? "bg-sep-600" : "bg-sep-200",
                             )}
                             style={{ width: `${Math.max(2, option.pct)}%` }}
                           />

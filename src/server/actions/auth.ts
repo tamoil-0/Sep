@@ -19,6 +19,7 @@ export interface ActionState {
   error?: string;
   fieldErrors?: Record<string, string[]>;
   message?: string;
+  submittedEmail?: string;
 }
 
 /* ── Iniciar sesión ───────────────────────────────────────── */
@@ -34,7 +35,11 @@ export async function loginAction(
   });
 
   if (!parsed.success) {
-    return { ok: false, fieldErrors: parsed.error.flatten().fieldErrors };
+    return {
+      ok: false,
+      error: "Revisa los campos marcados.",
+      fieldErrors: parsed.error.flatten().fieldErrors,
+    };
   }
 
   const ip = await clientIp();
@@ -84,7 +89,11 @@ export async function signupAction(
   });
 
   if (!parsed.success) {
-    return { ok: false, fieldErrors: parsed.error.flatten().fieldErrors };
+    return {
+      ok: false,
+      error: "Revisa los campos marcados.",
+      fieldErrors: parsed.error.flatten().fieldErrors,
+    };
   }
 
   const data = parsed.data;
@@ -163,6 +172,7 @@ export async function signupAction(
 
   return {
     ok: true,
+    submittedEmail: data.email,
     message:
       "¡Tu cuenta fue creada! Confirma tu correo y completa un diagnóstico breve para personalizar tu experiencia en SEP. Revisa también spam o promociones.",
   };
@@ -191,7 +201,11 @@ export async function forgotPasswordAction(
 ): Promise<ActionState> {
   const parsed = forgotPasswordSchema.safeParse({ email: formData.get("email") });
   if (!parsed.success) {
-    return { ok: false, fieldErrors: parsed.error.flatten().fieldErrors };
+    return {
+      ok: false,
+      error: "Revisa el correo marcado.",
+      fieldErrors: parsed.error.flatten().fieldErrors,
+    };
   }
 
   const email = parsed.data.email;
@@ -237,13 +251,14 @@ export async function forgotPasswordAction(
     return {
       ok: false,
       error:
-        "Gmail no pudo enviar el mensaje. Revisa la contraseña de aplicación y la configuración SMTP en Supabase.",
+        "No pudimos enviar el enlace en este momento. Revisa tu conexión e inténtalo nuevamente.",
     };
   }
 
   // Respuesta idéntica exista o no la cuenta: evita enumerar usuarios.
   return {
     ok: true,
+    submittedEmail: email,
     message:
       "Si existe una cuenta con ese correo, el enlace llegará en uno o dos minutos. Revisa también spam y promociones.",
   };
@@ -268,7 +283,11 @@ export async function resetPasswordAction(
   });
 
   if (!parsed.success) {
-    return { ok: false, fieldErrors: parsed.error.flatten().fieldErrors };
+    return {
+      ok: false,
+      error: "Revisa los campos marcados.",
+      fieldErrors: parsed.error.flatten().fieldErrors,
+    };
   }
 
   const supabase = await createClient();

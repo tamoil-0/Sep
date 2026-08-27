@@ -6,6 +6,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState, ProgressBar } from "@/components/ui/primitives";
 import { PanelSection } from "@/components/app/data-views";
 import { formatDate, initials } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mis mentorados" };
 
@@ -13,11 +14,13 @@ export default async function MentoradosPage() {
   const user = await requireRole(["mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data } = await supabase
+  const mentorshipsResult = await supabase
     .from("mentorships")
     .select("id, started_at, ended_at, notes, mentee_id, profiles!mentorships_mentee_id_fkey(full_name, region, university, career)")
     .eq("mentor_id", user.id)
     .order("started_at", { ascending: false });
+  assertQueryResults("mentor:mentorados", mentorshipsResult);
+  const data = mentorshipsResult.data;
 
   const rows = (data ?? []).map((m) => ({
     ...m,
@@ -25,12 +28,14 @@ export default async function MentoradosPage() {
   }));
 
   const menteeIds = rows.map((r) => r.mentee_id);
-  const { data: enrollments } = menteeIds.length
+  const enrollmentsResult = menteeIds.length
     ? await supabase
         .from("enrollments")
         .select("user_id, progress_pct, status, courses(title)")
         .in("user_id", menteeIds)
-    : { data: [] };
+    : null;
+  if (enrollmentsResult) assertQueryResults("mentor:mentorados:progreso", enrollmentsResult);
+  const enrollments = enrollmentsResult?.data ?? [];
 
   const byMentee = new Map<string, { progress: number; course: string }>();
   for (const e of enrollments ?? []) {
@@ -78,11 +83,11 @@ export default async function MentoradosPage() {
               return (
                 <Card key={m.id} className="p-5">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                       {initials(m.mentee?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-display text-[0.9375rem] font-semibold text-ink">
+                      <p className="truncate font-display text-body-sm font-semibold text-ink">
                         {m.mentee?.full_name}
                       </p>
                       <p className="truncate text-xs text-slate-ui">
@@ -108,7 +113,7 @@ export default async function MentoradosPage() {
                   )}
 
                   {m.notes && (
-                    <p className="mt-4 rounded-[10px] bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
+                    <p className="mt-4 rounded-sm bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
                       {m.notes}
                     </p>
                   )}
@@ -123,4 +128,3 @@ export default async function MentoradosPage() {
     </>
   );
 }
-

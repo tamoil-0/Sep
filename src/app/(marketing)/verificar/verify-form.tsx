@@ -32,7 +32,7 @@ export function VerifyForm() {
       />
       <button
         type="submit"
-        className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-sep-600 px-6 text-[0.9375rem] font-medium text-white transition-colors hover:bg-sep-700"
+        className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-6 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
       >
         <Search className="size-4" />
         Verificar

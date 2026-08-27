@@ -25,7 +25,7 @@ export function FaqAccordion({
                 aria-controls={`faq-panel-${i}`}
                 className="flex w-full items-start justify-between gap-6 py-5 text-left"
               >
-                <span className="font-display text-[1.0625rem] font-medium text-ink">
+                <span className="font-display text-body font-medium text-ink">
                   {item.q}
                 </span>
                 <Plus
@@ -39,7 +39,7 @@ export function FaqAccordion({
             <div
               id={`faq-panel-${i}`}
               hidden={!isOpen}
-              className="pb-6 pr-12 text-[0.9375rem] leading-relaxed text-slate-ui"
+              className="pb-6 pr-12 text-body-sm leading-relaxed text-slate-ui"
             >
               {item.a}
             </div>

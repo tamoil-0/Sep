@@ -15,6 +15,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card } from "@/components/ui/primitives";
 import { formatSoles } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Administración" };
 
@@ -24,11 +25,12 @@ async function count(
   filter?: (q: never) => never,
 ) {
   void filter;
-  const { count: n } = await supabase
+  const result = await supabase
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     .from(table as any)
     .select("*", { count: "exact", head: true });
-  return n ?? 0;
+  assertQueryResults(`admin:contador:${table}`, result);
+  return result.count ?? 0;
 }
 
 export default async function AdminPage() {
@@ -45,10 +47,12 @@ export default async function AdminPage() {
       count(supabase, "survey_leads"),
     ]);
 
-  const { data: paidOrders } = await supabase
+  const paidOrdersResult = await supabase
     .from("orders")
     .select("amount_cents")
     .eq("status", "pagado");
+  assertQueryResults("admin:ingresos", paidOrdersResult);
+  const paidOrders = paidOrdersResult.data;
 
   const revenue = (paidOrders ?? []).reduce((s, o) => s + o.amount_cents, 0);
 
@@ -101,7 +105,7 @@ export default async function AdminPage() {
               {...{ href: s.href }}
             >
               <s.icon className="size-5 text-sep-600" />
-              <h3 className="mt-3.5 text-[0.9375rem] font-medium text-ink">{s.label}</h3>
+              <h3 className="mt-3.5 text-body-sm font-medium text-ink">{s.label}</h3>
               <p className="mt-1 text-xs text-slate-ui">{s.detail}</p>
             </Card>
           ))}
@@ -113,7 +117,7 @@ export default async function AdminPage() {
           <div className="flex items-start gap-3.5">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-[#8A5A00]" />
             <div>
-              <h2 className="font-display text-[0.9375rem] font-semibold text-ink">
+              <h2 className="font-display text-body-sm font-semibold text-ink">
                 Recordatorio de seguridad
               </h2>
               <p className="mt-1.5 text-sm leading-relaxed text-graphite">

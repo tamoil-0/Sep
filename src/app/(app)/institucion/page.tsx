@@ -13,6 +13,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Panel institucional" };
 
@@ -20,24 +21,28 @@ export default async function InstitucionPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles")
     .select("institution_id, institutions(id, name, type, region, is_verified, agreement_signed_at)")
     .eq("id", user.id)
     .single();
+  assertQueryResults("institucion:panel:perfil", profileResult);
+  const profile = profileResult.data;
 
   const institution = Array.isArray(profile?.institutions)
     ? profile?.institutions[0]
     : profile?.institutions;
 
-  const { data: workshops } = institution?.id
+  const workshopsResult = institution?.id
     ? await supabase
         .from("workshops")
         .select("id, title, status, scheduled_at, students_count")
         .eq("institution_id", institution.id)
         .order("scheduled_at", { ascending: false })
         .limit(5)
-    : { data: null };
+    : null;
+  if (workshopsResult) assertQueryResults("institucion:panel:talleres", workshopsResult);
+  const workshops = workshopsResult?.data ?? [];
 
   const done = (workshops ?? []).filter((w) => w.status === "realizado");
   const students = done.reduce((s, w) => s + (w.students_count ?? 0), 0);
@@ -147,7 +152,7 @@ export default async function InstitucionPage() {
       <section className="mt-8">
         <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-white text-sep-600 ring-1 ring-inset ring-line">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-sep-600 ring-1 ring-inset ring-line">
               <ChartNoAxesCombined className="size-5" />
             </span>
             <div>

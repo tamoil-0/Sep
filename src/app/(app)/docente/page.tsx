@@ -74,11 +74,11 @@ export default async function DocentePage() {
         <div className="grid gap-3 sm:grid-cols-2">
           {resources.map((r) => (
             <Card key={r.title} interactive className="flex gap-3.5 p-5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-gold-500/15 text-gold-700">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
                 <FolderOpen className="size-4" />
               </span>
               <div>
-                <h3 className="text-[0.9375rem] font-medium leading-snug text-ink">
+                <h3 className="text-body-sm font-medium leading-snug text-ink">
                   {r.title}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-slate-ui">{r.detail}</p>

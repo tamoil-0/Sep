@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/ui/toast";
 
 export function CopyButton({
   value,
@@ -14,6 +15,7 @@ export function CopyButton({
   className?: string;
 }) {
   const [copied, setCopied] = React.useState(false);
+  const toast = useToast();
 
   React.useEffect(() => {
     if (!copied) return;
@@ -24,22 +26,28 @@ export function CopyButton({
   return (
     <button
       type="button"
-      aria-label={label}
+      aria-label={copied ? `${label}: copiado` : label}
       onClick={async () => {
         try {
           await navigator.clipboard.writeText(value);
           setCopied(true);
+          toast({ title: "Enlace copiado", tone: "success" });
         } catch {
-          /* el navegador puede bloquearlo sin HTTPS; no rompemos nada */
+          toast({
+            title: "No pudimos copiar el enlace",
+            description: "Selecciona el texto y cópialo manualmente.",
+            tone: "error",
+          });
         }
       }}
       className={cn(
-        "inline-flex size-7 items-center justify-center rounded-lg text-slate-ui transition-colors hover:bg-surface-2 hover:text-ink",
+        "inline-flex size-control items-center justify-center rounded-sm text-slate-ui transition-colors hover:bg-surface-2 hover:text-ink",
         copied && "text-success",
         className,
       )}
     >
-      {copied ? <Check className="size-4" /> : <Copy className="size-3.5" />}
+      {copied ? <Check className="size-icon-sm" /> : <Copy className="size-icon-sm" />}
+      <span className="sr-only" aria-live="polite">{copied ? "Enlace copiado" : ""}</span>
     </button>
   );
 }

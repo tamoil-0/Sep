@@ -59,10 +59,10 @@ export default async function PostularPage({
               {role.exclusive && <Badge tone="brand">{role.exclusive}</Badge>}
             </div>
 
-            <h1 className="mt-4 font-display text-[2.25rem] font-bold leading-tight text-ink">
+            <h1 className="mt-4 font-display text-h1 font-bold leading-tight text-ink">
               {role.name}
             </h1>
-            <p className="mt-4 max-w-xl text-[1.0625rem] leading-relaxed text-slate-ui">
+            <p className="mt-4 max-w-xl text-body leading-relaxed text-slate-ui">
               {role.description}
             </p>
 
@@ -93,7 +93,7 @@ export default async function PostularPage({
                 <ol className="mt-3.5 space-y-3">
                   {volunteerProcess.map((s) => (
                     <li key={s.step} className="flex gap-2.5">
-                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-sep-50 text-[0.625rem] font-semibold text-sep-600">
+                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
                         {s.step}
                       </span>
                       <div>
@@ -125,7 +125,7 @@ export default async function PostularPage({
 
           {/* Formulario */}
           <Card className="lg:sticky lg:top-24 lg:self-start">
-            <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+            <h2 className="font-display text-h4 font-semibold text-ink">
               Formulario de postulación
             </h2>
             <p className="mt-1 text-sm text-slate-ui">

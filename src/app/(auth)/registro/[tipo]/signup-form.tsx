@@ -19,6 +19,14 @@ import {
   TEACHING_LEVELS,
 } from "@/config/regions";
 import { INSTITUTION_TYPES, type SignupRole } from "@/types/roles";
+import { Button } from "@/components/ui/button";
+
+function maskEmail(email?: string) {
+  if (!email) return "el correo que registraste";
+  const [local, domain] = email.split("@");
+  if (!domain) return "el correo que registraste";
+  return `${local.slice(0, 1)}${"•".repeat(Math.min(Math.max(local.length - 1, 3), 6))}@${domain}`;
+}
 
 const institutionLabels: Record<string, string> = {
   colegio: "Colegio",
@@ -31,14 +39,15 @@ const institutionLabels: Record<string, string> = {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <button
+    <Button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] sep-gradient text-[0.9375rem] font-medium text-white shadow-[0_4px_16px_rgba(46,11,232,.22)] transition-all hover:shadow-[0_8px_24px_rgba(46,11,232,.3)] disabled:opacity-60"
+      variant="gradient"
+      className="w-full"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Crear mi cuenta
-    </button>
+      {pending ? "Creando tu cuenta…" : "Crear mi cuenta"}
+    </Button>
   );
 }
 
@@ -51,22 +60,28 @@ export function SignupForm({ role }: { role: SignupRole }) {
 
   if (state?.ok && state.message) {
     return (
-      <div className="rounded-[14px] border border-success/25 bg-success-bg p-6 text-center">
+      <div className="rounded-md border border-success/25 bg-success-bg p-6 text-center">
         <CheckCircle2 className="mx-auto size-9 text-success" />
         <p className="mt-4 font-display text-lg font-semibold text-ink">
-          Revisa tu correo
+          Tu cuenta está lista para confirmar
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-graphite">{state.message}</p>
-        <p className="mt-3 text-xs leading-relaxed text-slate-ui">
-          El enlace puede tardar unos minutos. No cierres esta pestaña si quieres volver a
-          revisar la dirección que registraste.
+        <p className="mt-2 text-sm leading-relaxed text-graphite">
+          Enviamos el enlace de confirmación a <strong>{maskEmail(state.submittedEmail)}</strong>.
         </p>
-        <Link
-          href="/"
-          className="mt-5 inline-flex h-10 items-center justify-center rounded-[10px] bg-white px-5 text-sm font-medium text-ink ring-1 ring-inset ring-line"
-        >
-          Volver al inicio
-        </Link>
+        <ol className="mx-auto mt-4 max-w-sm space-y-2 text-left text-xs leading-relaxed text-slate-ui">
+          <li><strong className="text-graphite">1.</strong> Abre el mensaje de SEP y confirma tu correo.</li>
+          <li><strong className="text-graphite">2.</strong> Inicia sesión y completa el diagnóstico de 4–6 minutos.</li>
+          <li><strong className="text-graphite">3.</strong> Entrarás al panel correspondiente a tu perfil.</li>
+        </ol>
+        <p className="mt-4 text-xs leading-relaxed text-slate-ui">
+          Puede tardar uno o dos minutos. Revisa spam y promociones antes de volver a intentarlo.
+        </p>
+        <div className="mt-5 flex flex-col justify-center gap-2 sm:flex-row">
+          <Button href="/login">Ir a iniciar sesión</Button>
+          <Button type="button" variant="outline" onClick={() => window.location.reload()}>
+            Usar otro correo
+          </Button>
+        </div>
       </div>
     );
   }
@@ -162,7 +177,7 @@ export function SignupForm({ role }: { role: SignupRole }) {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <Field label="Universidad" htmlFor="university" error={e?.university}>
-              <Input id="university" name="university" placeholder="Opcional" />
+              <Input id="university" name="university" autoComplete="organization" placeholder="Ej. Universidad Nacional del Santa" />
             </Field>
             <Field label="Carrera y ciclo" htmlFor="career" error={e?.career}>
               <Input id="career" name="career" placeholder="Ej. Administración · 5to" />
@@ -243,7 +258,7 @@ export function SignupForm({ role }: { role: SignupRole }) {
           </div>
 
           <Field label="Área o curso que enseñas" htmlFor="subject">
-            <Input id="subject" name="subject" placeholder="Opcional" />
+            <Input id="subject" name="subject" placeholder="Ej. Matemática o Ciencias Sociales" />
           </Field>
         </>
       )}
@@ -316,18 +331,18 @@ export function SignupForm({ role }: { role: SignupRole }) {
               id="website"
               name="website"
               type="url"
-              placeholder="https://… (opcional)"
+              placeholder="https://institucion.pe"
             />
           </Field>
         </>
       )}
 
-      <Field label="WhatsApp" htmlFor="phone" error={e?.phone} hint="Opcional.">
-        <Input id="phone" name="phone" type="tel" placeholder="+51 9XX XXX XXX" />
+      <Field label="WhatsApp" htmlFor="phone" error={e?.phone}>
+        <Input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+51 9XX XXX XXX" />
       </Field>
 
       {/* ── Consentimientos (§9.5) ── */}
-      <div className="space-y-3 rounded-[12px] border border-line bg-surface-1 p-4">
+      <div className="space-y-3 rounded-md border border-line bg-surface-1 p-4">
         <Checkbox
           id="terms"
           name="terms"

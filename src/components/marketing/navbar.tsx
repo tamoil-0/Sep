@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/primitives";
 import { marketingNav } from "@/config/navigation";
 import { cn } from "@/lib/utils";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 
 /**
  * El menú anterior se sentía lento por tres razones, todas corregidas aquí:
@@ -30,6 +31,10 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [openMenu, setOpenMenu] = React.useState<string | null>(null);
   const closeTimer = React.useRef<ReturnType<typeof setTimeout> | null>(null);
+  const mobileMenuRef = useDialogA11y<HTMLDivElement>({
+    open: mobileOpen,
+    onClose: () => setMobileOpen(false),
+  });
 
   // Scroll pasivo, sin re-render salvo cuando cruza el umbral.
   React.useEffect(() => {
@@ -48,13 +53,6 @@ export function Navbar() {
       if (raf) cancelAnimationFrame(raf);
     };
   }, []);
-
-  React.useEffect(() => {
-    document.body.style.overflow = mobileOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
 
   // Escape cierra el desplegable.
   React.useEffect(() => {
@@ -91,7 +89,7 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300",
         scrolled
-          ? "border-b border-line bg-white/80 backdrop-blur-xl"
+          ? "border-b border-line bg-white "
           : "border-b border-transparent bg-white",
       )}
     >
@@ -124,7 +122,7 @@ export function Navbar() {
                     onFocus={() => item.children && open(item.label)}
                     onClick={() => setOpenMenu(null)}
                     className={cn(
-                      "flex items-center gap-1 rounded-lg px-3 py-2 text-[0.9375rem] font-medium transition-colors duration-150",
+                      "flex min-h-control items-center gap-1 rounded-sm px-3 py-2 text-body-sm font-medium transition-colors duration-150",
                       isActive(item.href)
                         ? "text-sep-600"
                         : "text-graphite hover:text-ink",
@@ -153,7 +151,7 @@ export function Navbar() {
                           : "pointer-events-none -translate-y-1 opacity-0",
                       )}
                     >
-                      <div className="overflow-hidden rounded-[16px] border border-line bg-white p-2 shadow-[0_16px_48px_-12px_rgba(18,16,28,.18)]">
+                      <div className="overflow-hidden rounded-lg border border-line bg-white p-2 shadow-elevated">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -161,13 +159,13 @@ export function Navbar() {
                             prefetch
                             tabIndex={expanded ? 0 : -1}
                             onClick={() => setOpenMenu(null)}
-                            className="block rounded-[11px] px-3.5 py-3 transition-colors duration-150 hover:bg-surface-1"
+                            className="block rounded-sm px-3.5 py-3 transition-colors duration-150 hover:bg-surface-1"
                           >
-                            <p className="text-[0.9375rem] font-medium text-ink">
+                            <p className="text-body-sm font-medium text-ink">
                               {child.label}
                             </p>
                             {child.description && (
-                              <p className="mt-0.5 text-[0.8125rem] leading-relaxed text-slate-ui">
+                              <p className="mt-0.5 text-caption text-slate-ui">
                                 {child.description}
                               </p>
                             )}
@@ -194,7 +192,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((v) => !v)}
-            className="-mr-2 rounded-lg p-2 text-ink transition-colors hover:bg-surface-1 lg:hidden"
+            className="-mr-2 flex size-control items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-1 lg:hidden"
             aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
             aria-expanded={mobileOpen}
           >
@@ -204,7 +202,15 @@ export function Navbar() {
       </Container>
 
       {mobileOpen && (
-        <div className="fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line bg-white lg:hidden">
+        <div
+          ref={mobileMenuRef}
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="mobile-navigation-title"
+          tabIndex={-1}
+          className="fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line bg-white outline-none lg:hidden"
+        >
+          <h2 id="mobile-navigation-title" className="sr-only">Navegación principal</h2>
           <Container className="py-6">
             <ul className="space-y-0.5">
               {marketingNav.map((item) => (
@@ -213,7 +219,7 @@ export function Navbar() {
                     href={item.href}
                     prefetch
                     onClick={() => setMobileOpen(false)}
-                    className="block rounded-lg px-3 py-2.5 font-display text-[1.375rem] font-semibold text-ink"
+                    className="block min-h-control rounded-sm px-3 py-2.5 font-display text-h4 font-semibold text-ink"
                   >
                     {item.label}
                   </Link>
@@ -225,7 +231,7 @@ export function Navbar() {
                             href={child.href}
                             prefetch
                             onClick={() => setMobileOpen(false)}
-                            className="block py-2 text-[0.9375rem] text-slate-ui"
+                            className="flex min-h-control items-center py-2 text-body-sm text-slate-ui"
                           >
                             {child.label}
                           </Link>

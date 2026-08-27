@@ -67,12 +67,12 @@ export default function ContactoPage() {
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="mt-1.5 break-words text-[0.9375rem] font-medium text-ink hover:text-sep-600"
+                  className="mt-1.5 break-words text-body-sm font-medium text-ink hover:text-sep-600"
                 >
                   {c.value}
                 </a>
               ) : (
-                <p className="mt-1.5 text-[0.9375rem] font-medium text-ink">{c.value}</p>
+                <p className="mt-1.5 text-body-sm font-medium text-ink">{c.value}</p>
               )}
               <p className="mt-2.5 flex-1 text-xs leading-relaxed text-slate-ui">
                 {c.detail}

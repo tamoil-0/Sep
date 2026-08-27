@@ -18,8 +18,9 @@ export const metadata = createPageMetadata({
   keywords: ["cursos de emprendimiento", "Design Thinking Perú", "Scrum Perú"],
 });
 
+export const dynamic = "force-dynamic";
+
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
 
 export default async function CursosPage() {
   const courses = await getCatalog();
@@ -31,7 +32,7 @@ export default async function CursosPage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <div className="max-w-2xl">
             <Badge tone="seed">Catálogo abierto</Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.1] text-ink sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
               Cursos para convertir ideas en acción
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-ui">
@@ -50,7 +51,7 @@ export default async function CursosPage() {
           />
           </div>
 
-          <dl className="mt-10 grid gap-6 rounded-[16px] border border-line bg-white p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+          <dl className="mt-10 grid gap-6 rounded-lg border border-line bg-white p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
             {[
               ["Duración", `${COURSE_FORMAT.weeks} semanas`],
               ["Frecuencia", COURSE_FORMAT.frequency],
@@ -61,7 +62,7 @@ export default async function CursosPage() {
                 <dt className="text-xs uppercase tracking-[0.1em] text-slate-ui">
                   {label}
                 </dt>
-                <dd className="mt-1.5 text-[0.9375rem] font-medium text-ink">{value}</dd>
+                <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>
               </div>
             ))}
           </dl>
@@ -77,7 +78,7 @@ export default async function CursosPage() {
                 <Card
                   key={c.id}
                   interactive
-                  className="group flex flex-col overflow-hidden border-transparent p-3 shadow-[0_8px_30px_-22px_rgba(18,16,28,.4)] hover:bg-surface-1/40 sm:p-4"
+                  className="group flex flex-col overflow-hidden border-transparent p-3  hover:bg-surface-1/40 sm:p-4"
                   as={Link}
                   {...{ href: `/cursos/${c.slug}`, prefetch: true }}
                 >
@@ -99,7 +100,7 @@ export default async function CursosPage() {
                   </div>
 
                   <div className="px-1">
-                  <h2 className="mt-4 font-display text-[1.125rem] font-semibold leading-snug text-ink">
+                  <h2 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
                     {c.title}
                   </h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
@@ -159,11 +160,11 @@ export default async function CursosPage() {
             ].map((c) => (
               <Card key={c.name} className="text-center">
                 {c.recommended && <Badge tone="gold">Recomendado</Badge>}
-                <h3 className="mt-3 font-display text-[1.0625rem] font-semibold text-ink">
+                <h3 className="mt-3 font-display text-body font-semibold text-ink">
                   {c.name}
                 </h3>
                 <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
-                <p className="tabular mt-4 font-display text-[2rem] font-bold leading-none sep-gradient-text">
+                <p className="tabular mt-4 font-display text-h2 font-bold leading-none text-sep-700">
                   {formatSoles(c.price)}
                 </p>
               </Card>

@@ -52,7 +52,7 @@ export function MediaImage({
   return (
     <figure
       className={cn(
-        "group relative isolate min-h-56 overflow-hidden rounded-[20px] shadow-[0_18px_50px_-24px_rgba(18,16,28,.45)]",
+        "group relative isolate min-h-56 overflow-hidden rounded-lg border border-line",
         kind === "photo" ? "bg-sep-950" : "bg-surface-1",
         className,
       )}
@@ -61,7 +61,7 @@ export function MediaImage({
         src={src}
         alt={alt}
         fill
-        priority={priority}
+        loading={priority ? "eager" : "lazy"}
         sizes={sizes}
         className={cn(
           "transition-transform duration-700 ease-out",
@@ -78,7 +78,7 @@ export function MediaImage({
         <figcaption
           className={cn(
             "absolute inset-x-0 bottom-0 flex items-center gap-2 p-4 text-xs font-medium sm:p-5",
-            kind === "photo" ? "text-white" : "bg-white/92 text-graphite backdrop-blur-sm",
+            kind === "photo" ? "text-white" : "bg-white text-graphite",
           )}
         >
           <MapPin className={cn("size-3.5", kind === "photo" ? "text-gold-500" : "text-sep-600")} />
@@ -102,7 +102,7 @@ export function HeroPhoto() {
         priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
         label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-[24px] border border-white/20"
+        className="aspect-[4/3] min-h-0 rounded-xl border border-white/20"
         imageClassName="object-[52%_50%]"
       />
     </div>

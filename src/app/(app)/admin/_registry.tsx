@@ -10,6 +10,7 @@ import {
   relativeTime,
 } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 /**
  * Registro de las vistas de listado del panel de administración.
@@ -48,7 +49,7 @@ export interface AdminView {
 
 const person = (name?: string | null, sub?: string | null) => (
   <div className="flex items-center gap-2.5">
-    <span className="flex size-7 shrink-0 items-center justify-center rounded-full sep-gradient text-[0.625rem] font-semibold text-white">
+    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
       {initials(name ?? "?")}
     </span>
     <div className="min-w-0">
@@ -79,10 +80,13 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin cursos cargados",
     async load() {
       const s = await createClient();
-      const [{ data: courses }, { data: stats }] = await Promise.all([
+      const [coursesResult, statsResult] = await Promise.all([
         s.from("courses").select("*").order("order_index"),
         s.from("course_stats").select("*"),
       ]);
+      assertQueryResults("admin:cursos", coursesResult, statsResult);
+      const courses = coursesResult.data;
+      const stats = statsResult.data;
       const byId = new Map((stats ?? []).map((x) => [x.id, x]));
       const rows = (courses ?? []).map((c) => ({ ...c, stat: byId.get(c.id) }));
       const enroll = rows.reduce((a, r) => a + Number(r.stat?.enrollments ?? 0), 0);
@@ -123,13 +127,15 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin inscripciones todavía",
     async load() {
       const s = await createClient();
-      const { data } = await s
+      const result = await s
         .from("enrollments")
         .select(
           "id, status, progress_pct, enrolled_at, profiles(full_name, region), courses(title)",
         )
         .order("enrolled_at", { ascending: false })
         .limit(200);
+      assertQueryResults("admin:inscripciones", result);
+      const data = result.data;
       const rows = (data ?? []).map((e) => ({
         ...e,
         student: one(e.profiles),
@@ -171,7 +177,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyDescription: "Se emiten automáticamente al aprobar un pago desde Pagos.",
     async load() {
       const s = await createClient();
-      const [{ data: certs }, { data: stats }] = await Promise.all([
+      const [certsResult, statsResult] = await Promise.all([
         s
           .from("certificates")
           .select(
@@ -181,6 +187,9 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
           .limit(200),
         s.from("certificate_stats").select("*"),
       ]);
+      assertQueryResults("admin:certificados", certsResult, statsResult);
+      const certs = certsResult.data;
+      const stats = statsResult.data;
       const rows = (certs ?? []).map((c) => ({
         ...c,
         holder: one(c.profiles),
@@ -237,10 +246,12 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin instituciones registradas",
     async load() {
       const s = await createClient();
-      const { data } = await s
+      const result = await s
         .from("institutions")
         .select("*")
         .order("created_at", { ascending: false });
+      assertQueryResults("admin:instituciones", result);
+      const data = result.data;
       const rows = data ?? [];
       return {
         rows,
@@ -291,10 +302,13 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin eventos creados",
     async load() {
       const s = await createClient();
-      const [{ data: events }, { data: regs }] = await Promise.all([
+      const [eventsResult, registrationsResult] = await Promise.all([
         s.from("events").select("*").order("starts_at", { ascending: false }),
         s.from("event_registrations").select("event_id"),
       ]);
+      assertQueryResults("admin:eventos", eventsResult, registrationsResult);
+      const events = eventsResult.data;
+      const regs = registrationsResult.data;
       const count = new Map<string, number>();
       for (const r of regs ?? []) count.set(r.event_id, (count.get(r.event_id) ?? 0) + 1);
       const rows = (events ?? []).map((e) => ({ ...e, regs: count.get(e.id) ?? 0 }));
@@ -353,11 +367,13 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin suscriptores todavía",
     async load() {
       const s = await createClient();
-      const { data } = await s
+      const result = await s
         .from("newsletter_subscribers")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(300);
+      assertQueryResults("admin:newsletter", result);
+      const data = result.data;
       const rows = data ?? [];
       return {
         rows,
@@ -400,11 +416,13 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin donaciones todavía",
     async load() {
       const s = await createClient();
-      const { data } = await s
+      const result = await s
         .from("donations")
         .select("*")
         .order("created_at", { ascending: false })
         .limit(200);
+      assertQueryResults("admin:donaciones", result);
+      const data = result.data;
       const rows = data ?? [];
       const paid = rows.filter((r) => r.status === "pagado");
       return {
@@ -450,7 +468,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
     emptyTitle: "Sin publicaciones",
     async load() {
       const s = await createClient();
-      const [{ data: posts }, { count: comments }] = await Promise.all([
+      const [postsResult, commentsResult] = await Promise.all([
         s
           .from("posts")
           .select("id, content, created_at, likes_count, is_pinned, is_hidden, profiles(full_name, region)")
@@ -458,6 +476,9 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
           .limit(80),
         s.from("comments").select("id", { count: "exact", head: true }),
       ]);
+      assertQueryResults("admin:comunidad", postsResult, commentsResult);
+      const posts = postsResult.data;
+      const comments = commentsResult.count;
       const rows = (posts ?? []).map((p) => ({ ...p, author: one(p.profiles) }));
       return {
         rows,

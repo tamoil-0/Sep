@@ -9,6 +9,7 @@ import { PanelSection } from "@/components/app/data-views";
 
 import { Award, Mic, Users } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mis participaciones" };
 
@@ -16,16 +17,20 @@ export default async function SpeakerParticipacionesPage() {
   const user = await requireRole(["speaker", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: sp } = await supabase
+  const speakerResult = await supabase
     .from("speaker_profiles").select("id, full_name").eq("user_id", user.id).maybeSingle();
+  assertQueryResults("speaker:perfil", speakerResult);
+  const sp = speakerResult.data;
 
-  const { data: invites } = sp?.id
+  const invitationsResult = sp?.id
     ? await supabase
         .from("speaker_invitations")
         .select("id, topic, proposed_at, status, events(title, starts_at, location, capacity)")
         .eq("speaker_id", sp.id)
         .eq("status", "aceptada")
-    : { data: [] };
+    : null;
+  if (invitationsResult) assertQueryResults("speaker:participaciones", invitationsResult);
+  const invites = invitationsResult?.data ?? [];
 
   const rows = (invites ?? []).map((i) => ({
     ...i,
@@ -84,7 +89,7 @@ export default async function SpeakerParticipacionesPage() {
         <div className="flex items-start gap-3.5">
           <Award className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="font-display text-[1.0625rem] font-semibold text-ink">
+            <h3 className="font-display text-body font-semibold text-ink">
               Tu constancia de speaker
             </h3>
             <p className="mt-1.5 text-sm leading-relaxed text-graphite">

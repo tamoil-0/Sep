@@ -49,7 +49,7 @@ export default function NosotrosPage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
             <div className="max-w-2xl">
             <Badge tone="white">Desde Casma, Áncash · 7 de abril de 2024</Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-white sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-white sm:text-display">
               Llevamos la innovación al{" "}
               <span className="text-gold-500">territorio del talento</span>, no al revés.
             </h1>
@@ -97,7 +97,7 @@ export default function NosotrosPage() {
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sep-600">
                   {c.label}
                 </p>
-                <p className="mt-3.5 text-[1.0625rem] leading-relaxed text-graphite">
+                <p className="mt-3.5 text-body leading-relaxed text-graphite">
                   {c.text}
                 </p>
               </Card>
@@ -121,11 +121,11 @@ export default function NosotrosPage() {
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {problemStats.map((s) => (
               <Card key={s.title}>
-                <p className="tabular font-display text-[3rem] font-bold leading-none sep-gradient-text">
+                <p className="tabular font-display text-display font-bold leading-none text-sep-700">
                   {s.figure}
                 </p>
                 <h3 className="mt-5 text-lg font-semibold text-ink">{s.title}</h3>
-                <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate-ui">
+                <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
                   {s.body}
                 </p>
               </Card>
@@ -181,11 +181,11 @@ export default function NosotrosPage() {
             {team.map((m) => (
               <li key={m.name}>
                 <Card className="flex items-center gap-4 p-5">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full sep-gradient text-sm font-semibold text-white">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sep-700 text-sm font-semibold text-white">
                     {initials(m.name)}
                   </span>
                   <div className="min-w-0">
-                    <p className="truncate font-display text-[0.9375rem] font-semibold text-ink">
+                    <p className="truncate font-display text-body-sm font-semibold text-ink">
                       {m.name}
                     </p>
                     <p className="mt-0.5 truncate text-xs text-slate-ui">{m.role}</p>
@@ -222,7 +222,7 @@ export default function NosotrosPage() {
       <section className="sep-gradient">
         <Container size="wide" className="py-16 text-center">
           <Sprout className="mx-auto size-8 text-gold-500" />
-          <h2 className="mx-auto mt-5 max-w-xl font-display text-[2rem] font-bold leading-tight text-white">
+          <h2 className="mx-auto mt-5 max-w-xl font-display text-h2 font-bold leading-tight text-white">
             ¿Quieres construir esto con nosotros?
           </h2>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

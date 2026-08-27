@@ -10,14 +10,14 @@ export default function MarketingLoading() {
             <div className="skeleton mt-7 h-5 w-full max-w-md" />
             <div className="skeleton mt-2 h-5 w-3/4 max-w-sm" />
           </div>
-          <div className="skeleton aspect-[4/3] min-h-56 rounded-[20px]" />
+          <div className="skeleton aspect-[4/3] min-h-56 rounded-lg" />
         </div>
       </section>
       <section className="mx-auto w-full max-w-7xl px-5 py-14 sm:px-8 sm:py-20">
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {[0, 1, 2, 3, 4, 5].map((item) => (
-            <div key={item} className="rounded-[16px] border border-line bg-white p-4">
-              <div className="skeleton aspect-[16/9] w-full rounded-[12px]" />
+            <div key={item} className="rounded-lg border border-line bg-white p-4">
+              <div className="skeleton aspect-[16/9] w-full rounded-md" />
               <div className="skeleton mt-5 h-5 w-2/3" />
               <div className="skeleton mt-3 h-4 w-full" />
               <div className="skeleton mt-2 h-4 w-4/5" />

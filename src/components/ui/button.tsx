@@ -4,28 +4,28 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-[10px] font-medium transition-all duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sep-500",
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sep-500",
   {
     variants: {
       variant: {
         primary:
-          "bg-sep-600 text-white shadow-[0_1px_3px_rgba(18,16,28,.08)] hover:bg-sep-700 active:bg-sep-800",
+          "bg-sep-600 text-white hover:bg-sep-700 active:bg-sep-800",
         gradient:
-          "sep-gradient text-white shadow-[0_4px_16px_rgba(46,11,232,.24)] hover:shadow-[0_8px_24px_rgba(46,11,232,.32)] hover:-translate-y-px",
-        gold: "bg-gold-500 text-ink hover:bg-gold-400 active:bg-gold-600 shadow-[0_2px_8px_rgba(255,198,41,.35)]",
+          "sep-gradient text-white hover:opacity-95",
+        gold: "bg-gold-500 text-ink hover:bg-gold-400 active:bg-gold-400",
         outline:
           "border border-line bg-white text-ink hover:bg-surface-1 hover:border-mist",
         "outline-white":
-          "border border-white/35 bg-white/5 text-white backdrop-blur-sm hover:bg-white/15 hover:border-white/60",
+          "border border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
         ghost: "text-graphite hover:bg-surface-2 hover:text-ink",
         link: "text-sep-600 underline-offset-4 hover:underline p-0 h-auto",
-        danger: "bg-danger text-white hover:brightness-110",
+        danger: "bg-danger text-white hover:bg-[#852d31] active:bg-[#70262a]",
       },
       size: {
-        sm: "h-9 px-3.5 text-sm [&_svg]:size-4",
-        md: "h-11 px-5 text-[0.9375rem] [&_svg]:size-[18px]",
-        lg: "h-[52px] px-7 text-base [&_svg]:size-5",
-        icon: "h-10 w-10 [&_svg]:size-[18px]",
+        sm: "h-control px-3.5 text-body-sm [&_svg]:size-icon-sm",
+        md: "h-control px-5 text-body-sm [&_svg]:size-icon-md",
+        lg: "h-control-lg px-7 text-body [&_svg]:size-icon-lg",
+        icon: "size-control [&_svg]:size-icon-md",
       },
     },
     defaultVariants: { variant: "primary", size: "md" },

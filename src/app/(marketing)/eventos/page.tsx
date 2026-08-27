@@ -21,8 +21,9 @@ export const metadata = createPageMetadata({
   keywords: ["eventos de emprendimiento Perú", "webinars gratuitos", "ferias de innovación"],
 });
 
+export const dynamic = "force-dynamic";
+
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
 
 const kindLabels: Record<string, string> = {
   demo_day: "Demo Day",
@@ -72,7 +73,7 @@ export default async function EventosPage() {
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
               {upcoming.map((e) => (
-                <Card key={e.id} className="relative flex flex-col overflow-hidden border-sep-100 p-6 shadow-[0_12px_36px_-26px_rgba(46,11,232,.45)]">
+                <Card key={e.id} className="relative flex flex-col overflow-hidden border-sep-100 p-6">
                   <span className="absolute inset-x-0 top-0 h-1 sep-gradient" />
                   <div className="flex flex-wrap items-center gap-2">
                     <Badge tone="brand">{kindLabels[e.kind ?? ""] ?? "Evento"}</Badge>
@@ -89,10 +90,10 @@ export default async function EventosPage() {
                     )}
                   </div>
 
-                  <h3 className="mt-4 font-display text-[1.25rem] font-semibold leading-snug text-ink">
+                  <h3 className="mt-4 font-display text-h4 font-semibold leading-snug text-ink">
                     {e.title}
                   </h3>
-                  <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-slate-ui">
+                  <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {e.description}
                   </p>
 
@@ -122,11 +123,11 @@ export default async function EventosPage() {
               <h2 className="mb-6 mt-14 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
                 Ya sucedieron
               </h2>
-              <ul className="divide-y divide-line overflow-hidden rounded-[14px] border border-line bg-white">
+              <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
                 {past.map((e) => (
                   <li key={e.id} className="flex flex-wrap items-center gap-4 px-5 py-4">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-[0.9375rem] font-medium text-ink">
+                      <p className="truncate text-body-sm font-medium text-ink">
                         {e.title}
                       </p>
                       <p className="mt-0.5 text-xs capitalize text-slate-ui">

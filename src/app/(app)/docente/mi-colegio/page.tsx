@@ -7,6 +7,7 @@ import { Card, EmptyState } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { StatusBadge, PanelSection } from "@/components/app/data-views";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mi colegio" };
 
@@ -14,11 +15,13 @@ export default async function DocenteMiColegioPage() {
   const user = await requireRole(["docente", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles")
     .select("institution_id, institutions(id, name, type, region, province, is_verified, agreement_signed_at, students_count)")
     .eq("id", user.id)
     .maybeSingle();
+  assertQueryResults("docente:colegio", profileResult);
+  const profile = profileResult.data;
 
   const inst = Array.isArray(profile?.institutions) ? profile?.institutions[0] : profile?.institutions;
 
@@ -36,11 +39,13 @@ export default async function DocenteMiColegioPage() {
     );
   }
 
-  const { data: workshops } = await supabase
+  const workshopsResult = await supabase
     .from("workshops")
     .select("id, title, topic, scheduled_at, status, students_count")
     .eq("institution_id", inst.id)
     .order("scheduled_at", { ascending: false });
+  assertQueryResults("docente:colegio:talleres", workshopsResult);
+  const workshops = workshopsResult.data;
 
   const done = (workshops ?? []).filter((w) => w.status === "realizado");
   const students = done.reduce((s, w) => s + (w.students_count ?? 0), 0);
@@ -85,4 +90,3 @@ export default async function DocenteMiColegioPage() {
     </>
   );
 }
-

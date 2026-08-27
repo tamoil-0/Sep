@@ -51,10 +51,10 @@ export default async function CertificadosPage() {
           <div className="grid gap-3 md:grid-cols-2">
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
-                <div className="sep-gradient px-5 py-4">
+                <div className="bg-sep-800 px-5 py-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate font-display text-[0.9375rem] font-semibold text-white">
+                      <p className="truncate font-display text-body-sm font-semibold text-white">
                         {c.type?.name}
                       </p>
                       <p className="mt-0.5 truncate text-xs text-white/65">
@@ -135,7 +135,7 @@ export default async function CertificadosPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 font-display text-[1.0625rem] font-semibold text-ink">
+                      <h3 className="mt-2.5 font-display text-body font-semibold text-ink">
                         {e.course?.title}
                       </h3>
                       <p className="mt-0.5 text-sm text-slate-ui">
@@ -145,7 +145,7 @@ export default async function CertificadosPage() {
                   </div>
 
                   {isPending && (
-                    <div className="mt-4 rounded-[10px] border border-warning/30 bg-warning-bg px-4 py-3">
+                    <div className="mt-4 rounded-sm border border-warning/30 bg-warning-bg px-4 py-3">
                       <p className="text-sm text-graphite">
                         Tienes un certificado en proceso de pago.{" "}
                         <Link
@@ -193,7 +193,7 @@ export default async function CertificadosPage() {
               <Card key={e.id} className="p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate font-display text-[0.9375rem] font-semibold text-ink">
+                    <p className="truncate font-display text-body-sm font-semibold text-ink">
                       {e.course?.title}
                     </p>
                     <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-ui">
@@ -240,7 +240,7 @@ export default async function CertificadosPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-display text-[0.9375rem] font-semibold text-ink">
+                    <h3 className="font-display text-body-sm font-semibold text-ink">
                       {t.name}
                     </h3>
                     {t.kind === "internacional" && <Badge tone="gold">Recomendado</Badge>}

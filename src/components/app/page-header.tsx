@@ -14,14 +14,14 @@ export function PageHeader({
   return (
     <div
       className={cn(
-        "mb-6 flex min-w-0 flex-col items-stretch gap-4 sm:mb-7 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between",
+        "mb-5 flex min-w-0 flex-col items-stretch gap-3 sm:mb-6 sm:flex-row sm:flex-wrap sm:items-start sm:justify-between",
         className,
       )}
     >
       <div className="min-w-0 flex-1">
-        <h1 className="break-words font-display text-[1.625rem] font-semibold text-ink sm:text-[1.75rem]">{title}</h1>
+        <h1 className="break-words text-h3 font-semibold tracking-tight text-ink">{title}</h1>
         {description && (
-          <p className="mt-1.5 text-[0.9375rem] text-slate-ui">{description}</p>
+          <p className="mt-1.5 text-body-sm text-slate-ui">{description}</p>
         )}
       </div>
       {action}
@@ -45,12 +45,12 @@ export function Kpi({
   icon?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-[14px] border border-line bg-white p-5">
+    <div className="rounded-md border border-line bg-white px-4 py-3.5 sm:px-5 sm:py-4">
       <div className="flex items-start justify-between gap-3">
-        <p className="text-[0.8125rem] text-slate-ui">{label}</p>
+        <p className="text-body-sm text-slate-ui">{label}</p>
         {icon && <span className="text-mist">{icon}</span>}
       </div>
-      <p className="tabular mt-2 font-display text-[1.75rem] font-semibold leading-none text-ink">
+      <p className="tabular mt-1.5 text-h3 font-semibold leading-none tracking-tight text-ink">
         {value}
       </p>
       {hint && <p className="mt-1.5 text-xs text-mist">{hint}</p>}

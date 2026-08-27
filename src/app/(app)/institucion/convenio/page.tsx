@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { Check, FileSignature } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Convenio" };
 
@@ -23,11 +24,13 @@ export default async function InstitucionConvenioPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const result = await supabase
     .from("profiles")
     .select("institutions(name, type, region, agreement_signed_at, agreement_url, is_verified)")
     .eq("id", user.id)
     .maybeSingle();
+  assertQueryResults("institucion:convenio", result);
+  const profile = result.data;
 
   const i = Array.isArray(profile?.institutions) ? profile?.institutions[0] : profile?.institutions;
   const signed = Boolean(i?.agreement_signed_at);
@@ -41,9 +44,9 @@ export default async function InstitucionConvenioPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="sep-gradient px-7 py-6 text-white">
+        <div className="bg-sep-800 px-7 py-6 text-white">
           <FileSignature className="size-6 text-gold-500" />
-          <h2 className="mt-4 font-display text-[1.5rem] font-semibold">
+          <h2 className="mt-4 font-display text-h3 font-semibold">
             {i?.name ?? "Tu institución"}
           </h2>
           <p className="mt-1 text-sm text-white/75">
@@ -59,7 +62,7 @@ export default async function InstitucionConvenioPage() {
           </h3>
           <ul className="mt-4 space-y-2.5">
             {TERMS.map((t) => (
-              <li key={t} className="flex items-start gap-2.5 text-[0.9375rem] text-graphite">
+              <li key={t} className="flex items-start gap-2.5 text-body-sm text-graphite">
                 <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                 {t}
               </li>
@@ -67,7 +70,7 @@ export default async function InstitucionConvenioPage() {
           </ul>
 
           {!signed && (
-            <div className="mt-7 rounded-[12px] border border-warning/30 bg-warning-bg p-5">
+            <div className="mt-7 rounded-md border border-warning/30 bg-warning-bg p-5">
               <p className="text-sm leading-relaxed text-graphite">
                 Para formalizar el convenio, el equipo de alianzas de SEP coordina una
                 reunión virtual de 30 minutos y envía el documento firmado digitalmente.
@@ -82,4 +85,3 @@ export default async function InstitucionConvenioPage() {
     </>
   );
 }
-

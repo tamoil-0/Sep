@@ -60,7 +60,7 @@ export default async function MisCursosPage() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <Badge tone="brand">En progreso</Badge>
-                          <h3 className="mt-2.5 truncate font-display text-[1.0625rem] font-semibold text-ink">
+                          <h3 className="mt-2.5 truncate font-display text-body font-semibold text-ink">
                             {e.course?.title}
                           </h3>
                           <p className="mt-0.5 truncate text-sm text-slate-ui">
@@ -99,7 +99,7 @@ export default async function MisCursosPage() {
                           <Check className="size-3.5" />
                           Completado
                         </Badge>
-                        <h3 className="mt-2.5 truncate font-display text-[1.0625rem] font-semibold text-ink">
+                        <h3 className="mt-2.5 truncate font-display text-body font-semibold text-ink">
                           {e.course?.title}
                         </h3>
                         <p className="mt-0.5 text-xs text-slate-ui">

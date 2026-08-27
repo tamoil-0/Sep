@@ -7,6 +7,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { PanelSection, StatusBadge } from "@/components/app/data-views";
 import { formatDateTime } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Sesiones" };
 
@@ -14,7 +15,7 @@ export default async function MentorSesionesPage() {
   const user = await requireRole(["mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: workshops }, { data: sessions }] = await Promise.all([
+  const [workshopsResult, sessionsResult] = await Promise.all([
     supabase
       .from("workshop_facilitators")
       .select("workshop_id, workshops(id, title, topic, scheduled_at, status, students_count, modality, institutions(name, region))")
@@ -26,6 +27,9 @@ export default async function MentorSesionesPage() {
       .order("scheduled_at")
       .limit(20),
   ]);
+  assertQueryResults("mentor:sesiones", workshopsResult, sessionsResult);
+  const workshops = workshopsResult.data;
+  const sessions = sessionsResult.data;
 
   const talleres = (workshops ?? [])
     .map((w) => (Array.isArray(w.workshops) ? w.workshops[0] : w.workshops))
@@ -106,7 +110,7 @@ export default async function MentorSesionesPage() {
                         href={s.meet_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-[8px] bg-sep-600 px-3.5 text-sm font-medium text-white hover:bg-sep-700"
+                        className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-sm font-medium text-white hover:bg-sep-700"
                       >
                         <Video className="size-3.5" />
                         Unirme

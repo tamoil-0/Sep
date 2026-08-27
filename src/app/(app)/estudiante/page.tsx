@@ -16,6 +16,7 @@ import { Badge, Card, EmptyState, ProgressBar } from "@/components/ui/primitives
 import { Button } from "@/components/ui/button";
 import { formatSoles, initials } from "@/lib/utils";
 import { certificateTypes } from "@/config/pricing";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mi panel" };
 
@@ -30,17 +31,21 @@ export default async function EstudiantePage() {
   const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: enrollments } = await supabase
+  const enrollmentsResult = await supabase
     .from("enrollments")
     .select("id, progress_pct, status, course_id, courses(slug, title, subtitle, sessions_count)")
     .eq("user_id", user.id)
     .order("enrolled_at", { ascending: false });
+  assertQueryResults("estudiante:panel:inscripciones", enrollmentsResult);
+  const enrollments = enrollmentsResult.data;
 
-  const { count: certificatesCount } = await supabase
+  const certificatesResult = await supabase
     .from("certificates")
     .select("id", { count: "exact", head: true })
     .eq("user_id", user.id)
     .eq("status", "emitido");
+  assertQueryResults("estudiante:panel:certificados", certificatesResult);
+  const certificatesCount = certificatesResult.count;
 
   const active = (enrollments ?? []).filter((e) => e.status === "activo");
   const hoursDone = (enrollments ?? []).reduce(
@@ -126,7 +131,7 @@ export default async function EstudiantePage() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="truncate font-display text-[0.9375rem] font-semibold text-ink">
+                      <h3 className="truncate font-display text-body-sm font-semibold text-ink">
                         {course?.title}
                       </h3>
                       <p className="mt-0.5 truncate text-xs text-slate-ui">
@@ -156,7 +161,7 @@ export default async function EstudiantePage() {
             <Video className="size-4" />
             Próxima sesión en vivo
           </div>
-          <div className="mt-4 rounded-[12px] border border-line bg-surface-1 p-4">
+          <div className="mt-4 rounded-md border border-line bg-surface-1 p-4">
             <p className="text-sm font-medium text-ink">
               Aún no hay sesiones programadas
             </p>
@@ -195,14 +200,14 @@ export default async function EstudiantePage() {
               },
             ].map((p) => (
               <li key={p.name} className="flex gap-3">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full sep-gradient text-[0.625rem] font-semibold text-white">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                   {initials(p.name)}
                 </span>
                 <div className="min-w-0">
                   <p className="text-xs font-medium text-ink">
                     {p.name} · <span className="font-normal text-slate-ui">{p.region}</span>
                   </p>
-                  <p className="mt-0.5 text-[0.8125rem] leading-relaxed text-slate-ui">
+                  <p className="mt-0.5 text-body-sm leading-relaxed text-slate-ui">
                     {p.text}
                   </p>
                 </div>
@@ -222,7 +227,7 @@ export default async function EstudiantePage() {
             <Card key={c.slug} className="flex items-start justify-between gap-4 p-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-[0.9375rem] font-semibold text-ink">
+                  <h3 className="font-display text-body-sm font-semibold text-ink">
                     {c.name}
                   </h3>
                   {c.recommended && <Badge tone="gold">Recomendado</Badge>}

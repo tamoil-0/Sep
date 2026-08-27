@@ -6,6 +6,8 @@ import { createClient } from "@/lib/supabase/server";
 import { primaryRole, ROLE_META } from "@/types/roles";
 import { Card } from "@/components/ui/primitives";
 import { OnboardingForm, type OnboardingQuestion } from "./onboarding-form";
+import { Button } from "@/components/ui/button";
+import { ContextualHelp } from "@/components/ui/contextual-help";
 
 export const metadata: Metadata = {
   title: "Cuéntanos sobre ti",
@@ -63,6 +65,14 @@ export default async function OnboardingPage() {
             Tu cuenta está segura. Inténtalo nuevamente en unos minutos; no tendrás que
             volver a registrarte.
           </p>
+          <Button href="/onboarding?retry=1" className="mt-5">
+            Volver a intentar
+          </Button>
+          <ContextualHelp
+            className="mt-6"
+            title="¿Sigue sin cargar?"
+            description="Escríbenos indicando el tipo de cuenta que registraste para ayudarte a ingresar."
+          />
         </Card>
       </div>
     );

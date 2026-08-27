@@ -21,7 +21,7 @@ export function Footer() {
           <div>
             <Logo className="h-14" variant="white" />
 
-            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/60">
+            <p className="mt-5 max-w-xs text-sm leading-relaxed text-white/70">
               Democratizamos metodologías ágiles para jóvenes de todas las regiones del Perú.
               Nacimos en Casma, Áncash, en abril de 2024.
             </p>
@@ -65,7 +65,7 @@ export function Footer() {
                     <li key={link.href}>
                       <Link
                         href={link.href}
-                        className="text-sm text-white/60 transition-colors hover:text-white"
+                        className="text-sm text-white/70 transition-colors hover:text-white"
                       >
                         {link.label}
                       </Link>
@@ -78,7 +78,7 @@ export function Footer() {
         </div>
 
         <div className="mt-14 flex flex-col gap-5 border-t border-white/10 pt-7 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-white/45">
+          <p className="text-xs text-white/60">
             © {new Date().getFullYear()} {siteConfig.name}. Todos los derechos reservados.
           </p>
           <ul className="flex flex-wrap gap-5">

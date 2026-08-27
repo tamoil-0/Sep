@@ -10,6 +10,7 @@ import {
 } from "@/components/app/data-views";
 import { formatDate } from "@/lib/utils";
 import { SchoolQueue } from "./school-queue";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Red de colegios" };
 
@@ -17,7 +18,7 @@ export default async function AdminColegiosPage() {
   await requireRole(["admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: apps }, { data: impact }] = await Promise.all([
+  const [applicationsResult, impactResult] = await Promise.all([
     supabase
       .from("school_applications")
       .select("*")
@@ -25,6 +26,9 @@ export default async function AdminColegiosPage() {
       .limit(100),
     supabase.from("school_impact").select("*"),
   ]);
+  assertQueryResults("admin:colegios", applicationsResult, impactResult);
+  const apps = applicationsResult.data;
+  const impact = impactResult.data;
 
   const pending = (apps ?? []).filter(
     (a) => a.status === "recibida" || a.status === "en_revision",

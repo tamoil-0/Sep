@@ -43,8 +43,8 @@ export default async function DocenteCertificadosPage() {
           <div className="grid gap-3 md:grid-cols-2">
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
-                <div className="sep-gradient px-5 py-4">
-                  <p className="font-display text-[0.9375rem] font-semibold text-white">{c.type?.name}</p>
+                <div className="bg-sep-800 px-5 py-4">
+                  <p className="font-display text-body-sm font-semibold text-white">{c.type?.name}</p>
                   <p className="mt-0.5 text-xs text-white/65">{c.type?.issuer}</p>
                 </div>
                 <div className="p-5">
@@ -72,4 +72,3 @@ export default async function DocenteCertificadosPage() {
     </>
   );
 }
-

@@ -4,6 +4,7 @@ import { requireRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Feed } from "./feed";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Comunidad SEP" };
 
@@ -11,8 +12,7 @@ export default async function ComunidadPage() {
   const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: posts }, { count: members }, { data: regionRows }, { data: myLikes }] =
-    await Promise.all([
+  const [postsResult, membersResult, regionsResult, likesResult] = await Promise.all([
       supabase
         .from("posts")
         .select(
@@ -26,18 +26,25 @@ export default async function ComunidadPage() {
       supabase.from("profiles").select("region").not("region", "is", null),
       supabase.from("post_likes").select("post_id").eq("user_id", user.id),
     ]);
+  assertQueryResults("estudiante:comunidad", postsResult, membersResult, regionsResult, likesResult);
+  const posts = postsResult.data;
+  const members = membersResult.count;
+  const regionRows = regionsResult.data;
+  const myLikes = likesResult.data;
 
   // Comentarios en una sola consulta para las publicaciones visibles,
   // en lugar de una por post.
   const postIds = (posts ?? []).map((p) => p.id);
-  const { data: allComments } = postIds.length
+  const commentsResult = postIds.length
     ? await supabase
         .from("comments")
         .select("id, post_id, content, created_at, profiles(full_name)")
         .in("post_id", postIds)
         .eq("is_hidden", false)
         .order("created_at")
-    : { data: [] };
+    : null;
+  if (commentsResult) assertQueryResults("estudiante:comunidad:comentarios", commentsResult);
+  const allComments = commentsResult?.data ?? [];
 
   const commentsByPost = new Map<
     string,

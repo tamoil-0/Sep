@@ -15,6 +15,11 @@ export const marketingNav: NavItem[] = [
     href: "/cursos",
     children: [
       {
+        label: "AI Design Thinking",
+        href: "/ai-design-thinking",
+        description: "Seis clases para crear y validar una solución con apoyo responsable de IA.",
+      },
+      {
         label: "Cursos gratuitos",
         href: "/cursos",
         description: "Design Thinking, Scrum y Liderazgo. 8 h, 100 % virtual y sin costo de acceso.",
@@ -82,6 +87,7 @@ export const marketingNav: NavItem[] = [
 
 export const footerNav = {
   Programas: [
+    { label: "AI Design Thinking", href: "/ai-design-thinking" },
     { label: "Cursos gratuitos", href: "/cursos" },
     { label: "SILP", href: "/silp" },
     { label: "Programa docente", href: "/docentes" },

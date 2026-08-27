@@ -24,10 +24,10 @@ export default async function NuevaContrasenaPage() {
 
   return (
     <div>
-      <h1 className="font-display text-[2rem] font-semibold text-ink">
+      <h1 className="font-display text-h2 font-semibold text-ink">
         Crea una contraseña nueva
       </h1>
-      <p className="mt-2 text-[0.9375rem] text-slate-ui">
+      <p className="mt-2 text-body-sm text-slate-ui">
         Usa al menos 10 caracteres. Al guardarla cerraremos esta sesión de recuperación
         para proteger tu cuenta.
       </p>

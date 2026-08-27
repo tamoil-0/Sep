@@ -16,10 +16,10 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-gold-500 text-[0.9375rem] font-medium text-ink shadow-[0_4px_16px_rgba(255,198,41,.3)] transition-all hover:bg-gold-400 disabled:opacity-60"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-gold-500 text-body-sm font-medium text-ink  transition-colors hover:bg-gold-400 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Quiero donar
+      {pending ? "Preparando donación…" : "Quiero donar"}
     </button>
   );
 }
@@ -36,9 +36,9 @@ export function DonationForm() {
 
   if (state?.ok) {
     return (
-      <div className="rounded-[12px] border border-success/25 bg-success-bg p-6 text-center">
+      <div className="rounded-md border border-success/25 bg-success-bg p-6 text-center">
         <CircleCheck className="mx-auto size-8 text-success" />
-        <p className="mt-3 font-display text-[1.0625rem] font-semibold text-ink">
+        <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Gracias de corazón!
         </p>
         <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
@@ -52,7 +52,7 @@ export function DonationForm() {
     <form action={action} className="space-y-4">
       <input type="hidden" name="amountCents" value={effective} />
 
-      {state && !state.ok && state.error && !e && (
+      {state && !state.ok && state.error && (
         <FormAlert tone="error">{state.error}</FormAlert>
       )}
 
@@ -66,12 +66,13 @@ export function DonationForm() {
             <button
               key={a}
               type="button"
+              aria-pressed={!custom && amount === a}
               onClick={() => {
                 setAmount(a);
                 setCustom("");
               }}
               className={cn(
-                "tabular h-11 rounded-[10px] border text-sm font-medium transition-colors",
+                "tabular h-11 rounded-sm border text-sm font-medium transition-colors",
                 !custom && amount === a
                   ? "border-sep-500 bg-sep-50 text-sep-700"
                   : "border-line bg-white text-graphite hover:border-sep-300",
@@ -99,12 +100,14 @@ export function DonationForm() {
               onChange={(e) => setCustom(e.target.value)}
               placeholder="Otro monto"
               className="tabular pl-9"
+              invalid={!!e?.amountCents}
+              aria-describedby={e?.amountCents?.length ? "donation-amount-error" : undefined}
             />
           </div>
         </div>
 
         {e?.amountCents?.length ? (
-          <p className="mt-1.5 text-xs text-danger" role="alert">
+          <p id="donation-amount-error" className="mt-1.5 text-xs text-danger" role="alert">
             {e.amountCents[0]}
           </p>
         ) : null}
@@ -135,7 +138,7 @@ export function DonationForm() {
         />
       </Field>
 
-      <div className="space-y-2.5 rounded-[12px] border border-line bg-surface-1 p-4">
+      <div className="space-y-2.5 rounded-md border border-line bg-surface-1 p-4">
         <Checkbox
           id="isRecurring"
           name="isRecurring"

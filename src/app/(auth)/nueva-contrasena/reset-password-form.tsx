@@ -13,7 +13,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] bg-sep-600 text-[0.9375rem] font-medium text-white transition-colors hover:bg-sep-700 disabled:cursor-wait disabled:opacity-60"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:cursor-wait disabled:opacity-60"
     >
       {pending ? <Loader2 className="size-4 animate-spin" /> : <ShieldCheck className="size-4" />}
       {pending ? "Protegiendo tu cuenta…" : "Guardar nueva contraseña"}

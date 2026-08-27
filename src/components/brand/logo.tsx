@@ -22,7 +22,7 @@ export function Logo({
       className={cn(
         "relative inline-block h-10 shrink-0 overflow-hidden align-middle",
         variant === "white" &&
-          "rounded-[9px] bg-white shadow-[0_8px_24px_-14px_rgba(18,16,28,.55)] ring-1 ring-inset ring-white/60",
+          "rounded-sm bg-white  ring-1 ring-inset ring-white/60",
         className,
       )}
       style={{ aspectRatio: "412 / 275" }}
@@ -32,6 +32,7 @@ export function Logo({
         alt="Semillero de Emprendedores Perú"
         width={500}
         height={500}
+        loading="eager"
         sizes="160px"
         className={cn(
           "pointer-events-none absolute max-w-none select-none",
@@ -64,7 +65,7 @@ export function OrganizationLockup({
       <span
         aria-hidden
         className={cn(
-          "border-l pl-3 text-left font-display text-[0.72rem] font-semibold uppercase leading-[1.35] tracking-[0.08em] sm:pl-4 sm:text-[0.82rem]",
+          "border-l pl-3 text-left font-display text-caption font-semibold uppercase leading-[1.35] tracking-[0.08em] sm:pl-4 sm:text-body-sm",
           inverted ? "border-white/30 text-white/90" : "border-line text-graphite",
         )}
       >

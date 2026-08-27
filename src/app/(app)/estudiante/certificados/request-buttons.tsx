@@ -32,16 +32,21 @@ export function RequestCertificateButtons({
     setLoading(typeId);
     setError(null);
 
-    const result = await createOrderAction({
-      itemType: "certificate",
-      itemId: typeId,
-      refId: enrollmentId,
-    });
+    try {
+      const result = await createOrderAction({
+        itemType: "certificate",
+        itemId: typeId,
+        refId: enrollmentId,
+      });
 
-    if (result.ok) {
-      router.push(`/pagar/${result.data}`);
-    } else {
-      setError(result.error);
+      if (result.ok) {
+        router.push(`/pagar/${result.data}`);
+      } else {
+        setError(result.error);
+        setLoading(null);
+      }
+    } catch {
+      setError("No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.");
       setLoading(null);
     }
   }
@@ -62,14 +67,14 @@ export function RequestCertificateButtons({
             disabled={t.owned || loading !== null}
             onClick={() => request(t.id)}
             className={cn(
-              "group flex items-start justify-between gap-3 rounded-[12px] border p-4 text-left transition-all",
+              "group flex items-start justify-between gap-3 rounded-md border p-4 text-left transition-colors",
               t.owned
                 ? "cursor-default border-success/30 bg-success-bg"
-                : "border-line bg-white hover:border-sep-300 hover:shadow-[0_6px_20px_rgba(46,11,232,.08)] disabled:opacity-60",
+                : "border-line bg-white hover:border-sep-300  disabled:opacity-60",
             )}
           >
             <div className="min-w-0">
-              <p className="text-[0.9375rem] font-medium text-ink">{t.name}</p>
+              <p className="text-body-sm font-medium text-ink">{t.name}</p>
               <p className="mt-0.5 truncate text-xs text-slate-ui">{t.issuer}</p>
               {t.owned && (
                 <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-success">

@@ -71,14 +71,14 @@ export default async function CursoPage({
             {course.is_free && <Badge tone="seed">Gratuito</Badge>}
           </div>
 
-          <h1 className="mt-3.5 font-display text-[1.75rem] font-semibold leading-tight text-ink">
+          <h1 className="mt-3.5 font-display text-h2 font-semibold leading-tight text-ink">
             {course.title}
           </h1>
           {course.subtitle && (
-            <p className="mt-1 text-[0.9375rem] text-slate-ui">{course.subtitle}</p>
+            <p className="mt-1 text-body-sm text-slate-ui">{course.subtitle}</p>
           )}
           {course.description && (
-            <p className="mt-3 max-w-2xl text-[0.9375rem] leading-relaxed text-graphite">
+            <p className="mt-3 max-w-2xl text-body-sm leading-relaxed text-graphite">
               {course.description}
             </p>
           )}
@@ -121,7 +121,7 @@ export default async function CursoPage({
                 )}
               </p>
             ) : (
-              <div className="mt-4 flex flex-wrap items-center gap-3 rounded-[10px] border border-success/25 bg-success-bg px-4 py-3">
+              <div className="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-success/25 bg-success-bg px-4 py-3">
                 <Award className="size-5 shrink-0 text-success" />
                 <p className="flex-1 text-sm text-graphite">
                   ¡Completaste el curso! Ya puedes obtener tu certificado.

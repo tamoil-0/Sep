@@ -26,9 +26,9 @@ export default async function MembresiaPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="sep-gradient px-7 py-6 text-white">
+        <div className="bg-sep-800 px-7 py-6 text-white">
           <p className="text-xs uppercase tracking-[0.12em] text-white/70">Tu plan actual</p>
-          <h2 className="mt-2 font-display text-[1.75rem] font-semibold">
+          <h2 className="mt-2 font-display text-h2 font-semibold">
             {membership?.plan?.name ?? "Semilla"}
           </h2>
           <p className="mt-1 text-sm text-white/75">
@@ -50,11 +50,11 @@ export default async function MembresiaPage() {
                 className={isCurrent ? "flex flex-col border-sep-300 bg-sep-50/40" : "flex flex-col"}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-display text-[1.0625rem] font-semibold text-ink">{p.name}</h3>
+                  <h3 className="font-display text-body font-semibold text-ink">{p.name}</h3>
                   {isCurrent && <Badge tone="brand">Actual</Badge>}
                 </div>
 
-                <p className="tabular mt-4 font-display text-[1.75rem] font-bold leading-none text-ink">
+                <p className="tabular mt-4 font-display text-h2 font-bold leading-none text-ink">
                   {p.price_cents === 0 ? "Gratis" : formatSoles(p.price_cents)}
                 </p>
                 <p className="mt-1 text-xs text-slate-ui">
@@ -79,7 +79,7 @@ export default async function MembresiaPage() {
         <div className="flex items-start gap-3.5">
           <Sprout className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="font-display text-[1.0625rem] font-semibold text-ink">
+            <h3 className="font-display text-body font-semibold text-ink">
               Los voluntarios tienen todo gratis
             </h3>
             <p className="mt-1.5 text-sm leading-relaxed text-graphite">

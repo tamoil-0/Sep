@@ -26,8 +26,8 @@ export default function FaqPage() {
           <FaqAccordion items={faqs} />
         </div>
 
-        <div className="mt-12 rounded-[14px] border border-line bg-surface-1 p-7 text-center">
-          <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+        <div className="mt-12 rounded-md border border-line bg-surface-1 p-7 text-center">
+          <h2 className="font-display text-h4 font-semibold text-ink">
             ¿No encontraste tu respuesta?
           </h2>
           <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-ui">

@@ -41,7 +41,7 @@ export default function EmpresasPage() {
               <Building2 className="size-3.5" />
               Alianzas RSE
             </Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-ink sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Convierte tu inversión social en{" "}
               <GoldUnderline>resultados medibles</GoldUnderline>
             </h1>
@@ -103,7 +103,7 @@ export default function EmpresasPage() {
             ].map((f) => (
               <Card key={f.title} className="p-6">
                 <f.icon className="size-5 text-sep-600" />
-                <h3 className="mt-4 font-display text-[0.9375rem] font-semibold text-ink">
+                <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
                   {f.title}
                 </h3>
                 <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{f.body}</p>
@@ -124,12 +124,12 @@ export default function EmpresasPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {b2bPackages.map((p) => (
               <Card key={p.slug} className="flex flex-col">
-                <h3 className="font-display text-[1.0625rem] font-semibold text-ink">
+                <h3 className="font-display text-body font-semibold text-ink">
                   {p.name}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-slate-ui">{p.scope}</p>
 
-                <p className="tabular mt-5 font-display text-[1.75rem] font-bold leading-none text-ink">
+                <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                   {"priceFrom" in p && p.priceFrom && (
                     <span className="text-sm font-medium text-slate-ui">Desde </span>
                   )}
@@ -157,7 +157,7 @@ export default function EmpresasPage() {
 
       <section className="sep-gradient">
         <Container size="wide" className="py-16 text-center">
-          <h2 className="mx-auto max-w-2xl font-display text-[2rem] font-bold leading-tight text-white">
+          <h2 className="mx-auto max-w-2xl font-display text-h2 font-bold leading-tight text-white">
             Conversemos sobre el impacto que quieres demostrar
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-white/75">

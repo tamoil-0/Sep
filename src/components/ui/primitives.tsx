@@ -15,10 +15,10 @@ export function Container({
   return (
     <div
       className={cn(
-        "mx-auto w-full px-5 sm:px-8",
-        size === "narrow" && "max-w-3xl",
-        size === "default" && "max-w-6xl",
-        size === "wide" && "max-w-7xl",
+        "mx-auto w-full px-4 sm:px-6 md:px-8",
+        size === "narrow" && "max-w-reading",
+        size === "default" && "max-w-content",
+        size === "wide" && "max-w-wide",
         className,
       )}
     >
@@ -42,7 +42,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "py-16 sm:py-24",
+        "py-14 md:py-18 lg:py-22",
         tone === "muted" && "bg-surface-1",
         tone === "gradient" && "sep-gradient text-white",
         className,
@@ -80,7 +80,7 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "mb-3 text-xs font-semibold uppercase tracking-[0.14em]",
+            "mb-3 text-caption font-semibold uppercase tracking-[0.12em]",
             inverted ? "text-gold-500" : "text-sep-600",
           )}
         >
@@ -89,7 +89,7 @@ export function SectionHeader({
       )}
       <h2
         className={cn(
-          "text-[2rem] sm:text-[2.5rem]",
+          "font-display text-h2",
           inverted ? "text-white" : "text-ink",
         )}
       >
@@ -98,7 +98,7 @@ export function SectionHeader({
       {description && (
         <p
           className={cn(
-            "mt-4 text-[1.0625rem] leading-relaxed",
+            "mt-4 text-body-lg",
             inverted ? "text-white/75" : "text-slate-ui",
           )}
         >
@@ -142,19 +142,7 @@ export function PageHero({
         inverted ? "sep-gradient" : "border-b border-line bg-surface-1",
       )}
     >
-      {inverted && (
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-      )}
-
-      <Container size="wide" className="relative py-16 sm:py-20">
+      <Container size="wide" className="relative py-14 md:py-18 lg:py-20">
         <div
           className={cn(
             "grid items-center gap-12",
@@ -165,7 +153,7 @@ export function PageHero({
             {eyebrow}
             <h1
               className={cn(
-                "mt-5 font-display text-[2.5rem] font-bold leading-[1.06] tracking-[-0.03em] sm:text-[3.25rem]",
+                "mt-5 font-display text-display font-bold",
                 inverted ? "text-white" : "text-ink",
               )}
             >
@@ -174,7 +162,7 @@ export function PageHero({
             {description && (
               <p
                 className={cn(
-                  "mt-5 text-lg leading-relaxed",
+                  "mt-5 max-w-[65ch] text-body-lg",
                   inverted ? "text-white/75" : "text-slate-ui",
                 )}
               >
@@ -193,15 +181,15 @@ export function PageHero({
               <div key={s.label}>
                 <dd
                   className={cn(
-                    "tabular font-display text-[2rem] font-semibold leading-none",
-                    inverted ? "text-gold-500" : "sep-gradient-text",
+                    "tabular text-h3 font-semibold leading-none tracking-tight",
+                    inverted ? "text-white" : "text-ink",
                   )}
                 >
                   {s.value}
                 </dd>
                 <dt
                   className={cn(
-                    "mt-2 text-[0.8125rem] leading-snug",
+                    "mt-2 text-body-sm leading-snug",
                     inverted ? "text-white/65" : "text-slate-ui",
                   )}
                 >
@@ -235,9 +223,9 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "min-w-0 rounded-[14px] border border-line bg-white p-4 sm:p-6",
+        "min-w-0 rounded-md border border-line bg-white p-5",
         interactive &&
-          "transition-all duration-200 hover:border-sep-200 hover:shadow-[0_8px_28px_rgba(46,11,232,.08)]",
+          "transition-colors duration-150 hover:border-sep-300 hover:bg-surface-1/50",
         className,
       )}
       {...rest}
@@ -251,13 +239,13 @@ export function Card({
 
 const badgeTones = {
   brand: "bg-sep-50 text-sep-700",
-  gold: "bg-[#FFF6DE] text-gold-700",
-  seed: "bg-[#EEF8E4] text-seed-700",
+  gold: "bg-[#fff6de] text-gold-700",
+  seed: "bg-[#eef8e4] text-seed-700",
   neutral: "bg-surface-2 text-graphite",
   success: "bg-success-bg text-success",
-  warning: "bg-warning-bg text-[#8A5A00]",
+  warning: "bg-warning-bg text-warning",
   danger: "bg-danger-bg text-danger",
-  white: "bg-white/12 text-white ring-1 ring-inset ring-white/25 backdrop-blur-sm",
+  white: "bg-white/10 text-white ring-1 ring-inset ring-white/25",
 } as const;
 
 export function Badge({
@@ -272,7 +260,7 @@ export function Badge({
   return (
     <span
       className={cn(
-        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
+        "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-caption font-semibold",
         badgeTones[tone],
         className,
       )}
@@ -303,15 +291,15 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-[14px] border border-dashed border-line bg-surface-1 px-4 py-10 text-center sm:px-6 sm:py-14">
+    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-line bg-surface-1 px-4 py-10 text-center sm:px-6 sm:py-14">
       {icon && (
-        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-white text-slate-ui shadow-[0_1px_3px_rgba(18,16,28,.06)]">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-white text-slate-ui shadow-subtle">
           {icon}
         </div>
       )}
-      <p className="font-display text-lg font-semibold text-ink">{title}</p>
+      <p className="font-display text-h4 font-semibold text-ink">{title}</p>
       {description && (
-        <p className="mt-1.5 max-w-sm text-sm text-slate-ui">{description}</p>
+        <p className="mt-1.5 max-w-sm text-body-sm text-slate-ui">{description}</p>
       )}
       {action && <div className="mt-5">{action}</div>}
     </div>
@@ -324,24 +312,27 @@ export function ProgressBar({
   value,
   className,
   tone = "brand",
+  label = "Progreso",
 }: {
   value: number;
   className?: string;
   tone?: "brand" | "gold" | "seed";
+  label?: string;
 }) {
   const pct = Math.max(0, Math.min(100, value));
   return (
     <div
       className={cn("h-1.5 w-full overflow-hidden rounded-full bg-surface-2", className)}
       role="progressbar"
+      aria-label={label}
       aria-valuenow={pct}
       aria-valuemin={0}
       aria-valuemax={100}
     >
       <div
         className={cn(
-          "h-full rounded-full transition-[width] duration-500",
-          tone === "brand" && "sep-gradient",
+          "h-full rounded-full transition-[width] duration-200",
+          tone === "brand" && "bg-sep-600",
           tone === "gold" && "bg-gold-500",
           tone === "seed" && "bg-seed-500",
         )}
@@ -368,8 +359,8 @@ export function Stat({
     <div className={className}>
       <p
         className={cn(
-          "tabular font-display text-[2.25rem] font-semibold leading-none tracking-tight sm:text-[2.75rem]",
-          inverted ? "text-gold-500" : "sep-gradient-text",
+          "tabular font-display text-h1 font-semibold leading-none tracking-tight",
+          inverted ? "text-gold-500" : "text-sep-700",
         )}
       >
         {value}

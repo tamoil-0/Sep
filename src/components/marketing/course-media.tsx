@@ -55,7 +55,7 @@ export function CourseMedia({
     return (
       <figure
         className={cn(
-          "group relative isolate overflow-hidden rounded-[12px] bg-sep-950",
+          "group relative isolate overflow-hidden rounded-md bg-sep-950",
           className,
         )}
       >
@@ -63,7 +63,7 @@ export function CourseMedia({
           src={src}
           alt={coverUrl ? `Portada del curso ${title}` : (mappedPhoto?.alt ?? `Portada del curso ${title}`)}
           fill
-          priority={priority}
+          loading={priority ? "eager" : "lazy"}
           sizes="(min-width: 1024px) 28vw, (min-width: 640px) 48vw, 92vw"
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
           style={{ objectPosition: mappedPhoto?.position }}
@@ -78,7 +78,7 @@ export function CourseMedia({
       role="img"
       aria-label={`Portada visual SEP para ${title}`}
       className={cn(
-        "relative isolate overflow-hidden rounded-[12px] sep-gradient text-white",
+        "relative isolate overflow-hidden rounded-md sep-gradient text-white",
         className,
       )}
     >

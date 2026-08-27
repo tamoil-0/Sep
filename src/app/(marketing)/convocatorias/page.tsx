@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata = createPageMetadata({
   title: "Convocatorias abiertas",
@@ -19,13 +20,12 @@ export const metadata = createPageMetadata({
   keywords: ["convocatorias para jóvenes Perú", "convocatorias emprendimiento", "oportunidades universitarios Perú"],
 });
 
-/** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function ConvocatoriasPage() {
   const supabase = createPublicClient();
 
-  const [{ data: courses }, { data: roles }] = await Promise.all([
+  const [coursesResult, rolesResult] = await Promise.all([
     supabase
       .from("courses")
       .select("slug, title, subtitle, sessions_count, total_hours")
@@ -37,6 +37,9 @@ export default async function ConvocatoriasPage() {
       .eq("is_open", true)
       .gt("open_positions", 0),
   ]);
+  assertQueryResults("publico:convocatorias", coursesResult, rolesResult);
+  const courses = coursesResult.data;
+  const roles = rolesResult.data;
 
   const calls = [
     ...(courses ?? []).map((c) => ({
@@ -106,13 +109,13 @@ export default async function ConvocatoriasPage() {
               <li key={c.key}>
                 <Card className="flex h-full flex-col p-6">
                   <div className="flex items-start justify-between gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-sep-50 text-sep-600">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600">
                       <c.icon className="size-5" />
                     </span>
                     <Badge tone={c.tone}>{c.kind}</Badge>
                   </div>
 
-                  <h2 className="mt-4 font-display text-[1.125rem] font-semibold leading-snug text-ink">
+                  <h2 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
                     {c.title}
                   </h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">

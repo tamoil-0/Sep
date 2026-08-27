@@ -30,44 +30,56 @@ export function SessionList({
 }) {
   const router = useRouter();
   const [busy, setBusy] = React.useState<string | null>(null);
-  const [toast, setToast] = React.useState<string | null>(null);
+  const [feedback, setFeedback] = React.useState<{ text: string; ok: boolean } | null>(null);
   const [open, setOpen] = React.useState<string | null>(null);
 
   React.useEffect(() => {
-    if (!toast) return;
-    const t = setTimeout(() => setToast(null), 5000);
+    if (!feedback) return;
+    const t = setTimeout(() => setFeedback(null), 5000);
     return () => clearTimeout(t);
-  }, [toast]);
+  }, [feedback]);
 
   async function toggle(session: SessionRow) {
     setBusy(session.id);
-    const result = await toggleSessionAction(
-      session.id,
-      !session.isCompleted,
-      courseSlug,
-    );
-    setBusy(null);
-
-    if (result.ok) {
-      if (result.message) setToast(result.message);
-      router.refresh();
-    } else {
-      setToast(result.error);
+    try {
+      const result = await toggleSessionAction(
+        session.id,
+        !session.isCompleted,
+        courseSlug,
+      );
+      if (result.ok) {
+        setFeedback({ text: result.message ?? "Progreso actualizado.", ok: true });
+        router.refresh();
+      } else {
+        setFeedback({ text: result.error, ok: false });
+      }
+    } catch {
+      setFeedback({
+        text: "No pudimos conectarnos. Tu progreso no cambió; inténtalo nuevamente.",
+        ok: false,
+      });
+    } finally {
+      setBusy(null);
     }
   }
 
   return (
     <>
-      {toast && (
+      {feedback && (
         <div
-          className="mb-3 rounded-[10px] border border-sep-200 bg-sep-50 px-4 py-3 text-sm text-sep-700"
+          className={cn(
+            "mb-3 rounded-sm border px-4 py-3 text-sm",
+            feedback.ok
+              ? "border-success/25 bg-success-bg text-success"
+              : "border-danger/25 bg-danger-bg text-danger",
+          )}
           role="status"
         >
-          {toast}
+          {feedback.text}
         </div>
       )}
 
-      <ul className="divide-y divide-line overflow-hidden rounded-[14px] border border-line bg-white">
+      <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
         {sessions.map((s) => {
           const isOpen = open === s.id;
           return (
@@ -86,7 +98,7 @@ export function SessionList({
                     }
                     aria-pressed={s.isCompleted}
                     className={cn(
-                      "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-all",
+                      "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                       s.isCompleted
                         ? "border-seed-500 bg-seed-500 text-white"
                         : "border-line bg-white text-transparent hover:border-sep-400",
@@ -117,7 +129,7 @@ export function SessionList({
                     </span>
                     <p
                       className={cn(
-                        "text-[0.9375rem] font-medium",
+                        "text-body-sm font-medium",
                         s.isCompleted ? "text-slate-ui" : "text-ink",
                       )}
                     >
@@ -148,7 +160,7 @@ export function SessionList({
                     href={s.meetUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-[8px] bg-sep-600 px-3.5 text-sm font-medium text-white transition-colors hover:bg-sep-700"
+                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-sm font-medium text-white transition-colors hover:bg-sep-700"
                   >
                     <ExternalLink className="size-3.5" />
                     Unirme

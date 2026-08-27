@@ -15,10 +15,10 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] sep-gradient text-[0.9375rem] font-medium text-white shadow-[0_4px_16px_rgba(46,11,232,.22)] transition-all hover:shadow-[0_8px_24px_rgba(46,11,232,.3)] disabled:opacity-60"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Enviar comprobante
+      {pending ? "Enviando comprobante…" : "Enviar comprobante"}
     </button>
   );
 }
@@ -61,9 +61,9 @@ export function VoucherForm({ orderId }: { orderId: string }) {
 
   if (state?.ok && state.message) {
     return (
-      <div className="rounded-[12px] border border-success/25 bg-success-bg p-5 text-center">
+      <div className="rounded-md border border-success/25 bg-success-bg p-5 text-center">
         <CircleCheck className="mx-auto size-8 text-success" />
-        <p className="mt-3 font-display text-[1.0625rem] font-semibold text-ink">
+        <p className="mt-3 font-display text-body font-semibold text-ink">
           Comprobante recibido
         </p>
         <p className="mx-auto mt-1.5 max-w-sm text-sm leading-relaxed text-graphite">
@@ -123,7 +123,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
 
         <div
           className={cn(
-            "relative rounded-[12px] border border-dashed p-5 transition-colors",
+            "relative rounded-md border border-dashed p-5 transition-colors",
             fieldErrors?.voucher
               ? "border-danger bg-danger-bg/30"
               : "border-line bg-surface-1 hover:border-sep-300",

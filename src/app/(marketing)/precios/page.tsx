@@ -29,7 +29,7 @@ export const metadata = createPageMetadata({
 
 function ProposedTag() {
   return (
-    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-warning-bg px-2 py-0.5 text-[0.625rem] font-medium text-[#8A5A00]">
+    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-warning-bg px-2 py-0.5 text-caption font-medium text-[#8A5A00]">
       <Info className="size-3" />
       Propuesta
     </span>
@@ -43,7 +43,7 @@ export default function PreciosPage() {
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 text-center sm:py-20">
           <Badge tone="seed">Transparencia total</Badge>
-          <h1 className="mx-auto mt-5 max-w-3xl font-display text-[2.5rem] font-bold leading-[1.1] text-ink sm:text-[3.25rem]">
+          <h1 className="mx-auto mt-5 max-w-3xl font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
             Formación clara, <GoldUnderline>precios transparentes</GoldUnderline>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-ui">
@@ -59,10 +59,10 @@ export default function PreciosPage() {
           <Card className="flex flex-wrap items-center justify-between gap-6 border-seed-400/40 bg-[#F5FBEF] p-8">
             <div>
               <Badge tone="seed">Todo el catálogo</Badge>
-              <h2 className="mt-3.5 font-display text-[1.75rem] font-semibold text-ink">
+              <h2 className="mt-3.5 font-display text-h2 font-semibold text-ink">
                 Cursos: S/ 0
               </h2>
-              <p className="mt-2 max-w-xl text-[0.9375rem] leading-relaxed text-slate-ui">
+              <p className="mt-2 max-w-xl text-body-sm leading-relaxed text-slate-ui">
                 Design Thinking aplicado, Scrum para proyectos sociales, Liderazgo e
                 impacto regional y Metodologías ágiles en el aula. 8 horas cada uno,
                 6 sesiones en vivo, 100 % virtual, sin costo de acceso.
@@ -92,12 +92,12 @@ export default function PreciosPage() {
                 key={cert.slug}
                 className={
                   cert.recommended
-                    ? "relative border-sep-200 shadow-[0_8px_32px_rgba(46,11,232,.09)]"
+                    ? "relative border-sep-200 "
                     : ""
                 }
               >
                 {cert.recommended && (
-                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-[0.6875rem] font-semibold text-ink">
+                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-ink">
                     Recomendado
                   </span>
                 )}
@@ -105,7 +105,7 @@ export default function PreciosPage() {
                   {cert.name}
                 </h3>
                 <p className="mt-1 text-xs text-slate-ui">{cert.issuer}</p>
-                <p className="tabular mt-5 font-display text-[2.25rem] font-bold leading-none text-ink">
+                <p className="tabular mt-5 font-display text-h1 font-bold leading-none text-ink">
                   {formatSoles(cert.priceCents)}
                 </p>
                 <p className="mt-3 text-sm leading-relaxed text-slate-ui">
@@ -141,7 +141,7 @@ export default function PreciosPage() {
                   {tier.label}
                   {!tier.confirmed && <ProposedTag />}
                 </p>
-                <p className="tabular mt-3 font-display text-[2rem] font-bold leading-none sep-gradient-text">
+                <p className="tabular mt-3 font-display text-h2 font-bold leading-none text-sep-700">
                   {tier.priceCents === 0 ? "Gratis" : formatSoles(tier.priceCents)}
                 </p>
               </Card>
@@ -172,12 +172,12 @@ export default function PreciosPage() {
                   key={plan.slug}
                   className={
                     plan.highlight
-                      ? "relative flex flex-col border-sep-300 shadow-[0_8px_32px_rgba(46,11,232,.1)]"
+                      ? "relative flex flex-col border-sep-300 "
                       : "flex flex-col"
                   }
                 >
                   {plan.highlight && (
-                    <span className="absolute -top-3 left-6 rounded-full sep-gradient px-3 py-1 text-[0.6875rem] font-semibold text-white">
+                    <span className="absolute -top-3 left-6 rounded-full bg-sep-700 px-3 py-1 text-caption font-semibold text-white">
                       El más elegido
                     </span>
                   )}
@@ -188,7 +188,7 @@ export default function PreciosPage() {
                   </h3>
                   <p className="mt-0.5 text-xs text-slate-ui">{plan.tagline}</p>
 
-                  <p className="tabular mt-5 font-display text-[1.875rem] font-bold leading-none text-ink">
+                  <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                     {plan.priceCents === 0 ? "Gratis" : formatSoles(plan.priceCents)}
                   </p>
                   <p className="mt-1 text-xs text-slate-ui">
@@ -250,12 +250,12 @@ export default function PreciosPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {b2bPackages.map((pkg) => (
               <Card key={pkg.slug} className="flex flex-col">
-                <h3 className="font-display text-[1.0625rem] font-semibold text-ink">
+                <h3 className="font-display text-body font-semibold text-ink">
                   {pkg.name}
                 </h3>
                 <p className="mt-1 text-xs leading-relaxed text-slate-ui">{pkg.scope}</p>
 
-                <p className="tabular mt-5 font-display text-[1.75rem] font-bold leading-none text-ink">
+                <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                   {"priceFrom" in pkg && pkg.priceFrom && (
                     <span className="text-sm font-medium text-slate-ui">Desde </span>
                   )}
@@ -299,13 +299,13 @@ export default function PreciosPage() {
         <Container size="wide">
           <div className="grid gap-5 lg:grid-cols-2">
             <Card className="p-8">
-              <div className="flex size-11 items-center justify-center rounded-[12px] bg-gold-500/15 text-gold-700">
+              <div className="flex size-11 items-center justify-center rounded-md bg-gold-500/15 text-gold-700">
                 <HeartHandshake className="size-5" />
               </div>
-              <h2 className="mt-5 font-display text-[1.5rem] font-semibold text-ink">
+              <h2 className="mt-5 font-display text-h3 font-semibold text-ink">
                 Donar
               </h2>
-              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate-ui">
+              <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
                 Tu donación ayuda a que jóvenes de regiones que nadie está atendiendo
                 accedan a formación, mentoría y talleres.
               </p>
@@ -314,12 +314,12 @@ export default function PreciosPage() {
                 {donationAmounts.map((a) => (
                   <span
                     key={a}
-                    className="tabular rounded-[10px] border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink"
+                    className="tabular rounded-sm border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink"
                   >
                     {formatSoles(a)}
                   </span>
                 ))}
-                <span className="rounded-[10px] border border-dashed border-line px-4 py-2.5 text-sm text-slate-ui">
+                <span className="rounded-sm border border-dashed border-line px-4 py-2.5 text-sm text-slate-ui">
                   Otro monto
                 </span>
               </div>
@@ -332,10 +332,10 @@ export default function PreciosPage() {
             </Card>
 
             <Card className="p-8">
-              <h2 className="font-display text-[1.5rem] font-semibold text-ink">
+              <h2 className="font-display text-h3 font-semibold text-ink">
                 Cómo puedes pagar
               </h2>
-              <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate-ui">
+              <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
                 Elegimos los métodos que la gente realmente usa en el Perú.
               </p>
 
@@ -366,7 +366,7 @@ export default function PreciosPage() {
             <div className="flex items-start gap-3.5">
               <Info className="mt-0.5 size-5 shrink-0 text-slate-ui" />
               <div>
-                <h2 className="font-display text-[0.9375rem] font-semibold text-ink">
+                <h2 className="font-display text-body-sm font-semibold text-ink">
                   Sobre los precios marcados como propuesta
                 </h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">

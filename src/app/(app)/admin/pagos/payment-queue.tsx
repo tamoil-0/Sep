@@ -15,6 +15,8 @@ import { Badge, Card } from "@/components/ui/primitives";
 import { Textarea } from "@/components/forms/field";
 import { formatSoles, relativeTime, initials } from "@/lib/utils";
 import { cn } from "@/lib/utils";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
+import { useToast } from "@/components/ui/toast";
 
 interface PaymentRow {
   id: string;
@@ -75,9 +77,15 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
   const [tab, setTab] = React.useState<string>("en_revision");
   const [busy, setBusy] = React.useState<string | null>(null);
   const [rejecting, setRejecting] = React.useState<string | null>(null);
+  const [approving, setApproving] = React.useState<string | null>(null);
   const [reason, setReason] = React.useState("");
   const [feedback, setFeedback] = React.useState<{ id: string; text: string; ok: boolean } | null>(null);
   const [voucher, setVoucher] = React.useState<{ url: string; row: PaymentRow } | null>(null);
+  const toast = useToast();
+  const voucherDialogRef = useDialogA11y<HTMLDivElement>({
+    open: Boolean(voucher),
+    onClose: () => setVoucher(null),
+  });
 
   const visible =
     tab === "all" ? payments : payments.filter((p) => p.status === tab);
@@ -95,24 +103,39 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
   async function openVoucher(row: PaymentRow) {
     if (!row.voucherUrl) return;
     setBusy(row.id);
-    const result = await getVoucherUrlAction(row.voucherUrl);
-    setBusy(null);
-    if (result.ok) setVoucher({ url: result.data, row });
-    else setFeedback({ id: row.id, text: result.error, ok: false });
+    try {
+      const result = await getVoucherUrlAction(row.voucherUrl);
+      if (result.ok) setVoucher({ url: result.data, row });
+      else setFeedback({ id: row.id, text: result.error, ok: false });
+    } catch {
+      setFeedback({ id: row.id, text: "No pudimos cargar el comprobante. Revisa tu conexión e inténtalo nuevamente.", ok: false });
+    } finally {
+      setBusy(null);
+    }
   }
 
   async function review(id: string, approve: boolean) {
     setBusy(id);
-    const result = await reviewPaymentAction(id, approve, approve ? undefined : reason);
-    setBusy(null);
+    try {
+      const result = await reviewPaymentAction(id, approve, approve ? undefined : reason);
 
-    if (result.ok) {
-      setFeedback({ id, text: result.message ?? "Listo.", ok: true });
-      setRejecting(null);
-      setReason("");
-      router.refresh();
-    } else {
-      setFeedback({ id, text: result.error, ok: false });
+      if (result.ok) {
+        setFeedback({ id, text: result.message ?? "Cambio guardado.", ok: true });
+        toast({ title: result.message ?? (approve ? "Pago aprobado" : "Pago rechazado"), tone: "success" });
+        setRejecting(null);
+        setApproving(null);
+        setReason("");
+        router.refresh();
+      } else {
+        setFeedback({ id, text: result.error, ok: false });
+        toast({ title: "No pudimos revisar el pago", description: result.error, tone: "error" });
+      }
+    } catch {
+      const error = "No pudimos conectarnos. El pago no cambió; inténtalo nuevamente.";
+      setFeedback({ id, text: error, ok: false });
+      toast({ title: "No se revisó el pago", description: error, tone: "error" });
+    } finally {
+      setBusy(null);
     }
   }
 
@@ -147,20 +170,36 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
 
       {visible.length === 0 ? (
         <Card className="py-10 text-center">
-          <p className="text-sm text-slate-ui">Nada por aquí.</p>
+          <p className="font-display text-body font-semibold text-ink">
+            {payments.length === 0 ? "Aún no hay pagos registrados" : `No hay pagos en “${TABS.find((item) => item.key === tab)?.label}”`}
+          </p>
+          <p className="mt-1 text-sm text-slate-ui">
+            {payments.length === 0
+              ? "Cuando se envíe un pago aparecerá aquí para su seguimiento."
+              : "Los pagos existen, pero ninguno coincide con esta pestaña."}
+          </p>
+          {payments.length > 0 && tab !== "all" && (
+            <button
+              type="button"
+              onClick={() => setTab("all")}
+              className="mt-4 min-h-control rounded-sm border border-line bg-white px-4 text-body-sm font-semibold text-ink hover:bg-surface-2"
+            >
+              Ver todos los pagos
+            </button>
+          )}
         </Card>
       ) : (
         <div className="space-y-3">
           {visible.map((p) => (
             <Card key={p.id} className="p-0">
               <div className="flex flex-wrap items-start gap-4 p-5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                   {initials(p.buyerName)}
                 </span>
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                    <p className="font-display text-body-sm font-semibold text-ink">
                       {p.buyerName}
                     </p>
                     <Badge tone={statusTone[p.status as keyof typeof statusTone] ?? "neutral"}>
@@ -235,7 +274,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                     type="button"
                     onClick={() => openVoucher(p)}
                     disabled={busy === p.id}
-                    className="inline-flex h-9 items-center gap-2 rounded-[8px] border border-line bg-white px-3.5 text-sm text-graphite transition-colors hover:bg-surface-2 disabled:opacity-50"
+                    className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-3.5 text-body-sm text-graphite transition-colors hover:bg-surface-2 disabled:opacity-50"
                   >
                     {busy === p.id ? (
                       <Loader2 className="size-4 animate-spin" />
@@ -250,9 +289,9 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                   <>
                     <button
                       type="button"
-                      onClick={() => review(p.id, true)}
+                      onClick={() => setApproving(p.id)}
                       disabled={busy === p.id}
-                      className="inline-flex h-9 items-center gap-2 rounded-[8px] bg-success px-3.5 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-success px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-[#066331] disabled:opacity-50"
                     >
                       <Check className="size-4" />
                       Aprobar y emitir
@@ -263,7 +302,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                         setRejecting(rejecting === p.id ? null : p.id);
                         setReason("");
                       }}
-                      className="inline-flex h-9 items-center gap-2 rounded-[8px] border border-danger/30 bg-white px-3.5 text-sm font-medium text-danger transition-colors hover:bg-danger-bg"
+                      className="inline-flex min-h-control items-center gap-2 rounded-sm border border-danger/30 bg-white px-3.5 text-body-sm font-medium text-danger transition-colors hover:bg-danger-bg"
                     >
                       <X className="size-4" />
                       Rechazar
@@ -271,6 +310,17 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                   </>
                 )}
               </div>
+
+              {approving === p.id && (
+                <div className="border-t border-success/20 bg-success-bg p-5">
+                  <p className="text-body-sm font-semibold text-success">Aprobar pago de {p.buyerName}</p>
+                  <p className="mt-1 text-caption text-graphite">Marcarás {formatSoles(p.amountCents)} como pagado y continuará la emisión asociada. Verifica el monto y el código de operación antes de confirmar.</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <button type="button" onClick={() => void review(p.id, true)} disabled={busy === p.id} className="min-h-control rounded-sm bg-success px-4 text-body-sm font-semibold text-white disabled:opacity-50">Confirmar aprobación</button>
+                    <button type="button" onClick={() => setApproving(null)} className="min-h-control rounded-sm px-4 text-body-sm font-medium text-graphite hover:bg-white">Cancelar</button>
+                  </div>
+                </div>
+              )}
 
               {rejecting === p.id && (
                 <div className="border-t border-line bg-surface-1 p-5">
@@ -292,7 +342,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                       type="button"
                       onClick={() => review(p.id, false)}
                       disabled={busy === p.id || reason.trim().length < 10}
-                      className="inline-flex h-9 items-center gap-2 rounded-[8px] bg-danger px-4 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-danger px-4 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                     >
                       {busy === p.id && <Loader2 className="size-4 animate-spin" />}
                       Confirmar rechazo
@@ -300,7 +350,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                     <button
                       type="button"
                       onClick={() => setRejecting(null)}
-                      className="inline-flex h-9 items-center rounded-[8px] px-4 text-sm text-graphite hover:bg-surface-2"
+                      className="inline-flex min-h-control items-center rounded-sm px-4 text-sm text-graphite hover:bg-surface-2"
                     >
                       Cancelar
                     </button>
@@ -315,21 +365,24 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
       {/* Visor del comprobante */}
       {voucher && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-5 backdrop-blur-sm"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-5 "
           onClick={() => setVoucher(null)}
           role="dialog"
           aria-modal="true"
-          aria-label="Comprobante de pago"
+          aria-labelledby="voucher-dialog-title"
+          aria-describedby="voucher-dialog-description"
         >
           <div
-            className="max-h-[90vh] w-full max-w-lg overflow-auto rounded-[16px] bg-white"
+            ref={voucherDialogRef}
+            tabIndex={-1}
+            className="max-h-[90dvh] w-full max-w-lg overflow-auto rounded-lg bg-white shadow-elevated outline-none"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
               <div className="flex items-center gap-2.5">
                 <Receipt className="size-4 text-slate-ui" />
                 <div>
-                  <p className="text-sm font-medium text-ink">{voucher.row.buyerName}</p>
+                  <p id="voucher-dialog-title" className="text-body-sm font-medium text-ink">Comprobante de {voucher.row.buyerName}</p>
                   <p className="tabular text-xs text-slate-ui">
                     {methodLabels[voucher.row.method]} ·{" "}
                     {formatSoles(voucher.row.amountCents)} · Op.{" "}
@@ -340,7 +393,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
               <button
                 type="button"
                 onClick={() => setVoucher(null)}
-                className="rounded-lg p-2 text-slate-ui hover:bg-surface-2"
+                className="flex size-control items-center justify-center rounded-sm text-slate-ui hover:bg-surface-2"
                 aria-label="Cerrar"
               >
                 <X className="size-4" />
@@ -362,7 +415,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                   className="mx-auto max-h-[60vh] rounded-lg border border-line object-contain"
                 />
               )}
-              <p className="mt-3 text-center text-xs text-mist">
+              <p id="voucher-dialog-description" className="mt-3 text-center text-caption text-mist">
                 Enlace temporal: caduca en 5 minutos.
               </p>
             </div>

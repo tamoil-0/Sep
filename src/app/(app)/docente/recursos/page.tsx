@@ -40,12 +40,12 @@ export default async function DocenteRecursosPage() {
             {g.items.map((r) => (
               <Card key={r.name} className="flex flex-col p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-[9px] bg-gold-500/15 text-gold-700">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
                     <FolderOpen className="size-4" />
                   </span>
                   <Badge tone="neutral">{r.level}</Badge>
                 </div>
-                <h3 className="mt-3.5 text-[0.9375rem] font-medium leading-snug text-ink">{r.name}</h3>
+                <h3 className="mt-3.5 text-body-sm font-medium leading-snug text-ink">{r.name}</h3>
                 <p className="mt-1.5 flex-1 text-xs leading-relaxed text-slate-ui">{r.detail}</p>
                 <p className="mt-4 inline-flex items-center gap-1.5 border-t border-line pt-3 text-xs text-mist">
                   <Download className="size-3.5" />

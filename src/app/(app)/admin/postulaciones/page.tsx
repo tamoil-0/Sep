@@ -3,6 +3,7 @@ import { requireRole } from "@/lib/auth/session";
 import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/app/page-header";
 import { ApplicationBoard } from "./application-board";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Postulaciones" };
 
@@ -10,8 +11,7 @@ export default async function AdminPostulacionesPage() {
   await requireRole(["admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: volunteers }, { data: speakers }, { data: hours }] =
-    await Promise.all([
+  const [volunteersResult, speakersResult, hoursResult] = await Promise.all([
       supabase
         .from("volunteer_applications")
         .select(
@@ -33,6 +33,10 @@ export default async function AdminPostulacionesPage() {
         .order("date", { ascending: false })
         .limit(60),
     ]);
+  assertQueryResults("admin:postulaciones", volunteersResult, speakersResult, hoursResult);
+  const volunteers = volunteersResult.data;
+  const speakers = speakersResult.data;
+  const hours = hoursResult.data;
 
   return (
     <>

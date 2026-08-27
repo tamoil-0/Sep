@@ -9,6 +9,7 @@ import { PanelSection } from "@/components/app/data-views";
 import { Check, Clock, Mail } from "lucide-react";
 import { StatusBadge } from "@/components/app/data-views";
 import { formatDateTime } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Invitaciones" };
 
@@ -16,16 +17,20 @@ export default async function SpeakerInvitacionesPage() {
   const user = await requireRole(["speaker", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: sp } = await supabase
+  const speakerResult = await supabase
     .from("speaker_profiles").select("id").eq("user_id", user.id).maybeSingle();
+  assertQueryResults("speaker:perfil", speakerResult);
+  const sp = speakerResult.data;
 
-  const { data: invites } = sp?.id
+  const invitationsResult = sp?.id
     ? await supabase
         .from("speaker_invitations")
         .select("id, topic, proposed_at, status, events(title, starts_at, location, is_online)")
         .eq("speaker_id", sp.id)
         .order("created_at", { ascending: false })
-    : { data: [] };
+    : null;
+  if (invitationsResult) assertQueryResults("speaker:invitaciones", invitationsResult);
+  const invites = invitationsResult?.data ?? [];
 
   const rows = (invites ?? []).map((i) => ({
     ...i,
@@ -61,7 +66,7 @@ export default async function SpeakerInvitacionesPage() {
               <Card key={i.id} className="p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
-                    <p className="font-display text-[1.0625rem] font-semibold text-ink">
+                    <p className="font-display text-body font-semibold text-ink">
                       {i.topic ?? "Charla SEP"}
                     </p>
                     {i.event && (
@@ -78,7 +83,7 @@ export default async function SpeakerInvitacionesPage() {
                 </div>
 
                 {i.status === "pendiente" && (
-                  <p className="mt-4 rounded-[10px] bg-surface-1 px-4 py-3 text-sm text-graphite">
+                  <p className="mt-4 rounded-sm bg-surface-1 px-4 py-3 text-sm text-graphite">
                     Para confirmar o proponer otra fecha, responde el correo que te enviamos
                     o escríbenos por WhatsApp. Así queda registro de la coordinación.
                   </p>
@@ -91,4 +96,3 @@ export default async function SpeakerInvitacionesPage() {
     </>
   );
 }
-

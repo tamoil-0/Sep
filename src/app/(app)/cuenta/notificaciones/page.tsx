@@ -7,6 +7,7 @@ import { PageHeader } from "@/components/app/page-header";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { MarkAllReadButton } from "./mark-all-button";
 import { relativeTime, cn } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = {
   title: "Notificaciones",
@@ -17,12 +18,14 @@ export default async function NotificacionesPage() {
   const user = await requireUser();
   const supabase = await createClient();
 
-  const { data } = await supabase
+  const result = await supabase
     .from("notifications")
     .select("id, kind, title, body, link, read_at, created_at")
     .eq("user_id", user.id)
     .order("created_at", { ascending: false })
     .limit(60);
+  assertQueryResults("cuenta:notificaciones", result);
+  const data = result.data;
 
   const rows = data ?? [];
   const unread = rows.filter((n) => !n.read_at).length;
@@ -57,7 +60,7 @@ export default async function NotificacionesPage() {
                   <div className="min-w-0 flex-1">
                     <p
                       className={cn(
-                        "text-[0.9375rem]",
+                        "text-body-sm",
                         n.read_at ? "text-graphite" : "font-medium text-ink",
                       )}
                     >
@@ -89,4 +92,3 @@ export default async function NotificacionesPage() {
     </>
   );
 }
-

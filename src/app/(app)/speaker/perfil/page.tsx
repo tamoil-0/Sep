@@ -6,6 +6,7 @@ import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 
 import { Globe, Mic, UserRound } from "lucide-react";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mi perfil de speaker" };
 
@@ -13,11 +14,13 @@ export default async function SpeakerPerfilPage() {
   const user = await requireRole(["speaker", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: s } = await supabase
+  const result = await supabase
     .from("speaker_profiles")
     .select("*")
     .eq("user_id", user.id)
     .maybeSingle();
+  assertQueryResults("speaker:perfil-completo", result);
+  const s = result.data;
 
   if (!s) {
     return (
@@ -96,7 +99,7 @@ export default async function SpeakerPerfilPage() {
               <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
                 Mi historia
               </h2>
-              <p className="mt-3 text-[0.9375rem] leading-relaxed text-graphite">{s.story}</p>
+              <p className="mt-3 text-body-sm leading-relaxed text-graphite">{s.story}</p>
             </Card>
           )}
 
@@ -114,4 +117,3 @@ export default async function SpeakerPerfilPage() {
     </>
   );
 }
-

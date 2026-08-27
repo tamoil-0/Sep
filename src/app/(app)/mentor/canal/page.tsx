@@ -6,6 +6,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { PanelSection } from "@/components/app/data-views";
 import { initials, relativeTime } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Canal de mentores" };
 
@@ -20,7 +21,7 @@ export default async function MentorCanalPage() {
   const user = await requireRole(["mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: mentors }, { data: posts }] = await Promise.all([
+  const [mentorsResult, postsResult] = await Promise.all([
     supabase.from("volunteer_leaderboard").select("*").limit(20),
     supabase
       .from("posts")
@@ -29,6 +30,9 @@ export default async function MentorCanalPage() {
       .order("created_at", { ascending: false })
       .limit(10),
   ]);
+  assertQueryResults("mentor:canal", mentorsResult, postsResult);
+  const mentors = mentorsResult.data;
+  const posts = postsResult.data;
 
   const team = mentors ?? [];
 
@@ -56,7 +60,7 @@ export default async function MentorCanalPage() {
               return (
                 <Card key={p.id} className="p-5">
                   <div className="flex gap-3">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                       {initials(a?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0">
@@ -64,7 +68,7 @@ export default async function MentorCanalPage() {
                         <span className="font-medium text-ink">{a?.full_name}</span>
                         <span className="ml-2 text-xs text-mist">{relativeTime(p.created_at)}</span>
                       </p>
-                      <p className="mt-1.5 whitespace-pre-line text-[0.9375rem] leading-relaxed text-graphite">
+                      <p className="mt-1.5 whitespace-pre-line text-body-sm leading-relaxed text-graphite">
                         {p.content}
                       </p>
                     </div>
@@ -80,7 +84,7 @@ export default async function MentorCanalPage() {
         <div className="grid gap-3 md:grid-cols-2">
           {RESOURCES.map((r) => (
             <Card key={r.title} className="p-5">
-              <h3 className="text-[0.9375rem] font-medium text-ink">{r.title}</h3>
+              <h3 className="text-body-sm font-medium text-ink">{r.title}</h3>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{r.detail}</p>
             </Card>
           ))}
@@ -92,7 +96,7 @@ export default async function MentorCanalPage() {
           <ul className="divide-y divide-line">
             {team.map((m) => (
               <li key={m.user_id} className="flex items-center gap-3 px-5 py-3.5">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                   {initials(m.full_name)}
                 </span>
                 <div className="min-w-0 flex-1">
@@ -112,4 +116,3 @@ export default async function MentorCanalPage() {
     </>
   );
 }
-

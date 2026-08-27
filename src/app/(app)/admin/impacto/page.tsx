@@ -13,6 +13,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Card, EmptyState } from "@/components/ui/primitives";
 import { PrintButton } from "@/components/app/print-button";
 import { formatDate, formatSoles } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Reporte de impacto" };
 
@@ -20,13 +21,23 @@ export default async function AdminImpactoPage() {
   await requireRole(["admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: dash }, { data: regions }, { data: schools }, { data: volunteers }] =
-    await Promise.all([
+  const [dashboardResult, regionsResult, schoolsResult, volunteersResult] = await Promise.all([
       supabase.rpc("admin_dashboard"),
       supabase.from("region_stats").select("*"),
       supabase.from("school_impact").select("*"),
       supabase.from("volunteer_leaderboard").select("*"),
     ]);
+  assertQueryResults(
+    "admin:impacto",
+    dashboardResult,
+    regionsResult,
+    schoolsResult,
+    volunteersResult,
+  );
+  const dash = dashboardResult.data;
+  const regions = regionsResult.data;
+  const schools = schoolsResult.data;
+  const volunteers = volunteersResult.data;
 
   const d = dash;
   const topRegions = (regions ?? []).slice(0, 8);
@@ -42,11 +53,11 @@ export default async function AdminImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-6 overflow-hidden p-0">
-        <div className="sep-gradient px-7 py-6 text-white">
+        <div className="bg-sep-800 px-7 py-6 text-white">
           <p className="text-xs uppercase tracking-[0.14em] text-white/70">
             Semillero de Emprendedores Perú
           </p>
-          <h2 className="mt-2 font-display text-[1.75rem] font-semibold">
+          <h2 className="mt-2 font-display text-h2 font-semibold">
             Reporte de impacto
           </h2>
           <p className="mt-1 text-sm text-white/75">
@@ -121,7 +132,7 @@ export default async function AdminImpactoPage() {
                   </div>
                   <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-2">
                     <div
-                      className="h-full rounded-full sep-gradient"
+                      className="h-full rounded-full bg-sep-700"
                       style={{ width: `${(Number(r.users) / maxUsers) * 100}%` }}
                     />
                   </div>
@@ -218,7 +229,7 @@ export default async function AdminImpactoPage() {
             [10, "Reducción de las desigualdades"],
           ].map(([goal, name]) => (
             <Card key={goal} className="p-5">
-              <p className="tabular font-display text-[1.75rem] font-bold leading-none sep-gradient-text">
+              <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                 ODS {goal}
               </p>
               <p className="mt-2 text-sm font-medium text-ink">{name}</p>

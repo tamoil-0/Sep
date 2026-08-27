@@ -127,16 +127,23 @@ export function DiagnosticWizard({
       answer,
     }));
 
-    const result = await submitDiagnosticAction({
-      email,
-      profile,
-      region: region || null,
-      answers: payload,
-    });
+    try {
+      const result = await submitDiagnosticAction({
+        email,
+        profile,
+        region: region || null,
+        answers: payload,
+      });
 
-    setBusy(false);
-    if (result.ok) setStep("done");
-    else setError(result.error);
+      if (result.ok) setStep("done");
+      else setError(result.error);
+    } catch {
+      setError(
+        "No pudimos conectarnos. Tus respuestas siguen en pantalla; revisa tu conexión e inténtalo nuevamente.",
+      );
+    } finally {
+      setBusy(false);
+    }
   }
 
   const answered = current ? answers[current.number] : undefined;
@@ -149,11 +156,11 @@ export function DiagnosticWizard({
         <Container size="narrow">
           <div className="text-center">
             <Badge tone="seed">Fase piloto · 2026 · Áncash, Perú</Badge>
-            <h1 className="mx-auto mt-6 max-w-2xl font-display text-[2.25rem] font-bold leading-[1.12] text-ink sm:text-[2.75rem]">
+            <h1 className="mx-auto mt-6 max-w-2xl font-display text-h1 font-bold leading-[1.12] text-ink sm:text-h1">
               Estamos construyendo algo para jóvenes de regiones.{" "}
               <GoldUnderline>Ayúdanos a hacerlo bien.</GoldUnderline>
             </h1>
-            <p className="mx-auto mt-5 max-w-lg text-[1.0625rem] leading-relaxed text-slate-ui">
+            <p className="mx-auto mt-5 max-w-lg text-body leading-relaxed text-slate-ui">
               Antes de abrir las puertas queremos entender tu realidad: qué te frena, qué
               sueñas y qué necesitas. Son 3 minutos que pueden cambiar lo que construimos
               para ti.
@@ -202,7 +209,7 @@ export function DiagnosticWizard({
               },
             ].map((c) => (
               <Card key={c.title} className="p-6">
-                <h2 className="font-display text-[0.9375rem] font-semibold text-ink">
+                <h2 className="font-display text-body-sm font-semibold text-ink">
                   {c.title}
                 </h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{c.body}</p>
@@ -222,10 +229,10 @@ export function DiagnosticWizard({
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Paso 1 de 3 · Perfil
           </p>
-          <h1 className="mt-3 font-display text-[2rem] font-semibold leading-tight text-ink">
+          <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
             Antes de empezar, ¿quién eres?
           </h1>
-          <p className="mt-2.5 text-[0.9375rem] text-slate-ui">
+          <p className="mt-2.5 text-body-sm text-slate-ui">
             Según tu perfil, las preguntas serán diferentes. No te tomará más de 3 minutos.
           </p>
 
@@ -240,15 +247,15 @@ export function DiagnosticWizard({
                     setAnswers({});
                     setStep("questions");
                   }}
-                  className="group flex w-full items-start gap-4 rounded-[14px] border border-line bg-white p-5 text-left transition-all hover:border-sep-300 hover:shadow-[0_8px_28px_rgba(46,11,232,.08)]"
+                  className="group flex w-full items-start gap-4 rounded-md border border-line bg-white p-5 text-left transition-colors hover:border-sep-300 "
                 >
                   <span className="text-2xl leading-none">{p.emoji}</span>
                   <span className="flex-1">
                     <span className="flex items-center justify-between gap-3">
-                      <span className="font-display text-[1.0625rem] font-semibold text-ink">
+                      <span className="font-display text-body font-semibold text-ink">
                         {p.title}
                       </span>
-                      <ArrowRight className="size-4 shrink-0 text-mist transition-all group-hover:translate-x-0.5 group-hover:text-sep-600" />
+                      <ArrowRight className="size-4 shrink-0 text-mist transition-colors group-hover:translate-x-0.5 group-hover:text-sep-600" />
                     </span>
                     <span className="mt-1 block text-sm leading-relaxed text-slate-ui">
                       {p.body}
@@ -284,7 +291,7 @@ export function DiagnosticWizard({
             </div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-surface-2">
               <div
-                className="h-full rounded-full sep-gradient transition-[width] duration-300"
+                className="h-full rounded-full bg-sep-700 transition-[width] duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
@@ -297,7 +304,7 @@ export function DiagnosticWizard({
             </Badge>
           )}
 
-          <h1 className="font-display text-[1.75rem] font-semibold leading-tight text-ink">
+          <h1 className="font-display text-h2 font-semibold leading-tight text-ink">
             {current.question}
           </h1>
 
@@ -323,7 +330,7 @@ export function DiagnosticWizard({
                     }
                     aria-pressed={selected}
                     className={cn(
-                      "flex w-full items-center gap-3 rounded-[12px] border p-4 text-left text-[0.9375rem] transition-all",
+                      "flex w-full items-center gap-3 rounded-md border p-4 text-left text-body-sm transition-colors",
                       selected
                         ? "border-sep-500 bg-sep-50 text-sep-700"
                         : "border-line bg-white text-graphite hover:border-sep-300",
@@ -332,7 +339,7 @@ export function DiagnosticWizard({
                     <span
                       className={cn(
                         "flex size-5 shrink-0 items-center justify-center border-2 transition-colors",
-                        current.inputType === "multiple" ? "rounded-[5px]" : "rounded-full",
+                        current.inputType === "multiple" ? "rounded-sm" : "rounded-full",
                         selected ? "border-sep-600 bg-sep-600 text-white" : "border-line",
                       )}
                     >
@@ -373,10 +380,10 @@ export function DiagnosticWizard({
           <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Paso final
           </p>
-          <h1 className="mt-3 font-display text-[2rem] font-semibold leading-tight text-ink">
+          <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
             Gracias por contarnos
           </h1>
-          <p className="mt-2.5 text-[0.9375rem] leading-relaxed text-slate-ui">
+          <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
             Antes de mostrarte lo que construimos para ti, déjanos tu correo. Te avisamos
             cuando abramos el acceso al piloto.
           </p>
@@ -435,15 +442,15 @@ export function DiagnosticWizard({
   return (
     <Section>
       <Container size="narrow">
-        <div className="overflow-hidden rounded-[18px] border border-line">
+        <div className="overflow-hidden rounded-lg border border-line">
           <div className="sep-gradient px-8 py-10 text-center text-white">
             <p className="text-xs uppercase tracking-[0.14em] text-white/70">
               Construido exactamente para lo que nos contaste
             </p>
-            <h1 className="mt-4 font-display text-[2rem] font-bold leading-tight">
+            <h1 className="mt-4 font-display text-h2 font-bold leading-tight">
               Semillero de Emprendedores Perú
             </h1>
-            <p className="mx-auto mt-3 max-w-md text-[0.9375rem] text-white/75">
+            <p className="mx-auto mt-3 max-w-md text-body-sm text-white/75">
               Sin importar tu región, tu carrera o tu punto de partida.
             </p>
           </div>
@@ -477,7 +484,7 @@ export function DiagnosticWizard({
                 ["10+", "Regiones alcanzadas"],
               ].map(([value, label]) => (
                 <div key={label}>
-                  <dd className="tabular font-display text-[1.75rem] font-bold leading-none sep-gradient-text">
+                  <dd className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                     {value}
                   </dd>
                   <dt className="mt-1.5 text-xs text-slate-ui">{label}</dt>

@@ -39,7 +39,7 @@ export default function DocentesPage() {
               <GraduationCap className="size-3.5" />
               Gratuito para docentes
             </Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-ink sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Metodologías activas que{" "}
               <GoldUnderline>puedes usar el lunes</GoldUnderline>
             </h1>
@@ -81,7 +81,7 @@ export default function DocentesPage() {
                   "Evaluación por competencias con evidencia observable",
                   "Cómo motivar a estudiantes en contextos de región",
                 ].map((f) => (
-                  <li key={f} className="flex items-start gap-2.5 text-[0.9375rem] text-graphite">
+                  <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
                     <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                     {f}
                   </li>
@@ -105,7 +105,7 @@ export default function DocentesPage() {
                 {resources.map((r) => (
                   <li
                     key={r}
-                    className="flex items-center gap-3 rounded-[10px] border border-line bg-white px-4 py-3.5"
+                    className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3.5"
                   >
                     <FolderOpen className="size-4 shrink-0 text-gold-600" />
                     <span className="text-sm text-graphite">{r}</span>
@@ -124,10 +124,10 @@ export default function DocentesPage() {
         <Container size="narrow">
           <Card className="text-center">
             <School className="mx-auto size-8 text-seed-500" />
-            <h2 className="mt-4 font-display text-[1.5rem] font-semibold text-ink">
+            <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Y también podemos ir a tu colegio
             </h2>
-            <p className="mx-auto mt-2.5 max-w-lg text-[0.9375rem] leading-relaxed text-slate-ui">
+            <p className="mx-auto mt-2.5 max-w-lg text-body-sm leading-relaxed text-slate-ui">
               Universitarios formados por SEP dictan talleres presenciales gratuitos a tus
               estudiantes, en tu propia región. Sin costo para el colegio.
             </p>

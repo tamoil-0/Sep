@@ -16,7 +16,7 @@ export default function VerificarPage() {
     <Section>
       <Container size="narrow">
         <div className="text-center">
-          <span className="mx-auto flex size-12 items-center justify-center rounded-[14px] bg-sep-50 text-sep-600">
+          <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-sep-50 text-sep-600">
             <ShieldCheck className="size-6" />
           </span>
           <div className="mt-6">

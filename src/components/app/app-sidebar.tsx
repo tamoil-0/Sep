@@ -11,6 +11,7 @@ import { ROLE_META, type UserRole } from "@/types/roles";
 import { cn, initials } from "@/lib/utils";
 import { LogoutDialog } from "@/components/app/logout-dialog";
 import { AppLoadingSplash } from "@/components/app/app-loading-splash";
+import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 
 type IconName = keyof typeof Icons;
 
@@ -38,6 +39,10 @@ export function AppSidebar({
   const [navigatingTo, setNavigatingTo] = React.useState<string | null>(null);
   const items = appNav[activeRole] ?? [];
   const otherRoles = roles.filter((r) => r !== activeRole && appNav[r]?.length);
+  const drawerRef = useDialogA11y<HTMLElement>({
+    open: mobileOpen,
+    onClose: () => setMobileOpen(false),
+  });
 
   function prepareNavigation(href: string) {
     if (href !== pathname) router.prefetch(href);
@@ -54,8 +59,8 @@ export function AppSidebar({
         <Link href="/" aria-label="Inicio">
           <Logo className="h-11" variant="white" />
         </Link>
-        <p className="mt-2 text-[0.6875rem] uppercase tracking-[0.12em] text-white/40">
-          {ROLE_META[activeRole].shortLabel}
+        <p className="mt-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
+          Panel activo · {ROLE_META[activeRole].shortLabel}
         </p>
       </div>
 
@@ -74,7 +79,7 @@ export function AppSidebar({
                   onClick={() => startNavigation(item.href)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex items-center gap-2.5 rounded-[8px] border-l-2 px-3 py-2 text-[0.875rem] transition-colors",
+                    "flex min-h-control items-center gap-2.5 rounded-sm border-l-2 px-3 py-2 text-body-sm transition-colors",
                     active
                       ? "border-gold-500 bg-white/12 font-medium text-white"
                       : "border-transparent text-white/60 hover:bg-white/8 hover:text-white",
@@ -90,7 +95,7 @@ export function AppSidebar({
 
         {otherRoles.length > 0 && (
           <div className="mt-6 border-t border-white/10 pt-4">
-            <p className="px-3 pb-2 text-[0.625rem] font-medium uppercase tracking-[0.12em] text-white/35">
+            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
               Cambiar de panel
             </p>
             <ul className="space-y-0.5">
@@ -101,7 +106,7 @@ export function AppSidebar({
                     onPointerEnter={() => prepareNavigation(ROLE_META[r].home)}
                     onFocus={() => prepareNavigation(ROLE_META[r].home)}
                     onClick={() => startNavigation(ROLE_META[r].home)}
-                    className="flex items-center gap-2.5 rounded-[8px] px-3 py-2 text-[0.8125rem] text-white/50 transition-colors hover:bg-white/8 hover:text-white"
+                    className="flex min-h-control items-center gap-2.5 rounded-sm px-3 py-2 text-body-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white"
                   >
                     <Icons.Repeat className="size-4" />
                     {ROLE_META[r].shortLabel}
@@ -119,16 +124,16 @@ export function AppSidebar({
           onPointerEnter={() => prepareNavigation("/cuenta")}
           onFocus={() => prepareNavigation("/cuenta")}
           onClick={() => startNavigation("/cuenta")}
-          className="flex items-center gap-2.5 rounded-[8px] px-2 py-2 transition-colors hover:bg-white/8"
+          className="flex min-h-control items-center gap-2.5 rounded-sm px-2 py-2 transition-colors hover:bg-white/8"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-[0.6875rem] font-semibold text-ink">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-caption font-semibold text-ink">
             {initials(fullName || email)}
           </span>
           <span className="min-w-0 flex-1">
-            <span className="block truncate text-[0.8125rem] font-medium text-white">
+            <span className="block truncate text-body-sm font-medium text-white">
               {fullName || "Mi cuenta"}
             </span>
-            <span className="block truncate text-[0.6875rem] text-white/45">{email}</span>
+            <span className="block truncate text-caption text-white/70">{email}</span>
           </span>
         </Link>
 
@@ -142,14 +147,14 @@ export function AppSidebar({
   return (
     <>
       {/* Barra móvil */}
-      <div className="sticky top-0 z-40 flex h-14 w-full items-center justify-between border-b border-line bg-white/95 px-4 backdrop-blur lg:hidden">
+      <div className="sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-white px-4 lg:hidden">
         <Link href="/" aria-label="Inicio">
           <Logo className="h-9" />
         </Link>
         <button
           type="button"
           onClick={() => setMobileOpen((v) => !v)}
-          className="flex size-10 items-center justify-center rounded-lg text-ink transition-colors hover:bg-surface-2"
+          className="flex size-control items-center justify-center rounded-sm text-ink transition-colors hover:bg-surface-2"
           aria-label={mobileOpen ? "Cerrar menú" : "Abrir menú"}
           aria-expanded={mobileOpen}
         >
@@ -166,12 +171,18 @@ export function AppSidebar({
       )}
 
       <aside
+        ref={drawerRef}
+        role={mobileOpen ? "dialog" : undefined}
+        aria-modal={mobileOpen ? "true" : undefined}
+        aria-labelledby={mobileOpen ? "app-navigation-title" : undefined}
+        tabIndex={mobileOpen ? -1 : undefined}
         className={cn(
-          "z-50 flex w-[min(82vw,280px)] shrink-0 flex-col bg-sep-800 py-4 shadow-2xl lg:w-[232px] lg:shadow-none",
-          "fixed inset-y-0 left-0 transition-transform duration-250 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
+          "z-50 flex w-[min(88vw,320px)] shrink-0 flex-col bg-sep-800 py-4 shadow-elevated outline-none lg:w-[232px] lg:shadow-none",
+          "fixed inset-y-0 left-0 transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
       >
+        <h2 id="app-navigation-title" className="sr-only">Navegación del panel</h2>
         {content}
       </aside>
 

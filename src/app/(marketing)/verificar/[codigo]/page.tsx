@@ -6,6 +6,7 @@ import { Card, Container, Section } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { Logo } from "@/components/brand/logo";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = {
   title: "Resultado de verificación",
@@ -22,10 +23,12 @@ export default async function VerificarCodigoPage({
 
   const supabase = await createClient();
   // Función SECURITY DEFINER: devuelve solo lo mínimo, sin exponer PII (§8.4).
-  const { data, error } = await supabase.rpc("verify_certificate", { code });
+  const result = await supabase.rpc("verify_certificate", { code });
+  assertQueryResults("publico:verificar-certificado", result);
+  const data = result.data;
 
   const record = Array.isArray(data) ? data[0] : null;
-  const valid = !error && record?.is_valid === true;
+  const valid = record?.is_valid === true;
 
   return (
     <Section>
@@ -72,10 +75,10 @@ export default async function VerificarCodigoPage({
             <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-danger-bg text-danger">
               <CircleX className="size-6" />
             </span>
-            <h1 className="mt-5 font-display text-[1.5rem] font-semibold text-ink">
+            <h1 className="mt-5 font-display text-h3 font-semibold text-ink">
               No encontramos ese certificado
             </h1>
-            <p className="mx-auto mt-2.5 max-w-md text-[0.9375rem] leading-relaxed text-slate-ui">
+            <p className="mx-auto mt-2.5 max-w-md text-body-sm leading-relaxed text-slate-ui">
               El código <span className="tabular font-medium text-ink">{code}</span> no
               corresponde a ningún certificado emitido, o el certificado fue revocado.
               Revisa que lo hayas escrito exactamente como aparece en el documento.

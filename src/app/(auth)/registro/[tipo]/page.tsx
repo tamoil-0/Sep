@@ -43,10 +43,10 @@ export default async function SignupTypePage({
         Cambiar tipo de cuenta
       </Link>
 
-      <h1 className="mt-5 font-display text-[1.75rem] font-semibold text-ink">
+      <h1 className="mt-5 font-display text-h2 font-semibold text-ink">
         Cuenta de {meta.shortLabel.toLowerCase()}
       </h1>
-      <p className="mt-2 text-[0.9375rem] text-slate-ui">{meta.description}</p>
+      <p className="mt-2 text-body-sm text-slate-ui">{meta.description}</p>
 
       <div className="mt-7">
         <SignupForm role={role} />

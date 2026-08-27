@@ -7,6 +7,7 @@ import { Card, EmptyState } from "@/components/ui/primitives";
 import { StatusBadge, PanelSection } from "@/components/app/data-views";
 import { WorkshopRequestForm } from "./request-form";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Solicitar taller" };
 
@@ -14,7 +15,7 @@ export default async function DocenteTalleresPage() {
   const user = await requireRole(["docente", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: profile }, { data: mine }] = await Promise.all([
+  const [profileResult, requestsResult] = await Promise.all([
     supabase.from("profiles").select("institution_id, institutions(name)").eq("id", user.id).maybeSingle(),
     supabase
       .from("workshops")
@@ -22,6 +23,9 @@ export default async function DocenteTalleresPage() {
       .eq("requested_by", user.id)
       .order("created_at", { ascending: false }),
   ]);
+  assertQueryResults("docente:talleres", profileResult, requestsResult);
+  const profile = profileResult.data;
+  const mine = requestsResult.data;
 
   const inst = Array.isArray(profile?.institutions) ? profile?.institutions[0] : profile?.institutions;
 
@@ -34,7 +38,7 @@ export default async function DocenteTalleresPage() {
 
       <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
         <Card className="lg:sticky lg:top-6 lg:self-start">
-          <h2 className="font-display text-[1.125rem] font-semibold text-ink">Nueva solicitud</h2>
+          <h2 className="font-display text-body-lg font-semibold text-ink">Nueva solicitud</h2>
           <p className="mt-1.5 text-sm text-slate-ui">
             {inst?.name ? `Para ${inst.name}` : "Primero vincula tu colegio en Mi colegio."}
           </p>
@@ -79,4 +83,3 @@ export default async function DocenteTalleresPage() {
     </>
   );
 }
-

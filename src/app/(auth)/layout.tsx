@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ArrowLeft, Award, Globe, Sprout, Users } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { ContextualHelp } from "@/components/ui/contextual-help";
 
 export const metadata: Metadata = {
   robots: { index: false, follow: false, nocache: true },
@@ -19,26 +20,12 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
     <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(360px,0.9fr)_minmax(520px,1.1fr)]">
       {/* Panel de marca */}
       <aside className="relative hidden min-h-dvh overflow-hidden sep-gradient lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-14">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.14]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-            backgroundSize: "32px 32px",
-          }}
-        />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -bottom-40 -left-24 size-[440px] rounded-full bg-white/10 blur-3xl"
-        />
-
         <Link href="/" className="relative">
           <Logo className="h-14" variant="white" />
         </Link>
 
         <div className="relative">
-          <h2 className="max-w-md font-display text-[2.25rem] font-bold leading-[1.15] text-white">
+          <h2 className="max-w-md font-display text-h1 font-bold leading-[1.15] text-white">
             El talento está en regiones.
             <br />
             <span className="text-gold-500">Aquí empieza tu camino.</span>
@@ -47,10 +34,8 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <ul className="mt-9 space-y-3.5">
             {highlights.map((h) => (
               <li key={h.text} className="flex items-center gap-3 text-white/80">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white/12 ring-1 ring-inset ring-white/15">
-                  <h.icon className="size-4 text-gold-500" />
-                </span>
-                <span className="text-[0.9375rem]">{h.text}</span>
+                <h.icon className="size-4 shrink-0 text-gold-500" />
+                <span className="text-body-sm">{h.text}</span>
               </li>
             ))}
           </ul>
@@ -76,8 +61,14 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </Link>
         </div>
 
-        <div className="flex flex-1 items-center justify-center py-8 sm:py-10">
-          <div className="w-full max-w-[440px]">{children}</div>
+        <div className="flex flex-1 items-start justify-center pb-8 pt-16 sm:pt-20 lg:items-center lg:py-10">
+          <div className="w-full max-w-[440px]">
+            {children}
+            <ContextualHelp
+              className="mt-8"
+              description="Si el correo no llega o no puedes continuar, escríbenos indicando el paso en el que estás."
+            />
+          </div>
         </div>
       </main>
     </div>

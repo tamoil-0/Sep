@@ -12,6 +12,7 @@ import {
 import { speakerBenefits } from "@/config/volunteering";
 import { initials } from "@/lib/utils";
 import { SpeakerForm } from "./speaker-form";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata = createPageMetadata({
   title: "Red de speakers",
@@ -21,23 +22,25 @@ export const metadata = createPageMetadata({
   keywords: ["speakers Perú", "ponentes emprendimiento", "red de mentores Perú"],
 });
 
-/** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function SpeakersPage() {
   const supabase = createPublicClient();
 
-  const { data: speakers } = await supabase
+  const speakersResult = await supabase
     .from("speaker_profiles")
     .select("id, full_name, expertise, topics, story, region, country")
     .eq("is_public", true)
     .eq("is_approved", true)
     .limit(9);
 
-  const { count } = await supabase
+  const countResult = await supabase
     .from("speaker_profiles")
     .select("id", { count: "exact", head: true })
     .eq("is_approved", true);
+  assertQueryResults("publico:speakers", speakersResult, countResult);
+  const speakers = speakersResult.data;
+  const count = countResult.count;
 
   return (
     <>
@@ -45,7 +48,7 @@ export default async function SpeakersPage() {
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
             <Badge tone="brand">{count ?? 0} speakers en la red</Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-ink sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               ¿Tienes algo que <GoldUnderline>contar</GoldUnderline>?
             </h1>
             <p className="mt-5 text-lg leading-relaxed text-slate-ui">
@@ -75,7 +78,7 @@ export default async function SpeakersPage() {
             ].map((c) => (
               <Card key={c.title} className="p-6">
                 <c.icon className="size-5 text-sep-600" />
-                <h2 className="mt-4 font-display text-[0.9375rem] font-semibold text-ink">
+                <h2 className="mt-4 font-display text-body-sm font-semibold text-ink">
                   {c.title}
                 </h2>
                 <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{c.body}</p>
@@ -102,7 +105,7 @@ export default async function SpeakersPage() {
                       <li key={s.id}>
                         <Card className="flex h-full flex-col p-5">
                           <div className="flex items-center gap-3">
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                               {initials(s.full_name)}
                             </span>
                             <div className="min-w-0">
@@ -151,8 +154,8 @@ export default async function SpeakersPage() {
                 </p>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">
                   {speakerBenefits.map((b) => (
-                    <li key={b.title} className="rounded-[12px] border border-line p-5">
-                      <p className="text-[0.9375rem] font-medium text-ink">{b.title}</p>
+                    <li key={b.title} className="rounded-md border border-line p-5">
+                      <p className="text-body-sm font-medium text-ink">{b.title}</p>
                       <p className="mt-1 text-sm leading-relaxed text-slate-ui">
                         {b.detail}
                       </p>
@@ -164,7 +167,7 @@ export default async function SpeakersPage() {
 
             <Card className="lg:sticky lg:top-24 lg:self-start">
               <div className="flex items-center gap-2">
-                <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+                <h2 className="font-display text-h4 font-semibold text-ink">
                   Únete a la red
                 </h2>
                 <Badge tone="seed">Gratuito</Badge>

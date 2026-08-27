@@ -8,6 +8,7 @@ import { PanelSection, StatusBadge } from "@/components/app/data-views";
 
 import { Receipt, Wallet } from "lucide-react";
 import { formatDate, formatSoles } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Facturación" };
 
@@ -15,18 +16,22 @@ export default async function InstitucionFacturacionPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles").select("institution_id, institutions(name, ruc)").eq("id", user.id).maybeSingle();
+  assertQueryResults("institucion:facturacion:perfil", profileResult);
+  const profile = profileResult.data;
 
   const inst = Array.isArray(profile?.institutions) ? profile?.institutions[0] : profile?.institutions;
 
-  const { data: orders } = profile?.institution_id
+  const ordersResult = profile?.institution_id
     ? await supabase
         .from("orders")
         .select("id, item_type, amount_cents, status, created_at")
         .eq("institution_id", profile.institution_id)
         .order("created_at", { ascending: false })
-    : { data: [] };
+    : null;
+  if (ordersResult) assertQueryResults("institucion:facturacion:ordenes", ordersResult);
+  const orders = ordersResult?.data ?? [];
 
   const rows = orders ?? [];
   const paid = rows.filter((o) => o.status === "pagado");
@@ -72,4 +77,3 @@ export default async function InstitucionFacturacionPage() {
     </>
   );
 }
-

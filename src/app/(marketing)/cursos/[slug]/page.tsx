@@ -12,22 +12,18 @@ import {
   Video,
 } from "lucide-react";
 import { createPublicClient } from "@/lib/supabase/public";
-import { getCatalog, getCourseBySlug } from "@/server/queries/courses";
+import { getCourseBySlug } from "@/server/queries/courses";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { CourseMedia } from "@/components/marketing/course-media";
 import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
+import { assertQueryResults } from "@/lib/supabase/query";
 
-/** ISR: se regenera cada 5 min en lugar de consultar la BD en cada visita. */
-export const revalidate = 300;
-
-/** Prerrenderiza una página por curso en el build; las nuevas se generan al vuelo. */
-export async function generateStaticParams() {
-  const courses = await getCatalog();
-  return courses.map((c) => ({ slug: c.slug }));
-}
+// La ruta se resuelve con una solicitud real: un fallo de datos nunca se publica como 404.
+// Las consultas conservan su caché de 5 minutos en `server/queries/courses`.
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -57,11 +53,13 @@ export default async function CursoPublicoPage({
   if (!course) notFound();
 
   const supabase = createPublicClient();
-  const { data: sessions } = await supabase
+  const sessionsResult = await supabase
     .from("course_sessions")
     .select("id, number, week, title, subtitle, description")
     .eq("course_id", course.id)
     .order("number");
+  assertQueryResults("publico:curso:sesiones", sessionsResult);
+  const sessions = sessionsResult.data;
 
   const weeks = [...new Set((sessions ?? []).map((s) => s.week))].sort();
   const available = course.status === "disponible";
@@ -90,14 +88,14 @@ export default async function CursoPublicoPage({
                 {course.is_free && <Badge tone="gold">Gratuito</Badge>}
               </div>
 
-              <h1 className="mt-4 font-display text-[2.25rem] font-bold leading-[1.1] text-ink sm:text-[2.75rem]">
+              <h1 className="mt-4 font-display text-h1 font-bold leading-[1.1] text-ink sm:text-h1">
                 {course.title}
               </h1>
               {course.subtitle && (
                 <p className="mt-2 text-lg text-slate-ui">{course.subtitle}</p>
               )}
               {course.description && (
-                <p className="mt-5 max-w-2xl text-[1.0625rem] leading-relaxed text-graphite">
+                <p className="mt-5 max-w-2xl text-body leading-relaxed text-graphite">
                   {course.description}
                 </p>
               )}
@@ -132,7 +130,7 @@ export default async function CursoPublicoPage({
                 className="aspect-[16/10] w-full"
               />
               <Card>
-                <p className="tabular font-display text-[2.25rem] font-bold leading-none text-ink">
+                <p className="tabular font-display text-h1 font-bold leading-none text-ink">
                   {course.is_free ? "Gratis" : formatSoles(course.price_cents)}
                 </p>
                 <p className="mt-1.5 text-sm text-slate-ui">
@@ -180,7 +178,7 @@ export default async function CursoPublicoPage({
       {(sessions?.length ?? 0) > 0 && (
         <Section>
           <Container size="wide">
-            <h2 className="font-display text-[1.75rem] font-semibold text-ink">
+            <h2 className="font-display text-h2 font-semibold text-ink">
               Qué vas a aprender
             </h2>
 
@@ -190,7 +188,7 @@ export default async function CursoPublicoPage({
                   <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-gold-600">
                     Semana {week}
                   </p>
-                  <ul className="divide-y divide-line overflow-hidden rounded-[14px] border border-line bg-white">
+                  <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
                     {(sessions ?? [])
                       .filter((s) => s.week === week)
                       .map((s) => (
@@ -199,7 +197,7 @@ export default async function CursoPublicoPage({
                             {s.number}
                           </span>
                           <div>
-                            <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                            <p className="font-display text-body-sm font-semibold text-ink">
                               {s.title}
                             </p>
                             {s.subtitle && (
@@ -225,10 +223,10 @@ export default async function CursoPublicoPage({
         <Container size="narrow">
           <Card className="text-center">
             <Award className="mx-auto size-8 text-gold-600" />
-            <h2 className="mt-4 font-display text-[1.5rem] font-semibold text-ink">
+            <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Al terminar, acredítalo
             </h2>
-            <p className="mx-auto mt-2.5 max-w-md text-[0.9375rem] leading-relaxed text-slate-ui">
+            <p className="mx-auto mt-2.5 max-w-md text-body-sm leading-relaxed text-slate-ui">
               Certificado SEP por {formatSoles(3000)} o certificado con aval del Instituto
               Internacional de Ingeniería por {formatSoles(5000)}. Ambos con código público
               de verificación.

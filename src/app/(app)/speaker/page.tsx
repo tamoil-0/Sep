@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Panel de speaker" };
 
@@ -12,20 +13,24 @@ export default async function SpeakerPage() {
   const user = await requireRole(["speaker", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: speaker } = await supabase
+  const speakerResult = await supabase
     .from("speaker_profiles")
     .select("id, expertise, topics, region, country, is_approved, is_public")
     .eq("user_id", user.id)
     .maybeSingle();
+  assertQueryResults("speaker:panel:perfil", speakerResult);
+  const speaker = speakerResult.data;
 
-  const { data: invitations } = speaker?.id
+  const invitationsResult = speaker?.id
     ? await supabase
         .from("speaker_invitations")
         .select("id, topic, status, proposed_at")
         .eq("speaker_id", speaker.id)
         .order("created_at", { ascending: false })
         .limit(5)
-    : { data: null };
+    : null;
+  if (invitationsResult) assertQueryResults("speaker:panel:invitaciones", invitationsResult);
+  const invitations = invitationsResult?.data ?? [];
 
   const pending = (invitations ?? []).filter((i) => i.status === "pendiente");
   const accepted = (invitations ?? []).filter((i) => i.status === "aceptada");

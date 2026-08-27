@@ -3,31 +3,32 @@ import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { createPublicClient } from "@/lib/supabase/public";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 /** Catálogo público. Solo cursos publicados; RLS lo garantiza. */
 export const getCatalog = unstable_cache(async () => {
   // Cliente público: sin cookies, así la página puede ser estática con ISR.
   const supabase = createPublicClient();
-  const { data } = await supabase
+  const result = await supabase
     .from("courses")
     .select(
       "id, slug, title, subtitle, description, category, audience, status, total_hours, sessions_count, weeks, frequency, is_free, price_cents, cover_url",
     )
     .in("status", ["disponible", "proximamente"])
     .order("order_index");
-
-  return data ?? [];
+  assertQueryResults("publico:cursos", result);
+  return result.data ?? [];
 }, ["public-course-catalog-v1"], { revalidate: 300, tags: ["public-courses"] });
 
 export const getCourseBySlug = unstable_cache(async (slug: string) => {
   const supabase = createPublicClient();
-  const { data } = await supabase
+  const result = await supabase
     .from("courses")
     .select("*")
     .eq("slug", slug)
     .maybeSingle();
-
-  return data;
+  assertQueryResults("publico:curso", result);
+  return result.data;
 }, ["public-course-by-slug-v1"], { revalidate: 300, tags: ["public-courses"] });
 
 /**
@@ -37,15 +38,17 @@ export const getCourseBySlug = unstable_cache(async (slug: string) => {
 export const getCourseWithProgress = cache(async (slug: string, userId: string) => {
   const supabase = await createClient();
 
-  const { data: course } = await supabase
+  const courseResult = await supabase
     .from("courses")
     .select("*")
     .eq("slug", slug)
     .maybeSingle();
+  assertQueryResults("curso:detalle", courseResult);
+  const course = courseResult.data;
 
   if (!course) return null;
 
-  const [{ data: sessions }, { data: enrollment }] = await Promise.all([
+  const [sessionsResult, enrollmentResult] = await Promise.all([
     supabase
       .from("course_sessions")
       .select("*")
@@ -58,13 +61,18 @@ export const getCourseWithProgress = cache(async (slug: string, userId: string) 
       .eq("user_id", userId)
       .maybeSingle(),
   ]);
+  assertQueryResults("curso:progreso", sessionsResult, enrollmentResult);
+  const sessions = sessionsResult.data;
+  const enrollment = enrollmentResult.data;
 
   let completed = new Set<string>();
   if (enrollment) {
-    const { data: progress } = await supabase
+    const progressResult = await supabase
       .from("session_progress")
       .select("session_id, completed_at")
       .eq("enrollment_id", enrollment.id);
+    assertQueryResults("curso:sesiones-completadas", progressResult);
+    const progress = progressResult.data;
 
     completed = new Set(
       (progress ?? []).filter((p) => p.completed_at).map((p) => p.session_id),
@@ -87,13 +95,15 @@ export const getCourseWithProgress = cache(async (slug: string, userId: string) 
 /** Inscripciones del usuario con datos del curso. */
 export const getMyEnrollments = cache(async (userId: string) => {
   const supabase = await createClient();
-  const { data } = await supabase
+  const result = await supabase
     .from("enrollments")
     .select(
       "id, status, progress_pct, enrolled_at, completed_at, courses(id, slug, title, subtitle, category, sessions_count, total_hours, cover_url)",
     )
     .eq("user_id", userId)
     .order("enrolled_at", { ascending: false });
+  assertQueryResults("estudiante:inscripciones", result);
+  const data = result.data;
 
   return (data ?? []).map((e) => ({
     ...e,
@@ -105,16 +115,18 @@ export const getMyEnrollments = cache(async (userId: string) => {
 export const getNextSession = cache(async (userId: string) => {
   const supabase = await createClient();
 
-  const { data: enrollments } = await supabase
+  const enrollmentsResult = await supabase
     .from("enrollments")
     .select("course_id, courses(slug, title)")
     .eq("user_id", userId)
     .eq("status", "activo");
+  assertQueryResults("estudiante:proxima-sesion:inscripciones", enrollmentsResult);
+  const enrollments = enrollmentsResult.data;
 
   if (!enrollments?.length) return null;
 
   const courseIds = enrollments.map((e) => e.course_id);
-  const { data: session } = await supabase
+  const sessionResult = await supabase
     .from("course_sessions")
     .select("id, course_id, number, title, subtitle, scheduled_at, meet_url, status")
     .in("course_id", courseIds)
@@ -122,6 +134,8 @@ export const getNextSession = cache(async (userId: string) => {
     .order("scheduled_at")
     .limit(1)
     .maybeSingle();
+  assertQueryResults("estudiante:proxima-sesion", sessionResult);
+  const session = sessionResult.data;
 
   if (!session) return null;
 

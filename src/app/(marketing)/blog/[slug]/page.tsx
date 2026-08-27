@@ -7,6 +7,9 @@ import { Badge, Container, Section } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/utils";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
+import { assertQueryResults } from "@/lib/supabase/query";
+
+export const dynamic = "force-dynamic";
 
 export async function generateMetadata({
   params,
@@ -15,12 +18,14 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   const supabase = await createClient();
-  const { data } = await supabase
+  const result = await supabase
     .from("blog_posts")
     .select("title, excerpt")
     .eq("slug", slug)
     .eq("is_published", true)
     .maybeSingle();
+  assertQueryResults("publico:blog:metadatos", result);
+  const data = result.data;
 
   if (!data) return { title: "Artículo no encontrado", robots: { index: false } };
   return createPageMetadata({
@@ -39,12 +44,14 @@ export default async function BlogPostPage({
   const { slug } = await params;
   const supabase = await createClient();
 
-  const { data: post } = await supabase
+  const result = await supabase
     .from("blog_posts")
     .select("title, excerpt, content_mdx, tags, published_at, profiles(full_name)")
     .eq("slug", slug)
     .eq("is_published", true)
     .maybeSingle();
+  assertQueryResults("publico:blog:articulo", result);
+  const post = result.data;
 
   if (!post) notFound();
 
@@ -73,7 +80,7 @@ export default async function BlogPostPage({
             </div>
           )}
 
-          <h1 className="mt-4 font-display text-[2.25rem] font-bold leading-[1.15] text-ink">
+          <h1 className="mt-4 font-display text-h1 font-bold leading-[1.15] text-ink">
             {post.title}
           </h1>
 
@@ -90,7 +97,7 @@ export default async function BlogPostPage({
 
           <div className="mt-9 space-y-5">
             {paragraphs.map((p, i) => (
-              <p key={i} className="text-[1.0625rem] leading-relaxed text-graphite">
+              <p key={i} className="text-body leading-relaxed text-graphite">
                 {p}
               </p>
             ))}

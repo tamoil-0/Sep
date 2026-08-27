@@ -10,6 +10,7 @@ import {
 } from "@/server/actions/admin";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { formatDate, relativeTime, initials, cn } from "@/lib/utils";
+import { useToast } from "@/components/ui/toast";
 
 interface VolunteerApp {
   id: string;
@@ -84,6 +85,8 @@ export function ApplicationBoard({
   const [busy, setBusy] = React.useState<string | null>(null);
   const [feedback, setFeedback] = React.useState<{ text: string; ok: boolean } | null>(null);
   const [expanded, setExpanded] = React.useState<string | null>(null);
+  const [confirming, setConfirming] = React.useState<string | null>(null);
+  const toast = useToast();
 
   React.useEffect(() => {
     if (!feedback) return;
@@ -93,13 +96,25 @@ export function ApplicationBoard({
 
   async function run(id: string, fn: () => Promise<{ ok: boolean; message?: string; error?: string }>) {
     setBusy(id);
-    const result = await fn();
-    setBusy(null);
-    setFeedback({
-      text: result.ok ? (result.message ?? "Listo.") : (result.error ?? "Error."),
-      ok: result.ok,
-    });
-    if (result.ok) router.refresh();
+    try {
+      const result = await fn();
+      const text = result.ok
+        ? (result.message ?? "Cambio guardado.")
+        : (result.error ?? "No pudimos guardar el cambio.");
+      setFeedback({ text, ok: result.ok });
+      toast({
+        title: text,
+        tone: result.ok ? "success" : "error",
+      });
+      if (result.ok) router.refresh();
+    } catch {
+      const text = "No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.";
+      setFeedback({ text, ok: false });
+      toast({ title: "No se guardó el cambio", description: text, tone: "error" });
+    } finally {
+      setBusy(null);
+      setConfirming(null);
+    }
   }
 
   const pendingVolunteers = volunteers.filter(
@@ -118,7 +133,7 @@ export function ApplicationBoard({
       {feedback && (
         <div
           className={cn(
-            "mb-4 rounded-[10px] px-4 py-3 text-sm",
+            "mb-4 rounded-sm px-4 py-3 text-sm",
             feedback.ok
               ? "border border-success/25 bg-success-bg text-success"
               : "border border-danger/25 bg-danger-bg text-danger",
@@ -166,13 +181,13 @@ export function ApplicationBoard({
             {volunteers.map((v) => (
               <Card key={v.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                     {initials(v.name)}
                   </span>
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                      <p className="font-display text-body-sm font-semibold text-ink">
                         {v.name}
                       </p>
                       <Badge tone={statusTone[v.status as keyof typeof statusTone] ?? "neutral"}>
@@ -195,7 +210,7 @@ export function ApplicationBoard({
                     </button>
 
                     {expanded === v.id && (
-                      <dl className="mt-3 space-y-2.5 rounded-[10px] bg-surface-1 p-4 text-sm">
+                      <dl className="mt-3 space-y-2.5 rounded-sm bg-surface-1 p-4 text-sm">
                         {[
                           ["Universidad", v.university],
                           ["Carrera y ciclo", v.careerCycle],
@@ -227,12 +242,12 @@ export function ApplicationBoard({
                           : undefined
                       }
                       onClick={() =>
-                        run(v.id, () =>
-                          updateApplicationStatusAction(v.id, s),
-                        )
+                        s === "aprobada" || s === "rechazada"
+                          ? setConfirming(`${v.id}:${s}`)
+                          : run(v.id, () => updateApplicationStatusAction(v.id, s))
                       }
                       className={cn(
-                        "inline-flex h-8 items-center gap-1.5 rounded-[8px] px-3 text-xs font-medium transition-colors disabled:opacity-40",
+                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-xs font-medium transition-colors disabled:opacity-40",
                         s === "aprobada"
                           ? "bg-success text-white hover:opacity-90"
                           : s === "rechazada"
@@ -245,6 +260,44 @@ export function ApplicationBoard({
                     </button>
                   ))}
                 </div>
+                {(confirming === `${v.id}:aprobada` || confirming === `${v.id}:rechazada`) && (
+                  <div className={cn(
+                    "mt-3 rounded-sm border p-4",
+                    confirming.endsWith(":rechazada")
+                      ? "border-danger/25 bg-danger-bg"
+                      : "border-success/25 bg-success-bg",
+                  )}>
+                    <p className="text-body-sm font-semibold text-ink">
+                      {confirming.endsWith(":rechazada")
+                        ? `Rechazar la postulación de ${v.name}`
+                        : `Aprobar la postulación de ${v.name}`}
+                    </p>
+                    <p className="mt-1 text-caption text-graphite">
+                      {confirming.endsWith(":rechazada")
+                        ? "La postulación quedará cerrada como rechazada. Verifica el detalle antes de continuar."
+                        : "La aprobación otorgará automáticamente el rol correspondiente a esta cuenta."}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        disabled={busy === v.id}
+                        onClick={() => {
+                          const status = confirming.endsWith(":rechazada") ? "rechazada" : "aprobada";
+                          void run(v.id, () => updateApplicationStatusAction(v.id, status));
+                        }}
+                        className={cn(
+                          "min-h-control rounded-sm px-4 text-body-sm font-semibold text-white disabled:opacity-50",
+                          confirming.endsWith(":rechazada") ? "bg-danger" : "bg-success",
+                        )}
+                      >
+                        {confirming.endsWith(":rechazada") ? "Confirmar rechazo" : "Aprobar y otorgar rol"}
+                      </button>
+                      <button type="button" onClick={() => setConfirming(null)} className="min-h-control rounded-sm px-4 text-body-sm font-semibold text-graphite hover:bg-white">
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                )}
               </Card>
             ))}
           </div>
@@ -259,13 +312,13 @@ export function ApplicationBoard({
             {speakers.map((s) => (
               <Card key={s.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full sep-gradient text-xs font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
                     {initials(s.name)}
                   </span>
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                      <p className="font-display text-body-sm font-semibold text-ink">
                         {s.name}
                       </p>
                       <Badge tone={s.approved ? "success" : "warning"}>
@@ -288,7 +341,7 @@ export function ApplicationBoard({
                       </div>
                     )}
                     {s.story && (
-                      <p className="mt-3 rounded-[10px] bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
+                      <p className="mt-3 rounded-sm bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
                         “{s.story}”
                       </p>
                     )}
@@ -302,9 +355,9 @@ export function ApplicationBoard({
                     <button
                       type="button"
                       disabled={busy === s.id}
-                      onClick={() => run(s.id, () => approveSpeakerAction(s.id, !s.approved))}
+                      onClick={() => setConfirming(`speaker:${s.id}:${s.approved ? "hide" : "publish"}`)}
                       className={cn(
-                        "inline-flex h-8 items-center gap-1.5 rounded-[8px] px-3 text-xs font-medium transition-colors disabled:opacity-40",
+                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-xs font-medium transition-colors disabled:opacity-40",
                         s.approved
                           ? "border border-line text-graphite hover:bg-surface-2"
                           : "bg-success text-white hover:opacity-90",
@@ -321,6 +374,37 @@ export function ApplicationBoard({
                     </button>
                   </div>
                 </div>
+                {confirming?.startsWith(`speaker:${s.id}:`) && (
+                  <div className={cn(
+                    "mt-4 rounded-sm border p-4",
+                    s.approved ? "border-danger/25 bg-danger-bg" : "border-success/25 bg-success-bg",
+                  )}>
+                    <p className="text-body-sm font-semibold text-ink">
+                      {s.approved ? `Despublicar a ${s.name}` : `Publicar a ${s.name} como speaker`}
+                    </p>
+                    <p className="mt-1 text-caption text-graphite">
+                      {s.approved
+                        ? "Su perfil dejará de aparecer públicamente hasta que vuelvas a aprobarlo."
+                        : "Su nombre, perfil y temas pasarán a ser visibles en la red pública de speakers."}
+                    </p>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <button
+                        type="button"
+                        disabled={busy === s.id}
+                        onClick={() => void run(s.id, () => approveSpeakerAction(s.id, !s.approved))}
+                        className={cn(
+                          "min-h-control rounded-sm px-4 text-body-sm font-semibold text-white disabled:opacity-50",
+                          s.approved ? "bg-danger" : "bg-success",
+                        )}
+                      >
+                        {s.approved ? "Despublicar perfil" : "Aprobar y publicar"}
+                      </button>
+                      <button type="button" onClick={() => setConfirming(null)} className="min-h-control rounded-sm px-4 text-body-sm font-semibold text-graphite hover:bg-white">
+                        Cancelar
+                      </button>
+                    </div>
+                  </div>
+                )}
               </Card>
             ))}
           </div>
@@ -358,7 +442,7 @@ export function ApplicationBoard({
                     type="button"
                     disabled={busy === h.id}
                     onClick={() => run(h.id, () => approveHoursAction(h.id))}
-                    className="inline-flex h-8 shrink-0 items-center gap-1.5 rounded-[8px] bg-success px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-success px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
                   >
                     {busy === h.id ? (
                       <Loader2 className="size-3 animate-spin" />

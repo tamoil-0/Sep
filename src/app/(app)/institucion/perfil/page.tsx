@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 
 import { Building2, Mail, MapPin, Phone } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Perfil institucional" };
 
@@ -14,11 +15,13 @@ export default async function InstitucionPerfilPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const result = await supabase
     .from("profiles")
     .select("institution_id, institutions(*)")
     .eq("id", user.id)
     .maybeSingle();
+  assertQueryResults("institucion:perfil", result);
+  const profile = result.data;
 
   const i = Array.isArray(profile?.institutions) ? profile?.institutions[0] : profile?.institutions;
 
@@ -121,4 +124,3 @@ export default async function InstitucionPerfilPage() {
     </>
   );
 }
-

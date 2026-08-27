@@ -14,6 +14,8 @@ import {
 import { submitAccountDiagnosticAction } from "@/server/actions/onboarding";
 import { Logo } from "@/components/brand/logo";
 import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
+import { FormAlert } from "@/components/forms/field";
+import { ContextualHelp } from "@/components/ui/contextual-help";
 import { cn } from "@/lib/utils";
 
 export interface OnboardingQuestion {
@@ -64,7 +66,52 @@ export function OnboardingForm({
   const [answers, setAnswers] = React.useState<Answers>({});
   const [busy, setBusy] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
+  const [draftReady, setDraftReady] = React.useState(false);
+  const [draftSaved, setDraftSaved] = React.useState(false);
   const headingRef = React.useRef<HTMLHeadingElement>(null);
+  const draftKey = `sep:onboarding:${profile}:${firstName}`;
+
+  React.useEffect(() => {
+    const timer = window.setTimeout(() => {
+      try {
+        const stored = window.sessionStorage.getItem(draftKey);
+        if (stored) {
+          const draft = JSON.parse(stored) as { module?: number; answers?: Answers };
+          if (draft.answers && typeof draft.answers === "object") {
+            const allowedNumbers = new Set(questions.map((question) => String(question.number)));
+            const safeAnswers = Object.fromEntries(
+              Object.entries(draft.answers).filter(
+                ([number, value]) =>
+                  allowedNumbers.has(number) &&
+                  (typeof value === "string" ||
+                    (Array.isArray(value) && value.every((item) => typeof item === "string"))),
+              ),
+            ) as Answers;
+            setAnswers(safeAnswers);
+            setModule(Math.max(0, Math.min(2, Number(draft.module) || 0)));
+          }
+        }
+      } catch {
+        window.sessionStorage.removeItem(draftKey);
+      } finally {
+        setDraftReady(true);
+      }
+    }, 0);
+    return () => window.clearTimeout(timer);
+  }, [draftKey, questions]);
+
+  React.useEffect(() => {
+    if (!draftReady || busy) return;
+    const timer = window.setTimeout(() => {
+      try {
+        window.sessionStorage.setItem(draftKey, JSON.stringify({ module, answers }));
+        setDraftSaved(true);
+      } catch {
+        setDraftSaved(false);
+      }
+    }, 350);
+    return () => window.clearTimeout(timer);
+  }, [answers, busy, draftKey, draftReady, module]);
 
   const visibleQuestions = questions.slice(module * 5, module * 5 + 5);
   const answeredCount = questions.filter((question) => hasAnswer(answers[question.number])).length;
@@ -76,6 +123,7 @@ export function OnboardingForm({
   function moveTo(nextModule: number) {
     setModule(nextModule);
     setError(null);
+    setDraftSaved(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
     window.setTimeout(() => headingRef.current?.focus(), 350);
   }
@@ -83,6 +131,7 @@ export function OnboardingForm({
   function setAnswer(number: number, value: Answer) {
     setAnswers((current) => ({ ...current, [number]: value }));
     setError(null);
+    setDraftSaved(false);
   }
 
   function toggleAnswer(number: number, option: string) {
@@ -116,6 +165,7 @@ export function OnboardingForm({
           return;
         }
 
+        window.sessionStorage.removeItem(draftKey);
         window.location.assign(result.data.redirectTo);
       } catch {
         setBusy(false);
@@ -131,7 +181,7 @@ export function OnboardingForm({
 
   return (
     <div className="mx-auto max-w-5xl pb-8">
-      <header className="relative overflow-hidden rounded-[20px] sep-gradient px-5 py-7 text-white sm:px-8 sm:py-9">
+      <header className="relative overflow-hidden rounded-lg sep-gradient px-5 py-7 text-white sm:px-8 sm:py-9">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.12]"
@@ -146,13 +196,12 @@ export function OnboardingForm({
         </div>
         <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <Badge tone="white">Diagnóstico de entrada · {profileLabel}</Badge>
-            <h1 className="mt-4 font-display text-[1.8rem] font-semibold leading-tight sm:text-[2.2rem]">
-              {firstName ? `${firstName}, queremos conocerte mejor` : "Queremos conocerte mejor"}
+            <Badge tone="white">Preparando SEP para ti · {profileLabel}</Badge>
+            <h1 className="mt-4 font-display text-h1 font-semibold">
+              {firstName ? `${firstName}, personalicemos tu experiencia` : "Personalicemos tu experiencia"}
             </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75 sm:text-[0.9375rem]">
-              Son 15 preguntas sobre {audience}. Tus respuestas nos ayudan a ofrecerte una
-              experiencia SEP realmente útil para ti.
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75 sm:text-body-sm">
+              Son 15 preguntas breves sobre {audience}, organizadas en tres módulos. Así podremos mostrarte primero lo que te resulte más útil.
             </p>
           </div>
           <div className="flex shrink-0 gap-4 text-xs text-white/75">
@@ -175,7 +224,15 @@ export function OnboardingForm({
               </p>
               <span className="tabular text-xs font-medium text-sep-700">{progress}%</span>
             </div>
-            <ProgressBar value={progress} className="mt-2.5" />
+            <ProgressBar value={progress} label={`${answeredCount} de ${questions.length} preguntas respondidas`} className="mt-2.5" />
+            <p className="mt-2 text-caption text-slate-ui" aria-live="polite">
+              {answeredCount} de {questions.length} respondidas
+            </p>
+            <p className="mt-1 text-caption text-mist" aria-live="polite">
+              {draftSaved
+                ? "Borrador guardado en esta pestaña"
+                : "Guardando borrador en esta pestaña…"}
+            </p>
             <ol className="mt-5 grid grid-cols-3 gap-2 lg:grid-cols-1 lg:gap-1.5">
               {MODULES.map((item, index) => {
                 const complete = questions
@@ -191,7 +248,7 @@ export function OnboardingForm({
                       disabled={index > module}
                       aria-current={active ? "step" : undefined}
                       className={cn(
-                        "flex w-full flex-col items-center gap-2 rounded-[10px] px-2 py-2.5 text-center transition-colors lg:flex-row lg:text-left",
+                        "flex min-h-control w-full flex-col items-center gap-2 rounded-sm px-2 py-2.5 text-center transition-colors lg:flex-row lg:text-left",
                         active && "bg-sep-50 text-sep-700",
                         !active && index < module && "text-graphite hover:bg-surface-1",
                         index > module && "cursor-default text-mist",
@@ -213,8 +270,8 @@ export function OnboardingForm({
                 );
               })}
             </ol>
-            <p className="mt-4 hidden text-xs leading-relaxed text-mist lg:block">
-              Tus respuestas se guardarán juntas únicamente al finalizar.
+            <p className="mt-4 hidden text-caption text-mist lg:block">
+              Tus respuestas se conservan si recargas esta pestaña y se eliminan al finalizar.
             </p>
           </Card>
         </aside>
@@ -248,10 +305,10 @@ export function OnboardingForm({
                           {question.number}
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span className="flex flex-wrap items-center gap-2 font-display text-[1rem] font-semibold leading-snug text-ink sm:text-[1.0625rem]">
+                          <span className="flex flex-wrap items-center gap-2 font-display text-body font-semibold leading-snug text-ink sm:text-body">
                             {question.question}
                             {question.isKey && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-[#FFF6DE] px-2 py-0.5 font-sans text-[0.65rem] font-semibold uppercase tracking-wide text-gold-700">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-[#FFF6DE] px-2 py-0.5 font-sans text-caption font-semibold uppercase tracking-wide text-gold-700">
                                 <Sparkles className="size-3" /> Clave
                               </span>
                             )}
@@ -281,9 +338,9 @@ export function OnboardingForm({
                           <label
                             key={option}
                             className={cn(
-                              "group flex min-h-12 cursor-pointer items-center gap-3 rounded-[11px] border px-3.5 py-3 text-sm leading-snug transition-all",
+                              "group flex min-h-12 cursor-pointer items-center gap-3 rounded-md border px-3.5 py-3 text-sm leading-snug transition-colors",
                               selected
-                                ? "border-sep-500 bg-sep-50 text-sep-800 shadow-[0_2px_8px_rgba(46,11,232,.06)]"
+                                ? "border-sep-500 bg-sep-50 text-sep-800 "
                                 : "border-line bg-white text-graphite hover:border-sep-300 hover:bg-surface-1",
                               question.inputType === "scale_1_5" &&
                                 "sm:min-h-[76px] sm:flex-col sm:justify-center sm:px-2 sm:text-center",
@@ -305,7 +362,7 @@ export function OnboardingForm({
                               aria-hidden
                               className={cn(
                                 "flex size-5 shrink-0 items-center justify-center border-2 transition-colors",
-                                multiple ? "rounded-[5px]" : "rounded-full",
+                                multiple ? "rounded-sm" : "rounded-full",
                                 selected
                                   ? "border-sep-600 bg-sep-600 text-white"
                                   : "border-line bg-white group-hover:border-sep-300",
@@ -325,12 +382,7 @@ export function OnboardingForm({
 
             <div className="border-t border-line bg-surface-1 px-5 py-5 sm:px-7">
               {error && (
-                <div
-                  role="alert"
-                  className="mb-4 rounded-[10px] border border-danger/20 bg-danger-bg px-4 py-3 text-sm text-danger"
-                >
-                  {error}
-                </div>
+                <div className="mb-4"><FormAlert tone="error">{error}</FormAlert></div>
               )}
 
               <div className="flex flex-col-reverse gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -338,7 +390,7 @@ export function OnboardingForm({
                   type="button"
                   onClick={() => moveTo(module - 1)}
                   disabled={module === 0 || busy}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] px-4 text-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-sm px-4 text-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
                 >
                   <ArrowLeft className="size-4" /> Anterior
                 </button>
@@ -353,7 +405,7 @@ export function OnboardingForm({
                     type="button"
                     onClick={() => (module === 2 ? finish() : moveTo(module + 1))}
                     disabled={!moduleComplete || busy}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] sep-gradient px-5 text-sm font-semibold text-white shadow-[0_4px_16px_rgba(46,11,232,.2)] transition-all hover:shadow-[0_7px_22px_rgba(46,11,232,.28)] disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
                   >
                     {busy ? (
                       <>
@@ -375,6 +427,11 @@ export function OnboardingForm({
           </Card>
         </main>
       </div>
+      <ContextualHelp
+        className="mt-5"
+        title="¿No puedes completar el diagnóstico?"
+        description="Tu borrador queda en esta pestaña. Si una pregunta no corresponde a tu caso o aparece un error, escríbenos antes de cerrar."
+      />
     </div>
   );
 }

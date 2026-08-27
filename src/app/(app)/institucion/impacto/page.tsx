@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import {
   Award,
   Building2,
-  ChartNoAxesCombined,
   GraduationCap,
   Presentation,
   Printer,
@@ -15,6 +14,7 @@ import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { formatDate } from "@/lib/utils";
 import { PrintButton } from "@/components/app/print-button";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Reporte de impacto" };
 
@@ -22,11 +22,13 @@ export default async function ImpactoPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles")
     .select("institution_id")
     .eq("id", user.id)
     .single();
+  assertQueryResults("institucion:impacto:perfil", profileResult);
+  const profile = profileResult.data;
 
   if (!profile?.institution_id) {
     return (
@@ -42,22 +44,13 @@ export default async function ImpactoPage() {
     );
   }
 
-  const { data, error } = await supabase.rpc("institution_impact_report", {
+  const reportResult = await supabase.rpc("institution_impact_report", {
     p_institution_id: profile.institution_id,
   });
+  assertQueryResults("institucion:impacto:reporte", reportResult);
+  const data = reportResult.data;
 
-  if (error || !data) {
-    return (
-      <>
-        <PageHeader title="Reporte de impacto" />
-        <EmptyState
-          icon={<ChartNoAxesCombined className="size-5" />}
-          title="No pudimos generar el reporte"
-          description="Inténtalo de nuevo en unos minutos o escríbenos si el problema persiste."
-        />
-      </>
-    );
-  }
+  if (!data) throw new Error("DATA_LOAD_FAILED");
 
   const report = data;
   const inst = report.institution;
@@ -72,11 +65,11 @@ export default async function ImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-5 overflow-hidden p-0 print:border-0">
-        <div className="sep-gradient px-7 py-6 text-white">
+        <div className="bg-sep-800 px-7 py-6 text-white">
           <p className="text-xs uppercase tracking-[0.14em] text-white/70">
             Reporte de impacto social
           </p>
-          <h2 className="mt-2 font-display text-[1.75rem] font-semibold leading-tight">
+          <h2 className="mt-2 font-display text-h2 font-semibold leading-tight">
             {inst?.name ?? "Institución"}
           </h2>
           <p className="mt-1 text-sm text-white/75">
@@ -167,7 +160,7 @@ export default async function ImpactoPage() {
         <div className="grid gap-3 sm:grid-cols-3">
           {report.sdg.map((g) => (
             <Card key={g.goal} className="p-5">
-              <p className="tabular font-display text-[2rem] font-bold leading-none sep-gradient-text">
+              <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                 ODS {g.goal}
               </p>
               <p className="mt-2.5 text-sm font-medium text-ink">{g.name}</p>

@@ -1,7 +1,6 @@
 import Link from "next/link";
 import {
   ArrowRight,
-  BadgeCheck,
   Building2,
   Check,
   GraduationCap,
@@ -20,7 +19,7 @@ import {
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
-import { DotGrid, ImpactChainIllustration, StatBlock } from "@/components/brand/illustrations";
+import { ImpactChainIllustration, StatBlock } from "@/components/brand/illustrations";
 import { CountUp } from "@/components/marketing/count-up";
 import { CourseMedia } from "@/components/marketing/course-media";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
@@ -33,10 +32,13 @@ import {
   MediaImage,
   SEP_PHOTOS,
 } from "@/components/marketing/real-photo";
-import { OrganizationLockup } from "@/components/brand/logo";
 import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
 import { getPublishedPosts } from "@/server/queries/public-content";
+
+// Los bloques con datos reales se resuelven por solicitud para no publicar un
+// catálogo vacío si la fuente está temporalmente inaccesible durante el build.
+export const dynamic = "force-dynamic";
 import { formatSoles } from "@/lib/utils";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 
@@ -69,22 +71,14 @@ export default async function HomePage() {
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
       <section className="relative overflow-hidden sep-gradient">
-        <DotGrid tone="dark" className="opacity-90" />
-        <div
-          aria-hidden
-          className="pointer-events-none absolute -right-40 -top-40 size-[560px] rounded-full bg-white/10 blur-3xl"
-        />
-
         <Container size="wide" className="relative">
-          <div className="grid items-center gap-10 py-12 sm:py-16 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:py-20">
+          <div className="grid items-center gap-10 py-14 sm:py-18 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:py-24">
             <div className="max-w-2xl">
-              <OrganizationLockup variant="white" />
-
-              <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-gold-500 sm:text-sm">
+              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-gold-500">
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
-              <h1 className="mt-4 font-display text-[2.35rem] font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-[3.35rem] lg:text-[3.65rem]">
+              <h1 className="mt-4 font-display text-h1 font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-display lg:text-display">
                 Ideas jóvenes que se convierten en
                 <span className="text-gold-500"> proyectos con impacto.</span>
               </h1>
@@ -101,18 +95,6 @@ export default async function HomePage() {
                 </Button>
               </div>
 
-              <div className="mt-7 flex max-w-xl items-start gap-3 rounded-[14px] border border-white/20 bg-white/10 px-4 py-3 text-left backdrop-blur-sm sm:items-center sm:px-5">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-white text-sep-700">
-                  <BadgeCheck className="size-4" />
-                </span>
-                <p className="text-sm leading-relaxed text-white/80">
-                  Organización juvenil reconocida por la
-                  <strong className="font-semibold text-white">
-                    {" "}Secretaría Nacional de la Juventud (SENAJU)
-                  </strong>
-                  .
-                </p>
-              </div>
             </div>
 
             <HeroPhoto />
@@ -120,19 +102,19 @@ export default async function HomePage() {
         </Container>
 
         {/* ═══ 2 · MÉTRICAS ════════════════════════════════ */}
-        <div className="relative border-t border-white/12">
+        <div className="relative border-b border-line bg-white">
           <Container size="wide">
-            <dl className="grid grid-cols-2 gap-y-8 py-10 sm:grid-cols-3 lg:grid-cols-5">
+            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:grid-cols-3 lg:grid-cols-5">
               {impactStats.map((stat) => (
                 <div key={stat.label}>
-                  <dd className="tabular font-display text-[1.875rem] font-semibold leading-none text-gold-500">
+                  <dd className="tabular text-h3 font-semibold leading-none tracking-tight text-ink">
                     <CountUp
                       value={stat.value}
                       prefix={"prefix" in stat ? stat.prefix : ""}
                       suffix={"suffix" in stat ? stat.suffix : ""}
                     />
                   </dd>
-                  <dt className="mt-2 text-[0.8125rem] leading-snug text-white/60">
+                  <dt className="mt-2 text-body-sm leading-snug text-slate-ui">
                     {stat.label}
                   </dt>
                 </div>
@@ -224,7 +206,7 @@ export default async function HomePage() {
               },
             ].map((audience) => (
               <Card key={audience.title} interactive className="flex h-full flex-col p-6">
-                <span className="flex size-11 items-center justify-center rounded-[12px] bg-sep-50 text-sep-700">
+                <span className="flex size-11 items-center justify-center rounded-md bg-sep-50 text-sep-700">
                   <audience.icon className="size-5" />
                 </span>
                 <h3 className="mt-5 font-display text-lg font-semibold text-ink">
@@ -320,7 +302,7 @@ export default async function HomePage() {
                 ["Impacto", "Que se sostiene solo"],
               ].map(([title, detail]) => (
                 <li key={title}>
-                  <p className="font-display text-[0.9375rem] font-semibold text-ink">
+                  <p className="font-display text-body-sm font-semibold text-ink">
                     {title}
                   </p>
                   <p className="mt-0.5 text-xs text-slate-ui">{detail}</p>
@@ -373,7 +355,7 @@ export default async function HomePage() {
                     {course.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
                   </div>
 
-                  <h3 className="mt-3 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
+                  <h3 className="mt-3 font-display text-body font-semibold leading-snug text-ink">
                     {course.title}
                   </h3>
                   <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
@@ -398,24 +380,24 @@ export default async function HomePage() {
       {/* ═══ 6 · SILP ═════════════════════════════════════ */}
       <Section tone="muted" className="py-14">
         <Container size="wide">
-          <div className="overflow-hidden rounded-[20px] border border-line bg-white">
+          <div className="overflow-hidden rounded-lg border border-line bg-white">
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
               <div className="p-8 sm:p-10">
                 <Badge tone="gold">
                   <Sparkles className="size-3.5" />
                   Programa insignia
                 </Badge>
-                <h2 className="mt-4 font-display text-[1.875rem] font-semibold leading-tight text-ink">
+                <h2 className="mt-4 font-display text-h2 font-semibold leading-tight text-ink">
                   Social Impact Leadership Program
                 </h2>
-                <p className="mt-3 max-w-lg text-[0.9375rem] leading-relaxed text-slate-ui">
+                <p className="mt-3 max-w-lg text-body-sm leading-relaxed text-slate-ui">
                   Seis semanas para pasar de una idea a un proyecto que funciona en tu
                   región, con mentoría uno a uno.
                 </p>
 
                 <div className="mt-6 flex flex-wrap items-center gap-6">
                   <div>
-                    <p className="tabular font-display text-[1.75rem] font-bold leading-none sep-gradient-text">
+                    <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                       {formatSoles(20000)}
                     </p>
                     <p className="mt-1 text-xs text-slate-ui">Tarifa social</p>
@@ -466,19 +448,19 @@ export default async function HomePage() {
                 key={c.name}
                 className={
                   c.recommended
-                    ? "relative border-sep-200 shadow-[0_8px_32px_rgba(46,11,232,.09)]"
+                    ? "relative border-sep-200 "
                     : ""
                 }
               >
                 {c.recommended && (
-                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-[0.6875rem] font-semibold text-ink">
+                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-ink">
                     Recomendado
                   </span>
                 )}
-                <p className="tabular font-display text-[2.25rem] font-bold leading-none text-ink">
+                <p className="tabular font-display text-h1 font-bold leading-none text-ink">
                   {formatSoles(c.price)}
                 </p>
-                <h3 className="mt-4 font-display text-[1.0625rem] font-semibold text-ink">
+                <h3 className="mt-4 font-display text-body font-semibold text-ink">
                   {c.name}
                 </h3>
                 <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
@@ -530,7 +512,7 @@ export default async function HomePage() {
             ].map((c) => (
               <Card key={c.title} interactive className="flex flex-col p-7">
                 <span
-                  className={`flex size-11 items-center justify-center rounded-[12px] ${
+                  className={`flex size-11 items-center justify-center rounded-md ${
                     c.tone === "gold"
                       ? "bg-gold-500/15 text-gold-700"
                       : c.tone === "seed"
@@ -541,10 +523,10 @@ export default async function HomePage() {
                   <c.icon className="size-5" />
                 </span>
 
-                <h3 className="mt-5 font-display text-[1.25rem] font-semibold text-ink">
+                <h3 className="mt-5 font-display text-h4 font-semibold text-ink">
                   {c.title}
                 </h3>
-                <p className="mt-2 flex-1 text-[0.9375rem] leading-relaxed text-slate-ui">
+                <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                   {c.body}
                 </p>
 
@@ -599,12 +581,12 @@ export default async function HomePage() {
                 {partners.map((partner) => (
                   <li
                     key={partner.name}
-                    className="flex min-w-0 items-center justify-between gap-3 rounded-[10px] border border-line bg-surface-1 px-3.5 py-3"
+                    className="flex min-w-0 items-center justify-between gap-3 rounded-sm border border-line bg-surface-1 px-3.5 py-3"
                   >
                     <span className="min-w-0 text-sm font-medium text-graphite">
                       {partner.name}
                     </span>
-                    <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-[0.6875rem] font-medium text-sep-700 ring-1 ring-inset ring-sep-100">
+                    <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-caption font-medium text-sep-700 ring-1 ring-inset ring-sep-100">
                       {partnerCategoryLabels[partner.category]}
                     </span>
                   </li>
@@ -636,7 +618,7 @@ export default async function HomePage() {
 
             <div>
               <Card id="newsletter" className="scroll-mt-24 lg:sticky lg:top-24">
-                <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+                <h2 className="font-display text-h4 font-semibold text-ink">
                   Newsletter SEP
                 </h2>
                 <p className="mt-2 text-sm leading-relaxed text-slate-ui">
@@ -656,9 +638,8 @@ export default async function HomePage() {
 
       {/* ═══ CTA FINAL ════════════════════════════════════ */}
       <section className="relative overflow-hidden sep-gradient">
-        <DotGrid tone="dark" />
         <Container size="wide" className="relative py-20 text-center">
-          <h2 className="mx-auto max-w-2xl font-display text-[2.25rem] font-bold leading-tight text-white sm:text-[3rem]">
+          <h2 className="mx-auto max-w-2xl font-display text-h1 font-bold leading-tight text-white sm:text-display">
             ¿Listos para sembrar el cambio?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-lg text-white/70">

@@ -6,6 +6,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { PanelSection } from "@/components/app/data-views";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mis proyectos" };
 
@@ -13,7 +14,7 @@ export default async function ProyectosPage() {
   const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: mine }, { data: others }] = await Promise.all([
+  const [mineResult, communityResult] = await Promise.all([
     supabase.from("projects").select("*").eq("user_id", user.id).order("created_at", { ascending: false }),
     supabase
       .from("projects")
@@ -22,6 +23,9 @@ export default async function ProyectosPage() {
       .neq("user_id", user.id)
       .limit(6),
   ]);
+  assertQueryResults("estudiante:proyectos", mineResult, communityResult);
+  const mine = mineResult.data;
+  const others = communityResult.data;
 
   const rows = mine ?? [];
 
@@ -54,7 +58,7 @@ export default async function ProyectosPage() {
                   {p.region && <Badge tone="brand">{p.region}</Badge>}
                   {p.is_public ? <Badge tone="seed">Público</Badge> : <Badge tone="neutral">Privado</Badge>}
                 </div>
-                <h3 className="mt-3 font-display text-[1.0625rem] font-semibold text-ink">{p.title}</h3>
+                <h3 className="mt-3 font-display text-body font-semibold text-ink">{p.title}</h3>
                 {p.problem && (
                   <>
                     <p className="mt-3 text-xs uppercase tracking-[0.08em] text-slate-ui">El problema</p>
@@ -82,7 +86,7 @@ export default async function ProyectosPage() {
               return (
                 <Card key={p.id} className="p-5">
                   {p.region && <Badge tone="neutral">{p.region}</Badge>}
-                  <h3 className="mt-3 font-display text-[0.9375rem] font-semibold text-ink">{p.title}</h3>
+                  <h3 className="mt-3 font-display text-body-sm font-semibold text-ink">{p.title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-slate-ui">{p.solution}</p>
                   <p className="mt-3 text-xs text-mist">{author?.full_name}</p>
                 </Card>

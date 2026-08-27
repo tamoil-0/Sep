@@ -201,7 +201,7 @@ export function CourseCover({
   return (
     <div
       className={cn(
-        "relative overflow-hidden rounded-[12px] bg-surface-1",
+        "relative overflow-hidden rounded-md bg-surface-1",
         className,
       )}
       aria-hidden
@@ -327,7 +327,7 @@ export function StatBlock({
   tone?: "brand" | "gold" | "seed";
 }) {
   return (
-    <div className="relative overflow-hidden rounded-[16px] border border-line bg-white p-6">
+    <div className="relative overflow-hidden rounded-lg border border-line bg-white p-6">
       <div
         aria-hidden
         className={cn(
@@ -339,15 +339,15 @@ export function StatBlock({
       />
       <p
         className={cn(
-          "tabular relative font-display text-[2.75rem] font-bold leading-none",
-          tone === "brand" && "sep-gradient-text",
+          "tabular relative font-display text-h1 font-bold leading-none",
+          tone === "brand" && "text-sep-700",
           tone === "gold" && "text-gold-600",
           tone === "seed" && "text-seed-700",
         )}
       >
         {figure}
       </p>
-      <p className="relative mt-3 font-display text-[1.0625rem] font-semibold text-ink">
+      <p className="relative mt-3 font-display text-body font-semibold text-ink">
         {label}
       </p>
       {detail && (
@@ -376,14 +376,14 @@ export function AvatarStack({
         {initials.map((i, idx) => (
           <span
             key={i + idx}
-            className="flex size-9 items-center justify-center rounded-full border-2 border-white sep-gradient text-[0.6875rem] font-semibold text-white"
+            className="flex size-9 items-center justify-center rounded-full border-2 border-white sep-gradient text-caption font-semibold text-white"
             style={{ opacity: 1 - idx * 0.12 }}
           >
             {i}
           </span>
         ))}
         {extra ? (
-          <span className="flex size-9 items-center justify-center rounded-full border-2 border-white bg-surface-2 text-[0.6875rem] font-semibold text-graphite">
+          <span className="flex size-9 items-center justify-center rounded-full border-2 border-white bg-surface-2 text-caption font-semibold text-graphite">
             +{extra}
           </span>
         ) : null}

@@ -26,55 +26,94 @@
   --color-gold-300: #ffdc7a;
   --color-gold-400: #ffd24d;
   --color-gold-500: #ffc629;
-  --color-gold-600: #e0a800;
-  --color-gold-700: #996f00;
+  --color-gold-600: #735000;
+  --color-gold-700: #735000;
+  --color-gold-800: #5c4000;
 
   /* ── Acento: verde semilla (el brote del logo) ── */
   --color-seed-400: #9bd46a;
-  --color-seed-500: #7cc242;
-  --color-seed-700: #4c8a1f;
+  --color-seed-500: #326912;
+  --color-seed-700: #326912;
+  --color-seed-800: #28550d;
 
   /* ── Neutrales minimal ── */
   --color-ink: #12101c;
-  --color-graphite: #3a3550;
-  --color-slate-ui: #6e6a85;
-  --color-mist: #a8a4bc;
-  --color-line: #e6e4f0;
-  --color-surface-2: #f2f1f8;
-  --color-surface-1: #f7f6fc;
+  --color-graphite: #373541;
+  --color-slate-ui: #666370;
+  /* El tono más sutil que todavía supera AA sobre blanco (4.65:1). */
+  --color-mist: #74717c;
+  --color-line: #e5e4e9;
+  --color-surface-2: #f4f3f6;
+  --color-surface-1: #faf9fb;
   --color-surface-0: #ffffff;
 
   /* ── Semánticos ── */
-  --color-success: #12a150;
+  --color-success: #08783b;
   --color-success-bg: #e6f6ed;
-  --color-warning: #f5a524;
+  --color-warning: #8a5a00;
   --color-warning-bg: #fef4e4;
-  --color-danger: #e5484d;
+  --color-danger: #a3373b;
   --color-danger-bg: #fdecec;
-  --color-info: #3b82f6;
+  --color-info: #245fbd;
   --color-info-bg: #eaf2fe;
 
   /* ── Tipografía ── */
   --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
 
-  /* ── Radios ── */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 24px;
+  /* Escala semántica: títulos fluidos, UI estable y líneas legibles. */
+  --text-display: clamp(2.5rem, 6vw, 4.25rem);
+  --text-display--line-height: 1.06;
+  --text-display--letter-spacing: -0.035em;
+  --text-h1: clamp(2rem, 5vw, 2.5rem);
+  --text-h1--line-height: 1.15;
+  --text-h1--letter-spacing: -0.025em;
+  --text-h2: clamp(1.75rem, 4vw, 2rem);
+  --text-h2--line-height: 1.2;
+  --text-h2--letter-spacing: -0.02em;
+  --text-h3: 1.5rem;
+  --text-h3--line-height: 1.33;
+  --text-h4: 1.25rem;
+  --text-h4--line-height: 1.4;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.67;
+  --text-body: 1rem;
+  --text-body--line-height: 1.625;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.57;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.5;
+  --text-caption--letter-spacing: 0.02em;
 
-  /* ── Sombra única ── */
-  --shadow-soft: 0 1px 3px rgba(18, 16, 28, 0.06);
-  --shadow-card: 0 2px 12px rgba(18, 16, 28, 0.07);
-  --shadow-lift: 0 12px 32px rgba(46, 11, 232, 0.14);
+  /* ── Radios ── */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 18px;
+
+  /* Elevación: solo cuando comunica jerarquía o superposición. */
+  --shadow-subtle: 0 1px 2px rgba(18, 16, 28, 0.05);
+  --shadow-card: 0 1px 3px rgba(18, 16, 28, 0.06);
+  --shadow-elevated: 0 12px 32px rgba(18, 16, 28, 0.14);
+
+  /* Alturas y anchos compartidos. */
+  --spacing-control: 2.75rem;
+  --spacing-control-lg: 3.25rem;
+  --spacing-nav: 3.5rem;
+  --spacing-icon-sm: 1rem;
+  --spacing-icon-md: 1.125rem;
+  --spacing-icon-lg: 1.25rem;
+  --spacing-icon-xl: 1.5rem;
+  --container-reading: 48rem;
+  --container-content: 72rem;
+  --container-wide: 80rem;
 
   /* ── Motion ── */
   --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 /* ============================================================
-   Variables en runtime (light / dark)
+   Variables en runtime
    ============================================================ */
 
 :root {
@@ -91,16 +130,6 @@
     rgba(46, 11, 232, 0.06) 0%,
     rgba(165, 15, 198, 0.06) 100%
   );
-}
-
-.dark {
-  --bg: #0b0916;
-  --bg-1: #12101f;
-  --bg-2: #1a1730;
-  --fg: #f4f3fa;
-  --fg-2: #cfcbe0;
-  --fg-3: #9b96b4;
-  --border: #2a2545;
 }
 
 /* ============================================================
@@ -156,6 +185,15 @@ textarea {
   font: inherit;
 }
 
+button,
+[href],
+input,
+select,
+textarea,
+summary {
+  -webkit-tap-highlight-color: rgba(46, 11, 232, 0.12);
+}
+
 ::selection {
   background: #ffc629;
   color: #12101c;
@@ -163,15 +201,13 @@ textarea {
 
 :focus-visible {
   outline: 2px solid #4a26ec;
-  outline-offset: 2px;
-  border-radius: 4px;
+  outline-offset: 3px;
 }
 
 h1,
 h2,
 h3,
 h4 {
-  font-family: var(--font-display);
   font-weight: 600;
   letter-spacing: -0.02em;
   line-height: 1.15;
@@ -180,6 +216,21 @@ h4 {
 
 p {
   text-wrap: pretty;
+}
+
+/* El producto autenticado usa Inter incluso cuando una vista heredada pide
+   `font-display`: Poppins queda reservado para hitos editoriales de marketing. */
+.app-shell .font-display {
+  font-family: var(--font-sans);
+}
+
+.app-shell .sep-gradient {
+  background: var(--color-sep-800);
+}
+
+.app-shell .sep-gradient-text {
+  background: none;
+  color: var(--color-ink);
 }
 
 /* ============================================================
@@ -324,6 +375,18 @@ p {
   }
 }
 
+@keyframes navigation-progress {
+  0% {
+    transform: translateX(-100%);
+  }
+  55% {
+    transform: translateX(45%);
+  }
+  100% {
+    transform: translateX(160%);
+  }
+}
+
 .animate-scale-in {
   animation: scale-in 0.22s var(--ease-out-soft) both;
 }
@@ -430,8 +493,9 @@ input:-webkit-autofill:focus {
   }
 
   /* Evita que una tarjeta quede partida entre dos páginas */
-  .rounded-\[14px\],
-  .rounded-\[18px\],
+  .rounded-md,
+  .rounded-lg,
+  .rounded-xl,
   section {
     break-inside: avoid;
   }

@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient } from "@/lib/supabase/server";
+import { assertQueryResults } from "@/lib/supabase/query";
 import type { Json, SurveyProfileDb } from "@/types/database";
 
 /**
@@ -364,8 +365,7 @@ export async function loadDiagnosticCounts(
       .range(from, from + PAGE_SIZE - 1);
 
     if (error) {
-      console.error("[sep] no se pudieron contar las encuestas:", error.code, error.message);
-      break;
+      assertQueryResults("admin:diagnostico:conteo", { error });
     }
     if (!data?.length) break;
 
@@ -420,8 +420,7 @@ async function fetchLeads(
       .range(from, from + PAGE_SIZE - 1);
 
     if (error) {
-      console.error("[sep] no se pudieron leer las encuestas:", error.code, error.message);
-      break;
+      assertQueryResults("admin:diagnostico:encuestas", { error });
     }
     if (!data?.length) return { rows, truncated: false };
 
@@ -447,12 +446,14 @@ async function fetchAccounts(supabase: SupabaseServerClient, userIds: string[]) 
   >();
 
   for (const ids of chunk(userIds, ID_CHUNK)) {
-    const { data } = await supabase
+    const result = await supabase
       .from("profiles")
       .select(
         "id, full_name, phone, region, university, career, current_situation, institution_id",
       )
       .in("id", ids);
+    assertQueryResults("admin:diagnostico:perfiles", result);
+    const data = result.data;
 
     for (const row of data ?? []) profiles.set(row.id, row);
   }
@@ -467,7 +468,9 @@ async function fetchAccounts(supabase: SupabaseServerClient, userIds: string[]) 
   const institutions = new Map<string, string>();
 
   for (const ids of chunk(institutionIds, ID_CHUNK)) {
-    const { data } = await supabase.from("institutions").select("id, name").in("id", ids);
+    const result = await supabase.from("institutions").select("id, name").in("id", ids);
+    assertQueryResults("admin:diagnostico:instituciones", result);
+    const data = result.data;
     for (const row of data ?? []) institutions.set(row.id, row.name);
   }
 
@@ -488,8 +491,7 @@ async function fetchResponses(supabase: SupabaseServerClient, leadIds: string[])
         .range(from, from + PAGE_SIZE - 1);
 
       if (error) {
-        console.error("[sep] no se pudieron leer las respuestas:", error.code, error.message);
-        break;
+        assertQueryResults("admin:diagnostico:respuestas", { error });
       }
       if (!data?.length) break;
 

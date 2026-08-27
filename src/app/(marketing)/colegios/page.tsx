@@ -21,8 +21,9 @@ export const metadata = createPageMetadata({
   keywords: ["talleres gratuitos para colegios", "innovación escolar Perú", "red de colegios SEP"],
 });
 
+export const dynamic = "force-dynamic";
+
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
-export const revalidate = 300;
 
 export default async function ColegiosPage() {
   const { schools, workshops, students } = await getSchoolNetwork();
@@ -36,7 +37,7 @@ export default async function ColegiosPage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">
             <Badge tone="seed">100 % gratuito para el colegio</Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-ink sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Conectamos colegios con{" "}
               <GoldUnderline>universitarios de su región</GoldUnderline>
             </h1>
@@ -62,10 +63,10 @@ export default async function ColegiosPage() {
               [String(regions.size), "Regiones activas"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dd className="tabular font-display text-[2rem] font-semibold leading-none sep-gradient-text">
+                <dd className="tabular font-display text-h2 font-semibold leading-none text-sep-700">
                   {value}
                 </dd>
-                <dt className="mt-2 text-[0.8125rem] text-slate-ui">{label}</dt>
+                <dt className="mt-2 text-body-sm text-slate-ui">{label}</dt>
               </div>
             ))}
           </dl>
@@ -89,10 +90,10 @@ export default async function ColegiosPage() {
                       {i + 1}
                     </span>
                     <div>
-                      <p className="font-display text-[1.0625rem] font-semibold text-ink">
+                      <p className="font-display text-body font-semibold text-ink">
                         {b.title}
                       </p>
-                      <p className="mt-1 text-[0.9375rem] leading-relaxed text-slate-ui">
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
                         {b.detail}
                       </p>
                     </div>
@@ -107,11 +108,11 @@ export default async function ColegiosPage() {
                 </p>
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
                   {schoolProcess.map((s) => (
-                    <li key={s.step} className="rounded-[12px] border border-line p-5">
+                    <li key={s.step} className="rounded-md border border-line p-5">
                       <span className="tabular text-xs font-semibold text-gold-600">
                         Paso {s.step}
                       </span>
-                      <p className="mt-2 text-[0.9375rem] font-medium text-ink">
+                      <p className="mt-2 text-body-sm font-medium text-ink">
                         {s.title}
                       </p>
                       <p className="mt-1 text-sm leading-relaxed text-slate-ui">
@@ -132,7 +133,7 @@ export default async function ColegiosPage() {
                     {schools.map((s) => (
                       <li
                         key={s.id}
-                        className="flex items-center gap-3 rounded-[10px] border border-line bg-white px-4 py-3"
+                        className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3"
                       >
                         <School className="size-4 shrink-0 text-seed-500" />
                         <div className="min-w-0">
@@ -151,7 +152,7 @@ export default async function ColegiosPage() {
             {/* Formulario */}
             <Card className="lg:sticky lg:top-24 lg:self-start">
               <div className="flex items-center gap-2">
-                <h2 className="font-display text-[1.25rem] font-semibold text-ink">
+                <h2 className="font-display text-h4 font-semibold text-ink">
                   Inscribe tu colegio
                 </h2>
                 <Badge tone="seed">Gratis</Badge>
@@ -172,10 +173,10 @@ export default async function ColegiosPage() {
         <Container size="narrow">
           <Card className="text-center">
             <Check className="mx-auto size-8 text-seed-500" />
-            <h2 className="mt-4 font-display text-[1.5rem] font-semibold text-ink">
+            <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Sin letra chica
             </h2>
-            <p className="mx-auto mt-2.5 max-w-lg text-[0.9375rem] leading-relaxed text-slate-ui">
+            <p className="mx-auto mt-2.5 max-w-lg text-body-sm leading-relaxed text-slate-ui">
               Los talleres para colegios de la red no tienen costo. Si una empresa decide
               patrocinar cohortes, eso ocurre entre SEP y la empresa: tu colegio nunca paga.
             </p>

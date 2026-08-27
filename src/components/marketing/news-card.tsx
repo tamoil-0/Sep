@@ -41,7 +41,7 @@ export function NewsCard({
       <Link
         href={`/blog/${post.slug}`}
         className={cn(
-          "relative block overflow-hidden rounded-[11px] bg-surface-2",
+          "relative block overflow-hidden rounded-md bg-surface-2",
           featured ? "aspect-[16/10] md:aspect-auto md:min-h-[320px]" : "aspect-[16/9]",
         )}
         aria-label={`Leer ${post.title}`}
@@ -50,7 +50,7 @@ export function NewsCard({
           src={post.cover_url ?? fallbackImage}
           alt=""
           fill
-          priority={priority}
+          loading={priority ? "eager" : "lazy"}
           sizes={
             featured
               ? "(min-width: 1024px) 60vw, (min-width: 768px) 55vw, 92vw"
@@ -76,7 +76,7 @@ export function NewsCard({
         <h3
           className={cn(
             "mt-3 font-display font-semibold leading-snug text-ink",
-            featured ? "text-[1.5rem] md:text-[1.75rem]" : "text-[1.125rem]",
+            featured ? "text-h3 md:text-h2" : "text-body-lg",
           )}
         >
           <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">

@@ -15,10 +15,10 @@ export default async function RecuperarPage({
   const { error } = await searchParams;
   return (
     <div>
-      <h1 className="font-display text-[2rem] font-semibold text-ink">
+      <h1 className="font-display text-h2 font-semibold text-ink">
         ¿Olvidaste tu contraseña?
       </h1>
-      <p className="mt-2 text-[0.9375rem] text-slate-ui">
+      <p className="mt-2 text-body-sm text-slate-ui">
         Escribe tu correo y te enviamos un enlace para crear una nueva.
       </p>
 

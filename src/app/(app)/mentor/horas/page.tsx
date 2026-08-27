@@ -6,6 +6,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/utils";
 import { HoursForm } from "./hours-form";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Mis horas de voluntariado" };
 
@@ -13,12 +14,14 @@ export default async function MentorHorasPage() {
   const user = await requireRole(["mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: hours } = await supabase
+  const result = await supabase
     .from("volunteer_hours")
     .select("id, date, hours, activity, approved_at")
     .eq("user_id", user.id)
     .order("date", { ascending: false })
     .limit(80);
+  assertQueryResults("mentor:horas", result);
+  const hours = result.data;
 
   const rows = hours ?? [];
   const approved = rows.filter((h) => h.approved_at);

@@ -63,7 +63,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           autoComplete="email"
           placeholder="tu@correo.com"
           className={cn(
-            "h-12 flex-1 rounded-[10px] border px-4 text-[0.9375rem] outline-none transition-colors",
+            "h-12 flex-1 rounded-sm border px-4 text-body-sm outline-none transition-colors",
             inverted
               ? "border-white/25 bg-white/10 text-white placeholder:text-white/45 focus:border-gold-500"
               : "border-line bg-white text-ink placeholder:text-mist focus:border-sep-400",
@@ -73,7 +73,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           type="submit"
           disabled={state === "loading"}
           className={cn(
-            "inline-flex h-12 items-center justify-center gap-2 rounded-[10px] px-6 text-[0.9375rem] font-medium transition-all disabled:opacity-60",
+            "inline-flex h-12 items-center justify-center gap-2 rounded-sm px-6 text-body-sm font-medium transition-colors disabled:opacity-60",
             inverted
               ? "bg-gold-500 text-ink hover:bg-gold-400"
               : "bg-sep-600 text-white hover:bg-sep-700",

@@ -1,6 +1,7 @@
 import "server-only";
 import { unstable_cache } from "next/cache";
 import { createPublicClient } from "@/lib/supabase/public";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 /**
  * Eventos publicados, ya separados en próximos y pasados.
@@ -12,7 +13,7 @@ export const getPublishedEvents = unstable_cache(async () => {
   const supabase = createPublicClient();
   const nowIso = new Date().toISOString();
 
-  const [{ data: upcoming }, { data: past }] = await Promise.all([
+  const [upcomingResult, pastResult] = await Promise.all([
     supabase
       .from("events")
       .select("id, slug, title, description, kind, starts_at, location, is_online, capacity")
@@ -27,6 +28,9 @@ export const getPublishedEvents = unstable_cache(async () => {
       .order("starts_at", { ascending: false })
       .limit(12),
   ]);
+  assertQueryResults("publico:eventos", upcomingResult, pastResult);
+  const upcoming = upcomingResult.data;
+  const past = pastResult.data;
 
   return { upcoming: upcoming ?? [], past: past ?? [] };
 }, ["public-events-v1"], { revalidate: 300, tags: ["public-events"] });

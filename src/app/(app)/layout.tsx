@@ -18,7 +18,7 @@ export default async function AppLayout({
   const active = primaryRole(user.roles);
 
   return (
-    <div className="min-h-dvh bg-surface-1 lg:flex">
+    <div className="app-shell min-h-dvh bg-surface-1 lg:flex">
       <AppSidebar
         activeRole={active}
         roles={user.roles}
@@ -28,7 +28,7 @@ export default async function AppLayout({
       <div className="min-w-0 flex-1">
         <main
           id="contenido"
-          className="mx-auto w-full max-w-6xl px-4 py-6 sm:px-6 sm:py-8 xl:px-8 xl:py-10"
+          className="mx-auto w-full max-w-6xl px-4 py-5 sm:px-6 sm:py-7 xl:px-8 xl:py-8"
         >
           {children}
         </main>

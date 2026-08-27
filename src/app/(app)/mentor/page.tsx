@@ -5,6 +5,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { Badge, Card, EmptyState, ProgressBar } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Panel de mentor" };
 
@@ -12,8 +13,7 @@ export default async function MentorPage() {
   const user = await requireRole(["mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: volunteer }, { data: mentorships }, { data: hours }] =
-    await Promise.all([
+  const [volunteerResult, mentorshipsResult, hoursResult] = await Promise.all([
       supabase
         .from("volunteer_profiles")
         .select("type, started_at, hours_committed")
@@ -30,6 +30,10 @@ export default async function MentorPage() {
         .eq("user_id", user.id)
         .gte("date", new Date(new Date().getFullYear(), new Date().getMonth(), 1).toISOString().slice(0, 10)),
     ]);
+  assertQueryResults("mentor:panel", volunteerResult, mentorshipsResult, hoursResult);
+  const volunteer = volunteerResult.data;
+  const mentorships = mentorshipsResult.data;
+  const hours = hoursResult.data;
 
   const monthHours = (hours ?? []).reduce((s, h) => s + Number(h.hours), 0);
   const committed = (volunteer?.hours_committed ?? 4) * 4;
@@ -122,7 +126,7 @@ export default async function MentorPage() {
           <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Progreso del mes
           </h2>
-          <p className="tabular mt-4 font-display text-[2rem] font-semibold leading-none text-ink">
+          <p className="tabular mt-4 font-display text-h2 font-semibold leading-none text-ink">
             {monthHours}
             <span className="text-lg text-slate-ui"> / {committed} h</span>
           </p>
@@ -144,7 +148,7 @@ export default async function MentorPage() {
       <section className="mt-8">
         <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-white text-sep-600 ring-1 ring-inset ring-line">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-sep-600 ring-1 ring-inset ring-line">
               <MessagesSquare className="size-5" />
             </span>
             <div>

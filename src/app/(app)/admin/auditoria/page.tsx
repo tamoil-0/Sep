@@ -6,6 +6,7 @@ import { PageHeader, Kpi, KpiGrid } from "@/components/app/page-header";
 import { DataTable, ComingSoon, EmptyState } from "@/components/app/data-views";
 import { Badge } from "@/components/ui/primitives";
 import { formatDateTime, initials } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Auditoría" };
 
@@ -28,11 +29,13 @@ export default async function AdminAuditoriaPage() {
   }
 
   const supabase = await createClient();
-  const { data } = await supabase
+  const result = await supabase
     .from("audit_log")
     .select("id, action, entity, entity_id, created_at, ip, profiles(full_name, email)")
     .order("created_at", { ascending: false })
     .limit(200);
+  assertQueryResults("admin:auditoria", result);
+  const data = result.data;
 
   const rows = (data ?? []).map((a) => ({
     ...a,
@@ -64,7 +67,7 @@ export default async function AdminAuditoriaPage() {
               render: (r) =>
                 r.actor ? (
                   <div className="flex items-center gap-2.5">
-                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-[0.625rem] font-semibold text-graphite">
+                    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-surface-2 text-caption font-semibold text-graphite">
                       {initials(r.actor.full_name ?? "?")}
                     </span>
                     <div className="min-w-0">

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { createPublicClient } from "@/lib/supabase/public";
 import { FairDiagnostic, type FairQuestion } from "./fair-diagnostic";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = {
   title: "Apoya hoy",
@@ -9,15 +10,17 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
 
-export const revalidate = 300;
+export const dynamic = "force-dynamic";
 
 export default async function ApoyaHoyPage() {
   const supabase = createPublicClient();
-  const { data, error } = await supabase
+  const result = await supabase
     .from("survey_questions")
     .select("number, question, input_type, options, is_key")
     .eq("profile", "universitario")
     .order("number");
+  assertQueryResults("campana:diagnostico", result);
+  const data = result.data;
 
   const questions: FairQuestion[] = (data ?? []).map((question) => ({
     number: question.number,
@@ -27,5 +30,5 @@ export default async function ApoyaHoyPage() {
     isKey: question.is_key,
   }));
 
-  return <FairDiagnostic questions={error ? [] : questions} />;
+  return <FairDiagnostic questions={questions} />;
 }

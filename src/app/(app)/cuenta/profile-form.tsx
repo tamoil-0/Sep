@@ -14,10 +14,10 @@ function SaveButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 items-center justify-center gap-2 rounded-[10px] bg-sep-600 px-6 text-[0.9375rem] font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-6 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Guardar cambios
+      {pending ? "Guardando cambios…" : "Guardar cambios"}
     </button>
   );
 }
@@ -40,7 +40,7 @@ export function ProfileForm({
   return (
     <form action={action} className="space-y-5">
       {state?.ok && state.message && <FormAlert tone="success">{state.message}</FormAlert>}
-      {state && !state.ok && state.error && !e && <FormAlert tone="error">{state.error}</FormAlert>}
+      {state && !state.ok && state.error && <FormAlert tone="error">{state.error}</FormAlert>}
 
       <div className="grid gap-4 sm:grid-cols-2">
         <Field label="Nombre completo" htmlFor="fullName" error={e?.fullName} required>
@@ -95,7 +95,7 @@ export function ProfileForm({
         </div>
       </fieldset>
 
-      <div className="rounded-[12px] border border-line bg-surface-1 p-4">
+      <div className="rounded-md border border-line bg-surface-1 p-4">
         <Checkbox
           id="newsletter"
           name="newsletter"
@@ -108,4 +108,3 @@ export function ProfileForm({
     </form>
   );
 }
-

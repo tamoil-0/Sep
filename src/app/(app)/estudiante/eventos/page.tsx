@@ -8,6 +8,7 @@ import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { PanelSection } from "@/components/app/data-views";
 import { EventRegisterButton } from "./register-button";
 import { formatDateTime } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Eventos" };
 
@@ -15,10 +16,13 @@ export default async function EstudianteEventosPage() {
   const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: events }, { data: mine }] = await Promise.all([
+  const [eventsResult, registrationsResult] = await Promise.all([
     supabase.from("events").select("*").eq("is_published", true).order("starts_at"),
     supabase.from("event_registrations").select("event_id, attended").eq("user_id", user.id),
   ]);
+  assertQueryResults("estudiante:eventos", eventsResult, registrationsResult);
+  const events = eventsResult.data;
+  const mine = registrationsResult.data;
 
   const registered = new Map((mine ?? []).map((r) => [r.event_id, r]));
   const cutoff = now();
@@ -55,7 +59,7 @@ export default async function EstudianteEventosPage() {
                     <Badge tone="gold"><MapPin className="size-3" />Presencial</Badge>
                   )}
                 </div>
-                <h3 className="mt-3.5 font-display text-[1.0625rem] font-semibold text-ink">{e.title}</h3>
+                <h3 className="mt-3.5 font-display text-body font-semibold text-ink">{e.title}</h3>
                 <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">{e.description}</p>
                 <p className="mt-4 text-xs capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
                 {e.location && <p className="mt-1 text-xs text-slate-ui">{e.location}</p>}

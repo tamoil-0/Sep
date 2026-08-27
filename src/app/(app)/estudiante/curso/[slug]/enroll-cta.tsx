@@ -18,12 +18,16 @@ export function EnrollCta({
   async function enroll() {
     setBusy(true);
     setError(null);
-    const { enrollAction } = await import("@/server/actions/learning");
-    const result = await enrollAction(slug);
-    setBusy(false);
-
-    if (result.ok) router.refresh();
-    else setError(result.error);
+    try {
+      const { enrollAction } = await import("@/server/actions/learning");
+      const result = await enrollAction(slug);
+      if (result.ok) router.refresh();
+      else setError(result.error);
+    } catch {
+      setError("No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.");
+    } finally {
+      setBusy(false);
+    }
   }
 
   if (!available) {
@@ -45,7 +49,7 @@ export function EnrollCta({
           type="button"
           onClick={enroll}
           disabled={busy}
-          className="inline-flex h-10 items-center justify-center gap-2 rounded-[10px] sep-gradient px-5 text-sm font-medium text-white shadow-[0_4px_16px_rgba(46,11,232,.2)] transition-all hover:shadow-[0_8px_24px_rgba(46,11,232,.28)] disabled:opacity-60"
+          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-medium text-white  transition-colors  disabled:opacity-60"
         >
           {busy && <Loader2 className="size-4 animate-spin" />}
           Inscribirme gratis
@@ -53,7 +57,7 @@ export function EnrollCta({
       </div>
 
       {error && (
-        <p className="mt-3 rounded-[10px] border border-danger/25 bg-danger-bg px-3.5 py-2.5 text-sm text-danger">
+        <p className="mt-3 rounded-sm border border-danger/25 bg-danger-bg px-3.5 py-2.5 text-sm text-danger">
           {error}
         </p>
       )}

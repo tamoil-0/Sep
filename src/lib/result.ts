@@ -94,6 +94,7 @@ export function fromPostgrestError(
   fallback = "No pudimos completar la operación. Inténtalo de nuevo.",
 ): ActionResult<never> {
   const raw = error.message ?? "";
+  const normalized = raw.toLowerCase();
 
   for (const [code, message] of Object.entries(PG_ERRORS)) {
     if (raw.includes(code)) {
@@ -103,6 +104,20 @@ export function fromPostgrestError(
 
   if (error.code && PG_CODES[error.code]) {
     return fail(PG_CODES[error.code], error.code);
+  }
+
+  if (
+    normalized.includes("fetch failed") ||
+    normalized.includes("failed to fetch") ||
+    normalized.includes("network") ||
+    normalized.includes("timeout") ||
+    normalized.includes("gateway")
+  ) {
+    console.error("[sep] error de conectividad con datos:", { code: error.code });
+    return fail(
+      "No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.",
+      "NETWORK",
+    );
   }
 
   // Nunca devolvemos el mensaje crudo de Postgres al cliente: puede filtrar

@@ -33,10 +33,10 @@ function SubmitButton({ disabled }: { disabled: boolean }) {
     <button
       type="submit"
       disabled={pending || disabled}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-[10px] sep-gradient text-[0.9375rem] font-medium text-white shadow-[0_4px_16px_rgba(46,11,232,.22)] transition-all hover:shadow-[0_8px_24px_rgba(46,11,232,.3)] disabled:opacity-50"
+      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-50"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
-      Enviar solicitud
+      {pending ? "Enviando solicitud…" : "Enviar solicitud"}
     </button>
   );
 }
@@ -64,7 +64,7 @@ export function WorkshopRequestForm({
 
   if (!institutionId) {
     return (
-      <p className="rounded-[10px] border border-warning/30 bg-warning-bg px-4 py-3 text-sm leading-relaxed text-graphite">
+      <p className="rounded-sm border border-warning/30 bg-warning-bg px-4 py-3 text-sm leading-relaxed text-graphite">
         Para solicitar un taller primero debes estar vinculado a un colegio de la red.
         Escríbenos y te vinculamos, o inscribe tu colegio desde la página pública.
       </p>
@@ -86,7 +86,7 @@ export function WorkshopRequestForm({
           </span>
         </FormAlert>
       )}
-      {state && !state.ok && state.error && !e && (
+      {state && !state.ok && state.error && (
         <FormAlert tone="error">{state.error}</FormAlert>
       )}
 

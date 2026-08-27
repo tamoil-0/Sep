@@ -14,7 +14,7 @@ export function EventRegisterButton({
 }) {
   const router = useRouter();
   const [busy, setBusy] = React.useState(false);
-  const [msg, setMsg] = React.useState<string | null>(null);
+  const [msg, setMsg] = React.useState<{ text: string; ok: boolean } | null>(null);
 
   if (registered) {
     return (
@@ -32,18 +32,27 @@ export function EventRegisterButton({
         disabled={busy}
         onClick={async () => {
           setBusy(true);
-          const r = await registerForEventAction(eventId);
-          setBusy(false);
-          setMsg(r.ok ? (r.message ?? "Listo.") : r.error);
-          if (r.ok) router.refresh();
+          setMsg(null);
+          try {
+            const r = await registerForEventAction(eventId);
+            setMsg({ text: r.ok ? (r.message ?? "Inscripción confirmada.") : r.error, ok: r.ok });
+            if (r.ok) router.refresh();
+          } catch {
+            setMsg({ text: "No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.", ok: false });
+          } finally {
+            setBusy(false);
+          }
         }}
-        className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-[8px] bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
       >
         {busy && <Loader2 className="size-4 animate-spin" />}
         Inscribirme
       </button>
-      {msg && <p className="mt-2 text-xs text-slate-ui">{msg}</p>}
+      {msg && (
+        <p className={msg.ok ? "mt-2 text-xs text-success" : "mt-2 text-xs text-danger"} role="status">
+          {msg.text}
+        </p>
+      )}
     </div>
   );
 }
-

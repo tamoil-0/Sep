@@ -58,7 +58,7 @@ export default async function DocenteProgramaPage() {
             <ProgressBar value={enrollment.progress_pct} className="mt-2.5" />
           </>
         ) : (
-          <p className="mt-5 text-[0.9375rem] leading-relaxed text-slate-ui">
+          <p className="mt-5 text-body-sm leading-relaxed text-slate-ui">
             Cuando abramos la próxima cohorte te avisaremos por correo. Mientras tanto,
             los recursos de aula ya están disponibles.
           </p>
@@ -81,7 +81,7 @@ export default async function DocenteProgramaPage() {
                     {s.number}
                   </span>
                   <div>
-                    <p className="font-display text-[0.9375rem] font-semibold text-ink">{s.title}</p>
+                    <p className="font-display text-body-sm font-semibold text-ink">{s.title}</p>
                     {s.subtitle && <p className="mt-0.5 text-xs text-slate-ui">{s.subtitle}</p>}
                     {s.description && (
                       <p className="mt-2 text-sm leading-relaxed text-graphite">{s.description}</p>

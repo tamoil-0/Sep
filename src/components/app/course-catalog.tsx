@@ -3,7 +3,7 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { CalendarDays, Check, Clock, Loader2, Search, Sprout } from "lucide-react";
+import { CalendarDays, Check, Clock, Loader2, Search, Sprout, X } from "lucide-react";
 import { enrollAction } from "@/server/actions/learning";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Input } from "@/components/forms/field";
@@ -47,15 +47,25 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
       (c.subtitle ?? "").toLowerCase().includes(q);
     return matchesCategory && matchesQuery;
   });
+  const hasFilters = query.trim().length > 0 || category !== "Todos";
+
+  function clearFilters() {
+    setQuery("");
+    setCategory("Todos");
+  }
 
   async function enroll(slug: string) {
     setBusy(slug);
     setError(null);
-    const result = await enrollAction(slug);
-    setBusy(null);
-
-    if (result.ok) router.push(`/estudiante/curso/${slug}`);
-    else setError(result.error);
+    try {
+      const result = await enrollAction(slug);
+      if (result.ok) router.push(`/estudiante/curso/${slug}`);
+      else setError(result.error);
+    } catch {
+      setError("No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.");
+    } finally {
+      setBusy(null);
+    }
   }
 
   return (
@@ -80,7 +90,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
               type="button"
               onClick={() => setCategory(c)}
               className={cn(
-                "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+                "min-h-control rounded-sm px-3.5 py-2 text-body-sm font-medium transition-colors",
                 category === c
                   ? "bg-sep-600 text-white"
                   : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -90,10 +100,25 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
             </button>
           ))}
         </div>
+        {hasFilters && (
+          <div className="flex flex-wrap items-center gap-3 text-caption text-slate-ui" role="status">
+            <span>
+              Mostrando {visible.length} de {courses.length} cursos
+              {category !== "Todos" ? ` en “${category}”` : ""}.
+            </span>
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="inline-flex min-h-control items-center gap-1.5 font-semibold text-sep-700 hover:underline"
+            >
+              <X className="size-icon-sm" /> Limpiar filtros
+            </button>
+          </div>
+        )}
       </div>
 
       {error && (
-        <div className="mb-4 rounded-[10px] border border-danger/25 bg-danger-bg px-4 py-3 text-sm text-danger">
+        <div className="mb-4 rounded-sm border border-danger/25 bg-danger-bg px-4 py-3 text-sm text-danger">
           {error}
         </div>
       )}
@@ -103,6 +128,15 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
           icon={<Search className="size-5" />}
           title="No encontramos cursos con ese filtro"
           description="Prueba con otra palabra o quita los filtros."
+          action={
+            <button
+              type="button"
+              onClick={clearFilters}
+              className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-4 text-body-sm font-semibold text-ink hover:bg-surface-2"
+            >
+              <X className="size-icon-sm" /> Limpiar filtros
+            </button>
+          }
         />
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
@@ -134,7 +168,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
-                  <h3 className="mt-3.5 font-display text-[1.0625rem] font-semibold leading-snug text-ink">
+                  <h3 className="mt-3.5 font-display text-body font-semibold leading-snug text-ink">
                     {c.title}
                   </h3>
                   <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
@@ -168,7 +202,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.enrolled ? (
                       <Link
                         href={`/estudiante/curso/${c.slug}`}
-                        className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-white text-sm font-medium text-ink transition-colors hover:bg-surface-2"
+                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-white text-sm font-medium text-ink transition-colors hover:bg-surface-2"
                       >
                         Ir al curso
                       </Link>
@@ -177,7 +211,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                         type="button"
                         onClick={() => enroll(c.slug)}
                         disabled={busy !== null}
-                        className="inline-flex h-9 w-full items-center justify-center gap-2 rounded-[8px] bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+                        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
                       >
                         {busy === c.slug && <Loader2 className="size-4 animate-spin" />}
                         {c.isFree ? "Inscribirme gratis" : "Continuar"}
@@ -186,7 +220,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                       <button
                         type="button"
                         disabled
-                        className="inline-flex h-9 w-full items-center justify-center rounded-[8px] border border-line bg-surface-1 text-sm text-mist"
+                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-surface-1 text-sm text-mist"
                       >
                         Próximamente
                       </button>

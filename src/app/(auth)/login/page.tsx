@@ -23,10 +23,10 @@ export default async function LoginPage({
 
   return (
     <div>
-      <h1 className="font-display text-[2rem] font-semibold text-ink">
-        Bienvenid@ de vuelta
+      <h1 className="font-display text-h1 font-semibold text-ink">
+        Te damos la bienvenida
       </h1>
-      <p className="mt-2 text-[0.9375rem] text-slate-ui">
+      <p className="mt-2 text-body-sm text-slate-ui">
         Entra a tu panel y continúa donde lo dejaste.
       </p>
 

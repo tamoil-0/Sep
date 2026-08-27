@@ -9,6 +9,7 @@ import { PanelSection } from "@/components/app/data-views";
 import { ROLE_META } from "@/types/roles";
 import { formatDate, initials } from "@/lib/utils";
 import { ProfileForm } from "./profile-form";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = {
   title: "Mi cuenta",
@@ -19,19 +20,23 @@ export default async function CuentaPage() {
   const user = await requireUser();
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles")
     .select(
       "full_name, email, phone, region, province, university, career, current_situation, bio, interests, created_at, newsletter_opt_in",
     )
     .eq("id", user.id)
     .maybeSingle();
+  assertQueryResults("cuenta:perfil", profileResult);
+  const profile = profileResult.data;
 
-  const { count: unread } = await supabase
+  const notificationsResult = await supabase
     .from("notifications")
     .select("id", { count: "exact", head: true })
     .eq("user_id", user.id)
     .is("read_at", null);
+  assertQueryResults("cuenta:notificaciones-pendientes", notificationsResult);
+  const unread = notificationsResult.count;
 
   return (
     <>
@@ -42,13 +47,13 @@ export default async function CuentaPage() {
 
       {/* Identidad */}
       <Card className="overflow-hidden p-0">
-        <div className="sep-gradient px-7 py-7">
+        <div className="bg-sep-800 px-7 py-7">
           <div className="flex flex-wrap items-center gap-5">
             <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 font-display text-lg font-semibold text-ink">
               {initials(profile?.full_name || user.email)}
             </span>
             <div className="min-w-0">
-              <h2 className="font-display text-[1.5rem] font-semibold text-white">
+              <h2 className="font-display text-h3 font-semibold text-white">
                 {profile?.full_name || "Sin nombre"}
               </h2>
               <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm text-white/70">
@@ -93,11 +98,11 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/seguridad" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-sep-50 text-sep-600">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600">
             <ShieldCheck className="size-5" />
           </span>
           <div className="min-w-0">
-            <p className="text-[0.9375rem] font-medium text-ink">Seguridad</p>
+            <p className="text-body-sm font-medium text-ink">Seguridad</p>
             <p className="mt-0.5 text-xs text-slate-ui">
               Contraseña, doble factor y sesiones
             </p>
@@ -110,11 +115,11 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/notificaciones" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-gold-500/15 text-gold-700">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
             <Bell className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="text-[0.9375rem] font-medium text-ink">Notificaciones</p>
+            <p className="text-body-sm font-medium text-ink">Notificaciones</p>
             <p className="mt-0.5 text-xs text-slate-ui">
               {unread ? `${unread} sin leer` : "Todo al día"}
             </p>
@@ -149,7 +154,7 @@ export default async function CuentaPage() {
           <div className="flex items-start gap-3.5">
             <KeyRound className="mt-0.5 size-5 shrink-0 text-slate-ui" />
             <div>
-              <h3 className="font-display text-[0.9375rem] font-semibold text-ink">
+              <h3 className="font-display text-body-sm font-semibold text-ink">
                 Acceso, rectificación, cancelación y oposición
               </h3>
               <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">

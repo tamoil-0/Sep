@@ -8,6 +8,7 @@ import { PanelSection } from "@/components/app/data-views";
 
 import { GraduationCap, ShieldCheck } from "lucide-react";
 import { formatDate } from "@/lib/utils";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Estudiantes" };
 
@@ -22,8 +23,10 @@ export default async function InstitucionEstudiantesPage() {
   const user = await requireRole(["institucion", "admin", "super_admin"]);
   const supabase = await createClient();
 
-  const { data: profile } = await supabase
+  const profileResult = await supabase
     .from("profiles").select("institution_id").eq("id", user.id).maybeSingle();
+  assertQueryResults("institucion:estudiantes:perfil", profileResult);
+  const profile = profileResult.data;
 
   if (!profile?.institution_id) {
     return (
@@ -34,19 +37,23 @@ export default async function InstitucionEstudiantesPage() {
     );
   }
 
-  const { data: workshops } = await supabase
+  const workshopsResult = await supabase
     .from("workshops")
     .select("id, title, scheduled_at, grade")
     .eq("institution_id", profile.institution_id)
     .order("scheduled_at", { ascending: false });
+  assertQueryResults("institucion:estudiantes:talleres", workshopsResult);
+  const workshops = workshopsResult.data;
 
   const ids = (workshops ?? []).map((w) => w.id);
-  const { data: attendees } = ids.length
+  const attendeesResult = ids.length
     ? await supabase
         .from("workshop_attendees")
         .select("id, workshop_id, student_name, grade, attended, certificate_id")
         .in("workshop_id", ids)
-    : { data: [] };
+    : null;
+  if (attendeesResult) assertQueryResults("institucion:estudiantes:asistencia", attendeesResult);
+  const attendees = attendeesResult?.data ?? [];
 
   const rows = attendees ?? [];
   const byWorkshop = new Map((workshops ?? []).map((w) => [w.id, w]));
@@ -110,4 +117,3 @@ export default async function InstitucionEstudiantesPage() {
     </>
   );
 }
-

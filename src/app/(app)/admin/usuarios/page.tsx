@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/app/page-header";
 import { UserTable } from "./user-table";
 import type { UserRole } from "@/types/roles";
+import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata: Metadata = { title: "Usuarios y roles" };
 
@@ -11,7 +12,7 @@ export default async function AdminUsuariosPage() {
   const admin = await requireRole(["admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [{ data: profiles }, { data: roles }] = await Promise.all([
+  const [profilesResult, rolesResult] = await Promise.all([
     supabase
       .from("profiles")
       .select("id, full_name, email, region, university, created_at, onboarding_done")
@@ -19,6 +20,9 @@ export default async function AdminUsuariosPage() {
       .limit(300),
     supabase.from("user_roles").select("user_id, role").is("revoked_at", null),
   ]);
+  assertQueryResults("admin:usuarios", profilesResult, rolesResult);
+  const profiles = profilesResult.data;
+  const roles = rolesResult.data;
 
   const rolesByUser = new Map<string, UserRole[]>();
   for (const r of roles ?? []) {

@@ -60,7 +60,7 @@ export default function VoluntariadoPage() {
         <Container size="wide" className="relative py-16 sm:py-20">
           <div className="max-w-2xl">
             <Badge tone="white">{totalPositions} vacantes abiertas</Badge>
-            <h1 className="mt-5 font-display text-[2.5rem] font-bold leading-[1.08] text-white sm:text-[3.25rem]">
+            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-white sm:text-display">
               Forma parte del equipo que{" "}
               <span className="text-gold-500">democratiza la innovación</span>
             </h1>
@@ -88,10 +88,10 @@ export default function VoluntariadoPage() {
               [String(totalPositions), "Vacantes abiertas"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dd className="tabular font-display text-[2rem] font-semibold leading-none text-gold-500">
+                <dd className="tabular font-display text-h2 font-semibold leading-none text-gold-500">
                   {value}
                 </dd>
-                <dt className="mt-2 text-[0.8125rem] text-white/65">{label}</dt>
+                <dt className="mt-2 text-body-sm text-white/65">{label}</dt>
               </div>
             ))}
           </dl>
@@ -115,7 +115,7 @@ export default function VoluntariadoPage() {
                   <div className="grid gap-8 p-7 lg:grid-cols-[1.2fr_1fr]">
                     <div>
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex size-11 shrink-0 items-center justify-center rounded-[12px] bg-sep-50 text-sep-600">
+                        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-sep-50 text-sep-600">
                           <Icon className="size-5" />
                         </span>
                         <Badge tone="gold">
@@ -124,7 +124,7 @@ export default function VoluntariadoPage() {
                         </Badge>
                       </div>
 
-                      <h2 className="mt-5 font-display text-[1.5rem] font-semibold text-ink">
+                      <h2 className="mt-5 font-display text-h3 font-semibold text-ink">
                         {role.name}
                       </h2>
                       {role.exclusive && (
@@ -132,7 +132,7 @@ export default function VoluntariadoPage() {
                           {role.exclusive}
                         </p>
                       )}
-                      <p className="mt-3 text-[0.9375rem] leading-relaxed text-slate-ui">
+                      <p className="mt-3 text-body-sm leading-relaxed text-slate-ui">
                         {role.description}
                       </p>
 
@@ -166,7 +166,7 @@ export default function VoluntariadoPage() {
                       </Button>
                     </div>
 
-                    <div className="rounded-[14px] bg-surface-1 p-6">
+                    <div className="rounded-md bg-surface-1 p-6">
                       <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
                         Beneficios exclusivos del rol
                       </p>
@@ -209,7 +209,7 @@ export default function VoluntariadoPage() {
               return (
                 <Card key={b.title} className="p-6">
                   <Icon className="size-5 text-sep-600" />
-                  <h3 className="mt-4 font-display text-[0.9375rem] font-semibold text-ink">
+                  <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
                     {b.title}
                   </h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{b.detail}</p>
@@ -232,11 +232,11 @@ export default function VoluntariadoPage() {
           <ol className="mt-10 space-y-4">
             {volunteerProcess.map((s) => (
               <li key={s.step} className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full sep-gradient text-sm font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-sm font-semibold text-white">
                   {s.step}
                 </span>
                 <div className="pt-1">
-                  <p className="font-display text-[1.0625rem] font-semibold text-ink">
+                  <p className="font-display text-body font-semibold text-ink">
                     {s.title}
                   </p>
                   <p className="mt-1 text-sm text-slate-ui">{s.detail}</p>
