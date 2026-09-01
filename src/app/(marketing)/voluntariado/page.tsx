@@ -48,23 +48,23 @@ export default function VoluntariadoPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden sep-gradient">
+      <section className="relative overflow-hidden border-b border-line bg-surface-1">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          className="pointer-events-none absolute inset-0 opacity-[0.45]"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, #e6e4f0 1px, transparent 0)",
             backgroundSize: "34px 34px",
           }}
         />
-        <Container size="wide" className="relative py-16 sm:py-20">
+        <Container size="wide" className="relative py-10 sm:py-16">
           <div className="max-w-2xl">
-            <Badge tone="white">{totalPositions} vacantes abiertas</Badge>
-            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-white sm:text-display">
+            <Badge>{totalPositions} vacantes abiertas</Badge>
+            <h1 className="mt-4 font-display text-h1 font-bold leading-[1.08] text-ink lg:text-[3.5rem]">
               Forma parte del equipo que{" "}
-              <span className="text-gold-500">democratiza la innovación</span>
+              <span className="text-sep-700">democratiza la innovación</span>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-white/80">
+            <p className="mt-4 text-lg leading-relaxed text-slate-ui">
               Tu trabajo llega a jóvenes que nadie más está atendiendo. A cambio recibes
               certificación formal, red nacional y formación continua sin costo.
             </p>
@@ -75,12 +75,12 @@ export default function VoluntariadoPage() {
             alt="Voluntarios y participantes de SEP trabajando como equipo"
             priority
             label="Una comunidad que construye"
-            className="mt-10 aspect-[16/7] min-h-52 border border-white/20"
+            className="mt-8 aspect-[16/7] min-h-52"
             imageClassName="object-[50%_42%]"
             sizes="(min-width: 1280px) 1152px, 100vw"
           />
 
-          <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <dl className="mt-8 grid grid-cols-2 gap-6 border-t border-line pt-7 sm:grid-cols-4">
             {[
               ["3", "Roles disponibles"],
               ["12", "Voluntarios activos"],
@@ -88,10 +88,10 @@ export default function VoluntariadoPage() {
               [String(totalPositions), "Vacantes abiertas"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dd className="tabular font-display text-h2 font-semibold leading-none text-gold-500">
+                <dd className="tabular font-display text-h2 font-semibold leading-none text-sep-700">
                   {value}
                 </dd>
-                <dt className="mt-2 text-body-sm text-white/65">{label}</dt>
+                <dt className="mt-2 text-body-sm text-slate-ui">{label}</dt>
               </div>
             ))}
           </dl>

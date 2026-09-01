@@ -17,21 +17,21 @@ const highlights = [
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(360px,0.9fr)_minmax(520px,1.1fr)]">
+    <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(340px,0.78fr)_minmax(520px,1.22fr)]">
       {/* Panel de marca */}
-      <aside className="relative hidden min-h-dvh overflow-hidden sep-gradient lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-14">
+      <aside className="relative hidden min-h-dvh overflow-hidden bg-sep-950 lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-12">
         <Link href="/" className="relative">
           <Logo className="h-14" variant="white" />
         </Link>
 
         <div className="relative">
-          <h2 className="max-w-md font-display text-h1 font-bold leading-[1.15] text-white">
+          <h2 className="max-w-sm font-display text-h2 font-semibold leading-[1.15] text-white">
             El talento está en regiones.
             <br />
             <span className="text-gold-500">Aquí empieza tu camino.</span>
           </h2>
 
-          <ul className="mt-9 space-y-3.5">
+          <ul className="mt-7 space-y-3">
             {highlights.map((h) => (
               <li key={h.text} className="flex items-center gap-3 text-white/80">
                 <h.icon className="size-4 shrink-0 text-gold-500" />
@@ -61,11 +61,11 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </Link>
         </div>
 
-        <div className="flex flex-1 items-start justify-center pb-8 pt-16 sm:pt-20 lg:items-center lg:py-10">
+        <div className="flex flex-1 items-start justify-center pb-8 pt-10 sm:pt-14 lg:items-center lg:py-8">
           <div className="w-full max-w-[440px]">
             {children}
             <ContextualHelp
-              className="mt-8"
+              className="mt-6 border-0 bg-transparent px-0 py-2 shadow-none"
               description="Si el correo no llega o no puedes continuar, escríbenos indicando el paso en el que estás."
             />
           </div>

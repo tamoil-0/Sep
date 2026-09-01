@@ -28,8 +28,9 @@ export async function loginAction(
   _prev: ActionState | null,
   formData: FormData,
 ): Promise<ActionState> {
+  const submittedEmail = String(formData.get("email") ?? "");
   const parsed = loginSchema.safeParse({
-    email: formData.get("email"),
+    email: submittedEmail,
     password: formData.get("password"),
     next: formData.get("next") ?? undefined,
   });
@@ -39,6 +40,7 @@ export async function loginAction(
       ok: false,
       error: "Revisa los campos marcados.",
       fieldErrors: parsed.error.flatten().fieldErrors,
+      submittedEmail,
     };
   }
 
@@ -53,6 +55,7 @@ export async function loginAction(
     return {
       ok: false,
       error: "Demasiados intentos. Espera 15 minutos antes de volver a intentar.",
+      submittedEmail: parsed.data.email,
     };
   }
 
@@ -64,7 +67,11 @@ export async function loginAction(
 
   if (error) {
     // Mensaje genérico: no revelamos si el correo existe (§9.3)
-    return { ok: false, error: "Correo o contraseña incorrectos." };
+    return {
+      ok: false,
+      error: "Correo o contraseña incorrectos.",
+      submittedEmail: parsed.data.email,
+    };
   }
 
   revalidatePath("/", "layout");

@@ -22,25 +22,25 @@ export function ProgramHero({
   aside?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden sep-gradient text-white">
-      <Container size="wide" className="relative grid items-center gap-10 py-14 md:py-18 lg:grid-cols-[1.05fr_.95fr] lg:py-22">
+    <section className="relative overflow-hidden border-b border-line bg-surface-1">
+      <Container size="wide" className="relative grid items-center gap-8 py-10 md:py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-16">
         <div className="max-w-2xl">
-          <Badge tone="white"><Sparkles className="size-icon-sm" />{eyebrow}</Badge>
-          <h1 className="mt-5 font-display text-display font-bold">{title}</h1>
-          <p className="mt-5 max-w-[62ch] text-body-lg text-white/85">{description}</p>
-          <ul className="mt-7 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-white/85">
+          <Badge><Sparkles className="size-icon-sm" />{eyebrow}</Badge>
+          <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-[3.5rem] lg:leading-[1.04]">{title}</h1>
+          <p className="mt-4 max-w-[62ch] text-body-lg text-slate-ui">{description}</p>
+          <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-graphite">
             {facts.map((fact) => (
               <li key={fact} className="flex items-center gap-2">
-                <Check className="size-icon-sm text-gold-500" />{fact}
+                <Check className="size-icon-sm text-seed-700" />{fact}
               </li>
             ))}
           </ul>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Button href={primaryAction.href} variant="gold" size="lg">
+          <div className="mt-7 flex flex-col gap-3 sm:flex-row">
+            <Button href={primaryAction.href} size="lg">
               {primaryAction.label}<ArrowRight />
             </Button>
             {secondaryAction && (
-              <Button href={secondaryAction.href} variant="outline-white" size="lg">
+              <Button href={secondaryAction.href} variant="outline" size="lg">
                 {secondaryAction.label}
               </Button>
             )}

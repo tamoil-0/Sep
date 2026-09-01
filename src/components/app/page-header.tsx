@@ -30,7 +30,7 @@ export function PageHeader({
 }
 
 export function KpiGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">{children}</div>;
+  return <div className="grid grid-cols-2 gap-2.5 lg:grid-cols-4">{children}</div>;
 }
 
 export function Kpi({
@@ -45,15 +45,15 @@ export function Kpi({
   icon?: React.ReactNode;
 }) {
   return (
-    <div className="rounded-md border border-line bg-white px-4 py-3.5 sm:px-5 sm:py-4">
+    <div className="min-w-0 rounded-sm border border-line bg-white px-3 py-3 sm:rounded-md sm:px-4 sm:py-3.5">
       <div className="flex items-start justify-between gap-3">
-        <p className="text-body-sm text-slate-ui">{label}</p>
-        {icon && <span className="text-mist">{icon}</span>}
+        <p className="text-xs leading-snug text-slate-ui sm:text-body-sm">{label}</p>
+        {icon && <span className="hidden text-mist sm:block">{icon}</span>}
       </div>
-      <p className="tabular mt-1.5 text-h3 font-semibold leading-none tracking-tight text-ink">
+      <p className="tabular mt-1.5 truncate text-xl font-semibold leading-none tracking-tight text-ink sm:text-h3">
         {value}
       </p>
-      {hint && <p className="mt-1.5 text-xs text-mist">{hint}</p>}
+      {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5 sm:text-xs">{hint}</p>}
     </div>
   );
 }

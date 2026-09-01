@@ -36,21 +36,21 @@ export function ForgotForm({ initialError }: { initialError?: string }) {
 
   if (state?.ok && state.message) {
     return (
-      <div className="space-y-4">
+      <div className="space-y-5">
         <FormAlert tone="success">
           <span className="block font-semibold">Solicitud recibida</span>
           <span className="mt-1 block font-normal">
             Si existe una cuenta para {maskEmail(state.submittedEmail)}, el enlace llegará en uno o dos minutos.
           </span>
         </FormAlert>
-        <div className="rounded-sm border border-line bg-surface-1 p-4 text-caption leading-relaxed text-slate-ui">
-          <p>Revisa también spam y promociones. El enlace solo se puede usar una vez.</p>
-          <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-            <Button href="/login" variant="outline" className="flex-1">Volver al login</Button>
-            <Button type="button" variant="ghost" className="flex-1" onClick={() => window.location.reload()}>
-              Intentar otra vez
-            </Button>
-          </div>
+        <p className="text-body-sm leading-relaxed text-slate-ui">
+          Revisa también spam y promociones. El enlace solo se puede usar una vez.
+        </p>
+        <div className="flex flex-col gap-2 sm:flex-row">
+          <Button href="/login" className="flex-1">Volver al login</Button>
+          <Button type="button" variant="ghost" className="flex-1" onClick={() => window.location.reload()}>
+            Usar otro correo
+          </Button>
         </div>
       </div>
     );

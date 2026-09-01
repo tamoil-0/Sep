@@ -1,12 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   Award,
   BookOpen,
-  ChartPie,
   CreditCard,
-  Inbox,
-  School,
   ShieldCheck,
   Users,
 } from "lucide-react";
@@ -37,14 +33,11 @@ export default async function AdminPage() {
   const user = await requireRole(["admin", "super_admin"]);
   const supabase = await createClient();
 
-  const [users, enrollments, certificates, applications, schools, leads] =
+  const [users, enrollments, certificates] =
     await Promise.all([
       count(supabase, "profiles"),
       count(supabase, "enrollments"),
       count(supabase, "certificates"),
-      count(supabase, "volunteer_applications"),
-      count(supabase, "school_applications"),
-      count(supabase, "survey_leads"),
     ]);
 
   const paidOrdersResult = await supabase
@@ -55,17 +48,6 @@ export default async function AdminPage() {
   const paidOrders = paidOrdersResult.data;
 
   const revenue = (paidOrders ?? []).reduce((s, o) => s + o.amount_cents, 0);
-
-  const shortcuts = [
-    { href: "/admin/usuarios", label: "Usuarios y roles", icon: Users, detail: `${users} registrados` },
-    { href: "/admin/cursos", label: "Cursos y sesiones", icon: BookOpen, detail: "Editar el catálogo" },
-    { href: "/admin/certificados", label: "Emitir certificados", icon: Award, detail: `${certificates} emitidos` },
-    { href: "/admin/pagos", label: "Conciliar pagos", icon: CreditCard, detail: "Yape, Plin y Culqi" },
-    { href: "/admin/postulaciones", label: "Postulaciones", icon: Inbox, detail: `${applications} recibidas` },
-    { href: "/admin/colegios", label: "Red de colegios", icon: School, detail: `${schools} solicitudes` },
-    { href: "/admin/diagnostico", label: "Diagnóstico", icon: ChartPie, detail: `${leads} respuestas` },
-    { href: "/admin/auditoria", label: "Auditoría", icon: ShieldCheck, detail: "Solo super admin" },
-  ];
 
   return (
     <>
@@ -91,28 +73,7 @@ export default async function AdminPage() {
         />
       </KpiGrid>
 
-      <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
-          Accesos rápidos
-        </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {shortcuts.map((s) => (
-            <Card
-              key={s.href}
-              interactive
-              className="p-5"
-              as={Link}
-              {...{ href: s.href }}
-            >
-              <s.icon className="size-5 text-sep-600" />
-              <h3 className="mt-3.5 text-body-sm font-medium text-ink">{s.label}</h3>
-              <p className="mt-1 text-xs text-slate-ui">{s.detail}</p>
-            </Card>
-          ))}
-        </div>
-      </section>
-
-      <section className="mt-8">
+      <section className="mt-6 sm:mt-8">
         <Card className="border-warning/25 bg-warning-bg/60">
           <div className="flex items-start gap-3.5">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-[#8A5A00]" />

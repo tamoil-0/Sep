@@ -170,7 +170,7 @@ export function PanelSection({
   className?: string;
 }) {
   return (
-    <section className={cn("mt-8 first:mt-0", className)}>
+    <section className={cn("mt-6 first:mt-0 sm:mt-8", className)}>
       <div className="mb-3.5 flex items-center justify-between gap-4">
         <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
           {title}

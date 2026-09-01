@@ -8,14 +8,12 @@ import {
   CheckCircle2,
   Clock3,
   Loader2,
-  LockKeyhole,
   Sparkles,
 } from "lucide-react";
 import { submitAccountDiagnosticAction } from "@/server/actions/onboarding";
 import { Logo } from "@/components/brand/logo";
-import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
+import { Card, ProgressBar } from "@/components/ui/primitives";
 import { FormAlert } from "@/components/forms/field";
-import { ContextualHelp } from "@/components/ui/contextual-help";
 import { cn } from "@/lib/utils";
 
 export interface OnboardingQuestion {
@@ -180,44 +178,33 @@ export function OnboardingForm({
     profile === "empresa" ? "Organización" : profile === "docente" ? "Docente" : "Estudiante";
 
   return (
-    <div className="mx-auto max-w-5xl pb-8">
-      <header className="relative overflow-hidden rounded-lg sep-gradient px-5 py-7 text-white sm:px-8 sm:py-9">
-        <div
-          aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
-          style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
-            backgroundSize: "28px 28px",
-          }}
-        />
-        <div className="relative mb-7 flex items-center justify-between">
-          <Logo variant="white" className="h-14" />
-          <span className="text-xs font-medium text-white/60">Tu ingreso a SEP</span>
-        </div>
-        <div className="relative flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
-          <div className="max-w-2xl">
-            <Badge tone="white">Preparando SEP para ti · {profileLabel}</Badge>
-            <h1 className="mt-4 font-display text-h1 font-semibold">
-              {firstName ? `${firstName}, personalicemos tu experiencia` : "Personalicemos tu experiencia"}
+    <div className="mx-auto max-w-6xl pb-6">
+      <header className="overflow-hidden rounded-md border border-line bg-white">
+        <div className="h-1 sep-gradient" aria-hidden />
+        <div className="flex items-start gap-4 px-4 py-4 sm:items-center sm:px-6 sm:py-5">
+          <Logo className="mt-0.5 h-10 sm:mt-0 sm:h-11" />
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-sep-600">
+                Diagnóstico de entrada · {profileLabel}
+              </p>
+              <span className="inline-flex items-center gap-1 text-xs text-slate-ui">
+                <Clock3 className="size-3.5" /> 4–6 min
+              </span>
+            </div>
+            <h1 className="mt-1 font-display text-2xl font-semibold leading-tight text-ink sm:text-3xl">
+              {firstName ? `${firstName}, cuéntanos sobre ti` : "Cuéntanos sobre ti"}
             </h1>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/75 sm:text-body-sm">
-              Son 15 preguntas breves sobre {audience}, organizadas en tres módulos. Así podremos mostrarte primero lo que te resulte más útil.
+            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-ui">
+              15 preguntas sobre {audience} para personalizar lo que verás en SEP.
             </p>
-          </div>
-          <div className="flex shrink-0 gap-4 text-xs text-white/75">
-            <span className="inline-flex items-center gap-1.5">
-              <Clock3 className="size-4 text-gold-500" /> 4–6 min
-            </span>
-            <span className="inline-flex items-center gap-1.5">
-              <LockKeyhole className="size-4 text-gold-500" /> Información protegida
-            </span>
           </div>
         </div>
       </header>
 
-      <div className="mt-5 grid gap-5 lg:grid-cols-[220px_minmax(0,1fr)] lg:items-start">
+      <div className="mt-3 grid gap-3 lg:grid-cols-[200px_minmax(0,1fr)] lg:items-start">
         <aside className="lg:sticky lg:top-6">
-          <Card className="p-4 sm:p-5">
+          <Card className="p-3 sm:p-4">
             <div className="flex items-center justify-between gap-3">
               <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
                 Tu avance
@@ -225,15 +212,15 @@ export function OnboardingForm({
               <span className="tabular text-xs font-medium text-sep-700">{progress}%</span>
             </div>
             <ProgressBar value={progress} label={`${answeredCount} de ${questions.length} preguntas respondidas`} className="mt-2.5" />
-            <p className="mt-2 text-caption text-slate-ui" aria-live="polite">
-              {answeredCount} de {questions.length} respondidas
-            </p>
-            <p className="mt-1 text-caption text-mist" aria-live="polite">
-              {draftSaved
-                ? "Borrador guardado en esta pestaña"
-                : "Guardando borrador en esta pestaña…"}
-            </p>
-            <ol className="mt-5 grid grid-cols-3 gap-2 lg:grid-cols-1 lg:gap-1.5">
+            <div className="mt-2 flex items-center justify-between gap-3 text-caption">
+              <p className="text-slate-ui" aria-live="polite">
+                {answeredCount} de {questions.length}
+              </p>
+              <p className="text-mist" aria-live="polite">
+                {draftSaved ? "Guardado" : "Guardando…"}
+              </p>
+            </div>
+            <ol className="mt-3 grid grid-cols-3 gap-1.5 lg:grid-cols-1">
               {MODULES.map((item, index) => {
                 const complete = questions
                   .slice(index * 5, index * 5 + 5)
@@ -248,7 +235,7 @@ export function OnboardingForm({
                       disabled={index > module}
                       aria-current={active ? "step" : undefined}
                       className={cn(
-                        "flex min-h-control w-full flex-col items-center gap-2 rounded-sm px-2 py-2.5 text-center transition-colors lg:flex-row lg:text-left",
+                        "flex min-h-10 w-full items-center justify-center gap-2 rounded-sm px-2 py-2 text-center transition-colors lg:justify-start lg:text-left",
                         active && "bg-sep-50 text-sep-700",
                         !active && index < module && "text-graphite hover:bg-surface-1",
                         index > module && "cursor-default text-mist",
@@ -264,41 +251,38 @@ export function OnboardingForm({
                       >
                         {complete ? <Check className="size-3.5" /> : index + 1}
                       </span>
-                      <span className="hidden text-xs font-medium sm:block">Módulo {index + 1}</span>
+                      <span className="text-xs font-medium">Módulo {index + 1}</span>
                     </button>
                   </li>
                 );
               })}
             </ol>
-            <p className="mt-4 hidden text-caption text-mist lg:block">
-              Tus respuestas se conservan si recargas esta pestaña y se eliminan al finalizar.
-            </p>
           </Card>
         </aside>
 
         <main className="min-w-0">
-          <Card className="overflow-hidden p-0">
-            <div className="border-b border-line bg-surface-1 px-5 py-5 sm:px-7 sm:py-6">
+          <Card className="overflow-hidden p-0 max-sm:rounded-sm">
+            <div className="border-b border-line bg-surface-1 px-4 py-4 sm:px-6 sm:py-5">
               <p className="text-xs font-semibold uppercase tracking-[0.12em] text-sep-600">
                 Módulo {module + 1} de 3 · Preguntas {module * 5 + 1}–{module * 5 + 5}
               </p>
               <h2
                 ref={headingRef}
                 tabIndex={-1}
-                className="mt-1.5 font-display text-xl font-semibold text-ink outline-none sm:text-2xl"
+                className="mt-1 font-display text-xl font-semibold text-ink outline-none sm:text-2xl"
               >
                 {MODULES[module].title}
               </h2>
-              <p className="mt-1 text-sm text-slate-ui">{MODULES[module].description}</p>
+              <p className="mt-0.5 text-sm text-slate-ui">{MODULES[module].description}</p>
             </div>
 
-            <div className="divide-y divide-line px-5 sm:px-7">
+            <div className="divide-y divide-line px-4 sm:px-6">
               {visibleQuestions.map((question) => {
                 const answer = answers[question.number];
                 const multiple = question.inputType === "multiple";
 
                 return (
-                  <fieldset key={question.number} className="py-6 sm:py-7">
+                  <fieldset key={question.number} className="py-4 sm:py-5">
                     <legend className="w-full">
                       <span className="flex items-start gap-3">
                         <span className="tabular mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-700">
@@ -324,7 +308,7 @@ export function OnboardingForm({
 
                     <div
                       className={cn(
-                        "mt-4 grid gap-2.5 pl-0 sm:pl-10",
+                        "mt-3 grid gap-2 pl-0 sm:pl-10",
                         question.inputType === "scale_1_5" &&
                           "grid-cols-1 sm:grid-cols-5 sm:gap-2",
                       )}
@@ -338,12 +322,12 @@ export function OnboardingForm({
                           <label
                             key={option}
                             className={cn(
-                              "group flex min-h-12 cursor-pointer items-center gap-3 rounded-md border px-3.5 py-3 text-sm leading-snug transition-colors",
+                              "group flex min-h-11 cursor-pointer items-center gap-3 rounded-sm border px-3 py-2.5 text-sm leading-snug transition-colors",
                               selected
                                 ? "border-sep-500 bg-sep-50 text-sep-800 "
                                 : "border-line bg-white text-graphite hover:border-sep-300 hover:bg-surface-1",
                               question.inputType === "scale_1_5" &&
-                                "sm:min-h-[76px] sm:flex-col sm:justify-center sm:px-2 sm:text-center",
+                                "sm:min-h-16 sm:flex-col sm:justify-center sm:px-2 sm:text-center",
                             )}
                           >
                             <input
@@ -380,7 +364,7 @@ export function OnboardingForm({
               })}
             </div>
 
-            <div className="border-t border-line bg-surface-1 px-5 py-5 sm:px-7">
+            <div className="border-t border-line bg-surface-1 px-4 py-4 sm:px-6">
               {error && (
                 <div className="mb-4"><FormAlert tone="error">{error}</FormAlert></div>
               )}
@@ -427,11 +411,9 @@ export function OnboardingForm({
           </Card>
         </main>
       </div>
-      <ContextualHelp
-        className="mt-5"
-        title="¿No puedes completar el diagnóstico?"
-        description="Tu borrador queda en esta pestaña. Si una pregunta no corresponde a tu caso o aparece un error, escríbenos antes de cerrar."
-      />
+      <p className="mt-3 px-1 text-center text-caption text-mist">
+        El borrador se conserva en esta pestaña hasta que finalices.
+      </p>
     </div>
   );
 }

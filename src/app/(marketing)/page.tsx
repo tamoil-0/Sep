@@ -70,27 +70,27 @@ export default async function HomePage() {
   return (
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
-      <section className="relative overflow-hidden sep-gradient">
+      <section className="relative overflow-hidden border-b border-line bg-surface-1">
         <Container size="wide" className="relative">
-          <div className="grid items-center gap-10 py-14 sm:py-18 lg:grid-cols-[1.02fr_0.98fr] lg:gap-14 lg:py-24">
+          <div className="grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:py-16">
             <div className="max-w-2xl">
-              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-gold-500">
+              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-sep-700">
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
-              <h1 className="mt-4 font-display text-h1 font-bold leading-[1.06] tracking-[-0.035em] text-white sm:text-display lg:text-display">
+              <h1 className="mt-4 font-display text-h1 font-bold leading-[1.06] tracking-[-0.035em] text-ink lg:text-[3.5rem]">
                 Ideas jóvenes que se convierten en
-                <span className="text-gold-500"> proyectos con impacto.</span>
+                <span className="text-sep-700"> proyectos con impacto.</span>
               </h1>
 
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/78 sm:text-lg">
+              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-ui sm:text-lg">
                 Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
                 ese talento con escolares, docentes y comunidades de todo el Perú.
               </p>
 
-              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <div className="mt-7 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                 <SupportQrDialog />
-                <Button href="/nosotros" variant="outline-white" size="lg" prefetch>
+                <Button href="/nosotros" variant="outline" size="lg" prefetch>
                   Conoce SEP
                 </Button>
               </div>

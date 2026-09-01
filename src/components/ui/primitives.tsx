@@ -42,7 +42,7 @@ export function Section({
     <section
       id={id}
       className={cn(
-        "py-14 md:py-18 lg:py-22",
+        "py-12 md:py-16 lg:py-18",
         tone === "muted" && "bg-surface-1",
         tone === "gradient" && "sep-gradient text-white",
         className,
@@ -142,10 +142,10 @@ export function PageHero({
         inverted ? "sep-gradient" : "border-b border-line bg-surface-1",
       )}
     >
-      <Container size="wide" className="relative py-14 md:py-18 lg:py-20">
+      <Container size="wide" className="relative py-10 md:py-14 lg:py-16">
         <div
           className={cn(
-            "grid items-center gap-12",
+            "grid items-center gap-8 lg:gap-12",
             aside && "lg:grid-cols-[1.2fr_1fr]",
           )}
         >
@@ -153,7 +153,7 @@ export function PageHero({
             {eyebrow}
             <h1
               className={cn(
-                "mt-5 font-display text-display font-bold",
+                "mt-4 font-display text-h1 font-bold lg:text-[3.5rem] lg:leading-[1.04]",
                 inverted ? "text-white" : "text-ink",
               )}
             >
@@ -162,21 +162,21 @@ export function PageHero({
             {description && (
               <p
                 className={cn(
-                  "mt-5 max-w-[65ch] text-body-lg",
+                  "mt-4 max-w-[65ch] text-body-lg",
                   inverted ? "text-white/75" : "text-slate-ui",
                 )}
               >
                 {description}
               </p>
             )}
-            {action && <div className="mt-8">{action}</div>}
+            {action && <div className="mt-6">{action}</div>}
           </div>
 
           {aside && <div className="mx-auto w-full max-w-xs lg:max-w-none">{aside}</div>}
         </div>
 
         {stats && stats.length > 0 && (
-          <dl className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
+          <dl className="mt-9 grid grid-cols-2 gap-5 sm:grid-cols-4">
             {stats.map((s) => (
               <div key={s.label}>
                 <dd
@@ -291,9 +291,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-line bg-surface-1 px-4 py-10 text-center sm:px-6 sm:py-14">
+    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-line bg-surface-1 px-4 py-7 text-center sm:px-6 sm:py-9">
       {icon && (
-        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-white text-slate-ui shadow-subtle">
+        <div className="mb-3 flex size-10 items-center justify-center rounded-full bg-white text-slate-ui ring-1 ring-line">
           {icon}
         </div>
       )}
@@ -301,7 +301,7 @@ export function EmptyState({
       {description && (
         <p className="mt-1.5 max-w-sm text-body-sm text-slate-ui">{description}</p>
       )}
-      {action && <div className="mt-5">{action}</div>}
+      {action && <div className="mt-4">{action}</div>}
     </div>
   );
 }

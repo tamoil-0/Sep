@@ -37,8 +37,16 @@ export function AppSidebar({
   const router = useRouter();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [navigatingTo, setNavigatingTo] = React.useState<string | null>(null);
-  const items = appNav[activeRole] ?? [];
-  const otherRoles = roles.filter((r) => r !== activeRole && appNav[r]?.length);
+  const routeRole = React.useMemo<UserRole>(() => {
+    const roleFromPath = roles.find((role) => {
+      const home = ROLE_META[role].home;
+      return pathname === home || pathname.startsWith(`${home}/`);
+    });
+
+    return roleFromPath ?? activeRole;
+  }, [activeRole, pathname, roles]);
+  const items = appNav[routeRole] ?? [];
+  const otherRoles = roles.filter((r) => r !== routeRole && appNav[r]?.length);
   const drawerRef = useDialogA11y<HTMLElement>({
     open: mobileOpen,
     onClose: () => setMobileOpen(false),
@@ -60,7 +68,7 @@ export function AppSidebar({
           <Logo className="h-11" variant="white" />
         </Link>
         <p className="mt-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
-          Panel activo · {ROLE_META[activeRole].shortLabel}
+          Panel activo · {ROLE_META[routeRole].shortLabel}
         </p>
       </div>
 

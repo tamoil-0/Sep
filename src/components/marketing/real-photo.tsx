@@ -53,7 +53,7 @@ export function MediaImage({
     <figure
       className={cn(
         "group relative isolate min-h-56 overflow-hidden rounded-lg border border-line",
-        kind === "photo" ? "bg-sep-950" : "bg-surface-1",
+        kind === "photo" ? "bg-surface-2" : "bg-surface-1",
         className,
       )}
     >

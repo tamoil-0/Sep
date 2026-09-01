@@ -48,6 +48,7 @@ export function LoginForm({
           type="email"
           autoComplete="email"
           placeholder="tu@correo.com"
+          defaultValue={state?.submittedEmail}
           required
           invalid={!!state?.fieldErrors?.email}
         />

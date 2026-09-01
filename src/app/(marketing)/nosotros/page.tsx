@@ -36,24 +36,24 @@ const team = [
 export default function NosotrosPage() {
   return (
     <>
-      <section className="relative overflow-hidden sep-gradient">
+      <section className="relative overflow-hidden border-b border-line bg-surface-1">
         <div
           aria-hidden
-          className="pointer-events-none absolute inset-0 opacity-[0.12]"
+          className="pointer-events-none absolute inset-0 opacity-[0.45]"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #fff 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, #e6e4f0 1px, transparent 0)",
             backgroundSize: "34px 34px",
           }}
         />
-        <Container size="wide" className="relative py-16 sm:py-24">
+        <Container size="wide" className="relative py-10 sm:py-16">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
             <div className="max-w-2xl">
-            <Badge tone="white">Desde Casma, Áncash · 7 de abril de 2024</Badge>
-            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-white sm:text-display">
+            <Badge>Desde Casma, Áncash · 7 de abril de 2024</Badge>
+            <h1 className="mt-4 font-display text-h1 font-bold leading-[1.08] text-ink lg:text-[3.5rem]">
               Llevamos la innovación al{" "}
-              <span className="text-gold-500">territorio del talento</span>, no al revés.
+              <span className="text-sep-700">territorio del talento</span>, no al revés.
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-white/80">
+            <p className="mt-4 text-lg leading-relaxed text-slate-ui">
               SEP es la primera organización peruana especializada en programas de
               emprendimiento juvenil e innovación científico-tecnológica nacida fuera de
               Lima y pensada para regiones.
@@ -64,7 +64,7 @@ export default function NosotrosPage() {
               alt="Comunidad de jóvenes reunida junto a un panel de SEP"
               priority
               label="Una comunidad construida desde las regiones"
-              className="aspect-[4/3] min-h-0 border border-white/20"
+              className="aspect-[4/3] min-h-0"
               imageClassName="object-[50%_48%]"
             />
           </div>

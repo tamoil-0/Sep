@@ -31,7 +31,7 @@ export function SupportQrDialog() {
 
   return (
     <>
-      <Button type="button" variant="gold" size="lg" onClick={() => setOpen(true)}>
+      <Button type="button" size="lg" onClick={() => setOpen(true)}>
         <HeartHandshake />
         Apoya hoy
       </Button>
