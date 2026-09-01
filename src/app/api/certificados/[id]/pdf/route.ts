@@ -33,7 +33,7 @@ export async function GET(
   const { data: cert, error } = await supabase
     .from("certificates")
     .select(
-      "id, verification_code, status, issued_at, revoked_at, user_id, certificate_types(name, issuer), profiles(full_name), enrollments(courses(title, total_hours))",
+      "id, verification_code, status, issued_at, revoked_at, user_id, certificate_types(name, issuer, kind), profiles(full_name), enrollments(courses(title, total_hours))",
     )
     .eq("id", id)
     .maybeSingle();
@@ -58,14 +58,15 @@ export async function GET(
     : cert.enrollments;
   const course =
     enrollment && (Array.isArray(enrollment.courses) ? enrollment.courses[0] : enrollment.courses);
+  const international = type?.kind === "internacional";
 
   let bytes: Uint8Array;
   try {
     bytes = await buildCertificatePdf({
       holderName: profile?.full_name ?? "Participante SEP",
       courseTitle: course?.title ?? "Programa SEP",
-      certificateName: type?.name ?? "Certificado SEP",
-      issuer: type?.issuer ?? "Semillero de Emprendedores Perú",
+      certificateName: international ? "CERTIFICADO INTERNACIONAL" : (type?.name ?? "Certificado SEP"),
+      issuer: international ? "" : (type?.issuer ?? "Semillero de Emprendedores Perú"),
       verificationCode: cert.verification_code,
       issuedAt: cert.issued_at ? new Date(cert.issued_at) : new Date(),
       hours: Number(course?.total_hours ?? 8),

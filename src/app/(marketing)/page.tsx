@@ -455,11 +455,8 @@ export default async function HomePage() {
             <Card className="border-dashed bg-surface-1">
               <Badge>En trámite</Badge>
               <h3 className="mt-3 font-display text-body font-semibold text-ink">
-                Certificación internacional
+                CERTIFICADO INTERNACIONAL
               </h3>
-              <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">
-                Aún no está disponible ni se ofrece como un beneficio vigente.
-              </p>
             </Card>
           </div>
         </Container>

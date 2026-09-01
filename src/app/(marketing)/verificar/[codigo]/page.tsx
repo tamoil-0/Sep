@@ -29,6 +29,7 @@ export default async function VerificarCodigoPage({
 
   const record = Array.isArray(data) ? data[0] : null;
   const valid = record?.is_valid === true;
+  const international = /internacional/i.test(record?.certificate ?? "");
 
   return (
     <Section>
@@ -48,8 +49,8 @@ export default async function VerificarCodigoPage({
                 {[
                   ["Otorgado a", record.holder_name],
                   ["Programa", record.course_title],
-                  ["Certificado", record.certificate],
-                  ["Emitido por", record.issuer],
+                  ["Certificado", international ? "CERTIFICADO INTERNACIONAL" : record.certificate],
+                  ...(international ? [] : [["Emitido por", record.issuer]]),
                   [
                     "Fecha de emisión",
                     record.issued_at ? formatDate(record.issued_at) : "—",

@@ -17,9 +17,13 @@ export const getMyCertificates = cache(async (userId: string) => {
   const data = result.data;
 
   return (data ?? []).map((c) => {
-    const type = Array.isArray(c.certificate_types)
+    const rawType = Array.isArray(c.certificate_types)
       ? c.certificate_types[0]
       : c.certificate_types;
+    const type =
+      rawType?.kind === "internacional"
+        ? { ...rawType, name: "CERTIFICADO INTERNACIONAL", issuer: "" }
+        : rawType;
     const enr = Array.isArray(c.enrollments) ? c.enrollments[0] : c.enrollments;
     const course = enr && (Array.isArray(enr.courses) ? enr.courses[0] : enr.courses);
 
@@ -71,13 +75,13 @@ export const getOrderForCheckout = cache(async (orderId: string, userId: string)
   if (order.item_type === "certificate" && order.item_id) {
     const result = await supabase
       .from("certificate_types")
-      .select("name, issuer")
+      .select("name, issuer, kind")
       .eq("id", order.item_id)
       .maybeSingle();
     assertQueryResults("pago:certificado", result);
     const data = result.data;
-    itemName = data?.name ?? itemName;
-    itemDetail = data?.issuer ?? null;
+    itemName = data?.kind === "internacional" ? "CERTIFICADO INTERNACIONAL" : (data?.name ?? itemName);
+    itemDetail = data?.kind === "internacional" ? null : (data?.issuer ?? null);
   } else if (order.item_type === "membership" && order.item_id) {
     const result = await supabase
       .from("membership_plans")

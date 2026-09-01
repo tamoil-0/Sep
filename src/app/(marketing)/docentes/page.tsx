@@ -91,8 +91,7 @@ export default function DocentesPage() {
               <Card className="mt-8 border-sep-200 bg-sep-50/40">
                 <p className="text-sm leading-relaxed text-graphite">
                   <strong className="font-medium text-ink">Certificado opcional:</strong>{" "}
-                  S/30 con aval de SEP y código de verificación público. La certificación
-                  internacional se encuentra en trámite y todavía no está disponible.
+                  S/30 con aval de SEP y código de verificación público.
                 </p>
               </Card>
             </div>

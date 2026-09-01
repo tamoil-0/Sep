@@ -106,7 +106,7 @@ export const faqs = [
   },
   {
     q: "¿Los cursos tienen algún costo?",
-    a: "No. Los cursos del catálogo no tienen costo de acceso. El certificado SEP es opcional y cuesta S/30. La certificación internacional se encuentra en trámite y todavía no está disponible.",
+    a: "No. Los cursos del catálogo no tienen costo de acceso. El certificado SEP es opcional y cuesta S/30.",
   },
   {
     q: "¿Cómo puedo apoyar la misión de la comunidad SEP?",

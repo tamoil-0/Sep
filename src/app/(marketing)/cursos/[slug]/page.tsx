@@ -228,8 +228,6 @@ export default async function CursoPublicoPage({
             </h2>
             <p className="mx-auto mt-2.5 max-w-md text-body-sm leading-relaxed text-slate-ui">
               Certificado SEP por {formatSoles(3000)}, con código público de verificación.
-              La certificación internacional se encuentra en trámite y todavía no está
-              disponible.
             </p>
             <Button href="/precios" variant="outline" className="mt-6">
               Ver todos los precios

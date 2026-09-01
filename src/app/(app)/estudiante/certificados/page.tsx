@@ -57,9 +57,11 @@ export default async function CertificadosPage() {
                       <p className="truncate font-display text-body-sm font-semibold text-white">
                         {c.type?.name}
                       </p>
-                      <p className="mt-0.5 truncate text-xs text-white/65">
-                        {c.type?.issuer}
-                      </p>
+                      {c.type?.issuer && (
+                        <p className="mt-0.5 truncate text-xs text-white/65">
+                          {c.type.issuer}
+                        </p>
+                      )}
                     </div>
                     <Award className="size-5 shrink-0 text-gold-500" />
                   </div>
@@ -243,7 +245,6 @@ export default async function CertificadosPage() {
                     <h3 className="font-display text-body-sm font-semibold text-ink">
                       {t.name}
                     </h3>
-                    {t.kind === "internacional" && <Badge tone="gold">Recomendado</Badge>}
                   </div>
                   <p className="mt-1.5 text-xs leading-relaxed text-slate-ui">
                     {t.description}

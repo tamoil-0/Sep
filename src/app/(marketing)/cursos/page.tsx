@@ -165,11 +165,8 @@ export default async function CursosPage() {
             <Card className="border-dashed bg-white/60 text-center">
               <Badge>En trámite</Badge>
               <h3 className="mt-3 font-display text-body font-semibold text-ink">
-                Certificación internacional
+                CERTIFICADO INTERNACIONAL
               </h3>
-              <p className="mt-2 text-body-sm text-slate-ui">
-                Todavía no está disponible.
-              </p>
             </Card>
           </div>
 

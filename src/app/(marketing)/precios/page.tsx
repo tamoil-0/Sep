@@ -124,11 +124,8 @@ export default function PreciosPage() {
             <Card className="border-dashed bg-white/60">
               <Badge>En trámite</Badge>
               <h3 className="mt-3 font-display text-lg font-semibold text-ink">
-                Certificación internacional
+                CERTIFICADO INTERNACIONAL
               </h3>
-              <p className="mt-3 text-sm leading-relaxed text-slate-ui">
-                Estamos gestionando este respaldo. Todavía no está disponible ni se ofrece como beneficio vigente.
-              </p>
             </Card>
           </div>
         </Container>

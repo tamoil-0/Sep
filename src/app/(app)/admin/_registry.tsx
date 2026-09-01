@@ -181,7 +181,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         s
           .from("certificates")
           .select(
-            "id, verification_code, status, issued_at, profiles(full_name, email), certificate_types(name, issuer)",
+            "id, verification_code, status, issued_at, profiles(full_name, email), certificate_types(name, issuer, kind)",
           )
           .order("created_at", { ascending: false })
           .limit(200),
@@ -193,7 +193,12 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
       const rows = (certs ?? []).map((c) => ({
         ...c,
         holder: one(c.profiles),
-        type: one(c.certificate_types),
+        type: (() => {
+          const type = one((c as AdminRow).certificate_types) as AdminRow | null;
+          return type?.kind === "internacional"
+            ? { ...type, name: "CERTIFICADO INTERNACIONAL", issuer: "" }
+            : type;
+        })(),
       }));
       const revenue = (stats ?? []).reduce((a, x) => a + Number(x.revenue_cents ?? 0), 0);
       return {
