@@ -437,26 +437,8 @@ export default async function HomePage() {
                 issuer: "Semillero de Emprendedores Perú",
                 price: 3000,
               },
-              {
-                name: "Certificado Internacional",
-                issuer: "Instituto Internacional de Ingeniería",
-                price: 5000,
-                recommended: true,
-              },
             ].map((c) => (
-              <Card
-                key={c.name}
-                className={
-                  c.recommended
-                    ? "relative border-sep-200 "
-                    : ""
-                }
-              >
-                {c.recommended && (
-                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-ink">
-                    Recomendado
-                  </span>
-                )}
+              <Card key={c.name}>
                 <p className="tabular font-display text-h1 font-bold leading-none text-ink">
                   {formatSoles(c.price)}
                 </p>
@@ -470,6 +452,15 @@ export default async function HomePage() {
                 </p>
               </Card>
             ))}
+            <Card className="border-dashed bg-surface-1">
+              <Badge>En trámite</Badge>
+              <h3 className="mt-3 font-display text-body font-semibold text-ink">
+                Certificación internacional
+              </h3>
+              <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">
+                Aún no está disponible ni se ofrece como un beneficio vigente.
+              </p>
+            </Card>
           </div>
         </Container>
       </Section>

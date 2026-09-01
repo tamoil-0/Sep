@@ -92,7 +92,6 @@ export const partners = [
   { name: "UPN", category: "mentoria" },
   { name: "Huánuco Innova", category: "mentoria" },
   { name: "SpinOut Awards 2025", category: "premio" },
-  { name: "Instituto Internacional de Ingeniería", category: "aval" },
 ] as const;
 
 /** FAQs oficiales — §1.14 */
@@ -107,7 +106,7 @@ export const faqs = [
   },
   {
     q: "¿Los cursos tienen algún costo?",
-    a: "No. Los cursos del catálogo no tienen costo de acceso. Lo único opcional es el certificado: S/30 el certificado SEP y S/50 el certificado con aval del Instituto Internacional de Ingeniería.",
+    a: "No. Los cursos del catálogo no tienen costo de acceso. El certificado SEP es opcional y cuesta S/30. La certificación internacional se encuentra en trámite y todavía no está disponible.",
   },
   {
     q: "¿Cómo puedo apoyar la misión de la comunidad SEP?",

@@ -91,7 +91,7 @@ const content: Record<Doc, { heading: string; body: string }[]> = {
     },
     {
       heading: "4. Con quién los compartimos",
-      body: "Con nuestros proveedores de infraestructura (Supabase para la base de datos, Vercel para el alojamiento, Resend para el correo), que actúan como encargados del tratamiento. Con el Instituto Internacional de Ingeniería, únicamente los datos necesarios para emitir tu certificado internacional si lo solicitas. Nunca vendemos tus datos.",
+      body: "Con nuestros proveedores de infraestructura (Supabase para la base de datos, Vercel para el alojamiento, Resend para el correo), que actúan como encargados del tratamiento. Nunca vendemos tus datos ni los compartimos con terceros para fines comerciales.",
     },
     {
       heading: "5. Menores de edad",

@@ -35,6 +35,20 @@ export async function createOrderAction(input: {
   if (!parsed.success) return fail("Producto no válido.");
 
   const supabase = await createClient();
+
+  if (parsed.data.itemType === "certificate") {
+    const { data: certificateType, error: certificateTypeError } = await supabase
+      .from("certificate_types")
+      .select("kind, is_active")
+      .eq("id", parsed.data.itemId)
+      .maybeSingle();
+
+    if (certificateTypeError) return fromPostgrestError(certificateTypeError);
+    if (!certificateType || !certificateType.is_active || certificateType.kind !== "sep") {
+      return fail("Esta certificación todavía no está disponible.");
+    }
+  }
+
   const { data, error } = await supabase.rpc("create_order", {
     p_item_type: parsed.data.itemType,
     p_item_id: parsed.data.itemId,

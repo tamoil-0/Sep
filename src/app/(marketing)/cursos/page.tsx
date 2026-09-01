@@ -151,15 +151,8 @@ export default async function CursosPage() {
           <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
             {[
               { name: "Certificado SEP", price: 3000, issuer: "Semillero de Emprendedores Perú" },
-              {
-                name: "Certificado Internacional",
-                price: 5000,
-                issuer: "Instituto Internacional de Ingeniería",
-                recommended: true,
-              },
             ].map((c) => (
               <Card key={c.name} className="text-center">
-                {c.recommended && <Badge tone="gold">Recomendado</Badge>}
                 <h3 className="mt-3 font-display text-body font-semibold text-ink">
                   {c.name}
                 </h3>
@@ -169,6 +162,15 @@ export default async function CursosPage() {
                 </p>
               </Card>
             ))}
+            <Card className="border-dashed bg-white/60 text-center">
+              <Badge>En trámite</Badge>
+              <h3 className="mt-3 font-display text-body font-semibold text-ink">
+                Certificación internacional
+              </h3>
+              <p className="mt-2 text-body-sm text-slate-ui">
+                Todavía no está disponible.
+              </p>
+            </Card>
           </div>
 
           <div className="mt-8 text-center">

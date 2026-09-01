@@ -33,7 +33,7 @@ export const getCertificateTypes = cache(async () => {
     .from("certificate_types")
     .select("*")
     .eq("is_active", true)
-    .in("kind", ["sep", "internacional"])
+    .eq("kind", "sep")
     .order("price_cents");
   assertQueryResults("cuenta:tipos-certificado", result);
   return result.data ?? [];

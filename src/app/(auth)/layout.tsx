@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 const highlights = [
   { icon: Sprout, text: "Cursos virtuales de acceso gratuito" },
   { icon: Globe, text: "Presencia en 10+ regiones del Perú" },
-  { icon: Award, text: "Certificación nacional e internacional" },
+  { icon: Award, text: "Certificado SEP con verificación pública" },
   { icon: Users, text: "Comunidad de 75+ jóvenes formados" },
 ];
 

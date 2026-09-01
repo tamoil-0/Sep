@@ -22,7 +22,7 @@ import { formatSoles } from "@/lib/utils";
 export const metadata = createPageMetadata({
   title: "Precios y certificados",
   description:
-    "Los cursos de SEP no tienen costo de acceso. Certificado SEP S/30, certificado internacional S/50, SILP desde S/200, membresías y programas institucionales.",
+    "Los cursos de SEP no tienen costo de acceso. Certificado SEP S/30, SILP desde S/200, membresías y programas institucionales.",
   path: "/precios",
   keywords: ["cursos gratis emprendimiento", "certificado Design Thinking", "precios SEP"],
 });
@@ -121,6 +121,15 @@ export default function PreciosPage() {
                 </ul>
               </Card>
             ))}
+            <Card className="border-dashed bg-white/60">
+              <Badge>En trámite</Badge>
+              <h3 className="mt-3 font-display text-lg font-semibold text-ink">
+                Certificación internacional
+              </h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-ui">
+                Estamos gestionando este respaldo. Todavía no está disponible ni se ofrece como beneficio vigente.
+              </p>
+            </Card>
           </div>
         </Container>
       </Section>

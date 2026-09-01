@@ -39,23 +39,6 @@ export const certificateTypes = [
       "Válido para voluntariado y postulaciones",
     ],
   },
-  {
-    slug: "internacional",
-    kind: "internacional",
-    name: "Certificado Internacional",
-    issuer: "Instituto Internacional de Ingeniería",
-    priceCents: 5000,
-    confirmed: true,
-    recommended: true,
-    description:
-      "Aval del Instituto Internacional de Ingeniería. Mayor peso en tu CV y en aplicaciones internacionales.",
-    features: [
-      "Aval internacional",
-      "Mayor peso en CV",
-      "Código de verificación público",
-      "Válido para aplicaciones internacionales",
-    ],
-  },
 ] as const;
 
 /* ── SILP — §10.3 ─────────────────────────────────────────── */
@@ -132,7 +115,7 @@ export const membershipPlans = [
     tagline: "Un año completo de crecimiento",
     benefits: [
       "Todo lo de Tronco",
-      "1 certificado Internacional incluido",
+      "Beneficio adicional de certificación por confirmar",
       "SILP con 30% de descuento",
       "Badge de miembro fundador",
     ],
