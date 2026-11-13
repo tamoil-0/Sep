@@ -75,7 +75,7 @@ export default async function SpeakerInvitacionesPage() {
                         {i.event.location ? ` · ${i.event.location}` : ""}
                       </p>
                     )}
-                    <p className="mt-2 text-caption capitalize text-slate-ui">
+                    <p className="mt-2 text-caption text-slate-ui first-letter:uppercase">
                       {i.proposed_at ? formatDateTime(i.proposed_at) : "Fecha por coordinar"}
                     </p>
                   </div>

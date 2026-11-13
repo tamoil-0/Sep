@@ -41,6 +41,7 @@ export default async function EventosPage() {
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
+            as="h1"
             eyebrow="Agenda"
             title="Eventos SEP"
             description="Demo Days, ferias escolares, webinars y talleres abiertos. Participar es gratis y no importa desde dónde te conectes."
@@ -97,10 +98,10 @@ export default async function EventosPage() {
                     {e.description}
                   </p>
 
-                  <dl className="mt-5 space-y-1.5 border-t border-line pt-4 text-body-sm text-slate-ui">
+                  <div className="mt-5 space-y-1.5 border-t border-line pt-4 text-body-sm text-slate-ui">
                     <div className="flex items-center gap-2">
                       <CalendarDays className="size-4 text-mist" />
-                      <span className="capitalize">{formatDateTime(e.starts_at)}</span>
+                      <span className="inline-block first-letter:uppercase">{formatDateTime(e.starts_at)}</span>
                     </div>
                     {e.location && (
                       <div className="flex items-center gap-2">
@@ -108,7 +109,7 @@ export default async function EventosPage() {
                         {e.location}
                       </div>
                     )}
-                  </dl>
+                  </div>
 
                   <Button href="/registro" variant="primary" size="sm" className="mt-5">
                     Registrarme
@@ -130,7 +131,7 @@ export default async function EventosPage() {
                       <p className="truncate text-body-sm font-medium text-ink">
                         {e.title}
                       </p>
-                      <p className="mt-0.5 text-caption capitalize text-slate-ui">
+                      <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">
                         {formatDateTime(e.starts_at)}
                         {e.location ? ` · ${e.location}` : ""}
                       </p>

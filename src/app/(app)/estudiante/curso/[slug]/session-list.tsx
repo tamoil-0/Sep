@@ -98,7 +98,7 @@ export function SessionList({
                     }
                     aria-pressed={s.isCompleted}
                     className={cn(
-                      "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
+                      "relative mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors after:absolute after:-inset-2 after:content-['']",
                       s.isCompleted
                         ? "border-seed-700 bg-seed-700 text-white"
                         : "border-line bg-white text-transparent hover:border-sep-400",
@@ -143,7 +143,7 @@ export function SessionList({
                   )}
 
                   {s.scheduledAt && (
-                    <p className="mt-1 text-caption capitalize text-mist">
+                    <p className="mt-1 text-caption text-mist first-letter:uppercase">
                       {formatDateTime(s.scheduledAt)}
                     </p>
                   )}

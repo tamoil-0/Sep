@@ -82,7 +82,7 @@ export default async function AdminAuditoriaPage() {
             { key: "ac", header: "Acción", render: (r) => <Badge tone="neutral">{r.action}</Badge> },
             { key: "e", header: "Entidad", render: (r) => r.entity },
             { key: "ip", header: "IP", render: (r) => <span className="tabular text-caption">{String(r.ip ?? "—")}</span> },
-            { key: "t", header: "Cuándo", render: (r) => <span className="capitalize">{formatDateTime(r.created_at)}</span> },
+            { key: "t", header: "Cuándo", render: (r) => <span className="inline-block first-letter:uppercase">{formatDateTime(r.created_at)}</span> },
           ]}
         />
       </div>

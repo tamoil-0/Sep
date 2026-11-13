@@ -32,22 +32,46 @@ export function formatSoles(cents: number): string {
   })}`;
 }
 
+/**
+ * Zona horaria fija de la plataforma. El servidor (Vercel) corre en UTC y el
+ * navegador en la hora local: sin fijarla, la misma fecha se pinta distinto en
+ * el servidor y en el cliente (horas corridas 5 h y errores de hidratación).
+ */
+const SEP_TIME_ZONE = "America/Lima";
+
+/** "2026-11-20" (solo fecha) se interpreta como medianoche UTC: se formatea en UTC para no restar un día. */
+const DATE_ONLY = /^\d{4}-\d{2}-\d{2}$/;
+
+/**
+ * Node y el navegador traen versiones distintas de ICU: uno separa "2:00 p. m."
+ * con espacio fino no separable (U+202F/U+00A0) y el otro con espacio normal.
+ * Se normalizan para que el HTML del servidor coincida con el del cliente.
+ */
+const normalizeSpaces = (text: string) => text.replace(/[\u00a0\u202f]/g, " ");
+
 export function formatDate(date: string | Date): string {
-  return new Intl.DateTimeFormat("es-PE", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  }).format(typeof date === "string" ? new Date(date) : date);
+  const dateOnly = typeof date === "string" && DATE_ONLY.test(date);
+  return normalizeSpaces(
+    new Intl.DateTimeFormat("es-PE", {
+      day: "numeric",
+      month: "long",
+      year: "numeric",
+      timeZone: dateOnly ? "UTC" : SEP_TIME_ZONE,
+    }).format(typeof date === "string" ? new Date(date) : date),
+  );
 }
 
 export function formatDateTime(date: string | Date): string {
-  return new Intl.DateTimeFormat("es-PE", {
-    weekday: "long",
-    day: "numeric",
-    month: "short",
-    hour: "numeric",
-    minute: "2-digit",
-  }).format(typeof date === "string" ? new Date(date) : date);
+  return normalizeSpaces(
+    new Intl.DateTimeFormat("es-PE", {
+      weekday: "long",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "2-digit",
+      timeZone: SEP_TIME_ZONE,
+    }).format(typeof date === "string" ? new Date(date) : date),
+  );
 }
 
 export function initials(name: string): string {

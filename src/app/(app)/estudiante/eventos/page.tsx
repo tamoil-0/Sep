@@ -61,7 +61,7 @@ export default async function EstudianteEventosPage() {
                 </div>
                 <h3 className="mt-3.5 text-body leading-snug font-semibold text-ink">{e.title}</h3>
                 <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">{e.description}</p>
-                <p className="mt-4 text-caption capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
+                <p className="mt-4 text-caption text-slate-ui first-letter:uppercase">{formatDateTime(e.starts_at)}</p>
                 {e.location && <p className="mt-1 text-caption text-slate-ui">{e.location}</p>}
                 <div className="mt-4">
                   <EventRegisterButton eventId={e.id} registered={registered.has(e.id)} />
@@ -80,7 +80,7 @@ export default async function EstudianteEventosPage() {
                 <li key={e.id} className="flex flex-wrap items-center gap-3 px-5 py-3.5">
                   <div className="min-w-0 flex-1">
                     <p className="truncate text-body-sm font-medium text-ink">{e.title}</p>
-                    <p className="mt-0.5 text-caption capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">{formatDateTime(e.starts_at)}</p>
                   </div>
                   {registered.get(e.id)?.attended && <Badge tone="success">Asististe</Badge>}
                 </li>

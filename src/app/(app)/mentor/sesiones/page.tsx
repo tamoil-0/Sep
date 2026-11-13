@@ -101,7 +101,7 @@ export default async function MentorSesionesPage() {
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="truncate text-body-sm font-medium text-ink">{s.title}</p>
-                      <p className="mt-0.5 text-caption capitalize text-slate-ui">
+                      <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">
                         {c?.title} · {s.scheduled_at ? formatDateTime(s.scheduled_at) : ""}
                       </p>
                     </div>
