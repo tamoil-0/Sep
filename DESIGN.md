@@ -102,7 +102,8 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 | Token | Tamaño / interlineado | Uso real |
 |---|---|---|
 | `text-display` | clamp(40→68px) / 1.06, -0.035em | Hero de la home (9 usos) |
-| `text-h1` | clamp(32→40px) / 1.15, -0.025em | Título de página. En el hero de marketing sube a 56px en `lg` (ver §8) |
+| `text-hero` | 56px / 1.06, -0.03em | H1 del hero de marketing en desktop: `text-h1 lg:text-hero` |
+| `text-h1` | clamp(32→40px) / 1.15, -0.025em | Título de página |
 | `text-h2` | clamp(28→32px) / 1.2, -0.02em | Título de sección (`SectionHeader`) |
 | `text-h3` | 24px / 1.33 | Subtítulo, cifras de `PageHero` |
 | `text-h4` | 20px / 1.4 | Título de tarjeta y de `EmptyState` |
@@ -188,7 +189,7 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 
 ## 8. Inconsistencias a unificar
 
-> Inventario medido en el código. **No se ha cambiado nada todavía**; cada punto propone el valor estándar.
+> Inventario medido en el código (noviembre de 2026). Los puntos 1–12 se unificaron en la rama `design/unificacion`, un commit por punto. El #13 apareció durante la unificación y queda pendiente.
 
 | # | Inconsistencia | Hoy | Propuesta |
 |---|---|---|---|
