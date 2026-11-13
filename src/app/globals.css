@@ -116,14 +116,9 @@
    Variables en runtime
    ============================================================ */
 
+/* Solo valores compuestos que @theme no puede expresar. Los colores
+   planos (fondo, texto, bordes) viven únicamente en @theme. */
 :root {
-  --bg: #ffffff;
-  --bg-1: #f7f6fc;
-  --bg-2: #f2f1f8;
-  --fg: #12101c;
-  --fg-2: #3a3550;
-  --fg-3: #6e6a85;
-  --border: #e6e4f0;
   --sep-gradient: linear-gradient(100deg, #2e0be8 0%, #6a0dd9 52%, #a50fc6 100%);
   --sep-gradient-soft: linear-gradient(
     100deg,
@@ -160,8 +155,8 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--color-surface-0);
+  color: var(--color-ink);
   font-family: var(--font-sans);
   font-size: 16px;
   line-height: 1.625;
@@ -398,9 +393,9 @@ p {
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--bg-2) 25%,
+    var(--color-surface-2) 25%,
     rgba(255, 255, 255, 0.7) 37%,
-    var(--bg-2) 63%
+    var(--color-surface-2) 63%
   );
   background-size: 200% 100%;
   animation: shimmer 1.4s ease-in-out infinite;
