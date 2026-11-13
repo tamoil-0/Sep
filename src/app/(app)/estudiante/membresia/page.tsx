@@ -75,7 +75,7 @@ export default async function MembresiaPage() {
         </div>
       </PanelSection>
 
-      <Card className="mt-8 border-gold-500/35 bg-[#FFFBF0]">
+      <Card className="mt-8 border-gold-500/35 bg-gold-50/50">
         <div className="flex items-start gap-3.5">
           <Sprout className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>

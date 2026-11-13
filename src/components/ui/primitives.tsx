@@ -239,8 +239,8 @@ export function Card({
 
 const badgeTones = {
   brand: "bg-sep-50 text-sep-700",
-  gold: "bg-[#fff6de] text-gold-700",
-  seed: "bg-[#eef8e4] text-seed-700",
+  gold: "bg-gold-50 text-gold-700",
+  seed: "bg-seed-50 text-seed-700",
   neutral: "bg-surface-2 text-graphite",
   success: "bg-success-bg text-success",
   warning: "bg-warning-bg text-warning",

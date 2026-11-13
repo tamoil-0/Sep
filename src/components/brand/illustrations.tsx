@@ -18,7 +18,7 @@ const GRAD = {
   purple: "#A50FC6",
   gold: "#FFC629",
   seed: "#7CC242",
-  line: "#E6E4F0",
+  line: "#E5E4E9",
   mist: "#A8A4BC",
 };
 

@@ -29,7 +29,7 @@ export const metadata = createPageMetadata({
 
 function ProposedTag() {
   return (
-    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-warning-bg px-2 py-0.5 text-caption font-medium text-[#8A5A00]">
+    <span className="ml-2 inline-flex items-center gap-1 rounded-full bg-warning-bg px-2 py-0.5 text-caption font-medium text-warning">
       <Info className="size-3" />
       Propuesta
     </span>
@@ -56,7 +56,7 @@ export default function PreciosPage() {
       {/* Cursos */}
       <Section>
         <Container size="wide">
-          <Card className="flex flex-wrap items-center justify-between gap-6 border-seed-400/40 bg-[#F5FBEF] p-8">
+          <Card className="flex flex-wrap items-center justify-between gap-6 border-seed-400/40 bg-seed-50/60 p-8">
             <div>
               <Badge tone="seed">Todo el catálogo</Badge>
               <h2 className="mt-3.5 font-display text-h2 font-semibold text-ink">
@@ -227,7 +227,7 @@ export default function PreciosPage() {
               ))}
           </div>
 
-          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-gold-500/35 bg-[#FFFBF0]">
+          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-gold-500/35 bg-gold-50/50">
             <div>
               <h3 className="font-display text-lg font-semibold text-ink">
                 ⭐ Membresía de voluntario — gratis
@@ -283,7 +283,7 @@ export default function PreciosPage() {
             ))}
           </div>
 
-          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-[#F5FBEF]">
+          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-seed-50/60">
             <div>
               <h3 className="font-display text-lg font-semibold text-ink">
                 Talleres sin costo para colegios de la red SEP

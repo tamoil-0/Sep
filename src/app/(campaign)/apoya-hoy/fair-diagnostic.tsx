@@ -269,7 +269,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
 
       <section className="flex flex-1 flex-col px-4 py-6 sm:px-8 sm:py-8">
         {current.isKey && (
-          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-[#fff6de] px-2.5 py-1 text-xs font-semibold text-gold-700">
+          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-50 px-2.5 py-1 text-xs font-semibold text-gold-700">
             <Sparkles className="size-3.5" /> Pregunta clave
           </span>
         )}

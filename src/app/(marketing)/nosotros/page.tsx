@@ -92,7 +92,7 @@ export default function NosotrosPage() {
             ].map((c) => (
               <Card
                 key={c.label}
-                className={c.highlight ? "border-gold-500/35 bg-[#FFFBF0]" : ""}
+                className={c.highlight ? "border-gold-500/35 bg-gold-50/50" : ""}
               >
                 <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sep-600">
                   {c.label}

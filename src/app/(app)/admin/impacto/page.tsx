@@ -204,7 +204,7 @@ export default async function AdminImpactoPage() {
                         {v.approved_hours} h
                       </p>
                       {Number(v.pending_hours) > 0 && (
-                        <p className="text-xs text-[#8A5A00]">
+                        <p className="text-xs text-warning">
                           +{v.pending_hours} por aprobar
                         </p>
                       )}

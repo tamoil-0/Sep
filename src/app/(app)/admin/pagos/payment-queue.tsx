@@ -291,7 +291,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                       type="button"
                       onClick={() => setApproving(p.id)}
                       disabled={busy === p.id}
-                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-success px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-[#066331] disabled:opacity-50"
+                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-success px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-success-700 disabled:opacity-50"
                     >
                       <Check className="size-4" />
                       Aprobar y emitir

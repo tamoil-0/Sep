@@ -292,7 +292,7 @@ export function OnboardingForm({
                           <span className="flex flex-wrap items-center gap-2 font-display text-body font-semibold leading-snug text-ink sm:text-body">
                             {question.question}
                             {question.isKey && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-[#FFF6DE] px-2 py-0.5 font-sans text-caption font-semibold uppercase tracking-wide text-gold-700">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-gold-50 px-2 py-0.5 font-sans text-caption font-semibold uppercase tracking-wide text-gold-700">
                                 <Sparkles className="size-3" /> Clave
                               </span>
                             )}

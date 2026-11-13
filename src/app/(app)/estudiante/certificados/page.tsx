@@ -152,7 +152,7 @@ export default async function CertificadosPage() {
                         Tienes un certificado en proceso de pago.{" "}
                         <Link
                           href="/estudiante/certificados"
-                          className="font-medium text-[#8A5A00] hover:underline"
+                          className="font-medium text-warning hover:underline"
                         >
                           Revisa su estado
                         </Link>

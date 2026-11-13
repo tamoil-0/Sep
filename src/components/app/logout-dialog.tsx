@@ -136,7 +136,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <button
                 type="button"
                 onClick={confirmLogout}
-                className="inline-flex h-control flex-1 items-center justify-center gap-2 rounded-sm bg-danger text-body-sm font-medium text-white transition-colors hover:bg-[#852d31]"
+                className="inline-flex h-control flex-1 items-center justify-center gap-2 rounded-sm bg-danger text-body-sm font-medium text-white transition-colors hover:bg-danger-700"
               >
                 <LogOut className="size-4" />
                 Sí, salir

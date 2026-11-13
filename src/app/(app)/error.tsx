@@ -22,7 +22,7 @@ export default function AppError({
   return (
     <section className="mx-auto flex min-h-[60dvh] max-w-xl items-center justify-center py-10">
       <div className="w-full rounded-lg border border-line bg-white p-6 text-center sm:p-9">
-        <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-red-50 text-danger">
+        <span className="mx-auto flex size-14 items-center justify-center rounded-2xl bg-danger-bg text-danger">
           <AlertTriangle className="size-6" />
         </span>
         <h1 className="mt-5 font-display text-2xl font-semibold text-ink">

@@ -103,7 +103,7 @@ export default async function CheckoutPage({
           {isReviewing && (
             <Card className="mb-5 border-warning/30 bg-warning-bg">
               <div className="flex items-start gap-3.5">
-                <Clock className="mt-0.5 size-5 shrink-0 text-[#8A5A00]" />
+                <Clock className="mt-0.5 size-5 shrink-0 text-warning" />
                 <div>
                   <h2 className="font-display text-body font-semibold text-ink">
                     Estamos revisando tu pago
