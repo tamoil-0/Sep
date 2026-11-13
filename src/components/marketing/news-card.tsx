@@ -20,11 +20,14 @@ export function NewsCard({
   fallbackImage,
   priority = false,
   variant = "default",
+  headingLevel: Heading = "h3",
 }: {
   post: NewsCardPost;
   fallbackImage: string;
   priority?: boolean;
   variant?: "default" | "featured";
+  /** `h2` cuando la tarjeta cuelga directo del h1 de la página (listado del blog). */
+  headingLevel?: "h2" | "h3";
 }) {
   const category = post.tags[0] ?? "Actualidad SEP";
   const featured = variant === "featured";
@@ -73,7 +76,7 @@ export function NewsCard({
           )}
         </div>
 
-        <h3
+        <Heading
           className={cn(
             "mt-3 font-display font-semibold text-ink",
             featured ? "text-h3 md:text-h2" : "text-body-lg",
@@ -84,7 +87,7 @@ export function NewsCard({
           <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">
             {post.title}
           </Link>
-        </h3>
+        </Heading>
         {post.excerpt && (
           <p className="mt-2 line-clamp-3 flex-1 text-body-sm leading-relaxed text-slate-ui">
             {post.excerpt}

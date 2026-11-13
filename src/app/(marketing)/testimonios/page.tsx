@@ -78,6 +78,7 @@ export default async function TestimoniosPage() {
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <SectionHeader
+            as="h1"
             eyebrow="La comunidad"
             title="Lo que dicen quienes ya pasaron por aquí"
             description="Sin retoques ni testimonios de stock. Personas reales de regiones reales."
@@ -98,7 +99,7 @@ export default async function TestimoniosPage() {
         <Container size="wide">
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stories.map((s) => (
-              <li key={s.name}>
+              <li key={s.name} className="min-w-0">
                 <Card className="relative flex h-full flex-col overflow-hidden p-6 ">
                   <span className="absolute left-0 top-0 h-full w-1 sep-gradient" />
                   <Quote className="size-5 text-gold-500" />
@@ -134,7 +135,7 @@ export default async function TestimoniosPage() {
 
             <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
-                <li key={p.id}>
+                <li key={p.id} className="min-w-0">
                   <Card className="flex h-full flex-col p-6">
                     {p.region && <Badge tone="brand">{p.region}</Badge>}
                     <h3 className="mt-3.5 font-display text-body leading-snug font-semibold text-ink">

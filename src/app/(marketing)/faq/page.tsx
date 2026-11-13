@@ -17,13 +17,14 @@ export default function FaqPage() {
     <Section>
       <Container size="narrow">
         <SectionHeader
+          as="h1"
           eyebrow="Preguntas frecuentes"
           title="Lo que suelen preguntarnos"
           align="center"
         />
 
         <div className="mt-10">
-          <FaqAccordion items={faqs} />
+          <FaqAccordion items={faqs} headingLevel="h2" />
         </div>
 
         <div className="mt-12 rounded-md border border-line bg-surface-1 p-7 text-center">

@@ -49,6 +49,7 @@ export default function ContactoPage() {
     <Section>
       <Container size="wide">
         <SectionHeader
+          as="h1"
           eyebrow="Contacto"
           title="Hablemos"
           description="No hay formularios que caen en un vacío. Del otro lado hay un equipo de nueve personas y doce voluntarios."
@@ -57,7 +58,11 @@ export default function ContactoPage() {
 
         <div className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-3">
           {channels.map((c) => (
-            <Card key={c.label} className="flex flex-col p-6 text-center">
+            <Card
+              key={c.label}
+              interactive={Boolean(c.href)}
+              className="relative flex flex-col p-6 text-center"
+            >
               <c.icon className="mx-auto size-5 text-sep-600" />
               <p className="mt-4 text-caption uppercase tracking-eyebrow text-slate-ui">
                 {c.label}
@@ -67,7 +72,7 @@ export default function ContactoPage() {
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="mt-1.5 break-words text-body-sm font-medium text-ink hover:text-sep-600"
+                  className="mt-1.5 break-words text-body-sm font-medium text-ink after:absolute after:inset-0 after:content-[''] hover:text-sep-600"
                 >
                   {c.value}
                 </a>

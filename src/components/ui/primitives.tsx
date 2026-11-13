@@ -53,13 +53,17 @@ export function Section({
   );
 }
 
-/** Encabezado de sección: etiqueta pequeña + título + bajada. */
+/**
+ * Encabezado de sección: etiqueta pequeña + título + bajada.
+ * Con `as="h1"` sirve de cabecera de página (misma escala que el h1 de `PageHero`).
+ */
 export function SectionHeader({
   eyebrow,
   title,
   description,
   align = "left",
   inverted = false,
+  as: Heading = "h2",
   className,
 }: {
   eyebrow?: string;
@@ -67,6 +71,7 @@ export function SectionHeader({
   description?: React.ReactNode;
   align?: "left" | "center";
   inverted?: boolean;
+  as?: "h1" | "h2";
   className?: string;
 }) {
   return (
@@ -87,14 +92,15 @@ export function SectionHeader({
           {eyebrow}
         </p>
       )}
-      <h2
+      <Heading
         className={cn(
-          "font-display text-h2",
+          "font-display",
+          Heading === "h1" ? "text-h1 font-bold lg:text-hero" : "text-h2",
           inverted ? "text-white" : "text-ink",
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {description && (
         <p
           className={cn(

@@ -6,8 +6,11 @@ import { cn } from "@/lib/utils";
 
 export function FaqAccordion({
   items,
+  headingLevel: Heading = "h3",
 }: {
   items: readonly { q: string; a: string }[];
+  /** Nivel de las preguntas: `h2` cuando el acordeón cuelga directo del h1 de la página. */
+  headingLevel?: "h2" | "h3";
 }) {
   const [open, setOpen] = React.useState<number | null>(0);
 
@@ -17,7 +20,7 @@ export function FaqAccordion({
         const isOpen = open === i;
         return (
           <div key={item.q}>
-            <h3>
+            <Heading>
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
@@ -35,7 +38,7 @@ export function FaqAccordion({
                   )}
                 />
               </button>
-            </h3>
+            </Heading>
             <div
               id={`faq-panel-${i}`}
               hidden={!isOpen}

@@ -31,6 +31,7 @@ export default async function BlogPage() {
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
+            as="h1"
             eyebrow="Blog"
             title="Lo que vamos aprendiendo"
             description="Metodologías, crónicas de campo y decisiones que tomamos en voz alta."
@@ -57,6 +58,7 @@ export default async function BlogPage() {
           ) : (
             <div>
               <NewsCard
+                headingLevel="h2"
                 post={posts[0]}
                 fallbackImage={SEP_PHOTOS.communityGroup}
                 priority
@@ -67,6 +69,7 @@ export default async function BlogPage() {
                   {posts.slice(1).map((post, index) => (
                     <li key={post.id}>
                       <NewsCard
+                        headingLevel="h2"
                         post={post}
                         fallbackImage={
                           [SEP_PHOTOS.methodology, SEP_PHOTOS.workshop, SEP_PHOTOS.community][

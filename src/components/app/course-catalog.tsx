@@ -168,14 +168,14 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
-                  <h3 className="mt-3.5 text-body font-semibold leading-snug text-ink">
+                  <h2 className="mt-3.5 text-body font-semibold leading-snug text-ink">
                     {c.title}
-                  </h3>
+                  </h2>
                   <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {c.description}
                   </p>
 
-                  <dl className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-caption text-slate-ui">
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-caption text-slate-ui">
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="size-3.5 text-mist" />
                       {c.totalHours} h
@@ -188,7 +188,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                       <Sprout className="size-3.5 text-mist" />
                       {c.weeks} sem.
                     </span>
-                  </dl>
+                  </div>
 
                   <p className="mt-3 text-body-sm font-medium text-ink">
                     {c.isFree ? (

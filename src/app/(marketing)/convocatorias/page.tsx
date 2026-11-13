@@ -95,6 +95,7 @@ export default async function ConvocatoriasPage() {
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16">
           <SectionHeader
+            as="h1"
             eyebrow="Convocatorias"
             title="Lo que está abierto ahora"
             description="Todo lo que puedes empezar hoy mismo. Sin listas de espera artificiales."
