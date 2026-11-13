@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { FilterPills } from "@/components/ui/filter-pills";
 import { useRouter } from "next/navigation";
 import { Loader2, Search, ShieldCheck, X } from "lucide-react";
 import { grantRoleAction, revokeRoleAction } from "@/server/actions/admin";
@@ -142,40 +143,19 @@ export function UserTable({
           />
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
-          <button
-            type="button"
-            onClick={() => setFilter("todos")}
-            className={cn(
-              "rounded-full px-3 py-1.5 text-caption font-medium transition-colors",
-              filter === "todos"
-                ? "bg-sep-600 text-white"
-                : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
-            )}
-          >
-            Todos <span className="tabular ml-1 opacity-70">{users.length}</span>
-          </button>
-          {USER_ROLES.map((r) => {
-            const count = users.filter((u) => u.roles.includes(r)).length;
-            if (count === 0) return null;
-            return (
-              <button
-                key={r}
-                type="button"
-                onClick={() => setFilter(r)}
-                className={cn(
-                  "rounded-full px-3 py-1.5 text-caption font-medium transition-colors",
-                  filter === r
-                    ? "bg-sep-600 text-white"
-                    : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
-                )}
-              >
-                {ROLE_META[r].shortLabel}
-                <span className="tabular ml-1 opacity-70">{count}</span>
-              </button>
-            );
-          })}
-        </div>
+        <FilterPills
+          label="Filtrar usuarios por rol"
+          value={filter}
+          onChange={setFilter}
+          options={[
+            { key: "todos" as const, label: "Todos", count: users.length },
+            ...USER_ROLES.map((r) => ({
+              key: r,
+              label: ROLE_META[r].shortLabel,
+              count: users.filter((u) => u.roles.includes(r)).length,
+            })).filter((o) => o.count > 0),
+          ]}
+        />
         {hasFilters && (
           <div className="flex flex-wrap items-center gap-3 text-caption text-slate-ui" role="status">
             <span>Mostrando {visible.length} de {users.length} usuarios.</span>

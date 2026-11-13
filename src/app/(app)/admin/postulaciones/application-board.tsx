@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import { FilterPills } from "@/components/ui/filter-pills";
 import { useRouter } from "next/navigation";
 import { Check, Clock, Loader2, Mic, UserRound, X } from "lucide-react";
 import {
@@ -144,33 +145,18 @@ export function ApplicationBoard({
         </div>
       )}
 
-      <div className="mb-5 flex flex-wrap gap-1.5">
-        {tabs.map((t) => (
-          <button
-            key={t.key}
-            type="button"
-            onClick={() => setTab(t.key)}
-            className={cn(
-              "rounded-full px-3.5 py-1.5 text-body-sm font-medium transition-colors",
-              tab === t.key
-                ? "bg-sep-600 text-white"
-                : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
-            )}
-          >
-            {t.label}
-            {t.count > 0 && (
-              <span
-                className={cn(
-                  "tabular ml-1.5 rounded-full px-1.5 text-caption",
-                  tab === t.key ? "bg-white/20" : "bg-gold-500/20 text-gold-700",
-                )}
-              >
-                {t.count}
-              </span>
-            )}
-          </button>
-        ))}
-      </div>
+      {/* El conteo muestra lo pendiente de revisar en cada pestaña. */}
+      <FilterPills
+        label="Tipo de postulación"
+        className="mb-5"
+        value={tab}
+        onChange={setTab}
+        options={tabs.map((t) => ({
+          key: t.key,
+          label: t.label,
+          count: t.count > 0 ? t.count : undefined,
+        }))}
+      />
 
       {/* ── Voluntariado ── */}
       {tab === "voluntariado" &&

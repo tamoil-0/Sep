@@ -45,7 +45,7 @@ export function FilterPills<K extends string>({
           >
             {o.label}
             {typeof o.count === "number" && (
-              <span className={cn("tabular", active ? "text-white/75" : "text-mist")}>
+              <span className={cn("tabular", active ? "text-white" : "text-mist")}>
                 {o.count}
               </span>
             )}
