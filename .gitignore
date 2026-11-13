@@ -37,3 +37,6 @@ yarn-error.log*
 .demo-pass.txt
 docs/CUENTAS-DEMO.md
 .referencias/
+
+# capturas de revisión visual (locales)
+.ui-review/
