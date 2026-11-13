@@ -45,7 +45,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   return (
     <ToastContext.Provider value={notify}>
       {children}
-      <div
+      <section
         className="pointer-events-none fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-[150] flex flex-col items-end gap-2 sm:left-auto sm:w-full sm:max-w-sm"
         aria-label="Notificaciones"
       >
@@ -79,7 +79,7 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             </div>
           );
         })}
-      </div>
+      </section>
     </ToastContext.Provider>
   );
 }

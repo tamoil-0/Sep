@@ -196,8 +196,9 @@ export function Feed({
                           : "text-slate-ui hover:text-ink",
                       )}
                       aria-pressed={p.liked}
+                      aria-label={`Me gusta${p.likes > 0 ? ` (${p.likes})` : ""}`}
                     >
-                      <Heart className={cn("size-4", p.liked && "fill-current")} />
+                      <Heart aria-hidden className={cn("size-4", p.liked && "fill-current")} />
                       {p.likes > 0 && <span className="tabular">{p.likes}</span>}
                     </button>
 

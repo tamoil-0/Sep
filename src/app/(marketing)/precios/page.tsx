@@ -379,7 +379,7 @@ export default function PreciosPage() {
                   Los precios de certificados y la tarifa social del SILP están
                   confirmados. Los de membresías y programas institucionales son una
                   propuesta que estamos calibrando con las respuestas del{" "}
-                  <a href="/conocenos" className="text-sep-600 hover:underline">
+                  <a href="/conocenos" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
                     diagnóstico público
                   </a>
                   . Preferimos decirlo antes que fingir certeza.

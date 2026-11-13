@@ -63,7 +63,7 @@ export default function RegistroPage() {
           </strong>{" "}
           Esos roles se otorgan tras una postulación. Crea tu cuenta de estudiante y
           postula desde{" "}
-          <Link href="/voluntariado" className="text-sep-600 hover:underline">
+          <Link href="/voluntariado" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
             voluntariado
           </Link>{" "}
           o{" "}

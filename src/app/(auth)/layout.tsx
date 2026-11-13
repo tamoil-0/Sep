@@ -41,7 +41,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </ul>
         </div>
 
-        <p className="relative text-caption text-white/45">
+        <p className="relative text-caption text-white/75">
           Organización juvenil reconocida por SENAJU · Desde Áncash, 2024
         </p>
       </aside>

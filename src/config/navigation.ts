@@ -120,7 +120,7 @@ export const footerNav = {
 
 export const appNav: Record<UserRole, NavItem[]> = {
   estudiante: [
-    { label: "Dashboard", href: "/estudiante", icon: "LayoutDashboard" },
+    { label: "Inicio", href: "/estudiante", icon: "LayoutDashboard" },
     { label: "Mis cursos", href: "/estudiante/mis-cursos", icon: "BookOpen" },
     { label: "Catálogo", href: "/estudiante/catalogo", icon: "LibraryBig" },
     { label: "Comunidad", href: "/estudiante/comunidad", icon: "Users" },
@@ -130,7 +130,7 @@ export const appNav: Record<UserRole, NavItem[]> = {
     { label: "Membresía", href: "/estudiante/membresia", icon: "Sprout" },
   ],
   docente: [
-    { label: "Dashboard", href: "/docente", icon: "LayoutDashboard" },
+    { label: "Inicio", href: "/docente", icon: "LayoutDashboard" },
     { label: "Mi programa", href: "/docente/programa", icon: "BookOpen" },
     { label: "Recursos para el aula", href: "/docente/recursos", icon: "FolderOpen" },
     { label: "Mi colegio", href: "/docente/mi-colegio", icon: "School" },
@@ -138,14 +138,14 @@ export const appNav: Record<UserRole, NavItem[]> = {
     { label: "Certificados", href: "/docente/certificados", icon: "Award" },
   ],
   mentor: [
-    { label: "Dashboard", href: "/mentor", icon: "LayoutDashboard" },
+    { label: "Inicio", href: "/mentor", icon: "LayoutDashboard" },
     { label: "Mis mentorados", href: "/mentor/mentorados", icon: "UsersRound" },
     { label: "Sesiones", href: "/mentor/sesiones", icon: "CalendarDays" },
     { label: "Canal de mentores", href: "/mentor/canal", icon: "MessagesSquare" },
     { label: "Mis horas", href: "/mentor/horas", icon: "Clock" },
   ],
   institucion: [
-    { label: "Dashboard", href: "/institucion", icon: "LayoutDashboard" },
+    { label: "Inicio", href: "/institucion", icon: "LayoutDashboard" },
     { label: "Perfil institucional", href: "/institucion/perfil", icon: "Building2" },
     { label: "Talleres", href: "/institucion/talleres", icon: "Presentation" },
     { label: "Estudiantes", href: "/institucion/estudiantes", icon: "GraduationCap" },
@@ -154,7 +154,7 @@ export const appNav: Record<UserRole, NavItem[]> = {
     { label: "Facturación", href: "/institucion/facturacion", icon: "Receipt" },
   ],
   speaker: [
-    { label: "Dashboard", href: "/speaker", icon: "LayoutDashboard" },
+    { label: "Inicio", href: "/speaker", icon: "LayoutDashboard" },
     { label: "Mi perfil público", href: "/speaker/perfil", icon: "UserRound" },
     { label: "Invitaciones", href: "/speaker/invitaciones", icon: "Mail" },
     { label: "Mis participaciones", href: "/speaker/participaciones", icon: "Mic" },
