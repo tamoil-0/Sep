@@ -185,7 +185,7 @@ export default async function CursoPublicoPage({
             <div className="mt-8 space-y-6">
               {weeks.map((week) => (
                 <div key={week}>
-                  <p className="mb-3 text-caption font-semibold uppercase tracking-[0.12em] text-gold-700">
+                  <p className="mb-3 text-caption font-semibold uppercase tracking-eyebrow text-gold-700">
                     Semana {week}
                   </p>
                   <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">

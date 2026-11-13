@@ -92,6 +92,9 @@
   --text-hero--line-height: 1.06;
   --text-hero--letter-spacing: -0.03em;
 
+  /* Etiquetas en mayúsculas sobre los títulos (eyebrows). */
+  --tracking-eyebrow: 0.12em;
+
   /* ── Radios ── */
   --radius-sm: 6px;
   --radius-md: 10px;

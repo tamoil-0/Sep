@@ -63,7 +63,7 @@ export default async function SpeakerPerfilPage() {
 
       <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
         <Card>
-          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Datos del perfil
           </h2>
           <dl className="mt-4 divide-y divide-line">
@@ -80,7 +80,7 @@ export default async function SpeakerPerfilPage() {
 
         <div className="space-y-5">
           <Card>
-            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
               Mis temas
             </h2>
             {s.topics?.length ? (
@@ -96,7 +96,7 @@ export default async function SpeakerPerfilPage() {
 
           {s.story && (
             <Card>
-              <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Mi historia
               </h2>
               <p className="mt-3 text-body-sm leading-relaxed text-graphite">{s.story}</p>

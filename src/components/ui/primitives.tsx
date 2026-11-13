@@ -80,7 +80,7 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "mb-3 text-caption font-semibold uppercase tracking-[0.12em]",
+            "mb-3 text-caption font-semibold uppercase tracking-eyebrow",
             inverted ? "text-gold-500" : "text-sep-600",
           )}
         >

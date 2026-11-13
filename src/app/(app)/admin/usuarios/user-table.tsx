@@ -249,7 +249,7 @@ export function UserTable({
                   {["Usuario", "Región", "Roles", "Registro", ""].map((h) => (
                     <th
                       key={h}
-                      className="px-5 py-3 text-caption font-semibold uppercase tracking-[0.08em] text-slate-ui"
+                      className="px-5 py-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui"
                     >
                       {h}
                     </th>

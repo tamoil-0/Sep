@@ -94,7 +94,7 @@ export default function NosotrosPage() {
                 key={c.label}
                 className={c.highlight ? "border-gold-500/35 bg-gold-50/50" : ""}
               >
-                <p className="text-caption font-semibold uppercase tracking-[0.14em] text-sep-600">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
                   {c.label}
                 </p>
                 <p className="mt-3.5 text-body leading-relaxed text-graphite">
@@ -147,7 +147,7 @@ export default function NosotrosPage() {
             {impactChain.map((node, i) => (
               <li key={node.step} className="relative">
                 <Card className="h-full">
-                  <span className="tabular text-caption font-semibold tracking-[0.14em] text-gold-700">
+                  <span className="tabular text-caption font-semibold tracking-eyebrow text-gold-700">
                     0{i + 1}
                   </span>
                   <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">

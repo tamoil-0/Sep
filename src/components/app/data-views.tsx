@@ -45,7 +45,7 @@ export function DataTable<T>({
                   key={column.key}
                   className="grid grid-cols-[minmax(7rem,.7fr)_minmax(0,1.3fr)] gap-3"
                 >
-                  <dt className="text-caption font-semibold uppercase tracking-[0.06em] text-slate-ui">
+                  <dt className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                     {column.header || "Acciones"}
                   </dt>
                   <dd
@@ -72,7 +72,7 @@ export function DataTable<T>({
                   key={c.key}
                   scope="col"
                   className={cn(
-                    "px-4 py-2.5 text-caption font-semibold uppercase tracking-[0.08em] text-slate-ui",
+                    "px-4 py-2.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui",
                     c.numeric && "text-right",
                   )}
                 >
@@ -172,7 +172,7 @@ export function PanelSection({
   return (
     <section className={cn("mt-6 first:mt-0 sm:mt-8", className)}>
       <div className="mb-3.5 flex items-center justify-between gap-4">
-        <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           {title}
         </h2>
         {action && (

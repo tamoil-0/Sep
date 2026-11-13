@@ -86,7 +86,7 @@ export default async function MentorPage() {
       <section className="mt-8 grid gap-3 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <div className="flex items-center justify-between">
-            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
               Mis mentorados
             </h2>
             <Button href="/mentor/mentorados" variant="link" size="sm">
@@ -123,7 +123,7 @@ export default async function MentorPage() {
         </Card>
 
         <Card>
-          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Progreso del mes
           </h2>
           <p className="tabular mt-4 font-display text-h2 font-semibold leading-none text-ink">

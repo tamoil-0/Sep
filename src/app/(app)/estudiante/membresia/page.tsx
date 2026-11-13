@@ -27,7 +27,7 @@ export default async function MembresiaPage() {
 
       <Card className="overflow-hidden p-0">
         <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-caption uppercase tracking-[0.12em] text-white/70">Tu plan actual</p>
+          <p className="text-caption uppercase tracking-eyebrow text-white/70">Tu plan actual</p>
           <h2 className="mt-2 font-display text-h2 font-semibold">
             {membership?.plan?.name ?? "Semilla"}
           </h2>

@@ -141,7 +141,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-700 text-white ">
             <PartyPopper className="size-8" />
           </span>
-          <p className="mt-6 text-caption font-semibold uppercase tracking-[0.14em] text-seed-700">
+          <p className="mt-6 text-caption font-semibold uppercase tracking-eyebrow text-seed-700">
             Participación registrada
           </p>
           <h1 className="mt-2 font-display text-h2 font-bold leading-tight text-ink sm:text-h1">
@@ -174,7 +174,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
             <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-ink ">
               <HeartHandshake className="size-6" />
             </span>
-            <p className="mt-5 text-caption font-semibold uppercase tracking-[0.14em] text-gold-500">
+            <p className="mt-5 text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
               Tu voz importa
             </p>
             <h1 className="mt-2 font-display text-h2 font-bold leading-[1.08] sm:text-h1">

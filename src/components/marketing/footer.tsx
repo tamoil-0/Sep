@@ -57,7 +57,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {Object.entries(footerNav).map(([group, links]) => (
               <div key={group}>
-                <p className="mb-4 text-caption font-semibold uppercase tracking-[0.14em] text-gold-500">
+                <p className="mb-4 text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
                   {group}
                 </p>
                 <ul className="space-y-2.5">

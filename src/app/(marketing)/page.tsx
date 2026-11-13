@@ -74,7 +74,7 @@ export default async function HomePage() {
         <Container size="wide" className="relative">
           <div className="grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:py-16">
             <div className="max-w-2xl">
-              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-sep-700">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-700">
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
@@ -562,7 +562,7 @@ export default async function HomePage() {
             </div>
 
             <Card className="p-6 sm:p-8">
-              <p className="text-caption font-semibold uppercase tracking-[0.14em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Vínculos registrados por SEP
               </p>
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">

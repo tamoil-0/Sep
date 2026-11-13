@@ -97,7 +97,7 @@ export default function DocentesPage() {
             </div>
 
             <div>
-              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Recursos descargables
               </p>
               <ul className="mt-5 space-y-2.5">

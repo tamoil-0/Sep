@@ -45,7 +45,7 @@ export default async function CertificadosPage() {
       {/* ── Emitidos ── */}
       {issued.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Obtenidos
           </h2>
           <div className="grid gap-3 md:grid-cols-2">
@@ -114,7 +114,7 @@ export default async function CertificadosPage() {
       {/* ── Cursos completados sin certificado ── */}
       {completed.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Listos para certificar
           </h2>
           <div className="space-y-3">
@@ -162,7 +162,7 @@ export default async function CertificadosPage() {
                   )}
 
                   <div className="mt-5 border-t border-line pt-5">
-                    <p className="mb-3 text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                    <p className="mb-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                       Elige tu certificado
                     </p>
                     <RequestCertificateButtons
@@ -187,7 +187,7 @@ export default async function CertificadosPage() {
       {/* ── En progreso ── */}
       {inProgress.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             En camino
           </h2>
           <div className="grid gap-3 md:grid-cols-2">
@@ -233,7 +233,7 @@ export default async function CertificadosPage() {
 
       {/* ── Tipos de certificado ── */}
       <section className="mt-10">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Tipos de certificado
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">

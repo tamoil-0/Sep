@@ -103,7 +103,7 @@ export default async function ColegiosPage() {
 
               {/* Proceso */}
               <div className="mt-12">
-                <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                   ¿Cómo funciona?
                 </p>
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -126,7 +126,7 @@ export default async function ColegiosPage() {
               {/* Colegios activos */}
               {schools.length > 0 && (
                 <div className="mt-12">
-                  <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                  <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                     Colegios en la red
                   </p>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">

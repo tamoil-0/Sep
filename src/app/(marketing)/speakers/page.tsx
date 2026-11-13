@@ -149,7 +149,7 @@ export default async function SpeakersPage() {
               )}
 
               <div className="mt-12">
-                <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                   ¿Qué ganas al unirte?
                 </p>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">

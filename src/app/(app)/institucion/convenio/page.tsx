@@ -57,7 +57,7 @@ export default async function InstitucionConvenioPage() {
         </div>
 
         <div className="p-7">
-          <h3 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h3 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Qué acordamos
           </h3>
           <ul className="mt-4 space-y-2.5">

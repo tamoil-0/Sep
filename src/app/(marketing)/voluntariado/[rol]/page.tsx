@@ -73,7 +73,7 @@ export default async function PostularPage({
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <Card className="p-6">
-                <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                   Requisitos
                 </p>
                 <ul className="mt-3.5 space-y-2.5">
@@ -87,7 +87,7 @@ export default async function PostularPage({
               </Card>
 
               <Card className="p-6">
-                <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                   Proceso
                 </p>
                 <ol className="mt-3.5 space-y-3">
@@ -107,7 +107,7 @@ export default async function PostularPage({
             </div>
 
             <Card className="mt-5 p-6">
-              <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Lo que ganas
               </p>
               <ul className="mt-4 grid gap-4 sm:grid-cols-2">

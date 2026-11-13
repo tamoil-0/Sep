@@ -95,7 +95,7 @@ export default function SilpPage() {
 
           <Card className="p-0">
             <div className="border-b border-line p-5">
-              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Programa completo
               </p>
               <p className="tabular mt-2 font-display text-h1 font-semibold leading-none text-ink">

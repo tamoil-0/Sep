@@ -59,7 +59,7 @@ export default async function CursosPage() {
               ["Modalidad", COURSE_FORMAT.modality],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="text-caption uppercase tracking-[0.1em] text-slate-ui">
+                <dt className="text-caption uppercase tracking-eyebrow text-slate-ui">
                   {label}
                 </dt>
                 <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>

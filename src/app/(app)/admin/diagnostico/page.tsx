@@ -275,7 +275,7 @@ export default async function AdminDiagnosticoPage({
           />
         ) : (
           <Card className="overflow-hidden p-0">
-            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-caption font-semibold uppercase tracking-[0.08em] text-slate-ui md:grid">
+            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui md:grid">
               <span>Participante</span>
               <span>Región</span>
               <span>Completado</span>
@@ -341,7 +341,7 @@ export default async function AdminDiagnosticoPage({
             <div className="bg-sep-800 px-5 py-6 text-white sm:px-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-caption font-semibold uppercase tracking-[0.12em] text-white/65">
+                  <p className="text-caption font-semibold uppercase tracking-eyebrow text-white/65">
                     Respuesta individual · {activeMeta.singular}
                   </p>
                   <h2

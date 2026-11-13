@@ -100,7 +100,7 @@ export default async function EstudiantePage() {
 
       {/* Continúa aprendiendo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Continúa aprendiendo
         </h2>
 
@@ -157,7 +157,7 @@ export default async function EstudiantePage() {
       <div className="mt-8 grid gap-3 lg:grid-cols-2">
         {/* Próxima sesión */}
         <Card className="p-5">
-          <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             <Video className="size-4" />
             Próxima sesión en vivo
           </div>
@@ -174,7 +174,7 @@ export default async function EstudiantePage() {
         {/* Comunidad */}
         <Card className="p-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
               <MessageSquare className="size-4" />
               Comunidad SEP
             </div>
@@ -219,7 +219,7 @@ export default async function EstudiantePage() {
 
       {/* Certificados */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Certificados al finalizar
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">

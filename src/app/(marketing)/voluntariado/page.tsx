@@ -136,7 +136,7 @@ export default function VoluntariadoPage() {
                         {role.description}
                       </p>
 
-                      <p className="mt-5 text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="mt-5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                         Requisitos
                       </p>
                       <ul className="mt-2.5 space-y-2">
@@ -167,7 +167,7 @@ export default function VoluntariadoPage() {
                     </div>
 
                     <div className="rounded-md bg-surface-1 p-6">
-                      <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                         Beneficios exclusivos del rol
                       </p>
                       <ul className="mt-4 space-y-4">

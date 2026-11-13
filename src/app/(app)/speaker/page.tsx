@@ -62,7 +62,7 @@ export default async function SpeakerPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Invitaciones
           </h2>
           <Button href="/speaker/invitaciones" variant="link" size="sm">
@@ -111,7 +111,7 @@ export default async function SpeakerPage() {
 
       {speaker?.topics?.length ? (
         <section className="mt-8">
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Mis temas
           </h2>
           <div className="flex flex-wrap gap-2">

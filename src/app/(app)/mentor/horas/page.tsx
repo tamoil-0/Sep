@@ -58,14 +58,14 @@ export default async function MentorHorasPage() {
 
       <div className="mt-8 grid gap-5 lg:grid-cols-[380px_1fr]">
         <Card className="lg:sticky lg:top-6 lg:self-start">
-          <h2 className="mb-4 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-4 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Registrar horas
           </h2>
           <HoursForm />
         </Card>
 
         <div>
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Historial
           </h2>
 

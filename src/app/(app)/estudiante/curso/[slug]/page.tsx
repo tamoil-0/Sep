@@ -141,7 +141,7 @@ export default async function CursoPage({
 
       {/* Sesiones */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Contenido del curso
         </h2>
 

@@ -67,7 +67,7 @@ export function AppSidebar({
         <Link href="/" aria-label="Inicio">
           <Logo className="h-11" variant="white" />
         </Link>
-        <p className="mt-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
+        <p className="mt-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
           Panel activo · {ROLE_META[routeRole].shortLabel}
         </p>
       </div>
@@ -103,7 +103,7 @@ export function AppSidebar({
 
         {otherRoles.length > 0 && (
           <div className="mt-6 border-t border-white/10 pt-4">
-            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
+            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
               Cambiar de panel
             </p>
             <ul className="space-y-0.5">
