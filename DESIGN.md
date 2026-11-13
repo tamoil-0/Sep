@@ -172,6 +172,11 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 ## 6. Componentes y estados
 
 - **Botones** (`Button`): variantes `primary` (por defecto), `gradient`, `gold`, `outline`, `outline-white`, `ghost`, `link` y `danger`; tamaños `sm`, `md`, `lg` e `icon`. Todos de 44px o más, con `rounded-sm`. Acepta `href` (usa `Link` interno o `<a target=_blank>` para enlaces externos).
+- **Enlaces de texto** (`src/components/ui/arrow-link.tsx`): `ArrowLink` ("Ver detalle →", amplía el área táctil con un pseudo-elemento; `stretched` hace clicable toda la `Card`) y `BackLink` ("← Todos los cursos", `min-h-control`). No escribas a mano el enlace "volver" con `ArrowLeft`.
+- **Filtros en píldora** (`FilterPills`): pestañas de una lista con conteo ("Por revisar 1", "Aprobados 3"); 44px, `aria-pressed` y `label` para el grupo.
+- **Cabecera de página:** `PageHero` en marketing y `PageHeader` en el producto. Si la cabecera es un `SectionHeader`, pásale `as="h1"` (misma escala que el h1 de `PageHero`). **Toda página tiene exactamente un `h1`** y los niveles no saltan (`FaqAccordion` y `NewsCard` aceptan `headingLevel` para colgar directo del h1).
+- **Enlaces dentro de un párrafo:** siempre subrayados (`underline underline-offset-4`), porque el color solo no distingue el enlace del texto (WCAG 1.4.1).
+- **Fechas:** usa `formatDate` / `formatDateTime` de `@/lib/utils` (hora de Lima, iguales en servidor y cliente). Para la mayúscula inicial usa `first-letter:uppercase`, no `capitalize` (pondría "P. M.").
 - **Badges** (`Badge`): tonos `brand`, `gold`, `seed`, `neutral`, `success`, `warning`, `danger` y `white`; `rounded-full text-caption font-semibold`.
 - **Formularios:** `src/components/forms/field.tsx` con `react-hook-form` + `zod`; inputs `rounded-sm border border-line bg-white min-h-control`.
 - **Estados obligatorios** en toda vista con datos: **vacío** (`EmptyState`: ícono + título `h4` + descripción + acción), **cargando** (`loading.tsx` con `.skeleton`), **error** (`error.tsx` con mensaje claro y reintentar) y **éxito** (`toast`).
