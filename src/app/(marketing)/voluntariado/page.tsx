@@ -209,7 +209,7 @@ export default function VoluntariadoPage() {
               return (
                 <Card key={b.title} className="p-6">
                   <Icon className="size-5 text-sep-600" />
-                  <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
+                  <h3 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                     {b.title}
                   </h3>
                   <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{b.detail}</p>

@@ -210,7 +210,7 @@ export default async function HomePage() {
                 <span className="flex size-11 items-center justify-center rounded-md bg-sep-50 text-sep-700">
                   <audience.icon className="size-5" />
                 </span>
-                <h3 className="mt-5 font-display text-body-lg font-semibold text-ink">
+                <h3 className="mt-5 font-display text-body-lg leading-snug font-semibold text-ink">
                   {audience.title}
                 </h3>
                 <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">

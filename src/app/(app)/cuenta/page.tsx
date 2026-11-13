@@ -154,7 +154,7 @@ export default async function CuentaPage() {
           <div className="flex items-start gap-3.5">
             <KeyRound className="mt-0.5 size-5 shrink-0 text-slate-ui" />
             <div>
-              <h3 className="text-body-sm font-semibold text-ink">
+              <h3 className="text-body-sm leading-snug font-semibold text-ink">
                 Acceso, rectificación, cancelación y oposición
               </h3>
               <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">

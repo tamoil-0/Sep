@@ -59,7 +59,7 @@ export default async function EstudianteEventosPage() {
                     <Badge tone="gold"><MapPin className="size-3" />Presencial</Badge>
                   )}
                 </div>
-                <h3 className="mt-3.5 text-body font-semibold text-ink">{e.title}</h3>
+                <h3 className="mt-3.5 text-body leading-snug font-semibold text-ink">{e.title}</h3>
                 <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">{e.description}</p>
                 <p className="mt-4 text-caption capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
                 {e.location && <p className="mt-1 text-caption text-slate-ui">{e.location}</p>}

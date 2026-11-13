@@ -19,7 +19,7 @@ export function CertificateOptions({
         <p className="tabular font-display text-h1 font-bold leading-none text-ink">
           {formatSoles(3000)}
         </p>
-        <h3 className="mt-4 font-display text-body font-semibold text-ink">Certificado SEP</h3>
+        <h3 className="mt-4 font-display text-body leading-snug font-semibold text-ink">Certificado SEP</h3>
         <p className="mt-1 text-caption text-slate-ui">Semillero de Emprendedores Perú</p>
         {showVerification && (
           <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-caption text-slate-ui">
@@ -31,7 +31,7 @@ export function CertificateOptions({
 
       <Card className="flex flex-col items-start justify-center border-dashed bg-surface-1">
         <Badge>En trámite</Badge>
-        <h3 className="mt-3 font-display text-body font-semibold text-graphite">
+        <h3 className="mt-3 font-display text-body leading-snug font-semibold text-graphite">
           Certificado internacional
         </h3>
       </Card>

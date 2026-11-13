@@ -407,7 +407,7 @@ export default async function AdminDiagnosticoPage({
                       <span className="flex size-7 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
                         {moduleIndex + 1}
                       </span>
-                      <h3 className="text-body-lg font-semibold text-ink">
+                      <h3 className="text-body-lg leading-snug font-semibold text-ink">
                         {moduleTitle}
                       </h3>
                     </div>

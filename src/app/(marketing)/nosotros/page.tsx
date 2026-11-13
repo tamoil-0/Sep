@@ -124,7 +124,7 @@ export default function NosotrosPage() {
                 <p className="tabular font-display text-display font-bold leading-none text-sep-700">
                   {s.figure}
                 </p>
-                <h3 className="mt-5 text-body-lg font-semibold text-ink">{s.title}</h3>
+                <h3 className="mt-5 text-body-lg leading-snug font-semibold text-ink">{s.title}</h3>
                 <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
                   {s.body}
                 </p>
@@ -150,7 +150,7 @@ export default function NosotrosPage() {
                   <span className="tabular text-caption font-semibold tracking-eyebrow text-gold-700">
                     0{i + 1}
                   </span>
-                  <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">
+                  <h3 className="mt-3 font-display text-body-lg leading-snug font-semibold text-ink">
                     {node.step}
                   </h3>
                   <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">

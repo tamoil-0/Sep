@@ -137,7 +137,7 @@ export default async function CertificadosPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 text-body font-semibold text-ink">
+                      <h3 className="mt-2.5 text-body leading-snug font-semibold text-ink">
                         {e.course?.title}
                       </h3>
                       <p className="mt-0.5 text-body-sm text-slate-ui">
@@ -242,7 +242,7 @@ export default async function CertificadosPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="text-body-sm font-semibold text-ink">
+                    <h3 className="text-body-sm leading-snug font-semibold text-ink">
                       {t.name}
                     </h3>
                   </div>

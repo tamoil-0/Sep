@@ -84,7 +84,7 @@ export default async function MentorCanalPage() {
         <div className="grid gap-3 md:grid-cols-2">
           {RESOURCES.map((r) => (
             <Card key={r.title} className="p-5">
-              <h3 className="text-body-sm font-medium text-ink">{r.title}</h3>
+              <h3 className="text-body-sm leading-snug font-medium text-ink">{r.title}</h3>
               <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{r.detail}</p>
             </Card>
           ))}

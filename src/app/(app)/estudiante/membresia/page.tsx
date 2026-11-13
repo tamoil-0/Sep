@@ -50,7 +50,7 @@ export default async function MembresiaPage() {
                 className={isCurrent ? "flex flex-col border-sep-300 bg-sep-50/40" : "flex flex-col"}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="text-body font-semibold text-ink">{p.name}</h3>
+                  <h3 className="text-body leading-snug font-semibold text-ink">{p.name}</h3>
                   {isCurrent && <Badge tone="brand">Actual</Badge>}
                 </div>
 
@@ -79,7 +79,7 @@ export default async function MembresiaPage() {
         <div className="flex items-start gap-3.5">
           <Sprout className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="text-body font-semibold text-ink">
+            <h3 className="text-body leading-snug font-semibold text-ink">
               Los voluntarios tienen todo gratis
             </h3>
             <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">

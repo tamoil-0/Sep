@@ -78,7 +78,7 @@ export default async function AdminPage() {
           <div className="flex items-start gap-3.5">
             <ShieldCheck className="mt-0.5 size-5 shrink-0 text-warning" />
             <div>
-              <h2 className="text-body-sm font-semibold text-ink">
+              <h2 className="text-body-sm leading-snug font-semibold text-ink">
                 Recordatorio de seguridad
               </h2>
               <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">

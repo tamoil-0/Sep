@@ -137,7 +137,7 @@ export default async function TestimoniosPage() {
                 <li key={p.id}>
                   <Card className="flex h-full flex-col p-6">
                     {p.region && <Badge tone="brand">{p.region}</Badge>}
-                    <h3 className="mt-3.5 font-display text-body font-semibold text-ink">
+                    <h3 className="mt-3.5 font-display text-body leading-snug font-semibold text-ink">
                       {p.title}
                     </h3>
                     {p.problem && (

@@ -156,7 +156,7 @@ export default async function InstitucionPage() {
               <ChartNoAxesCombined className="size-5" />
             </span>
             <div>
-              <h2 className="text-body-lg font-semibold text-ink">
+              <h2 className="text-body-lg leading-snug font-semibold text-ink">
                 Reporte de impacto
               </h2>
               <p className="mt-1 max-w-lg text-body-sm text-slate-ui">

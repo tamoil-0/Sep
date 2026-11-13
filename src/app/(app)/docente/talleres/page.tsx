@@ -38,7 +38,7 @@ export default async function DocenteTalleresPage() {
 
       <div className="grid gap-5 lg:grid-cols-[420px_1fr]">
         <Card className="lg:sticky lg:top-6 lg:self-start">
-          <h2 className="text-body-lg font-semibold text-ink">Nueva solicitud</h2>
+          <h2 className="text-body-lg leading-snug font-semibold text-ink">Nueva solicitud</h2>
           <p className="mt-1.5 text-body-sm text-slate-ui">
             {inst?.name ? `Para ${inst.name}` : "Primero vincula tu colegio en Mi colegio."}
           </p>

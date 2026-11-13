@@ -103,7 +103,7 @@ export default function EmpresasPage() {
             ].map((f) => (
               <Card key={f.title} className="p-6">
                 <f.icon className="size-5 text-sep-600" />
-                <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
+                <h3 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {f.title}
                 </h3>
                 <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{f.body}</p>
@@ -124,7 +124,7 @@ export default function EmpresasPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {b2bPackages.map((p) => (
               <Card key={p.slug} className="flex flex-col">
-                <h3 className="font-display text-body font-semibold text-ink">
+                <h3 className="font-display text-body leading-snug font-semibold text-ink">
                   {p.name}
                 </h3>
                 <p className="mt-1 text-caption leading-relaxed text-slate-ui">{p.scope}</p>

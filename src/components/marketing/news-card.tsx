@@ -75,8 +75,10 @@ export function NewsCard({
 
         <h3
           className={cn(
-            "mt-3 font-display font-semibold leading-snug text-ink",
+            "mt-3 font-display font-semibold text-ink",
             featured ? "text-h3 md:text-h2" : "text-body-lg",
+            // Después del tamaño: tailwind-merge descarta un leading-* previo a text-*.
+            "leading-snug",
           )}
         >
           <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">

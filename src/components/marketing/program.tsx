@@ -211,7 +211,7 @@ export function ProgramModuleList({
               <span className="tabular text-body-sm font-semibold text-sep-700">
                 {String(module.number).padStart(2, "0")}
               </span>
-              <h3 className="font-display text-body font-semibold text-ink">{module.theme}</h3>
+              <h3 className="font-display text-body leading-snug font-semibold text-ink">{module.theme}</h3>
               <p className="col-start-2 text-body-sm text-slate-ui sm:col-auto">{module.result}</p>
               <span className="col-start-2 text-caption font-medium text-mist sm:col-auto sm:text-right">
                 {module.duration}

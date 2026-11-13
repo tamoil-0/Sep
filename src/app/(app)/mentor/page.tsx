@@ -152,7 +152,7 @@ export default async function MentorPage() {
               <MessagesSquare className="size-5" />
             </span>
             <div>
-              <h2 className="text-body-lg font-semibold text-ink">
+              <h2 className="text-body-lg leading-snug font-semibold text-ink">
                 Canal privado de mentores
               </h2>
               <p className="mt-1 max-w-lg text-body-sm text-slate-ui">

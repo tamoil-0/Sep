@@ -84,7 +84,7 @@ export default function DonacionesPage() {
               </ul>
 
               <Card className="mt-8 border-sep-200 bg-sep-50/40">
-                <h2 className="font-display text-body font-semibold text-ink">
+                <h2 className="font-display text-body leading-snug font-semibold text-ink">
                   Transparencia
                 </h2>
                 <p className="mt-2 text-body-sm leading-relaxed text-graphite">

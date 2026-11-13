@@ -78,7 +78,7 @@ export default async function SpeakersPage() {
             ].map((c) => (
               <Card key={c.title} className="p-6">
                 <c.icon className="size-5 text-sep-600" />
-                <h2 className="mt-4 font-display text-body-sm font-semibold text-ink">
+                <h2 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {c.title}
                 </h2>
                 <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{c.body}</p>

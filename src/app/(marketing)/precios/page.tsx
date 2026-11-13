@@ -101,7 +101,7 @@ export default function PreciosPage() {
                     Recomendado
                   </span>
                 )}
-                <h3 className="font-display text-body-lg font-semibold text-ink">
+                <h3 className="font-display text-body-lg leading-snug font-semibold text-ink">
                   {cert.name}
                 </h3>
                 <p className="mt-1 text-caption text-slate-ui">{cert.issuer}</p>
@@ -123,7 +123,7 @@ export default function PreciosPage() {
             ))}
             <Card className="border-dashed bg-white/60">
               <Badge>En trámite</Badge>
-              <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">
+              <h3 className="mt-3 font-display text-body-lg leading-snug font-semibold text-ink">
                 CERTIFICADO INTERNACIONAL
               </h3>
             </Card>
@@ -189,7 +189,7 @@ export default function PreciosPage() {
                   )}
 
                   <p className="text-h3 leading-none">{plan.emoji}</p>
-                  <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">
+                  <h3 className="mt-3 font-display text-body-lg leading-snug font-semibold text-ink">
                     {plan.name}
                   </h3>
                   <p className="mt-0.5 text-caption text-slate-ui">{plan.tagline}</p>
@@ -229,7 +229,7 @@ export default function PreciosPage() {
 
           <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-gold-500/35 bg-gold-50/50">
             <div>
-              <h3 className="font-display text-body-lg font-semibold text-ink">
+              <h3 className="font-display text-body-lg leading-snug font-semibold text-ink">
                 ⭐ Membresía de voluntario — gratis
               </h3>
               <p className="mt-1.5 max-w-2xl text-body-sm text-slate-ui">
@@ -256,7 +256,7 @@ export default function PreciosPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {b2bPackages.map((pkg) => (
               <Card key={pkg.slug} className="flex flex-col">
-                <h3 className="font-display text-body font-semibold text-ink">
+                <h3 className="font-display text-body leading-snug font-semibold text-ink">
                   {pkg.name}
                 </h3>
                 <p className="mt-1 text-caption leading-relaxed text-slate-ui">{pkg.scope}</p>
@@ -285,7 +285,7 @@ export default function PreciosPage() {
 
           <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-seed-50/60">
             <div>
-              <h3 className="font-display text-body-lg font-semibold text-ink">
+              <h3 className="font-display text-body-lg leading-snug font-semibold text-ink">
                 Talleres sin costo para colegios de la red SEP
               </h3>
               <p className="mt-1.5 max-w-2xl text-body-sm text-slate-ui">
@@ -372,7 +372,7 @@ export default function PreciosPage() {
             <div className="flex items-start gap-3.5">
               <Info className="mt-0.5 size-5 shrink-0 text-slate-ui" />
               <div>
-                <h2 className="font-display text-body-sm font-semibold text-ink">
+                <h2 className="font-display text-body-sm leading-snug font-semibold text-ink">
                   Sobre los precios marcados como propuesta
                 </h2>
                 <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">

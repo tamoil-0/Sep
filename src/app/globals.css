@@ -141,19 +141,72 @@
 }
 
 /* ============================================================
-   Base
+   Base — dentro de @layer base para que las utilidades de Tailwind
+   (text-*, leading-*, tracking-*, font-*) puedan sobrescribirla.
    ============================================================ */
 
-* {
-  box-sizing: border-box;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-surface-0);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 320px;
+    overflow-wrap: break-word;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button,
+  [href],
+  input,
+  select,
+  textarea,
+  summary {
+    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-sep-600) 12%, transparent);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  overflow-x: clip;
-}
-
+/* Fuera de capa a propósito: deben ganarle a cualquier utilidad. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -167,63 +220,16 @@ html {
   }
 }
 
-body {
-  background: var(--color-surface-0);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.625;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-width: 320px;
-  overflow-wrap: break-word;
-}
-
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button,
-[href],
-input,
-select,
-textarea,
-summary {
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-sep-600) 12%, transparent);
-}
-
 ::selection {
   background: var(--color-gold-500);
   color: var(--color-ink);
 }
 
+/* Red de seguridad de accesibilidad: un `outline-none` en un input no
+   debe borrar el foco de teclado. */
 :focus-visible {
   outline: 2px solid var(--color-sep-500);
   outline-offset: 3px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
 }
 
 /* El producto autenticado usa Inter incluso cuando una vista heredada pide
