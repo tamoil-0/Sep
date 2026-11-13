@@ -214,7 +214,7 @@ export default async function AdminDiagnosticoPage({
               name="q"
               defaultValue={search}
               placeholder="Buscar nombre, correo o región"
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-body-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-body-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             />
           </label>
           <label>
@@ -222,7 +222,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="origen"
               defaultValue={origin}
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="todos">Todos los orígenes</option>
               <option value="feria">{ORIGIN_LABELS.feria}</option>
@@ -235,7 +235,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="datos"
               defaultValue={dataset}
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="reales">Solo respuestas reales</option>
               <option value="todos">Incluir datos de demostración</option>
@@ -243,7 +243,7 @@ export default async function AdminDiagnosticoPage({
           </label>
           <button
             type="submit"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white transition hover:bg-sep-700"
+            className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white transition hover:bg-sep-700"
           >
             Aplicar filtros
           </button>

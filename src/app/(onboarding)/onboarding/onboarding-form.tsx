@@ -374,7 +374,7 @@ export function OnboardingForm({
                   type="button"
                   onClick={() => moveTo(module - 1)}
                   disabled={module === 0 || busy}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-sm px-4 text-body-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
+                  className="inline-flex h-control items-center justify-center gap-2 rounded-sm px-4 text-body-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
                 >
                   <ArrowLeft className="size-4" /> Anterior
                 </button>
@@ -389,7 +389,7 @@ export function OnboardingForm({
                     type="button"
                     onClick={() => (module === 2 ? finish() : moveTo(module + 1))}
                     disabled={!moduleComplete || busy}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
+                    className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
                   >
                     {busy ? (
                       <>

@@ -16,7 +16,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-gold-500 text-body-sm font-medium text-ink  transition-colors hover:bg-gold-400 disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-gold-500 text-body-sm font-medium text-ink  transition-colors hover:bg-gold-400 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Preparando donación…" : "Quiero donar"}
@@ -72,7 +72,7 @@ export function DonationForm() {
                 setCustom("");
               }}
               className={cn(
-                "tabular h-11 rounded-sm border text-body-sm font-medium transition-colors",
+                "tabular h-control rounded-sm border text-body-sm font-medium transition-colors",
                 !custom && amount === a
                   ? "border-sep-500 bg-sep-50 text-sep-700"
                   : "border-line bg-white text-graphite hover:border-sep-300",

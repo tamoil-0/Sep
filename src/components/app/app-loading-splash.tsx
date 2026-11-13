@@ -49,7 +49,7 @@ export function AppLoadingSplash({ overlay = false }: { overlay?: boolean }) {
           <div className="skeleton h-4 w-36" />
           <div className="mt-5 space-y-3">
             {[0, 1, 2, 3].map((item) => (
-              <div key={item} className="skeleton h-11 w-full" />
+              <div key={item} className="skeleton h-control w-full" />
             ))}
           </div>
         </div>

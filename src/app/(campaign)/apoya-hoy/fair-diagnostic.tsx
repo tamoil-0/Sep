@@ -155,7 +155,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           </div>
           <Link
             href="/"
-            className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-line px-5 text-body-sm font-medium text-graphite transition-colors hover:bg-surface-1"
+            className="mt-7 inline-flex h-control items-center justify-center gap-2 rounded-sm border border-line px-5 text-body-sm font-medium text-graphite transition-colors hover:bg-surface-1"
           >
             Conocer más de SEP <ArrowRight className="size-4" />
           </Link>
@@ -201,7 +201,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               autoFocus
               maxLength={120}
               placeholder="Tu nombre y apellido"
-              className="mt-3 h-14 w-full rounded-md border border-line bg-white px-4 text-body text-ink outline-none transition focus:border-sep-500 focus:ring-4 focus:ring-sep-100"
+              className="mt-3 h-control-lg w-full rounded-md border border-line bg-white px-4 text-body text-ink outline-none transition focus:border-sep-500 focus:ring-4 focus:ring-sep-100"
             />
             <div className="absolute -left-[9999px]" aria-hidden="true">
               <label htmlFor="company-website">Sitio web</label>
@@ -218,7 +218,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
 
             <button
               type="submit"
-              className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-md sep-gradient px-5 text-body font-semibold text-white  transition-transform active:scale-[.99]"
+              className="mt-5 inline-flex h-control-lg w-full items-center justify-center gap-2 rounded-md sep-gradient px-5 text-body font-semibold text-white  transition-transform active:scale-[.99]"
             >
               Comenzar ahora <ArrowRight className="size-5" />
             </button>
@@ -337,7 +337,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
             type="button"
             onClick={() => goTo(index - 1)}
             disabled={index === 0 || busy}
-            className="inline-flex h-11 items-center gap-1.5 rounded-sm px-3 text-body-sm font-medium text-slate-ui transition hover:bg-surface-1 disabled:invisible"
+            className="inline-flex h-control items-center gap-1.5 rounded-sm px-3 text-body-sm font-medium text-slate-ui transition hover:bg-surface-1 disabled:invisible"
           >
             <ArrowLeft className="size-4" /> Atrás
           </button>
@@ -347,7 +347,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               type="button"
               onClick={() => (index === questions.length - 1 ? finish() : goTo(index + 1))}
               disabled={!answered(currentAnswer) || busy}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
             >
               {busy ? (
                 <><Loader2 className="size-4 animate-spin" /> Guardando</>

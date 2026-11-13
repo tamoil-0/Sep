@@ -254,7 +254,7 @@ export function Feed({
                             placeholder="Escribe un comentario…"
                             maxLength={2000}
                             aria-label="Escribe un comentario"
-                            className="h-9 flex-1 rounded-sm border border-line bg-white px-3 text-body-sm outline-none placeholder:text-mist focus:border-sep-400"
+                            className="h-control flex-1 rounded-sm border border-line bg-white px-3 text-body-sm outline-none placeholder:text-mist focus:border-sep-400"
                           />
                           <button
                             type="button"

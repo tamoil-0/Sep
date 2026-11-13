@@ -20,7 +20,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Enviando enlace…" : "Enviar enlace"}
