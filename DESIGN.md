@@ -164,7 +164,7 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 
 **Elevación:** las tarjetas **no llevan sombra**; se separan con `border border-line` sobre `bg-white` o `surface-1`. Usa sombra solo cuando algo flota:
 - `shadow-elevated` (`0 12px 32px rgba(ink,.14)`): diálogos, menús y toasts (10 usos).
-- `shadow-subtle` y `shadow-card` están definidos, pero hoy no se usan (ver §8).
+- Es la única sombra del sistema; `shadow-subtle` y `shadow-card` se eliminaron por no tener uso (§8 #8).
 
 ---
 
@@ -200,7 +200,7 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 | 5 | **Variables duplicadas en `:root`** — ✅ **Resuelta** | `--bg`, `--bg-1/2`, `--fg`, `--fg-2/3` y `--border` repetían los neutrales con **otros valores** (`--border #e6e4f0` frente a `line #e5e4e9`; `--fg-3 #6e6a85` frente a `mist #74717c`). | Hecho: `body` usa `surface-0`/`ink`, `.skeleton` usa `surface-2`, los fondos punteados de `/nosotros` y `/voluntariado` usan `var(--color-line)`, y se borraron `--bg*`, `--fg*` y `--border`. Excepción: `global-error.tsx` mantiene hex en línea porque se pinta sin `globals.css`. |
 | 6 | **Tokens con el mismo valor** — ✅ **Resuelta** | `gold-600` = `gold-700` = `#735000`; `seed-500` = `seed-700` = `#326912` | Hecho: `gold-600 → gold-700` (9 usos) y `seed-500 → seed-700` (31 usos), y se borraron `gold-600` y `seed-500` de `@theme`. Sin cambio visual (mismo valor). |
 | 7 | **Tracking de eyebrows** — ✅ **Resuelta** | `0.12em` (54), `0.1em` (17), `0.14em` (11), `0.08em` (9) y `0.06em` (1) | Hecho: token `--tracking-eyebrow: 0.12em` (clase `tracking-eyebrow`, registrada en `cn()`), aplicado en los 93 usos. No se creó el componente `<Eyebrow>` para no tocar 44 archivos de estructura; queda como mejora opcional. |
-| 8 | **Sombras sin uso** | `shadow-subtle` y `shadow-card` definidas con 0 usos | Borrarlas, o documentar `shadow-card` para tarjetas arrastrables si se necesitan. |
+| 8 | **Sombras sin uso** — ✅ **Resuelta** | `shadow-subtle` y `shadow-card` estaban definidas con 0 usos | Hecho: se borraron de `@theme`. Queda una sola sombra de sistema: `shadow-elevated` (10 usos). |
 | 9 | **`font-display` dentro del producto** | Vistas de `(app)` piden `font-display`, que `.app-shell` neutraliza por CSS | Quitar `font-display` del código de `(app)` y dejar la regla CSS solo como red de seguridad. |
 | 10 | **Alturas de control** | `h-11` (24 usos = `h-control`), `h-12`, `h-10`, `h-9` y `h-13` | Usar `h-control` / `h-control-lg`. `h-9`/`h-10` solo para elementos no táctiles. |
 | 11 | **Anchos máximos arbitrarios** | `max-w-[65ch]`, `[62ch]`, `[60ch]`, `[620px]`, `[440px]` y `[280px]` | Crear `--container-prose: 65ch` y usar `max-w-md`/`lg`/`xl` para el resto. |
