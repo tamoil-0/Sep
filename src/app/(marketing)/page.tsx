@@ -2,7 +2,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Building2,
-  Check,
   GraduationCap,
   Presentation,
   School,
@@ -26,6 +25,7 @@ import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
 import { ArrowLink } from "@/components/ui/arrow-link";
+import { CertificateOptions } from "@/components/marketing/certificate-options";
 import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
 import {
   ExperienceGallery,
@@ -427,35 +427,7 @@ export default async function HomePage() {
             align="center"
           />
 
-          <div className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-2">
-            {[
-              {
-                name: "Certificado SEP",
-                issuer: "Semillero de Emprendedores Perú",
-                price: 3000,
-              },
-            ].map((c) => (
-              <Card key={c.name}>
-                <p className="tabular font-display text-h1 font-bold leading-none text-ink">
-                  {formatSoles(c.price)}
-                </p>
-                <h3 className="mt-4 font-display text-body font-semibold text-ink">
-                  {c.name}
-                </h3>
-                <p className="mt-1 text-caption text-slate-ui">{c.issuer}</p>
-                <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-caption text-slate-ui">
-                  <Check className="size-3.5 text-seed-700" />
-                  Código de verificación público
-                </p>
-              </Card>
-            ))}
-            <Card className="flex flex-col items-start justify-center border-dashed bg-surface-1">
-              <Badge>En trámite</Badge>
-              <h3 className="mt-3 font-display text-body font-semibold text-graphite">
-                Certificado internacional
-              </h3>
-            </Card>
-          </div>
+          <CertificateOptions showVerification className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-2" />
         </Container>
       </Section>
 
