@@ -62,7 +62,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
         </div>
 
         <div className="flex flex-1 items-start justify-center pb-8 pt-10 sm:pt-14 lg:items-center lg:py-8">
-          <div className="w-full max-w-[440px]">
+          <div className="w-full max-w-md">
             {children}
             <ContextualHelp
               className="mt-6 border-0 bg-transparent px-0 py-2 shadow-none"

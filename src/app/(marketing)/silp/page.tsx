@@ -131,7 +131,7 @@ export default function SilpPage() {
           <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
             El SILP abre la ruta hacia la mentoría
           </h2>
-          <p className="mt-3 max-w-[65ch] text-body text-slate-ui">
+          <p className="mt-3 max-w-prose text-body text-slate-ui">
             Los egresados pueden postular como Mentor Junior de SEP y continuar su desarrollo dentro del ecosistema.
           </p>
           <Button href="/voluntariado/mentor" variant="outline" className="mt-6">

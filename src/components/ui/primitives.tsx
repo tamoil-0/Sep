@@ -162,7 +162,7 @@ export function PageHero({
             {description && (
               <p
                 className={cn(
-                  "mt-4 max-w-[65ch] text-body-lg",
+                  "mt-4 max-w-prose text-body-lg",
                   inverted ? "text-white/75" : "text-slate-ui",
                 )}
               >

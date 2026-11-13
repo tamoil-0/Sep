@@ -73,7 +73,7 @@ export function SupportQrDialog() {
                 </button>
               </div>
 
-              <div className="mx-auto mt-5 aspect-square w-full max-w-[280px] rounded-md border border-line bg-white p-3">
+              <div className="mx-auto mt-5 aspect-square w-full max-w-2xs rounded-md border border-line bg-white p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/apoya-hoy/qr"

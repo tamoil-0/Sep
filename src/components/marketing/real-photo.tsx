@@ -95,7 +95,7 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 
 export function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-[620px]">
+    <div className="relative mx-auto w-full max-w-xl">
       <RealPhoto
         src={SEP_PHOTOS.heroPresentation}
         alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"

@@ -27,7 +27,7 @@ export function ProgramHero({
         <div className="max-w-2xl">
           <Badge><Sparkles className="size-icon-sm" />{eyebrow}</Badge>
           <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">{title}</h1>
-          <p className="mt-4 max-w-[62ch] text-body-lg text-slate-ui">{description}</p>
+          <p className="mt-4 max-w-prose text-body-lg text-slate-ui">{description}</p>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-graphite">
             {facts.map((fact) => (
               <li key={fact} className="flex items-center gap-2">
@@ -269,7 +269,7 @@ export function ProgramFAQ({ items }: { items: { question: string; answer: strin
               <summary className="flex min-h-control cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium text-ink marker:hidden">
                 {item.question}<span aria-hidden className="text-sep-600 group-open:rotate-45">+</span>
               </summary>
-              <p className="max-w-[65ch] pb-5 text-body-sm text-slate-ui">{item.answer}</p>
+              <p className="max-w-prose pb-5 text-body-sm text-slate-ui">{item.answer}</p>
             </details>
           ))}
         </div>
@@ -283,7 +283,7 @@ export function ProgramCTA({ title, description, actions }: { title: string; des
     <Section tone="gradient">
       <Container size="narrow" className="text-center">
         <h2 className="font-display text-h1 font-semibold text-white">{title}</h2>
-        <p className="mx-auto mt-4 max-w-[60ch] text-body text-white/80">{description}</p>
+        <p className="mx-auto mt-4 max-w-prose text-body text-white/80">{description}</p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           {actions.map((action, index) => <Button key={action.href} href={action.href} variant={index === 0 ? "gold" : "outline-white"} size="lg">{action.label}<ArrowRight /></Button>)}
         </div>
