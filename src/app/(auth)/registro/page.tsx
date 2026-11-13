@@ -67,7 +67,7 @@ export default function RegistroPage() {
             voluntariado
           </Link>{" "}
           o{" "}
-          <Link href="/speakers" className="text-sep-600 hover:underline">
+          <Link href="/speakers" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
             la red de speakers
           </Link>
           .

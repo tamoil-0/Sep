@@ -506,7 +506,7 @@ export function DiagnosticWizard({
 
         <p className="mt-6 text-center text-body-sm text-slate-ui">
           Gracias por tus 3 minutos.{" "}
-          <Link href="/" className="text-sep-600 hover:underline">
+          <Link href="/" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
             Volver al inicio
           </Link>
         </p>

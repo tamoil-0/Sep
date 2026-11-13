@@ -350,11 +350,11 @@ export function SignupForm({ role }: { role: SignupRole }) {
           label={
             <>
               Acepto los{" "}
-              <Link href="/legal/terminos" className="text-sep-600 hover:underline">
+              <Link href="/legal/terminos" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
                 términos y condiciones
               </Link>{" "}
               y la{" "}
-              <Link href="/legal/privacidad" className="text-sep-600 hover:underline">
+              <Link href="/legal/privacidad" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
                 política de privacidad
               </Link>
               .
