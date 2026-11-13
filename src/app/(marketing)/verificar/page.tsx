@@ -13,7 +13,7 @@ export const metadata = createPageMetadata({
 
 export default function VerificarPage() {
   return (
-    <Section>
+    <Section tone="night" className="py-20 md:py-28 lg:py-32">
       <Container size="narrow">
         <div className="text-center">
           <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-sep-50 text-sep-600">

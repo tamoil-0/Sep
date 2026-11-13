@@ -135,7 +135,7 @@ export function AppSidebar({
           onClick={() => startNavigation("/cuenta")}
           className="flex min-h-control items-center gap-2.5 rounded-sm px-2 py-2 transition-colors hover:bg-white/8"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-caption font-semibold text-ink">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-caption font-semibold text-night-950">
             {initials(fullName || email)}
           </span>
           <span className="min-w-0 flex-1">

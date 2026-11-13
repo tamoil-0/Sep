@@ -5,6 +5,7 @@ import {
   GraduationCap,
   Presentation,
   School,
+  Sprout,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -18,7 +19,7 @@ import {
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
-import { ImpactChainIllustration, StatBlock } from "@/components/brand/illustrations";
+import { StatBlock } from "@/components/brand/illustrations";
 import { CountUp } from "@/components/marketing/count-up";
 import { CourseMedia } from "@/components/marketing/course-media";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
@@ -287,24 +288,31 @@ export default async function HomePage() {
             align="center"
           />
 
-          <div className="mx-auto mt-12 max-w-4xl">
-            <ImpactChainIllustration />
-            <ol className="mt-4 grid grid-cols-2 gap-4 text-center sm:grid-cols-4">
-              {[
-                ["SEP", "Plataforma virtual"],
-                ["Universitarios", "De cualquier región"],
-                ["Escolares", "En sus comunidades"],
-                ["Impacto", "Que se sostiene solo"],
-              ].map(([title, detail]) => (
-                <li key={title}>
-                  <p className="font-display text-body-sm font-semibold text-ink">
-                    {title}
-                  </p>
-                  <p className="mt-0.5 text-caption text-slate-ui">{detail}</p>
-                </li>
-              ))}
-            </ol>
-          </div>
+          {/* Cadena de 4 etapas: es una secuencia real, por eso va numerada.
+              La línea con degradado une las etapas en escritorio. */}
+          <ol className="relative mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+            <div
+              aria-hidden
+              className="absolute left-[12%] right-[12%] top-7 hidden h-px sep-gradient opacity-60 lg:block"
+            />
+            {[
+              { icon: Sparkles, title: "SEP", detail: "Diseña la formación y la abre en línea para todo el país." },
+              { icon: GraduationCap, title: "Universitarios", detail: "Aprenden desde cualquier región y se vuelven mentores." },
+              { icon: School, title: "Escolares", detail: "Reciben talleres de mentores de su propia comunidad." },
+              { icon: Sprout, title: "Impacto", detail: "Proyectos locales que siguen andando sin depender de Lima." },
+            ].map(({ icon: Icon, title, detail }, i) => (
+              <li key={title} className="relative flex flex-col items-start lg:items-center lg:text-center">
+                <span className="relative flex size-14 items-center justify-center rounded-full border border-sep-200 bg-surface-0 text-sep-600 shadow-soft">
+                  <Icon aria-hidden className="size-6" />
+                  <span className="tabular absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full sep-gradient text-caption font-semibold text-white">
+                    {i + 1}
+                  </span>
+                </span>
+                <p className="mt-5 font-display text-h4 font-semibold text-ink">{title}</p>
+                <p className="mt-2 max-w-60 text-body-sm text-slate-ui">{detail}</p>
+              </li>
+            ))}
+          </ol>
         </Container>
       </Section>
 

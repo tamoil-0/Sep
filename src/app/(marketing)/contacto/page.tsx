@@ -46,7 +46,7 @@ const shortcuts = [
 
 export default function ContactoPage() {
   return (
-    <Section>
+    <Section tone="night">
       <Container size="wide">
         <SectionHeader
           as="h1"

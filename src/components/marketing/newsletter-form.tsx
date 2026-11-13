@@ -75,7 +75,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           className={cn(
             "inline-flex h-control items-center justify-center gap-2 rounded-sm px-6 text-body-sm font-medium transition-colors disabled:opacity-60",
             inverted
-              ? "bg-gold-500 text-ink hover:bg-gold-400"
+              ? "bg-gold-500 text-night-950 hover:bg-gold-400"
               : "bg-sep-600 text-white hover:bg-sep-700",
           )}
         >

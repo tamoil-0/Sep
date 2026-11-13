@@ -14,7 +14,7 @@ const buttonVariants = cva(
           "bg-sep-600 text-white shadow-highlight hover:bg-sep-700 hover:shadow-glow active:bg-sep-800",
         gradient:
           "sep-gradient text-white shadow-highlight hover:shadow-glow",
-        gold: "bg-gold-500 text-ink hover:bg-gold-400 hover:shadow-glow-gold active:bg-gold-400",
+        gold: "bg-gold-500 text-night-950 hover:bg-gold-400 hover:shadow-glow-gold active:bg-gold-400",
         outline:
           "border border-line bg-surface-0 text-ink hover:border-sep-300 hover:bg-sep-50",
         "outline-white":

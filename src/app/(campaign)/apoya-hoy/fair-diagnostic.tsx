@@ -171,7 +171,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
         <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-lg border border-white/20 bg-white shadow-elevated">
           <div className="sep-gradient px-6 pb-8 pt-6 text-white sm:px-9 sm:pt-8">
             <Logo variant="white" className="h-14" />
-            <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-ink ">
+            <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-night-950 ">
               <HeartHandshake className="size-6" />
             </span>
             <p className="mt-5 text-body-sm font-semibold tracking-eyebrow text-gold-500">

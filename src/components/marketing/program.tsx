@@ -22,7 +22,7 @@ export function ProgramHero({
   aside?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-surface-1">
+    <section className="theme-night aurora relative overflow-hidden">
       <Container size="wide" className="relative grid items-center gap-8 py-10 md:py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-16">
         <div className="max-w-2xl">
           <Badge><Sparkles className="size-icon-sm" />{eyebrow}</Badge>

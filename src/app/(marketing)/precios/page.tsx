@@ -97,7 +97,7 @@ export default function PreciosPage() {
                 }
               >
                 {cert.recommended && (
-                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-ink">
+                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-night-950">
                     Recomendado
                   </span>
                 )}

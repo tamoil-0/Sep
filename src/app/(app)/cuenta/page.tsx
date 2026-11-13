@@ -49,7 +49,7 @@ export default async function CuentaPage() {
       <Card className="overflow-hidden p-0">
         <div className="aurora px-7 py-7">
           <div className="flex flex-wrap items-center gap-5">
-            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 text-body-lg font-semibold text-ink">
+            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 text-body-lg font-semibold text-night-950">
               {initials(profile?.full_name || user.email)}
             </span>
             <div className="min-w-0">
