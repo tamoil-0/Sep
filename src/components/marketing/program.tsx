@@ -26,8 +26,8 @@ export function ProgramHero({
       <Container size="wide" className="relative grid items-center gap-8 py-10 md:py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-16">
         <div className="max-w-2xl">
           <Badge><Sparkles className="size-icon-sm" />{eyebrow}</Badge>
-          <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-[3.5rem] lg:leading-[1.04]">{title}</h1>
-          <p className="mt-4 max-w-[62ch] text-body-lg text-slate-ui">{description}</p>
+          <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">{title}</h1>
+          <p className="mt-4 max-w-prose text-body-lg text-slate-ui">{description}</p>
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-graphite">
             {facts.map((fact) => (
               <li key={fact} className="flex items-center gap-2">
@@ -64,7 +64,7 @@ export function ProgramAudience({ audiences }: { audiences: ProgramAudienceData[
         <div className="mt-10 grid border-y border-line md:grid-cols-2 md:divide-x md:divide-line">
           {audiences.map((audience, index) => (
             <div key={audience.id} className="flex h-full flex-col py-7 md:px-8 md:py-9 first:md:pl-0 last:md:pr-0">
-              <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-[0.12em] text-sep-700">
+              <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-sep-700">
                 {index === 0 ? <Users className="size-icon-sm" /> : <BookOpen className="size-icon-sm" />}
                 Recorrido {index + 1}
               </p>
@@ -161,15 +161,15 @@ export function ProgramCurriculum({ audience }: { audience: ProgramAudienceData 
                 </summary>
                 <div className="grid gap-5 border-t border-line py-5 pl-[3.25rem] sm:grid-cols-2 sm:pl-[4.25rem]">
                   <div>
-                    <p className="text-caption font-semibold uppercase tracking-[.1em] text-sep-700 sm:hidden">Resultado de aprendizaje</p>
+                    <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:hidden">Resultado de aprendizaje</p>
                     <p className="mt-1.5 text-body-sm text-graphite sm:hidden">{session.learning}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-[.1em] text-sep-700 sm:mt-0">Actividad</p>
+                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:mt-0">Actividad</p>
                     <p className="mt-1.5 text-body-sm text-graphite">{session.activity}</p>
                   </div>
                   <div className="border-l border-line pl-4">
-                    <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-[.1em] text-graphite"><FileText className="size-icon-sm" />Materiales</p>
+                    <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-graphite"><FileText className="size-icon-sm" />Materiales</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.materials.join(" · ")}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-[.1em] text-graphite">Tarea</p>
+                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-graphite">Tarea</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.task}</p>
                   </div>
                 </div>
@@ -211,7 +211,7 @@ export function ProgramModuleList({
               <span className="tabular text-body-sm font-semibold text-sep-700">
                 {String(module.number).padStart(2, "0")}
               </span>
-              <h3 className="font-display text-body font-semibold text-ink">{module.theme}</h3>
+              <h3 className="font-display text-body leading-snug font-semibold text-ink">{module.theme}</h3>
               <p className="col-start-2 text-body-sm text-slate-ui sm:col-auto">{module.result}</p>
               <span className="col-start-2 text-caption font-medium text-mist sm:col-auto sm:text-right">
                 {module.duration}
@@ -269,7 +269,7 @@ export function ProgramFAQ({ items }: { items: { question: string; answer: strin
               <summary className="flex min-h-control cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium text-ink marker:hidden">
                 {item.question}<span aria-hidden className="text-sep-600 group-open:rotate-45">+</span>
               </summary>
-              <p className="max-w-[65ch] pb-5 text-body-sm text-slate-ui">{item.answer}</p>
+              <p className="max-w-prose pb-5 text-body-sm text-slate-ui">{item.answer}</p>
             </details>
           ))}
         </div>
@@ -283,7 +283,7 @@ export function ProgramCTA({ title, description, actions }: { title: string; des
     <Section tone="gradient">
       <Container size="narrow" className="text-center">
         <h2 className="font-display text-h1 font-semibold text-white">{title}</h2>
-        <p className="mx-auto mt-4 max-w-[60ch] text-body text-white/80">{description}</p>
+        <p className="mx-auto mt-4 max-w-prose text-body text-white/80">{description}</p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
           {actions.map((action, index) => <Button key={action.href} href={action.href} variant={index === 0 ? "gold" : "outline-white"} size="lg">{action.label}<ArrowRight /></Button>)}
         </div>

@@ -32,7 +32,7 @@ export function Field({
 
   return (
     <div className={cn("space-y-1.5", className)}>
-      <label htmlFor={htmlFor} className="block text-sm font-medium text-graphite">
+      <label htmlFor={htmlFor} className="block text-body-sm font-medium text-graphite">
         {label}
         {required ? (
           <span className="ml-1 text-danger" aria-label="obligatorio">*</span>
@@ -123,7 +123,7 @@ export function Checkbox({
         required={required}
         className="mt-0.5 size-5 shrink-0 cursor-pointer rounded-sm border-line accent-sep-600"
       />
-      <span className="text-sm leading-relaxed text-graphite">{label}</span>
+      <span className="text-body-sm leading-relaxed text-graphite">{label}</span>
     </label>
   );
 }

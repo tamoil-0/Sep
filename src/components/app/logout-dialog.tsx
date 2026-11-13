@@ -110,7 +110,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
 
             <h2
               id="logout-title"
-              className="mt-5 font-display text-h4 font-semibold text-ink"
+              className="mt-5 text-h4 font-semibold text-ink"
             >
               Cerrar sesión en este dispositivo
             </h2>
@@ -120,7 +120,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
             </p>
 
             {logoutError && (
-              <p role="alert" className="mt-4 rounded-xl bg-danger-bg px-3.5 py-3 text-sm text-danger">
+              <p role="alert" className="mt-4 rounded-md bg-danger-bg px-3.5 py-3 text-body-sm text-danger">
                 {logoutError}
               </p>
             )}
@@ -136,7 +136,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <button
                 type="button"
                 onClick={confirmLogout}
-                className="inline-flex h-control flex-1 items-center justify-center gap-2 rounded-sm bg-danger text-body-sm font-medium text-white transition-colors hover:bg-[#852d31]"
+                className="inline-flex h-control flex-1 items-center justify-center gap-2 rounded-sm bg-danger text-body-sm font-medium text-white transition-colors hover:bg-danger-700"
               >
                 <LogOut className="size-4" />
                 Sí, salir
@@ -171,7 +171,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <Logo className="h-16" variant="white" />
             </div>
 
-            <p className="mt-8 font-display text-h3 font-semibold text-white animate-fade-up">
+            <p className="mt-8 text-h3 font-semibold text-white animate-fade-up">
               {firstName ? `Hasta pronto, ${firstName}` : "Hasta pronto"}
             </p>
             <p
@@ -191,7 +191,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               />
             </div>
 
-            <p className="mt-4 text-xs text-white/50">Cerrando tu sesión…</p>
+            <p className="mt-4 text-caption text-white/50">Cerrando tu sesión…</p>
           </div>
         </div>,
         document.body,

@@ -33,7 +33,7 @@ export async function GET(
   const { data: cert, error } = await supabase
     .from("certificates")
     .select(
-      "id, verification_code, status, issued_at, revoked_at, user_id, certificate_types(name, issuer, kind), profiles(full_name), enrollments(courses(title, total_hours))",
+      "id, verification_code, status, issued_at, revoked_at, user_id, certificate_types(name, issuer, kind), profiles!certificates_user_id_fkey(full_name), enrollments(courses(title, total_hours))",
     )
     .eq("id", id)
     .maybeSingle();

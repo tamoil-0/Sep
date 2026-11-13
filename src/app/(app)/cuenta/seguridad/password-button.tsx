@@ -28,13 +28,13 @@ export function PasswordResetButton({ email }: { email: string }) {
             setBusy(false);
           }
         }}
-        className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-4 text-sm font-medium text-ink transition-colors hover:bg-surface-1 disabled:opacity-50"
+        className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-4 text-body-sm font-medium text-ink transition-colors hover:bg-surface-1 disabled:opacity-50"
       >
         {busy ? <Loader2 className="size-4 animate-spin" /> : <Mail className="size-4" />}
         Enviar enlace a {email}
       </button>
       {msg && (
-        <p className={msg.ok ? "mt-2.5 text-sm text-success" : "mt-2.5 text-sm text-danger"}>
+        <p className={msg.ok ? "mt-2.5 text-body-sm text-success" : "mt-2.5 text-body-sm text-danger"}>
           {msg.text}
         </p>
       )}

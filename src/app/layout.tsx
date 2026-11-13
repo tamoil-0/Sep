@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   description: siteConfig.seo.description,
   applicationName: siteConfig.shortName,
   icons: {
-    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
-    shortcut: "/icon",
-    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "64x64" }],
+    shortcut: "/icon.png",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   keywords: [...siteConfig.seo.keywords],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
@@ -81,7 +81,7 @@ export default function RootLayout({
       <body className="antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-sep-600 focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-sep-600 focus:px-4 focus:py-2 focus:text-body-sm focus:font-medium focus:text-white"
         >
           Saltar al contenido
         </a>

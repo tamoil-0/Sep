@@ -50,7 +50,7 @@ export default async function DocentePage() {
       </KpiGrid>
 
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Mi programa
         </h2>
         <EmptyState
@@ -63,7 +63,7 @@ export default async function DocentePage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Recursos para el aula
           </h2>
           <Button href="/docente/recursos" variant="link" size="sm">
@@ -81,7 +81,7 @@ export default async function DocentePage() {
                 <h3 className="text-body-sm font-medium leading-snug text-ink">
                   {r.title}
                 </h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-ui">{r.detail}</p>
+                <p className="mt-1 text-caption leading-relaxed text-slate-ui">{r.detail}</p>
               </div>
             </Card>
           ))}
@@ -91,10 +91,10 @@ export default async function DocentePage() {
       <section className="mt-8">
         <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
           <div>
-            <h2 className="font-display text-lg font-semibold text-ink">
+            <h2 className="text-body-lg leading-snug font-semibold text-ink">
               ¿Tu colegio quiere recibir a nuestros voluntarios?
             </h2>
-            <p className="mt-1.5 max-w-lg text-sm text-slate-ui">
+            <p className="mt-1.5 max-w-lg text-body-sm text-slate-ui">
               Inscribe tu colegio a la red SEP y conecta a tus estudiantes con
               universitarios líderes de su propia región. Completamente gratuito.
             </p>

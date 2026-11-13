@@ -21,7 +21,14 @@ import { assertQueryResults } from "@/lib/supabase/query";
 export const metadata: Metadata = { title: "Mi panel" };
 
 function greeting() {
-  const h = new Date().getHours();
+  // Hora de Lima: el servidor (Vercel) corre en UTC.
+  const h = Number(
+    new Intl.DateTimeFormat("es-PE", {
+      hour: "numeric",
+      hourCycle: "h23",
+      timeZone: "America/Lima",
+    }).format(new Date()),
+  );
   if (h < 12) return "Buenos días";
   if (h < 19) return "Buenas tardes";
   return "Buenas noches";
@@ -58,7 +65,8 @@ export default async function EstudiantePage() {
       <PageHeader
         title={
           <>
-            {greeting()}, {user.fullName.split(" ")[0] || "🌱"} 🌱
+            {greeting()}
+            {user.fullName.split(" ")[0] ? `, ${user.fullName.split(" ")[0]}` : ""}
           </>
         }
         description={
@@ -68,7 +76,7 @@ export default async function EstudiantePage() {
         }
         action={
           <Badge tone="brand">
-            <span className="size-1.5 rounded-full bg-seed-500" />
+            <span className="size-1.5 rounded-full bg-seed-700" />
             Plan Semilla
           </Badge>
         }
@@ -100,7 +108,7 @@ export default async function EstudiantePage() {
 
       {/* Continúa aprendiendo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Continúa aprendiendo
         </h2>
 
@@ -131,19 +139,19 @@ export default async function EstudiantePage() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="truncate font-display text-body-sm font-semibold text-ink">
+                      <h3 className="truncate text-body-sm leading-snug font-semibold text-ink">
                         {course?.title}
                       </h3>
-                      <p className="mt-0.5 truncate text-xs text-slate-ui">
+                      <p className="mt-0.5 truncate text-caption text-slate-ui">
                         {course?.subtitle}
                       </p>
                     </div>
-                    <span className="tabular shrink-0 text-sm font-semibold text-sep-600">
+                    <span className="tabular shrink-0 text-body-sm font-semibold text-sep-600">
                       {e.progress_pct}%
                     </span>
                   </div>
                   <ProgressBar value={e.progress_pct ?? 0} className="mt-4" />
-                  <p className="mt-2.5 text-xs text-slate-ui">
+                  <p className="mt-2.5 text-caption text-slate-ui">
                     Sesión {Math.min(done + 1, course?.sessions_count ?? 6)} de{" "}
                     {course?.sessions_count ?? 6}
                   </p>
@@ -157,15 +165,15 @@ export default async function EstudiantePage() {
       <div className="mt-8 grid gap-3 lg:grid-cols-2">
         {/* Próxima sesión */}
         <Card className="p-5">
-          <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             <Video className="size-4" />
             Próxima sesión en vivo
           </div>
           <div className="mt-4 rounded-md border border-line bg-surface-1 p-4">
-            <p className="text-sm font-medium text-ink">
+            <p className="text-body-sm font-medium text-ink">
               Aún no hay sesiones programadas
             </p>
-            <p className="mt-1 text-xs text-slate-ui">
+            <p className="mt-1 text-caption text-slate-ui">
               Cuando te inscribas a un curso, aquí verás el enlace de tu próxima sesión.
             </p>
           </div>
@@ -174,13 +182,13 @@ export default async function EstudiantePage() {
         {/* Comunidad */}
         <Card className="p-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
               <MessageSquare className="size-4" />
               Comunidad SEP
             </div>
             <Link
               href="/estudiante/comunidad"
-              className="text-xs font-medium text-sep-600 hover:underline"
+              className="relative text-caption font-medium text-sep-600 hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
             >
               Ver todo
             </Link>
@@ -204,7 +212,7 @@ export default async function EstudiantePage() {
                   {initials(p.name)}
                 </span>
                 <div className="min-w-0">
-                  <p className="text-xs font-medium text-ink">
+                  <p className="text-caption font-medium text-ink">
                     {p.name} · <span className="font-normal text-slate-ui">{p.region}</span>
                   </p>
                   <p className="mt-0.5 text-body-sm leading-relaxed text-slate-ui">
@@ -219,7 +227,7 @@ export default async function EstudiantePage() {
 
       {/* Certificados */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Certificados al finalizar
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -227,16 +235,16 @@ export default async function EstudiantePage() {
             <Card key={c.slug} className="flex items-start justify-between gap-4 p-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-body-sm font-semibold text-ink">
+                  <h3 className="text-body-sm leading-snug font-semibold text-ink">
                     {c.name}
                   </h3>
                   {c.recommended && <Badge tone="gold">Recomendado</Badge>}
                 </div>
-                <p className="mt-1.5 text-xs leading-relaxed text-slate-ui">
+                <p className="mt-1.5 text-caption leading-relaxed text-slate-ui">
                   {c.description}
                 </p>
               </div>
-              <p className="tabular shrink-0 font-display text-lg font-semibold text-ink">
+              <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                 {formatSoles(c.priceCents)}
               </p>
             </Card>

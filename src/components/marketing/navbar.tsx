@@ -87,7 +87,7 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300",
+        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200",
         scrolled
           ? "border-b border-line bg-white "
           : "border-b border-transparent bg-white",
@@ -97,7 +97,7 @@ export function Navbar() {
         <nav className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/"
-            className="shrink-0 transition-opacity hover:opacity-80"
+            className="flex min-h-control shrink-0 items-center transition-opacity hover:opacity-80"
             aria-label="Inicio — SEP"
           >
             <Logo className="h-10" />

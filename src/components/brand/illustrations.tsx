@@ -18,7 +18,7 @@ const GRAD = {
   purple: "#A50FC6",
   gold: "#FFC629",
   seed: "#7CC242",
-  line: "#E6E4F0",
+  line: "#E5E4E9",
   mist: "#A8A4BC",
 };
 
@@ -334,14 +334,14 @@ export function StatBlock({
           "absolute -right-6 -top-6 size-24 rounded-full opacity-[0.09]",
           tone === "brand" && "sep-gradient",
           tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-500",
+          tone === "seed" && "bg-seed-700",
         )}
       />
       <p
         className={cn(
           "tabular relative font-display text-h1 font-bold leading-none",
           tone === "brand" && "text-sep-700",
-          tone === "gold" && "text-gold-600",
+          tone === "gold" && "text-gold-700",
           tone === "seed" && "text-seed-700",
         )}
       >
@@ -351,7 +351,7 @@ export function StatBlock({
         {label}
       </p>
       {detail && (
-        <p className="relative mt-1.5 text-sm leading-relaxed text-slate-ui">{detail}</p>
+        <p className="relative mt-1.5 text-body-sm leading-relaxed text-slate-ui">{detail}</p>
       )}
     </div>
   );

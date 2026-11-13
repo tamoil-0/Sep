@@ -31,7 +31,7 @@ export function MarkAllReadButton() {
           setBusy(false);
         }
       }}
-      className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-4 text-sm font-medium text-ink transition-colors hover:bg-surface-1 disabled:opacity-60"
+      className="inline-flex min-h-control items-center gap-2 rounded-sm border border-line bg-white px-4 text-body-sm font-medium text-ink transition-colors hover:bg-surface-1 disabled:opacity-60"
     >
       {busy ? <Loader2 className="size-4 animate-spin" /> : <CheckCheck className="size-4" />}
       Marcar todo como leído

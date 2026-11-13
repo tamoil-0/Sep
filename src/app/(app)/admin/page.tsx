@@ -76,12 +76,12 @@ export default async function AdminPage() {
       <section className="mt-6 sm:mt-8">
         <Card className="border-warning/25 bg-warning-bg/60">
           <div className="flex items-start gap-3.5">
-            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-[#8A5A00]" />
+            <ShieldCheck className="mt-0.5 size-5 shrink-0 text-warning" />
             <div>
-              <h2 className="font-display text-body-sm font-semibold text-ink">
+              <h2 className="text-body-sm leading-snug font-semibold text-ink">
                 Recordatorio de seguridad
               </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+              <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
                 El acceso a esta sección requiere MFA activo. Toda asignación o revocación
                 de roles queda registrada en el log de auditoría con tu identidad, IP y
                 marca de tiempo.

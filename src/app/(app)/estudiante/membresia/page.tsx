@@ -27,11 +27,11 @@ export default async function MembresiaPage() {
 
       <Card className="overflow-hidden p-0">
         <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-xs uppercase tracking-[0.12em] text-white/70">Tu plan actual</p>
-          <h2 className="mt-2 font-display text-h2 font-semibold">
+          <p className="text-caption uppercase tracking-eyebrow text-white/70">Tu plan actual</p>
+          <h2 className="mt-2 text-h2 font-semibold">
             {membership?.plan?.name ?? "Semilla"}
           </h2>
-          <p className="mt-1 text-sm text-white/75">
+          <p className="mt-1 text-body-sm text-white/75">
             {membership
               ? `Vigente hasta el ${formatDate(membership.ends_at)}`
               : "Plan base sin costo"}
@@ -50,21 +50,21 @@ export default async function MembresiaPage() {
                 className={isCurrent ? "flex flex-col border-sep-300 bg-sep-50/40" : "flex flex-col"}
               >
                 <div className="flex items-center justify-between gap-2">
-                  <h3 className="font-display text-body font-semibold text-ink">{p.name}</h3>
+                  <h3 className="text-body leading-snug font-semibold text-ink">{p.name}</h3>
                   {isCurrent && <Badge tone="brand">Actual</Badge>}
                 </div>
 
-                <p className="tabular mt-4 font-display text-h2 font-bold leading-none text-ink">
+                <p className="tabular mt-4 text-h2 font-bold leading-none text-ink">
                   {p.price_cents === 0 ? "Gratis" : formatSoles(p.price_cents)}
                 </p>
-                <p className="mt-1 text-xs text-slate-ui">
+                <p className="mt-1 text-caption text-slate-ui">
                   {p.duration_months === 0 ? "Plan base" : `${p.duration_months} meses`}
                 </p>
 
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-4">
                   {benefits.map((b) => (
-                    <li key={b} className="flex items-start gap-2 text-sm text-graphite">
-                      <Check className="mt-0.5 size-3.5 shrink-0 text-seed-500" />
+                    <li key={b} className="flex items-start gap-2 text-body-sm text-graphite">
+                      <Check className="mt-0.5 size-3.5 shrink-0 text-seed-700" />
                       {b}
                     </li>
                   ))}
@@ -75,14 +75,14 @@ export default async function MembresiaPage() {
         </div>
       </PanelSection>
 
-      <Card className="mt-8 border-gold-500/35 bg-[#FFFBF0]">
+      <Card className="mt-8 border-gold-500/35 bg-gold-50/50">
         <div className="flex items-start gap-3.5">
           <Sprout className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="font-display text-body font-semibold text-ink">
+            <h3 className="text-body leading-snug font-semibold text-ink">
               Los voluntarios tienen todo gratis
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+            <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
               Si eres mentor, community manager u organizador activo, accedes a todos los
               beneficios sin pagar nada, por tu servicio a SEP.
             </p>

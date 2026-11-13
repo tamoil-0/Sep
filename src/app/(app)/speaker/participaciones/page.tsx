@@ -69,10 +69,10 @@ export default async function SpeakerParticipacionesPage() {
               {rows.map((r) => (
                 <li key={r.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">
+                    <p className="truncate text-body-sm font-medium text-ink">
                       {r.topic ?? r.event?.title ?? "Charla SEP"}
                     </p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {r.event?.starts_at ? formatDate(r.event.starts_at) : "Por coordinar"}
                       {r.event?.location ? ` · ${r.event.location}` : ""}
                     </p>
@@ -85,14 +85,14 @@ export default async function SpeakerParticipacionesPage() {
         )}
       </PanelSection>
 
-      <Card className="mt-8 border-gold-500/35 bg-[#FFFBF0]">
+      <Card className="mt-8 border-gold-500/35 bg-gold-50/50">
         <div className="flex items-start gap-3.5">
           <Award className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="font-display text-body font-semibold text-ink">
+            <h3 className="text-body leading-snug font-semibold text-ink">
               Tu constancia de speaker
             </h3>
-            <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+            <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
               SEP emite una constancia por cada participación. Escríbenos al terminar tu
               charla y te la enviamos con su código de verificación pública.
             </p>

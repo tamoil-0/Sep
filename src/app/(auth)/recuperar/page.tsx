@@ -32,7 +32,7 @@ export default async function RecuperarPage({
         />
       </div>
 
-      <p className="mt-8 text-center text-sm text-slate-ui">
+      <p className="mt-8 text-center text-body-sm text-slate-ui">
         <Link href="/login" className="font-medium text-sep-600 hover:underline">
           Volver a iniciar sesión
         </Link>

@@ -59,10 +59,10 @@ export default async function EstudianteEventosPage() {
                     <Badge tone="gold"><MapPin className="size-3" />Presencial</Badge>
                   )}
                 </div>
-                <h3 className="mt-3.5 font-display text-body font-semibold text-ink">{e.title}</h3>
-                <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">{e.description}</p>
-                <p className="mt-4 text-xs capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
-                {e.location && <p className="mt-1 text-xs text-slate-ui">{e.location}</p>}
+                <h3 className="mt-3.5 text-body leading-snug font-semibold text-ink">{e.title}</h3>
+                <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">{e.description}</p>
+                <p className="mt-4 text-caption text-slate-ui first-letter:uppercase">{formatDateTime(e.starts_at)}</p>
+                {e.location && <p className="mt-1 text-caption text-slate-ui">{e.location}</p>}
                 <div className="mt-4">
                   <EventRegisterButton eventId={e.id} registered={registered.has(e.id)} />
                 </div>
@@ -79,8 +79,8 @@ export default async function EstudianteEventosPage() {
               {past.map((e) => (
                 <li key={e.id} className="flex flex-wrap items-center gap-3 px-5 py-3.5">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">{e.title}</p>
-                    <p className="mt-0.5 text-xs capitalize text-slate-ui">{formatDateTime(e.starts_at)}</p>
+                    <p className="truncate text-body-sm font-medium text-ink">{e.title}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">{formatDateTime(e.starts_at)}</p>
                   </div>
                   {registered.get(e.id)?.attended && <Badge tone="success">Asististe</Badge>}
                 </li>

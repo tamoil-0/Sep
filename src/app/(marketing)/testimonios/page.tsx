@@ -78,6 +78,7 @@ export default async function TestimoniosPage() {
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <SectionHeader
+            as="h1"
             eyebrow="La comunidad"
             title="Lo que dicen quienes ya pasaron por aquí"
             description="Sin retoques ni testimonios de stock. Personas reales de regiones reales."
@@ -98,7 +99,7 @@ export default async function TestimoniosPage() {
         <Container size="wide">
           <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {stories.map((s) => (
-              <li key={s.name}>
+              <li key={s.name} className="min-w-0">
                 <Card className="relative flex h-full flex-col overflow-hidden p-6 ">
                   <span className="absolute left-0 top-0 h-full w-1 sep-gradient" />
                   <Quote className="size-5 text-gold-500" />
@@ -106,12 +107,12 @@ export default async function TestimoniosPage() {
                     {s.quote}
                   </p>
                   <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       {initials(s.name)}
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-ink">{s.name}</p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
+                      <p className="truncate text-caption text-slate-ui">
                         {s.region} · {s.role}
                       </p>
                     </div>
@@ -134,28 +135,28 @@ export default async function TestimoniosPage() {
 
             <ul className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {projects.map((p) => (
-                <li key={p.id}>
+                <li key={p.id} className="min-w-0">
                   <Card className="flex h-full flex-col p-6">
                     {p.region && <Badge tone="brand">{p.region}</Badge>}
-                    <h3 className="mt-3.5 font-display text-body font-semibold text-ink">
+                    <h3 className="mt-3.5 font-display text-body leading-snug font-semibold text-ink">
                       {p.title}
                     </h3>
                     {p.problem && (
-                      <p className="mt-3 text-xs uppercase tracking-[0.08em] text-slate-ui">
+                      <p className="mt-3 text-caption uppercase tracking-eyebrow text-slate-ui">
                         El problema
                       </p>
                     )}
                     {p.problem && (
-                      <p className="mt-1 text-sm leading-relaxed text-slate-ui">
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
                         {p.problem}
                       </p>
                     )}
                     {p.solution && (
                       <>
-                        <p className="mt-3 text-xs uppercase tracking-[0.08em] text-seed-700">
+                        <p className="mt-3 text-caption uppercase tracking-eyebrow text-seed-700">
                           La solución
                         </p>
-                        <p className="mt-1 flex-1 text-sm leading-relaxed text-graphite">
+                        <p className="mt-1 flex-1 text-body-sm leading-relaxed text-graphite">
                           {p.solution}
                         </p>
                       </>

@@ -58,14 +58,14 @@ export default async function MentorHorasPage() {
 
       <div className="mt-8 grid gap-5 lg:grid-cols-[380px_1fr]">
         <Card className="lg:sticky lg:top-6 lg:self-start">
-          <h2 className="mb-4 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-4 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Registrar horas
           </h2>
           <HoursForm />
         </Card>
 
         <div>
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Historial
           </h2>
 
@@ -82,18 +82,18 @@ export default async function MentorHorasPage() {
                   <li key={h.id} className="flex items-start gap-4 px-5 py-4">
                     <div className="min-w-0 flex-1">
                       <div className="flex flex-wrap items-center gap-2">
-                        <p className="text-sm font-medium text-ink">
+                        <p className="text-body-sm font-medium text-ink">
                           {formatDate(h.date)}
                         </p>
                         <Badge tone={h.approved_at ? "success" : "warning"}>
                           {h.approved_at ? "Aprobadas" : "Por aprobar"}
                         </Badge>
                       </div>
-                      <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+                      <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
                         {h.activity}
                       </p>
                     </div>
-                    <p className="tabular shrink-0 font-display text-lg font-semibold text-ink">
+                    <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                       {h.hours} h
                     </p>
                   </li>

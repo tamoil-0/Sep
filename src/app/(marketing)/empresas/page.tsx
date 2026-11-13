@@ -45,7 +45,7 @@ export default function EmpresasPage() {
               Convierte tu inversión social en{" "}
               <GoldUnderline>resultados medibles</GoldUnderline>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Somos el aliado que ejecuta en las regiones donde tu empresa quiere estar y
               te entrega las métricas que tu directorio necesita ver.
             </p>
@@ -103,10 +103,10 @@ export default function EmpresasPage() {
             ].map((f) => (
               <Card key={f.title} className="p-6">
                 <f.icon className="size-5 text-sep-600" />
-                <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
+                <h3 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {f.title}
                 </h3>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{f.body}</p>
+                <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{f.body}</p>
               </Card>
             ))}
           </div>
@@ -124,22 +124,22 @@ export default function EmpresasPage() {
           <div className="mt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {b2bPackages.map((p) => (
               <Card key={p.slug} className="flex flex-col">
-                <h3 className="font-display text-body font-semibold text-ink">
+                <h3 className="font-display text-body leading-snug font-semibold text-ink">
                   {p.name}
                 </h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-ui">{p.scope}</p>
+                <p className="mt-1 text-caption leading-relaxed text-slate-ui">{p.scope}</p>
 
                 <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                   {"priceFrom" in p && p.priceFrom && (
-                    <span className="text-sm font-medium text-slate-ui">Desde </span>
+                    <span className="text-body-sm font-medium text-slate-ui">Desde </span>
                   )}
                   {formatSoles(p.priceCents)}
                 </p>
 
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
                   {p.deliverables.map((d) => (
-                    <li key={d} className="flex items-start gap-2.5 text-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                    <li key={d} className="flex items-start gap-2.5 text-body-sm text-graphite">
+                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
                       {d}
                     </li>
                   ))}
@@ -148,7 +148,7 @@ export default function EmpresasPage() {
             ))}
           </div>
 
-          <p className="mt-6 text-center text-xs text-slate-ui">
+          <p className="mt-6 text-center text-caption text-slate-ui">
             Precios referenciales. Cada alianza se ajusta al alcance y a las regiones
             donde tu empresa opera.
           </p>

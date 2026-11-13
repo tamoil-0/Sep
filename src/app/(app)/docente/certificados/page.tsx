@@ -44,19 +44,19 @@ export default async function DocenteCertificadosPage() {
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
                 <div className="bg-sep-800 px-5 py-4">
-                  <p className="font-display text-body-sm font-semibold text-white">{c.type?.name}</p>
+                  <p className="text-body-sm font-semibold text-white">{c.type?.name}</p>
                   {c.type?.issuer && (
-                    <p className="mt-0.5 text-xs text-white/65">{c.type.issuer}</p>
+                    <p className="mt-0.5 text-caption text-white/65">{c.type.issuer}</p>
                   )}
                 </div>
                 <div className="p-5">
-                  {c.courseTitle && <p className="text-sm font-medium text-ink">{c.courseTitle}</p>}
-                  <p className="mt-0.5 text-xs text-slate-ui">
+                  {c.courseTitle && <p className="text-body-sm font-medium text-ink">{c.courseTitle}</p>}
+                  <p className="mt-0.5 text-caption text-slate-ui">
                     Emitido el {c.issued_at ? formatDate(c.issued_at) : "—"}
                   </p>
                   <div className="mt-4 flex items-center gap-2 rounded-lg bg-surface-1 px-3 py-2">
-                    <ShieldCheck className="size-4 shrink-0 text-seed-500" />
-                    <code className="tabular flex-1 truncate text-xs font-medium text-ink">
+                    <ShieldCheck className="size-4 shrink-0 text-seed-700" />
+                    <code className="tabular flex-1 truncate text-caption font-medium text-ink">
                       {c.verification_code}
                     </code>
                     <CopyButton value={`${siteConfig.url}/verificar/${c.verification_code}`} label="Copiar enlace" />

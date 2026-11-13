@@ -69,8 +69,8 @@ export default async function MentorSesionesPage() {
                 return (
                   <li key={t!.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-ink">{t!.title}</p>
-                      <p className="mt-0.5 text-xs text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{t!.title}</p>
+                      <p className="mt-0.5 text-caption text-slate-ui">
                         {inst?.name ?? "—"}
                         {t!.scheduled_at ? ` · ${formatDateTime(t!.scheduled_at)}` : ""}
                         {t!.students_count ? ` · ${t!.students_count} estudiantes` : ""}
@@ -96,12 +96,12 @@ export default async function MentorSesionesPage() {
                 const c = Array.isArray(s.courses) ? s.courses[0] : s.courses;
                 return (
                   <li key={s.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-600">
+                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
                       {s.number}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-ink">{s.title}</p>
-                      <p className="mt-0.5 text-xs capitalize text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{s.title}</p>
+                      <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">
                         {c?.title} · {s.scheduled_at ? formatDateTime(s.scheduled_at) : ""}
                       </p>
                     </div>
@@ -110,7 +110,7 @@ export default async function MentorSesionesPage() {
                         href={s.meet_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-sm font-medium text-white hover:bg-sep-700"
+                        className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-body-sm font-medium text-white hover:bg-sep-700"
                       >
                         <Video className="size-3.5" />
                         Unirme

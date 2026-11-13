@@ -19,7 +19,7 @@ const buttonVariants = cva(
           "border border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
         ghost: "text-graphite hover:bg-surface-2 hover:text-ink",
         link: "text-sep-600 underline-offset-4 hover:underline p-0 h-auto",
-        danger: "bg-danger text-white hover:bg-[#852d31] active:bg-[#70262a]",
+        danger: "bg-danger text-white hover:bg-danger-700 active:bg-danger-800",
       },
       size: {
         sm: "h-control px-3.5 text-body-sm [&_svg]:size-icon-sm",

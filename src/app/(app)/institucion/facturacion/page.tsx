@@ -63,10 +63,10 @@ export default async function InstitucionFacturacionPage() {
               {rows.map((o) => (
                 <li key={o.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">{o.item_type}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">{formatDate(o.created_at)}</p>
+                    <p className="truncate text-body-sm font-medium text-ink">{o.item_type}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">{formatDate(o.created_at)}</p>
                   </div>
-                  <p className="tabular text-sm font-semibold text-ink">{formatSoles(o.amount_cents)}</p>
+                  <p className="tabular text-body-sm font-semibold text-ink">{formatSoles(o.amount_cents)}</p>
                   <StatusBadge status={o.status} />
                 </li>
               ))}

@@ -41,7 +41,7 @@ export default async function MisCursosPage() {
         <>
           {active.length > 0 && (
             <section className="mb-8">
-              <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 En progreso
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
@@ -60,21 +60,21 @@ export default async function MisCursosPage() {
                       <div className="flex items-start justify-between gap-3">
                         <div className="min-w-0">
                           <Badge tone="brand">En progreso</Badge>
-                          <h3 className="mt-2.5 truncate font-display text-body font-semibold text-ink">
+                          <h3 className="mt-2.5 truncate text-body leading-snug font-semibold text-ink">
                             {e.course?.title}
                           </h3>
-                          <p className="mt-0.5 truncate text-sm text-slate-ui">
+                          <p className="mt-0.5 truncate text-body-sm text-slate-ui">
                             {e.course?.subtitle}
                           </p>
                         </div>
-                        <span className="tabular shrink-0 font-display text-lg font-semibold text-sep-600">
+                        <span className="tabular shrink-0 text-body-lg font-semibold text-sep-600">
                           {e.progress_pct}%
                         </span>
                       </div>
 
                       <ProgressBar value={e.progress_pct} className="mt-4" />
 
-                      <p className="mt-2.5 flex items-center gap-1.5 text-xs text-slate-ui">
+                      <p className="mt-2.5 flex items-center gap-1.5 text-caption text-slate-ui">
                         <Clock className="size-3.5 text-mist" />
                         {done} de {e.course?.sessions_count} sesiones completadas
                       </p>
@@ -87,7 +87,7 @@ export default async function MisCursosPage() {
 
           {completed.length > 0 && (
             <section>
-              <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Completados
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
@@ -99,10 +99,10 @@ export default async function MisCursosPage() {
                           <Check className="size-3.5" />
                           Completado
                         </Badge>
-                        <h3 className="mt-2.5 truncate font-display text-body font-semibold text-ink">
+                        <h3 className="mt-2.5 truncate text-body leading-snug font-semibold text-ink">
                           {e.course?.title}
                         </h3>
-                        <p className="mt-0.5 text-xs text-slate-ui">
+                        <p className="mt-0.5 text-caption text-slate-ui">
                           {e.completed_at
                             ? `Terminado el ${formatDate(e.completed_at)}`
                             : ""}

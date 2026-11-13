@@ -43,7 +43,7 @@ export default function DocentesPage() {
               Metodologías activas que{" "}
               <GoldUnderline>puedes usar el lunes</GoldUnderline>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               No teoría pedagógica: plantillas, guías y dinámicas probadas en aulas reales
               de secundaria en regiones del Perú.
             </p>
@@ -82,14 +82,14 @@ export default function DocentesPage() {
                   "Cómo motivar a estudiantes en contextos de región",
                 ].map((f) => (
                   <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                    <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                    <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
                     {f}
                   </li>
                 ))}
               </ul>
 
               <Card className="mt-8 border-sep-200 bg-sep-50/40">
-                <p className="text-sm leading-relaxed text-graphite">
+                <p className="text-body-sm leading-relaxed text-graphite">
                   <strong className="font-medium text-ink">Certificado opcional:</strong>{" "}
                   S/30 con aval de SEP y código de verificación público.
                 </p>
@@ -97,7 +97,7 @@ export default function DocentesPage() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                 Recursos descargables
               </p>
               <ul className="mt-5 space-y-2.5">
@@ -106,12 +106,12 @@ export default function DocentesPage() {
                     key={r}
                     className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3.5"
                   >
-                    <FolderOpen className="size-4 shrink-0 text-gold-600" />
-                    <span className="text-sm text-graphite">{r}</span>
+                    <FolderOpen className="size-4 shrink-0 text-gold-700" />
+                    <span className="text-body-sm text-graphite">{r}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs text-mist">
+              <p className="mt-4 text-caption text-mist">
                 Disponibles en tu panel al crear la cuenta de docente.
               </p>
             </div>
@@ -122,7 +122,7 @@ export default function DocentesPage() {
       <Section tone="muted">
         <Container size="narrow">
           <Card className="text-center">
-            <School className="mx-auto size-8 text-seed-500" />
+            <School className="mx-auto size-8 text-seed-700" />
             <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Y también podemos ir a tu colegio
             </h2>

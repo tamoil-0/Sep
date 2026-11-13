@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft,
   Award,
   CalendarDays,
   Clock,
   Repeat,
   Video,
 } from "lucide-react";
+import { BackLink } from "@/components/ui/arrow-link";
 import { requireRole } from "@/lib/auth/session";
 import { getCourseWithProgress } from "@/server/queries/courses";
 import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
@@ -46,13 +45,7 @@ export default async function CursoPage({
 
   return (
     <>
-      <Link
-        href="/estudiante/mis-cursos"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
-      >
-        <ArrowLeft className="size-4" />
-        Mis cursos
-      </Link>
+      <BackLink href="/estudiante/mis-cursos" className="mb-6">Mis cursos</BackLink>
 
       {/* Cabecera */}
       <Card className="p-0">
@@ -71,7 +64,7 @@ export default async function CursoPage({
             {course.is_free && <Badge tone="seed">Gratuito</Badge>}
           </div>
 
-          <h1 className="mt-3.5 font-display text-h2 font-semibold leading-tight text-ink">
+          <h1 className="mt-3.5 text-h2 font-semibold leading-tight text-ink">
             {course.title}
           </h1>
           {course.subtitle && (
@@ -83,7 +76,7 @@ export default async function CursoPage({
             </p>
           )}
 
-          <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-sm text-slate-ui">
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-body-sm text-slate-ui">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-4 text-mist" />
               {course.total_hours} horas
@@ -100,21 +93,21 @@ export default async function CursoPage({
               <Video className="size-4 text-mist" />
               100 % virtual
             </span>
-          </dl>
+          </div>
         </div>
 
         {enrollment ? (
           <div className="border-t border-line bg-surface-1 px-6 py-5">
             <div className="flex items-center justify-between">
-              <p className="text-sm font-medium text-ink">Tu progreso</p>
-              <p className="tabular text-sm text-slate-ui">
+              <p className="text-body-sm font-medium text-ink">Tu progreso</p>
+              <p className="tabular text-body-sm text-slate-ui">
                 {doneCount} / {sessions.length} sesiones
               </p>
             </div>
             <ProgressBar value={enrollment.progress_pct} className="mt-3" />
 
             {nextSession ? (
-              <p className="mt-3 text-sm text-slate-ui">
+              <p className="mt-3 text-body-sm text-slate-ui">
                 Siguiente: <span className="text-ink">Sesión {nextSession.number} — {nextSession.title}</span>
                 {nextSession.scheduled_at && (
                   <> · {formatDateTime(nextSession.scheduled_at)}</>
@@ -123,7 +116,7 @@ export default async function CursoPage({
             ) : (
               <div className="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-success/25 bg-success-bg px-4 py-3">
                 <Award className="size-5 shrink-0 text-success" />
-                <p className="flex-1 text-sm text-graphite">
+                <p className="flex-1 text-body-sm text-graphite">
                   ¡Completaste el curso! Ya puedes obtener tu certificado.
                 </p>
                 <Button href="/estudiante/certificados" size="sm">
@@ -141,14 +134,14 @@ export default async function CursoPage({
 
       {/* Sesiones */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Contenido del curso
         </h2>
 
         <div className="space-y-5">
           {weeks.map((week) => (
             <div key={week}>
-              <p className="mb-2.5 text-sm font-medium text-graphite">
+              <p className="mb-2.5 text-body-sm font-medium text-graphite">
                 Semana {week}
               </p>
               <SessionList

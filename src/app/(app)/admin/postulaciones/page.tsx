@@ -28,7 +28,7 @@ export default async function AdminPostulacionesPage() {
         .limit(100),
       supabase
         .from("volunteer_hours")
-        .select("id, date, hours, activity, approved_at, profiles(full_name, region)")
+        .select("id, date, hours, activity, approved_at, profiles!volunteer_hours_user_id_fkey(full_name, region)")
         .is("approved_at", null)
         .order("date", { ascending: false })
         .limit(60),

@@ -65,7 +65,7 @@ export function CourseMedia({
           fill
           loading={priority ? "eager" : "lazy"}
           sizes="(min-width: 1024px) 28vw, (min-width: 640px) 48vw, 92vw"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
           style={{ objectPosition: mappedPhoto?.position }}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/45 via-transparent to-transparent" />
@@ -93,12 +93,12 @@ export function CourseMedia({
       />
       <div aria-hidden className="absolute -right-12 -top-16 size-44 rounded-full border-[24px] border-white/10" />
       <div className="relative flex h-full min-h-36 flex-col justify-between p-5">
-        <span className="text-xs font-semibold uppercase tracking-[0.14em] text-gold-500">
+        <span className="text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
           {category ?? "Programa SEP"}
         </span>
         <div>
           <Logo className="h-12" variant="white" />
-          <p className="mt-1 max-w-[85%] text-sm font-medium leading-snug text-white/90">
+          <p className="mt-1 max-w-[85%] text-body-sm font-medium leading-snug text-white/90">
             {title}
           </p>
         </div>

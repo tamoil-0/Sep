@@ -23,16 +23,16 @@
   --color-purple-brand: #a50fc6;
 
   /* ── Acento: amarillo SEP ── */
+  --color-gold-50: #fff6de;
   --color-gold-300: #ffdc7a;
   --color-gold-400: #ffd24d;
   --color-gold-500: #ffc629;
-  --color-gold-600: #735000;
   --color-gold-700: #735000;
   --color-gold-800: #5c4000;
 
   /* ── Acento: verde semilla (el brote del logo) ── */
+  --color-seed-50: #eef8e4;
   --color-seed-400: #9bd46a;
-  --color-seed-500: #326912;
   --color-seed-700: #326912;
   --color-seed-800: #28550d;
 
@@ -50,10 +50,13 @@
   /* ── Semánticos ── */
   --color-success: #08783b;
   --color-success-bg: #e6f6ed;
+  --color-success-700: #066331;
   --color-warning: #8a5a00;
   --color-warning-bg: #fef4e4;
   --color-danger: #a3373b;
   --color-danger-bg: #fdecec;
+  --color-danger-700: #852d31;
+  --color-danger-800: #70262a;
   --color-info: #245fbd;
   --color-info-bg: #eaf2fe;
 
@@ -84,6 +87,13 @@
   --text-caption: 0.75rem;
   --text-caption--line-height: 1.5;
   --text-caption--letter-spacing: 0.02em;
+  /* H1 de los heros de marketing en desktop (se usa como lg:text-hero). */
+  --text-hero: 3.5rem;
+  --text-hero--line-height: 1.06;
+  --text-hero--letter-spacing: -0.03em;
+
+  /* Etiquetas en mayúsculas sobre los títulos (eyebrows). */
+  --tracking-eyebrow: 0.12em;
 
   /* ── Radios ── */
   --radius-sm: 6px;
@@ -92,8 +102,6 @@
   --radius-xl: 18px;
 
   /* Elevación: solo cuando comunica jerarquía o superposición. */
-  --shadow-subtle: 0 1px 2px rgba(18, 16, 28, 0.05);
-  --shadow-card: 0 1px 3px rgba(18, 16, 28, 0.06);
   --shadow-elevated: 0 12px 32px rgba(18, 16, 28, 0.14);
 
   /* Alturas y anchos compartidos. */
@@ -116,36 +124,89 @@
    Variables en runtime
    ============================================================ */
 
+/* Solo valores compuestos que @theme no puede expresar. Los colores
+   planos (fondo, texto, bordes) viven únicamente en @theme. */
 :root {
-  --bg: #ffffff;
-  --bg-1: #f7f6fc;
-  --bg-2: #f2f1f8;
-  --fg: #12101c;
-  --fg-2: #3a3550;
-  --fg-3: #6e6a85;
-  --border: #e6e4f0;
-  --sep-gradient: linear-gradient(100deg, #2e0be8 0%, #6a0dd9 52%, #a50fc6 100%);
+  --sep-gradient: linear-gradient(
+    100deg,
+    var(--color-sep-600) 0%,
+    var(--color-violet-brand) 52%,
+    var(--color-purple-brand) 100%
+  );
   --sep-gradient-soft: linear-gradient(
     100deg,
-    rgba(46, 11, 232, 0.06) 0%,
-    rgba(165, 15, 198, 0.06) 100%
+    color-mix(in srgb, var(--color-sep-600) 6%, transparent) 0%,
+    color-mix(in srgb, var(--color-purple-brand) 6%, transparent) 100%
   );
 }
 
 /* ============================================================
-   Base
+   Base — dentro de @layer base para que las utilidades de Tailwind
+   (text-*, leading-*, tracking-*, font-*) puedan sobrescribirla.
    ============================================================ */
 
-* {
-  box-sizing: border-box;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    overflow-x: clip;
+  }
+
+  body {
+    background: var(--color-surface-0);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    min-width: 320px;
+    overflow-wrap: break-word;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  button,
+  [href],
+  input,
+  select,
+  textarea,
+  summary {
+    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-sep-600) 12%, transparent);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-weight: 600;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-  overflow-x: clip;
-}
-
+/* Fuera de capa a propósito: deben ganarle a cualquier utilidad. */
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -159,63 +220,16 @@ html {
   }
 }
 
-body {
-  background: var(--bg);
-  color: var(--fg);
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.625;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  min-width: 320px;
-  overflow-wrap: break-word;
-}
-
-img,
-svg,
-video,
-canvas {
-  max-width: 100%;
-}
-
-button,
-input,
-select,
-textarea {
-  font: inherit;
-}
-
-button,
-[href],
-input,
-select,
-textarea,
-summary {
-  -webkit-tap-highlight-color: rgba(46, 11, 232, 0.12);
-}
-
 ::selection {
-  background: #ffc629;
-  color: #12101c;
+  background: var(--color-gold-500);
+  color: var(--color-ink);
 }
 
+/* Red de seguridad de accesibilidad: un `outline-none` en un input no
+   debe borrar el foco de teclado. */
 :focus-visible {
-  outline: 2px solid #4a26ec;
+  outline: 2px solid var(--color-sep-500);
   outline-offset: 3px;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  text-wrap: balance;
-}
-
-p {
-  text-wrap: pretty;
 }
 
 /* El producto autenticado usa Inter incluso cuando una vista heredada pide
@@ -260,7 +274,7 @@ p {
   right: 38%;
   bottom: -0.06em;
   height: 0.12em;
-  background: #ffc629;
+  background: var(--color-gold-500);
   border-radius: 999px;
   z-index: -1;
   opacity: 1;
@@ -274,8 +288,8 @@ p {
 /* Malla sutil de fondo para secciones neutras */
 .grid-bg {
   background-image:
-    linear-gradient(to right, rgba(230, 228, 240, 0.6) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(230, 228, 240, 0.6) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--color-line) 60%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-line) 60%, transparent) 1px, transparent 1px);
   background-size: 64px 64px;
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
@@ -289,13 +303,13 @@ p {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: #d7d4e6;
+  background: color-mix(in srgb, var(--color-mist) 30%, var(--color-surface-0));
   border-radius: 999px;
   border: 3px solid transparent;
   background-clip: content-box;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #b9b5cf;
+  background: color-mix(in srgb, var(--color-mist) 50%, var(--color-surface-0));
   background-clip: content-box;
 }
 
@@ -398,17 +412,17 @@ p {
 .skeleton {
   background: linear-gradient(
     90deg,
-    var(--bg-2) 25%,
-    rgba(255, 255, 255, 0.7) 37%,
-    var(--bg-2) 63%
+    var(--color-surface-2) 25%,
+    color-mix(in srgb, var(--color-surface-0) 70%, transparent) 37%,
+    var(--color-surface-2) 63%
   );
   background-size: 200% 100%;
   animation: shimmer 1.4s ease-in-out infinite;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
 }
 
 .animate-fade-up {
-  animation: fade-up 0.6s var(--ease-out-soft) both;
+  animation: fade-up 0.5s var(--ease-out-soft) both;
 }
 .animate-fade-in {
   animation: fade-in 0.5s ease-out both;
@@ -449,8 +463,8 @@ input[type="date"] {
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
-  -webkit-text-fill-color: #12101c;
-  -webkit-box-shadow: 0 0 0 1000px #ffffff inset;
+  -webkit-text-fill-color: var(--color-ink);
+  -webkit-box-shadow: 0 0 0 1000px var(--color-surface-0) inset;
   transition: background-color 5000s ease-in-out 0s;
 }
 

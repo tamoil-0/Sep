@@ -55,7 +55,7 @@ export function SupportQrDialog() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase text-sep-600">Comparte SEP</p>
+                  <p className="text-caption font-semibold uppercase text-sep-600">Comparte SEP</p>
                   <h2
                     id="support-qr-title"
                     className="mt-1 font-display text-h4 font-semibold text-ink"
@@ -73,7 +73,7 @@ export function SupportQrDialog() {
                 </button>
               </div>
 
-              <div className="mx-auto mt-5 aspect-square w-full max-w-[280px] rounded-md border border-line bg-white p-3">
+              <div className="mx-auto mt-5 aspect-square w-full max-w-2xs rounded-md border border-line bg-white p-3">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/apoya-hoy/qr"
@@ -87,7 +87,7 @@ export function SupportQrDialog() {
               <p id="support-qr-description" className="mt-4 text-center text-body-sm text-slate-ui">
                 Abre la cámara del celular y apunta al código para ingresar directamente.
               </p>
-              <p className="mt-2 break-all rounded-sm bg-surface-1 px-3 py-2 text-center text-xs text-graphite">
+              <p className="mt-2 break-all rounded-sm bg-surface-1 px-3 py-2 text-center text-caption text-graphite">
                 {SUPPORT_URL}
               </p>
 

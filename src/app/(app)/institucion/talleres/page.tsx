@@ -73,8 +73,8 @@ export default async function InstitucionTalleresPage() {
               {rows.map((w) => (
                 <li key={w.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">{w.title}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="truncate text-body-sm font-medium text-ink">{w.title}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {w.grade ?? "—"}
                       {w.students_count ? ` · ${w.students_count} estudiantes` : ""}
                       {w.scheduled_at ? ` · ${formatDate(w.scheduled_at)}` : " · fecha por coordinar"}

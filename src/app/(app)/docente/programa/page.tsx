@@ -51,7 +51,7 @@ export default async function DocenteProgramaPage() {
 
         {enrollment ? (
           <>
-            <div className="mt-5 flex items-center justify-between text-sm">
+            <div className="mt-5 flex items-center justify-between text-body-sm">
               <span className="font-medium text-ink">Tu progreso</span>
               <span className="tabular text-slate-ui">{enrollment.progress_pct}%</span>
             </div>
@@ -77,14 +77,14 @@ export default async function DocenteProgramaPage() {
             <ul className="divide-y divide-line">
               {sessions.map((s) => (
                 <li key={s.id} className="flex gap-4 p-5">
-                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-600">
+                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
                     {s.number}
                   </span>
                   <div>
-                    <p className="font-display text-body-sm font-semibold text-ink">{s.title}</p>
-                    {s.subtitle && <p className="mt-0.5 text-xs text-slate-ui">{s.subtitle}</p>}
+                    <p className="text-body-sm font-semibold text-ink">{s.title}</p>
+                    {s.subtitle && <p className="mt-0.5 text-caption text-slate-ui">{s.subtitle}</p>}
                     {s.description && (
-                      <p className="mt-2 text-sm leading-relaxed text-graphite">{s.description}</p>
+                      <p className="mt-2 text-body-sm leading-relaxed text-graphite">{s.description}</p>
                     )}
                   </div>
                 </li>

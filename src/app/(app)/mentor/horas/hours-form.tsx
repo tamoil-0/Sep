@@ -15,7 +15,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Registrando horas…" : "Registrar"}
@@ -95,7 +95,7 @@ export function HoursForm() {
 
       <SubmitButton />
 
-      <p className="text-xs leading-relaxed text-mist">
+      <p className="text-caption leading-relaxed text-mist">
         Las horas quedan pendientes hasta que el equipo de SEP las apruebe. No puedes
         aprobar las tuyas.
       </p>

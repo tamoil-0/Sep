@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowLeft,
   BadgeCheck,
   Clock,
   CircleAlert,
   CircleCheck,
   ShieldCheck,
 } from "lucide-react";
+import { BackLink } from "@/components/ui/arrow-link";
 import { requireUser } from "@/lib/auth/session";
 import { getOrderForCheckout } from "@/server/queries/payments";
 import { generatePaymentQr } from "@/lib/payments/yape";
@@ -18,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { formatSoles } from "@/lib/utils";
 import { VoucherForm } from "./voucher-form";
 import { CopyButton } from "@/components/app/copy-button";
+import { PageHeader } from "@/components/app/page-header";
 
 export const metadata: Metadata = {
   title: "Completar pago",
@@ -65,13 +65,16 @@ export default async function CheckoutPage({
 
   return (
     <>
-      <Link
-        href="/estudiante/certificados"
-        className="mb-6 inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
-      >
-        <ArrowLeft className="size-4" />
-        Volver a mis certificados
-      </Link>
+      <BackLink href="/estudiante/certificados" className="mb-4">Volver a mis certificados</BackLink>
+
+      <PageHeader
+        title={`Pago: ${itemName}`}
+        description={
+          canPay
+            ? "Paga con Yape, sube tu comprobante y el equipo de SEP lo valida en menos de 24 horas."
+            : undefined
+        }
+      />
 
       <div className="grid gap-5 lg:grid-cols-[1fr_360px]">
         {/* ── Columna principal ── */}
@@ -81,10 +84,10 @@ export default async function CheckoutPage({
               <div className="flex items-start gap-3.5">
                 <CircleCheck className="mt-0.5 size-5 shrink-0 text-success" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body leading-snug font-semibold text-ink">
                     Pago confirmado
                   </h2>
-                  <p className="mt-1 text-sm text-graphite">
+                  <p className="mt-1 text-body-sm text-graphite">
                     Tu certificado ya fue emitido. Puedes descargarlo desde tu panel.
                   </p>
                   <Button
@@ -103,12 +106,12 @@ export default async function CheckoutPage({
           {isReviewing && (
             <Card className="mb-5 border-warning/30 bg-warning-bg">
               <div className="flex items-start gap-3.5">
-                <Clock className="mt-0.5 size-5 shrink-0 text-[#8A5A00]" />
+                <Clock className="mt-0.5 size-5 shrink-0 text-warning" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body leading-snug font-semibold text-ink">
                     Estamos revisando tu pago
                   </h2>
-                  <p className="mt-1 text-sm leading-relaxed text-graphite">
+                  <p className="mt-1 text-body-sm leading-relaxed text-graphite">
                     Recibimos tu comprobante con el código{" "}
                     <span className="tabular font-medium">
                       {payment?.operation_code}
@@ -126,13 +129,13 @@ export default async function CheckoutPage({
               <div className="flex items-start gap-3.5">
                 <CircleAlert className="mt-0.5 size-5 shrink-0 text-danger" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body leading-snug font-semibold text-ink">
                     No pudimos validar tu pago
                   </h2>
-                  <p className="mt-1 text-sm leading-relaxed text-graphite">
+                  <p className="mt-1 text-body-sm leading-relaxed text-graphite">
                     {payment.reject_reason}
                   </p>
-                  <p className="mt-2 text-sm text-graphite">
+                  <p className="mt-2 text-body-sm text-graphite">
                     Vuelve a enviar el comprobante con la captura completa.
                   </p>
                 </div>
@@ -146,10 +149,10 @@ export default async function CheckoutPage({
               <Card className="p-0">
                 <div className="border-b border-line px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       1
                     </span>
-                    <h2 className="font-display text-body font-semibold text-ink">
+                    <h2 className="text-body leading-snug font-semibold text-ink">
                       Paga con Yape, Plin o transferencia
                     </h2>
                   </div>
@@ -167,45 +170,45 @@ export default async function CheckoutPage({
                         className="size-48"
                       />
                     </div>
-                    <p className="mt-2.5 text-center text-xs text-mist">
+                    <p className="mt-2.5 text-center text-caption text-mist">
                       Escanea desde tu app
                     </p>
                   </div>
 
                   <div className="space-y-3.5">
                     <div>
-                      <p className="text-xs uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
                         Número
                       </p>
                       <div className="mt-1 flex items-center gap-2">
-                        <p className="tabular font-display text-lg font-semibold text-ink">
+                        <p className="tabular text-body-lg font-semibold text-ink">
                           {qr.number}
                         </p>
                         <CopyButton value={qr.number} label="Copiar número" />
                       </div>
-                      <p className="mt-0.5 text-xs text-slate-ui">{qr.holder}</p>
+                      <p className="mt-0.5 text-caption text-slate-ui">{qr.holder}</p>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
                         Monto exacto
                       </p>
-                      <p className="tabular mt-1 font-display text-h2 font-bold leading-none text-sep-700">
+                      <p className="tabular mt-1 text-h2 font-bold leading-none text-sep-700">
                         {formatSoles(order.amount_cents)}
                       </p>
                     </div>
 
                     <div>
-                      <p className="text-xs uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
                         Referencia — escríbela en el mensaje
                       </p>
                       <div className="mt-1 flex items-center gap-2">
-                        <code className="tabular rounded-lg bg-surface-2 px-2.5 py-1 text-sm font-semibold text-ink">
+                        <code className="tabular rounded-lg bg-surface-2 px-2.5 py-1 text-body-sm font-semibold text-ink">
                           {qr.reference}
                         </code>
                         <CopyButton value={qr.reference} label="Copiar referencia" />
                       </div>
-                      <p className="mt-1.5 text-xs leading-relaxed text-slate-ui">
+                      <p className="mt-1.5 text-caption leading-relaxed text-slate-ui">
                         Es lo que nos permite encontrar tu pago sin preguntarte nada.
                       </p>
                     </div>
@@ -217,10 +220,10 @@ export default async function CheckoutPage({
               <Card className="mt-4 p-0">
                 <div className="border-b border-line px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       2
                     </span>
-                    <h2 className="font-display text-body font-semibold text-ink">
+                    <h2 className="text-body leading-snug font-semibold text-ink">
                       Sube tu comprobante
                     </h2>
                   </div>
@@ -235,10 +238,10 @@ export default async function CheckoutPage({
               <Card className="mt-4 border-dashed">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <h3 className="font-display text-body-sm font-semibold text-ink">
+                    <h3 className="text-body-sm leading-snug font-semibold text-ink">
                       ¿Prefieres pagar con tarjeta?
                     </h3>
-                    <p className="mt-1 text-sm text-slate-ui">
+                    <p className="mt-1 text-body-sm text-slate-ui">
                       Con Culqi la confirmación es inmediata: no esperas revisión.
                     </p>
                   </div>
@@ -254,35 +257,35 @@ export default async function CheckoutPage({
         {/* ── Resumen ── */}
         <aside className="order-1 lg:order-2">
           <Card className="lg:sticky lg:top-6">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
               Resumen
             </h2>
 
             <div className="mt-4 border-b border-line pb-4">
-              <p className="font-display text-body font-semibold text-ink">
+              <p className="text-body font-semibold text-ink">
                 {itemName}
               </p>
               {itemDetail && (
-                <p className="mt-0.5 text-sm text-slate-ui">{itemDetail}</p>
+                <p className="mt-0.5 text-body-sm text-slate-ui">{itemDetail}</p>
               )}
             </div>
 
             <div className="flex items-baseline justify-between py-4">
-              <span className="text-sm text-slate-ui">Total</span>
-              <span className="tabular font-display text-h2 font-bold leading-none text-ink">
+              <span className="text-body-sm text-slate-ui">Total</span>
+              <span className="tabular text-h2 font-bold leading-none text-ink">
                 {formatSoles(order.amount_cents)}
               </span>
             </div>
 
             <div className="flex items-center justify-between border-t border-line pt-4">
-              <span className="text-sm text-slate-ui">Estado</span>
+              <span className="text-body-sm text-slate-ui">Estado</span>
               <Badge tone={meta.tone}>
                 <meta.icon className="size-3.5" />
                 {meta.label}
               </Badge>
             </div>
 
-            <p className="tabular mt-4 text-xs text-mist">
+            <p className="tabular mt-4 text-caption text-mist">
               Orden {qr.reference}
             </p>
 
@@ -294,9 +297,9 @@ export default async function CheckoutPage({
               ].map((f) => (
                 <p
                   key={f.text}
-                  className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-ui"
+                  className="flex items-start gap-2.5 text-caption leading-relaxed text-slate-ui"
                 >
-                  <f.icon className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                  <f.icon className="mt-0.5 size-4 shrink-0 text-seed-700" />
                   {f.text}
                 </p>
               ))}

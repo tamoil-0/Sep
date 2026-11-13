@@ -16,7 +16,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-gold-500 text-body-sm font-medium text-ink  transition-colors hover:bg-gold-400 disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-gold-500 text-body-sm font-medium text-ink  transition-colors hover:bg-gold-400 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Preparando donación…" : "Quiero donar"}
@@ -41,7 +41,7 @@ export function DonationForm() {
         <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Gracias de corazón!
         </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
+        <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">{state.message}</p>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export function DonationForm() {
 
       {/* Monto */}
       <div>
-        <p className="mb-2 text-sm font-medium text-graphite">
+        <p className="mb-2 text-body-sm font-medium text-graphite">
           Monto<span className="ml-0.5 text-danger">*</span>
         </p>
         <div className="grid grid-cols-3 gap-2">
@@ -72,7 +72,7 @@ export function DonationForm() {
                 setCustom("");
               }}
               className={cn(
-                "tabular h-11 rounded-sm border text-sm font-medium transition-colors",
+                "tabular h-control rounded-sm border text-body-sm font-medium transition-colors",
                 !custom && amount === a
                   ? "border-sep-500 bg-sep-50 text-sep-700"
                   : "border-line bg-white text-graphite hover:border-sep-300",
@@ -88,7 +88,7 @@ export function DonationForm() {
             Otro monto en soles
           </label>
           <div className="relative">
-            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-sm text-mist">
+            <span className="pointer-events-none absolute left-3.5 top-1/2 -translate-y-1/2 text-body-sm text-mist">
               S/
             </span>
             <Input
@@ -107,7 +107,7 @@ export function DonationForm() {
         </div>
 
         {e?.amountCents?.length ? (
-          <p id="donation-amount-error" className="mt-1.5 text-xs text-danger" role="alert">
+          <p id="donation-amount-error" className="mt-1.5 text-caption text-danger" role="alert">
             {e.amountCents[0]}
           </p>
         ) : null}
@@ -153,7 +153,7 @@ export function DonationForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         Te enviaremos por correo los datos de Yape, Plin o transferencia para completar tu
         donación.
       </p>

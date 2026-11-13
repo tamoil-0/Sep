@@ -18,7 +18,7 @@ export function EventRegisterButton({
 
   if (registered) {
     return (
-      <p className="inline-flex items-center gap-1.5 text-sm font-medium text-success">
+      <p className="inline-flex items-center gap-1.5 text-body-sm font-medium text-success">
         <Check className="size-4" />
         Ya estás inscrito
       </p>
@@ -43,13 +43,13 @@ export function EventRegisterButton({
             setBusy(false);
           }
         }}
-        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
       >
         {busy && <Loader2 className="size-4 animate-spin" />}
         Inscribirme
       </button>
       {msg && (
-        <p className={msg.ok ? "mt-2 text-xs text-success" : "mt-2 text-xs text-danger"} role="status">
+        <p className={msg.ok ? "mt-2 text-caption text-success" : "mt-2 text-caption text-danger"} role="status">
           {msg.text}
         </p>
       )}

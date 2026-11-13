@@ -66,20 +66,20 @@ export default async function ImpactoPage() {
       {/* Cabecera imprimible */}
       <Card className="mb-5 overflow-hidden p-0 print:border-0">
         <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-xs uppercase tracking-[0.14em] text-white/70">
+          <p className="text-caption uppercase tracking-eyebrow text-white/70">
             Reporte de impacto social
           </p>
-          <h2 className="mt-2 font-display text-h2 font-semibold leading-tight">
+          <h2 className="mt-2 text-h2 font-semibold leading-tight">
             {inst?.name ?? "Institución"}
           </h2>
-          <p className="mt-1 text-sm text-white/75">
+          <p className="mt-1 text-body-sm text-white/75">
             {[inst?.province, inst?.region].filter(Boolean).join(", ")}
             {inst?.agreement_signed_at &&
               ` · Convenio firmado el ${formatDate(inst.agreement_signed_at)}`}
           </p>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 px-7 py-4">
-          <p className="text-xs text-slate-ui">
+          <p className="text-caption text-slate-ui">
             Generado el {formatDate(new Date())} · Semillero de Emprendedores Perú
           </p>
           <Badge tone="seed">Datos verificables en plataforma</Badge>
@@ -112,7 +112,7 @@ export default async function ImpactoPage() {
 
       {/* Línea de tiempo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Línea de tiempo
         </h2>
 
@@ -130,14 +130,14 @@ export default async function ImpactoPage() {
                   <span
                     className={
                       w.status === "realizado"
-                        ? "size-2 shrink-0 rounded-full bg-seed-500"
+                        ? "size-2 shrink-0 rounded-full bg-seed-700"
                         : "size-2 shrink-0 rounded-full bg-mist"
                     }
                     aria-hidden
                   />
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">{w.title}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="truncate text-body-sm font-medium text-ink">{w.title}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {w.date ? formatDate(w.date) : "Fecha por coordinar"}
                       {w.students ? ` · ${w.students} estudiantes` : ""}
                     </p>
@@ -154,22 +154,22 @@ export default async function ImpactoPage() {
 
       {/* ODS */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Alineación con los Objetivos de Desarrollo Sostenible
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
           {report.sdg.map((g) => (
             <Card key={g.goal} className="p-5">
-              <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
+              <p className="tabular text-h2 font-bold leading-none text-sep-700">
                 ODS {g.goal}
               </p>
-              <p className="mt-2.5 text-sm font-medium text-ink">{g.name}</p>
+              <p className="mt-2.5 text-body-sm font-medium text-ink">{g.name}</p>
             </Card>
           ))}
         </div>
       </section>
 
-      <p className="mt-8 flex items-start gap-2 text-xs leading-relaxed text-slate-ui">
+      <p className="mt-8 flex items-start gap-2 text-caption leading-relaxed text-slate-ui">
         <Printer className="mt-0.5 size-4 shrink-0 text-mist" />
         Usa «Imprimir» y elige «Guardar como PDF» para obtener el documento listo para
         enviar. Todas las cifras provienen de registros de asistencia verificados en la

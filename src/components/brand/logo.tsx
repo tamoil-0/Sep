@@ -65,7 +65,7 @@ export function OrganizationLockup({
       <span
         aria-hidden
         className={cn(
-          "border-l pl-3 text-left font-display text-caption font-semibold uppercase leading-[1.35] tracking-[0.08em] sm:pl-4 sm:text-body-sm",
+          "border-l pl-3 text-left font-display text-caption font-semibold uppercase leading-[1.35] tracking-eyebrow sm:pl-4 sm:text-body-sm",
           inverted ? "border-white/30 text-white/90" : "border-line text-graphite",
         )}
       >

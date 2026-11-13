@@ -144,7 +144,7 @@ export default async function LegalPage({
   return (
     <Section>
       <Container size="narrow">
-        <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sep-600">
+        <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
           Legal
         </p>
         <h1 className="mt-3 font-display text-h1 font-bold leading-tight text-ink">
@@ -157,7 +157,7 @@ export default async function LegalPage({
         <div className="mt-12 space-y-9">
           {content[key].map((section) => (
             <section key={section.heading}>
-              <h2 className="font-display text-body-lg font-semibold text-ink">
+              <h2 className="font-display text-body-lg leading-snug font-semibold text-ink">
                 {section.heading}
               </h2>
               <p className="mt-2.5 text-body-sm leading-relaxed text-graphite">
@@ -168,7 +168,7 @@ export default async function LegalPage({
         </div>
 
         <div className="mt-14 rounded-md border border-line bg-surface-1 p-6">
-          <p className="text-sm leading-relaxed text-slate-ui">
+          <p className="text-body-sm leading-relaxed text-slate-ui">
             ¿Tienes dudas sobre este documento? Escríbenos a{" "}
             <a
               href={`mailto:${siteConfig.contact.email}`}

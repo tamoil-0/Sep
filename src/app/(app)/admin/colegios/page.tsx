@@ -101,7 +101,7 @@ export default async function AdminColegiosPage() {
               render: (i) => (
                 <div>
                   <p className="font-medium text-ink">{i.name}</p>
-                  <p className="mt-0.5 text-xs text-slate-ui">
+                  <p className="mt-0.5 text-caption text-slate-ui">
                     {[i.province, i.region].filter(Boolean).join(", ")}
                   </p>
                 </div>

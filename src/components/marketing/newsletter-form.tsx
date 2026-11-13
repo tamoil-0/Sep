@@ -39,7 +39,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
     return (
       <p
         className={cn(
-          "flex items-center gap-2 text-sm font-medium",
+          "flex items-center gap-2 text-body-sm font-medium",
           inverted ? "text-gold-500" : "text-success",
         )}
       >
@@ -63,7 +63,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           autoComplete="email"
           placeholder="tu@correo.com"
           className={cn(
-            "h-12 flex-1 rounded-sm border px-4 text-body-sm outline-none transition-colors",
+            "h-control w-full rounded-sm border px-4 text-body-sm sm:w-auto sm:flex-1 outline-none transition-colors",
             inverted
               ? "border-white/25 bg-white/10 text-white placeholder:text-white/45 focus:border-gold-500"
               : "border-line bg-white text-ink placeholder:text-mist focus:border-sep-400",
@@ -73,7 +73,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           type="submit"
           disabled={state === "loading"}
           className={cn(
-            "inline-flex h-12 items-center justify-center gap-2 rounded-sm px-6 text-body-sm font-medium transition-colors disabled:opacity-60",
+            "inline-flex h-control items-center justify-center gap-2 rounded-sm px-6 text-body-sm font-medium transition-colors disabled:opacity-60",
             inverted
               ? "bg-gold-500 text-ink hover:bg-gold-400"
               : "bg-sep-600 text-white hover:bg-sep-700",
@@ -90,7 +90,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
 
       <p
         className={cn(
-          "mt-3 text-xs",
+          "mt-3 text-caption",
           state === "error"
             ? "text-danger"
             : inverted

@@ -72,7 +72,7 @@ export function LoginForm({
       </Field>
 
       <div className="flex justify-end">
-        <Link href="/recuperar" className="text-sm text-sep-600 hover:underline">
+        <Link href="/recuperar" className="-my-2.5 inline-flex min-h-control items-center text-body-sm text-sep-600 underline-offset-4 hover:underline">
           ¿Olvidaste tu contraseña?
         </Link>
       </div>

@@ -14,7 +14,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Enviando perfil…" : "Registrarme en la red"}
@@ -35,7 +35,7 @@ export function SpeakerForm() {
         <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Perfil recibido!
         </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
+        <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">{state.message}</p>
       </div>
     );
   }
@@ -109,14 +109,14 @@ export function SpeakerForm() {
       </Field>
 
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-graphite">
+        <legend className="mb-2 text-body-sm font-medium text-graphite">
           ¿En qué temas puedes inspirar?<span className="ml-0.5 text-danger">*</span>
         </legend>
         <div className="flex flex-wrap gap-2">
           {speakerTopics.map((t) => (
             <label
               key={t}
-              className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-xs text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
+              className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
             >
               <input type="checkbox" name="topics" value={t} className="sr-only" />
               {t}
@@ -124,7 +124,7 @@ export function SpeakerForm() {
           ))}
         </div>
         {e?.topics?.length ? (
-          <p className="mt-1.5 text-xs text-danger" role="alert">
+          <p className="mt-1.5 text-caption text-danger" role="alert">
             {e.topics[0]}
           </p>
         ) : null}
@@ -217,7 +217,7 @@ export function SpeakerForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         El equipo de SEP revisará tu perfil antes de publicarlo en la red.
       </p>
     </form>

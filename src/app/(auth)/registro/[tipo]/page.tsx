@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { ROLE_META, SIGNUP_ROLES, type SignupRole } from "@/types/roles";
 import { SignupForm } from "./signup-form";
+import { BackLink } from "@/components/ui/arrow-link";
 
 export function generateStaticParams() {
   return SIGNUP_ROLES.map((tipo) => ({ tipo }));
@@ -35,13 +35,7 @@ export default async function SignupTypePage({
 
   return (
     <div>
-      <Link
-        href="/registro"
-        className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
-      >
-        <ArrowLeft className="size-4" />
-        Cambiar tipo de cuenta
-      </Link>
+      <BackLink href="/registro">Cambiar tipo de cuenta</BackLink>
 
       <h1 className="mt-5 font-display text-h2 font-semibold text-ink">
         Cuenta de {meta.shortLabel.toLowerCase()}
@@ -52,7 +46,7 @@ export default async function SignupTypePage({
         <SignupForm role={role} />
       </div>
 
-      <p className="mt-8 text-center text-sm text-slate-ui">
+      <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Ya tienes cuenta?{" "}
         <Link href="/login" className="font-medium text-sep-600 hover:underline">
           Iniciar sesión

@@ -74,7 +74,7 @@ export default async function InstitucionEstudiantesPage() {
       </KpiGrid>
 
       <Card className="mt-8 border-sep-200 bg-sep-50/40">
-        <p className="text-sm leading-relaxed text-graphite">
+        <p className="text-body-sm leading-relaxed text-graphite">
           <strong className="font-medium text-ink">Sobre la privacidad:</strong> son menores
           de edad, así que SEP no crea cuentas para ellos ni guarda más que su nombre y grado,
           bajo responsabilidad del colegio y con consentimiento del apoderado. Aquí los ves
@@ -97,10 +97,10 @@ export default async function InstitucionEstudiantesPage() {
                 return (
                   <li key={a.id} className="flex flex-wrap items-center gap-3 px-5 py-3">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-ink">
+                      <p className="truncate text-body-sm font-medium text-ink">
                         {anonymize(a.student_name)}
                       </p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-caption text-slate-ui">
                         {a.grade ?? w?.grade ?? "—"}
                         {w?.scheduled_at ? ` · ${formatDate(w.scheduled_at)}` : ""}
                       </p>

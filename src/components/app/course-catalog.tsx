@@ -118,7 +118,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-sm border border-danger/25 bg-danger-bg px-4 py-3 text-sm text-danger">
+        <div className="mb-4 rounded-sm border border-danger/25 bg-danger-bg px-4 py-3 text-body-sm text-danger">
           {error}
         </div>
       )}
@@ -168,14 +168,14 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
-                  <h3 className="mt-3.5 font-display text-body font-semibold leading-snug text-ink">
+                  <h2 className="mt-3.5 text-body font-semibold leading-snug text-ink">
                     {c.title}
-                  </h3>
-                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
+                  </h2>
+                  <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {c.description}
                   </p>
 
-                  <dl className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-xs text-slate-ui">
+                  <div className="mt-4 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-3.5 text-caption text-slate-ui">
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="size-3.5 text-mist" />
                       {c.totalHours} h
@@ -188,9 +188,9 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                       <Sprout className="size-3.5 text-mist" />
                       {c.weeks} sem.
                     </span>
-                  </dl>
+                  </div>
 
-                  <p className="mt-3 text-sm font-medium text-ink">
+                  <p className="mt-3 text-body-sm font-medium text-ink">
                     {c.isFree ? (
                       <span className="text-seed-700">Gratuito</span>
                     ) : (
@@ -202,7 +202,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.enrolled ? (
                       <Link
                         href={`/estudiante/curso/${c.slug}`}
-                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-white text-sm font-medium text-ink transition-colors hover:bg-surface-2"
+                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-white text-body-sm font-medium text-ink transition-colors hover:bg-surface-2"
                       >
                         Ir al curso
                       </Link>
@@ -211,7 +211,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                         type="button"
                         onClick={() => enroll(c.slug)}
                         disabled={busy !== null}
-                        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+                        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
                       >
                         {busy === c.slug && <Loader2 className="size-4 animate-spin" />}
                         {c.isFree ? "Inscribirme gratis" : "Continuar"}
@@ -220,7 +220,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                       <button
                         type="button"
                         disabled
-                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-surface-1 text-sm text-mist"
+                        className="inline-flex min-h-control w-full items-center justify-center rounded-sm border border-line bg-surface-1 text-body-sm text-mist"
                       >
                         Próximamente
                       </button>

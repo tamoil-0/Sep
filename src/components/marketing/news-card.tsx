@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowLink } from "@/components/ui/arrow-link";
 
 import { Badge, Card } from "@/components/ui/primitives";
 import { cn, formatDate } from "@/lib/utils";
@@ -20,11 +20,14 @@ export function NewsCard({
   fallbackImage,
   priority = false,
   variant = "default",
+  headingLevel: Heading = "h3",
 }: {
   post: NewsCardPost;
   fallbackImage: string;
   priority?: boolean;
   variant?: "default" | "featured";
+  /** `h2` cuando la tarjeta cuelga directo del h1 de la página (listado del blog). */
+  headingLevel?: "h2" | "h3";
 }) {
   const category = post.tags[0] ?? "Actualidad SEP";
   const featured = variant === "featured";
@@ -56,7 +59,7 @@ export function NewsCard({
               ? "(min-width: 1024px) 60vw, (min-width: 768px) 55vw, 92vw"
               : "(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 92vw"
           }
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/20 to-transparent" />
       </Link>
@@ -67,35 +70,33 @@ export function NewsCard({
             {category}
           </Badge>
           {post.published_at && (
-            <time dateTime={post.published_at} className="text-xs text-slate-ui">
+            <time dateTime={post.published_at} className="text-caption text-slate-ui">
               {formatDate(post.published_at)}
             </time>
           )}
         </div>
 
-        <h3
+        <Heading
           className={cn(
-            "mt-3 font-display font-semibold leading-snug text-ink",
+            "mt-3 font-display font-semibold text-ink",
             featured ? "text-h3 md:text-h2" : "text-body-lg",
+            // Después del tamaño: tailwind-merge descarta un leading-* previo a text-*.
+            "leading-snug",
           )}
         >
           <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">
             {post.title}
           </Link>
-        </h3>
+        </Heading>
         {post.excerpt && (
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-ui">
+          <p className="mt-2 line-clamp-3 flex-1 text-body-sm leading-relaxed text-slate-ui">
             {post.excerpt}
           </p>
         )}
 
-        <Link
-          href={`/blog/${post.slug}`}
-          className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
-        >
+        <ArrowLink href={`/blog/${post.slug}`} className="mt-5">
           Ver noticia
-          <ArrowRight className="size-3.5" />
-        </Link>
+        </ArrowLink>
       </div>
     </Card>
   );

@@ -45,7 +45,7 @@ export default async function CertificadosPage() {
       {/* ── Emitidos ── */}
       {issued.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Obtenidos
           </h2>
           <div className="grid gap-3 md:grid-cols-2">
@@ -54,11 +54,11 @@ export default async function CertificadosPage() {
                 <div className="bg-sep-800 px-5 py-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate font-display text-body-sm font-semibold text-white">
+                      <p className="truncate text-body-sm font-semibold text-white">
                         {c.type?.name}
                       </p>
                       {c.type?.issuer && (
-                        <p className="mt-0.5 truncate text-xs text-white/65">
+                        <p className="mt-0.5 truncate text-caption text-white/65">
                           {c.type.issuer}
                         </p>
                       )}
@@ -69,15 +69,15 @@ export default async function CertificadosPage() {
 
                 <div className="p-5">
                   {c.courseTitle && (
-                    <p className="text-sm font-medium text-ink">{c.courseTitle}</p>
+                    <p className="text-body-sm font-medium text-ink">{c.courseTitle}</p>
                   )}
-                  <p className="mt-0.5 text-xs text-slate-ui">
+                  <p className="mt-0.5 text-caption text-slate-ui">
                     Emitido el {c.issued_at ? formatDate(c.issued_at) : "—"}
                   </p>
 
                   <div className="mt-4 flex items-center gap-2 rounded-lg bg-surface-1 px-3 py-2">
-                    <ShieldCheck className="size-4 shrink-0 text-seed-500" />
-                    <code className="tabular flex-1 truncate text-xs font-medium text-ink">
+                    <ShieldCheck className="size-4 shrink-0 text-seed-700" />
+                    <code className="tabular flex-1 truncate text-caption font-medium text-ink">
                       {c.verification_code}
                     </code>
                     <CopyButton
@@ -114,7 +114,7 @@ export default async function CertificadosPage() {
       {/* ── Cursos completados sin certificado ── */}
       {completed.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Listos para certificar
           </h2>
           <div className="space-y-3">
@@ -132,15 +132,15 @@ export default async function CertificadosPage() {
                           Completado
                         </Badge>
                         {e.completed_at && (
-                          <span className="text-xs text-slate-ui">
+                          <span className="text-caption text-slate-ui">
                             {formatDate(e.completed_at)}
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 font-display text-body font-semibold text-ink">
+                      <h3 className="mt-2.5 text-body leading-snug font-semibold text-ink">
                         {e.course?.title}
                       </h3>
-                      <p className="mt-0.5 text-sm text-slate-ui">
+                      <p className="mt-0.5 text-body-sm text-slate-ui">
                         {e.course?.sessions_count} sesiones · {e.course?.total_hours} horas
                       </p>
                     </div>
@@ -148,11 +148,11 @@ export default async function CertificadosPage() {
 
                   {isPending && (
                     <div className="mt-4 rounded-sm border border-warning/30 bg-warning-bg px-4 py-3">
-                      <p className="text-sm text-graphite">
+                      <p className="text-body-sm text-graphite">
                         Tienes un certificado en proceso de pago.{" "}
                         <Link
                           href="/estudiante/certificados"
-                          className="font-medium text-[#8A5A00] hover:underline"
+                          className="font-medium text-warning hover:underline"
                         >
                           Revisa su estado
                         </Link>
@@ -162,7 +162,7 @@ export default async function CertificadosPage() {
                   )}
 
                   <div className="mt-5 border-t border-line pt-5">
-                    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                    <p className="mb-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
                       Elige tu certificado
                     </p>
                     <RequestCertificateButtons
@@ -187,7 +187,7 @@ export default async function CertificadosPage() {
       {/* ── En progreso ── */}
       {inProgress.length > 0 && (
         <section className="mb-8">
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             En camino
           </h2>
           <div className="grid gap-3 md:grid-cols-2">
@@ -195,15 +195,15 @@ export default async function CertificadosPage() {
               <Card key={e.id} className="p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate font-display text-body-sm font-semibold text-ink">
+                    <p className="truncate text-body-sm font-semibold text-ink">
                       {e.course?.title}
                     </p>
-                    <p className="mt-1 flex items-center gap-1.5 text-xs text-slate-ui">
+                    <p className="mt-1 flex items-center gap-1.5 text-caption text-slate-ui">
                       <Lock className="size-3.5" />
                       Completa las {e.course?.sessions_count} sesiones para desbloquearlo
                     </p>
                   </div>
-                  <span className="tabular shrink-0 text-sm font-semibold text-sep-600">
+                  <span className="tabular shrink-0 text-body-sm font-semibold text-sep-600">
                     {e.progress_pct}%
                   </span>
                 </div>
@@ -233,7 +233,7 @@ export default async function CertificadosPage() {
 
       {/* ── Tipos de certificado ── */}
       <section className="mt-10">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
           Tipos de certificado
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -242,15 +242,15 @@ export default async function CertificadosPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-display text-body-sm font-semibold text-ink">
+                    <h3 className="text-body-sm leading-snug font-semibold text-ink">
                       {t.name}
                     </h3>
                   </div>
-                  <p className="mt-1.5 text-xs leading-relaxed text-slate-ui">
+                  <p className="mt-1.5 text-caption leading-relaxed text-slate-ui">
                     {t.description}
                   </p>
                 </div>
-                <p className="tabular shrink-0 font-display text-lg font-semibold text-ink">
+                <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                   {formatSoles(t.price_cents)}
                 </p>
               </div>

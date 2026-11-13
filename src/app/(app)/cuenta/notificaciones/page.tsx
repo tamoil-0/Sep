@@ -67,9 +67,9 @@ export default async function NotificacionesPage() {
                       {n.title}
                     </p>
                     {n.body && (
-                      <p className="mt-1 text-sm leading-relaxed text-slate-ui">{n.body}</p>
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{n.body}</p>
                     )}
-                    <p className="mt-1.5 text-xs text-mist">{relativeTime(n.created_at)}</p>
+                    <p className="mt-1.5 text-caption text-mist">{relativeTime(n.created_at)}</p>
                   </div>
                 </div>
               );

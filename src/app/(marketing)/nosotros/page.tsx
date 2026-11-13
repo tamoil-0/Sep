@@ -41,7 +41,7 @@ export default function NosotrosPage() {
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.45]"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, #e6e4f0 1px, transparent 0)",
+            backgroundImage: "radial-gradient(circle at 1px 1px, var(--color-line) 1px, transparent 0)",
             backgroundSize: "34px 34px",
           }}
         />
@@ -49,11 +49,11 @@ export default function NosotrosPage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
             <div className="max-w-2xl">
             <Badge>Desde Casma, Áncash · 7 de abril de 2024</Badge>
-            <h1 className="mt-4 font-display text-h1 font-bold leading-[1.08] text-ink lg:text-[3.5rem]">
+            <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Llevamos la innovación al{" "}
               <span className="text-sep-700">territorio del talento</span>, no al revés.
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-4 text-body-lg leading-relaxed text-slate-ui">
               SEP es la primera organización peruana especializada en programas de
               emprendimiento juvenil e innovación científico-tecnológica nacida fuera de
               Lima y pensada para regiones.
@@ -92,9 +92,9 @@ export default function NosotrosPage() {
             ].map((c) => (
               <Card
                 key={c.label}
-                className={c.highlight ? "border-gold-500/35 bg-[#FFFBF0]" : ""}
+                className={c.highlight ? "border-gold-500/35 bg-gold-50/50" : ""}
               >
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-sep-600">
+                <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
                   {c.label}
                 </p>
                 <p className="mt-3.5 text-body leading-relaxed text-graphite">
@@ -124,7 +124,7 @@ export default function NosotrosPage() {
                 <p className="tabular font-display text-display font-bold leading-none text-sep-700">
                   {s.figure}
                 </p>
-                <h3 className="mt-5 text-lg font-semibold text-ink">{s.title}</h3>
+                <h3 className="mt-5 text-body-lg leading-snug font-semibold text-ink">{s.title}</h3>
                 <p className="mt-2.5 text-body-sm leading-relaxed text-slate-ui">
                   {s.body}
                 </p>
@@ -147,13 +147,13 @@ export default function NosotrosPage() {
             {impactChain.map((node, i) => (
               <li key={node.step} className="relative">
                 <Card className="h-full">
-                  <span className="tabular text-xs font-semibold tracking-[0.14em] text-gold-600">
+                  <span className="tabular text-caption font-semibold tracking-eyebrow text-gold-700">
                     0{i + 1}
                   </span>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-ink">
+                  <h3 className="mt-3 font-display text-body-lg leading-snug font-semibold text-ink">
                     {node.step}
                   </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-ui">
+                  <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">
                     {node.detail}
                   </p>
                 </Card>
@@ -181,14 +181,14 @@ export default function NosotrosPage() {
             {team.map((m) => (
               <li key={m.name}>
                 <Card className="flex items-center gap-4 p-5">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sep-700 text-sm font-semibold text-white">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sep-700 text-body-sm font-semibold text-white">
                     {initials(m.name)}
                   </span>
                   <div className="min-w-0">
                     <p className="truncate font-display text-body-sm font-semibold text-ink">
                       {m.name}
                     </p>
-                    <p className="mt-0.5 truncate text-xs text-slate-ui">{m.role}</p>
+                    <p className="mt-0.5 truncate text-caption text-slate-ui">{m.role}</p>
                   </div>
                 </Card>
               </li>
@@ -209,7 +209,7 @@ export default function NosotrosPage() {
             {partners.map((p) => (
               <li
                 key={p.name}
-                className="rounded-full border border-line bg-white px-4 py-2 text-sm text-graphite"
+                className="rounded-full border border-line bg-white px-4 py-2 text-body-sm text-graphite"
               >
                 {p.name}
               </li>

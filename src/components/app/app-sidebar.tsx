@@ -64,10 +64,10 @@ export function AppSidebar({
   const content = (
     <>
       <div className="px-4 pb-5 pt-1">
-        <Link href="/" aria-label="Inicio">
+        <Link href="/" aria-label="Inicio" className="inline-flex">
           <Logo className="h-11" variant="white" />
         </Link>
-        <p className="mt-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
+        <p className="mt-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
           Panel activo · {ROLE_META[routeRole].shortLabel}
         </p>
       </div>
@@ -103,7 +103,7 @@ export function AppSidebar({
 
         {otherRoles.length > 0 && (
           <div className="mt-6 border-t border-white/10 pt-4">
-            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-[0.12em] text-white/70">
+            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
               Cambiar de panel
             </p>
             <ul className="space-y-0.5">
@@ -155,8 +155,8 @@ export function AppSidebar({
   return (
     <>
       {/* Barra móvil */}
-      <div className="sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-white px-4 lg:hidden">
-        <Link href="/" aria-label="Inicio">
+      <header className="sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-white px-4 lg:hidden">
+        <Link href="/" aria-label="Inicio" className="flex min-h-control items-center">
           <Logo className="h-9" />
         </Link>
         <button
@@ -168,7 +168,7 @@ export function AppSidebar({
         >
           {mobileOpen ? <Icons.X className="size-5" /> : <Icons.Menu className="size-5" />}
         </button>
-      </div>
+      </header>
 
       {mobileOpen && (
         <div
@@ -182,7 +182,7 @@ export function AppSidebar({
         ref={drawerRef}
         role={mobileOpen ? "dialog" : undefined}
         aria-modal={mobileOpen ? "true" : undefined}
-        aria-labelledby={mobileOpen ? "app-navigation-title" : undefined}
+        aria-labelledby="app-navigation-title"
         tabIndex={mobileOpen ? -1 : undefined}
         className={cn(
           "z-50 flex w-[min(88vw,320px)] shrink-0 flex-col bg-sep-800 py-4 shadow-elevated outline-none lg:w-[232px] lg:shadow-none",

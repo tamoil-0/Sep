@@ -1,13 +1,12 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { Badge, Container, Section } from "@/components/ui/primitives";
 import { formatDate } from "@/lib/utils";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { siteConfig } from "@/config/site";
 import { assertQueryResults } from "@/lib/supabase/query";
+import { BackLink } from "@/components/ui/arrow-link";
 
 export const dynamic = "force-dynamic";
 
@@ -61,13 +60,7 @@ export default async function BlogPostPage({
   return (
     <Section>
       <Container size="narrow">
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
-        >
-          <ArrowLeft className="size-4" />
-          Todos los artículos
-        </Link>
+        <BackLink href="/blog">Todos los artículos</BackLink>
 
         <article className="mt-8">
           {post.tags?.length > 0 && (
@@ -84,13 +77,13 @@ export default async function BlogPostPage({
             {post.title}
           </h1>
 
-          <p className="mt-4 text-sm text-slate-ui">
+          <p className="mt-4 text-body-sm text-slate-ui">
             {author?.full_name ?? "Equipo SEP"}
             {post.published_at && ` · ${formatDate(post.published_at)}`}
           </p>
 
           {post.excerpt && (
-            <p className="mt-7 border-l-2 border-gold-500 pl-5 text-lg leading-relaxed text-graphite">
+            <p className="mt-7 border-l-2 border-gold-500 pl-5 text-body-lg leading-relaxed text-graphite">
               {post.excerpt}
             </p>
           )}

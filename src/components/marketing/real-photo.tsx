@@ -64,7 +64,7 @@ export function MediaImage({
         loading={priority ? "eager" : "lazy"}
         sizes={sizes}
         className={cn(
-          "transition-transform duration-700 ease-out",
+          "transition-transform duration-300 ease-out",
           kind === "photo"
             ? "object-cover group-hover:scale-[1.025]"
             : "object-contain p-3 sm:p-4",
@@ -77,7 +77,7 @@ export function MediaImage({
       {label && (
         <figcaption
           className={cn(
-            "absolute inset-x-0 bottom-0 flex items-center gap-2 p-4 text-xs font-medium sm:p-5",
+            "absolute inset-x-0 bottom-0 flex items-center gap-2 p-4 text-caption font-medium sm:p-5",
             kind === "photo" ? "text-white" : "bg-white text-graphite",
           )}
         >
@@ -95,14 +95,14 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 
 export function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-[620px]">
+    <div className="relative mx-auto w-full max-w-xl">
       <RealPhoto
         src={SEP_PHOTOS.heroPresentation}
         alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"
         priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
         label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-xl border border-white/20"
+        className="aspect-[4/3] min-h-0 rounded-lg border border-white/20"
         imageClassName="object-[52%_50%]"
       />
     </div>

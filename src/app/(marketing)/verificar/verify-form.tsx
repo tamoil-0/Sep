@@ -4,6 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { Search } from "lucide-react";
 import { Input } from "@/components/forms/field";
+import { Button } from "@/components/ui/button";
 
 export function VerifyForm() {
   const router = useRouter();
@@ -27,16 +28,13 @@ export function VerifyForm() {
         placeholder="SEP-2026-XXXXXX"
         autoComplete="off"
         spellCheck={false}
-        className="tabular flex-1 uppercase"
+        className="tabular uppercase sm:flex-1"
         required
       />
-      <button
-        type="submit"
-        className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-6 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
-      >
-        <Search className="size-4" />
+      <Button type="submit" className="px-6">
+        <Search aria-hidden className="size-4" />
         Verificar
-      </button>
+      </Button>
     </form>
   );
 }

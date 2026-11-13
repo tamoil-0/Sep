@@ -93,7 +93,7 @@ export default async function InstitucionPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Talleres
           </h2>
           <Button href="/institucion/talleres" variant="link" size="sm">
@@ -119,8 +119,8 @@ export default async function InstitucionPage() {
               {workshops.map((w) => (
                 <li key={w.id} className="flex items-center justify-between gap-4 px-5 py-4">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-ink">{w.title}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="truncate text-body-sm font-medium text-ink">{w.title}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {w.scheduled_at
                         ? new Date(w.scheduled_at).toLocaleDateString("es-PE", {
                             day: "numeric",
@@ -156,10 +156,10 @@ export default async function InstitucionPage() {
               <ChartNoAxesCombined className="size-5" />
             </span>
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">
+              <h2 className="text-body-lg leading-snug font-semibold text-ink">
                 Reporte de impacto
               </h2>
-              <p className="mt-1 max-w-lg text-sm text-slate-ui">
+              <p className="mt-1 max-w-lg text-body-sm text-slate-ui">
                 Descarga un PDF con métricas verificables, fotos, testimonios y el mapeo a
                 los Objetivos de Desarrollo Sostenible. Listo para presentar a tu
                 directorio.

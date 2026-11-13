@@ -55,13 +55,13 @@ export default async function OnboardingPage() {
     return (
       <div className="mx-auto max-w-xl py-10 sm:py-16">
         <Card className="p-7 text-center sm:p-9">
-          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-warning-bg text-[#8A5A00]">
+          <span className="mx-auto flex size-12 items-center justify-center rounded-full bg-warning-bg text-warning">
             <AlertCircle className="size-5" />
           </span>
-          <h1 className="mt-5 font-display text-2xl font-semibold text-ink">
+          <h1 className="mt-5 font-display text-h3 font-semibold text-ink">
             Estamos preparando tus preguntas
           </h1>
-          <p className="mt-2 text-sm leading-relaxed text-slate-ui">
+          <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">
             Tu cuenta está segura. Inténtalo nuevamente en unos minutos; no tendrás que
             volver a registrarte.
           </p>

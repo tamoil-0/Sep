@@ -17,20 +17,21 @@ export default function FaqPage() {
     <Section>
       <Container size="narrow">
         <SectionHeader
+          as="h1"
           eyebrow="Preguntas frecuentes"
           title="Lo que suelen preguntarnos"
           align="center"
         />
 
         <div className="mt-10">
-          <FaqAccordion items={faqs} />
+          <FaqAccordion items={faqs} headingLevel="h2" />
         </div>
 
         <div className="mt-12 rounded-md border border-line bg-surface-1 p-7 text-center">
           <h2 className="font-display text-h4 font-semibold text-ink">
             ¿No encontraste tu respuesta?
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-ui">
+          <p className="mx-auto mt-2 max-w-md text-body-sm leading-relaxed text-slate-ui">
             Escríbenos por WhatsApp o al correo. Respondemos de verdad, no con bots.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">

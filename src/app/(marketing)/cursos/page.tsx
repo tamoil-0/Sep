@@ -1,12 +1,20 @@
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import Link from "next/link";
-import { ArrowRight, CalendarDays, Clock, Sprout } from "lucide-react";
+import { ArrowRight, BookOpen, CalendarDays, Clock, Sprout } from "lucide-react";
 import { getCatalog } from "@/server/queries/courses";
 import { CourseMedia } from "@/components/marketing/course-media";
-import { Badge, Card, Container, Section, SectionHeader } from "@/components/ui/primitives";
+import {
+  Badge,
+  Card,
+  Container,
+  EmptyState,
+  Section,
+  SectionHeader,
+} from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { COURSE_FORMAT } from "@/config/courses";
 import { formatSoles } from "@/lib/utils";
+import { CertificateOptions } from "@/components/marketing/certificate-options";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
@@ -28,14 +36,14 @@ export default async function CursosPage() {
   return (
     <>
       <section className="border-b border-line bg-surface-1">
-        <Container size="wide" className="py-16 sm:py-20">
-          <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
+        <Container size="wide" className="py-10 md:py-14 lg:py-16">
+          <div className="grid items-center gap-8 lg:grid-cols-[1fr_0.86fr] lg:gap-12">
           <div className="max-w-2xl">
             <Badge tone="seed">Catálogo abierto</Badge>
-            <h1 className="mt-5 font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
+            <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Cursos para convertir ideas en acción
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-4 max-w-prose text-body-lg text-slate-ui">
               Metodologías ágiles y liderazgo llevados al terreno de la innovación social.
               Encuentra opciones abiertas a distintas regiones y etapas de aprendizaje.
             </p>
@@ -51,7 +59,7 @@ export default async function CursosPage() {
           />
           </div>
 
-          <dl className="mt-10 grid gap-6 rounded-lg border border-line bg-white p-5 sm:grid-cols-2 sm:p-6 lg:grid-cols-4">
+          <dl className="mt-9 grid grid-cols-2 gap-x-4 gap-y-5 rounded-md border border-line bg-white p-5 sm:p-6 lg:grid-cols-4">
             {[
               ["Duración", `${COURSE_FORMAT.weeks} semanas`],
               ["Frecuencia", COURSE_FORMAT.frequency],
@@ -59,7 +67,7 @@ export default async function CursosPage() {
               ["Modalidad", COURSE_FORMAT.modality],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="text-xs uppercase tracking-[0.1em] text-slate-ui">
+                <dt className="text-caption uppercase tracking-eyebrow text-slate-ui">
                   {label}
                 </dt>
                 <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>
@@ -71,14 +79,34 @@ export default async function CursosPage() {
 
       <Section>
         <Container size="wide">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <SectionHeader
+            eyebrow="Catálogo"
+            title="Cursos de emprendimiento y liderazgo"
+            description={`${courses.length} ${courses.length === 1 ? "opción" : "opciones"} entre cursos y programas.`}
+          />
+
+          {courses.length === 0 ? (
+            <div className="mt-10">
+              <EmptyState
+                icon={<BookOpen aria-hidden className="size-5" />}
+                title="Aún no hay cursos publicados"
+                description="Estamos preparando la próxima convocatoria. Crea tu cuenta y te avisaremos cuando abra."
+                action={
+                  <Button href="/registro" variant="outline">
+                    Crear cuenta
+                  </Button>
+                }
+              />
+            </div>
+          ) : (
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {courses.map((c) => {
               const available = c.status === "disponible";
               return (
                 <Card
                   key={c.id}
                   interactive
-                  className="group flex flex-col overflow-hidden border-transparent p-3  hover:bg-surface-1/40 sm:p-4"
+                  className="group flex flex-col overflow-hidden p-4"
                   as={Link}
                   {...{ href: `/cursos/${c.slug}`, prefetch: true }}
                 >
@@ -87,7 +115,7 @@ export default async function CursosPage() {
                     title={c.title}
                     category={c.category}
                     coverUrl={c.cover_url}
-                    className="mb-4 aspect-[16/9] w-full transition-transform duration-500 group-hover:scale-[1.015]"
+                    className="mb-4 aspect-[16/9] w-full transition-transform duration-300 group-hover:scale-[1.015]"
                   />
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (
@@ -99,36 +127,36 @@ export default async function CursosPage() {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
-                  <div className="px-1">
-                  <h2 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
+                  <div className="flex flex-1 flex-col px-1">
+                  <h3 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
                     {c.title}
-                  </h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
+                  </h3>
+                  <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {c.description}
                   </p>
 
-                  <dl className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 text-xs text-slate-ui">
+                  <div className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 text-caption text-slate-ui">
                     <span className="inline-flex items-center gap-1.5">
-                      <Clock className="size-3.5 text-mist" />
+                      <Clock aria-hidden className="size-icon-sm text-mist" />
                       {c.total_hours} h
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <CalendarDays className="size-3.5 text-mist" />
+                      <CalendarDays aria-hidden className="size-icon-sm text-mist" />
                       {c.sessions_count} sesiones
                     </span>
                     <span className="inline-flex items-center gap-1.5">
-                      <Sprout className="size-3.5 text-mist" />
+                      <Sprout aria-hidden className="size-icon-sm text-mist" />
                       {c.weeks} sem.
                     </span>
-                  </dl>
+                  </div>
 
-                  <p className="mt-4 flex items-center justify-between text-sm">
+                  <p className="mt-4 flex items-center justify-between text-body-sm">
                     <span className="font-medium text-seed-700">
                       {c.is_free ? "Gratuito" : formatSoles(c.price_cents)}
                     </span>
                     <span className="inline-flex items-center gap-1 text-sep-600">
                       Ver detalle
-                      <ArrowRight className="size-3.5" />
+                      <ArrowRight aria-hidden className="size-icon-sm" />
                     </span>
                   </p>
                   </div>
@@ -136,6 +164,7 @@ export default async function CursosPage() {
               );
             })}
           </div>
+          )}
         </Container>
       </Section>
 
@@ -148,27 +177,7 @@ export default async function CursosPage() {
             align="center"
           />
 
-          <div className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2">
-            {[
-              { name: "Certificado SEP", price: 3000, issuer: "Semillero de Emprendedores Perú" },
-            ].map((c) => (
-              <Card key={c.name} className="text-center">
-                <h3 className="mt-3 font-display text-body font-semibold text-ink">
-                  {c.name}
-                </h3>
-                <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
-                <p className="tabular mt-4 font-display text-h2 font-bold leading-none text-sep-700">
-                  {formatSoles(c.price)}
-                </p>
-              </Card>
-            ))}
-            <Card className="border-dashed bg-white/60 text-center">
-              <Badge>En trámite</Badge>
-              <h3 className="mt-3 font-display text-body font-semibold text-ink">
-                CERTIFICADO INTERNACIONAL
-              </h3>
-            </Card>
-          </div>
+          <CertificateOptions className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2" />
 
           <div className="mt-8 text-center">
             <Button href="/registro" variant="gradient" size="lg">

@@ -95,6 +95,7 @@ export default async function ConvocatoriasPage() {
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16">
           <SectionHeader
+            as="h1"
             eyebrow="Convocatorias"
             title="Lo que está abierto ahora"
             description="Todo lo que puedes empezar hoy mismo. Sin listas de espera artificiales."
@@ -118,11 +119,11 @@ export default async function ConvocatoriasPage() {
                   <h2 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
                     {c.title}
                   </h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
+                  <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {c.detail}
                   </p>
 
-                  <p className="mt-4 border-t border-line pt-3.5 text-xs text-slate-ui">
+                  <p className="mt-4 border-t border-line pt-3.5 text-caption text-slate-ui">
                     {c.meta}
                   </p>
 

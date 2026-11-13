@@ -53,13 +53,17 @@ export function Section({
   );
 }
 
-/** Encabezado de sección: etiqueta pequeña + título + bajada. */
+/**
+ * Encabezado de sección: etiqueta pequeña + título + bajada.
+ * Con `as="h1"` sirve de cabecera de página (misma escala que el h1 de `PageHero`).
+ */
 export function SectionHeader({
   eyebrow,
   title,
   description,
   align = "left",
   inverted = false,
+  as: Heading = "h2",
   className,
 }: {
   eyebrow?: string;
@@ -67,6 +71,7 @@ export function SectionHeader({
   description?: React.ReactNode;
   align?: "left" | "center";
   inverted?: boolean;
+  as?: "h1" | "h2";
   className?: string;
 }) {
   return (
@@ -80,21 +85,22 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "mb-3 text-caption font-semibold uppercase tracking-[0.12em]",
+            "mb-3 text-caption font-semibold uppercase tracking-eyebrow",
             inverted ? "text-gold-500" : "text-sep-600",
           )}
         >
           {eyebrow}
         </p>
       )}
-      <h2
+      <Heading
         className={cn(
-          "font-display text-h2",
+          "font-display",
+          Heading === "h1" ? "text-h1 font-bold lg:text-hero" : "text-h2",
           inverted ? "text-white" : "text-ink",
         )}
       >
         {title}
-      </h2>
+      </Heading>
       {description && (
         <p
           className={cn(
@@ -153,7 +159,7 @@ export function PageHero({
             {eyebrow}
             <h1
               className={cn(
-                "mt-4 font-display text-h1 font-bold lg:text-[3.5rem] lg:leading-[1.04]",
+                "mt-4 font-display text-h1 font-bold lg:text-hero",
                 inverted ? "text-white" : "text-ink",
               )}
             >
@@ -162,7 +168,7 @@ export function PageHero({
             {description && (
               <p
                 className={cn(
-                  "mt-4 max-w-[65ch] text-body-lg",
+                  "mt-4 max-w-prose text-body-lg",
                   inverted ? "text-white/75" : "text-slate-ui",
                 )}
               >
@@ -239,8 +245,8 @@ export function Card({
 
 const badgeTones = {
   brand: "bg-sep-50 text-sep-700",
-  gold: "bg-[#fff6de] text-gold-700",
-  seed: "bg-[#eef8e4] text-seed-700",
+  gold: "bg-gold-50 text-gold-700",
+  seed: "bg-seed-50 text-seed-700",
   neutral: "bg-surface-2 text-graphite",
   success: "bg-success-bg text-success",
   warning: "bg-warning-bg text-warning",
@@ -334,7 +340,7 @@ export function ProgressBar({
           "h-full rounded-full transition-[width] duration-200",
           tone === "brand" && "bg-sep-600",
           tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-500",
+          tone === "seed" && "bg-seed-700",
         )}
         style={{ width: `${pct}%` }}
       />
@@ -367,7 +373,7 @@ export function Stat({
       </p>
       <p
         className={cn(
-          "mt-2 text-sm",
+          "mt-2 text-body-sm",
           inverted ? "text-white/70" : "text-slate-ui",
         )}
       >
