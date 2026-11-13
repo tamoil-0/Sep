@@ -71,58 +71,56 @@ export default async function HomePage() {
   return (
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
-      <section className="relative overflow-hidden border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
+        {/* Malla tenue: profundidad sin sumar otro color. */}
+        <div aria-hidden className="aurora-grid pointer-events-none absolute inset-0" />
         <Container size="wide" className="relative">
-          <div className="grid items-center gap-8 py-10 sm:py-14 lg:grid-cols-[1.02fr_0.98fr] lg:gap-12 lg:py-16">
+          <div className="grid items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 lg:pb-16 lg:pt-20">
             <div className="max-w-2xl">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-700">
+              <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-0 px-3.5 py-1.5 text-caption text-slate-ui backdrop-blur-sm sm:text-body-sm">
+                <span aria-hidden className="size-1.5 rounded-full bg-gold-500" />
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
-              <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
-                Ideas jóvenes que se convierten en
-                <span className="text-sep-700"> proyectos con impacto.</span>
+              <h1 className="mt-6 font-display text-display font-semibold text-ink">
+                Ideas jóvenes que se convierten en proyectos con impacto.
               </h1>
 
-              <p className="mt-4 max-w-xl text-body leading-relaxed text-slate-ui sm:text-body-lg">
+              <p className="mt-6 max-w-xl text-body-lg text-slate-ui">
                 Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
                 ese talento con escolares, docentes y comunidades de todo el Perú.
               </p>
 
-              <div className="mt-7 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                 <SupportQrDialog />
                 <Button href="/nosotros" variant="outline" size="lg" prefetch>
                   Conoce SEP
                 </Button>
               </div>
-
             </div>
 
             <HeroPhoto />
           </div>
-        </Container>
 
-        {/* ═══ 2 · MÉTRICAS ════════════════════════════════ */}
-        <div className="relative border-b border-line bg-white">
-          <Container size="wide">
-            <dl className="grid grid-cols-2 gap-x-6 gap-y-8 py-10 sm:grid-cols-3 lg:grid-cols-5">
-              {impactStats.map((stat) => (
-                <div key={stat.label}>
-                  <dd className="tabular text-h3 font-semibold leading-none tracking-tight text-ink">
-                    <CountUp
-                      value={stat.value}
-                      prefix={"prefix" in stat ? stat.prefix : ""}
-                      suffix={"suffix" in stat ? stat.suffix : ""}
-                    />
-                  </dd>
-                  <dt className="mt-2 text-body-sm leading-snug text-slate-ui">
-                    {stat.label}
-                  </dt>
-                </div>
-              ))}
-            </dl>
-          </Container>
-        </div>
+          {/* ═══ 2 · MÉTRICAS: dentro del hero, separadas por filetes ═══ */}
+          <dl className="grid grid-cols-2 border-t border-line sm:grid-cols-3 lg:grid-cols-5">
+            {impactStats.map((stat) => (
+              <div
+                key={stat.label}
+                className="border-b border-line py-7 pr-4 sm:border-b-0 lg:border-l lg:pl-6 lg:first:border-l-0 lg:first:pl-0"
+              >
+                <dd className="tabular font-display text-h1 font-semibold leading-none text-ink">
+                  <CountUp
+                    value={stat.value}
+                    prefix={"prefix" in stat ? stat.prefix : ""}
+                    suffix={"suffix" in stat ? stat.suffix : ""}
+                  />
+                </dd>
+                <dt className="mt-3 text-body-sm leading-snug text-slate-ui">{stat.label}</dt>
+              </div>
+            ))}
+          </dl>
+        </Container>
       </section>
 
       {/* ═══ 3 · ACTUALIDAD — solo aparece cuando hay contenido publicado ═ */}
@@ -226,7 +224,7 @@ export default async function HomePage() {
       </Section>
 
       {/* ═══ 5 · EL PROBLEMA ══════════════════════════════════════════════ */}
-      <Section>
+      <Section tone="night">
         <Container size="wide">
           <SectionHeader
             eyebrow="Por qué existimos"
@@ -526,7 +524,7 @@ export default async function HomePage() {
             </div>
 
             <Card className="p-6 sm:p-8">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Vínculos registrados por SEP
               </p>
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
@@ -581,7 +579,7 @@ export default async function HomePage() {
       </Section>
 
       {/* ═══ CTA FINAL ════════════════════════════════════ */}
-      <section className="relative overflow-hidden sep-gradient">
+      <section className="theme-night aurora relative overflow-hidden border-b border-line">
         <Container size="wide" className="relative py-20 text-center">
           <h2 className="mx-auto max-w-2xl font-display text-h1 font-bold leading-tight text-white sm:text-display">
             ¿Listos para sembrar el cambio?

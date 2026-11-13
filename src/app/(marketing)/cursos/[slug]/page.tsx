@@ -65,7 +65,7 @@ export default async function CursoPublicoPage({
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-14">
           <BackLink href="/cursos">Todos los cursos</BackLink>
 
@@ -178,7 +178,7 @@ export default async function CursoPublicoPage({
             <div className="mt-8 space-y-6">
               {weeks.map((week) => (
                 <div key={week}>
-                  <p className="mb-3 text-caption font-semibold uppercase tracking-eyebrow text-gold-700">
+                  <p className="mb-3 text-body-sm font-semibold tracking-eyebrow text-gold-700">
                     Semana {week}
                   </p>
                   <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">

@@ -152,7 +152,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
         typeof document !== "undefined" &&
         createPortal(
         <div
-          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden bg-sep-800 px-5 text-center animate-fade-in"
+          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden aurora px-5 text-center animate-fade-in"
           role="status"
           aria-live="polite"
         >

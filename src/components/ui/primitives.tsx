@@ -35,16 +35,17 @@ export function Section({
 }: {
   className?: string;
   children: React.ReactNode;
-  tone?: "base" | "muted" | "gradient";
+  /** `night` (y `gradient`, su alias histórico) pinta la sección en noche con halo aurora. */
+  tone?: "base" | "muted" | "gradient" | "night";
   id?: string;
 }) {
   return (
     <section
       id={id}
       className={cn(
-        "py-12 md:py-16 lg:py-18",
+        "py-14 md:py-20 lg:py-24",
         tone === "muted" && "bg-surface-1",
-        tone === "gradient" && "sep-gradient text-white",
+        (tone === "gradient" || tone === "night") && "theme-night aurora relative overflow-hidden",
         className,
       )}
     >
@@ -85,17 +86,19 @@ export function SectionHeader({
       {eyebrow && (
         <p
           className={cn(
-            "mb-3 text-caption font-semibold uppercase tracking-eyebrow",
-            inverted ? "text-gold-500" : "text-sep-600",
+            "mb-4 inline-flex items-center gap-2 text-body-sm font-medium",
+            inverted ? "text-gold-500" : "text-sep-700",
           )}
         >
+          {/* Punto de marca: marca la sección sin mayúsculas ni tracking. */}
+          <span aria-hidden className="size-1.5 rounded-full sep-gradient" />
           {eyebrow}
         </p>
       )}
       <Heading
         className={cn(
           "font-display",
-          Heading === "h1" ? "text-h1 font-bold lg:text-hero" : "text-h2",
+          Heading === "h1" ? "text-h1 font-semibold lg:text-hero" : "text-h2 font-semibold",
           inverted ? "text-white" : "text-ink",
         )}
       >
@@ -229,9 +232,9 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "min-w-0 rounded-md border border-line bg-white p-5",
+        "min-w-0 rounded-md border border-line bg-surface-0 p-5",
         interactive &&
-          "transition-colors duration-150 hover:border-sep-300 hover:bg-surface-1/50",
+          "transition-[border-color,box-shadow] duration-200 hover:border-sep-300 hover:shadow-soft",
         className,
       )}
       {...rest}
@@ -297,9 +300,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-line bg-surface-1 px-4 py-7 text-center sm:px-6 sm:py-9">
+    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-sep-200 bg-sep-50/40 px-4 py-8 text-center sm:px-6 sm:py-10">
       {icon && (
-        <div className="mb-3 flex size-10 items-center justify-center rounded-full bg-white text-slate-ui ring-1 ring-line">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-surface-0 text-sep-600 shadow-soft ring-1 ring-sep-100">
           {icon}
         </div>
       )}
@@ -338,7 +341,7 @@ export function ProgressBar({
       <div
         className={cn(
           "h-full rounded-full transition-[width] duration-200",
-          tone === "brand" && "bg-sep-600",
+          tone === "brand" && "sep-gradient",
           tone === "gold" && "bg-gold-500",
           tone === "seed" && "bg-seed-700",
         )}
@@ -365,8 +368,8 @@ export function Stat({
     <div className={className}>
       <p
         className={cn(
-          "tabular font-display text-h1 font-semibold leading-none tracking-tight",
-          inverted ? "text-gold-500" : "text-sep-700",
+          "tabular font-display text-h1 font-semibold leading-none",
+          inverted ? "text-gold-500" : "text-ink",
         )}
       >
         {value}

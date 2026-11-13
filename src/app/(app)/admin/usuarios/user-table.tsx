@@ -249,7 +249,7 @@ export function UserTable({
                   {["Usuario", "Región", "Roles", "Registro", "Acciones"].map((h) => (
                     <th
                       key={h}
-                      className="px-5 py-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui"
+                      className="px-5 py-3 text-body-sm font-semibold tracking-eyebrow text-slate-ui"
                     >
                       {/* La columna de acciones no lleva título visible, pero sí para lectores de pantalla. */}
                       {h === "Acciones" ? <span className="sr-only">{h}</span> : h}

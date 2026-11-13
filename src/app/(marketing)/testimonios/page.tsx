@@ -74,7 +74,7 @@ export default async function TestimoniosPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <SectionHeader
@@ -142,7 +142,7 @@ export default async function TestimoniosPage() {
                       {p.title}
                     </h3>
                     {p.problem && (
-                      <p className="mt-3 text-caption uppercase tracking-eyebrow text-slate-ui">
+                      <p className="mt-3 text-caption font-medium tracking-eyebrow text-slate-ui">
                         El problema
                       </p>
                     )}
@@ -153,7 +153,7 @@ export default async function TestimoniosPage() {
                     )}
                     {p.solution && (
                       <>
-                        <p className="mt-3 text-caption uppercase tracking-eyebrow text-seed-700">
+                        <p className="mt-3 text-caption font-medium tracking-eyebrow text-seed-700">
                           La solución
                         </p>
                         <p className="mt-1 flex-1 text-body-sm leading-relaxed text-graphite">

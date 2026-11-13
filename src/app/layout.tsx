@@ -1,19 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Geist, Sora } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { ToastProvider } from "@/components/ui/toast";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// Cuerpo y UI: Geist, sobria y técnica. Títulos: Sora, geométrica y de aire futurista.
+const geist = Geist({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-poppins",
+const sora = Sora({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -76,7 +76,7 @@ export default function RootLayout({
     <html
       lang="es-PE"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${poppins.variable}`}
+      className={`${geist.variable} ${sora.variable}`}
     >
       <body className="antialiased">
         <a

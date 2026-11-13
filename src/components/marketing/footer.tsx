@@ -14,7 +14,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="bg-night-950 text-white">
       <Container size="wide" className="py-16">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2.7fr]">
           {/* Marca */}
@@ -57,7 +57,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {Object.entries(footerNav).map(([group, links]) => (
               <div key={group}>
-                <p className="mb-4 text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
+                <p className="mb-4 text-body-sm font-semibold tracking-eyebrow text-gold-500">
                   {group}
                 </p>
                 <ul className="space-y-2.5">

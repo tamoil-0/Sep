@@ -53,8 +53,8 @@ export default async function AdminImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-6 overflow-hidden p-0">
-        <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-caption uppercase tracking-eyebrow text-white/70">
+        <div className="aurora px-7 py-6 text-white">
+          <p className="text-caption font-medium tracking-eyebrow text-white/70">
             Semillero de Emprendedores Perú
           </p>
           <h2 className="mt-2 text-h2 font-semibold">
@@ -111,7 +111,7 @@ export default async function AdminImpactoPage() {
 
       {/* Distribución territorial — el argumento central de SEP */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Distribución territorial
         </h2>
         <Card>
@@ -146,7 +146,7 @@ export default async function AdminImpactoPage() {
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         {/* Colegios */}
         <section>
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Impacto por colegio
           </h2>
           <Card className="p-0">
@@ -181,7 +181,7 @@ export default async function AdminImpactoPage() {
 
         {/* Voluntarios */}
         <section>
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Horas de voluntariado
           </h2>
           <Card className="p-0">
@@ -219,7 +219,7 @@ export default async function AdminImpactoPage() {
 
       {/* ODS */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Alineación con los ODS
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">

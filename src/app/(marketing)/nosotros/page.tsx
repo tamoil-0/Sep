@@ -36,7 +36,7 @@ const team = [
 export default function NosotrosPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.45]"
@@ -94,7 +94,7 @@ export default function NosotrosPage() {
                 key={c.label}
                 className={c.highlight ? "border-gold-500/35 bg-gold-50/50" : ""}
               >
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-sep-600">
                   {c.label}
                 </p>
                 <p className="mt-3.5 text-body leading-relaxed text-graphite">

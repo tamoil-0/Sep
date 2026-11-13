@@ -33,7 +33,7 @@ export const metadata = createPageMetadata({
 export default function EmpresasPage() {
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">

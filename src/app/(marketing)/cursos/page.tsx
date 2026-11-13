@@ -35,7 +35,7 @@ export default async function CursosPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-10 md:py-14 lg:py-16">
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_0.86fr] lg:gap-12">
           <div className="max-w-2xl">
@@ -59,7 +59,7 @@ export default async function CursosPage() {
           />
           </div>
 
-          <dl className="mt-9 grid grid-cols-2 gap-x-4 gap-y-5 rounded-md border border-line bg-white p-5 sm:p-6 lg:grid-cols-4">
+          <dl className="mt-9 grid grid-cols-2 gap-x-4 gap-y-5 rounded-md border border-line bg-surface-0 p-5 backdrop-blur-sm sm:p-6 lg:grid-cols-4">
             {[
               ["Duración", `${COURSE_FORMAT.weeks} semanas`],
               ["Frecuencia", COURSE_FORMAT.frequency],
@@ -67,7 +67,7 @@ export default async function CursosPage() {
               ["Modalidad", COURSE_FORMAT.modality],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="text-caption uppercase tracking-eyebrow text-slate-ui">
+                <dt className="text-caption font-medium tracking-eyebrow text-slate-ui">
                   {label}
                 </dt>
                 <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>

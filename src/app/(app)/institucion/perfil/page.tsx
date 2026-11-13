@@ -63,7 +63,7 @@ export default async function InstitucionPerfilPage() {
 
       <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
         <Card>
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Datos de la institución
           </h2>
           <dl className="mt-4 divide-y divide-line">
@@ -82,7 +82,7 @@ export default async function InstitucionPerfilPage() {
 
         <div className="space-y-5">
           <Card>
-            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+            <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
               Contacto registrado
             </h2>
             <ul className="mt-4 space-y-3 text-body-sm">
@@ -109,7 +109,7 @@ export default async function InstitucionPerfilPage() {
           </Card>
 
           <Card>
-            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">Convenio</h2>
+            <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">Convenio</h2>
             <p className="mt-3 text-body-sm text-graphite">
               {i.agreement_signed_at
                 ? `Firmado el ${formatDate(i.agreement_signed_at)}`

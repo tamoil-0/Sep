@@ -61,13 +61,13 @@ export default async function ProyectosPage() {
                 <h3 className="mt-3 text-body leading-snug font-semibold text-ink">{p.title}</h3>
                 {p.problem && (
                   <>
-                    <p className="mt-3 text-caption uppercase tracking-eyebrow text-slate-ui">El problema</p>
+                    <p className="mt-3 text-caption font-medium tracking-eyebrow text-slate-ui">El problema</p>
                     <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{p.problem}</p>
                   </>
                 )}
                 {p.solution && (
                   <>
-                    <p className="mt-3 text-caption uppercase tracking-eyebrow text-seed-700">La solución</p>
+                    <p className="mt-3 text-caption font-medium tracking-eyebrow text-seed-700">La solución</p>
                     <p className="mt-1 text-body-sm leading-relaxed text-graphite">{p.solution}</p>
                   </>
                 )}

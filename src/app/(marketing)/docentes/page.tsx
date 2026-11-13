@@ -31,7 +31,7 @@ const resources = [
 export default function DocentesPage() {
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">
@@ -97,7 +97,7 @@ export default function DocentesPage() {
             </div>
 
             <div>
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Recursos descargables
               </p>
               <ul className="mt-5 space-y-2.5">

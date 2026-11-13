@@ -185,7 +185,7 @@ export function OnboardingForm({
           <Logo className="mt-0.5 h-10 sm:mt-0 sm:h-11" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-sep-600">
                 Diagnóstico de entrada · {profileLabel}
               </p>
               <span className="inline-flex items-center gap-1 text-caption text-slate-ui">
@@ -206,7 +206,7 @@ export function OnboardingForm({
         <aside className="lg:sticky lg:top-6">
           <Card className="p-3 sm:p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Tu avance
               </p>
               <span className="tabular text-caption font-medium text-sep-700">{progress}%</span>
@@ -263,7 +263,7 @@ export function OnboardingForm({
         <main className="min-w-0">
           <Card className="overflow-hidden p-0 max-sm:rounded-sm">
             <div className="border-b border-line bg-surface-1 px-4 py-4 sm:px-6 sm:py-5">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-sep-600">
                 Módulo {module + 1} de 3 · Preguntas {module * 5 + 1}–{module * 5 + 5}
               </p>
               <h2

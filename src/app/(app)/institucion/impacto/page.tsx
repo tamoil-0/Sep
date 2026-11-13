@@ -65,8 +65,8 @@ export default async function ImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-5 overflow-hidden p-0 print:border-0">
-        <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-caption uppercase tracking-eyebrow text-white/70">
+        <div className="aurora px-7 py-6 text-white">
+          <p className="text-caption font-medium tracking-eyebrow text-white/70">
             Reporte de impacto social
           </p>
           <h2 className="mt-2 text-h2 font-semibold leading-tight">
@@ -112,7 +112,7 @@ export default async function ImpactoPage() {
 
       {/* Línea de tiempo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Línea de tiempo
         </h2>
 
@@ -154,7 +154,7 @@ export default async function ImpactoPage() {
 
       {/* ODS */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Alineación con los Objetivos de Desarrollo Sostenible
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">

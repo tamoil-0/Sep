@@ -47,7 +47,7 @@ export default async function CuentaPage() {
 
       {/* Identidad */}
       <Card className="overflow-hidden p-0">
-        <div className="bg-sep-800 px-7 py-7">
+        <div className="aurora px-7 py-7">
           <div className="flex flex-wrap items-center gap-5">
             <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 text-body-lg font-semibold text-ink">
               {initials(profile?.full_name || user.email)}

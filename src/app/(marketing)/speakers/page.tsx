@@ -44,7 +44,7 @@ export default async function SpeakersPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
             <Badge tone="brand">{count ?? 0} speakers en la red</Badge>
@@ -149,7 +149,7 @@ export default async function SpeakersPage() {
               )}
 
               <div className="mt-12">
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                   ¿Qué ganas al unirte?
                 </p>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">

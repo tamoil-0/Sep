@@ -19,13 +19,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(340px,0.78fr)_minmax(520px,1.22fr)]">
       {/* Panel de marca */}
-      <aside className="relative hidden min-h-dvh overflow-hidden bg-sep-950 lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-12">
+      <aside className="relative hidden min-h-dvh overflow-hidden aurora lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-12">
         <Link href="/" className="relative">
           <Logo className="h-14" variant="white" />
         </Link>
 
         <div className="relative">
-          <h2 className="max-w-sm font-display text-h2 font-semibold leading-[1.15] text-white">
+          <h2 className="max-w-sm font-display text-h2 font-semibold text-white">
             El talento está en regiones.
             <br />
             <span className="text-gold-500">Aquí empieza tu camino.</span>

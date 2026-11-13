@@ -177,7 +177,7 @@ export default async function CheckoutPage({
 
                   <div className="space-y-3.5">
                     <div>
-                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
+                      <p className="text-caption font-medium tracking-eyebrow text-slate-ui">
                         Número
                       </p>
                       <div className="mt-1 flex items-center gap-2">
@@ -190,7 +190,7 @@ export default async function CheckoutPage({
                     </div>
 
                     <div>
-                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
+                      <p className="text-caption font-medium tracking-eyebrow text-slate-ui">
                         Monto exacto
                       </p>
                       <p className="tabular mt-1 text-h2 font-bold leading-none text-sep-700">
@@ -199,7 +199,7 @@ export default async function CheckoutPage({
                     </div>
 
                     <div>
-                      <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
+                      <p className="text-caption font-medium tracking-eyebrow text-slate-ui">
                         Referencia — escríbela en el mensaje
                       </p>
                       <div className="mt-1 flex items-center gap-2">
@@ -257,7 +257,7 @@ export default async function CheckoutPage({
         {/* ── Resumen ── */}
         <aside className="order-1 lg:order-2">
           <Card className="lg:sticky lg:top-6">
-            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+            <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
               Resumen
             </h2>
 

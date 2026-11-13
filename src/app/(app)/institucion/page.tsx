@@ -93,7 +93,7 @@ export default async function InstitucionPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Talleres
           </h2>
           <Button href="/institucion/talleres" variant="link" size="sm">

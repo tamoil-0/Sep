@@ -4,19 +4,21 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-sm font-medium transition-[background-color,border-color,color,box-shadow] duration-150 disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sep-500",
+  // Píldora: el control es la pieza más pequeña de la jerarquía de radios
+  // (botón redondo < tarjeta 16px < superficie 22px).
+  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full font-medium transition-[background-color,border-color,color,box-shadow,transform] duration-150 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 [&_svg]:shrink-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sep-500",
   {
     variants: {
       variant: {
         primary:
-          "bg-sep-600 text-white hover:bg-sep-700 active:bg-sep-800",
+          "bg-sep-600 text-white shadow-highlight hover:bg-sep-700 hover:shadow-glow active:bg-sep-800",
         gradient:
-          "sep-gradient text-white hover:opacity-95",
-        gold: "bg-gold-500 text-ink hover:bg-gold-400 active:bg-gold-400",
+          "sep-gradient text-white shadow-highlight hover:shadow-glow",
+        gold: "bg-gold-500 text-ink hover:bg-gold-400 hover:shadow-glow-gold active:bg-gold-400",
         outline:
-          "border border-line bg-white text-ink hover:bg-surface-1 hover:border-mist",
+          "border border-line bg-surface-0 text-ink hover:border-sep-300 hover:bg-sep-50",
         "outline-white":
-          "border border-white/40 bg-transparent text-white hover:border-white/70 hover:bg-white/10",
+          "border border-white/25 bg-white/5 text-white backdrop-blur-sm hover:border-white/50 hover:bg-white/10",
         ghost: "text-graphite hover:bg-surface-2 hover:text-ink",
         link: "text-sep-600 underline-offset-4 hover:underline p-0 h-auto",
         danger: "bg-danger text-white hover:bg-danger-700 active:bg-danger-800",

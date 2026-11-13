@@ -48,7 +48,7 @@ export default function VoluntariadoPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative overflow-hidden border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.45]"
@@ -136,7 +136,7 @@ export default function VoluntariadoPage() {
                         {role.description}
                       </p>
 
-                      <p className="mt-5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                      <p className="mt-5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                         Requisitos
                       </p>
                       <ul className="mt-2.5 space-y-2">
@@ -167,7 +167,7 @@ export default function VoluntariadoPage() {
                     </div>
 
                     <div className="rounded-md bg-surface-1 p-6">
-                      <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                      <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                         Beneficios exclusivos del rol
                       </p>
                       <ul className="mt-4 space-y-4">

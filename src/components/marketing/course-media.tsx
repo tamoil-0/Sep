@@ -93,7 +93,7 @@ export function CourseMedia({
       />
       <div aria-hidden className="absolute -right-12 -top-16 size-44 rounded-full border-[24px] border-white/10" />
       <div className="relative flex h-full min-h-36 flex-col justify-between p-5">
-        <span className="text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
+        <span className="text-body-sm font-semibold tracking-eyebrow text-gold-500">
           {category ?? "Programa SEP"}
         </span>
         <div>

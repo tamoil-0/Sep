@@ -44,7 +44,7 @@ export default async function InstitucionConvenioPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="bg-sep-800 px-7 py-6 text-white">
+        <div className="aurora px-7 py-6 text-white">
           <FileSignature className="size-6 text-gold-500" />
           <h2 className="mt-4 text-h3 font-semibold">
             {i?.name ?? "Tu institución"}
@@ -57,7 +57,7 @@ export default async function InstitucionConvenioPage() {
         </div>
 
         <div className="p-7">
-          <h3 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h3 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Qué acordamos
           </h3>
           <ul className="mt-4 space-y-2.5">

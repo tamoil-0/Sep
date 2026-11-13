@@ -327,27 +327,21 @@ export function StatBlock({
   tone?: "brand" | "gold" | "seed";
 }) {
   return (
-    <div className="relative overflow-hidden rounded-lg border border-line bg-white p-6">
+    <div className="relative overflow-hidden rounded-md border border-line bg-surface-0 p-6 sm:p-7">
+      {/* Franja de acento de 4px: el color distingue la cifra sin teñir el número. */}
       <div
         aria-hidden
         className={cn(
-          "absolute -right-6 -top-6 size-24 rounded-full opacity-[0.09]",
+          "absolute inset-x-0 top-0 h-1",
           tone === "brand" && "sep-gradient",
           tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-700",
+          tone === "seed" && "bg-seed-400",
         )}
       />
-      <p
-        className={cn(
-          "tabular relative font-display text-h1 font-bold leading-none",
-          tone === "brand" && "text-sep-700",
-          tone === "gold" && "text-gold-700",
-          tone === "seed" && "text-seed-700",
-        )}
-      >
+      <p className="tabular relative font-display text-display font-semibold leading-none text-ink">
         {figure}
       </p>
-      <p className="relative mt-3 font-display text-body font-semibold text-ink">
+      <p className="relative mt-4 font-display text-body-lg font-semibold text-ink">
         {label}
       </p>
       {detail && (

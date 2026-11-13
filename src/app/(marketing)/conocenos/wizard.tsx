@@ -226,7 +226,7 @@ export function DiagnosticWizard({
     return (
       <Section>
         <Container size="narrow">
-          <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Paso 1 de 3 · Perfil
           </p>
           <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
@@ -377,7 +377,7 @@ export function DiagnosticWizard({
     return (
       <Section>
         <Container size="narrow">
-          <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Paso final
           </p>
           <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
@@ -444,7 +444,7 @@ export function DiagnosticWizard({
       <Container size="narrow">
         <div className="overflow-hidden rounded-lg border border-line">
           <div className="sep-gradient px-8 py-10 text-center text-white">
-            <p className="text-caption uppercase tracking-eyebrow text-white/70">
+            <p className="text-caption font-medium tracking-eyebrow text-white/70">
               Construido exactamente para lo que nos contaste
             </p>
             <h1 className="mt-4 font-display text-h2 font-bold leading-tight">
@@ -467,7 +467,7 @@ export function DiagnosticWizard({
                   key={label}
                   className="flex flex-wrap items-center gap-3 border-b border-line pb-4 last:border-0 last:pb-0"
                 >
-                  <span className="w-28 shrink-0 text-caption uppercase tracking-eyebrow text-slate-ui">
+                  <span className="w-28 shrink-0 text-caption font-medium tracking-eyebrow text-slate-ui">
                     {label}
                   </span>
                   <span className="text-body-sm text-slate-ui">{from}</span>

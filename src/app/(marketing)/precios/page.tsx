@@ -40,7 +40,7 @@ export default function PreciosPage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 text-center sm:py-20">
           <Badge tone="seed">Transparencia total</Badge>
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">

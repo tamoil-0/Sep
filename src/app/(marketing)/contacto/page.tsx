@@ -64,7 +64,7 @@ export default function ContactoPage() {
               className="relative flex flex-col p-6 text-center"
             >
               <c.icon className="mx-auto size-5 text-sep-600" />
-              <p className="mt-4 text-caption uppercase tracking-eyebrow text-slate-ui">
+              <p className="mt-4 text-caption font-medium tracking-eyebrow text-slate-ui">
                 {c.label}
               </p>
               {c.href ? (
@@ -87,7 +87,7 @@ export default function ContactoPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <p className="text-center text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-center text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             ¿Qué te trae por aquí?
           </p>
           <ul className="mt-5 flex flex-wrap justify-center gap-2.5">

@@ -32,7 +32,7 @@ export default async function ColegiosPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">
@@ -103,7 +103,7 @@ export default async function ColegiosPage() {
 
               {/* Proceso */}
               <div className="mt-12">
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                   ¿Cómo funciona?
                 </p>
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -126,7 +126,7 @@ export default async function ColegiosPage() {
               {/* Colegios activos */}
               {schools.length > 0 && (
                 <div className="mt-12">
-                  <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                  <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                     Colegios en la red
                   </p>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">

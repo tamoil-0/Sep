@@ -92,7 +92,7 @@ export default async function ConvocatoriasPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16">
           <SectionHeader
             as="h1"

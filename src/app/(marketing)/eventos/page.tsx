@@ -37,7 +37,7 @@ export default async function EventosPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
@@ -60,7 +60,7 @@ export default async function EventosPage() {
 
       <Section>
         <Container size="wide">
-          <h2 className="mb-6 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="mb-6 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Próximos
           </h2>
 
@@ -121,7 +121,7 @@ export default async function EventosPage() {
 
           {past.length > 0 && (
             <>
-              <h2 className="mb-6 mt-14 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <h2 className="mb-6 mt-14 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Ya sucedieron
               </h2>
               <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">

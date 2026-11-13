@@ -96,13 +96,15 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 export function HeroPhoto() {
   return (
     <div className="relative mx-auto w-full max-w-xl">
+      {/* Halo de marca detrás de la foto: el único brillo del hero. */}
+      <div aria-hidden className="absolute -inset-6 rounded-xl sep-gradient opacity-35 blur-3xl" />
       <RealPhoto
         src={SEP_PHOTOS.heroPresentation}
         alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"
         priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
         label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-lg border border-white/20"
+        className="aspect-[4/3] min-h-0 rounded-lg shadow-elevated ring-1 ring-white/15"
         imageClassName="object-[52%_50%]"
       />
     </div>

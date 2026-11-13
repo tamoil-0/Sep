@@ -64,7 +64,7 @@ export function ProgramAudience({ audiences }: { audiences: ProgramAudienceData[
         <div className="mt-10 grid border-y border-line md:grid-cols-2 md:divide-x md:divide-line">
           {audiences.map((audience, index) => (
             <div key={audience.id} className="flex h-full flex-col py-7 md:px-8 md:py-9 first:md:pl-0 last:md:pr-0">
-              <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-sep-700">
+              <p className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-sep-700">
                 {index === 0 ? <Users className="size-icon-sm" /> : <BookOpen className="size-icon-sm" />}
                 Recorrido {index + 1}
               </p>
@@ -161,15 +161,15 @@ export function ProgramCurriculum({ audience }: { audience: ProgramAudienceData 
                 </summary>
                 <div className="grid gap-5 border-t border-line py-5 pl-[3.25rem] sm:grid-cols-2 sm:pl-[4.25rem]">
                   <div>
-                    <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:hidden">Resultado de aprendizaje</p>
+                    <p className="text-body-sm font-semibold tracking-eyebrow text-sep-700 sm:hidden">Resultado de aprendizaje</p>
                     <p className="mt-1.5 text-body-sm text-graphite sm:hidden">{session.learning}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:mt-0">Actividad</p>
+                    <p className="mt-4 text-body-sm font-semibold tracking-eyebrow text-sep-700 sm:mt-0">Actividad</p>
                     <p className="mt-1.5 text-body-sm text-graphite">{session.activity}</p>
                   </div>
                   <div className="border-l border-line pl-4">
-                    <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-graphite"><FileText className="size-icon-sm" />Materiales</p>
+                    <p className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-graphite"><FileText className="size-icon-sm" />Materiales</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.materials.join(" · ")}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-graphite">Tarea</p>
+                    <p className="mt-4 text-body-sm font-semibold tracking-eyebrow text-graphite">Tarea</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.task}</p>
                   </div>
                 </div>

@@ -38,7 +38,7 @@ const impact = [
 export default function DonacionesPage() {
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night aurora relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
             <HeartHandshake className="size-9 text-gold-700" />

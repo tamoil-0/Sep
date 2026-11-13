@@ -41,7 +41,7 @@ export default async function MisCursosPage() {
         <>
           {active.length > 0 && (
             <section className="mb-8">
-              <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 En progreso
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
@@ -87,7 +87,7 @@ export default async function MisCursosPage() {
 
           {completed.length > 0 && (
             <section>
-              <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Completados
               </h2>
               <div className="grid gap-3 md:grid-cols-2">
