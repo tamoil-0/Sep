@@ -1,15 +1,14 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import Image from "next/image";
 import {
-  ArrowLeft,
   BadgeCheck,
   Clock,
   CircleAlert,
   CircleCheck,
   ShieldCheck,
 } from "lucide-react";
+import { BackLink } from "@/components/ui/arrow-link";
 import { requireUser } from "@/lib/auth/session";
 import { getOrderForCheckout } from "@/server/queries/payments";
 import { generatePaymentQr } from "@/lib/payments/yape";
@@ -18,6 +17,7 @@ import { Button } from "@/components/ui/button";
 import { formatSoles } from "@/lib/utils";
 import { VoucherForm } from "./voucher-form";
 import { CopyButton } from "@/components/app/copy-button";
+import { PageHeader } from "@/components/app/page-header";
 
 export const metadata: Metadata = {
   title: "Completar pago",
@@ -65,13 +65,16 @@ export default async function CheckoutPage({
 
   return (
     <>
-      <Link
-        href="/estudiante/certificados"
-        className="mb-6 inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
-      >
-        <ArrowLeft className="size-4" />
-        Volver a mis certificados
-      </Link>
+      <BackLink href="/estudiante/certificados" className="mb-4">Volver a mis certificados</BackLink>
+
+      <PageHeader
+        title={`Pago: ${itemName}`}
+        description={
+          canPay
+            ? "Paga con Yape, sube tu comprobante y el equipo de SEP lo valida en menos de 24 horas."
+            : undefined
+        }
+      />
 
       <div className="grid gap-5 lg:grid-cols-[1fr_360px]">
         {/* ── Columna principal ── */}

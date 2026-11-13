@@ -356,7 +356,7 @@ export function DiagnosticWizard({
             <button
               type="button"
               onClick={back}
-              className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
+              className="inline-flex min-h-control items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
             >
               <ArrowLeft className="size-4" />
               Anterior

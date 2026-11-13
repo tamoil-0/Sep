@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft,
   Award,
   CalendarDays,
   Clock,
   Repeat,
   Video,
 } from "lucide-react";
+import { BackLink } from "@/components/ui/arrow-link";
 import { requireRole } from "@/lib/auth/session";
 import { getCourseWithProgress } from "@/server/queries/courses";
 import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
@@ -46,13 +45,7 @@ export default async function CursoPage({
 
   return (
     <>
-      <Link
-        href="/estudiante/mis-cursos"
-        className="mb-6 inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
-      >
-        <ArrowLeft className="size-4" />
-        Mis cursos
-      </Link>
+      <BackLink href="/estudiante/mis-cursos" className="mb-6">Mis cursos</BackLink>
 
       {/* Cabecera */}
       <Card className="p-0">
@@ -83,7 +76,7 @@ export default async function CursoPage({
             </p>
           )}
 
-          <dl className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-body-sm text-slate-ui">
+          <div className="mt-5 flex flex-wrap gap-x-6 gap-y-2 text-body-sm text-slate-ui">
             <span className="inline-flex items-center gap-1.5">
               <Clock className="size-4 text-mist" />
               {course.total_hours} horas
@@ -100,7 +93,7 @@ export default async function CursoPage({
               <Video className="size-4 text-mist" />
               100 % virtual
             </span>
-          </dl>
+          </div>
         </div>
 
         {enrollment ? (

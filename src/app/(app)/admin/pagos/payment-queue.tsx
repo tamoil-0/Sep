@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
+import { FilterPills } from "@/components/ui/filter-pills";
 import {
   Check,
   Eye,
@@ -72,9 +73,11 @@ const TABS = [
   { key: "all", label: "Todos" },
 ] as const;
 
+type TabKey = (typeof TABS)[number]["key"];
+
 export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
   const router = useRouter();
-  const [tab, setTab] = React.useState<string>("en_revision");
+  const [tab, setTab] = React.useState<TabKey>("en_revision");
   const [busy, setBusy] = React.useState<string | null>(null);
   const [rejecting, setRejecting] = React.useState<string | null>(null);
   const [approving, setApproving] = React.useState<string | null>(null);
@@ -141,32 +144,13 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
 
   return (
     <>
-      {/* Pestañas */}
-      <div className="mb-5 flex flex-wrap gap-1.5">
-        {TABS.map((t) => (
-          <button
-            key={t.key}
-            type="button"
-            onClick={() => setTab(t.key)}
-            className={cn(
-              "rounded-full px-3.5 py-1.5 text-body-sm font-medium transition-colors",
-              tab === t.key
-                ? "bg-sep-600 text-white"
-                : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
-            )}
-          >
-            {t.label}
-            <span
-              className={cn(
-                "tabular ml-1.5",
-                tab === t.key ? "text-white/70" : "text-mist",
-              )}
-            >
-              {counts[t.key as keyof typeof counts]}
-            </span>
-          </button>
-        ))}
-      </div>
+      <FilterPills
+        label="Filtrar pagos por estado"
+        className="mb-5"
+        value={tab}
+        onChange={setTab}
+        options={TABS.map((t) => ({ ...t, count: counts[t.key] }))}
+      />
 
       {visible.length === 0 ? (
         <Card className="py-10 text-center">

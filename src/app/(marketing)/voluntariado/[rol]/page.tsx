@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Check, Clock } from "lucide-react";
+import { Check, Clock } from "lucide-react";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { volunteerProcess, volunteerRoles } from "@/config/volunteering";
 import { VolunteerForm } from "./volunteer-form";
 import { createPageMetadata } from "@/lib/seo";
+import { BackLink } from "@/components/ui/arrow-link";
 
 export function generateStaticParams() {
   return volunteerRoles.map((r) => ({ rol: r.slug }));
@@ -40,13 +40,7 @@ export default async function PostularPage({
   return (
     <Section>
       <Container size="wide">
-        <Link
-          href="/voluntariado"
-          className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
-        >
-          <ArrowLeft className="size-4" />
-          Todos los roles
-        </Link>
+        <BackLink href="/voluntariado">Todos los roles</BackLink>
 
         <div className="mt-6 grid gap-8 lg:grid-cols-[1fr_400px]">
           {/* Info del rol */}

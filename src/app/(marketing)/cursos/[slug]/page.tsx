@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { notFound } from "next/navigation";
 import {
-  ArrowLeft,
   ArrowRight,
   Award,
   CalendarDays,
@@ -11,6 +9,7 @@ import {
   Repeat,
   Video,
 } from "lucide-react";
+import { BackLink } from "@/components/ui/arrow-link";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getCourseBySlug } from "@/server/queries/courses";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
@@ -68,13 +67,7 @@ export default async function CursoPublicoPage({
     <>
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-14">
-          <Link
-            href="/cursos"
-            className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
-          >
-            <ArrowLeft className="size-4" />
-            Todos los cursos
-          </Link>
+          <BackLink href="/cursos">Todos los cursos</BackLink>
 
           <div className="mt-6 grid gap-10 lg:grid-cols-[1fr_320px]">
             <div>
@@ -100,7 +93,7 @@ export default async function CursoPublicoPage({
                 </p>
               )}
 
-              <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-body-sm text-slate-ui">
+              <div className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-body-sm text-slate-ui">
                 <span className="inline-flex items-center gap-2">
                   <Clock className="size-4 text-mist" />
                   {course.total_hours} horas totales
@@ -117,7 +110,7 @@ export default async function CursoPublicoPage({
                   <Video className="size-4 text-mist" />
                   100 % virtual
                 </span>
-              </dl>
+              </div>
             </div>
 
             <div className="space-y-4 lg:sticky lg:top-24 lg:self-start">

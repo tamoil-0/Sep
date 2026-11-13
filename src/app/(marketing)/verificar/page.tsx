@@ -21,6 +21,7 @@ export default function VerificarPage() {
           </span>
           <div className="mt-6">
             <SectionHeader
+              as="h1"
               title="Verificar un certificado"
               description="Escribe el código que aparece en el certificado (por ejemplo, SEP-2026-A7K3M9) para comprobar su autenticidad."
               align="center"

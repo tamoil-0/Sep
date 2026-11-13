@@ -1,6 +1,6 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 /**
@@ -43,6 +43,35 @@ export function ArrowLink({
         aria-hidden
         className="size-icon-sm transition-transform duration-150 group-hover/arrow:translate-x-0.5"
       />
+    </Link>
+  );
+}
+
+/**
+ * Enlace "volver" ("← Todos los cursos", "← Mis cursos").
+ *
+ * Antes se escribía a mano en cada pantalla con 22px de alto; aquí ocupa el
+ * alto táctil mínimo (`min-h-control`) sin cambiar su aspecto de texto.
+ */
+export function BackLink({
+  href,
+  children,
+  className,
+}: {
+  href: string;
+  children: React.ReactNode;
+  className?: string;
+}) {
+  return (
+    <Link
+      href={href}
+      className={cn(
+        "-my-2.5 inline-flex min-h-control w-fit items-center gap-1.5 text-body-sm text-slate-ui transition-colors duration-150 hover:text-ink",
+        className,
+      )}
+    >
+      <ArrowLeft aria-hidden className="size-icon-sm" />
+      {children}
     </Link>
   );
 }
