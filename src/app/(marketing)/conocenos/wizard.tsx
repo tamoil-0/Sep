@@ -178,13 +178,13 @@ export function DiagnosticWizard({
 
             <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-body-sm text-slate-ui">
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-500" /> 3 minutos
+                <Check className="size-4 text-seed-700" /> 3 minutos
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-500" /> Sin crear cuenta
+                <Check className="size-4 text-seed-700" /> Sin crear cuenta
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-500" /> Cualquier región
+                <Check className="size-4 text-seed-700" /> Cualquier región
               </span>
             </p>
           </div>

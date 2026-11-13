@@ -139,7 +139,7 @@ export default function EmpresasPage() {
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
                   {p.deliverables.map((d) => (
                     <li key={d} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
                       {d}
                     </li>
                   ))}

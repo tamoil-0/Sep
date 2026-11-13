@@ -334,14 +334,14 @@ export function StatBlock({
           "absolute -right-6 -top-6 size-24 rounded-full opacity-[0.09]",
           tone === "brand" && "sep-gradient",
           tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-500",
+          tone === "seed" && "bg-seed-700",
         )}
       />
       <p
         className={cn(
           "tabular relative font-display text-h1 font-bold leading-none",
           tone === "brand" && "text-sep-700",
-          tone === "gold" && "text-gold-600",
+          tone === "gold" && "text-gold-700",
           tone === "seed" && "text-seed-700",
         )}
       >

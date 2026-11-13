@@ -63,7 +63,7 @@ export default async function InstitucionConvenioPage() {
           <ul className="mt-4 space-y-2.5">
             {TERMS.map((t) => (
               <li key={t} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
                 {t}
               </li>
             ))}

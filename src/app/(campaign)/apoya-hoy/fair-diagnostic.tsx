@@ -31,7 +31,7 @@ type Answers = Record<number, Answer>;
 const MODULES = [
   { title: "Tu realidad", color: "bg-sep-600" },
   { title: "Lo que buscas", color: "bg-gold-500" },
-  { title: "Tu impacto", color: "bg-seed-500" },
+  { title: "Tu impacto", color: "bg-seed-700" },
 ] as const;
 
 function answered(value: Answer | undefined) {
@@ -138,7 +138,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
       <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
         <div aria-hidden className="absolute inset-0 sep-gradient opacity-[0.06]" />
         <div className="relative w-full max-w-lg rounded-lg border border-line bg-white px-6 py-10 text-center shadow-elevated sm:px-10">
-          <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-500 text-white ">
+          <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-700 text-white ">
             <PartyPopper className="size-8" />
           </span>
           <p className="mt-6 text-caption font-semibold uppercase tracking-[0.14em] text-seed-700">

@@ -130,7 +130,7 @@ export default async function ImpactoPage() {
                   <span
                     className={
                       w.status === "realizado"
-                        ? "size-2 shrink-0 rounded-full bg-seed-500"
+                        ? "size-2 shrink-0 rounded-full bg-seed-700"
                         : "size-2 shrink-0 rounded-full bg-mist"
                     }
                     aria-hidden

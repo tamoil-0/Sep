@@ -39,9 +39,11 @@ Todos los colores son tokens de Tailwind v4 (`bg-*`, `text-*`, `border-*`, `ring
 |---|---|---|
 | **`gold-500`** | `#ffc629` | Amarillo SEP (50 usos): botón `gold`, eyebrows sobre fondo oscuro, subrayado `.gold-underline`, `::selection`, cifras de `Stat` invertido. **Siempre con texto `ink`, nunca texto blanco encima.** |
 | `gold-300` / `gold-400` | `#ffdc7a` / `#ffd24d` | Hover del botón `gold` |
-| `gold-600` / `gold-700` | `#735000` | Texto dorado legible sobre fondo claro (badge `gold`) |
+| `gold-50` | `#fff6de` | Fondo del badge `gold` y tint de tarjetas destacadas (`bg-gold-50/50`) |
+| `gold-700` | `#735000` | Texto dorado legible sobre fondo claro (badge `gold`) |
 | `gold-800` | `#5c4000` | Texto dorado más oscuro |
-| `seed-500` / `seed-700` | `#326912` | Verde "semilla" del logo (33 usos): badge `seed`, barra de progreso `seed` |
+| `seed-50` | `#eef8e4` | Fondo del badge `seed` y tint de tarjetas (`bg-seed-50/60`) |
+| `seed-700` | `#326912` | Verde "semilla" del logo: badge `seed`, barra de progreso `seed`, "Acceso sin costo" |
 | `seed-400` / `seed-800` | `#9bd46a` / `#28550d` | Decorativo / texto verde intenso |
 
 ### 2.3 Neutrales
@@ -59,9 +61,9 @@ Todos los colores son tokens de Tailwind v4 (`bg-*`, `text-*`, `border-*`, `ring
 ### 2.4 Semánticos (texto + fondo)
 | Par | Valores | Para qué |
 |---|---|---|
-| `success` / `success-bg` | `#08783b` / `#e6f6ed` | Confirmaciones, pagos aprobados |
+| `success` / `success-bg` | `#08783b` / `#e6f6ed` | Confirmaciones, pagos aprobados (hover: `success-700`) |
 | `warning` / `warning-bg` | `#8a5a00` / `#fef4e4` | Pagos en revisión, avisos |
-| `danger` / `danger-bg` | `#a3373b` / `#fdecec` | Errores, botón `danger`, acciones irreversibles |
+| `danger` / `danger-bg` | `#a3373b` / `#fdecec` | Errores, botón `danger`, acciones irreversibles (hover/active: `danger-700` / `danger-800`) |
 | `info` / `info-bg` | `#245fbd` / `#eaf2fe` | Ayuda contextual (poco uso) |
 
 Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
@@ -196,7 +198,7 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 | 3 | **Radios fuera de escala** — ✅ **Resuelta** | Había `rounded-xl` (5), `rounded-2xl` (1, en `(app)/error.tsx`), `rounded-t/b-[24px]` (fair-diagnostic) y `.skeleton` con 8px fijos | Hecho: paneles y diálogos de `apoya-hoy` → `rounded-lg` (con header/footer `rounded-t/b-lg`); alerta de `logout-dialog` → `rounded-md`; `.skeleton` → `var(--radius-sm)`. **Más cercano:** foto del hero (`real-photo`, 18px) → `rounded-lg`; ícono de `(app)/error.tsx` → `rounded-full`, igual que el ícono de `EmptyState`. Quedan 4 valores: sm, md, lg y full. |
 | 4 | **Colores hex en clases** — ✅ **Resuelta** | Había 21 usos: `text-[#8A5A00]` (6, idéntico a `warning`), `bg-[#FFFBF0]` / `[#fff6de]` / `[#FFF6DE]` (tint dorado), `bg-[#eef8e4]` / `[#F5FBEF]` (tint verde), `bg-[#852d31]` / `[#70262a]` (hover del botón danger), `bg-[#066331]` y `bg-[#f5f3fb]`, más `bg-red-50` en `(app)/error.tsx`. | Hecho: tokens nuevos `gold-50`, `seed-50`, `danger-700`, `danger-800` y `success-700` (hover del botón de aprobar pago). `#8A5A00 → text-warning`; `#FFFBF0 → bg-gold-50/50` y `#F5FBEF → bg-seed-50/60` (mismo color resultante); `red-50 → danger-bg`. **Más cercano:** `#f5f3fb` (fondo de `(campaign)`) → `surface-2` (`#f4f3f6`). Los hex del CSS (degradado, selección, foco, subrayado, malla, scrollbar, autofill) ahora usan `var()` o `color-mix()` sobre tokens. **Excepciones:** estilos de impresión, imágenes generadas (`icon`, `apple-icon`, `opengraph-image`), `global-error.tsx`, `manifest.ts`, el QR, el Excel y la paleta SVG de `illustrations.tsx` (no pueden usar clases; su `line` quedó sincronizado con el token). |
 | 5 | **Variables duplicadas en `:root`** — ✅ **Resuelta** | `--bg`, `--bg-1/2`, `--fg`, `--fg-2/3` y `--border` repetían los neutrales con **otros valores** (`--border #e6e4f0` frente a `line #e5e4e9`; `--fg-3 #6e6a85` frente a `mist #74717c`). | Hecho: `body` usa `surface-0`/`ink`, `.skeleton` usa `surface-2`, los fondos punteados de `/nosotros` y `/voluntariado` usan `var(--color-line)`, y se borraron `--bg*`, `--fg*` y `--border`. Excepción: `global-error.tsx` mantiene hex en línea porque se pinta sin `globals.css`. |
-| 6 | **Tokens con el mismo valor** | `gold-600` = `gold-700` = `#735000`; `seed-500` = `seed-700` = `#326912` | Dejar uno de cada par (`gold-700`, `seed-700`) o diferenciarlos. |
+| 6 | **Tokens con el mismo valor** — ✅ **Resuelta** | `gold-600` = `gold-700` = `#735000`; `seed-500` = `seed-700` = `#326912` | Hecho: `gold-600 → gold-700` (9 usos) y `seed-500 → seed-700` (31 usos), y se borraron `gold-600` y `seed-500` de `@theme`. Sin cambio visual (mismo valor). |
 | 7 | **Tracking de eyebrows** | `0.12em` (54), `0.1em` (17), `0.14em` (11), `0.08em` (9) y `0.06em` (1) | Estandarizar en `0.12em`, idealmente con un componente `<Eyebrow>`. |
 | 8 | **Sombras sin uso** | `shadow-subtle` y `shadow-card` definidas con 0 usos | Borrarlas, o documentar `shadow-card` para tarjetas arrastrables si se necesitan. |
 | 9 | **`font-display` dentro del producto** | Vistas de `(app)` piden `font-display`, que `.app-shell` neutraliza por CSS | Quitar `font-display` del código de `(app)` y dejar la regla CSS solo como red de seguridad. |

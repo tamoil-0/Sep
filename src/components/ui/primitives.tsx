@@ -334,7 +334,7 @@ export function ProgressBar({
           "h-full rounded-full transition-[width] duration-200",
           tone === "brand" && "bg-sep-600",
           tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-500",
+          tone === "seed" && "bg-seed-700",
         )}
         style={{ width: `${pct}%` }}
       />

@@ -296,7 +296,7 @@ export default async function CheckoutPage({
                   key={f.text}
                   className="flex items-start gap-2.5 text-caption leading-relaxed text-slate-ui"
                 >
-                  <f.icon className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                  <f.icon className="mt-0.5 size-4 shrink-0 text-seed-700" />
                   {f.text}
                 </p>
               ))}

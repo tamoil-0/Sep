@@ -93,7 +93,7 @@ export default async function SeguridadPage() {
               },
             ].map((f) => (
               <li key={f.title} className="flex items-start gap-3.5">
-                <f.icon className="mt-0.5 size-5 shrink-0 text-seed-500" />
+                <f.icon className="mt-0.5 size-5 shrink-0 text-seed-700" />
                 <div>
                   <p className="text-body-sm font-medium text-ink">{f.title}</p>
                   <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{f.detail}</p>

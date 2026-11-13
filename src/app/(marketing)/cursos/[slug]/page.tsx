@@ -147,7 +147,7 @@ export default async function CursoPublicoPage({
                     "Certificado opcional desde S/30",
                   ].map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
                       {f}
                     </li>
                   ))}
@@ -185,7 +185,7 @@ export default async function CursoPublicoPage({
             <div className="mt-8 space-y-6">
               {weeks.map((week) => (
                 <div key={week}>
-                  <p className="mb-3 text-caption font-semibold uppercase tracking-[0.12em] text-gold-600">
+                  <p className="mb-3 text-caption font-semibold uppercase tracking-[0.12em] text-gold-700">
                     Semana {week}
                   </p>
                   <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
@@ -222,7 +222,7 @@ export default async function CursoPublicoPage({
       <Section tone="muted" className="py-14">
         <Container size="narrow">
           <Card className="text-center">
-            <Award className="mx-auto size-8 text-gold-600" />
+            <Award className="mx-auto size-8 text-gold-700" />
             <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Al terminar, acredítalo
             </h2>

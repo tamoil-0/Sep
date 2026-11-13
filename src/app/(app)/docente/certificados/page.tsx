@@ -55,7 +55,7 @@ export default async function DocenteCertificadosPage() {
                     Emitido el {c.issued_at ? formatDate(c.issued_at) : "—"}
                   </p>
                   <div className="mt-4 flex items-center gap-2 rounded-lg bg-surface-1 px-3 py-2">
-                    <ShieldCheck className="size-4 shrink-0 text-seed-500" />
+                    <ShieldCheck className="size-4 shrink-0 text-seed-700" />
                     <code className="tabular flex-1 truncate text-caption font-medium text-ink">
                       {c.verification_code}
                     </code>

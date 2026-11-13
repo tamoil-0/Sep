@@ -41,7 +41,7 @@ export default function DonacionesPage() {
       <section className="border-b border-line bg-surface-1">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
-            <HeartHandshake className="size-9 text-gold-600" />
+            <HeartHandshake className="size-9 text-gold-700" />
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Tu donación llega a{" "}
               <GoldUnderline>quien nadie está atendiendo</GoldUnderline>

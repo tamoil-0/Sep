@@ -465,7 +465,7 @@ export default async function AdminDiagnosticoPage({
                 <Card key={number} className="p-5 sm:p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="flex-1">
-                      <p className="tabular text-caption font-semibold text-gold-600">
+                      <p className="tabular text-caption font-semibold text-gold-700">
                         PREGUNTA {number}
                       </p>
                       <h3 className="mt-1.5 font-display text-body font-semibold leading-snug text-ink">

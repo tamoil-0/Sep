@@ -68,7 +68,7 @@ export default async function EstudiantePage() {
         }
         action={
           <Badge tone="brand">
-            <span className="size-1.5 rounded-full bg-seed-500" />
+            <span className="size-1.5 rounded-full bg-seed-700" />
             Plan Semilla
           </Badge>
         }

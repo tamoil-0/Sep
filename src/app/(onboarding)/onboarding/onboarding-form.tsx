@@ -244,7 +244,7 @@ export function OnboardingForm({
                       <span
                         className={cn(
                           "flex size-7 shrink-0 items-center justify-center rounded-full border text-caption font-semibold",
-                          complete && "border-seed-500 bg-seed-500 text-white",
+                          complete && "border-seed-700 bg-seed-700 text-white",
                           active && !complete && "border-sep-500 bg-white text-sep-700",
                           !active && !complete && "border-line bg-white",
                         )}

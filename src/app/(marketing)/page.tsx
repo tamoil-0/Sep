@@ -447,7 +447,7 @@ export default async function HomePage() {
                 </h3>
                 <p className="mt-1 text-caption text-slate-ui">{c.issuer}</p>
                 <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-caption text-slate-ui">
-                  <Check className="size-3.5 text-seed-500" />
+                  <Check className="size-3.5 text-seed-700" />
                   Código de verificación público
                 </p>
               </Card>
@@ -504,7 +504,7 @@ export default async function HomePage() {
                     c.tone === "gold"
                       ? "bg-gold-500/15 text-gold-700"
                       : c.tone === "seed"
-                        ? "bg-seed-500/15 text-seed-700"
+                        ? "bg-seed-700/15 text-seed-700"
                         : "bg-sep-50 text-sep-600"
                   }`}
                 >

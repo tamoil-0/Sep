@@ -64,7 +64,7 @@ export default async function MembresiaPage() {
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-4">
                   {benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-3.5 shrink-0 text-seed-500" />
+                      <Check className="mt-0.5 size-3.5 shrink-0 text-seed-700" />
                       {b}
                     </li>
                   ))}

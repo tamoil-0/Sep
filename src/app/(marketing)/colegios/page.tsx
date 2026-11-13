@@ -109,7 +109,7 @@ export default async function ColegiosPage() {
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
                   {schoolProcess.map((s) => (
                     <li key={s.step} className="rounded-md border border-line p-5">
-                      <span className="tabular text-caption font-semibold text-gold-600">
+                      <span className="tabular text-caption font-semibold text-gold-700">
                         Paso {s.step}
                       </span>
                       <p className="mt-2 text-body-sm font-medium text-ink">
@@ -135,7 +135,7 @@ export default async function ColegiosPage() {
                         key={s.id}
                         className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3"
                       >
-                        <School className="size-4 shrink-0 text-seed-500" />
+                        <School className="size-4 shrink-0 text-seed-700" />
                         <div className="min-w-0">
                           <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
                           <p className="truncate text-caption text-slate-ui">
@@ -172,7 +172,7 @@ export default async function ColegiosPage() {
       <Section tone="muted" className="py-14">
         <Container size="narrow">
           <Card className="text-center">
-            <Check className="mx-auto size-8 text-seed-500" />
+            <Check className="mx-auto size-8 text-seed-700" />
             <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Sin letra chica
             </h2>

@@ -147,7 +147,7 @@ export default function NosotrosPage() {
             {impactChain.map((node, i) => (
               <li key={node.step} className="relative">
                 <Card className="h-full">
-                  <span className="tabular text-caption font-semibold tracking-[0.14em] text-gold-600">
+                  <span className="tabular text-caption font-semibold tracking-[0.14em] text-gold-700">
                     0{i + 1}
                   </span>
                   <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">

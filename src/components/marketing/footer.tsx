@@ -46,7 +46,7 @@ export function Footer() {
             </div>
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1.5 ring-1 ring-inset ring-white/15">
-              <span className="size-1.5 rounded-full bg-seed-500" />
+              <span className="size-1.5 rounded-full bg-seed-700" />
               <span className="text-caption text-white/70">
                 Organización juvenil reconocida por SENAJU
               </span>

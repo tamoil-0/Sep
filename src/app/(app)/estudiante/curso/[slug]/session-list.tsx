@@ -100,7 +100,7 @@ export function SessionList({
                     className={cn(
                       "mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors",
                       s.isCompleted
-                        ? "border-seed-500 bg-seed-500 text-white"
+                        ? "border-seed-700 bg-seed-700 text-white"
                         : "border-line bg-white text-transparent hover:border-sep-400",
                       busy === s.id && "opacity-60",
                     )}
