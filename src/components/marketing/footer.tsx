@@ -26,10 +26,10 @@ export function Footer() {
               Nacimos en Casma, Áncash, en abril de 2024.
             </p>
 
-            <div className="mt-6 space-y-2.5 text-body-sm">
+            <div className="mt-5 text-body-sm">
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="flex items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
+                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
               >
                 <Mail className="size-4 shrink-0" />
                 <span className="break-all">{siteConfig.contact.email}</span>
@@ -38,7 +38,7 @@ export function Footer() {
                 href={siteConfig.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
+                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
               >
                 <MessageCircle className="size-4 shrink-0" />
                 {siteConfig.contact.whatsappDisplay}

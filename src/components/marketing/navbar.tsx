@@ -97,7 +97,7 @@ export function Navbar() {
         <nav className="flex h-16 items-center justify-between gap-8">
           <Link
             href="/"
-            className="shrink-0 transition-opacity hover:opacity-80"
+            className="flex min-h-control shrink-0 items-center transition-opacity hover:opacity-80"
             aria-label="Inicio — SEP"
           >
             <Logo className="h-10" />

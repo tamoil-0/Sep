@@ -63,7 +63,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           autoComplete="email"
           placeholder="tu@correo.com"
           className={cn(
-            "h-control flex-1 rounded-sm border px-4 text-body-sm outline-none transition-colors",
+            "h-control w-full rounded-sm border px-4 text-body-sm sm:w-auto sm:flex-1 outline-none transition-colors",
             inverted
               ? "border-white/25 bg-white/10 text-white placeholder:text-white/45 focus:border-gold-500"
               : "border-line bg-white text-ink placeholder:text-mist focus:border-sep-400",

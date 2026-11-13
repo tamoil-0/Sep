@@ -25,6 +25,7 @@ import { CourseMedia } from "@/components/marketing/course-media";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
+import { ArrowLink } from "@/components/ui/arrow-link";
 import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
 import {
   ExperienceGallery,
@@ -126,7 +127,7 @@ export default async function HomePage() {
 
       {/* ═══ 3 · ACTUALIDAD — solo aparece cuando hay contenido publicado ═ */}
       {latestPosts.length > 0 && (
-        <Section id="actualidad" className="py-14 sm:py-20">
+        <Section id="actualidad">
           <Container size="wide">
             <div className="flex flex-wrap items-end justify-between gap-5">
               <SectionHeader
@@ -205,7 +206,7 @@ export default async function HomePage() {
                 href: "/empresas",
               },
             ].map((audience) => (
-              <Card key={audience.title} interactive className="flex h-full flex-col p-6">
+              <Card key={audience.title} interactive className="relative flex h-full flex-col p-6">
                 <span className="flex size-11 items-center justify-center rounded-md bg-sep-50 text-sep-700">
                   <audience.icon className="size-5" />
                 </span>
@@ -215,13 +216,9 @@ export default async function HomePage() {
                 <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                   {audience.body}
                 </p>
-                <Link
-                  href={audience.href}
-                  className="mt-5 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
-                >
+                <ArrowLink href={audience.href} stretched className="mt-5">
                   {audience.cta}
-                  <ArrowRight className="size-3.5" />
-                </Link>
+                </ArrowLink>
               </Card>
             ))}
           </div>
@@ -378,7 +375,7 @@ export default async function HomePage() {
       </Section>
 
       {/* ═══ 6 · SILP ═════════════════════════════════════ */}
-      <Section tone="muted" className="py-14">
+      <Section tone="muted">
         <Container size="wide">
           <div className="overflow-hidden rounded-lg border border-line bg-white">
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
@@ -402,7 +399,7 @@ export default async function HomePage() {
                     </p>
                     <p className="mt-1 text-caption text-slate-ui">Tarifa social</p>
                   </div>
-                  <Button href="/silp" variant="gradient" prefetch>
+                  <Button href="/silp" prefetch>
                     Ver el programa
                     <ArrowRight className="size-4" />
                   </Button>
@@ -452,10 +449,10 @@ export default async function HomePage() {
                 </p>
               </Card>
             ))}
-            <Card className="border-dashed bg-surface-1">
+            <Card className="flex flex-col items-start justify-center border-dashed bg-surface-1">
               <Badge>En trámite</Badge>
-              <h3 className="mt-3 font-display text-body font-semibold text-ink">
-                CERTIFICADO INTERNACIONAL
+              <h3 className="mt-3 font-display text-body font-semibold text-graphite">
+                Certificado internacional
               </h3>
             </Card>
           </div>
@@ -498,14 +495,14 @@ export default async function HomePage() {
                 tone: "brand" as const,
               },
             ].map((c) => (
-              <Card key={c.title} interactive className="flex flex-col p-7">
+              <Card key={c.title} interactive className="relative flex flex-col p-6">
                 <span
                   className={`flex size-11 items-center justify-center rounded-md ${
                     c.tone === "gold"
-                      ? "bg-gold-500/15 text-gold-700"
+                      ? "bg-gold-50 text-gold-700"
                       : c.tone === "seed"
-                        ? "bg-seed-700/15 text-seed-700"
-                        : "bg-sep-50 text-sep-600"
+                        ? "bg-seed-50 text-seed-700"
+                        : "bg-sep-50 text-sep-700"
                   }`}
                 >
                   <c.icon className="size-5" />
@@ -518,14 +515,9 @@ export default async function HomePage() {
                   {c.body}
                 </p>
 
-                <Link
-                  href={c.href}
-                  prefetch={false}
-                  className="mt-5 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:underline"
-                >
+                <ArrowLink href={c.href} prefetch={false} stretched className="mt-5">
                   {c.cta}
-                  <ArrowRight className="size-3.5" />
-                </Link>
+                </ArrowLink>
               </Card>
             ))}
           </div>
@@ -594,14 +586,9 @@ export default async function HomePage() {
               <div className="mt-8">
                 <FaqAccordion items={faqs.slice(0, 5)} />
               </div>
-              <Link
-                href="/faq"
-                prefetch={false}
-                className="mt-6 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:underline"
-              >
+              <ArrowLink href="/faq" prefetch={false} className="mt-6">
                 Ver todas
-                <ArrowRight className="size-3.5" />
-              </Link>
+              </ArrowLink>
             </div>
 
             <div>
@@ -615,9 +602,6 @@ export default async function HomePage() {
                 <div className="mt-5">
                   <NewsletterForm />
                 </div>
-                <p className="mt-4 text-caption text-mist">
-                  Puedes darte de baja cuando quieras.
-                </p>
               </Card>
             </div>
           </div>

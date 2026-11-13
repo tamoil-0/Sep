@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowLink } from "@/components/ui/arrow-link";
 
 import { Badge, Card } from "@/components/ui/primitives";
 import { cn, formatDate } from "@/lib/utils";
@@ -89,13 +89,9 @@ export function NewsCard({
           </p>
         )}
 
-        <Link
-          href={`/blog/${post.slug}`}
-          className="mt-5 inline-flex w-fit items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
-        >
+        <ArrowLink href={`/blog/${post.slug}`} className="mt-5">
           Ver noticia
-          <ArrowRight className="size-3.5" />
-        </Link>
+        </ArrowLink>
       </div>
     </Card>
   );
