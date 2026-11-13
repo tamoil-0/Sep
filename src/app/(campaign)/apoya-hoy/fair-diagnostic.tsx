@@ -137,7 +137,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
     return (
       <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
         <div aria-hidden className="absolute inset-0 sep-gradient opacity-[0.06]" />
-        <div className="relative w-full max-w-lg rounded-xl border border-line bg-white px-6 py-10 text-center shadow-elevated sm:px-10">
+        <div className="relative w-full max-w-lg rounded-lg border border-line bg-white px-6 py-10 text-center shadow-elevated sm:px-10">
           <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-500 text-white ">
             <PartyPopper className="size-8" />
           </span>
@@ -168,7 +168,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
     return (
       <div className="relative min-h-dvh overflow-hidden px-4 py-5 sm:flex sm:items-center sm:justify-center sm:px-6 sm:py-10">
         <div aria-hidden className="absolute inset-x-0 top-0 h-[48%] sep-gradient" />
-        <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-xl border border-white/20 bg-white shadow-elevated">
+        <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-lg border border-white/20 bg-white shadow-elevated">
           <div className="sep-gradient px-6 pb-8 pt-6 text-white sm:px-9 sm:pt-8">
             <Logo variant="white" className="h-14" />
             <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-ink ">
@@ -244,8 +244,8 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
   const moduleMeta = MODULES[moduleIndex];
 
   return (
-    <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col bg-white sm:min-h-0 sm:my-8 sm:rounded-xl sm:border sm:border-line sm:shadow-elevated">
-      <header className="sticky top-0 z-10 border-b border-line bg-white px-4 pb-3 pt-4  sm:rounded-t-[24px] sm:px-7 sm:pt-5">
+    <div className="mx-auto flex min-h-dvh w-full max-w-3xl flex-col bg-white sm:min-h-0 sm:my-8 sm:rounded-lg sm:border sm:border-line sm:shadow-elevated">
+      <header className="sticky top-0 z-10 border-b border-line bg-white px-4 pb-3 pt-4  sm:rounded-t-lg sm:px-7 sm:pt-5">
         <div className="flex items-center justify-between gap-4">
           <Logo className="h-10" />
           <span className="tabular text-xs font-semibold text-slate-ui">
@@ -331,7 +331,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
         )}
       </section>
 
-      <footer className="sticky bottom-0 border-t border-line bg-white px-4 py-3  sm:rounded-b-[24px] sm:px-8 sm:py-4">
+      <footer className="sticky bottom-0 border-t border-line bg-white px-4 py-3  sm:rounded-b-lg sm:px-8 sm:py-4">
         <div className="flex items-center justify-between gap-3">
           <button
             type="button"

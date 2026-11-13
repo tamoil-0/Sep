@@ -102,7 +102,7 @@ export function HeroPhoto() {
         priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
         label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-xl border border-white/20"
+        className="aspect-[4/3] min-h-0 rounded-lg border border-white/20"
         imageClassName="object-[52%_50%]"
       />
     </div>
