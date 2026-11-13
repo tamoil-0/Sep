@@ -26,9 +26,9 @@ export const metadata: Metadata = {
   description: siteConfig.seo.description,
   applicationName: siteConfig.shortName,
   icons: {
-    icon: [{ url: "/icon", type: "image/png", sizes: "64x64" }],
-    shortcut: "/icon",
-    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+    icon: [{ url: "/icon.png", type: "image/png", sizes: "64x64" }],
+    shortcut: "/icon.png",
+    apple: [{ url: "/apple-icon.png", type: "image/png", sizes: "180x180" }],
   },
   keywords: [...siteConfig.seo.keywords],
   authors: [{ name: siteConfig.name, url: siteConfig.url }],
