@@ -34,17 +34,17 @@ export default function RegistroPage() {
             <li key={role}>
               <Link
                 href={`/registro/${role}`}
-                className="group flex min-h-control items-start gap-4 rounded-md border border-line bg-white p-5 transition-[border-color,box-shadow] hover:border-sep-300 "
+                className="group flex min-h-control items-start gap-4 rounded-md border border-line bg-white p-5 transition-colors duration-150 hover:border-sep-300 hover:bg-surface-1/50"
               >
-                <span className="flex size-control shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600 transition-colors group-hover:sep-gradient group-hover:text-white">
-                  <Icon className="size-5" />
+                <span className="flex size-control shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600 transition-colors duration-150 group-hover:bg-sep-600 group-hover:text-white">
+                  <Icon aria-hidden className="size-icon-lg" />
                 </span>
                 <span className="flex-1">
                   <span className="flex items-center justify-between gap-2">
                     <span className="font-display text-body font-semibold text-ink">
                       {meta.label}
                     </span>
-                    <ArrowRight className="size-4 shrink-0 text-mist transition-colors group-hover:translate-x-0.5 group-hover:text-sep-600" />
+                    <ArrowRight aria-hidden className="size-icon-sm shrink-0 text-mist transition-[color,transform] duration-150 group-hover:translate-x-0.5 group-hover:text-sep-600" />
                   </span>
                   <span className="mt-1 block text-body-sm leading-relaxed text-slate-ui">
                     {meta.description}

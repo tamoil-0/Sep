@@ -49,14 +49,14 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
       {/* Formulario */}
       <main id="contenido" className="flex min-h-dvh min-w-0 flex-col px-4 py-5 sm:px-8 sm:py-7 lg:px-10 xl:px-16">
         <div className="mx-auto flex w-full max-w-xl items-center justify-between">
-          <Link href="/" className="lg:hidden">
+          <Link href="/" className="flex min-h-control items-center lg:hidden" aria-label="Inicio — SEP">
             <Logo className="h-9" />
           </Link>
           <Link
             href="/"
-            className="ml-auto inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
+            className="ml-auto inline-flex min-h-control items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
           >
-            <ArrowLeft className="size-4" />
+            <ArrowLeft aria-hidden className="size-icon-sm" />
             Volver al inicio
           </Link>
         </div>
@@ -65,7 +65,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="w-full max-w-md">
             {children}
             <ContextualHelp
-              className="mt-6 border-0 bg-transparent px-0 py-2 shadow-none"
+              className="mt-10 rounded-none border-0 border-t border-line bg-transparent px-0 pb-0 pt-6 shadow-none"
               description="Si el correo no llega o no puedes continuar, escríbenos indicando el paso en el que estás."
             />
           </div>
