@@ -181,7 +181,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         s
           .from("certificates")
           .select(
-            "id, verification_code, status, issued_at, profiles(full_name, email), certificate_types(name, issuer, kind)",
+            "id, verification_code, status, issued_at, profiles!certificates_user_id_fkey(full_name, email), certificate_types(name, issuer, kind)",
           )
           .order("created_at", { ascending: false })
           .limit(200),
@@ -337,7 +337,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         render: (e: AdminRow) => (
           <div>
             <p className="font-medium text-ink">{e["title"]}</p>
-            <p className="mt-0.5 text-caption capitalize text-slate-ui">
+            <p className="mt-0.5 text-caption text-slate-ui first-letter:uppercase">
               {formatDateTime(e["starts_at"])}
             </p>
           </div>
@@ -476,7 +476,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
       const [postsResult, commentsResult] = await Promise.all([
         s
           .from("posts")
-          .select("id, content, created_at, likes_count, is_pinned, is_hidden, profiles(full_name, region)")
+          .select("id, content, created_at, likes_count, is_pinned, is_hidden, profiles!posts_user_id_fkey(full_name, region)")
           .order("created_at", { ascending: false })
           .limit(80),
         s.from("comments").select("id", { count: "exact", head: true }),

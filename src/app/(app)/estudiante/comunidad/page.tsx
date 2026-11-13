@@ -16,7 +16,7 @@ export default async function ComunidadPage() {
       supabase
         .from("posts")
         .select(
-          "id, content, created_at, likes_count, is_pinned, user_id, profiles(full_name, region, avatar_url)",
+          "id, content, created_at, likes_count, is_pinned, user_id, profiles!posts_user_id_fkey(full_name, region, avatar_url)",
         )
         .eq("is_hidden", false)
         .order("is_pinned", { ascending: false })
