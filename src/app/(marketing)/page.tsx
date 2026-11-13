@@ -78,7 +78,7 @@ export default async function HomePage() {
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
-              <h1 className="mt-4 font-display text-h1 font-bold leading-[1.06] tracking-[-0.035em] text-ink lg:text-[3.5rem]">
+              <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
                 Ideas jóvenes que se convierten en
                 <span className="text-sep-700"> proyectos con impacto.</span>
               </h1>

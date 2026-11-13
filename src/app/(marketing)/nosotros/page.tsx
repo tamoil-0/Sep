@@ -49,7 +49,7 @@ export default function NosotrosPage() {
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
             <div className="max-w-2xl">
             <Badge>Desde Casma, Áncash · 7 de abril de 2024</Badge>
-            <h1 className="mt-4 font-display text-h1 font-bold leading-[1.08] text-ink lg:text-[3.5rem]">
+            <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Llevamos la innovación al{" "}
               <span className="text-sep-700">territorio del talento</span>, no al revés.
             </h1>

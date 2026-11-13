@@ -6,6 +6,7 @@ const twMerge = extendTailwindMerge({
     theme: {
       text: [
         "display",
+        "hero",
         "h1",
         "h2",
         "h3",

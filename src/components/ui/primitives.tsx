@@ -153,7 +153,7 @@ export function PageHero({
             {eyebrow}
             <h1
               className={cn(
-                "mt-4 font-display text-h1 font-bold lg:text-[3.5rem] lg:leading-[1.04]",
+                "mt-4 font-display text-h1 font-bold lg:text-hero",
                 inverted ? "text-white" : "text-ink",
               )}
             >

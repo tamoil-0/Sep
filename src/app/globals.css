@@ -89,6 +89,10 @@
   --text-caption: 0.75rem;
   --text-caption--line-height: 1.5;
   --text-caption--letter-spacing: 0.02em;
+  /* H1 de los heros de marketing en desktop (se usa como lg:text-hero). */
+  --text-hero: 3.5rem;
+  --text-hero--line-height: 1.06;
+  --text-hero--letter-spacing: -0.03em;
 
   /* ── Radios ── */
   --radius-sm: 6px;

@@ -60,7 +60,7 @@ export default function VoluntariadoPage() {
         <Container size="wide" className="relative py-10 sm:py-16">
           <div className="max-w-2xl">
             <Badge>{totalPositions} vacantes abiertas</Badge>
-            <h1 className="mt-4 font-display text-h1 font-bold leading-[1.08] text-ink lg:text-[3.5rem]">
+            <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Forma parte del equipo que{" "}
               <span className="text-sep-700">democratiza la innovación</span>
             </h1>
