@@ -25,7 +25,7 @@ export default function AppError({
         <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-danger-bg text-danger">
           <AlertTriangle className="size-6" />
         </span>
-        <h1 className="mt-5 font-display text-h3 font-semibold text-ink">
+        <h1 className="mt-5 text-h3 font-semibold text-ink">
           No pudimos cargar esta sección
         </h1>
         <p className="mx-auto mt-2 max-w-md text-body-sm leading-6 text-slate-ui">

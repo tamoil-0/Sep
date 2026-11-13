@@ -84,7 +84,7 @@ export function SchoolQueue({ applications }: { applications: SchoolApp[] }) {
           <Card key={a.id} className="p-5">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-2">
-                <p className="font-display text-body font-semibold text-ink">
+                <p className="text-body font-semibold text-ink">
                   {a.schoolName}
                 </p>
                 <StatusBadge status={a.status} />

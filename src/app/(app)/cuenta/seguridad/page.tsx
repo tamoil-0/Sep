@@ -30,7 +30,7 @@ export default async function SeguridadPage() {
               <KeyRound className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
-              <h2 className="font-display text-body font-semibold text-ink">Contraseña</h2>
+              <h2 className="text-body font-semibold text-ink">Contraseña</h2>
               <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">
                 Te enviamos un enlace a tu correo para crear una nueva. No pedimos la
                 anterior: así, si alguien accede a tu sesión, no puede cambiarla sin
@@ -50,7 +50,7 @@ export default async function SeguridadPage() {
             </span>
             <div className="min-w-0 flex-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h2 className="font-display text-body font-semibold text-ink">
+                <h2 className="text-body font-semibold text-ink">
                   Doble factor
                 </h2>
                 {needsMfa && <Badge tone="warning">Obligatorio para tu rol</Badge>}

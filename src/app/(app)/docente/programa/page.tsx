@@ -81,7 +81,7 @@ export default async function DocenteProgramaPage() {
                     {s.number}
                   </span>
                   <div>
-                    <p className="font-display text-body-sm font-semibold text-ink">{s.title}</p>
+                    <p className="text-body-sm font-semibold text-ink">{s.title}</p>
                     {s.subtitle && <p className="mt-0.5 text-caption text-slate-ui">{s.subtitle}</p>}
                     {s.description && (
                       <p className="mt-2 text-body-sm leading-relaxed text-graphite">{s.description}</p>

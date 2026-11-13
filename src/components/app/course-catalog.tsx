@@ -168,7 +168,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                     {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
                   </div>
 
-                  <h3 className="mt-3.5 font-display text-body font-semibold leading-snug text-ink">
+                  <h3 className="mt-3.5 text-body font-semibold leading-snug text-ink">
                     {c.title}
                   </h3>
                   <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">

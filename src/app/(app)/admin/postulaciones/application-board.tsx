@@ -187,7 +187,7 @@ export function ApplicationBoard({
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-display text-body-sm font-semibold text-ink">
+                      <p className="text-body-sm font-semibold text-ink">
                         {v.name}
                       </p>
                       <Badge tone={statusTone[v.status as keyof typeof statusTone] ?? "neutral"}>
@@ -318,7 +318,7 @@ export function ApplicationBoard({
 
                   <div className="min-w-0 flex-1">
                     <div className="flex flex-wrap items-center gap-2">
-                      <p className="font-display text-body-sm font-semibold text-ink">
+                      <p className="text-body-sm font-semibold text-ink">
                         {s.name}
                       </p>
                       <Badge tone={s.approved ? "success" : "warning"}>
@@ -434,7 +434,7 @@ export function ApplicationBoard({
                     </p>
                   </div>
 
-                  <p className="tabular shrink-0 font-display text-body-lg font-semibold text-ink">
+                  <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                     {h.hours} h
                   </p>
 

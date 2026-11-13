@@ -335,7 +335,7 @@ export function UserTable({
           >
             <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
               <div>
-                <p id="roles-dialog-title" className="font-display text-h4 font-semibold text-ink">
+                <p id="roles-dialog-title" className="text-h4 font-semibold text-ink">
                   Gestionar roles de {editing.name}
                 </p>
                 <p className="text-caption text-slate-ui">{editing.email}</p>

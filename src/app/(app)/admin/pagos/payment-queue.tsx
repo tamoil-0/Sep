@@ -170,7 +170,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
 
       {visible.length === 0 ? (
         <Card className="py-10 text-center">
-          <p className="font-display text-body font-semibold text-ink">
+          <p className="text-body font-semibold text-ink">
             {payments.length === 0 ? "Aún no hay pagos registrados" : `No hay pagos en “${TABS.find((item) => item.key === tab)?.label}”`}
           </p>
           <p className="mt-1 text-body-sm text-slate-ui">
@@ -199,7 +199,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
-                    <p className="font-display text-body-sm font-semibold text-ink">
+                    <p className="text-body-sm font-semibold text-ink">
                       {p.buyerName}
                     </p>
                     <Badge tone={statusTone[p.status as keyof typeof statusTone] ?? "neutral"}>
@@ -261,7 +261,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                 </div>
 
                 <div className="text-right">
-                  <p className="tabular font-display text-h4 font-semibold text-ink">
+                  <p className="tabular text-h4 font-semibold text-ink">
                     {formatSoles(p.amountCents)}
                   </p>
                 </div>

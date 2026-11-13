@@ -63,7 +63,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
     return (
       <div className="rounded-md border border-success/25 bg-success-bg p-5 text-center">
         <CircleCheck className="mx-auto size-8 text-success" />
-        <p className="mt-3 font-display text-body font-semibold text-ink">
+        <p className="mt-3 text-body font-semibold text-ink">
           Comprobante recibido
         </p>
         <p className="mx-auto mt-1.5 max-w-sm text-body-sm leading-relaxed text-graphite">

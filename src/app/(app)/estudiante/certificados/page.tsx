@@ -54,7 +54,7 @@ export default async function CertificadosPage() {
                 <div className="bg-sep-800 px-5 py-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <p className="truncate font-display text-body-sm font-semibold text-white">
+                      <p className="truncate text-body-sm font-semibold text-white">
                         {c.type?.name}
                       </p>
                       {c.type?.issuer && (
@@ -137,7 +137,7 @@ export default async function CertificadosPage() {
                           </span>
                         )}
                       </div>
-                      <h3 className="mt-2.5 font-display text-body font-semibold text-ink">
+                      <h3 className="mt-2.5 text-body font-semibold text-ink">
                         {e.course?.title}
                       </h3>
                       <p className="mt-0.5 text-body-sm text-slate-ui">
@@ -195,7 +195,7 @@ export default async function CertificadosPage() {
               <Card key={e.id} className="p-5">
                 <div className="flex items-start justify-between gap-3">
                   <div className="min-w-0">
-                    <p className="truncate font-display text-body-sm font-semibold text-ink">
+                    <p className="truncate text-body-sm font-semibold text-ink">
                       {e.course?.title}
                     </p>
                     <p className="mt-1 flex items-center gap-1.5 text-caption text-slate-ui">
@@ -242,7 +242,7 @@ export default async function CertificadosPage() {
               <div className="flex items-start justify-between gap-3">
                 <div>
                   <div className="flex items-center gap-2">
-                    <h3 className="font-display text-body-sm font-semibold text-ink">
+                    <h3 className="text-body-sm font-semibold text-ink">
                       {t.name}
                     </h3>
                   </div>
@@ -250,7 +250,7 @@ export default async function CertificadosPage() {
                     {t.description}
                   </p>
                 </div>
-                <p className="tabular shrink-0 font-display text-body-lg font-semibold text-ink">
+                <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                   {formatSoles(t.price_cents)}
                 </p>
               </div>

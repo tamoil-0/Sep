@@ -44,7 +44,7 @@ export default async function DocenteCertificadosPage() {
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
                 <div className="bg-sep-800 px-5 py-4">
-                  <p className="font-display text-body-sm font-semibold text-white">{c.type?.name}</p>
+                  <p className="text-body-sm font-semibold text-white">{c.type?.name}</p>
                   {c.type?.issuer && (
                     <p className="mt-0.5 text-caption text-white/65">{c.type.issuer}</p>
                   )}

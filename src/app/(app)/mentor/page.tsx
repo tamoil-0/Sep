@@ -126,7 +126,7 @@ export default async function MentorPage() {
           <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
             Progreso del mes
           </h2>
-          <p className="tabular mt-4 font-display text-h2 font-semibold leading-none text-ink">
+          <p className="tabular mt-4 text-h2 font-semibold leading-none text-ink">
             {monthHours}
             <span className="text-body-lg text-slate-ui"> / {committed} h</span>
           </p>
@@ -152,7 +152,7 @@ export default async function MentorPage() {
               <MessagesSquare className="size-5" />
             </span>
             <div>
-              <h2 className="font-display text-body-lg font-semibold text-ink">
+              <h2 className="text-body-lg font-semibold text-ink">
                 Canal privado de mentores
               </h2>
               <p className="mt-1 max-w-lg text-body-sm text-slate-ui">

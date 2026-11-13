@@ -184,7 +184,7 @@ export default async function AdminDiagnosticoPage({
       <section className="mt-6" aria-labelledby="participants-title">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 id="participants-title" className="font-display text-h4 font-semibold text-ink">
+            <h2 id="participants-title" className="text-h4 font-semibold text-ink">
               Respuestas por persona
             </h2>
             <p className="mt-1 text-body-sm text-slate-ui">
@@ -346,7 +346,7 @@ export default async function AdminDiagnosticoPage({
                   </p>
                   <h2
                     id="response-detail-title"
-                    className="mt-1.5 font-display text-h3 font-semibold"
+                    className="mt-1.5 text-h3 font-semibold"
                   >
                     {selected.name}
                   </h2>
@@ -407,7 +407,7 @@ export default async function AdminDiagnosticoPage({
                       <span className="flex size-7 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
                         {moduleIndex + 1}
                       </span>
-                      <h3 className="font-display text-body-lg font-semibold text-ink">
+                      <h3 className="text-body-lg font-semibold text-ink">
                         {moduleTitle}
                       </h3>
                     </div>
@@ -442,7 +442,7 @@ export default async function AdminDiagnosticoPage({
 
       <section className="mt-10" aria-labelledby="trends-title">
         <div className="mb-4">
-          <h2 id="trends-title" className="font-display text-h4 font-semibold text-ink">
+          <h2 id="trends-title" className="text-h4 font-semibold text-ink">
             Tendencias generales
           </h2>
           <p className="mt-1 text-body-sm text-slate-ui">
@@ -468,7 +468,7 @@ export default async function AdminDiagnosticoPage({
                       <p className="tabular text-caption font-semibold text-gold-700">
                         PREGUNTA {number}
                       </p>
-                      <h3 className="mt-1.5 font-display text-body font-semibold leading-snug text-ink">
+                      <h3 className="mt-1.5 text-body font-semibold leading-snug text-ink">
                         {question.question}
                       </h3>
                     </div>

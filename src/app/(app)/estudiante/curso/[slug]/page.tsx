@@ -71,7 +71,7 @@ export default async function CursoPage({
             {course.is_free && <Badge tone="seed">Gratuito</Badge>}
           </div>
 
-          <h1 className="mt-3.5 font-display text-h2 font-semibold leading-tight text-ink">
+          <h1 className="mt-3.5 text-h2 font-semibold leading-tight text-ink">
             {course.title}
           </h1>
           {course.subtitle && (

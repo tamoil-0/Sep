@@ -57,7 +57,7 @@ export default async function AdminImpactoPage() {
           <p className="text-caption uppercase tracking-eyebrow text-white/70">
             Semillero de Emprendedores Perú
           </p>
-          <h2 className="mt-2 font-display text-h2 font-semibold">
+          <h2 className="mt-2 text-h2 font-semibold">
             Reporte de impacto
           </h2>
           <p className="mt-1 text-body-sm text-white/75">
@@ -229,7 +229,7 @@ export default async function AdminImpactoPage() {
             [10, "Reducción de las desigualdades"],
           ].map(([goal, name]) => (
             <Card key={goal} className="p-5">
-              <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
+              <p className="tabular text-h2 font-bold leading-none text-sep-700">
                 ODS {goal}
               </p>
               <p className="mt-2 text-body-sm font-medium text-ink">{name}</p>

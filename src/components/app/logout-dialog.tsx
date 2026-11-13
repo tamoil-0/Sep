@@ -110,7 +110,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
 
             <h2
               id="logout-title"
-              className="mt-5 font-display text-h4 font-semibold text-ink"
+              className="mt-5 text-h4 font-semibold text-ink"
             >
               Cerrar sesión en este dispositivo
             </h2>
@@ -171,7 +171,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               <Logo className="h-16" variant="white" />
             </div>
 
-            <p className="mt-8 font-display text-h3 font-semibold text-white animate-fade-up">
+            <p className="mt-8 text-h3 font-semibold text-white animate-fade-up">
               {firstName ? `Hasta pronto, ${firstName}` : "Hasta pronto"}
             </p>
             <p

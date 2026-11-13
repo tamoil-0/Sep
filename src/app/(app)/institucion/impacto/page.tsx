@@ -69,7 +69,7 @@ export default async function ImpactoPage() {
           <p className="text-caption uppercase tracking-eyebrow text-white/70">
             Reporte de impacto social
           </p>
-          <h2 className="mt-2 font-display text-h2 font-semibold leading-tight">
+          <h2 className="mt-2 text-h2 font-semibold leading-tight">
             {inst?.name ?? "Institución"}
           </h2>
           <p className="mt-1 text-body-sm text-white/75">
@@ -160,7 +160,7 @@ export default async function ImpactoPage() {
         <div className="grid gap-3 sm:grid-cols-3">
           {report.sdg.map((g) => (
             <Card key={g.goal} className="p-5">
-              <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
+              <p className="tabular text-h2 font-bold leading-none text-sep-700">
                 ODS {g.goal}
               </p>
               <p className="mt-2.5 text-body-sm font-medium text-ink">{g.name}</p>

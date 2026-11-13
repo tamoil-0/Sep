@@ -66,7 +66,7 @@ export default async function SpeakerInvitacionesPage() {
               <Card key={i.id} className="p-5">
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="min-w-0 flex-1">
-                    <p className="font-display text-body font-semibold text-ink">
+                    <p className="text-body font-semibold text-ink">
                       {i.topic ?? "Charla SEP"}
                     </p>
                     {i.event && (

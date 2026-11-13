@@ -87,7 +87,7 @@ export default async function MentoradosPage() {
                       {initials(m.mentee?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate font-display text-body-sm font-semibold text-ink">
+                      <p className="truncate text-body-sm font-semibold text-ink">
                         {m.mentee?.full_name}
                       </p>
                       <p className="truncate text-caption text-slate-ui">

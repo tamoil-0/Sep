@@ -93,7 +93,7 @@ export default async function MentorHorasPage() {
                         {h.activity}
                       </p>
                     </div>
-                    <p className="tabular shrink-0 font-display text-body-lg font-semibold text-ink">
+                    <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                       {h.hours} h
                     </p>
                   </li>

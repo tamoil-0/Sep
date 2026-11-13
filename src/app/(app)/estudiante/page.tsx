@@ -131,7 +131,7 @@ export default async function EstudiantePage() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="truncate font-display text-body-sm font-semibold text-ink">
+                      <h3 className="truncate text-body-sm font-semibold text-ink">
                         {course?.title}
                       </h3>
                       <p className="mt-0.5 truncate text-caption text-slate-ui">
@@ -227,7 +227,7 @@ export default async function EstudiantePage() {
             <Card key={c.slug} className="flex items-start justify-between gap-4 p-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="font-display text-body-sm font-semibold text-ink">
+                  <h3 className="text-body-sm font-semibold text-ink">
                     {c.name}
                   </h3>
                   {c.recommended && <Badge tone="gold">Recomendado</Badge>}
@@ -236,7 +236,7 @@ export default async function EstudiantePage() {
                   {c.description}
                 </p>
               </div>
-              <p className="tabular shrink-0 font-display text-body-lg font-semibold text-ink">
+              <p className="tabular shrink-0 text-body-lg font-semibold text-ink">
                 {formatSoles(c.priceCents)}
               </p>
             </Card>

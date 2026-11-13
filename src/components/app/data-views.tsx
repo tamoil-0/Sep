@@ -209,7 +209,7 @@ export function ComingSoon({
         <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-sep-50 text-sep-600">
           {icon}
         </span>
-        <h2 className="mt-5 font-display text-h4 font-semibold text-ink">
+        <h2 className="mt-5 text-h4 font-semibold text-ink">
           {title}
         </h2>
         <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">

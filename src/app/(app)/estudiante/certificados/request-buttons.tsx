@@ -85,7 +85,7 @@ export function RequestCertificateButtons({
             </div>
 
             <div className="shrink-0 text-right">
-              <p className="tabular font-display text-body-lg font-semibold text-ink">
+              <p className="tabular text-body-lg font-semibold text-ink">
                 {formatSoles(t.priceCents)}
               </p>
               {!t.owned && (

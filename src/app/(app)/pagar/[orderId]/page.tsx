@@ -81,7 +81,7 @@ export default async function CheckoutPage({
               <div className="flex items-start gap-3.5">
                 <CircleCheck className="mt-0.5 size-5 shrink-0 text-success" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body font-semibold text-ink">
                     Pago confirmado
                   </h2>
                   <p className="mt-1 text-body-sm text-graphite">
@@ -105,7 +105,7 @@ export default async function CheckoutPage({
               <div className="flex items-start gap-3.5">
                 <Clock className="mt-0.5 size-5 shrink-0 text-warning" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body font-semibold text-ink">
                     Estamos revisando tu pago
                   </h2>
                   <p className="mt-1 text-body-sm leading-relaxed text-graphite">
@@ -126,7 +126,7 @@ export default async function CheckoutPage({
               <div className="flex items-start gap-3.5">
                 <CircleAlert className="mt-0.5 size-5 shrink-0 text-danger" />
                 <div>
-                  <h2 className="font-display text-body font-semibold text-ink">
+                  <h2 className="text-body font-semibold text-ink">
                     No pudimos validar tu pago
                   </h2>
                   <p className="mt-1 text-body-sm leading-relaxed text-graphite">
@@ -149,7 +149,7 @@ export default async function CheckoutPage({
                     <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       1
                     </span>
-                    <h2 className="font-display text-body font-semibold text-ink">
+                    <h2 className="text-body font-semibold text-ink">
                       Paga con Yape, Plin o transferencia
                     </h2>
                   </div>
@@ -178,7 +178,7 @@ export default async function CheckoutPage({
                         Número
                       </p>
                       <div className="mt-1 flex items-center gap-2">
-                        <p className="tabular font-display text-body-lg font-semibold text-ink">
+                        <p className="tabular text-body-lg font-semibold text-ink">
                           {qr.number}
                         </p>
                         <CopyButton value={qr.number} label="Copiar número" />
@@ -190,7 +190,7 @@ export default async function CheckoutPage({
                       <p className="text-caption uppercase tracking-eyebrow text-slate-ui">
                         Monto exacto
                       </p>
-                      <p className="tabular mt-1 font-display text-h2 font-bold leading-none text-sep-700">
+                      <p className="tabular mt-1 text-h2 font-bold leading-none text-sep-700">
                         {formatSoles(order.amount_cents)}
                       </p>
                     </div>
@@ -220,7 +220,7 @@ export default async function CheckoutPage({
                     <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       2
                     </span>
-                    <h2 className="font-display text-body font-semibold text-ink">
+                    <h2 className="text-body font-semibold text-ink">
                       Sube tu comprobante
                     </h2>
                   </div>
@@ -235,7 +235,7 @@ export default async function CheckoutPage({
               <Card className="mt-4 border-dashed">
                 <div className="flex flex-wrap items-center justify-between gap-4">
                   <div>
-                    <h3 className="font-display text-body-sm font-semibold text-ink">
+                    <h3 className="text-body-sm font-semibold text-ink">
                       ¿Prefieres pagar con tarjeta?
                     </h3>
                     <p className="mt-1 text-body-sm text-slate-ui">
@@ -259,7 +259,7 @@ export default async function CheckoutPage({
             </h2>
 
             <div className="mt-4 border-b border-line pb-4">
-              <p className="font-display text-body font-semibold text-ink">
+              <p className="text-body font-semibold text-ink">
                 {itemName}
               </p>
               {itemDetail && (
@@ -269,7 +269,7 @@ export default async function CheckoutPage({
 
             <div className="flex items-baseline justify-between py-4">
               <span className="text-body-sm text-slate-ui">Total</span>
-              <span className="tabular font-display text-h2 font-bold leading-none text-ink">
+              <span className="tabular text-h2 font-bold leading-none text-ink">
                 {formatSoles(order.amount_cents)}
               </span>
             </div>

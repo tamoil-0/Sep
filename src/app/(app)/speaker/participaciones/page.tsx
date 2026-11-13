@@ -89,7 +89,7 @@ export default async function SpeakerParticipacionesPage() {
         <div className="flex items-start gap-3.5">
           <Award className="mt-0.5 size-5 shrink-0 text-gold-700" />
           <div>
-            <h3 className="font-display text-body font-semibold text-ink">
+            <h3 className="text-body font-semibold text-ink">
               Tu constancia de speaker
             </h3>
             <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">

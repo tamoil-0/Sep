@@ -49,11 +49,11 @@ export default async function CuentaPage() {
       <Card className="overflow-hidden p-0">
         <div className="bg-sep-800 px-7 py-7">
           <div className="flex flex-wrap items-center gap-5">
-            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 font-display text-body-lg font-semibold text-ink">
+            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 text-body-lg font-semibold text-ink">
               {initials(profile?.full_name || user.email)}
             </span>
             <div className="min-w-0">
-              <h2 className="font-display text-h3 font-semibold text-white">
+              <h2 className="text-h3 font-semibold text-white">
                 {profile?.full_name || "Sin nombre"}
               </h2>
               <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-body-sm text-white/70">
@@ -154,7 +154,7 @@ export default async function CuentaPage() {
           <div className="flex items-start gap-3.5">
             <KeyRound className="mt-0.5 size-5 shrink-0 text-slate-ui" />
             <div>
-              <h3 className="font-display text-body-sm font-semibold text-ink">
+              <h3 className="text-body-sm font-semibold text-ink">
                 Acceso, rectificación, cancelación y oposición
               </h3>
               <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">
