@@ -62,18 +62,18 @@ export function SignupForm({ role }: { role: SignupRole }) {
     return (
       <div className="rounded-md border border-success/25 bg-success-bg p-6 text-center">
         <CheckCircle2 className="mx-auto size-9 text-success" />
-        <p className="mt-4 font-display text-lg font-semibold text-ink">
+        <p className="mt-4 font-display text-body-lg font-semibold text-ink">
           Tu cuenta está lista para confirmar
         </p>
-        <p className="mt-2 text-sm leading-relaxed text-graphite">
+        <p className="mt-2 text-body-sm leading-relaxed text-graphite">
           Enviamos el enlace de confirmación a <strong>{maskEmail(state.submittedEmail)}</strong>.
         </p>
-        <ol className="mx-auto mt-4 max-w-sm space-y-2 text-left text-xs leading-relaxed text-slate-ui">
+        <ol className="mx-auto mt-4 max-w-sm space-y-2 text-left text-caption leading-relaxed text-slate-ui">
           <li><strong className="text-graphite">1.</strong> Abre el mensaje de SEP y confirma tu correo.</li>
           <li><strong className="text-graphite">2.</strong> Inicia sesión y completa el diagnóstico de 4–6 minutos.</li>
           <li><strong className="text-graphite">3.</strong> Entrarás al panel correspondiente a tu perfil.</li>
         </ol>
-        <p className="mt-4 text-xs leading-relaxed text-slate-ui">
+        <p className="mt-4 text-caption leading-relaxed text-slate-ui">
           Puede tardar uno o dos minutos. Revisa spam y promociones antes de volver a intentarlo.
         </p>
         <div className="mt-5 flex flex-col justify-center gap-2 sm:flex-row">
@@ -185,14 +185,14 @@ export function SignupForm({ role }: { role: SignupRole }) {
           </div>
 
           <fieldset>
-            <legend className="mb-2 text-sm font-medium text-graphite">
+            <legend className="mb-2 text-body-sm font-medium text-graphite">
               ¿Qué te interesa aprender?
             </legend>
             <div className="flex flex-wrap gap-2">
               {INTEREST_AREAS.map((area) => (
                 <label
                   key={area}
-                  className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-xs text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
+                  className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
                 >
                   <input type="checkbox" name="interests" value={area} className="sr-only" />
                   {area}
@@ -369,7 +369,7 @@ export function SignupForm({ role }: { role: SignupRole }) {
       </div>
 
       {e?.terms?.length ? (
-        <p className="text-xs text-danger" role="alert">
+        <p className="text-caption text-danger" role="alert">
           {e.terms[0]}
         </p>
       ) : null}

@@ -77,7 +77,7 @@ export function MediaImage({
       {label && (
         <figcaption
           className={cn(
-            "absolute inset-x-0 bottom-0 flex items-center gap-2 p-4 text-xs font-medium sm:p-5",
+            "absolute inset-x-0 bottom-0 flex items-center gap-2 p-4 text-caption font-medium sm:p-5",
             kind === "photo" ? "text-white" : "bg-white text-graphite",
           )}
         >

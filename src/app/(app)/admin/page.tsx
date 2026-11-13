@@ -81,7 +81,7 @@ export default async function AdminPage() {
               <h2 className="font-display text-body-sm font-semibold text-ink">
                 Recordatorio de seguridad
               </h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+              <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
                 El acceso a esta sección requiere MFA activo. Toda asignación o revocación
                 de roles queda registrada en el log de auditoría con tu identidad, IP y
                 marca de tiempo.

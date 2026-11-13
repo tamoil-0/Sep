@@ -42,7 +42,7 @@ export default async function PostularPage({
       <Container size="wide">
         <Link
           href="/voluntariado"
-          className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+          className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
         >
           <ArrowLeft className="size-4" />
           Todos los roles
@@ -66,19 +66,19 @@ export default async function PostularPage({
               {role.description}
             </p>
 
-            <p className="mt-5 inline-flex items-center gap-2 text-sm text-graphite">
+            <p className="mt-5 inline-flex items-center gap-2 text-body-sm text-graphite">
               <Clock className="size-4 text-mist" />
               {role.hoursPerWeek} horas por semana
             </p>
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <Card className="p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                   Requisitos
                 </p>
                 <ul className="mt-3.5 space-y-2.5">
                   {role.requirements.map((r) => (
-                    <li key={r} className="flex items-start gap-2.5 text-sm text-graphite">
+                    <li key={r} className="flex items-start gap-2.5 text-body-sm text-graphite">
                       <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                       {r}
                     </li>
@@ -87,7 +87,7 @@ export default async function PostularPage({
               </Card>
 
               <Card className="p-6">
-                <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                   Proceso
                 </p>
                 <ol className="mt-3.5 space-y-3">
@@ -97,8 +97,8 @@ export default async function PostularPage({
                         {s.step}
                       </span>
                       <div>
-                        <p className="text-sm font-medium text-ink">{s.title}</p>
-                        <p className="text-xs text-slate-ui">{s.detail}</p>
+                        <p className="text-body-sm font-medium text-ink">{s.title}</p>
+                        <p className="text-caption text-slate-ui">{s.detail}</p>
                       </div>
                     </li>
                   ))}
@@ -107,14 +107,14 @@ export default async function PostularPage({
             </div>
 
             <Card className="mt-5 p-6">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                 Lo que ganas
               </p>
               <ul className="mt-4 grid gap-4 sm:grid-cols-2">
                 {role.benefits.map((b) => (
                   <li key={b.title}>
-                    <p className="text-sm font-medium text-ink">{b.title}</p>
-                    <p className="mt-0.5 text-xs leading-relaxed text-slate-ui">
+                    <p className="text-body-sm font-medium text-ink">{b.title}</p>
+                    <p className="mt-0.5 text-caption leading-relaxed text-slate-ui">
                       {b.detail}
                     </p>
                   </li>
@@ -128,7 +128,7 @@ export default async function PostularPage({
             <h2 className="font-display text-h4 font-semibold text-ink">
               Formulario de postulación
             </h2>
-            <p className="mt-1 text-sm text-slate-ui">
+            <p className="mt-1 text-body-sm text-slate-ui">
               Rol: {role.name} · Respondemos en 48 h
             </p>
 

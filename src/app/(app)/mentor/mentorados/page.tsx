@@ -83,14 +83,14 @@ export default async function MentoradosPage() {
               return (
                 <Card key={m.id} className="p-5">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       {initials(m.mentee?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0 flex-1">
                       <p className="truncate font-display text-body-sm font-semibold text-ink">
                         {m.mentee?.full_name}
                       </p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-caption text-slate-ui">
                         {[m.mentee?.career, m.mentee?.university].filter(Boolean).join(" · ") || "—"}
                       </p>
                     </div>
@@ -104,7 +104,7 @@ export default async function MentoradosPage() {
 
                   {prog && (
                     <div className="mt-4">
-                      <div className="flex items-baseline justify-between text-xs">
+                      <div className="flex items-baseline justify-between text-caption">
                         <span className="text-slate-ui">{prog.course}</span>
                         <span className="tabular font-medium text-ink">{prog.progress}%</span>
                       </div>
@@ -113,12 +113,12 @@ export default async function MentoradosPage() {
                   )}
 
                   {m.notes && (
-                    <p className="mt-4 rounded-sm bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
+                    <p className="mt-4 rounded-sm bg-surface-1 p-3.5 text-body-sm leading-relaxed text-graphite">
                       {m.notes}
                     </p>
                   )}
 
-                  <p className="mt-3 text-xs text-mist">Desde el {formatDate(m.started_at)}</p>
+                  <p className="mt-3 text-caption text-mist">Desde el {formatDate(m.started_at)}</p>
                 </Card>
               );
             })}

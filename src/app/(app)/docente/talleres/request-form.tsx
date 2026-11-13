@@ -64,7 +64,7 @@ export function WorkshopRequestForm({
 
   if (!institutionId) {
     return (
-      <p className="rounded-sm border border-warning/30 bg-warning-bg px-4 py-3 text-sm leading-relaxed text-graphite">
+      <p className="rounded-sm border border-warning/30 bg-warning-bg px-4 py-3 text-body-sm leading-relaxed text-graphite">
         Para solicitar un taller primero debes estar vinculado a un colegio de la red.
         Escríbenos y te vinculamos, o inscribe tu colegio desde la página pública.
       </p>
@@ -166,7 +166,7 @@ export function WorkshopRequestForm({
 
       <SubmitButton disabled={false} />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         {institutionName ? `Para ${institutionName}. ` : ""}
         Sin costo. Te contactamos en menos de 72 horas.
       </p>

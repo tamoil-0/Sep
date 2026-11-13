@@ -367,7 +367,7 @@ export function Stat({
       </p>
       <p
         className={cn(
-          "mt-2 text-sm",
+          "mt-2 text-body-sm",
           inverted ? "text-white/70" : "text-slate-ui",
         )}
       >

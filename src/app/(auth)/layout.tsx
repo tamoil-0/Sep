@@ -41,7 +41,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </ul>
         </div>
 
-        <p className="relative text-xs text-white/45">
+        <p className="relative text-caption text-white/45">
           Organización juvenil reconocida por SENAJU · Desde Áncash, 2024
         </p>
       </aside>
@@ -54,7 +54,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           </Link>
           <Link
             href="/"
-            className="ml-auto inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+            className="ml-auto inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
           >
             <ArrowLeft className="size-4" />
             Volver al inicio

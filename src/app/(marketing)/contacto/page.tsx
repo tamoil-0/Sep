@@ -59,7 +59,7 @@ export default function ContactoPage() {
           {channels.map((c) => (
             <Card key={c.label} className="flex flex-col p-6 text-center">
               <c.icon className="mx-auto size-5 text-sep-600" />
-              <p className="mt-4 text-xs uppercase tracking-[0.1em] text-slate-ui">
+              <p className="mt-4 text-caption uppercase tracking-[0.1em] text-slate-ui">
                 {c.label}
               </p>
               {c.href ? (
@@ -74,7 +74,7 @@ export default function ContactoPage() {
               ) : (
                 <p className="mt-1.5 text-body-sm font-medium text-ink">{c.value}</p>
               )}
-              <p className="mt-2.5 flex-1 text-xs leading-relaxed text-slate-ui">
+              <p className="mt-2.5 flex-1 text-caption leading-relaxed text-slate-ui">
                 {c.detail}
               </p>
             </Card>
@@ -82,7 +82,7 @@ export default function ContactoPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <p className="text-center text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <p className="text-center text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             ¿Qué te trae por aquí?
           </p>
           <ul className="mt-5 flex flex-wrap justify-center gap-2.5">
@@ -98,7 +98,7 @@ export default function ContactoPage() {
 
         <div className="mx-auto mt-12 max-w-2xl">
           <Card className="text-center">
-            <p className="text-sm leading-relaxed text-slate-ui">
+            <p className="text-body-sm leading-relaxed text-slate-ui">
               También estamos en{" "}
               {[
                 ["Instagram", siteConfig.social.instagram],

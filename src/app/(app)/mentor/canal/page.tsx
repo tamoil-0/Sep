@@ -60,13 +60,13 @@ export default async function MentorCanalPage() {
               return (
                 <Card key={p.id} className="p-5">
                   <div className="flex gap-3">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       {initials(a?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0">
-                      <p className="text-sm">
+                      <p className="text-body-sm">
                         <span className="font-medium text-ink">{a?.full_name}</span>
-                        <span className="ml-2 text-xs text-mist">{relativeTime(p.created_at)}</span>
+                        <span className="ml-2 text-caption text-mist">{relativeTime(p.created_at)}</span>
                       </p>
                       <p className="mt-1.5 whitespace-pre-line text-body-sm leading-relaxed text-graphite">
                         {p.content}
@@ -85,7 +85,7 @@ export default async function MentorCanalPage() {
           {RESOURCES.map((r) => (
             <Card key={r.title} className="p-5">
               <h3 className="text-body-sm font-medium text-ink">{r.title}</h3>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{r.detail}</p>
+              <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{r.detail}</p>
             </Card>
           ))}
         </div>
@@ -96,16 +96,16 @@ export default async function MentorCanalPage() {
           <ul className="divide-y divide-line">
             {team.map((m) => (
               <li key={m.user_id} className="flex items-center gap-3 px-5 py-3.5">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                   {initials(m.full_name)}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="truncate text-sm font-medium text-ink">{m.full_name}</p>
-                  <p className="truncate text-xs text-slate-ui">
+                  <p className="truncate text-body-sm font-medium text-ink">{m.full_name}</p>
+                  <p className="truncate text-caption text-slate-ui">
                     {m.region ?? "—"} · {m.mentees} mentorados
                   </p>
                 </div>
-                <p className="tabular shrink-0 text-sm font-semibold text-ink">
+                <p className="tabular shrink-0 text-body-sm font-semibold text-ink">
                   {m.approved_hours} h
                 </p>
               </li>

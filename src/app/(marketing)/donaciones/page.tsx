@@ -46,7 +46,7 @@ export default function DonacionesPage() {
               Tu donación llega a{" "}
               <GoldUnderline>quien nadie está atendiendo</GoldUnderline>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               El 100 % de lo que recibimos se usa en formación, mentoría y talleres en
               regiones. Publicamos un reporte de impacto anual con cifras verificables.
             </p>
@@ -71,7 +71,7 @@ export default function DonacionesPage() {
                         <i.icon className="size-5" />
                       </span>
                       <div>
-                        <p className="tabular font-display text-lg font-semibold text-ink">
+                        <p className="tabular font-display text-body-lg font-semibold text-ink">
                           {i.amount}
                         </p>
                         <p className="mt-0.5 text-body-sm leading-relaxed text-slate-ui">
@@ -87,7 +87,7 @@ export default function DonacionesPage() {
                 <h2 className="font-display text-body font-semibold text-ink">
                   Transparencia
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-graphite">
+                <p className="mt-2 text-body-sm leading-relaxed text-graphite">
                   SEP es una organización juvenil reconocida por SENAJU. Cada año
                   publicamos cuántos jóvenes formamos, en qué regiones y con qué
                   resultados. Si donas, recibes ese reporte antes que nadie.
@@ -99,7 +99,7 @@ export default function DonacionesPage() {
               <h2 className="font-display text-h4 font-semibold text-ink">
                 Hacer una donación
               </h2>
-              <p className="mt-1.5 text-sm text-slate-ui">
+              <p className="mt-1.5 text-body-sm text-slate-ui">
                 Única o mensual. Por Yape, Plin o transferencia.
               </p>
 

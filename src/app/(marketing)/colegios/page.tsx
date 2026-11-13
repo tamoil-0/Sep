@@ -41,7 +41,7 @@ export default async function ColegiosPage() {
               Conectamos colegios con{" "}
               <GoldUnderline>universitarios de su región</GoldUnderline>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Universitarios formados por SEP dictan talleres de innovación social a tus
               estudiantes. Sin costo, en su propio idioma y desde su propia realidad.
             </p>
@@ -86,7 +86,7 @@ export default async function ColegiosPage() {
               <ul className="mt-10 space-y-5">
                 {schoolBenefits.map((b, i) => (
                   <li key={b.title} className="flex gap-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-600">
+                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
                       {i + 1}
                     </span>
                     <div>
@@ -103,19 +103,19 @@ export default async function ColegiosPage() {
 
               {/* Proceso */}
               <div className="mt-12">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                   ¿Cómo funciona?
                 </p>
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
                   {schoolProcess.map((s) => (
                     <li key={s.step} className="rounded-md border border-line p-5">
-                      <span className="tabular text-xs font-semibold text-gold-600">
+                      <span className="tabular text-caption font-semibold text-gold-600">
                         Paso {s.step}
                       </span>
                       <p className="mt-2 text-body-sm font-medium text-ink">
                         {s.title}
                       </p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-ui">
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
                         {s.detail}
                       </p>
                     </li>
@@ -126,7 +126,7 @@ export default async function ColegiosPage() {
               {/* Colegios activos */}
               {schools.length > 0 && (
                 <div className="mt-12">
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                  <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                     Colegios en la red
                   </p>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
@@ -137,8 +137,8 @@ export default async function ColegiosPage() {
                       >
                         <School className="size-4 shrink-0 text-seed-500" />
                         <div className="min-w-0">
-                          <p className="truncate text-sm font-medium text-ink">{s.name}</p>
-                          <p className="truncate text-xs text-slate-ui">
+                          <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
+                          <p className="truncate text-caption text-slate-ui">
                             {[s.province, s.region].filter(Boolean).join(", ")}
                           </p>
                         </div>
@@ -157,7 +157,7 @@ export default async function ColegiosPage() {
                 </h2>
                 <Badge tone="seed">Gratis</Badge>
               </div>
-              <p className="mt-1.5 text-sm text-slate-ui">
+              <p className="mt-1.5 text-body-sm text-slate-ui">
                 Te contactamos en menos de 72 horas.
               </p>
 

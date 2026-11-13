@@ -35,7 +35,7 @@ export default async function CursosPage() {
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
               Cursos para convertir ideas en acción
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Metodologías ágiles y liderazgo llevados al terreno de la innovación social.
               Encuentra opciones abiertas a distintas regiones y etapas de aprendizaje.
             </p>
@@ -59,7 +59,7 @@ export default async function CursosPage() {
               ["Modalidad", COURSE_FORMAT.modality],
             ].map(([label, value]) => (
               <div key={label}>
-                <dt className="text-xs uppercase tracking-[0.1em] text-slate-ui">
+                <dt className="text-caption uppercase tracking-[0.1em] text-slate-ui">
                   {label}
                 </dt>
                 <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>
@@ -103,11 +103,11 @@ export default async function CursosPage() {
                   <h2 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
                     {c.title}
                   </h2>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
+                  <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {c.description}
                   </p>
 
-                  <dl className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 text-xs text-slate-ui">
+                  <dl className="mt-5 flex flex-wrap gap-x-4 gap-y-1.5 border-t border-line pt-4 text-caption text-slate-ui">
                     <span className="inline-flex items-center gap-1.5">
                       <Clock className="size-3.5 text-mist" />
                       {c.total_hours} h
@@ -122,7 +122,7 @@ export default async function CursosPage() {
                     </span>
                   </dl>
 
-                  <p className="mt-4 flex items-center justify-between text-sm">
+                  <p className="mt-4 flex items-center justify-between text-body-sm">
                     <span className="font-medium text-seed-700">
                       {c.is_free ? "Gratuito" : formatSoles(c.price_cents)}
                     </span>
@@ -156,7 +156,7 @@ export default async function CursosPage() {
                 <h3 className="mt-3 font-display text-body font-semibold text-ink">
                   {c.name}
                 </h3>
-                <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
+                <p className="mt-1 text-caption text-slate-ui">{c.issuer}</p>
                 <p className="tabular mt-4 font-display text-h2 font-bold leading-none text-sep-700">
                   {formatSoles(c.price)}
                 </p>

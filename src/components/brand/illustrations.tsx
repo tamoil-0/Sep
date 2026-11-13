@@ -351,7 +351,7 @@ export function StatBlock({
         {label}
       </p>
       {detail && (
-        <p className="relative mt-1.5 text-sm leading-relaxed text-slate-ui">{detail}</p>
+        <p className="relative mt-1.5 text-body-sm leading-relaxed text-slate-ui">{detail}</p>
       )}
     </div>
   );

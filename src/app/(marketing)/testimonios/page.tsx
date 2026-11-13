@@ -106,12 +106,12 @@ export default async function TestimoniosPage() {
                     {s.quote}
                   </p>
                   <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                       {initials(s.name)}
                     </span>
                     <div className="min-w-0">
-                      <p className="truncate text-sm font-medium text-ink">{s.name}</p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
+                      <p className="truncate text-caption text-slate-ui">
                         {s.region} · {s.role}
                       </p>
                     </div>
@@ -141,21 +141,21 @@ export default async function TestimoniosPage() {
                       {p.title}
                     </h3>
                     {p.problem && (
-                      <p className="mt-3 text-xs uppercase tracking-[0.08em] text-slate-ui">
+                      <p className="mt-3 text-caption uppercase tracking-[0.08em] text-slate-ui">
                         El problema
                       </p>
                     )}
                     {p.problem && (
-                      <p className="mt-1 text-sm leading-relaxed text-slate-ui">
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
                         {p.problem}
                       </p>
                     )}
                     {p.solution && (
                       <>
-                        <p className="mt-3 text-xs uppercase tracking-[0.08em] text-seed-700">
+                        <p className="mt-3 text-caption uppercase tracking-[0.08em] text-seed-700">
                           La solución
                         </p>
-                        <p className="mt-1 flex-1 text-sm leading-relaxed text-graphite">
+                        <p className="mt-1 flex-1 text-body-sm leading-relaxed text-graphite">
                           {p.solution}
                         </p>
                       </>

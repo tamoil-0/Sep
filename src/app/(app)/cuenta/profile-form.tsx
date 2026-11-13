@@ -84,10 +84,10 @@ export function ProfileForm({
       </Field>
 
       <fieldset>
-        <legend className="mb-2 text-sm font-medium text-graphite">Áreas de interés</legend>
+        <legend className="mb-2 text-body-sm font-medium text-graphite">Áreas de interés</legend>
         <div className="flex flex-wrap gap-2">
           {INTEREST_AREAS.map((a) => (
-            <label key={a} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-xs text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700">
+            <label key={a} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700">
               <input type="checkbox" name="interests" value={a} defaultChecked={defaults.interests.includes(a)} className="sr-only" />
               {a}
             </label>

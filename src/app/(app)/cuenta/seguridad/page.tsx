@@ -31,7 +31,7 @@ export default async function SeguridadPage() {
             </span>
             <div className="min-w-0 flex-1">
               <h2 className="font-display text-body font-semibold text-ink">Contraseña</h2>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">
+              <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">
                 Te enviamos un enlace a tu correo para crear una nueva. No pedimos la
                 anterior: así, si alguien accede a tu sesión, no puede cambiarla sin
                 entrar también a tu correo.
@@ -55,12 +55,12 @@ export default async function SeguridadPage() {
                 </h2>
                 {needsMfa && <Badge tone="warning">Obligatorio para tu rol</Badge>}
               </div>
-              <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">
+              <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">
                 {needsMfa
                   ? "Tu cuenta tiene permisos de administración. El doble factor con app autenticadora es obligatorio para acceder al panel de administración."
                   : "Añade una segunda barrera con una app autenticadora como Google Authenticator o Authy."}
               </p>
-              <p className="mt-4 rounded-sm bg-white px-4 py-3 text-xs leading-relaxed text-slate-ui ring-1 ring-inset ring-line">
+              <p className="mt-4 rounded-sm bg-white px-4 py-3 text-caption leading-relaxed text-slate-ui ring-1 ring-inset ring-line">
                 La activación se hace desde el panel de Supabase mientras terminamos la
                 pantalla de configuración. Escríbenos y lo activamos contigo.
               </p>
@@ -96,7 +96,7 @@ export default async function SeguridadPage() {
                 <f.icon className="mt-0.5 size-5 shrink-0 text-seed-500" />
                 <div>
                   <p className="text-body-sm font-medium text-ink">{f.title}</p>
-                  <p className="mt-1 text-sm leading-relaxed text-slate-ui">{f.detail}</p>
+                  <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{f.detail}</p>
                 </div>
               </li>
             ))}

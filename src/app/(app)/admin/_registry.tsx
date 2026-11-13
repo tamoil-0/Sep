@@ -54,7 +54,7 @@ const person = (name?: string | null, sub?: string | null) => (
     </span>
     <div className="min-w-0">
       <p className="truncate font-medium text-ink">{name ?? "—"}</p>
-      {sub && <p className="truncate text-xs text-slate-ui">{sub}</p>}
+      {sub && <p className="truncate text-caption text-slate-ui">{sub}</p>}
     </div>
   </div>
 );
@@ -62,7 +62,7 @@ const person = (name?: string | null, sub?: string | null) => (
 const stack = (main: React.ReactNode, sub?: React.ReactNode) => (
   <div>
     <p className="font-medium text-ink">{main}</p>
-    {sub ? <p className="mt-0.5 text-xs text-slate-ui">{sub}</p> : null}
+    {sub ? <p className="mt-0.5 text-caption text-slate-ui">{sub}</p> : null}
   </div>
 );
 
@@ -228,7 +228,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
               href={`${siteConfig.url}/verificar/${c["verification_code"]}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="tabular text-xs text-sep-600 hover:underline"
+              className="tabular text-caption text-sep-600 hover:underline"
             >
               {c["verification_code"]}
             </a>
@@ -337,7 +337,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         render: (e: AdminRow) => (
           <div>
             <p className="font-medium text-ink">{e["title"]}</p>
-            <p className="mt-0.5 text-xs capitalize text-slate-ui">
+            <p className="mt-0.5 text-caption capitalize text-slate-ui">
               {formatDateTime(e["starts_at"])}
             </p>
           </div>

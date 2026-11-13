@@ -51,7 +51,7 @@ export default async function SpeakersPage() {
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               ¿Tienes algo que <GoldUnderline>contar</GoldUnderline>?
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               ¿Eres especialista en metodologías ágiles, innovación social o un referente
               en tu campo? Únete a nuestra base de speakers e inspira a más jóvenes desde
               tu región y tu historia.
@@ -81,7 +81,7 @@ export default async function SpeakersPage() {
                 <h2 className="mt-4 font-display text-body-sm font-semibold text-ink">
                   {c.title}
                 </h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{c.body}</p>
+                <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{c.body}</p>
               </Card>
             ))}
           </div>
@@ -105,14 +105,14 @@ export default async function SpeakersPage() {
                       <li key={s.id}>
                         <Card className="flex h-full flex-col p-5">
                           <div className="flex items-center gap-3">
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                               {initials(s.full_name)}
                             </span>
                             <div className="min-w-0">
-                              <p className="truncate text-sm font-medium text-ink">
+                              <p className="truncate text-body-sm font-medium text-ink">
                                 {s.full_name}
                               </p>
-                              <p className="truncate text-xs text-slate-ui">
+                              <p className="truncate text-caption text-slate-ui">
                                 {[s.region, s.country === "PE" ? "Perú" : s.country]
                                   .filter(Boolean)
                                   .join(", ")}
@@ -121,13 +121,13 @@ export default async function SpeakersPage() {
                           </div>
 
                           {s.expertise && (
-                            <p className="mt-3 text-xs font-medium text-sep-600">
+                            <p className="mt-3 text-caption font-medium text-sep-600">
                               {s.expertise}
                             </p>
                           )}
 
                           {s.story && (
-                            <p className="mt-2.5 flex-1 text-sm leading-relaxed text-slate-ui">
+                            <p className="mt-2.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
                               “{s.story}”
                             </p>
                           )}
@@ -149,14 +149,14 @@ export default async function SpeakersPage() {
               )}
 
               <div className="mt-12">
-                <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+                <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                   ¿Qué ganas al unirte?
                 </p>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">
                   {speakerBenefits.map((b) => (
                     <li key={b.title} className="rounded-md border border-line p-5">
                       <p className="text-body-sm font-medium text-ink">{b.title}</p>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-ui">
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
                         {b.detail}
                       </p>
                     </li>
@@ -172,7 +172,7 @@ export default async function SpeakersPage() {
                 </h2>
                 <Badge tone="seed">Gratuito</Badge>
               </div>
-              <p className="mt-1.5 text-sm text-slate-ui">
+              <p className="mt-1.5 text-body-sm text-slate-ui">
                 Cuéntanos tu historia. Revisamos cada perfil.
               </p>
 

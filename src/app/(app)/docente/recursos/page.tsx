@@ -46,8 +46,8 @@ export default async function DocenteRecursosPage() {
                   <Badge tone="neutral">{r.level}</Badge>
                 </div>
                 <h3 className="mt-3.5 text-body-sm font-medium leading-snug text-ink">{r.name}</h3>
-                <p className="mt-1.5 flex-1 text-xs leading-relaxed text-slate-ui">{r.detail}</p>
-                <p className="mt-4 inline-flex items-center gap-1.5 border-t border-line pt-3 text-xs text-mist">
+                <p className="mt-1.5 flex-1 text-caption leading-relaxed text-slate-ui">{r.detail}</p>
+                <p className="mt-4 inline-flex items-center gap-1.5 border-t border-line pt-3 text-caption text-mist">
                   <Download className="size-3.5" />
                   Se habilita al abrir la cohorte docente
                 </p>
@@ -58,7 +58,7 @@ export default async function DocenteRecursosPage() {
       ))}
 
       <Card className="mt-8 border-sep-200 bg-sep-50/40">
-        <p className="text-sm leading-relaxed text-graphite">
+        <p className="text-body-sm leading-relaxed text-graphite">
           <strong className="font-medium text-ink">¿Te falta algo?</strong> Escríbenos qué
           material necesitas para tu clase y lo diseñamos con el equipo de aprendizaje.
         </p>

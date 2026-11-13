@@ -63,14 +63,14 @@ export default async function SpeakerPerfilPage() {
 
       <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
         <Card>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Datos del perfil
           </h2>
           <dl className="mt-4 divide-y divide-line">
             {fields.map(([label, value]) => (
               <div key={label} className="flex flex-wrap justify-between gap-3 py-3">
-                <dt className="text-sm text-slate-ui">{label}</dt>
-                <dd className="max-w-[60%] text-right text-sm font-medium text-ink">
+                <dt className="text-body-sm text-slate-ui">{label}</dt>
+                <dd className="max-w-[60%] text-right text-body-sm font-medium text-ink">
                   {value ?? "—"}
                 </dd>
               </div>
@@ -80,7 +80,7 @@ export default async function SpeakerPerfilPage() {
 
         <div className="space-y-5">
           <Card>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
               Mis temas
             </h2>
             {s.topics?.length ? (
@@ -90,13 +90,13 @@ export default async function SpeakerPerfilPage() {
                 ))}
               </div>
             ) : (
-              <p className="mt-3 text-sm text-slate-ui">Sin temas registrados.</p>
+              <p className="mt-3 text-body-sm text-slate-ui">Sin temas registrados.</p>
             )}
           </Card>
 
           {s.story && (
             <Card>
-              <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                 Mi historia
               </h2>
               <p className="mt-3 text-body-sm leading-relaxed text-graphite">{s.story}</p>
@@ -106,7 +106,7 @@ export default async function SpeakerPerfilPage() {
           <Card className="border-sep-200 bg-sep-50/40">
             <div className="flex items-start gap-3">
               <UserRound className="mt-0.5 size-5 shrink-0 text-sep-600" />
-              <p className="text-sm leading-relaxed text-graphite">
+              <p className="text-body-sm leading-relaxed text-graphite">
                 Para actualizar tu perfil escríbenos. Los cambios los revisa el equipo antes
                 de publicarlos, para mantener la calidad de la red.
               </p>

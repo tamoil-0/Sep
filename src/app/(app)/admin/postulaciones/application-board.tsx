@@ -133,7 +133,7 @@ export function ApplicationBoard({
       {feedback && (
         <div
           className={cn(
-            "mb-4 rounded-sm px-4 py-3 text-sm",
+            "mb-4 rounded-sm px-4 py-3 text-body-sm",
             feedback.ok
               ? "border border-success/25 bg-success-bg text-success"
               : "border border-danger/25 bg-danger-bg text-danger",
@@ -151,7 +151,7 @@ export function ApplicationBoard({
             type="button"
             onClick={() => setTab(t.key)}
             className={cn(
-              "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+              "rounded-full px-3.5 py-1.5 text-body-sm font-medium transition-colors",
               tab === t.key
                 ? "bg-sep-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -161,7 +161,7 @@ export function ApplicationBoard({
             {t.count > 0 && (
               <span
                 className={cn(
-                  "tabular ml-1.5 rounded-full px-1.5 text-xs",
+                  "tabular ml-1.5 rounded-full px-1.5 text-caption",
                   tab === t.key ? "bg-white/20" : "bg-gold-500/20 text-gold-700",
                 )}
               >
@@ -181,7 +181,7 @@ export function ApplicationBoard({
             {volunteers.map((v) => (
               <Card key={v.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                     {initials(v.name)}
                   </span>
 
@@ -197,20 +197,20 @@ export function ApplicationBoard({
                       {!v.hasAccount && <Badge tone="warning">Sin cuenta</Badge>}
                     </div>
 
-                    <p className="mt-1 text-xs text-slate-ui">
+                    <p className="mt-1 text-caption text-slate-ui">
                       {v.email} · {v.region ?? "—"} · {relativeTime(v.createdAt)}
                     </p>
 
                     <button
                       type="button"
                       onClick={() => setExpanded(expanded === v.id ? null : v.id)}
-                      className="mt-2 text-xs font-medium text-sep-600 hover:underline"
+                      className="mt-2 text-caption font-medium text-sep-600 hover:underline"
                     >
                       {expanded === v.id ? "Ocultar detalle" : "Ver postulación completa"}
                     </button>
 
                     {expanded === v.id && (
-                      <dl className="mt-3 space-y-2.5 rounded-sm bg-surface-1 p-4 text-sm">
+                      <dl className="mt-3 space-y-2.5 rounded-sm bg-surface-1 p-4 text-body-sm">
                         {[
                           ["Universidad", v.university],
                           ["Carrera y ciclo", v.careerCycle],
@@ -220,7 +220,7 @@ export function ApplicationBoard({
                         ].map(([label, value]) =>
                           value ? (
                             <div key={label as string}>
-                              <dt className="text-xs font-medium text-slate-ui">{label}</dt>
+                              <dt className="text-caption font-medium text-slate-ui">{label}</dt>
                               <dd className="mt-0.5 leading-relaxed text-graphite">{value}</dd>
                             </div>
                           ) : null,
@@ -247,7 +247,7 @@ export function ApplicationBoard({
                           : run(v.id, () => updateApplicationStatusAction(v.id, s))
                       }
                       className={cn(
-                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-xs font-medium transition-colors disabled:opacity-40",
+                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-caption font-medium transition-colors disabled:opacity-40",
                         s === "aprobada"
                           ? "bg-success text-white hover:opacity-90"
                           : s === "rechazada"
@@ -312,7 +312,7 @@ export function ApplicationBoard({
             {speakers.map((s) => (
               <Card key={s.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                     {initials(s.name)}
                   </span>
 
@@ -325,11 +325,11 @@ export function ApplicationBoard({
                         {s.approved ? "Publicado" : "Por revisar"}
                       </Badge>
                     </div>
-                    <p className="mt-1 text-xs text-slate-ui">
+                    <p className="mt-1 text-caption text-slate-ui">
                       {s.email} · {s.location} · {relativeTime(s.createdAt)}
                     </p>
                     {s.expertise && (
-                      <p className="mt-2 text-sm text-graphite">{s.expertise}</p>
+                      <p className="mt-2 text-body-sm text-graphite">{s.expertise}</p>
                     )}
                     {s.topics.length > 0 && (
                       <div className="mt-2.5 flex flex-wrap gap-1.5">
@@ -341,11 +341,11 @@ export function ApplicationBoard({
                       </div>
                     )}
                     {s.story && (
-                      <p className="mt-3 rounded-sm bg-surface-1 p-3.5 text-sm leading-relaxed text-graphite">
+                      <p className="mt-3 rounded-sm bg-surface-1 p-3.5 text-body-sm leading-relaxed text-graphite">
                         “{s.story}”
                       </p>
                     )}
-                    <p className="mt-2 text-xs text-slate-ui">
+                    <p className="mt-2 text-caption text-slate-ui">
                       Experiencia: {s.experience ?? "—"} · Disponibilidad:{" "}
                       {s.availability ?? "—"}
                     </p>
@@ -357,7 +357,7 @@ export function ApplicationBoard({
                       disabled={busy === s.id}
                       onClick={() => setConfirming(`speaker:${s.id}:${s.approved ? "hide" : "publish"}`)}
                       className={cn(
-                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-xs font-medium transition-colors disabled:opacity-40",
+                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-3 text-caption font-medium transition-colors disabled:opacity-40",
                         s.approved
                           ? "border border-line text-graphite hover:bg-surface-2"
                           : "bg-success text-white hover:opacity-90",
@@ -424,17 +424,17 @@ export function ApplicationBoard({
               {hours.map((h) => (
                 <li key={h.id} className="flex flex-wrap items-center gap-4 px-5 py-4">
                   <div className="min-w-0 flex-1">
-                    <p className="text-sm font-medium text-ink">{h.volunteerName}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="text-body-sm font-medium text-ink">{h.volunteerName}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {formatDate(h.date)}
                       {h.region ? ` · ${h.region}` : ""}
                     </p>
-                    <p className="mt-1.5 text-sm leading-relaxed text-graphite">
+                    <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">
                       {h.activity}
                     </p>
                   </div>
 
-                  <p className="tabular shrink-0 font-display text-lg font-semibold text-ink">
+                  <p className="tabular shrink-0 font-display text-body-lg font-semibold text-ink">
                     {h.hours} h
                   </p>
 
@@ -442,7 +442,7 @@ export function ApplicationBoard({
                     type="button"
                     disabled={busy === h.id}
                     onClick={() => run(h.id, () => approveHoursAction(h.id))}
-                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-success px-3 text-xs font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
+                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-success px-3 text-caption font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-40"
                   >
                     {busy === h.id ? (
                       <Loader2 className="size-3 animate-spin" />

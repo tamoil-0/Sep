@@ -46,7 +46,7 @@ export default function PreciosPage() {
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
             Formación clara, <GoldUnderline>precios transparentes</GoldUnderline>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-slate-ui">
+          <p className="mx-auto mt-5 max-w-xl text-body-lg leading-relaxed text-slate-ui">
             El catálogo de cursos no tiene costo de acceso. Los pagos corresponden a la
             acreditación, programas avanzados o servicios institucionales.
           </p>
@@ -101,19 +101,19 @@ export default function PreciosPage() {
                     Recomendado
                   </span>
                 )}
-                <h3 className="font-display text-lg font-semibold text-ink">
+                <h3 className="font-display text-body-lg font-semibold text-ink">
                   {cert.name}
                 </h3>
-                <p className="mt-1 text-xs text-slate-ui">{cert.issuer}</p>
+                <p className="mt-1 text-caption text-slate-ui">{cert.issuer}</p>
                 <p className="tabular mt-5 font-display text-h1 font-bold leading-none text-ink">
                   {formatSoles(cert.priceCents)}
                 </p>
-                <p className="mt-3 text-sm leading-relaxed text-slate-ui">
+                <p className="mt-3 text-body-sm leading-relaxed text-slate-ui">
                   {cert.description}
                 </p>
                 <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
                   {cert.features.map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-graphite">
+                    <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
                       <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                       {f}
                     </li>
@@ -123,7 +123,7 @@ export default function PreciosPage() {
             ))}
             <Card className="border-dashed bg-white/60">
               <Badge>En trámite</Badge>
-              <h3 className="mt-3 font-display text-lg font-semibold text-ink">
+              <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">
                 CERTIFICADO INTERNACIONAL
               </h3>
             </Card>
@@ -143,7 +143,7 @@ export default function PreciosPage() {
           <div className="mt-10 grid gap-4 sm:grid-cols-3">
             {silpPricing.tiers.map((tier) => (
               <Card key={tier.label} className="text-center">
-                <p className="text-sm text-slate-ui">
+                <p className="text-body-sm text-slate-ui">
                   {tier.label}
                   {!tier.confirmed && <ProposedTag />}
                 </p>
@@ -154,7 +154,7 @@ export default function PreciosPage() {
             ))}
           </div>
 
-          <p className="mt-5 flex items-start gap-2 text-sm text-slate-ui">
+          <p className="mt-5 flex items-start gap-2 text-body-sm text-slate-ui">
             <Sparkles className="mt-0.5 size-4 shrink-0 text-gold-600" />
             Los voluntarios activos de SEP acceden al SILP sin costo. Es parte de lo que
             reciben por sostener la red.
@@ -188,16 +188,16 @@ export default function PreciosPage() {
                     </span>
                   )}
 
-                  <p className="text-2xl leading-none">{plan.emoji}</p>
-                  <h3 className="mt-3 font-display text-lg font-semibold text-ink">
+                  <p className="text-h3 leading-none">{plan.emoji}</p>
+                  <h3 className="mt-3 font-display text-body-lg font-semibold text-ink">
                     {plan.name}
                   </h3>
-                  <p className="mt-0.5 text-xs text-slate-ui">{plan.tagline}</p>
+                  <p className="mt-0.5 text-caption text-slate-ui">{plan.tagline}</p>
 
                   <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                     {plan.priceCents === 0 ? "Gratis" : formatSoles(plan.priceCents)}
                   </p>
-                  <p className="mt-1 text-xs text-slate-ui">
+                  <p className="mt-1 text-caption text-slate-ui">
                     {plan.months === 0
                       ? "Plan base"
                       : `${plan.months} meses · ${formatSoles(
@@ -208,7 +208,7 @@ export default function PreciosPage() {
 
                   <ul className="mt-5 flex-1 space-y-2.5 border-t border-line pt-5">
                     {plan.benefits.map((b) => (
-                      <li key={b} className="flex items-start gap-2.5 text-sm text-graphite">
+                      <li key={b} className="flex items-start gap-2.5 text-body-sm text-graphite">
                         <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                         {b}
                       </li>
@@ -229,10 +229,10 @@ export default function PreciosPage() {
 
           <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-gold-500/35 bg-gold-50/50">
             <div>
-              <h3 className="font-display text-lg font-semibold text-ink">
+              <h3 className="font-display text-body-lg font-semibold text-ink">
                 ⭐ Membresía de voluntario — gratis
               </h3>
-              <p className="mt-1.5 max-w-2xl text-sm text-slate-ui">
+              <p className="mt-1.5 max-w-2xl text-body-sm text-slate-ui">
                 Todo lo del plan Bosque sin costo, mientras estés activo como mentor,
                 community manager u organizador de eventos.
               </p>
@@ -259,21 +259,21 @@ export default function PreciosPage() {
                 <h3 className="font-display text-body font-semibold text-ink">
                   {pkg.name}
                 </h3>
-                <p className="mt-1 text-xs leading-relaxed text-slate-ui">{pkg.scope}</p>
+                <p className="mt-1 text-caption leading-relaxed text-slate-ui">{pkg.scope}</p>
 
                 <p className="tabular mt-5 font-display text-h2 font-bold leading-none text-ink">
                   {"priceFrom" in pkg && pkg.priceFrom && (
-                    <span className="text-sm font-medium text-slate-ui">Desde </span>
+                    <span className="text-body-sm font-medium text-slate-ui">Desde </span>
                   )}
                   {formatSoles(pkg.priceCents)}
                 </p>
-                <p className="mt-1 text-xs text-slate-ui">
+                <p className="mt-1 text-caption text-slate-ui">
                   <ProposedTag />
                 </p>
 
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
                   {pkg.deliverables.map((d) => (
-                    <li key={d} className="flex items-start gap-2.5 text-sm text-graphite">
+                    <li key={d} className="flex items-start gap-2.5 text-body-sm text-graphite">
                       <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                       {d}
                     </li>
@@ -285,10 +285,10 @@ export default function PreciosPage() {
 
           <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-seed-50/60">
             <div>
-              <h3 className="font-display text-lg font-semibold text-ink">
+              <h3 className="font-display text-body-lg font-semibold text-ink">
                 Talleres sin costo para colegios de la red SEP
               </h3>
-              <p className="mt-1.5 max-w-2xl text-sm text-slate-ui">
+              <p className="mt-1.5 max-w-2xl text-body-sm text-slate-ui">
                 Si tu colegio se suma a la red sin patrocinio, los talleres no cuestan
                 nada. Es el corazón del impacto social de SEP y no se toca.
               </p>
@@ -320,17 +320,17 @@ export default function PreciosPage() {
                 {donationAmounts.map((a) => (
                   <span
                     key={a}
-                    className="tabular rounded-sm border border-line bg-white px-4 py-2.5 text-sm font-medium text-ink"
+                    className="tabular rounded-sm border border-line bg-white px-4 py-2.5 text-body-sm font-medium text-ink"
                   >
                     {formatSoles(a)}
                   </span>
                 ))}
-                <span className="rounded-sm border border-dashed border-line px-4 py-2.5 text-sm text-slate-ui">
+                <span className="rounded-sm border border-dashed border-line px-4 py-2.5 text-body-sm text-slate-ui">
                   Otro monto
                 </span>
               </div>
 
-              <p className="mt-3 text-xs text-slate-ui">Donación única o mensual.</p>
+              <p className="mt-3 text-caption text-slate-ui">Donación única o mensual.</p>
 
               <Button href="/donaciones" variant="gradient" className="mt-6">
                 Quiero donar
@@ -348,7 +348,7 @@ export default function PreciosPage() {
               <ul className="mt-6 divide-y divide-line">
                 {paymentMethods.map((m) => (
                   <li key={m.slug} className="flex items-center justify-between py-3.5">
-                    <span className="text-sm font-medium text-ink">{m.label}</span>
+                    <span className="text-body-sm font-medium text-ink">{m.label}</span>
                     <Badge tone={m.auto ? "success" : "neutral"}>
                       {m.auto ? "Confirmación automática" : "Confirmación en 24 h"}
                     </Badge>
@@ -356,7 +356,7 @@ export default function PreciosPage() {
                 ))}
               </ul>
 
-              <p className="mt-5 text-xs leading-relaxed text-slate-ui">
+              <p className="mt-5 text-caption leading-relaxed text-slate-ui">
                 Con Yape o Plin subes la captura de tu operación y el equipo de SEP la
                 valida. Con tarjeta, la confirmación es inmediata.
               </p>
@@ -375,7 +375,7 @@ export default function PreciosPage() {
                 <h2 className="font-display text-body-sm font-semibold text-ink">
                   Sobre los precios marcados como propuesta
                 </h2>
-                <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">
+                <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">
                   Los precios de certificados y la tarifa social del SILP están
                   confirmados. Los de membresías y programas institucionales son una
                   propuesta que estamos calibrando con las respuestas del{" "}

@@ -38,7 +38,7 @@ export default async function VerificarCodigoPage({
           <Card className="overflow-hidden p-0">
             <div className="sep-gradient px-8 py-7">
               <Logo className="h-11" variant="white" />
-              <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1.5 text-sm font-medium text-white ring-1 ring-inset ring-white/25">
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/12 px-3 py-1.5 text-body-sm font-medium text-white ring-1 ring-inset ring-white/25">
                 <ShieldCheck className="size-4 text-gold-500" />
                 Certificado válido
               </p>
@@ -58,13 +58,13 @@ export default async function VerificarCodigoPage({
                   ["Código", code],
                 ].map(([label, value]) => (
                   <div key={label} className="flex flex-wrap justify-between gap-2 py-3.5">
-                    <dt className="text-sm text-slate-ui">{label}</dt>
-                    <dd className="text-sm font-medium text-ink">{value}</dd>
+                    <dt className="text-body-sm text-slate-ui">{label}</dt>
+                    <dd className="text-body-sm font-medium text-ink">{value}</dd>
                   </div>
                 ))}
               </dl>
 
-              <p className="mt-6 text-xs leading-relaxed text-slate-ui">
+              <p className="mt-6 text-caption leading-relaxed text-slate-ui">
                 Este certificado fue emitido por el Semillero de Emprendedores Perú,
                 organización juvenil reconocida por SENAJU. Si detectas alguna
                 inconsistencia, escríbenos a semilleroemprendedorperu@gmail.com
@@ -95,7 +95,7 @@ export default async function VerificarCodigoPage({
           </Card>
         )}
 
-        <p className="mt-6 text-center text-sm text-slate-ui">
+        <p className="mt-6 text-center text-body-sm text-slate-ui">
           <Link href="/" className="hover:underline">
             Volver al inicio de SEP
           </Link>

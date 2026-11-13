@@ -37,7 +37,7 @@ export default async function SignupTypePage({
     <div>
       <Link
         href="/registro"
-        className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+        className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
       >
         <ArrowLeft className="size-4" />
         Cambiar tipo de cuenta
@@ -52,7 +52,7 @@ export default async function SignupTypePage({
         <SignupForm role={role} />
       </div>
 
-      <p className="mt-8 text-center text-sm text-slate-ui">
+      <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Ya tienes cuenta?{" "}
         <Link href="/login" className="font-medium text-sep-600 hover:underline">
           Iniciar sesión

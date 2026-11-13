@@ -185,17 +185,17 @@ export function OnboardingForm({
           <Logo className="mt-0.5 h-10 sm:mt-0 sm:h-11" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-sep-600">
+              <p className="text-caption font-semibold uppercase tracking-[0.1em] text-sep-600">
                 Diagnóstico de entrada · {profileLabel}
               </p>
-              <span className="inline-flex items-center gap-1 text-xs text-slate-ui">
+              <span className="inline-flex items-center gap-1 text-caption text-slate-ui">
                 <Clock3 className="size-3.5" /> 4–6 min
               </span>
             </div>
-            <h1 className="mt-1 font-display text-2xl font-semibold leading-tight text-ink sm:text-3xl">
+            <h1 className="mt-1 font-display text-h3 font-semibold leading-tight text-ink sm:text-h2">
               {firstName ? `${firstName}, cuéntanos sobre ti` : "Cuéntanos sobre ti"}
             </h1>
-            <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-ui">
+            <p className="mt-1 max-w-2xl text-body-sm leading-relaxed text-slate-ui">
               15 preguntas sobre {audience} para personalizar lo que verás en SEP.
             </p>
           </div>
@@ -206,10 +206,10 @@ export function OnboardingForm({
         <aside className="lg:sticky lg:top-6">
           <Card className="p-3 sm:p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                 Tu avance
               </p>
-              <span className="tabular text-xs font-medium text-sep-700">{progress}%</span>
+              <span className="tabular text-caption font-medium text-sep-700">{progress}%</span>
             </div>
             <ProgressBar value={progress} label={`${answeredCount} de ${questions.length} preguntas respondidas`} className="mt-2.5" />
             <div className="mt-2 flex items-center justify-between gap-3 text-caption">
@@ -243,7 +243,7 @@ export function OnboardingForm({
                     >
                       <span
                         className={cn(
-                          "flex size-7 shrink-0 items-center justify-center rounded-full border text-xs font-semibold",
+                          "flex size-7 shrink-0 items-center justify-center rounded-full border text-caption font-semibold",
                           complete && "border-seed-500 bg-seed-500 text-white",
                           active && !complete && "border-sep-500 bg-white text-sep-700",
                           !active && !complete && "border-line bg-white",
@@ -251,7 +251,7 @@ export function OnboardingForm({
                       >
                         {complete ? <Check className="size-3.5" /> : index + 1}
                       </span>
-                      <span className="text-xs font-medium">Módulo {index + 1}</span>
+                      <span className="text-caption font-medium">Módulo {index + 1}</span>
                     </button>
                   </li>
                 );
@@ -263,17 +263,17 @@ export function OnboardingForm({
         <main className="min-w-0">
           <Card className="overflow-hidden p-0 max-sm:rounded-sm">
             <div className="border-b border-line bg-surface-1 px-4 py-4 sm:px-6 sm:py-5">
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-sep-600">
+              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-sep-600">
                 Módulo {module + 1} de 3 · Preguntas {module * 5 + 1}–{module * 5 + 5}
               </p>
               <h2
                 ref={headingRef}
                 tabIndex={-1}
-                className="mt-1 font-display text-xl font-semibold text-ink outline-none sm:text-2xl"
+                className="mt-1 font-display text-h4 font-semibold text-ink outline-none sm:text-h3"
               >
                 {MODULES[module].title}
               </h2>
-              <p className="mt-0.5 text-sm text-slate-ui">{MODULES[module].description}</p>
+              <p className="mt-0.5 text-body-sm text-slate-ui">{MODULES[module].description}</p>
             </div>
 
             <div className="divide-y divide-line px-4 sm:px-6">
@@ -285,7 +285,7 @@ export function OnboardingForm({
                   <fieldset key={question.number} className="py-4 sm:py-5">
                     <legend className="w-full">
                       <span className="flex items-start gap-3">
-                        <span className="tabular mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-700">
+                        <span className="tabular mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
                           {question.number}
                         </span>
                         <span className="min-w-0 flex-1">
@@ -298,7 +298,7 @@ export function OnboardingForm({
                             )}
                           </span>
                           {multiple && (
-                            <span className="mt-1 block font-sans text-xs font-normal text-slate-ui">
+                            <span className="mt-1 block font-sans text-caption font-normal text-slate-ui">
                               Puedes elegir más de una opción.
                             </span>
                           )}
@@ -322,7 +322,7 @@ export function OnboardingForm({
                           <label
                             key={option}
                             className={cn(
-                              "group flex min-h-11 cursor-pointer items-center gap-3 rounded-sm border px-3 py-2.5 text-sm leading-snug transition-colors",
+                              "group flex min-h-11 cursor-pointer items-center gap-3 rounded-sm border px-3 py-2.5 text-body-sm leading-snug transition-colors",
                               selected
                                 ? "border-sep-500 bg-sep-50 text-sep-800 "
                                 : "border-line bg-white text-graphite hover:border-sep-300 hover:bg-surface-1",
@@ -374,14 +374,14 @@ export function OnboardingForm({
                   type="button"
                   onClick={() => moveTo(module - 1)}
                   disabled={module === 0 || busy}
-                  className="inline-flex h-11 items-center justify-center gap-2 rounded-sm px-4 text-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
+                  className="inline-flex h-11 items-center justify-center gap-2 rounded-sm px-4 text-body-sm font-medium text-slate-ui transition-colors hover:bg-white hover:text-ink disabled:invisible"
                 >
                   <ArrowLeft className="size-4" /> Anterior
                 </button>
 
                 <div className="text-center sm:text-right">
                   {!moduleComplete && (
-                    <p className="mb-2 text-xs text-slate-ui">
+                    <p className="mb-2 text-caption text-slate-ui">
                       Responde las 5 preguntas para continuar.
                     </p>
                   )}
@@ -389,7 +389,7 @@ export function OnboardingForm({
                     type="button"
                     onClick={() => (module === 2 ? finish() : moveTo(module + 1))}
                     disabled={!moduleComplete || busy}
-                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
+                    className="inline-flex h-11 w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
                   >
                     {busy ? (
                       <>

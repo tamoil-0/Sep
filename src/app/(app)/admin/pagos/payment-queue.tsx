@@ -149,7 +149,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
             type="button"
             onClick={() => setTab(t.key)}
             className={cn(
-              "rounded-full px-3.5 py-1.5 text-sm font-medium transition-colors",
+              "rounded-full px-3.5 py-1.5 text-body-sm font-medium transition-colors",
               tab === t.key
                 ? "bg-sep-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -173,7 +173,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
           <p className="font-display text-body font-semibold text-ink">
             {payments.length === 0 ? "Aún no hay pagos registrados" : `No hay pagos en “${TABS.find((item) => item.key === tab)?.label}”`}
           </p>
-          <p className="mt-1 text-sm text-slate-ui">
+          <p className="mt-1 text-body-sm text-slate-ui">
             {payments.length === 0
               ? "Cuando se envíe un pago aparecerá aquí para su seguimiento."
               : "Los pagos existen, pero ninguno coincide con esta pestaña."}
@@ -193,7 +193,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
           {visible.map((p) => (
             <Card key={p.id} className="p-0">
               <div className="flex flex-wrap items-start gap-4 p-5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                   {initials(p.buyerName)}
                 </span>
 
@@ -208,7 +208,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                     <Badge tone="neutral">{methodLabels[p.method] ?? p.method}</Badge>
                   </div>
 
-                  <p className="mt-1 truncate text-xs text-slate-ui">
+                  <p className="mt-1 truncate text-caption text-slate-ui">
                     {p.buyerEmail}
                     {p.buyerRegion && (
                       <>
@@ -218,7 +218,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                     )}
                   </p>
 
-                  <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-xs">
+                  <dl className="mt-3 flex flex-wrap gap-x-6 gap-y-1.5 text-caption">
                     <div>
                       <dt className="inline text-slate-ui">Concepto: </dt>
                       <dd className="inline font-medium text-ink">
@@ -240,7 +240,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                   </dl>
 
                   {p.rejectReason && (
-                    <p className="mt-2.5 rounded-lg bg-danger-bg px-3 py-2 text-xs leading-relaxed text-danger">
+                    <p className="mt-2.5 rounded-lg bg-danger-bg px-3 py-2 text-caption leading-relaxed text-danger">
                       {p.rejectReason}
                     </p>
                   )}
@@ -248,7 +248,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                   {feedback?.id === p.id && (
                     <p
                       className={cn(
-                        "mt-2.5 rounded-lg px-3 py-2 text-xs leading-relaxed",
+                        "mt-2.5 rounded-lg px-3 py-2 text-caption leading-relaxed",
                         feedback.ok
                           ? "bg-success-bg text-success"
                           : "bg-danger-bg text-danger",
@@ -261,7 +261,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                 </div>
 
                 <div className="text-right">
-                  <p className="tabular font-display text-xl font-semibold text-ink">
+                  <p className="tabular font-display text-h4 font-semibold text-ink">
                     {formatSoles(p.amountCents)}
                   </p>
                 </div>
@@ -326,7 +326,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                 <div className="border-t border-line bg-surface-1 p-5">
                   <label
                     htmlFor={`reason-${p.id}`}
-                    className="mb-1.5 block text-sm font-medium text-graphite"
+                    className="mb-1.5 block text-body-sm font-medium text-graphite"
                   >
                     ¿Por qué rechazas el pago? Se lo enviamos tal cual al estudiante.
                   </label>
@@ -342,7 +342,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                       type="button"
                       onClick={() => review(p.id, false)}
                       disabled={busy === p.id || reason.trim().length < 10}
-                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-danger px-4 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
+                      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-danger px-4 text-body-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50"
                     >
                       {busy === p.id && <Loader2 className="size-4 animate-spin" />}
                       Confirmar rechazo
@@ -350,7 +350,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                     <button
                       type="button"
                       onClick={() => setRejecting(null)}
-                      className="inline-flex min-h-control items-center rounded-sm px-4 text-sm text-graphite hover:bg-surface-2"
+                      className="inline-flex min-h-control items-center rounded-sm px-4 text-body-sm text-graphite hover:bg-surface-2"
                     >
                       Cancelar
                     </button>
@@ -383,7 +383,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
                 <Receipt className="size-4 text-slate-ui" />
                 <div>
                   <p id="voucher-dialog-title" className="text-body-sm font-medium text-ink">Comprobante de {voucher.row.buyerName}</p>
-                  <p className="tabular text-xs text-slate-ui">
+                  <p className="tabular text-caption text-slate-ui">
                     {methodLabels[voucher.row.method]} ·{" "}
                     {formatSoles(voucher.row.amountCents)} · Op.{" "}
                     {voucher.row.operationCode}

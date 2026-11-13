@@ -172,13 +172,13 @@ export function PanelSection({
   return (
     <section className={cn("mt-6 first:mt-0 sm:mt-8", className)}>
       <div className="mb-3.5 flex items-center justify-between gap-4">
-        <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
           {title}
         </h2>
         {action && (
           <Link
             href={action.href}
-            className="inline-flex items-center gap-1 text-xs font-medium text-sep-600 hover:underline"
+            className="inline-flex items-center gap-1 text-caption font-medium text-sep-600 hover:underline"
           >
             {action.label}
             <ArrowRight className="size-3" />
@@ -221,7 +221,7 @@ export function ComingSoon({
             {bullets.map((b) => (
               <li
                 key={b}
-                className="flex items-start gap-2.5 rounded-sm bg-surface-1 px-4 py-3 text-sm text-graphite"
+                className="flex items-start gap-2.5 rounded-sm bg-surface-1 px-4 py-3 text-body-sm text-graphite"
               >
                 <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold-500" />
                 {b}

@@ -61,17 +61,17 @@ export default async function ProyectosPage() {
                 <h3 className="mt-3 font-display text-body font-semibold text-ink">{p.title}</h3>
                 {p.problem && (
                   <>
-                    <p className="mt-3 text-xs uppercase tracking-[0.08em] text-slate-ui">El problema</p>
-                    <p className="mt-1 text-sm leading-relaxed text-slate-ui">{p.problem}</p>
+                    <p className="mt-3 text-caption uppercase tracking-[0.08em] text-slate-ui">El problema</p>
+                    <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{p.problem}</p>
                   </>
                 )}
                 {p.solution && (
                   <>
-                    <p className="mt-3 text-xs uppercase tracking-[0.08em] text-seed-700">La solución</p>
-                    <p className="mt-1 text-sm leading-relaxed text-graphite">{p.solution}</p>
+                    <p className="mt-3 text-caption uppercase tracking-[0.08em] text-seed-700">La solución</p>
+                    <p className="mt-1 text-body-sm leading-relaxed text-graphite">{p.solution}</p>
                   </>
                 )}
-                <p className="mt-4 text-xs text-mist">Creado el {formatDate(p.created_at)}</p>
+                <p className="mt-4 text-caption text-mist">Creado el {formatDate(p.created_at)}</p>
               </Card>
             ))}
           </div>
@@ -87,8 +87,8 @@ export default async function ProyectosPage() {
                 <Card key={p.id} className="p-5">
                   {p.region && <Badge tone="neutral">{p.region}</Badge>}
                   <h3 className="mt-3 font-display text-body-sm font-semibold text-ink">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-slate-ui">{p.solution}</p>
-                  <p className="mt-3 text-xs text-mist">{author?.full_name}</p>
+                  <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">{p.solution}</p>
+                  <p className="mt-3 text-caption text-mist">{author?.full_name}</p>
                 </Card>
               );
             })}

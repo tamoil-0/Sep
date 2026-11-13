@@ -25,16 +25,16 @@ export default function AppError({
         <span className="mx-auto flex size-14 items-center justify-center rounded-full bg-danger-bg text-danger">
           <AlertTriangle className="size-6" />
         </span>
-        <h1 className="mt-5 font-display text-2xl font-semibold text-ink">
+        <h1 className="mt-5 font-display text-h3 font-semibold text-ink">
           No pudimos cargar esta sección
         </h1>
-        <p className="mx-auto mt-2 max-w-md text-sm leading-6 text-slate-ui">
+        <p className="mx-auto mt-2 max-w-md text-body-sm leading-6 text-slate-ui">
           No mostramos datos incompletos. Puede ser un problema temporal de conexión;
           vuelve a intentarlo o regresa al panel principal.
         </p>
 
         {error.digest && (
-          <p className="mt-3 text-xs text-mist">Código de incidente: {error.digest}</p>
+          <p className="mt-3 text-caption text-mist">Código de incidente: {error.digest}</p>
         )}
 
         <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">

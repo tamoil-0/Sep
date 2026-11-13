@@ -64,7 +64,7 @@ export default function VoluntariadoPage() {
               Forma parte del equipo que{" "}
               <span className="text-sep-700">democratiza la innovación</span>
             </h1>
-            <p className="mt-4 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-4 text-body-lg leading-relaxed text-slate-ui">
               Tu trabajo llega a jóvenes que nadie más está atendiendo. A cambio recibes
               certificación formal, red nacional y formación continua sin costo.
             </p>
@@ -128,7 +128,7 @@ export default function VoluntariadoPage() {
                         {role.name}
                       </h2>
                       {role.exclusive && (
-                        <p className="mt-1 text-xs font-medium text-gold-700">
+                        <p className="mt-1 text-caption font-medium text-gold-700">
                           {role.exclusive}
                         </p>
                       )}
@@ -136,14 +136,14 @@ export default function VoluntariadoPage() {
                         {role.description}
                       </p>
 
-                      <p className="mt-5 text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="mt-5 text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                         Requisitos
                       </p>
                       <ul className="mt-2.5 space-y-2">
                         {role.requirements.map((r) => (
                           <li
                             key={r}
-                            className="flex items-start gap-2.5 text-sm text-graphite"
+                            className="flex items-start gap-2.5 text-body-sm text-graphite"
                           >
                             <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                             {r}
@@ -151,7 +151,7 @@ export default function VoluntariadoPage() {
                         ))}
                       </ul>
 
-                      <p className="mt-5 inline-flex items-center gap-1.5 text-sm text-slate-ui">
+                      <p className="mt-5 inline-flex items-center gap-1.5 text-body-sm text-slate-ui">
                         <Clock className="size-4 text-mist" />
                         {role.hoursPerWeek} horas por semana
                       </p>
@@ -167,14 +167,14 @@ export default function VoluntariadoPage() {
                     </div>
 
                     <div className="rounded-md bg-surface-1 p-6">
-                      <p className="text-xs font-semibold uppercase tracking-[0.1em] text-slate-ui">
+                      <p className="text-caption font-semibold uppercase tracking-[0.1em] text-slate-ui">
                         Beneficios exclusivos del rol
                       </p>
                       <ul className="mt-4 space-y-4">
                         {role.benefits.map((b) => (
                           <li key={b.title}>
-                            <p className="text-sm font-medium text-ink">{b.title}</p>
-                            <p className="mt-0.5 text-xs leading-relaxed text-slate-ui">
+                            <p className="text-body-sm font-medium text-ink">{b.title}</p>
+                            <p className="mt-0.5 text-caption leading-relaxed text-slate-ui">
                               {b.detail}
                             </p>
                           </li>
@@ -212,7 +212,7 @@ export default function VoluntariadoPage() {
                   <h3 className="mt-4 font-display text-body-sm font-semibold text-ink">
                     {b.title}
                   </h3>
-                  <p className="mt-1.5 text-sm leading-relaxed text-slate-ui">{b.detail}</p>
+                  <p className="mt-1.5 text-body-sm leading-relaxed text-slate-ui">{b.detail}</p>
                 </Card>
               );
             })}
@@ -232,21 +232,21 @@ export default function VoluntariadoPage() {
           <ol className="mt-10 space-y-4">
             {volunteerProcess.map((s) => (
               <li key={s.step} className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-sm font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-body-sm font-semibold text-white">
                   {s.step}
                 </span>
                 <div className="pt-1">
                   <p className="font-display text-body font-semibold text-ink">
                     {s.title}
                   </p>
-                  <p className="mt-1 text-sm text-slate-ui">{s.detail}</p>
+                  <p className="mt-1 text-body-sm text-slate-ui">{s.detail}</p>
                 </div>
               </li>
             ))}
           </ol>
 
           <Card className="mt-10 border-sep-200 bg-sep-50/40 text-center">
-            <p className="text-sm leading-relaxed text-graphite">
+            <p className="text-body-sm leading-relaxed text-graphite">
               ¿Tu colegio quiere recibir a nuestros voluntarios?{" "}
               <Link href="/colegios" className="font-medium text-sep-600 hover:underline">
                 Inscríbelo a la red SEP

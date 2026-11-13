@@ -59,7 +59,7 @@ export default async function EventosPage() {
 
       <Section>
         <Container size="wide">
-          <h2 className="mb-6 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-6 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Próximos
           </h2>
 
@@ -97,7 +97,7 @@ export default async function EventosPage() {
                     {e.description}
                   </p>
 
-                  <dl className="mt-5 space-y-1.5 border-t border-line pt-4 text-sm text-slate-ui">
+                  <dl className="mt-5 space-y-1.5 border-t border-line pt-4 text-body-sm text-slate-ui">
                     <div className="flex items-center gap-2">
                       <CalendarDays className="size-4 text-mist" />
                       <span className="capitalize">{formatDateTime(e.starts_at)}</span>
@@ -120,7 +120,7 @@ export default async function EventosPage() {
 
           {past.length > 0 && (
             <>
-              <h2 className="mb-6 mt-14 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <h2 className="mb-6 mt-14 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                 Ya sucedieron
               </h2>
               <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
@@ -130,7 +130,7 @@ export default async function EventosPage() {
                       <p className="truncate text-body-sm font-medium text-ink">
                         {e.title}
                       </p>
-                      <p className="mt-0.5 text-xs capitalize text-slate-ui">
+                      <p className="mt-0.5 text-caption capitalize text-slate-ui">
                         {formatDateTime(e.starts_at)}
                         {e.location ? ` · ${e.location}` : ""}
                       </p>

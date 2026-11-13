@@ -75,9 +75,9 @@ export function RequestCertificateButtons({
           >
             <div className="min-w-0">
               <p className="text-body-sm font-medium text-ink">{t.name}</p>
-              <p className="mt-0.5 truncate text-xs text-slate-ui">{t.issuer}</p>
+              <p className="mt-0.5 truncate text-caption text-slate-ui">{t.issuer}</p>
               {t.owned && (
-                <p className="mt-2 inline-flex items-center gap-1.5 text-xs font-medium text-success">
+                <p className="mt-2 inline-flex items-center gap-1.5 text-caption font-medium text-success">
                   <Check className="size-3.5" />
                   Ya lo tienes
                 </p>
@@ -85,11 +85,11 @@ export function RequestCertificateButtons({
             </div>
 
             <div className="shrink-0 text-right">
-              <p className="tabular font-display text-lg font-semibold text-ink">
+              <p className="tabular font-display text-body-lg font-semibold text-ink">
                 {formatSoles(t.priceCents)}
               </p>
               {!t.owned && (
-                <p className="mt-1 text-xs font-medium text-sep-600">
+                <p className="mt-1 text-caption font-medium text-sep-600">
                   {loading === t.id ? (
                     <Loader2 className="ml-auto size-3.5 animate-spin" />
                   ) : (

@@ -49,7 +49,7 @@ export default async function InstitucionConvenioPage() {
           <h2 className="mt-4 font-display text-h3 font-semibold">
             {i?.name ?? "Tu institución"}
           </h2>
-          <p className="mt-1 text-sm text-white/75">
+          <p className="mt-1 text-body-sm text-white/75">
             {signed
               ? `Convenio firmado el ${formatDate(i!.agreement_signed_at!)}`
               : "Aún no firmamos el convenio"}
@@ -57,7 +57,7 @@ export default async function InstitucionConvenioPage() {
         </div>
 
         <div className="p-7">
-          <h3 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h3 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Qué acordamos
           </h3>
           <ul className="mt-4 space-y-2.5">
@@ -71,7 +71,7 @@ export default async function InstitucionConvenioPage() {
 
           {!signed && (
             <div className="mt-7 rounded-md border border-warning/30 bg-warning-bg p-5">
-              <p className="text-sm leading-relaxed text-graphite">
+              <p className="text-body-sm leading-relaxed text-graphite">
                 Para formalizar el convenio, el equipo de alianzas de SEP coordina una
                 reunión virtual de 30 minutos y envía el documento firmado digitalmente.
               </p>

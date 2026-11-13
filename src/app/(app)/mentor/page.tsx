@@ -86,7 +86,7 @@ export default async function MentorPage() {
       <section className="mt-8 grid gap-3 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <div className="flex items-center justify-between">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
               Mis mentorados
             </h2>
             <Button href="/mentor/mentorados" variant="link" size="sm">
@@ -109,8 +109,8 @@ export default async function MentorPage() {
                 return (
                   <li key={m.id} className="flex items-center justify-between gap-4 py-3.5">
                     <div>
-                      <p className="text-sm font-medium text-ink">{p?.full_name}</p>
-                      <p className="text-xs text-slate-ui">{p?.region}</p>
+                      <p className="text-body-sm font-medium text-ink">{p?.full_name}</p>
+                      <p className="text-caption text-slate-ui">{p?.region}</p>
                     </div>
                     <Button href="/mentor/mentorados" variant="ghost" size="sm">
                       Ver ficha
@@ -123,19 +123,19 @@ export default async function MentorPage() {
         </Card>
 
         <Card>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Progreso del mes
           </h2>
           <p className="tabular mt-4 font-display text-h2 font-semibold leading-none text-ink">
             {monthHours}
-            <span className="text-lg text-slate-ui"> / {committed} h</span>
+            <span className="text-body-lg text-slate-ui"> / {committed} h</span>
           </p>
           <ProgressBar
             value={committed ? (monthHours / committed) * 100 : 0}
             className="mt-4"
             tone="gold"
           />
-          <p className="mt-3 text-xs leading-relaxed text-slate-ui">
+          <p className="mt-3 text-caption leading-relaxed text-slate-ui">
             Tus horas registradas y aprobadas alimentan tu certificado de voluntariado y
             tu carta de recomendación institucional.
           </p>
@@ -152,10 +152,10 @@ export default async function MentorPage() {
               <MessagesSquare className="size-5" />
             </span>
             <div>
-              <h2 className="font-display text-lg font-semibold text-ink">
+              <h2 className="font-display text-body-lg font-semibold text-ink">
                 Canal privado de mentores
               </h2>
-              <p className="mt-1 max-w-lg text-sm text-slate-ui">
+              <p className="mt-1 max-w-lg text-body-sm text-slate-ui">
                 Comunidad cerrada con recursos, casos reales y sesiones de formación
                 exclusivas en mentoría.
               </p>

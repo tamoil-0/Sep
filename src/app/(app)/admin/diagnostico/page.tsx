@@ -121,14 +121,14 @@ export default async function AdminDiagnosticoPage({
           <div className="flex flex-wrap gap-2">
             <a
               href={`/api/admin/diagnostico/export?${query()}`}
-              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-sm font-medium text-white transition-colors hover:bg-sep-700"
+              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
             >
               <FileSpreadsheet className="size-4" />
               Descargar Excel
             </a>
             <a
               href={`/api/admin/diagnostico/export?${query({ perfil: "todos" })}`}
-              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-white px-4 text-sm font-medium text-graphite ring-1 ring-inset ring-line transition-colors hover:bg-surface-1"
+              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-white px-4 text-body-sm font-medium text-graphite ring-1 ring-inset ring-line transition-colors hover:bg-surface-1"
             >
               Los tres perfiles
             </a>
@@ -170,7 +170,7 @@ export default async function AdminDiagnosticoPage({
             key={profile.key}
             href={`/admin/diagnostico?${query({ perfil: profile.key, lead: undefined })}`}
             className={cn(
-              "shrink-0 rounded-full px-4 py-2 text-sm font-medium transition-colors",
+              "shrink-0 rounded-full px-4 py-2 text-body-sm font-medium transition-colors",
               active === profile.key
                 ? "bg-sep-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -184,10 +184,10 @@ export default async function AdminDiagnosticoPage({
       <section className="mt-6" aria-labelledby="participants-title">
         <div className="mb-3 flex flex-wrap items-end justify-between gap-3">
           <div>
-            <h2 id="participants-title" className="font-display text-xl font-semibold text-ink">
+            <h2 id="participants-title" className="font-display text-h4 font-semibold text-ink">
               Respuestas por persona
             </h2>
-            <p className="mt-1 text-sm text-slate-ui">
+            <p className="mt-1 text-body-sm text-slate-ui">
               {participants.length}{" "}
               {participants.length === 1 ? "respuesta completa" : "respuestas completas"} en{" "}
               {activeMeta.label.toLowerCase()}.
@@ -214,7 +214,7 @@ export default async function AdminDiagnosticoPage({
               name="q"
               defaultValue={search}
               placeholder="Buscar nombre, correo o región"
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-body-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             />
           </label>
           <label>
@@ -222,7 +222,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="origen"
               defaultValue={origin}
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="todos">Todos los orígenes</option>
               <option value="feria">{ORIGIN_LABELS.feria}</option>
@@ -235,7 +235,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="datos"
               defaultValue={dataset}
-              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-11 w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
             >
               <option value="reales">Solo respuestas reales</option>
               <option value="todos">Incluir datos de demostración</option>
@@ -243,7 +243,7 @@ export default async function AdminDiagnosticoPage({
           </label>
           <button
             type="submit"
-            className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-medium text-white transition hover:bg-sep-700"
+            className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white transition hover:bg-sep-700"
           >
             Aplicar filtros
           </button>
@@ -266,7 +266,7 @@ export default async function AdminDiagnosticoPage({
               search || origin !== "todos" ? (
                 <Link
                   href={`/admin/diagnostico?perfil=${active}`}
-                  className="text-sm font-medium text-sep-600 hover:underline"
+                  className="text-body-sm font-medium text-sep-600 hover:underline"
                 >
                   Limpiar filtros
                 </Link>
@@ -275,7 +275,7 @@ export default async function AdminDiagnosticoPage({
           />
         ) : (
           <Card className="overflow-hidden p-0">
-            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-ui md:grid">
+            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-caption font-semibold uppercase tracking-[0.08em] text-slate-ui md:grid">
               <span>Participante</span>
               <span>Región</span>
               <span>Completado</span>
@@ -314,15 +314,15 @@ export default async function AdminDiagnosticoPage({
                           </Badge>
                         )}
                       </span>
-                      <span className="mt-0.5 block truncate text-xs text-slate-ui">
+                      <span className="mt-0.5 block truncate text-caption text-slate-ui">
                         {person.email || "Participación rápida · sin cuenta"}
                       </span>
                     </span>
-                    <span className="flex items-center gap-1.5 text-sm text-graphite">
+                    <span className="flex items-center gap-1.5 text-body-sm text-graphite">
                       <MapPin className="size-3.5 text-mist" />
                       {person.region || "No indicada"}
                     </span>
-                    <span className="flex items-center gap-1.5 text-sm text-slate-ui">
+                    <span className="flex items-center gap-1.5 text-body-sm text-slate-ui">
                       <CalendarDays className="size-3.5 text-mist md:hidden" />
                       {formatDate(person.completedAt)}
                     </span>
@@ -341,12 +341,12 @@ export default async function AdminDiagnosticoPage({
             <div className="bg-sep-800 px-5 py-6 text-white sm:px-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.12em] text-white/65">
+                  <p className="text-caption font-semibold uppercase tracking-[0.12em] text-white/65">
                     Respuesta individual · {activeMeta.singular}
                   </p>
                   <h2
                     id="response-detail-title"
-                    className="mt-1.5 font-display text-2xl font-semibold"
+                    className="mt-1.5 font-display text-h3 font-semibold"
                   >
                     {selected.name}
                   </h2>
@@ -360,7 +360,7 @@ export default async function AdminDiagnosticoPage({
                 </Link>
               </div>
 
-              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm text-white/75">
+              <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-white/75">
                 {selected.email ? (
                   <span className="inline-flex items-center gap-1.5">
                     <Mail className="size-4 text-gold-500" /> {selected.email}
@@ -383,16 +383,16 @@ export default async function AdminDiagnosticoPage({
               {(selected.phone || selected.organization || selected.situation) && (
                 <dl className="mt-5 grid gap-3 border-t border-white/15 pt-5 sm:grid-cols-3">
                   <div>
-                    <dt className="text-xs text-white/55">Teléfono</dt>
-                    <dd className="mt-0.5 text-sm">{selected.phone || "No indicado"}</dd>
+                    <dt className="text-caption text-white/55">Teléfono</dt>
+                    <dd className="mt-0.5 text-body-sm">{selected.phone || "No indicado"}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs text-white/55">{activeMeta.organizationHeader}</dt>
-                    <dd className="mt-0.5 text-sm">{selected.organization || "No indicada"}</dd>
+                    <dt className="text-caption text-white/55">{activeMeta.organizationHeader}</dt>
+                    <dd className="mt-0.5 text-body-sm">{selected.organization || "No indicada"}</dd>
                   </div>
                   <div>
-                    <dt className="text-xs text-white/55">Situación / especialidad</dt>
-                    <dd className="mt-0.5 text-sm">{selected.situation || "No indicada"}</dd>
+                    <dt className="text-caption text-white/55">Situación / especialidad</dt>
+                    <dd className="mt-0.5 text-body-sm">{selected.situation || "No indicada"}</dd>
                   </div>
                 </dl>
               )}
@@ -404,10 +404,10 @@ export default async function AdminDiagnosticoPage({
                 return (
                   <div key={moduleTitle}>
                     <div className="mb-3 flex items-center gap-3">
-                      <span className="flex size-7 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-700">
+                      <span className="flex size-7 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
                         {moduleIndex + 1}
                       </span>
-                      <h3 className="font-display text-lg font-semibold text-ink">
+                      <h3 className="font-display text-body-lg font-semibold text-ink">
                         {moduleTitle}
                       </h3>
                     </div>
@@ -419,13 +419,13 @@ export default async function AdminDiagnosticoPage({
                             key={question.id}
                             className="rounded-md border border-line bg-surface-1 px-4 py-3.5"
                           >
-                            <dt className="text-sm leading-relaxed text-slate-ui">
+                            <dt className="text-body-sm leading-relaxed text-slate-ui">
                               <span className="tabular mr-1.5 font-semibold text-sep-600">
                                 {question.number}.
                               </span>
                               {question.question}
                             </dt>
-                            <dd className="mt-1.5 text-sm font-medium leading-relaxed text-ink">
+                            <dd className="mt-1.5 text-body-sm font-medium leading-relaxed text-ink">
                               {answer.length ? answer.join(" · ") : "Sin respuesta"}
                             </dd>
                           </div>
@@ -442,10 +442,10 @@ export default async function AdminDiagnosticoPage({
 
       <section className="mt-10" aria-labelledby="trends-title">
         <div className="mb-4">
-          <h2 id="trends-title" className="font-display text-xl font-semibold text-ink">
+          <h2 id="trends-title" className="font-display text-h4 font-semibold text-ink">
             Tendencias generales
           </h2>
-          <p className="mt-1 text-sm text-slate-ui">
+          <p className="mt-1 text-body-sm text-slate-ui">
             Distribución de las {participants.length} respuestas de{" "}
             {activeMeta.label.toLowerCase()} que pasan los filtros de arriba.
           </p>
@@ -465,7 +465,7 @@ export default async function AdminDiagnosticoPage({
                 <Card key={number} className="p-5 sm:p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="flex-1">
-                      <p className="tabular text-xs font-semibold text-gold-600">
+                      <p className="tabular text-caption font-semibold text-gold-600">
                         PREGUNTA {number}
                       </p>
                       <h3 className="mt-1.5 font-display text-body font-semibold leading-snug text-ink">
@@ -485,11 +485,11 @@ export default async function AdminDiagnosticoPage({
                   <ul className="mt-5 space-y-2.5">
                     {question.options.map((option) => (
                       <li key={option.option}>
-                        <div className="flex items-baseline justify-between gap-4 text-sm">
+                        <div className="flex items-baseline justify-between gap-4 text-body-sm">
                           <span className="text-graphite">{option.option}</span>
                           <span className="tabular shrink-0 font-medium text-ink">
                             {option.pct}%{" "}
-                            <span className="text-xs font-normal text-mist">({option.votes})</span>
+                            <span className="text-caption font-normal text-mist">({option.votes})</span>
                           </span>
                         </div>
                         <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-2">

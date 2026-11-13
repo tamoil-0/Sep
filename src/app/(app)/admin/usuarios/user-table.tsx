@@ -118,7 +118,7 @@ export function UserTable({
       {feedback && (
         <div
           className={cn(
-            "mb-4 rounded-sm px-4 py-3 text-sm",
+            "mb-4 rounded-sm px-4 py-3 text-body-sm",
             feedback.ok
               ? "border border-success/25 bg-success-bg text-success"
               : "border border-danger/25 bg-danger-bg text-danger",
@@ -147,7 +147,7 @@ export function UserTable({
             type="button"
             onClick={() => setFilter("todos")}
             className={cn(
-              "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
+              "rounded-full px-3 py-1.5 text-caption font-medium transition-colors",
               filter === "todos"
                 ? "bg-sep-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -164,7 +164,7 @@ export function UserTable({
                 type="button"
                 onClick={() => setFilter(r)}
                 className={cn(
-                  "rounded-full px-3 py-1.5 text-xs font-medium transition-colors",
+                  "rounded-full px-3 py-1.5 text-caption font-medium transition-colors",
                   filter === r
                     ? "bg-sep-600 text-white"
                     : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
@@ -249,7 +249,7 @@ export function UserTable({
                   {["Usuario", "Región", "Roles", "Registro", ""].map((h) => (
                     <th
                       key={h}
-                      className="px-5 py-3 text-xs font-semibold uppercase tracking-[0.08em] text-slate-ui"
+                      className="px-5 py-3 text-caption font-semibold uppercase tracking-[0.08em] text-slate-ui"
                     >
                       {h}
                     </th>
@@ -265,20 +265,20 @@ export function UserTable({
                           {initials(u.name || u.email)}
                         </span>
                         <div className="min-w-0">
-                          <p className="truncate text-sm font-medium text-ink">
+                          <p className="truncate text-body-sm font-medium text-ink">
                             {u.name || "—"}
                           </p>
-                          <p className="truncate text-xs text-slate-ui">{u.email}</p>
+                          <p className="truncate text-caption text-slate-ui">{u.email}</p>
                         </div>
                       </div>
                     </td>
-                    <td className="px-5 py-3.5 text-sm text-graphite">
+                    <td className="px-5 py-3.5 text-body-sm text-graphite">
                       {u.region ?? "—"}
                     </td>
                     <td className="px-5 py-3.5">
                       <div className="flex flex-wrap gap-1">
                         {u.roles.length === 0 ? (
-                          <span className="text-xs text-mist">Sin rol</span>
+                          <span className="text-caption text-mist">Sin rol</span>
                         ) : (
                           u.roles.map((r) => (
                             <Badge key={r} tone={roleTone[r]}>
@@ -288,7 +288,7 @@ export function UserTable({
                         )}
                       </div>
                     </td>
-                    <td className="px-5 py-3.5 text-xs text-slate-ui">
+                    <td className="px-5 py-3.5 text-caption text-slate-ui">
                       {formatDate(u.createdAt)}
                     </td>
                     <td className="px-5 py-3.5 text-right">
@@ -301,7 +301,7 @@ export function UserTable({
                             ? "No puedes modificar tus propios roles"
                             : "Gestionar roles"
                         }
-                        className="rounded-sm border border-line px-3 py-1.5 text-xs font-medium text-graphite transition-colors hover:bg-surface-2 disabled:opacity-40"
+                        className="rounded-sm border border-line px-3 py-1.5 text-caption font-medium text-graphite transition-colors hover:bg-surface-2 disabled:opacity-40"
                       >
                         Gestionar
                       </button>
@@ -338,7 +338,7 @@ export function UserTable({
                 <p id="roles-dialog-title" className="font-display text-h4 font-semibold text-ink">
                   Gestionar roles de {editing.name}
                 </p>
-                <p className="text-xs text-slate-ui">{editing.email}</p>
+                <p className="text-caption text-slate-ui">{editing.email}</p>
               </div>
               <button
                 type="button"
@@ -363,13 +363,13 @@ export function UserTable({
                 return (
                   <li key={role} className="flex items-center gap-3 px-5 py-3">
                     <div className="min-w-0 flex-1">
-                      <p className="flex items-center gap-1.5 text-sm font-medium text-ink">
+                      <p className="flex items-center gap-1.5 text-body-sm font-medium text-ink">
                         {ROLE_META[role].label}
                         {restricted && (
                           <ShieldCheck className="size-3.5 text-danger" />
                         )}
                       </p>
-                      <p className="mt-0.5 text-xs leading-relaxed text-slate-ui">
+                      <p className="mt-0.5 text-caption leading-relaxed text-slate-ui">
                         {ROLE_META[role].description}
                       </p>
                     </div>

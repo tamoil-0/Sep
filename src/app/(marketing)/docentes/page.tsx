@@ -43,7 +43,7 @@ export default function DocentesPage() {
               Metodologías activas que{" "}
               <GoldUnderline>puedes usar el lunes</GoldUnderline>
             </h1>
-            <p className="mt-5 text-lg leading-relaxed text-slate-ui">
+            <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               No teoría pedagógica: plantillas, guías y dinámicas probadas en aulas reales
               de secundaria en regiones del Perú.
             </p>
@@ -89,7 +89,7 @@ export default function DocentesPage() {
               </ul>
 
               <Card className="mt-8 border-sep-200 bg-sep-50/40">
-                <p className="text-sm leading-relaxed text-graphite">
+                <p className="text-body-sm leading-relaxed text-graphite">
                   <strong className="font-medium text-ink">Certificado opcional:</strong>{" "}
                   S/30 con aval de SEP y código de verificación público.
                 </p>
@@ -97,7 +97,7 @@ export default function DocentesPage() {
             </div>
 
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
                 Recursos descargables
               </p>
               <ul className="mt-5 space-y-2.5">
@@ -107,11 +107,11 @@ export default function DocentesPage() {
                     className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3.5"
                   >
                     <FolderOpen className="size-4 shrink-0 text-gold-600" />
-                    <span className="text-sm text-graphite">{r}</span>
+                    <span className="text-body-sm text-graphite">{r}</span>
                   </li>
                 ))}
               </ul>
-              <p className="mt-4 text-xs text-mist">
+              <p className="mt-4 text-caption text-mist">
                 Disponibles en tu panel al crear la cuenta de docente.
               </p>
             </div>

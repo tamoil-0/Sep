@@ -120,7 +120,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
             </p>
 
             {logoutError && (
-              <p role="alert" className="mt-4 rounded-md bg-danger-bg px-3.5 py-3 text-sm text-danger">
+              <p role="alert" className="mt-4 rounded-md bg-danger-bg px-3.5 py-3 text-body-sm text-danger">
                 {logoutError}
               </p>
             )}
@@ -191,7 +191,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
               />
             </div>
 
-            <p className="mt-4 text-xs text-white/50">Cerrando tu sesión…</p>
+            <p className="mt-4 text-caption text-white/50">Cerrando tu sesión…</p>
           </div>
         </div>,
         document.body,

@@ -72,7 +72,7 @@ export default async function AdminAuditoriaPage() {
                     </span>
                     <div className="min-w-0">
                       <p className="truncate font-medium text-ink">{r.actor.full_name}</p>
-                      <p className="truncate text-xs text-slate-ui">{r.actor.email}</p>
+                      <p className="truncate text-caption text-slate-ui">{r.actor.email}</p>
                     </div>
                   </div>
                 ) : (
@@ -81,7 +81,7 @@ export default async function AdminAuditoriaPage() {
             },
             { key: "ac", header: "Acción", render: (r) => <Badge tone="neutral">{r.action}</Badge> },
             { key: "e", header: "Entidad", render: (r) => r.entity },
-            { key: "ip", header: "IP", render: (r) => <span className="tabular text-xs">{String(r.ip ?? "—")}</span> },
+            { key: "ip", header: "IP", render: (r) => <span className="tabular text-caption">{String(r.ip ?? "—")}</span> },
             { key: "t", header: "Cuándo", render: (r) => <span className="capitalize">{formatDateTime(r.created_at)}</span> },
           ]}
         />

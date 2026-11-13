@@ -70,7 +70,7 @@ export default async function CursoPublicoPage({
         <Container size="wide" className="py-14">
           <Link
             href="/cursos"
-            className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+            className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
           >
             <ArrowLeft className="size-4" />
             Todos los cursos
@@ -92,7 +92,7 @@ export default async function CursoPublicoPage({
                 {course.title}
               </h1>
               {course.subtitle && (
-                <p className="mt-2 text-lg text-slate-ui">{course.subtitle}</p>
+                <p className="mt-2 text-body-lg text-slate-ui">{course.subtitle}</p>
               )}
               {course.description && (
                 <p className="mt-5 max-w-2xl text-body leading-relaxed text-graphite">
@@ -100,7 +100,7 @@ export default async function CursoPublicoPage({
                 </p>
               )}
 
-              <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-slate-ui">
+              <dl className="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-body-sm text-slate-ui">
                 <span className="inline-flex items-center gap-2">
                   <Clock className="size-4 text-mist" />
                   {course.total_hours} horas totales
@@ -133,7 +133,7 @@ export default async function CursoPublicoPage({
                 <p className="tabular font-display text-h1 font-bold leading-none text-ink">
                   {course.is_free ? "Gratis" : formatSoles(course.price_cents)}
                 </p>
-                <p className="mt-1.5 text-sm text-slate-ui">
+                <p className="mt-1.5 text-body-sm text-slate-ui">
                   {course.is_free
                     ? "Acceso completo sin costo"
                     : "Tarifa social para la red SEP"}
@@ -146,7 +146,7 @@ export default async function CursoPublicoPage({
                     "Acceso a la comunidad SEP",
                     "Certificado opcional desde S/30",
                   ].map((f) => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm text-graphite">
+                    <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
                       <Check className="mt-0.5 size-4 shrink-0 text-seed-500" />
                       {f}
                     </li>
@@ -166,7 +166,7 @@ export default async function CursoPublicoPage({
                   <ArrowRight className="size-4" />
                 </Button>
 
-                <p className="mt-3 text-center text-xs text-mist">
+                <p className="mt-3 text-center text-caption text-mist">
                   Necesitas una cuenta gratuita de SEP.
                 </p>
               </Card>
@@ -185,7 +185,7 @@ export default async function CursoPublicoPage({
             <div className="mt-8 space-y-6">
               {weeks.map((week) => (
                 <div key={week}>
-                  <p className="mb-3 text-xs font-semibold uppercase tracking-[0.12em] text-gold-600">
+                  <p className="mb-3 text-caption font-semibold uppercase tracking-[0.12em] text-gold-600">
                     Semana {week}
                   </p>
                   <ul className="divide-y divide-line overflow-hidden rounded-md border border-line bg-white">
@@ -193,7 +193,7 @@ export default async function CursoPublicoPage({
                       .filter((s) => s.week === week)
                       .map((s) => (
                         <li key={s.id} className="flex gap-4 p-5">
-                          <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-xs font-semibold text-sep-600">
+                          <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
                             {s.number}
                           </span>
                           <div>
@@ -201,10 +201,10 @@ export default async function CursoPublicoPage({
                               {s.title}
                             </p>
                             {s.subtitle && (
-                              <p className="mt-0.5 text-xs text-slate-ui">{s.subtitle}</p>
+                              <p className="mt-0.5 text-caption text-slate-ui">{s.subtitle}</p>
                             )}
                             {s.description && (
-                              <p className="mt-2 text-sm leading-relaxed text-graphite">
+                              <p className="mt-2 text-body-sm leading-relaxed text-graphite">
                                 {s.description}
                               </p>
                             )}

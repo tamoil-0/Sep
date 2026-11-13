@@ -54,13 +54,13 @@ export default async function AdminImpactoPage() {
       {/* Cabecera imprimible */}
       <Card className="mb-6 overflow-hidden p-0">
         <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-xs uppercase tracking-[0.14em] text-white/70">
+          <p className="text-caption uppercase tracking-[0.14em] text-white/70">
             Semillero de Emprendedores Perú
           </p>
           <h2 className="mt-2 font-display text-h2 font-semibold">
             Reporte de impacto
           </h2>
-          <p className="mt-1 text-sm text-white/75">
+          <p className="mt-1 text-body-sm text-white/75">
             Generado el {formatDate(new Date())} · Datos verificables en plataforma
           </p>
         </div>
@@ -111,7 +111,7 @@ export default async function AdminImpactoPage() {
 
       {/* Distribución territorial — el argumento central de SEP */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
           Distribución territorial
         </h2>
         <Card>
@@ -121,11 +121,11 @@ export default async function AdminImpactoPage() {
             <ul className="space-y-3.5">
               {topRegions.map((r) => (
                 <li key={r.region}>
-                  <div className="flex items-baseline justify-between gap-4 text-sm">
+                  <div className="flex items-baseline justify-between gap-4 text-body-sm">
                     <span className="font-medium text-ink">{r.region}</span>
                     <span className="tabular text-slate-ui">
                       {r.users}{" "}
-                      <span className="text-xs text-mist">
+                      <span className="text-caption text-mist">
                         ({r.students} est. · {r.mentors} ment.)
                       </span>
                     </span>
@@ -146,7 +146,7 @@ export default async function AdminImpactoPage() {
       <div className="mt-8 grid gap-5 lg:grid-cols-2">
         {/* Colegios */}
         <section>
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Impacto por colegio
           </h2>
           <Card className="p-0">
@@ -159,16 +159,16 @@ export default async function AdminImpactoPage() {
                 {(schools ?? []).map((s) => (
                   <li key={s.institution_id} className="flex items-center gap-4 px-5 py-3.5">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-ink">{s.name}</p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
+                      <p className="truncate text-caption text-slate-ui">
                         {[s.province, s.region].filter(Boolean).join(", ")}
                       </p>
                     </div>
                     <div className="shrink-0 text-right">
-                      <p className="tabular text-sm font-semibold text-ink">
+                      <p className="tabular text-body-sm font-semibold text-ink">
                         {s.students_reached}
                       </p>
-                      <p className="text-xs text-slate-ui">
+                      <p className="text-caption text-slate-ui">
                         {s.workshops_done} talleres
                       </p>
                     </div>
@@ -181,7 +181,7 @@ export default async function AdminImpactoPage() {
 
         {/* Voluntarios */}
         <section>
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Horas de voluntariado
           </h2>
           <Card className="p-0">
@@ -194,17 +194,17 @@ export default async function AdminImpactoPage() {
                 {(volunteers ?? []).map((v) => (
                   <li key={v.user_id} className="flex items-center gap-4 px-5 py-3.5">
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-medium text-ink">{v.full_name}</p>
-                      <p className="truncate text-xs text-slate-ui">
+                      <p className="truncate text-body-sm font-medium text-ink">{v.full_name}</p>
+                      <p className="truncate text-caption text-slate-ui">
                         {v.region ?? "—"} · {v.mentees} mentorados
                       </p>
                     </div>
                     <div className="shrink-0 text-right">
-                      <p className="tabular text-sm font-semibold text-ink">
+                      <p className="tabular text-body-sm font-semibold text-ink">
                         {v.approved_hours} h
                       </p>
                       {Number(v.pending_hours) > 0 && (
-                        <p className="text-xs text-warning">
+                        <p className="text-caption text-warning">
                           +{v.pending_hours} por aprobar
                         </p>
                       )}
@@ -219,7 +219,7 @@ export default async function AdminImpactoPage() {
 
       {/* ODS */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
           Alineación con los ODS
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -232,7 +232,7 @@ export default async function AdminImpactoPage() {
               <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                 ODS {goal}
               </p>
-              <p className="mt-2 text-sm font-medium text-ink">{name}</p>
+              <p className="mt-2 text-body-sm font-medium text-ink">{name}</p>
             </Card>
           ))}
         </div>

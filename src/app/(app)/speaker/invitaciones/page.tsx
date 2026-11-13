@@ -70,12 +70,12 @@ export default async function SpeakerInvitacionesPage() {
                       {i.topic ?? "Charla SEP"}
                     </p>
                     {i.event && (
-                      <p className="mt-1 text-sm text-slate-ui">
+                      <p className="mt-1 text-body-sm text-slate-ui">
                         {i.event.title}
                         {i.event.location ? ` · ${i.event.location}` : ""}
                       </p>
                     )}
-                    <p className="mt-2 text-xs capitalize text-slate-ui">
+                    <p className="mt-2 text-caption capitalize text-slate-ui">
                       {i.proposed_at ? formatDateTime(i.proposed_at) : "Fecha por coordinar"}
                     </p>
                   </div>
@@ -83,7 +83,7 @@ export default async function SpeakerInvitacionesPage() {
                 </div>
 
                 {i.status === "pendiente" && (
-                  <p className="mt-4 rounded-sm bg-surface-1 px-4 py-3 text-sm text-graphite">
+                  <p className="mt-4 rounded-sm bg-surface-1 px-4 py-3 text-body-sm text-graphite">
                     Para confirmar o proponer otra fecha, responde el correo que te enviamos
                     o escríbenos por WhatsApp. Así queda registro de la coordinación.
                   </p>

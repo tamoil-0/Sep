@@ -41,7 +41,7 @@ export function VolunteerForm({
         <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Postulación enviada!
         </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
+        <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">{state.message}</p>
       </div>
     );
   }
@@ -150,7 +150,7 @@ export function VolunteerForm({
 
       <SubmitButton />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         Al enviar aceptas que SEP trate tus datos para evaluar tu postulación, conforme a
         la Ley N.º 29733.
       </p>

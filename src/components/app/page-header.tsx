@@ -47,13 +47,13 @@ export function Kpi({
   return (
     <div className="min-w-0 rounded-sm border border-line bg-white px-3 py-3 sm:rounded-md sm:px-4 sm:py-3.5">
       <div className="flex items-start justify-between gap-3">
-        <p className="text-xs leading-snug text-slate-ui sm:text-body-sm">{label}</p>
+        <p className="text-caption leading-snug text-slate-ui sm:text-body-sm">{label}</p>
         {icon && <span className="hidden text-mist sm:block">{icon}</span>}
       </div>
-      <p className="tabular mt-1.5 truncate text-xl font-semibold leading-none tracking-tight text-ink sm:text-h3">
+      <p className="tabular mt-1.5 truncate text-h4 font-semibold leading-none tracking-tight text-ink sm:text-h3">
         {value}
       </p>
-      {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5 sm:text-xs">{hint}</p>}
+      {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5 sm:text-caption">{hint}</p>}
     </div>
   );
 }

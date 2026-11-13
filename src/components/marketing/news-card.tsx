@@ -67,7 +67,7 @@ export function NewsCard({
             {category}
           </Badge>
           {post.published_at && (
-            <time dateTime={post.published_at} className="text-xs text-slate-ui">
+            <time dateTime={post.published_at} className="text-caption text-slate-ui">
               {formatDate(post.published_at)}
             </time>
           )}
@@ -84,14 +84,14 @@ export function NewsCard({
           </Link>
         </h3>
         {post.excerpt && (
-          <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-ui">
+          <p className="mt-2 line-clamp-3 flex-1 text-body-sm leading-relaxed text-slate-ui">
             {post.excerpt}
           </p>
         )}
 
         <Link
           href={`/blog/${post.slug}`}
-          className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
+          className="mt-5 inline-flex w-fit items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
         >
           Ver noticia
           <ArrowRight className="size-3.5" />

@@ -39,7 +39,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
     return (
       <p
         className={cn(
-          "flex items-center gap-2 text-sm font-medium",
+          "flex items-center gap-2 text-body-sm font-medium",
           inverted ? "text-gold-500" : "text-success",
         )}
       >
@@ -90,7 +90,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
 
       <p
         className={cn(
-          "mt-3 text-xs",
+          "mt-3 text-caption",
           state === "error"
             ? "text-danger"
             : inverted

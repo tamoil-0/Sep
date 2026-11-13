@@ -32,7 +32,7 @@ export function EnrollCta({
 
   if (!available) {
     return (
-      <p className="text-sm text-slate-ui">
+      <p className="text-body-sm text-slate-ui">
         Este curso aún no está abierto. Te avisaremos cuando abra la próxima cohorte.
       </p>
     );
@@ -41,7 +41,7 @@ export function EnrollCta({
   return (
     <div>
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="text-sm text-graphite">
+        <p className="text-body-sm text-graphite">
           El curso es <strong className="font-medium text-ink">gratuito</strong>. Solo el
           certificado tiene costo, y es opcional.
         </p>
@@ -49,7 +49,7 @@ export function EnrollCta({
           type="button"
           onClick={enroll}
           disabled={busy}
-          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-medium text-white  transition-colors  disabled:opacity-60"
+          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
         >
           {busy && <Loader2 className="size-4 animate-spin" />}
           Inscribirme gratis
@@ -57,7 +57,7 @@ export function EnrollCta({
       </div>
 
       {error && (
-        <p className="mt-3 rounded-sm border border-danger/25 bg-danger-bg px-3.5 py-2.5 text-sm text-danger">
+        <p className="mt-3 rounded-sm border border-danger/25 bg-danger-bg px-3.5 py-2.5 text-body-sm text-danger">
           {error}
         </p>
       )}

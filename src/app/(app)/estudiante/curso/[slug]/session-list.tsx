@@ -68,7 +68,7 @@ export function SessionList({
       {feedback && (
         <div
           className={cn(
-            "mb-3 rounded-sm border px-4 py-3 text-sm",
+            "mb-3 rounded-sm border px-4 py-3 text-body-sm",
             feedback.ok
               ? "border-success/25 bg-success-bg text-success"
               : "border-danger/25 bg-danger-bg text-danger",
@@ -124,7 +124,7 @@ export function SessionList({
                   aria-expanded={isOpen}
                 >
                   <div className="flex flex-wrap items-center gap-2">
-                    <span className="tabular text-xs font-semibold text-mist">
+                    <span className="tabular text-caption font-semibold text-mist">
                       {String(s.number).padStart(2, "0")}
                     </span>
                     <p
@@ -139,17 +139,17 @@ export function SessionList({
                   </div>
 
                   {s.subtitle && (
-                    <p className="mt-0.5 text-xs text-slate-ui">{s.subtitle}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">{s.subtitle}</p>
                   )}
 
                   {s.scheduledAt && (
-                    <p className="mt-1 text-xs capitalize text-mist">
+                    <p className="mt-1 text-caption capitalize text-mist">
                       {formatDateTime(s.scheduledAt)}
                     </p>
                   )}
 
                   {isOpen && s.description && (
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-graphite">
+                    <p className="mt-3 max-w-2xl text-body-sm leading-relaxed text-graphite">
                       {s.description}
                     </p>
                   )}
@@ -160,7 +160,7 @@ export function SessionList({
                     href={s.meetUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-sm font-medium text-white transition-colors hover:bg-sep-700"
+                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
                   >
                     <ExternalLink className="size-3.5" />
                     Unirme

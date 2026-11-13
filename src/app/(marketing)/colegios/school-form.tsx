@@ -35,7 +35,7 @@ export function SchoolForm() {
         <p className="mt-3 font-display text-body font-semibold text-ink">
           ¡Solicitud recibida!
         </p>
-        <p className="mt-1.5 text-sm leading-relaxed text-graphite">{state.message}</p>
+        <p className="mt-1.5 text-body-sm leading-relaxed text-graphite">{state.message}</p>
       </div>
     );
   }
@@ -151,7 +151,7 @@ export function SchoolForm() {
 
       <SubmitButton />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         El equipo de SEP te contactará en menos de 72 horas para coordinar el primer taller.
       </p>
     </form>

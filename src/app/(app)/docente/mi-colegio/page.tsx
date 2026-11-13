@@ -74,8 +74,8 @@ export default async function DocenteMiColegioPage() {
               {(workshops ?? []).map((w) => (
                 <li key={w.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
                   <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-medium text-ink">{w.title}</p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="truncate text-body-sm font-medium text-ink">{w.title}</p>
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {w.scheduled_at ? formatDate(w.scheduled_at) : "Fecha por coordinar"}
                       {w.students_count ? ` · ${w.students_count} estudiantes` : ""}
                     </p>

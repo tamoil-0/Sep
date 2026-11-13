@@ -46,7 +46,7 @@ export default function RegistroPage() {
                     </span>
                     <ArrowRight className="size-4 shrink-0 text-mist transition-colors group-hover:translate-x-0.5 group-hover:text-sep-600" />
                   </span>
-                  <span className="mt-1 block text-sm leading-relaxed text-slate-ui">
+                  <span className="mt-1 block text-body-sm leading-relaxed text-slate-ui">
                     {meta.description}
                   </span>
                 </span>
@@ -57,7 +57,7 @@ export default function RegistroPage() {
       </ul>
 
       <div className="mt-8 rounded-md border border-line bg-surface-1 p-4">
-        <p className="text-sm text-slate-ui">
+        <p className="text-body-sm text-slate-ui">
           <strong className="font-medium text-graphite">
             ¿Quieres ser mentor o speaker?
           </strong>{" "}
@@ -74,7 +74,7 @@ export default function RegistroPage() {
         </p>
       </div>
 
-      <p className="mt-8 text-center text-sm text-slate-ui">
+      <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Ya tienes cuenta?{" "}
         <Link href="/login" className="font-medium text-sep-600 hover:underline">
           Iniciar sesión

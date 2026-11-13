@@ -141,21 +141,21 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-500 text-white ">
             <PartyPopper className="size-8" />
           </span>
-          <p className="mt-6 text-xs font-semibold uppercase tracking-[0.14em] text-seed-700">
+          <p className="mt-6 text-caption font-semibold uppercase tracking-[0.14em] text-seed-700">
             Participación registrada
           </p>
           <h1 className="mt-2 font-display text-h2 font-bold leading-tight text-ink sm:text-h1">
             ¡Gracias, {firstName}!
           </h1>
-          <p className="mx-auto mt-4 max-w-sm text-base leading-relaxed text-slate-ui">
+          <p className="mx-auto mt-4 max-w-sm text-body leading-relaxed text-slate-ui">
             Tu voz nos ayuda a construir oportunidades que sí respondan a lo que los jóvenes necesitan.
           </p>
-          <div className="mt-7 rounded-md bg-sep-50 px-4 py-4 text-sm leading-relaxed text-sep-800">
+          <div className="mt-7 rounded-md bg-sep-50 px-4 py-4 text-body-sm leading-relaxed text-sep-800">
             Ya guardamos tus 15 respuestas. Puedes devolver el equipo al personal de SEP.
           </div>
           <Link
             href="/"
-            className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-line px-5 text-sm font-medium text-graphite transition-colors hover:bg-surface-1"
+            className="mt-7 inline-flex h-11 items-center justify-center gap-2 rounded-sm border border-line px-5 text-body-sm font-medium text-graphite transition-colors hover:bg-surface-1"
           >
             Conocer más de SEP <ArrowRight className="size-4" />
           </Link>
@@ -174,7 +174,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
             <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-ink ">
               <HeartHandshake className="size-6" />
             </span>
-            <p className="mt-5 text-xs font-semibold uppercase tracking-[0.14em] text-gold-500">
+            <p className="mt-5 text-caption font-semibold uppercase tracking-[0.14em] text-gold-500">
               Tu voz importa
             </p>
             <h1 className="mt-2 font-display text-h2 font-bold leading-[1.08] sm:text-h1">
@@ -186,10 +186,10 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           </div>
 
           <form onSubmit={start} className="px-6 py-7 sm:px-9 sm:py-8">
-            <label htmlFor="fair-name" className="block text-sm font-semibold text-ink">
+            <label htmlFor="fair-name" className="block text-body-sm font-semibold text-ink">
               ¿Cómo te llamas?
             </label>
-            <p className="mt-1 text-xs text-slate-ui">Así podremos reconocer tu participación.</p>
+            <p className="mt-1 text-caption text-slate-ui">Así podremos reconocer tu participación.</p>
             <input
               id="fair-name"
               value={fullName}
@@ -201,7 +201,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               autoFocus
               maxLength={120}
               placeholder="Tu nombre y apellido"
-              className="mt-3 h-14 w-full rounded-md border border-line bg-white px-4 text-base text-ink outline-none transition focus:border-sep-500 focus:ring-4 focus:ring-sep-100"
+              className="mt-3 h-14 w-full rounded-md border border-line bg-white px-4 text-body text-ink outline-none transition focus:border-sep-500 focus:ring-4 focus:ring-sep-100"
             />
             <div className="absolute -left-[9999px]" aria-hidden="true">
               <label htmlFor="company-website">Sitio web</label>
@@ -214,15 +214,15 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               />
             </div>
 
-            {error && <p role="alert" className="mt-3 text-sm text-danger">{error}</p>}
+            {error && <p role="alert" className="mt-3 text-body-sm text-danger">{error}</p>}
 
             <button
               type="submit"
-              className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-md sep-gradient px-5 text-base font-semibold text-white  transition-transform active:scale-[.99]"
+              className="mt-5 inline-flex h-13 w-full items-center justify-center gap-2 rounded-md sep-gradient px-5 text-body font-semibold text-white  transition-transform active:scale-[.99]"
             >
               Comenzar ahora <ArrowRight className="size-5" />
             </button>
-            <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-xs text-mist">
+            <p className="mt-4 flex items-center justify-center gap-1.5 text-center text-caption text-mist">
               <LockKeyhole className="size-3.5" /> Tus respuestas solo serán vistas por el equipo SEP.
             </p>
             <p className="mt-2 text-center text-caption leading-relaxed text-mist">
@@ -248,7 +248,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
       <header className="sticky top-0 z-10 border-b border-line bg-white px-4 pb-3 pt-4  sm:rounded-t-lg sm:px-7 sm:pt-5">
         <div className="flex items-center justify-between gap-4">
           <Logo className="h-10" />
-          <span className="tabular text-xs font-semibold text-slate-ui">
+          <span className="tabular text-caption font-semibold text-slate-ui">
             {index + 1} de {questions.length}
           </span>
         </div>
@@ -259,17 +259,17 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           />
         </div>
         <div className="mt-3 flex items-center justify-between gap-3">
-          <span className="inline-flex items-center gap-2 text-xs font-semibold text-graphite">
+          <span className="inline-flex items-center gap-2 text-caption font-semibold text-graphite">
             <span className={cn("size-2 rounded-full", moduleMeta.color)} />
             Módulo {moduleIndex + 1}: {moduleMeta.title}
           </span>
-          <span className="text-xs text-mist">Hola, {firstName}</span>
+          <span className="text-caption text-mist">Hola, {firstName}</span>
         </div>
       </header>
 
       <section className="flex flex-1 flex-col px-4 py-6 sm:px-8 sm:py-8">
         {current.isKey && (
-          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-50 px-2.5 py-1 text-xs font-semibold text-gold-700">
+          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-50 px-2.5 py-1 text-caption font-semibold text-gold-700">
             <Sparkles className="size-3.5" /> Pregunta clave
           </span>
         )}
@@ -280,7 +280,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
         >
           {current.question}
         </h1>
-        <p className="mt-2 text-sm text-slate-ui">
+        <p className="mt-2 text-body-sm text-slate-ui">
           {multiple ? "Puedes marcar más de una opción." : "Toca la opción que mejor te represente."}
         </p>
 
@@ -325,7 +325,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
         </div>
 
         {error && (
-          <p role="alert" className="mt-4 rounded-sm bg-danger-bg px-4 py-3 text-sm text-danger">
+          <p role="alert" className="mt-4 rounded-sm bg-danger-bg px-4 py-3 text-body-sm text-danger">
             {error}
           </p>
         )}
@@ -337,7 +337,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
             type="button"
             onClick={() => goTo(index - 1)}
             disabled={index === 0 || busy}
-            className="inline-flex h-11 items-center gap-1.5 rounded-sm px-3 text-sm font-medium text-slate-ui transition hover:bg-surface-1 disabled:invisible"
+            className="inline-flex h-11 items-center gap-1.5 rounded-sm px-3 text-body-sm font-medium text-slate-ui transition hover:bg-surface-1 disabled:invisible"
           >
             <ArrowLeft className="size-4" /> Atrás
           </button>
@@ -347,7 +347,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               type="button"
               onClick={() => (index === questions.length - 1 ? finish() : goTo(index + 1))}
               disabled={!answered(currentAnswer) || busy}
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
             >
               {busy ? (
                 <><Loader2 className="size-4 animate-spin" /> Guardando</>

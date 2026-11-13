@@ -63,18 +63,18 @@ export default async function InstitucionPerfilPage() {
 
       <div className="grid gap-5 lg:grid-cols-[1.4fr_1fr]">
         <Card>
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Datos de la institución
           </h2>
           <dl className="mt-4 divide-y divide-line">
             {fields.map(([label, value]) => (
               <div key={label} className="flex flex-wrap justify-between gap-3 py-3">
-                <dt className="text-sm text-slate-ui">{label}</dt>
-                <dd className="text-sm font-medium text-ink">{value ?? "—"}</dd>
+                <dt className="text-body-sm text-slate-ui">{label}</dt>
+                <dd className="text-body-sm font-medium text-ink">{value ?? "—"}</dd>
               </div>
             ))}
           </dl>
-          <p className="mt-4 text-xs leading-relaxed text-mist">
+          <p className="mt-4 text-caption leading-relaxed text-mist">
             Para corregir algún dato escríbenos: los cambios en instituciones verificadas
             los aplica el equipo de SEP para mantener la trazabilidad de los convenios.
           </p>
@@ -82,15 +82,15 @@ export default async function InstitucionPerfilPage() {
 
         <div className="space-y-5">
           <Card>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
               Contacto registrado
             </h2>
-            <ul className="mt-4 space-y-3 text-sm">
+            <ul className="mt-4 space-y-3 text-body-sm">
               <li className="flex items-start gap-2.5">
                 <Building2 className="mt-0.5 size-4 shrink-0 text-mist" />
                 <span>
                   <span className="block font-medium text-ink">{i.contact_name ?? "—"}</span>
-                  <span className="block text-xs text-slate-ui">{i.contact_role ?? ""}</span>
+                  <span className="block text-caption text-slate-ui">{i.contact_role ?? ""}</span>
                 </span>
               </li>
               <li className="flex items-center gap-2.5 text-graphite">
@@ -109,8 +109,8 @@ export default async function InstitucionPerfilPage() {
           </Card>
 
           <Card>
-            <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">Convenio</h2>
-            <p className="mt-3 text-sm text-graphite">
+            <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">Convenio</h2>
+            <p className="mt-3 text-body-sm text-graphite">
               {i.agreement_signed_at
                 ? `Firmado el ${formatDate(i.agreement_signed_at)}`
                 : "Todavía sin convenio firmado."}

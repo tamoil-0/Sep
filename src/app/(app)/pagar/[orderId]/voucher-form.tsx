@@ -66,7 +66,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
         <p className="mt-3 font-display text-body font-semibold text-ink">
           Comprobante recibido
         </p>
-        <p className="mx-auto mt-1.5 max-w-sm text-sm leading-relaxed text-graphite">
+        <p className="mx-auto mt-1.5 max-w-sm text-body-sm leading-relaxed text-graphite">
           {state.message}
         </p>
       </div>
@@ -116,7 +116,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
       <div>
         <label
           htmlFor="voucher"
-          className="mb-1.5 block text-sm font-medium text-graphite"
+          className="mb-1.5 block text-body-sm font-medium text-graphite"
         >
           Captura de la operación<span className="ml-0.5 text-danger">*</span>
         </label>
@@ -150,8 +150,8 @@ export function VoucherForm({ orderId }: { orderId: string }) {
                 className="h-24 w-20 rounded-lg border border-line object-cover"
               />
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-medium text-ink">{fileName}</p>
-                <p className="mt-0.5 text-xs text-slate-ui">
+                <p className="truncate text-body-sm font-medium text-ink">{fileName}</p>
+                <p className="mt-0.5 text-caption text-slate-ui">
                   Verifica que se vean el monto, la fecha y el código.
                 </p>
               </div>
@@ -167,7 +167,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
           ) : fileName ? (
             <div className="flex items-center gap-3">
               <ImageUp className="size-5 text-slate-ui" />
-              <p className="flex-1 truncate text-sm font-medium text-ink">{fileName}</p>
+              <p className="flex-1 truncate text-body-sm font-medium text-ink">{fileName}</p>
               <button
                 type="button"
                 onClick={clearFile}
@@ -180,10 +180,10 @@ export function VoucherForm({ orderId }: { orderId: string }) {
           ) : (
             <div className="text-center">
               <ImageUp className="mx-auto size-6 text-mist" />
-              <p className="mt-2.5 text-sm font-medium text-ink">
+              <p className="mt-2.5 text-body-sm font-medium text-ink">
                 Arrastra tu captura o haz clic para elegirla
               </p>
-              <p id="voucher-hint" className="mt-1 text-xs text-slate-ui">
+              <p id="voucher-hint" className="mt-1 text-caption text-slate-ui">
                 JPG, PNG, WebP o PDF · máximo 5 MB
               </p>
             </div>
@@ -191,7 +191,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
         </div>
 
         {fieldErrors?.voucher?.length ? (
-          <p className="mt-1.5 text-xs text-danger" role="alert">
+          <p className="mt-1.5 text-caption text-danger" role="alert">
             {fieldErrors.voucher[0]}
           </p>
         ) : null}
@@ -199,7 +199,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
 
       <SubmitButton />
 
-      <p className="text-center text-xs leading-relaxed text-mist">
+      <p className="text-center text-caption leading-relaxed text-mist">
         Tu comprobante es privado: solo lo ve el equipo de SEP para validar el pago.
       </p>
     </form>

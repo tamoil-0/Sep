@@ -30,7 +30,7 @@ export default function FaqPage() {
           <h2 className="font-display text-h4 font-semibold text-ink">
             ¿No encontraste tu respuesta?
           </h2>
-          <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-ui">
+          <p className="mx-auto mt-2 max-w-md text-body-sm leading-relaxed text-slate-ui">
             Escríbenos por WhatsApp o al correo. Respondemos de verdad, no con bots.
           </p>
           <div className="mt-6 flex flex-col justify-center gap-3 sm:flex-row">

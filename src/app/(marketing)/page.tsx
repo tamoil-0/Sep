@@ -83,7 +83,7 @@ export default async function HomePage() {
                 <span className="text-sep-700"> proyectos con impacto.</span>
               </h1>
 
-              <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-ui sm:text-lg">
+              <p className="mt-4 max-w-xl text-body leading-relaxed text-slate-ui sm:text-body-lg">
                 Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
                 ese talento con escolares, docentes y comunidades de todo el Perú.
               </p>
@@ -209,15 +209,15 @@ export default async function HomePage() {
                 <span className="flex size-11 items-center justify-center rounded-md bg-sep-50 text-sep-700">
                   <audience.icon className="size-5" />
                 </span>
-                <h3 className="mt-5 font-display text-lg font-semibold text-ink">
+                <h3 className="mt-5 font-display text-body-lg font-semibold text-ink">
                   {audience.title}
                 </h3>
-                <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-ui">
+                <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
                   {audience.body}
                 </p>
                 <Link
                   href={audience.href}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
+                  className="mt-5 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:text-sep-800 hover:underline"
                 >
                   {audience.cta}
                   <ArrowRight className="size-3.5" />
@@ -305,7 +305,7 @@ export default async function HomePage() {
                   <p className="font-display text-body-sm font-semibold text-ink">
                     {title}
                   </p>
-                  <p className="mt-0.5 text-xs text-slate-ui">{detail}</p>
+                  <p className="mt-0.5 text-caption text-slate-ui">{detail}</p>
                 </li>
               ))}
             </ol>
@@ -358,15 +358,15 @@ export default async function HomePage() {
                   <h3 className="mt-3 font-display text-body font-semibold leading-snug text-ink">
                     {course.title}
                   </h3>
-                  <p className="mt-1.5 flex-1 text-sm leading-relaxed text-slate-ui">
+                  <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
                     {course.subtitle}
                   </p>
 
-                  <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-sm">
+                  <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-body-sm">
                     <span className="font-medium text-seed-700">
                       {course.is_free ? "Acceso sin costo" : formatSoles(course.price_cents)}
                     </span>
-                    <span className="text-xs text-slate-ui">
+                    <span className="text-caption text-slate-ui">
                       {course.total_hours} h · {course.sessions_count} sesiones
                     </span>
                   </p>
@@ -400,7 +400,7 @@ export default async function HomePage() {
                     <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
                       {formatSoles(20000)}
                     </p>
-                    <p className="mt-1 text-xs text-slate-ui">Tarifa social</p>
+                    <p className="mt-1 text-caption text-slate-ui">Tarifa social</p>
                   </div>
                   <Button href="/silp" variant="gradient" prefetch>
                     Ver el programa
@@ -445,8 +445,8 @@ export default async function HomePage() {
                 <h3 className="mt-4 font-display text-body font-semibold text-ink">
                   {c.name}
                 </h3>
-                <p className="mt-1 text-xs text-slate-ui">{c.issuer}</p>
-                <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-xs text-slate-ui">
+                <p className="mt-1 text-caption text-slate-ui">{c.issuer}</p>
+                <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-caption text-slate-ui">
                   <Check className="size-3.5 text-seed-500" />
                   Código de verificación público
                 </p>
@@ -521,7 +521,7 @@ export default async function HomePage() {
                 <Link
                   href={c.href}
                   prefetch={false}
-                  className="mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
+                  className="mt-5 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:underline"
                 >
                   {c.cta}
                   <ArrowRight className="size-3.5" />
@@ -562,7 +562,7 @@ export default async function HomePage() {
             </div>
 
             <Card className="p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-[0.14em] text-slate-ui">
+              <p className="text-caption font-semibold uppercase tracking-[0.14em] text-slate-ui">
                 Vínculos registrados por SEP
               </p>
               <ul className="mt-5 grid gap-2.5 sm:grid-cols-2">
@@ -571,7 +571,7 @@ export default async function HomePage() {
                     key={partner.name}
                     className="flex min-w-0 items-center justify-between gap-3 rounded-sm border border-line bg-surface-1 px-3.5 py-3"
                   >
-                    <span className="min-w-0 text-sm font-medium text-graphite">
+                    <span className="min-w-0 text-body-sm font-medium text-graphite">
                       {partner.name}
                     </span>
                     <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-caption font-medium text-sep-700 ring-1 ring-inset ring-sep-100">
@@ -597,7 +597,7 @@ export default async function HomePage() {
               <Link
                 href="/faq"
                 prefetch={false}
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-sep-600 hover:underline"
+                className="mt-6 inline-flex items-center gap-1.5 text-body-sm font-medium text-sep-600 hover:underline"
               >
                 Ver todas
                 <ArrowRight className="size-3.5" />
@@ -609,13 +609,13 @@ export default async function HomePage() {
                 <h2 className="font-display text-h4 font-semibold text-ink">
                   Newsletter SEP
                 </h2>
-                <p className="mt-2 text-sm leading-relaxed text-slate-ui">
+                <p className="mt-2 text-body-sm leading-relaxed text-slate-ui">
                   Convocatorias, becas, actividades y novedades de la comunidad SEP.
                 </p>
                 <div className="mt-5">
                   <NewsletterForm />
                 </div>
-                <p className="mt-4 text-xs text-mist">
+                <p className="mt-4 text-caption text-mist">
                   Puedes darte de baja cuando quieras.
                 </p>
               </Card>
@@ -630,7 +630,7 @@ export default async function HomePage() {
           <h2 className="mx-auto max-w-2xl font-display text-h1 font-bold leading-tight text-white sm:text-display">
             ¿Listos para sembrar el cambio?
           </h2>
-          <p className="mx-auto mt-5 max-w-md text-lg text-white/70">
+          <p className="mx-auto mt-5 max-w-md text-body-lg text-white/70">
             Crea tu cuenta y empieza tu primer curso esta semana.
           </p>
 

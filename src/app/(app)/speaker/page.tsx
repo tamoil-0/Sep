@@ -62,7 +62,7 @@ export default async function SpeakerPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Invitaciones
           </h2>
           <Button href="/speaker/invitaciones" variant="link" size="sm">
@@ -87,10 +87,10 @@ export default async function SpeakerPage() {
               {invitations.map((i) => (
                 <li key={i.id} className="flex items-center justify-between gap-4 px-5 py-4">
                   <div className="min-w-0">
-                    <p className="truncate text-sm font-medium text-ink">
+                    <p className="truncate text-body-sm font-medium text-ink">
                       {i.topic ?? "Charla SEP"}
                     </p>
-                    <p className="mt-0.5 text-xs text-slate-ui">
+                    <p className="mt-0.5 text-caption text-slate-ui">
                       {i.proposed_at
                         ? new Date(i.proposed_at).toLocaleDateString("es-PE", {
                             day: "numeric",
@@ -111,7 +111,7 @@ export default async function SpeakerPage() {
 
       {speaker?.topics?.length ? (
         <section className="mt-8">
-          <h2 className="mb-3.5 text-xs font-semibold uppercase tracking-[0.12em] text-slate-ui">
+          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-[0.12em] text-slate-ui">
             Mis temas
           </h2>
           <div className="flex flex-wrap gap-2">

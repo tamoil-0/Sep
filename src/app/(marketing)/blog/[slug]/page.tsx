@@ -63,7 +63,7 @@ export default async function BlogPostPage({
       <Container size="narrow">
         <Link
           href="/blog"
-          className="inline-flex items-center gap-1.5 text-sm text-slate-ui transition-colors hover:text-ink"
+          className="inline-flex items-center gap-1.5 text-body-sm text-slate-ui transition-colors hover:text-ink"
         >
           <ArrowLeft className="size-4" />
           Todos los artículos
@@ -84,13 +84,13 @@ export default async function BlogPostPage({
             {post.title}
           </h1>
 
-          <p className="mt-4 text-sm text-slate-ui">
+          <p className="mt-4 text-body-sm text-slate-ui">
             {author?.full_name ?? "Equipo SEP"}
             {post.published_at && ` · ${formatDate(post.published_at)}`}
           </p>
 
           {post.excerpt && (
-            <p className="mt-7 border-l-2 border-gold-500 pl-5 text-lg leading-relaxed text-graphite">
+            <p className="mt-7 border-l-2 border-gold-500 pl-5 text-body-lg leading-relaxed text-graphite">
               {post.excerpt}
             </p>
           )}

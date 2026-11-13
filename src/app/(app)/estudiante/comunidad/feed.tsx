@@ -41,7 +41,7 @@ function PostButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
     >
       {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-3.5" />}
       {pending ? "Publicando…" : "Publicar"}
@@ -113,7 +113,7 @@ export function Feed({
       <Card className="mb-5">
         <form ref={formRef} action={action}>
           <div className="flex gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
               {initials(currentUserName)}
             </span>
             <div className="min-w-0 flex-1">
@@ -127,7 +127,7 @@ export function Feed({
                 aria-label="Escribe tu publicación"
               />
               <div className="mt-3 flex items-center justify-between gap-3">
-                <p className="text-xs text-mist">
+                <p className="text-caption text-mist">
                   Sé amable. Esta comunidad existe para sostenernos.
                 </p>
                 <PostButton />
@@ -137,7 +137,7 @@ export function Feed({
         </form>
 
         {state && !state.ok && state.error && (
-          <p className="mt-3 rounded-sm bg-danger-bg px-3.5 py-2 text-sm text-danger" role="alert">
+          <p className="mt-3 rounded-sm bg-danger-bg px-3.5 py-2 text-body-sm text-danger" role="alert">
             {state.error}
           </p>
         )}
@@ -166,17 +166,17 @@ export function Feed({
               )}
 
               <div className="flex gap-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-xs font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
                   {initials(p.authorName)}
                 </span>
 
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-baseline gap-x-2">
-                    <p className="text-sm font-medium text-ink">{p.authorName}</p>
+                    <p className="text-body-sm font-medium text-ink">{p.authorName}</p>
                     {p.authorRegion && (
-                      <span className="text-xs text-slate-ui">· {p.authorRegion}</span>
+                      <span className="text-caption text-slate-ui">· {p.authorRegion}</span>
                     )}
-                    <span className="text-xs text-mist">· {relativeTime(p.createdAt)}</span>
+                    <span className="text-caption text-mist">· {relativeTime(p.createdAt)}</span>
                   </div>
 
                   <p className="mt-2 whitespace-pre-line text-body-sm leading-relaxed text-graphite">
@@ -190,7 +190,7 @@ export function Feed({
                       onClick={() => like(p.id)}
                       disabled={busy === p.id}
                       className={cn(
-                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-2 text-xs transition-colors disabled:opacity-50",
+                        "inline-flex min-h-control items-center gap-1.5 rounded-sm px-2 text-caption transition-colors disabled:opacity-50",
                         p.liked
                           ? "font-medium text-danger"
                           : "text-slate-ui hover:text-ink",
@@ -206,7 +206,7 @@ export function Feed({
                       onClick={() =>
                         setOpenComments(openComments === p.id ? null : p.id)
                       }
-                      className="inline-flex min-h-control items-center gap-1.5 rounded-sm px-2 text-xs text-slate-ui transition-colors hover:text-ink"
+                      className="inline-flex min-h-control items-center gap-1.5 rounded-sm px-2 text-caption text-slate-ui transition-colors hover:text-ink"
                       aria-expanded={openComments === p.id}
                     >
                       <MessageCircle className="size-4" />
@@ -227,13 +227,13 @@ export function Feed({
                             {initials(c.authorName)}
                           </span>
                           <div className="min-w-0">
-                            <p className="text-xs">
+                            <p className="text-caption">
                               <span className="font-medium text-ink">{c.authorName}</span>
                               <span className="ml-1.5 text-mist">
                                 {relativeTime(c.createdAt)}
                               </span>
                             </p>
-                            <p className="mt-0.5 text-sm leading-relaxed text-graphite">
+                            <p className="mt-0.5 text-body-sm leading-relaxed text-graphite">
                               {c.content}
                             </p>
                           </div>
@@ -254,7 +254,7 @@ export function Feed({
                             placeholder="Escribe un comentario…"
                             maxLength={2000}
                             aria-label="Escribe un comentario"
-                            className="h-9 flex-1 rounded-sm border border-line bg-white px-3 text-sm outline-none placeholder:text-mist focus:border-sep-400"
+                            className="h-9 flex-1 rounded-sm border border-line bg-white px-3 text-body-sm outline-none placeholder:text-mist focus:border-sep-400"
                           />
                           <button
                             type="button"
