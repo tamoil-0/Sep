@@ -56,7 +56,7 @@ export function NewsCard({
               ? "(min-width: 1024px) 60vw, (min-width: 768px) 55vw, 92vw"
               : "(min-width: 1024px) 30vw, (min-width: 640px) 48vw, 92vw"
           }
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/20 to-transparent" />
       </Link>

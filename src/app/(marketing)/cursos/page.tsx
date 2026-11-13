@@ -87,7 +87,7 @@ export default async function CursosPage() {
                     title={c.title}
                     category={c.category}
                     coverUrl={c.cover_url}
-                    className="mb-4 aspect-[16/9] w-full transition-transform duration-500 group-hover:scale-[1.015]"
+                    className="mb-4 aspect-[16/9] w-full transition-transform duration-300 group-hover:scale-[1.015]"
                   />
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (

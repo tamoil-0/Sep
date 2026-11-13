@@ -30,7 +30,7 @@ export function FaqAccordion({
                 </span>
                 <Plus
                   className={cn(
-                    "mt-0.5 size-5 shrink-0 text-slate-ui transition-transform duration-300",
+                    "mt-0.5 size-5 shrink-0 text-slate-ui transition-transform duration-200",
                     isOpen && "rotate-45 text-sep-600",
                   )}
                 />

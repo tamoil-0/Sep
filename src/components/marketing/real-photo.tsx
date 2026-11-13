@@ -64,7 +64,7 @@ export function MediaImage({
         loading={priority ? "eager" : "lazy"}
         sizes={sizes}
         className={cn(
-          "transition-transform duration-700 ease-out",
+          "transition-transform duration-300 ease-out",
           kind === "photo"
             ? "object-cover group-hover:scale-[1.025]"
             : "object-contain p-3 sm:p-4",

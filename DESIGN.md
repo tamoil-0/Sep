@@ -180,8 +180,8 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 
 ## 7. Movimiento
 
-- Transiciones de UI: `duration-150` (hover y color) a `duration-200` (progreso). Máximo 300ms en interacciones.
-- Entradas: `animate-fade-up` (600ms, `ease-out-soft`) y `animate-fade-in` (500ms), solo en marketing. Los diálogos usan `animate-scale-in` (220ms).
+- Transiciones de UI: `duration-150` (hover y color) a `duration-200` (íconos, navbar). Máximo 300ms en interacciones (zoom de imágenes, barras de progreso).
+- Entradas: `animate-fade-up` y `animate-fade-in` (500ms, `ease-out-soft`/`ease-out`), solo en marketing. Los diálogos usan `animate-scale-in` (220ms).
 - `prefers-reduced-motion` ya está desactivado globalmente en `globals.css`; no agregues animaciones que dependan de JS sin respetarlo.
 
 ---
@@ -204,7 +204,7 @@ Usa siempre el par: texto `text-<estado>` sobre `bg-<estado>-bg`.
 | 9 | **`font-display` dentro del producto** — ✅ **Resuelta** | Las vistas de `(app)` pedían `font-display`, que `.app-shell` neutraliza por CSS | Hecho: se quitaron 71 `font-display` de `src/app/(app)` y `src/components/app` (35 archivos). La regla `.app-shell .font-display` queda como red de seguridad para componentes compartidos (`EmptyState`, `Stat`). Efecto lateral buscado: `LogoutDialog`, que se pinta fuera de `.app-shell`, ahora también usa Inter. |
 | 10 | **Alturas de control** — ✅ **Resuelta** | `h-11` (24 usos = `h-control`), `h-12`, `h-10`, `h-9` y `h-13` en controles | Hecho: `h-11 → h-control` en 21 controles y skeletons de control; input del feed de comunidad `h-9 → h-control` (subió a 44px táctiles); newsletter (input y botón) `h-12 → h-control`; botón de `apoya-hoy` `h-13 → h-control-lg`. **Más cercano:** input de `apoya-hoy` `h-14` (56px) → `h-control-lg` (52px). Se dejaron a propósito los `h-9…h-14` de logos, skeletons de texto y los cuadros de ícono `size-11`, porque no son controles. |
 | 11 | **Anchos máximos arbitrarios** — ✅ **Resuelta** | `max-w-[65ch]`, `[62ch]`, `[60ch]`, `[620px]`, `[440px]` y `[280px]` | Hecho: no hizo falta un token nuevo porque Tailwind v4 ya trae `max-w-prose` (65ch). `65ch/62ch/60ch → max-w-prose`. **Más cercano:** formulario de auth `440px → max-w-md` (448px); foto del hero `620px → max-w-xl` (576px; en la práctica la limita su columna, de unos 560px); QR de apoyo `280px → max-w-2xs` (288px). Se mantienen los porcentajes `max-w-[60%]` y `[85%]` porque son relativos al contenedor, no anchos fijos. |
-| 12 | **Duraciones** | `duration-150/200/300/500/700` | UI: 150–200ms; solo las entradas de marketing pueden llegar a 500ms; eliminar 700ms. |
+| 12 | **Duraciones** — ✅ **Resuelta** | `duration-150/200/300/500/700` | Hecho: zoom de imágenes al pasar el cursor `500/700ms → 300ms` (cursos, `course-media`, `news-card`, `real-photo`); chevron del FAQ y fondo del navbar `300 → 200ms`; `animate-fade-up` `600 → 500ms`. Las barras de progreso se quedan en 300ms (dentro del máximo). Los bucles (`shimmer`, `float`, `marquee`) no son transiciones y quedan fuera de esta regla. |
 
 ---
 

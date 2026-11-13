@@ -65,7 +65,7 @@ export function CourseMedia({
           fill
           loading={priority ? "eager" : "lazy"}
           sizes="(min-width: 1024px) 28vw, (min-width: 640px) 48vw, 92vw"
-          className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.025]"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
           style={{ objectPosition: mappedPhoto?.position }}
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/45 via-transparent to-transparent" />
