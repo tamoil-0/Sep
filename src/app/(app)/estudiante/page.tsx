@@ -21,7 +21,14 @@ import { assertQueryResults } from "@/lib/supabase/query";
 export const metadata: Metadata = { title: "Mi panel" };
 
 function greeting() {
-  const h = new Date().getHours();
+  // Hora de Lima: el servidor (Vercel) corre en UTC.
+  const h = Number(
+    new Intl.DateTimeFormat("es-PE", {
+      hour: "numeric",
+      hourCycle: "h23",
+      timeZone: "America/Lima",
+    }).format(new Date()),
+  );
   if (h < 12) return "Buenos días";
   if (h < 19) return "Buenas tardes";
   return "Buenas noches";
@@ -58,7 +65,8 @@ export default async function EstudiantePage() {
       <PageHeader
         title={
           <>
-            {greeting()}, {user.fullName.split(" ")[0] || "🌱"} 🌱
+            {greeting()}
+            {user.fullName.split(" ")[0] ? `, ${user.fullName.split(" ")[0]}` : ""}
           </>
         }
         description={
@@ -131,7 +139,7 @@ export default async function EstudiantePage() {
                 >
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="truncate text-body-sm font-semibold text-ink">
+                      <h3 className="truncate text-body-sm leading-snug font-semibold text-ink">
                         {course?.title}
                       </h3>
                       <p className="mt-0.5 truncate text-caption text-slate-ui">
@@ -180,7 +188,7 @@ export default async function EstudiantePage() {
             </div>
             <Link
               href="/estudiante/comunidad"
-              className="text-caption font-medium text-sep-600 hover:underline"
+              className="relative text-caption font-medium text-sep-600 hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
             >
               Ver todo
             </Link>
@@ -227,7 +235,7 @@ export default async function EstudiantePage() {
             <Card key={c.slug} className="flex items-start justify-between gap-4 p-5">
               <div>
                 <div className="flex items-center gap-2">
-                  <h3 className="text-body-sm font-semibold text-ink">
+                  <h3 className="text-body-sm leading-snug font-semibold text-ink">
                     {c.name}
                   </h3>
                   {c.recommended && <Badge tone="gold">Recomendado</Badge>}
