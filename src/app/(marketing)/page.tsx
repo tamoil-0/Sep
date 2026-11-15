@@ -16,6 +16,7 @@ import {
   Card,
   Container,
   AccentUnderline,
+  Eyebrow,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -27,7 +28,8 @@ import { NewsCard } from "@/components/marketing/news-card";
 import { NewsletterForm } from "@/components/marketing/newsletter-form";
 import { ArrowLink } from "@/components/ui/arrow-link";
 import { CertificateOptions } from "@/components/marketing/certificate-options";
-import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
+import { Laptop, PantallaCertificado, PantallaLeccion, Telefono } from "@/components/maquetas/maquetas";
+import { MotivoSemilla } from "@/components/brand/motivo-semilla";
 import {
   ExperienceGallery,
   HeroPhoto,
@@ -78,26 +80,31 @@ export default async function HomePage() {
         <Container size="wide" className="relative">
           <div className="grid items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 lg:pb-16 lg:pt-20">
             <div className="max-w-2xl">
-              <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-0 px-3.5 py-1.5 text-caption text-slate-ui backdrop-blur-sm sm:text-body-sm">
-                <span aria-hidden className="size-1.5 rounded-full bg-cian-500" />
-                Emprendimiento y liderazgo juvenil desde las regiones del Perú
-              </p>
+              <Eyebrow className="text-cian-500">Desde las regiones del Perú</Eyebrow>
 
-              <h1 className="mt-6 font-display text-display font-semibold text-ink">
+              <h1 className="mt-5 font-display text-h1 font-semibold text-ink sm:text-display">
                 Ideas jóvenes que se convierten en proyectos con impacto.
               </h1>
 
               <p className="mt-6 max-w-xl text-body-lg text-slate-ui">
-                Formamos a jóvenes y universitarios con herramientas prácticas, y conectamos
-                ese talento con escolares, docentes y comunidades de todo el Perú.
+                Cursos gratuitos de Design Thinking, Scrum y liderazgo, 100 % virtuales. Te formas, y
+                luego llevas lo aprendido a los colegios de tu propia región.
               </p>
 
               <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
-                <SupportQrDialog />
-                <Button href="/nosotros" variant="outline" size="lg" prefetch>
+                <Button href="/registro" variant="neon" size="lg" prefetch>
+                  Crea tu cuenta gratis <ArrowRight aria-hidden />
+                </Button>
+                <Button href="/nosotros" variant="outline-white" size="lg" prefetch>
                   Conoce SEP
                 </Button>
               </div>
+              <p className="mt-5 text-body-sm text-slate-ui">
+                ¿Quieres sostener esta red?{" "}
+                <Link href="/donaciones" className="enlace-trazo font-medium text-ink">
+                  Apoya a SEP con una donación
+                </Link>
+              </p>
             </div>
 
             <HeroPhoto />
@@ -113,8 +120,8 @@ export default async function HomePage() {
                 <dd className="tabular font-display text-h1 font-semibold leading-none text-ink">
                   <CountUp
                     value={stat.value}
-                    prefix={"prefix" in stat ? stat.prefix : ""}
-                    suffix={"suffix" in stat ? stat.suffix : ""}
+                    prefix={stat.prefix ?? ""}
+                    suffix={stat.suffix ?? ""}
                   />
                 </dd>
                 <dt className="mt-3 text-body-sm leading-snug text-slate-ui">{stat.label}</dt>
@@ -423,17 +430,33 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      {/* ═══ 7 · CERTIFICADOS ═════════════════════════════ */}
-      <Section>
+      {/* ═══ 7 · LA PLATAFORMA POR DENTRO + CERTIFICADOS ═══ */}
+      <Section className="overflow-hidden">
         <Container size="wide">
-          <SectionHeader
-            eyebrow="Certificación"
-            title="Aprender es gratis. Acreditarlo, opcional."
-            description="Es lo que sostiene a SEP sin cobrar por la formación."
-            align="center"
-          />
+          <div className="grid items-center gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+            <div data-reveal>
+              <SectionHeader
+                eyebrow="La plataforma por dentro"
+                title="Aprender es gratis. Acreditarlo, opcional."
+                description="Avanzas sesión por sesión desde el celular y, si quieres, certificas lo aprendido con un código que cualquiera puede verificar. Es lo que sostiene a SEP sin cobrar por la formación."
+              />
+              <CertificateOptions showVerification className="mt-8 grid gap-4 sm:grid-cols-2" />
+            </div>
 
-          <CertificateOptions showVerification className="mx-auto mt-12 grid max-w-2xl gap-4 sm:grid-cols-2" />
+            {/* Maquetas con datos ficticios: no son capturas de usuarios reales. */}
+            <div className="relative grid items-end gap-6 sm:grid-cols-[auto_1fr]" data-reveal style={{ transitionDelay: "120ms" }}>
+              <Telefono label="Maqueta ilustrativa: la lección de un curso en el celular; el progreso avanza de 3 a 4 sesiones y aparece «¡Sesión 4 completada!»">
+                <PantallaLeccion />
+              </Telefono>
+              <Laptop
+                url="sep.pe/verificar/SEP-0000-EJEMPLO"
+                label="Maqueta ilustrativa: un certificado SEP de ejemplo a nombre de «Ana Q.» con su código QR y el sello de verificado"
+                className="hidden sm:block"
+              >
+                <PantallaCertificado />
+              </Laptop>
+            </div>
+          </div>
         </Container>
       </Section>
 
@@ -589,7 +612,8 @@ export default async function HomePage() {
       {/* ═══ CTA FINAL ════════════════════════════════════ */}
       <section className="theme-night halo relative overflow-hidden border-b border-line">
         <Container size="wide" className="relative py-20 text-center">
-          <h2 className="mx-auto max-w-2xl font-display text-h1 font-bold leading-tight text-white sm:text-display">
+          <MotivoSemilla className="mx-auto mb-6 w-28 sm:w-36" label="Ilustración: la semilla de SEP se ramifica en una red." ciclo={8} />
+          <h2 className="mx-auto max-w-3xl font-display text-h1 font-semibold text-white sm:text-display">
             ¿Listos para sembrar el cambio?
           </h2>
           <p className="mx-auto mt-5 max-w-md text-body-lg text-white/70">

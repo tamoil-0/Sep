@@ -16,7 +16,7 @@ const twMerge = extendTailwindMerge({
         "body-sm",
         "caption",
       ],
-      tracking: ["eyebrow"],
+      tracking: ["eyebrow", "marca"],
       shadow: ["elevated", "soft", "glow", "glow-neon", "highlight"],
     },
   },

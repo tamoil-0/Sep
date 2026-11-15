@@ -120,6 +120,8 @@
 
   /* Etiquetas sobre los títulos: frase normal, sin mayúsculas espaciadas. */
   --tracking-eyebrow: 0.005em;
+  /* Eyebrow de marca: mayúsculas pequeñas con aire (REDISEÑO §5). */
+  --tracking-marca: 0.15em;
 
   /* ── Radios: jerarquía por tamaño (control < tarjeta < superficie) ── */
   --radius-sm: 10px;
@@ -411,6 +413,312 @@
 ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--color-mist) 50%, var(--color-surface-0));
   background-clip: content-box;
+}
+
+/* ============================================================
+   Fase 3 · Utilidades de componentes (REDISEÑO §5)
+   Solo transform, opacity, background-position y sombras; 300 ms.
+   ============================================================ */
+
+/* Botón relleno: el fondo se desliza dentro de un degradado violeta
+   (600→700→800: el blanco pasa AA en todo el recorrido, ≥ 5.38), sube 2 px
+   y gana el brillo de marca. Al presionar, scale(0.98). */
+@utility btn-desliza {
+  background-image: linear-gradient(
+    110deg,
+    var(--color-violeta-600) 0%,
+    var(--color-violeta-600) 45%,
+    var(--color-violeta-700) 70%,
+    var(--color-violeta-800) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  transition:
+    background-position var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
+  &:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* Tarjeta viva: borde de 1 px que se enciende con el degradado de marca al
+   pasar el mouse, sube 4 px y gana sombra con tinte. El relleno sólido
+   (--relleno-tarjeta) evita que el degradado del borde se vea por dentro. */
+:root {
+  --relleno-tarjeta: var(--color-white);
+}
+.theme-night {
+  --relleno-tarjeta: var(--color-noche-800);
+}
+.theme-light {
+  --relleno-tarjeta: #ffffff;
+}
+@utility tarjeta-viva {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--relleno-tarjeta), var(--relleno-tarjeta)) padding-box,
+    linear-gradient(var(--color-line), var(--color-line)) border-box;
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
+  &:hover,
+  &:focus-within {
+    background:
+      linear-gradient(var(--relleno-tarjeta), var(--relleno-tarjeta)) padding-box,
+      var(--grad-marca) border-box;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+/* Enlace con trazo: subrayado en degradado que se dibuja de izquierda a derecha. */
+@utility enlace-trazo {
+  background-image: var(--grad-marca);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  padding-bottom: 2px;
+  transition: background-size var(--duration-slow) var(--ease-out);
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-size: 100% 2px;
+  }
+}
+
+/* Regla de 3 px en degradado para separar o subrayar títulos. */
+@utility regla-marca {
+  display: block;
+  height: 3px;
+  width: 3rem;
+  border-radius: 999px;
+  background: var(--grad-marca);
+}
+
+/* Velo sobre fotos: noche abajo para leer texto blanco encima. */
+@utility velo-foto {
+  background: linear-gradient(
+    180deg,
+    transparent 35%,
+    color-mix(in srgb, var(--color-noche-950) 82%, transparent) 100%
+  );
+}
+
+/* ============================================================
+   Fase 4 · Movimiento (REDISEÑO §6)
+   El contenido NUNCA queda oculto sin JS: `.js` lo pone RevealObserver.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      transform var(--duration-slow) var(--ease-out);
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Transición entre páginas: solo al navegar (la primera carga no espera). */
+  .navegado .pagina-entra:not(.ya-vista) {
+    animation: pagina-entra var(--duration-slow) var(--ease-out) both;
+  }
+}
+
+/* Maquetas y motivos animados: corren solo cuando se ven. */
+.js [data-anim]:not(.is-visible),
+.js [data-anim]:not(.is-visible) * {
+  animation-play-state: paused !important;
+}
+
+@keyframes pagina-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Barra de progreso: se llena con transform al entrar en pantalla. */
+@keyframes progreso-llena {
+  from {
+    transform: scaleX(0);
+  }
+}
+.barra-progreso {
+  transform-origin: left center;
+  animation: progreso-llena 700ms var(--ease-out) both;
+}
+
+/* Diálogo nativo: entra con fade + escala + 8 px (200 ms) y sale en 150 ms.
+   En móvil se presenta como hoja inferior. */
+dialog.dialogo {
+  margin: auto;
+  max-height: min(88dvh, 44rem);
+  width: min(100% - 2rem, 32rem);
+  border: 0;
+  padding: 0;
+  color: var(--color-ink);
+  background: var(--color-surface-0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transition:
+    opacity 150ms var(--ease-out),
+    transform 150ms var(--ease-out),
+    overlay 150ms allow-discrete,
+    display 150ms allow-discrete;
+}
+dialog.dialogo[open] {
+  opacity: 1;
+  transform: none;
+  transition-duration: 200ms;
+}
+@starting-style {
+  dialog.dialogo[open] {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+dialog.dialogo::backdrop {
+  background: color-mix(in srgb, var(--color-noche-950) 60%, transparent);
+  backdrop-filter: blur(4px);
+}
+@media (max-width: 639px) {
+  dialog.dialogo {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform: translateY(24px);
+  }
+  @starting-style {
+    dialog.dialogo[open] {
+      transform: translateY(24px);
+    }
+  }
+}
+
+/* ── Escenas de maquetas (components/maquetas) ───────────────
+   Ciclo compartido --d; cada pieza con su retraso --t. Mismo vocabulario
+   que ECOING: crecer-x, check, emerger, aparecer, pulso, sello. */
+.escena [class*="esc-"] {
+  animation-duration: var(--d, 10s);
+  animation-delay: var(--t, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+.escena .esc-crecer-x { animation-name: esc-crecer-x; transform-origin: left center; }
+.escena .esc-check { animation-name: esc-check; transform-box: fill-box; }
+.escena .esc-emerger { animation-name: esc-emerger; }
+.escena .esc-emerger-fijo { animation-name: esc-emerger-fijo; }
+.escena .esc-aparecer { animation-name: esc-aparecer; }
+.escena .esc-pulso { animation-name: esc-pulso; animation-timing-function: ease-in-out; }
+.escena .esc-sello { animation-name: esc-sello; }
+@keyframes esc-crecer-x {
+  0%, 15% { transform: scaleX(var(--desde, 0)); }
+  35%, 100% { transform: scaleX(1); }
+}
+@keyframes esc-check {
+  0%, 20% { opacity: 0; transform: scale(0.4); }
+  28%, 100% { opacity: 1; transform: none; }
+}
+@keyframes esc-emerger {
+  0%, 25% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  32%, 85% { opacity: 1; transform: none; }
+  95%, 100% { opacity: 0; transform: translateY(4px); }
+}
+@keyframes esc-emerger-fijo {
+  0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+  8%, 100% { opacity: 1; transform: none; }
+}
+@keyframes esc-aparecer {
+  0%, 5% { opacity: 0; }
+  12%, 100% { opacity: 1; }
+}
+@keyframes esc-pulso {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes esc-sello {
+  0%, 30% { opacity: 0; transform: scale(0.6); }
+  36% { opacity: 1; transform: scale(1.08); }
+  42%, 100% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .escena [class*="esc-"] { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Motivo «Semilla en cadena» (components/brand/motivo-semilla.tsx) ──
+   Ramas que se dibujan una vez, nodos que aparecen y un pulso que recorre la
+   red en bucle (--d). Colores por token; pensado para fondos noche. */
+.motivo-semilla .ms-trazo {
+  fill: none;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ms-dibujar 900ms var(--ease-out) var(--t, 0s) forwards;
+}
+.motivo-semilla .ms-tronco { stroke: var(--color-violeta-500); stroke-width: 3; }
+.motivo-semilla .ms-rama1 { stroke: var(--color-violeta-400); }
+.motivo-semilla .ms-rama2 { stroke: var(--color-turquesa-500); stroke-width: 1.75; }
+.motivo-semilla .ms-pulso {
+  fill: none;
+  stroke: var(--color-cian-500);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.08 1.2;
+  stroke-dashoffset: 1.1;
+  opacity: 0.9;
+  animation: ms-recorrer var(--d, 9s) linear var(--t, 0s) infinite;
+}
+.motivo-semilla .ms-nodo {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: ms-aparecer 500ms var(--ease-out) var(--t, 0s) forwards;
+}
+.motivo-semilla .ms-semilla { fill: var(--color-violeta-500); }
+.motivo-semilla .ms-n1 { fill: var(--color-turquesa-500); }
+.motivo-semilla .ms-n2 {
+  fill: var(--color-cian-500);
+  animation:
+    ms-aparecer 500ms var(--ease-out) var(--t, 0s) forwards,
+    ms-respirar 3.2s ease-in-out calc(var(--t, 0s) + 0.6s) infinite;
+}
+@keyframes ms-dibujar { to { stroke-dashoffset: 0; } }
+@keyframes ms-aparecer {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: none; }
+}
+/* El pulso ocupa ~25 % del ciclo y descansa el resto: calma, no ruido. */
+@keyframes ms-recorrer {
+  0% { stroke-dashoffset: 1.1; }
+  25%, 100% { stroke-dashoffset: -0.15; }
+}
+@keyframes ms-respirar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motivo-semilla .ms-trazo { stroke-dashoffset: 0; animation: none; }
+  .motivo-semilla .ms-nodo { opacity: 1; animation: none; }
+  .motivo-semilla .ms-pulso { display: none; }
 }
 
 /* ============================================================

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Sora } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { ToastProvider } from "@/components/ui/toast";
+import { RevealObserver } from "@/components/ui/reveal-observer";
 import "./globals.css";
 
 // Cuerpo y UI: Geist, sobria y técnica. Títulos: Sora, geométrica y de aire futurista.
@@ -86,6 +87,7 @@ export default function RootLayout({
           Saltar al contenido
         </a>
         <ToastProvider>{children}</ToastProvider>
+        <RevealObserver />
       </body>
     </html>
   );

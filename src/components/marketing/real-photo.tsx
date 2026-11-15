@@ -1,3 +1,4 @@
+import { MotivoSemilla } from "@/components/brand/motivo-semilla";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,11 @@ export const SEP_PHOTOS = {
   northStarMediaPartner: "/img/new_images/2d6ab556-c603-4fe0-bdae-e322cf78f5cf.jpg",
   innovationMediaPartner: "/img/new_images/54e4f2cf-6422-4e2f-b1ea-27da7283063e.jpg",
   virtualBootcamp: "/img/new_images/287d0326-b7d0-4f21-b888-970b2c31d205.jpg",
+  // Comunidad celebrando junto al banner de SEP (2560 px).
+  celebration: "/img/39564a3e-33c2-49cd-8fa1-eeb746de5170.jpg",
+  // Sesiones 100 % virtuales: participantes de varias regiones en Zoom.
+  virtualSession: "/img/31684365-609f-42da-8e26-b055b022d388.jpg",
+  virtualClass: "/img/eb4d428b-3074-4486-9224-88361927e129.jpg",
   virtualTourism: "/img/new_images/e74d9629-0a1d-4e95-9a2f-b486731526e4.jpg",
   recognitionEvent: "/img/new_images/f65374c2-41a0-4c34-9874-28be325374e0.jpg",
 } as const;
@@ -95,17 +101,17 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 
 export function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-xl">
-      {/* Halo de marca detrás de la foto: el único brillo del hero. */}
-      <div aria-hidden className="absolute -inset-6 rounded-xl grad-marca opacity-35 blur-3xl" />
+    <div className="relative mx-auto w-full max-w-xl lg:pt-28">
+      {/* Motivo de marca: la red brota desde la esquina de la foto, completa y a la vista. */}
+      <MotivoSemilla className="pointer-events-none absolute -right-4 top-0 hidden w-60 lg:block xl:w-64" />
       <RealPhoto
-        src={SEP_PHOTOS.heroPresentation}
-        alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"
+        src={SEP_PHOTOS.celebration}
+        alt="Jóvenes de la comunidad SEP celebran con globos junto al banner de Semillero de Emprendedores Perú"
         priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
-        label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-lg shadow-elevated ring-1 ring-white/15"
-        imageClassName="object-[52%_50%]"
+        label="La comunidad SEP"
+        className="relative aspect-[4/3] min-h-0 rounded-lg shadow-elevated ring-1 ring-white/15 lg:w-4/5"
+        imageClassName="object-[50%_45%]"
       />
     </div>
   );

@@ -84,16 +84,7 @@ export function SectionHeader({
       )}
     >
       {eyebrow && (
-        <p
-          className={cn(
-            "mb-4 inline-flex items-center gap-2 text-body-sm font-medium",
-            inverted ? "text-violeta-300" : "text-acento",
-          )}
-        >
-          {/* Punto de marca: marca la sección sin mayúsculas ni tracking. */}
-          <span aria-hidden className="size-1.5 rounded-full grad-marca" />
-          {eyebrow}
-        </p>
+        <Eyebrow className={cn("mb-4", inverted && "text-violeta-300")}>{eyebrow}</Eyebrow>
       )}
       <Heading
         className={cn(
@@ -232,9 +223,9 @@ export function Card({
   return (
     <Tag
       className={cn(
-        "min-w-0 rounded-md border border-line bg-surface-0 p-5",
-        interactive &&
-          "transition-[border-color,box-shadow] duration-200 hover:border-violeta-300 hover:shadow-soft",
+        "min-w-0 rounded-md p-5",
+        // Interactiva: borde que se enciende con el degradado, sube 4 px y sombra con tinte.
+        interactive ? "tarjeta-viva" : "border border-line bg-surface-0",
         className,
       )}
       {...rest}
@@ -280,6 +271,37 @@ export function Badge({
 }
 
 /* ── Tipografía de marca ──────────────────────────────────── */
+
+/**
+ * Etiqueta sobre un título: pequeña, en mayúsculas, tracking 0.15em y en el
+ * color de acento accesible (`acento`: 6.99 sobre blanco, 6.86 sobre noche).
+ * Úsala poco: no en todas las secciones.
+ */
+export function Eyebrow({
+  children,
+  className,
+  as: Tag = "p",
+}: {
+  children: React.ReactNode;
+  className?: string;
+  as?: "p" | "span";
+}) {
+  return (
+    <Tag className={cn("text-caption font-semibold uppercase tracking-marca text-acento", className)}>
+      {children}
+    </Tag>
+  );
+}
+
+/** Regla de 3 px en degradado para separar o subrayar títulos. */
+export function BrandRule({ className }: { className?: string }) {
+  return <span aria-hidden className={cn("regla-marca", className)} />;
+}
+
+/** Bloque de carga con brillo suave (usa `.skeleton` de globals.css). */
+export function Skeleton({ className }: { className?: string }) {
+  return <div aria-hidden className={cn("skeleton h-4 w-full", className)} />;
+}
 
 /** Palabra subrayada con el trazo del degradado de marca (decorativo). */
 export function AccentUnderline({ children }: { children: React.ReactNode }) {
@@ -338,9 +360,10 @@ export function ProgressBar({
       aria-valuemin={0}
       aria-valuemax={100}
     >
+      {/* Se llena con transform (scaleX) al montarse: `barra-progreso` en globals.css. */}
       <div
         className={cn(
-          "h-full rounded-full transition-[width] duration-200",
+          "barra-progreso h-full rounded-full",
           tone === "brand" && "grad-marca",
           // turquesa-700: 4.02:1 sobre blanco (objeto gráfico ≥ 3:1).
           tone === "success" && "bg-turquesa-700",

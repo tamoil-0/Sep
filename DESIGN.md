@@ -185,8 +185,16 @@ menús, toasts), `shadow-glow` (botón primario: `0 10px 30px -10px #7265FF`), `
 - **Fechas:** `formatDate` / `formatDateTime` de `@/lib/utils` (hora de Lima).
 - **Estados obligatorios** en toda vista con datos: vacío, cargando (`loading.tsx` con `.skeleton`), error (con
   reintentar) y éxito (`toast`).
-- **Faltan** (fase 3): modal con `<dialog>`, tabs, tabla adaptable, skeletons por ruta, botón con estado de carga,
-  tarjeta con borde encendido, enlace con trazo. Créalos en `src/components/ui` con `cva` + `cn()`.
+- **Fase 3 (hecho):**
+  - `Button`: `primary` usa `btn-desliza` (el fondo se desliza en violeta 600→800, sube 2 px, brillo y `scale(0.98)` al
+    presionar, 300 ms); prop `loading` con spinner que no cambia el ancho.
+  - `Card interactive` → `tarjeta-viva`: borde de 1 px que se enciende con `--grad-marca`, sube 4 px y sombra con tinte.
+  - `enlace-trazo`: subrayado en degradado que se dibuja de izquierda a derecha. `regla-marca` / `BrandRule`: regla de 3 px.
+  - `Eyebrow`: caption en mayúsculas, `tracking-marca` (0.15em), color `acento`. Úsalo poco.
+  - `Dialog` (`ui/dialog.tsx`): `<dialog>` nativo con `showModal()`, `aria-labelledby`, foco de vuelta, hoja inferior en móvil.
+  - `Tabs` (`ui/tabs.tsx`): compuesto (`Tabs.List/Tab/Panel`), flechas/Inicio/Fin, indicador que se desliza con transform.
+  - `Skeleton`, `ProgressBar` que se llena con `scaleX` (`barra-progreso`), `velo-foto` para texto sobre fotos.
+- **Pendiente:** migrar los 4 diálogos hechos a mano a `Dialog`, `Table` adaptable y `loading.tsx` por ruta.
 - **Íconos:** solo `lucide-react`, `strokeWidth` 1.75. Nunca emojis.
 
 ---
@@ -196,7 +204,13 @@ menús, toasts), `shadow-glow` (botón primario: `0 10px 30px -10px #7265FF`), `
 - Solo `transform` y `opacity`; ≤ 300 ms en la interfaz. Tokens: `--duration-fast` 150 ms, `--duration-base` 200 ms,
   `--duration-slow` 300 ms; curvas `--ease-out` y `--ease-out-soft`.
 - `prefers-reduced-motion` apaga todo globalmente. El contenido nunca queda oculto si falla el JS.
-- La fase 4 añade `RevealObserver`, animaciones pausadas fuera de pantalla y el motivo de marca animado.
+- **`RevealObserver`** (layout raíz): `data-reveal` aparece una vez (fade + 12 px); `data-anim` se pausa fuera de
+  pantalla. Primero marca lo visible y luego pone `.js` en `<html>`: sin JS nada queda oculto.
+- **`app/template.tsx`**: transición entre páginas (fade + 8 px, 300 ms) solo al navegar (`.navegado`); la primera
+  carga queda `ya-vista` para no retrasar el LCP.
+- **Motivo de marca «Semilla en cadena»** (`components/brand/motivo-semilla.tsx`): una semilla que se ramifica 1 → 3 → 9
+  («formamos a quien formará a diez más»). Ramas que se dibujan, nodos que aparecen y un pulso cian que recorre la red.
+  Es el único efecto firma: hero, panel de marca del login (y su banda en móvil), banda de cierre y logros.
 
 ---
 
@@ -207,8 +221,10 @@ Breakpoints `sm` 640, `md` 768, `lg` 1024, `xl` 1280. Diseña primero para 375 p
 
 ## 9. Maquetas
 
-Maquetas de la plataforma en código (fase 5): marcos `Telefono` y `Laptop` dibujados con CSS, **datos ficticios**
-(«Ana Q.», cursos de ejemplo), `role="img"` + `aria-label`, pausadas fuera de pantalla. Nunca capturas con datos reales.
+`components/maquetas/maquetas.tsx`: marcos `Telefono` y `Laptop` dibujados con CSS y pantallas `PantallaLeccion` y
+`PantallaCertificado` con **datos ficticios** («Ana Q.», código `SEP-0000-EJEMPLO`, QR que no codifica nada).
+Escenas solo con CSS (`.escena`, ciclo `--d`, retraso `--t`, keyframes `esc-*`), `role="img"` + `aria-label` que dice
+que es una maqueta, pausadas fuera de pantalla y quietas con movimiento reducido. Nunca capturas con datos reales.
 
 ---
 
