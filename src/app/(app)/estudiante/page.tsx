@@ -103,7 +103,7 @@ export default async function EstudiantePage() {
       />
 
       <KpiGrid>
-        <Kpi
+        <Kpi tone="destacada"
           label="Cursos en progreso"
           value={active.length}
           icon={<BookOpen className="size-4" />}

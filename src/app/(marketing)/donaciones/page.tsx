@@ -8,6 +8,7 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { DonationForm } from "./donation-form";
+import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
 
 export const metadata = createPageMetadata({
   title: "Dona y apoya a jóvenes emprendedores",
@@ -105,6 +106,10 @@ export default function DonacionesPage() {
 
               <div className="mt-6">
                 <DonationForm />
+              </div>
+              <div className="mt-6 flex flex-col items-start gap-3 border-t border-line pt-5 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-body-sm text-slate-ui">¿Prefieres compartirlo? Muestra el QR de «Apoya hoy».</p>
+                <SupportQrDialog />
               </div>
             </Card>
           </div>

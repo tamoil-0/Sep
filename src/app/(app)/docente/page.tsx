@@ -43,7 +43,7 @@ export default async function DocentePage() {
       />
 
       <KpiGrid>
-        <Kpi label="Programa docente" value="0%" hint="Metodologías ágiles en el aula" icon={<BookOpen className="size-4" />} />
+        <Kpi tone="destacada" label="Programa docente" value="0%" hint="Metodologías ágiles en el aula" icon={<BookOpen className="size-4" />} />
         <Kpi label="Talleres solicitados" value={0} icon={<School className="size-4" />} />
         <Kpi label="Estudiantes impactados" value={0} icon={<Users className="size-4" />} />
         <Kpi label="Certificados" value={0} icon={<Award className="size-4" />} />

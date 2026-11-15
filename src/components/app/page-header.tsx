@@ -38,18 +38,33 @@ export function Kpi({
   value,
   hint,
   icon,
+  tone = "default",
 }: {
   label: string;
   value: React.ReactNode;
   hint?: string;
   icon?: React.ReactNode;
+  /** `destacada`: la métrica principal del panel, en noche con el halo (una por panel). */
+  tone?: "default" | "destacada";
 }) {
+  const destacada = tone === "destacada";
   return (
-    <div className="min-w-0 rounded-md border border-line bg-surface-0 p-4 shadow-soft sm:p-5">
+    <div
+      className={cn(
+        "relative min-w-0 overflow-hidden rounded-md p-4 sm:p-5",
+        destacada ? "theme-night halo ring-1 ring-white/10" : "border border-line bg-surface-0 shadow-soft",
+      )}
+      data-reveal
+    >
       <div className="flex items-center justify-between gap-3">
         <p className="text-caption leading-snug text-slate-ui sm:text-body-sm">{label}</p>
         {icon && (
-          <span className="hidden size-9 items-center justify-center rounded-full bg-violeta-50 text-acento sm:flex [&_svg]:size-4">
+          <span
+            className={cn(
+              "hidden size-9 items-center justify-center rounded-full sm:flex [&_svg]:size-4",
+              destacada ? "bg-white/10 text-cian-500" : "bg-violeta-50 text-acento",
+            )}
+          >
             {icon}
           </span>
         )}
@@ -57,7 +72,7 @@ export function Kpi({
       <p className="tabular mt-3 truncate font-display text-h3 font-semibold leading-none text-ink sm:text-h2">
         {value}
       </p>
-      {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5 sm:text-caption">{hint}</p>}
+      {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5">{hint}</p>}
     </div>
   );
 }

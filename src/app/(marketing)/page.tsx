@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import {
   ArrowRight,
   Building2,
@@ -17,6 +18,7 @@ import {
   Container,
   AccentUnderline,
   Eyebrow,
+  Skeleton,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -65,21 +67,16 @@ const partnerCategoryLabels = {
   aval: "Aval",
 } as const;
 
-export default async function HomePage() {
-  const [catalog, posts] = await Promise.all([getCatalog(), getPublishedPosts()]);
-  const courses = catalog.filter((c) => c.category !== "SILP").slice(0, 4);
-  const latestPosts = posts.slice(0, 3);
-  const newsFallbacks = [SEP_PHOTOS.community, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop];
+export default function HomePage() {
 
   return (
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
       <section className="theme-night halo relative overflow-hidden">
-        {/* Malla tenue: profundidad sin sumar otro color. */}
-        <div aria-hidden className="halo-grid pointer-events-none absolute inset-0" />
         <Container size="wide" className="relative">
           <div className="grid items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 lg:pb-16 lg:pt-20">
             <div className="max-w-2xl">
+              <MotivoSemilla className="-ml-3 mb-2 w-20 lg:hidden" ciclo={8} />
               <Eyebrow className="text-cian-500">Desde las regiones del Perú</Eyebrow>
 
               <h1 className="mt-5 font-display text-h1 font-semibold text-ink sm:text-display">
@@ -131,45 +128,10 @@ export default async function HomePage() {
         </Container>
       </section>
 
-      {/* ═══ 3 · ACTUALIDAD — solo aparece cuando hay contenido publicado ═ */}
-      {latestPosts.length > 0 && (
-        <Section id="actualidad">
-          <Container size="wide">
-            <div className="flex flex-wrap items-end justify-between gap-5">
-              <SectionHeader
-                eyebrow="Actualidad"
-                title="Lo último en SEP"
-                description="Noticias, aprendizajes y actividades recientes de nuestra comunidad."
-              />
-              <Button href="/blog" variant="outline" prefetch>
-                Ver todas las noticias
-                <ArrowRight className="size-4" />
-              </Button>
-            </div>
-
-            <div className="mt-9">
-              <NewsCard
-                post={latestPosts[0]}
-                fallbackImage={newsFallbacks[0]}
-                priority
-                variant="featured"
-              />
-            </div>
-
-            {latestPosts.length > 1 && (
-              <div className="mt-5 grid gap-5 md:grid-cols-2">
-                {latestPosts.slice(1).map((post, index) => (
-                  <NewsCard
-                    key={post.id}
-                    post={post}
-                    fallbackImage={newsFallbacks[index + 1]}
-                  />
-                ))}
-              </div>
-            )}
-          </Container>
-        </Section>
-      )}
+      {/* ═══ 3 · ACTUALIDAD — se transmite aparte: el hero no espera a la base ═ */}
+      <Suspense fallback={null}>
+        <LatestNews />
+      </Suspense>
 
       {/* ═══ 4 · PÚBLICOS ═════════════════════════════════════════════════ */}
       <Section id="publicos" tone="muted">
@@ -323,69 +285,10 @@ export default async function HomePage() {
         </Container>
       </Section>
 
-      {/* ═══ 5 · CURSOS — con portada visual ═══════════════ */}
-      <Section>
-        <Container size="wide">
-          <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeader
-              eyebrow="Catálogo"
-              title="Formación práctica para empezar"
-              description="8 horas · 6 sesiones en vivo · 100 % virtual."
-            />
-            <Button href="/cursos" variant="outline" prefetch>
-              Ver catálogo
-              <ArrowRight className="size-4" />
-            </Button>
-          </div>
-
-          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {courses.map((course) => (
-              <Card
-                key={course.id}
-                interactive
-                className="flex flex-col p-4"
-                as={Link}
-                {...{ href: `/cursos/${course.slug}`, prefetch: true }}
-              >
-                <CourseMedia
-                  slug={course.slug}
-                  title={course.title}
-                  category={course.category}
-                  coverUrl={course.cover_url}
-                  className="aspect-[16/9] w-full"
-                />
-
-                <div className="mt-4 flex flex-1 flex-col px-1 pb-1">
-                  <div className="flex flex-wrap items-center gap-1.5">
-                    {course.status === "disponible" ? (
-                      <Badge tone="success">Disponible</Badge>
-                    ) : (
-                      <Badge tone="neutral">Pronto</Badge>
-                    )}
-                    {course.audience === "docente" && <Badge tone="neon">Docentes</Badge>}
-                  </div>
-
-                  <h3 className="mt-3 font-display text-body font-semibold leading-snug text-ink">
-                    {course.title}
-                  </h3>
-                  <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
-                    {course.subtitle}
-                  </p>
-
-                  <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-body-sm">
-                    <span className="font-medium text-turquesa-800">
-                      {course.is_free ? "Acceso sin costo" : formatSoles(course.price_cents)}
-                    </span>
-                    <span className="text-caption text-slate-ui">
-                      {course.total_hours} h · {course.sessions_count} sesiones
-                    </span>
-                  </p>
-                </div>
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+      {/* ═══ 5 · CURSOS — se transmite aparte con su propio esqueleto ═══ */}
+      <Suspense fallback={<CoursesFallback />}>
+        <CoursesSection />
+      </Suspense>
 
       {/* ═══ 6 · SILP ═════════════════════════════════════ */}
       <Section tone="muted">
@@ -685,5 +588,147 @@ export default async function HomePage() {
         }}
       />
     </>
+  );
+}
+
+/* ── Secciones con datos: cada una espera solo su consulta (streaming) ── */
+
+async function LatestNews() {
+  const posts = await getPublishedPosts();
+  const latestPosts = posts.slice(0, 3);
+  const newsFallbacks = [SEP_PHOTOS.community, SEP_PHOTOS.methodology, SEP_PHOTOS.workshop];
+  return (
+    <>
+      {latestPosts.length > 0 && (
+        <Section id="actualidad">
+          <Container size="wide">
+            <div className="flex flex-wrap items-end justify-between gap-5">
+              <SectionHeader
+                eyebrow="Actualidad"
+                title="Lo último en SEP"
+                description="Noticias, aprendizajes y actividades recientes de nuestra comunidad."
+              />
+              <Button href="/blog" variant="outline" prefetch>
+                Ver todas las noticias
+                <ArrowRight className="size-4" />
+              </Button>
+            </div>
+
+            <div className="mt-9">
+              <NewsCard
+                post={latestPosts[0]}
+                fallbackImage={newsFallbacks[0]}
+                priority
+                variant="featured"
+              />
+            </div>
+
+            {latestPosts.length > 1 && (
+              <div className="mt-5 grid gap-5 md:grid-cols-2">
+                {latestPosts.slice(1).map((post, index) => (
+                  <NewsCard
+                    key={post.id}
+                    post={post}
+                    fallbackImage={newsFallbacks[index + 1]}
+                  />
+                ))}
+              </div>
+            )}
+          </Container>
+        </Section>
+      )}
+
+    </>
+  );
+}
+
+async function CoursesSection() {
+  const catalog = await getCatalog();
+  const courses = catalog.filter((c) => c.category !== "SILP").slice(0, 4);
+  return (
+    <>
+      <Section>
+        <Container size="wide">
+          <div className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeader
+              eyebrow="Catálogo"
+              title="Formación práctica para empezar"
+              description="8 horas · 6 sesiones en vivo · 100 % virtual."
+            />
+            <Button href="/cursos" variant="outline" prefetch>
+              Ver catálogo
+              <ArrowRight className="size-4" />
+            </Button>
+          </div>
+
+          <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {courses.map((course) => (
+              <Card
+                key={course.id}
+                interactive
+                className="flex flex-col p-4"
+                as={Link}
+                {...{ href: `/cursos/${course.slug}`, prefetch: true }}
+              >
+                <CourseMedia
+                  slug={course.slug}
+                  title={course.title}
+                  category={course.category}
+                  coverUrl={course.cover_url}
+                  className="aspect-[16/9] w-full"
+                />
+
+                <div className="mt-4 flex flex-1 flex-col px-1 pb-1">
+                  <div className="flex flex-wrap items-center gap-1.5">
+                    {course.status === "disponible" ? (
+                      <Badge tone="success">Disponible</Badge>
+                    ) : (
+                      <Badge tone="neutral">Pronto</Badge>
+                    )}
+                    {course.audience === "docente" && <Badge tone="neon">Docentes</Badge>}
+                  </div>
+
+                  <h3 className="mt-3 font-display text-body font-semibold leading-snug text-ink">
+                    {course.title}
+                  </h3>
+                  <p className="mt-1.5 flex-1 text-body-sm leading-relaxed text-slate-ui">
+                    {course.subtitle}
+                  </p>
+
+                  <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-body-sm">
+                    <span className="font-medium text-turquesa-800">
+                      {course.is_free ? "Acceso sin costo" : formatSoles(course.price_cents)}
+                    </span>
+                    <span className="text-caption text-slate-ui">
+                      {course.total_hours} h · {course.sessions_count} sesiones
+                    </span>
+                  </p>
+                </div>
+              </Card>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
+    </>
+  );
+}
+
+function CoursesFallback() {
+  return (
+    <Section aria-busy>
+      <Container size="wide">
+        <Skeleton className="h-8 w-72 max-w-full" />
+        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {[0, 1, 2, 3].map((i) => (
+            <div key={i} className="rounded-md border border-line bg-surface-0 p-3">
+              <Skeleton className="aspect-[16/10] h-auto rounded-sm" />
+              <Skeleton className="mt-4 h-4 w-3/4" />
+              <Skeleton className="mt-2 h-3 w-1/2" />
+            </div>
+          ))}
+        </div>
+      </Container>
+    </Section>
   );
 }

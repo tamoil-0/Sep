@@ -194,7 +194,11 @@ menús, toasts), `shadow-glow` (botón primario: `0 10px 30px -10px #7265FF`), `
   - `Dialog` (`ui/dialog.tsx`): `<dialog>` nativo con `showModal()`, `aria-labelledby`, foco de vuelta, hoja inferior en móvil.
   - `Tabs` (`ui/tabs.tsx`): compuesto (`Tabs.List/Tab/Panel`), flechas/Inicio/Fin, indicador que se desliza con transform.
   - `Skeleton`, `ProgressBar` que se llena con `scaleX` (`barra-progreso`), `velo-foto` para texto sobre fotos.
-- **Pendiente:** migrar los 4 diálogos hechos a mano a `Dialog`, `Table` adaptable y `loading.tsx` por ruta.
+- **Fase 6 (hecho):** los 4 diálogos usan `Dialog` (comprobantes de pagos, roles de usuarios, cerrar sesión, QR de
+  «Apoya hoy»). `Kpi tone="destacada"` (noche con halo) marca la métrica principal de cada dashboard. Sidebar con un
+  indicador que se desliza al ítem activo. `(app)/loading.tsx` dibuja la silueta de la página con `Skeleton` y la
+  navegación muestra una barra fina en degradado (ya no una pantalla completa).
+- **Pendiente:** componente `Table` adaptable reutilizable.
 - **Íconos:** solo `lucide-react`, `strokeWidth` 1.75. Nunca emojis.
 
 ---
@@ -206,6 +210,8 @@ menús, toasts), `shadow-glow` (botón primario: `0 10px 30px -10px #7265FF`), `
 - `prefers-reduced-motion` apaga todo globalmente. El contenido nunca queda oculto si falla el JS.
 - **`RevealObserver`** (layout raíz): `data-reveal` aparece una vez (fade + 12 px); `data-anim` se pausa fuera de
   pantalla. Primero marca lo visible y luego pone `.js` en `<html>`: sin JS nada queda oculto.
+- **Animaciones decorativas** (motivo, escenas, contadores) arrancan después de `load` + `requestIdleCallback`
+  (`html.anim-listo`): no compiten con la carga.
 - **`app/template.tsx`**: transición entre páginas (fade + 8 px, 300 ms) solo al navegar (`.navegado`); la primera
   carga queda `ya-vista` para no retrasar el LCP.
 - **Motivo de marca «Semilla en cadena»** (`components/brand/motivo-semilla.tsx`): una semilla que se ramifica 1 → 3 → 9

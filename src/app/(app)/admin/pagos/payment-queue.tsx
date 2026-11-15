@@ -8,7 +8,6 @@ import {
   Eye,
   Loader2,
   MapPin,
-  Receipt,
   X,
 } from "lucide-react";
 import { reviewPaymentAction, getVoucherUrlAction } from "@/server/actions/payments";
@@ -16,7 +15,7 @@ import { Badge, Card } from "@/components/ui/primitives";
 import { Textarea } from "@/components/forms/field";
 import { formatSoles, relativeTime, initials } from "@/lib/utils";
 import { cn } from "@/lib/utils";
-import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
+import { Dialog } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/toast";
 
 interface PaymentRow {
@@ -85,10 +84,6 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
   const [feedback, setFeedback] = React.useState<{ id: string; text: string; ok: boolean } | null>(null);
   const [voucher, setVoucher] = React.useState<{ url: string; row: PaymentRow } | null>(null);
   const toast = useToast();
-  const voucherDialogRef = useDialogA11y<HTMLDivElement>({
-    open: Boolean(voucher),
-    onClose: () => setVoucher(null),
-  });
 
   const visible =
     tab === "all" ? payments : payments.filter((p) => p.status === tab);
@@ -346,66 +341,36 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
         </div>
       )}
 
-      {/* Visor del comprobante */}
-      {voucher && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-5 "
-          onClick={() => setVoucher(null)}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="voucher-dialog-title"
-          aria-describedby="voucher-dialog-description"
-        >
-          <div
-            ref={voucherDialogRef}
-            tabIndex={-1}
-            className="max-h-[90dvh] w-full max-w-lg overflow-auto rounded-lg bg-white shadow-elevated outline-none"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between border-b border-line px-5 py-3.5">
-              <div className="flex items-center gap-2.5">
-                <Receipt className="size-4 text-slate-ui" />
-                <div>
-                  <p id="voucher-dialog-title" className="text-body-sm font-medium text-ink">Comprobante de {voucher.row.buyerName}</p>
-                  <p className="tabular text-caption text-slate-ui">
-                    {methodLabels[voucher.row.method]} ·{" "}
-                    {formatSoles(voucher.row.amountCents)} · Op.{" "}
-                    {voucher.row.operationCode}
-                  </p>
-                </div>
-              </div>
-              <button
-                type="button"
-                onClick={() => setVoucher(null)}
-                className="flex size-control items-center justify-center rounded-sm text-slate-ui hover:bg-surface-2"
-                aria-label="Cerrar"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
-
-            <div className="p-5">
-              {voucher.url.includes(".pdf") ? (
-                <iframe
-                  src={voucher.url}
-                  title="Comprobante"
-                  className="h-[60vh] w-full rounded-lg border border-line"
-                />
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={voucher.url}
-                  alt="Comprobante de pago"
-                  className="mx-auto max-h-[60vh] rounded-lg border border-line object-contain"
-                />
-              )}
-              <p id="voucher-dialog-description" className="mt-3 text-center text-caption text-mist">
-                Enlace temporal: caduca en 5 minutos.
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      {/* Visor del comprobante: <dialog> nativo (foco, Esc y retorno del foco del navegador). */}
+      <Dialog
+        open={Boolean(voucher)}
+        onClose={() => setVoucher(null)}
+        title={voucher ? `Comprobante de ${voucher.row.buyerName}` : "Comprobante"}
+        description={
+          voucher ? (
+            <span className="tabular">
+              {methodLabels[voucher.row.method]} · {formatSoles(voucher.row.amountCents)} · Op.{" "}
+              {voucher.row.operationCode}
+            </span>
+          ) : undefined
+        }
+      >
+        {voucher && (
+          <>
+            {voucher.url.includes(".pdf") ? (
+              <iframe src={voucher.url} title="Comprobante" className="h-[60vh] w-full rounded-sm border border-line" />
+            ) : (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={voucher.url}
+                alt="Comprobante de pago"
+                className="mx-auto max-h-[60vh] rounded-sm border border-line object-contain"
+              />
+            )}
+            <p className="mt-3 text-center text-caption text-mist">Enlace temporal: caduca en 5 minutos.</p>
+          </>
+        )}
+      </Dialog>
     </>
   );
 }

@@ -9,7 +9,7 @@ import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Input } from "@/components/forms/field";
 import { ROLE_META, USER_ROLES, type UserRole } from "@/types/roles";
 import { formatDate, initials, cn } from "@/lib/utils";
-import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
+import { Dialog } from "@/components/ui/dialog";
 import { useToast } from "@/components/ui/toast";
 
 interface Row {
@@ -49,13 +49,6 @@ export function UserTable({
   const [editing, setEditing] = React.useState<Row | null>(null);
   const [confirming, setConfirming] = React.useState<UserRole | null>(null);
   const toast = useToast();
-  const dialogRef = useDialogA11y<HTMLDivElement>({
-    open: Boolean(editing),
-    onClose: () => {
-      setConfirming(null);
-      setEditing(null);
-    },
-  });
 
   React.useEffect(() => {
     if (!feedback) return;
@@ -295,114 +288,85 @@ export function UserTable({
         </Card>
       )}
 
-      {/* Modal de roles */}
-      {editing && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/60 p-5 "
-          onClick={() => {
-            setConfirming(null);
-            setEditing(null);
-          }}
-          role="dialog"
-          aria-modal="true"
-          aria-labelledby="roles-dialog-title"
-          aria-describedby="roles-dialog-description"
-        >
-          <div
-            ref={dialogRef}
-            tabIndex={-1}
-            className="max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-lg bg-white shadow-elevated outline-none"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-start justify-between gap-4 border-b border-line px-5 py-4">
-              <div>
-                <p id="roles-dialog-title" className="text-h4 font-semibold text-ink">
-                  Gestionar roles de {editing.name}
-                </p>
-                <p className="text-caption text-slate-ui">{editing.email}</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => {
-                  setConfirming(null);
-                  setEditing(null);
-                }}
-                className="flex size-control items-center justify-center rounded-sm text-slate-ui hover:bg-surface-2"
-                aria-label="Cerrar"
-              >
-                <X className="size-4" />
-              </button>
-            </div>
+      {/* Modal de roles: <dialog> nativo. */}
+      <Dialog
+        open={Boolean(editing)}
+        onClose={() => {
+          setConfirming(null);
+          setEditing(null);
+        }}
+        title={editing ? `Gestionar roles de ${editing.name}` : "Gestionar roles"}
+        description={editing?.email}
+        footer={
+          <p className="w-full text-caption text-slate-ui">
+            Cada cambio queda registrado en el log de auditoría con tu identidad, IP y marca de tiempo.
+          </p>
+        }
+      >
+        {editing && (
+        <ul className="-mx-5 -my-5 divide-y divide-line sm:-mx-6">
+          {USER_ROLES.map((role) => {
+            const has = editing.roles.includes(role);
+            const restricted = role === "admin" || role === "super_admin";
+            const locked = restricted && !isSuperAdmin;
+            const key = `${editing.id}:${role}`;
 
-            <ul className="divide-y divide-line">
-              {USER_ROLES.map((role) => {
-                const has = editing.roles.includes(role);
-                const restricted = role === "admin" || role === "super_admin";
-                const locked = restricted && !isSuperAdmin;
-                const key = `${editing.id}:${role}`;
-
-                return (
-                  <li key={role} className="flex items-center gap-3 px-5 py-3">
-                    <div className="min-w-0 flex-1">
-                      <p className="flex items-center gap-1.5 text-body-sm font-medium text-ink">
-                        {ROLE_META[role].label}
-                        {restricted && (
-                          <ShieldCheck className="size-3.5 text-danger" />
-                        )}
-                      </p>
-                      <p className="mt-0.5 text-caption leading-relaxed text-slate-ui">
-                        {ROLE_META[role].description}
-                      </p>
-                    </div>
-
-                    {confirming === role ? (
-                      <div className="w-full rounded-sm border border-danger/25 bg-danger-bg p-3 sm:w-auto">
-                        <p className="max-w-xs text-caption text-danger">
-                          Quitarás el rol {ROLE_META[role].shortLabel} a {editing.name}. Perderá acceso a ese panel hasta que vuelvas a otorgárselo.
-                        </p>
-                        <div className="mt-2 flex gap-2">
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setConfirming(null);
-                              void toggleRole(editing, role, true);
-                            }}
-                            className="min-h-control rounded-sm bg-danger px-3 text-caption font-semibold text-white"
-                          >
-                            Quitar rol
-                          </button>
-                          <button type="button" onClick={() => setConfirming(null)} className="min-h-control rounded-sm px-3 text-caption font-semibold text-graphite hover:bg-white">Cancelar</button>
-                        </div>
-                      </div>
-                    ) : (
-                    <button
-                      type="button"
-                      onClick={() => has ? setConfirming(role) : void toggleRole(editing, role, false)}
-                      disabled={locked || busy === key}
-                      title={locked ? "Solo un super administrador puede hacerlo" : undefined}
-                      className={cn(
-                        "inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm px-3 text-caption font-semibold transition-colors disabled:opacity-40",
-                        has
-                          ? "border border-danger/30 text-danger hover:bg-danger-bg"
-                          : "bg-violeta-600 text-white hover:bg-violeta-700",
-                      )}
-                    >
-                      {busy === key && <Loader2 className="size-3.5 animate-spin" />}
-                      {has ? "Revocar" : "Otorgar"}
-                    </button>
+            return (
+              <li key={role} className="flex items-center gap-3 px-5 py-3">
+                <div className="min-w-0 flex-1">
+                  <p className="flex items-center gap-1.5 text-body-sm font-medium text-ink">
+                    {ROLE_META[role].label}
+                    {restricted && (
+                      <ShieldCheck className="size-3.5 text-danger" />
                     )}
-                  </li>
-                );
-              })}
-            </ul>
+                  </p>
+                  <p className="mt-0.5 text-caption leading-relaxed text-slate-ui">
+                    {ROLE_META[role].description}
+                  </p>
+                </div>
 
-            <p id="roles-dialog-description" className="border-t border-line bg-surface-1 px-5 py-3 text-caption text-slate-ui">
-              Cada cambio queda registrado en el log de auditoría con tu identidad, IP y
-              marca de tiempo.
-            </p>
-          </div>
-        </div>
-      )}
+                {confirming === role ? (
+                  <div className="w-full rounded-sm border border-danger/25 bg-danger-bg p-3 sm:w-auto">
+                    <p className="max-w-xs text-caption text-danger">
+                      Quitarás el rol {ROLE_META[role].shortLabel} a {editing.name}. Perderá acceso a ese panel hasta que vuelvas a otorgárselo.
+                    </p>
+                    <div className="mt-2 flex gap-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setConfirming(null);
+                          void toggleRole(editing, role, true);
+                        }}
+                        className="min-h-control rounded-sm bg-danger px-3 text-caption font-semibold text-white"
+                      >
+                        Quitar rol
+                      </button>
+                      <button type="button" onClick={() => setConfirming(null)} className="min-h-control rounded-sm px-3 text-caption font-semibold text-graphite hover:bg-white">Cancelar</button>
+                    </div>
+                  </div>
+                ) : (
+                <button
+                  type="button"
+                  onClick={() => has ? setConfirming(role) : void toggleRole(editing, role, false)}
+                  disabled={locked || busy === key}
+                  title={locked ? "Solo un super administrador puede hacerlo" : undefined}
+                  className={cn(
+                    "inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm px-3 text-caption font-semibold transition-colors disabled:opacity-40",
+                    has
+                      ? "border border-danger/30 text-danger hover:bg-danger-bg"
+                      : "bg-violeta-600 text-white hover:bg-violeta-700",
+                  )}
+                >
+                  {busy === key && <Loader2 className="size-3.5 animate-spin" />}
+                  {has ? "Revocar" : "Otorgar"}
+                </button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+        )}
+      </Dialog>
     </>
   );
 }

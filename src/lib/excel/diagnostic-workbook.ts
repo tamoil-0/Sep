@@ -27,18 +27,18 @@ import type { SurveyProfileDb } from "@/types/database";
  */
 
 const BRAND = {
-  blue: "#2E0BE8",
-  violet: "#6A0DD9",
-  gold: "#FFC629",
-  ink: "#12101C",
-  graphite: "#3A3550",
-  slate: "#6E6A85",
-  line: "#E6E4F0",
-  tint: "#EFECFE",
-  zebra: "#F7F6FC",
+  blue: "#6257DB",
+  violet: "#7265FF",
+  gold: "#0BC6AB",
+  ink: "#212B38",
+  graphite: "#2A3545",
+  slate: "#4A5869",
+  line: "#E2E7EE",
+  tint: "#E8E6FF",
+  zebra: "#F5F7FA",
   white: "#FFFFFF",
-  amberBg: "#FFF6DA",
-  amberInk: "#7A5A00",
+  amberBg: "#EBFAF8",
+  amberInk: "#067363",
 } as const;
 
 const FONT = "Calibri";

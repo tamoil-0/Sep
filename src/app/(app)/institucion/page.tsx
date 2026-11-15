@@ -69,14 +69,14 @@ export default async function InstitucionPage() {
       <KpiGrid>
         {isCompany ? (
           <>
-            <Kpi label="Cohortes patrocinadas" value={0} icon={<GraduationCap className="size-4" />} />
+            <Kpi tone="destacada" label="Cohortes patrocinadas" value={0} icon={<GraduationCap className="size-4" />} />
             <Kpi label="Jóvenes formados" value={students} icon={<Building2 className="size-4" />} />
             <Kpi label="Regiones alcanzadas" value={0} icon={<Globe className="size-4" />} />
             <Kpi label="ODS alineados" value="4, 8, 10" icon={<ChartNoAxesCombined className="size-4" />} />
           </>
         ) : (
           <>
-            <Kpi label="Talleres realizados" value={done.length} icon={<Presentation className="size-4" />} />
+            <Kpi tone="destacada" label="Talleres realizados" value={done.length} icon={<Presentation className="size-4" />} />
             <Kpi label="Estudiantes impactados" value={students} icon={<GraduationCap className="size-4" />} />
             <Kpi
               label="Talleres programados"

@@ -32,6 +32,18 @@ export function RevealObserver() {
     anims.forEach((el) => el.classList.toggle("is-visible", enPantalla(el)));
     root.classList.add("js");
 
+    // Las animaciones decorativas esperan a que la página termine de cargar y el
+    // hilo principal quede libre (REDISEÑO §6.2).
+    let idleId: number | undefined;
+    const encender = () => {
+      const ric = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+      idleId = ric(() => root.classList.add("anim-listo"));
+    };
+    if (!root.classList.contains("anim-listo")) {
+      if (document.readyState === "complete") encender();
+      else window.addEventListener("load", encender, { once: true });
+    }
+
     if (!("IntersectionObserver" in window)) {
       reveals.forEach((el) => el.classList.add("is-visible"));
       return;
@@ -59,6 +71,8 @@ export function RevealObserver() {
     return () => {
       revealIO.disconnect();
       animIO.disconnect();
+      window.removeEventListener("load", encender);
+      if (idleId !== undefined) window.cancelIdleCallback?.(idleId);
     };
   }, [pathname]);
 

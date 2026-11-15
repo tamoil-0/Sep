@@ -58,7 +58,7 @@ export default async function MentorPage() {
       />
 
       <KpiGrid>
-        <Kpi
+        <Kpi tone="destacada"
           label="Mentorados activos"
           value={mentorships?.length ?? 0}
           icon={<UsersRound className="size-4" />}

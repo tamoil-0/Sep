@@ -10,7 +10,6 @@ import { appNav } from "@/config/navigation";
 import { ROLE_META, type UserRole } from "@/types/roles";
 import { cn, initials } from "@/lib/utils";
 import { LogoutDialog } from "@/components/app/logout-dialog";
-import { AppLoadingSplash } from "@/components/app/app-loading-splash";
 import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 
 type IconName = keyof typeof Icons;
@@ -19,7 +18,7 @@ function NavIcon({ name }: { name?: string }) {
   if (!name) return null;
   const Cmp = Icons[name as IconName] as React.ComponentType<{ className?: string }>;
   if (!Cmp) return null;
-  return <Cmp className="size-[18px] shrink-0" />;
+  return <Cmp className="size-icon-md shrink-0" />;
 }
 
 export function AppSidebar({
@@ -52,6 +51,14 @@ export function AppSidebar({
     onClose: () => setMobileOpen(false),
   });
 
+  // Indicador único que se desliza (transform) hasta el ítem activo.
+  const listRef = React.useRef<HTMLUListElement>(null);
+  const [indicator, setIndicator] = React.useState<{ y: number; h: number } | null>(null);
+  React.useLayoutEffect(() => {
+    const el = listRef.current?.querySelector<HTMLElement>('[aria-current="page"]');
+    setIndicator(el ? { y: el.offsetTop, h: el.offsetHeight } : null);
+  }, [pathname, routeRole]);
+
   function prepareNavigation(href: string) {
     if (href !== pathname) router.prefetch(href);
   }
@@ -74,11 +81,21 @@ export function AppSidebar({
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 pb-4">
-        <ul className="space-y-0.5">
+        <ul ref={listRef} className="relative space-y-0.5">
+          {indicator && (
+            <li
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 rounded-sm bg-white/10 ring-1 ring-inset ring-white/10 transition-transform duration-300 ease-out"
+              style={{ transform: `translateY(${indicator.y}px)`, height: indicator.h }}
+            >
+              <span className="absolute inset-y-2 left-0 w-0.5 rounded-full grad-marca" />
+            </li>
+          )}
           {items.map((item) => {
+            // El inicio del rol solo se marca en su ruta exacta; el resto, también en sus subrutas.
+            const home = ROLE_META[routeRole].home;
             const active =
-              pathname === item.href ||
-              (item.href !== "/admin" && pathname.startsWith(`${item.href}/`));
+              pathname === item.href || (item.href !== home && pathname.startsWith(`${item.href}/`));
             return (
               <li key={item.href}>
                 <Link
@@ -90,7 +107,7 @@ export function AppSidebar({
                   className={cn(
                     "group/nav relative flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm transition-colors duration-150",
                     active
-                      ? "bg-white/10 font-medium text-white ring-1 ring-inset ring-white/10 [&_svg]:text-violeta-300"
+                      ? "font-medium text-white [&_svg]:text-cian-500"
                       : "text-noche-300 hover:bg-white/5 hover:text-white",
                   )}
                 >
@@ -198,7 +215,13 @@ export function AppSidebar({
       {navigatingTo !== null &&
         navigatingTo !== pathname &&
         typeof document !== "undefined" &&
-        createPortal(<AppLoadingSplash overlay />, document.body)}
+        createPortal(
+          // Barra fina de navegación: no tapa el skeleton de la página que carga.
+          <div role="progressbar" aria-label="Cargando la página" className="fixed inset-x-0 top-0 z-50 h-0.5 overflow-hidden">
+            <div className="h-full w-1/3 grad-marca" style={{ animation: "navigation-progress 1.1s ease-in-out infinite" }} />
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

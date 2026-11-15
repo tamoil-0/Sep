@@ -51,7 +51,11 @@ try {
           window.scrollTo({ top: y, behavior: "instant" });
           await new Promise((r) => setTimeout(r, 160));
         }
-        await Promise.all([...document.images].map((img) => (img.complete ? null : new Promise((r) => { img.onload = img.onerror = r; }))));
+        // Tope de 3 s: una imagen `lazy` oculta (display:none) nunca dispara onload.
+        await Promise.race([
+          Promise.all([...document.images].map((img) => (img.complete ? null : new Promise((r) => { img.onload = img.onerror = r; })))),
+          new Promise((r) => setTimeout(r, 3000)),
+        ]);
         document.querySelectorAll("[data-reveal]").forEach((el) => el.classList.add("is-visible"));
         window.scrollTo({ top: 0, behavior: "instant" });
       });

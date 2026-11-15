@@ -101,13 +101,14 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 
 export function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-xl lg:pt-28">
+    // En móvil la foto queda bajo el pliegue y competía por el LCP: se oculta y, como es
+    // `lazy`, ni se descarga. En escritorio está en pantalla y carga de inmediato.
+    <div className="relative mx-auto hidden w-full max-w-xl lg:block lg:pt-28">
       {/* Motivo de marca: la red brota desde la esquina de la foto, completa y a la vista. */}
       <MotivoSemilla className="pointer-events-none absolute -right-4 top-0 hidden w-60 lg:block xl:w-64" />
       <RealPhoto
         src={SEP_PHOTOS.celebration}
         alt="Jóvenes de la comunidad SEP celebran con globos junto al banner de Semillero de Emprendedores Perú"
-        priority
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
         label="La comunidad SEP"
         className="relative aspect-[4/3] min-h-0 rounded-lg shadow-elevated ring-1 ring-white/15 lg:w-4/5"

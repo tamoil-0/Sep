@@ -534,6 +534,14 @@
   }
 }
 
+/* Animaciones decorativas: arrancan después de `load` + `requestIdleCallback`
+   (RevealObserver pone `.anim-listo`), para no competir con la carga. Sin JS
+   (sin `.js`) corren normalmente. */
+.js:not(.anim-listo) .motivo-semilla *,
+.js:not(.anim-listo) .escena * {
+  animation-play-state: paused !important;
+}
+
 /* Maquetas y motivos animados: corren solo cuando se ven. */
 .js [data-anim]:not(.is-visible),
 .js [data-anim]:not(.is-visible) * {
@@ -702,6 +710,12 @@ dialog.dialogo::backdrop {
     ms-respirar 3.2s ease-in-out calc(var(--t, 0s) + 0.6s) infinite;
 }
 @keyframes ms-dibujar { to { stroke-dashoffset: 0; } }
+/* Logro (curso completado): se dibuja una vez en ~800 ms y queda quieto. */
+.motivo-logro .ms-trazo { animation-duration: 450ms; }
+.motivo-logro .ms-pulso { display: none; }
+.motivo-logro .ms-n2 { animation: ms-aparecer 300ms var(--ease-out) var(--t, 0s) forwards; }
+.motivo-logro .ms-trazo,
+.motivo-logro .ms-nodo { animation-delay: calc(var(--t, 0s) * 0.25); }
 @keyframes ms-aparecer {
   from { opacity: 0; transform: scale(0.3); }
   to { opacity: 1; transform: none; }
