@@ -15,42 +15,43 @@ export const metadata = createPageMetadata({
   keywords: ["liderazgo social Perú", "SILP", "proyectos de impacto social"],
 });
 
+// Fuente: docs/SILP_Programa_y_Cronograma.xlsx, hoja «Programa SILP» (temario, qué se aprende y entregable).
 const modules = [
   {
     number: 1,
-    theme: "Liderazgo productivo",
-    result: "Reconoce tus fortalezas y conecta tu propósito personal con una causa social.",
-    duration: "1 semana",
+    theme: "Propósito y visión de liderazgo",
+    result: "Reconoce tus fortalezas, valores y motivaciones, y conecta tu propósito personal con una causa social.",
+    duration: "Entregable: declaración de propósito (1 página)",
   },
   {
     number: 2,
-    theme: "Diagnóstico de tu comunidad",
-    result: "Valida una problemática real mediante observación, conversaciones y mapeo de actores.",
-    duration: "1 semana",
+    theme: "Tu causa y la problemática social",
+    result: "Valida una problemática real de tu comunidad y define a quién quieres impactar.",
+    duration: "Entregable: canvas de causa",
   },
   {
     number: 3,
-    theme: "Diseño de la solución",
-    result: "Convierte las necesidades de tu audiencia en un prototipo inicial de iniciativa.",
-    duration: "1 semana",
+    theme: "Soluciones con AI Design Thinking",
+    result: "Entiende a tu audiencia, formula el problema y diseña un prototipo inicial de tu iniciativa.",
+    duration: "Entregable: mapa de empatía y prototipo",
   },
   {
     number: 4,
     theme: "Formulación del proyecto",
-    result: "Define objetivos, actividades, tiempos, materiales e indicadores de impacto.",
-    duration: "1 semana",
+    result: "Convierte el prototipo en una iniciativa con objetivos SMART, actividades, tiempos, materiales e indicadores.",
+    duration: "Entregable: diseño de la iniciativa (2–3 páginas)",
   },
   {
     number: 5,
-    theme: "Redes de apoyo",
-    result: "Mapea aliados y diseña estrategias concretas de acercamiento y colaboración.",
-    duration: "1 semana",
+    theme: "Redes de apoyo y stakeholders",
+    result: "Mapea aliados y beneficiarios, y diseña estrategias de acercamiento y colaboración.",
+    duration: "Entregable: mapa de stakeholders",
   },
   {
     number: 6,
-    theme: "Storytelling y pitch",
-    result: "Presenta tu iniciativa con una historia clara, presencia y materiales utilizables.",
-    duration: "1 semana",
+    theme: "Comunicación, storytelling y speech",
+    result: "Estructura tu speech, cuenta tu historia y mejora tu presencia con feedback.",
+    duration: "Entregable: video de tu speech + materiales base",
   },
 ];
 

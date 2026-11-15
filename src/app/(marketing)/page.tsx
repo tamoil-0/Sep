@@ -621,7 +621,6 @@ async function LatestNews() {
               <NewsCard
                 post={latestPosts[0]}
                 fallbackImage={newsFallbacks[0]}
-                priority
                 variant="featured"
               />
             </div>

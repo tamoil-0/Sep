@@ -84,7 +84,7 @@ export default async function CursoPage({
             </span>
             <span className="inline-flex items-center gap-1.5">
               <CalendarDays className="size-4 text-mist" />
-              {course.sessions_count} sesiones de 2 h
+              {course.sessions_count} sesiones de 80 min
             </span>
             <span className="inline-flex items-center gap-1.5">
               <Repeat className="size-4 text-mist" />

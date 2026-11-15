@@ -63,7 +63,7 @@ export default async function CursosPage() {
             {[
               ["Duración", `${COURSE_FORMAT.weeks} semanas`],
               ["Frecuencia", COURSE_FORMAT.frequency],
-              ["Sesiones", `${COURSE_FORMAT.sessionsCount} de 2 horas`],
+              ["Sesiones", `${COURSE_FORMAT.sessionsCount} de ${COURSE_FORMAT.sessionMinutes} min`],
               ["Modalidad", COURSE_FORMAT.modality],
             ].map(([label, value]) => (
               <div key={label}>

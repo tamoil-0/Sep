@@ -6,14 +6,16 @@ import { RevealObserver } from "@/components/ui/reveal-observer";
 import "./globals.css";
 
 // Cuerpo y UI: Geist, sobria y técnica. Títulos: Sora, geométrica y de aire futurista.
+// Solo `latin`: cubre todo el español (á, é, ñ, ¿, ¡). Precargar también
+// `latin-ext` sumaba 2 archivos (~45 KB) antes del primer pintado.
 const geist = Geist({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   variable: "--font-geist",
   display: "swap",
 });
 
 const sora = Sora({
-  subsets: ["latin", "latin-ext"],
+  subsets: ["latin"],
   variable: "--font-sora",
   display: "swap",
 });

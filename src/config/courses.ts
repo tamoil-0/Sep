@@ -37,7 +37,7 @@ export interface Course {
 export const COURSE_FORMAT = {
   weeks: 2,
   frequency: "Interdiario (3 sesiones/semana)",
-  sessionMinutes: 120,
+  sessionMinutes: 80, // 6 sesiones × 80 min = 8 h (decisión del equipo, 15 nov. 2026)
   totalHours: 8,
   sessionsCount: 6,
   modality: "100% virtual — Plataforma SEP",
