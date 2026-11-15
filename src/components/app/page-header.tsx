@@ -30,7 +30,8 @@ export function PageHeader({
 }
 
 export function KpiGrid({ children }: { children: React.ReactNode }) {
-  return <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">{children}</div>;
+  // `kpi-grid` da a los íconos un ritmo de color de marca (globals.css).
+  return <div className="kpi-grid grid grid-cols-2 gap-3 lg:grid-cols-4">{children}</div>;
 }
 
 export function Kpi({
@@ -62,7 +63,7 @@ export function Kpi({
           <span
             className={cn(
               "hidden size-9 items-center justify-center rounded-full sm:flex [&_svg]:size-4",
-              destacada ? "bg-white/10 text-cian-500" : "bg-violeta-50 text-acento",
+              destacada ? "bg-white/10 text-cian-500" : "kpi-icono bg-violeta-50 text-acento",
             )}
           >
             {icon}
