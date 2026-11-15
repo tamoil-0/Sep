@@ -152,7 +152,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
         typeof document !== "undefined" &&
         createPortal(
         <div
-          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden aurora px-5 text-center animate-fade-in"
+          className="fixed inset-0 z-[110] flex min-h-dvh flex-col items-center justify-center overflow-hidden halo px-5 text-center animate-fade-in"
           role="status"
           aria-live="polite"
         >
@@ -184,7 +184,7 @@ export function LogoutDialog({ userName }: { userName: string }) {
             {/* Barra de progreso sincronizada con la espera real */}
             <div className="mt-9 h-[3px] w-52 overflow-hidden rounded-full bg-white/20">
               <div
-                className="h-full rounded-full bg-gold-500"
+                className="h-full rounded-full bg-cian-500"
                 style={{
                   animation: `logout-progress ${FAREWELL_MS}ms cubic-bezier(.4,0,.2,1) forwards`,
                 }}

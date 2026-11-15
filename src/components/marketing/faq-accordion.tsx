@@ -34,7 +34,7 @@ export function FaqAccordion({
                 <Plus
                   className={cn(
                     "mt-0.5 size-5 shrink-0 text-slate-ui transition-transform duration-200",
-                    isOpen && "rotate-45 text-sep-600",
+                    isOpen && "rotate-45 text-acento",
                   )}
                 />
               </button>

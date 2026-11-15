@@ -43,7 +43,7 @@ export default async function DocenteCertificadosPage() {
           <div className="grid gap-3 md:grid-cols-2">
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
-                <div className="aurora px-5 py-4">
+                <div className="halo px-5 py-4">
                   <p className="text-body-sm font-semibold text-white">{c.type?.name}</p>
                   {c.type?.issuer && (
                     <p className="mt-0.5 text-caption text-white/65">{c.type.issuer}</p>
@@ -55,7 +55,7 @@ export default async function DocenteCertificadosPage() {
                     Emitido el {c.issued_at ? formatDate(c.issued_at) : "—"}
                   </p>
                   <div className="mt-4 flex items-center gap-2 rounded-lg bg-surface-1 px-3 py-2">
-                    <ShieldCheck className="size-4 shrink-0 text-seed-700" />
+                    <ShieldCheck className="size-4 shrink-0 text-turquesa-800" />
                     <code className="tabular flex-1 truncate text-caption font-medium text-ink">
                       {c.verification_code}
                     </code>

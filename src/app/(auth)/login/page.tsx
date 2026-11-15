@@ -36,7 +36,7 @@ export default async function LoginPage({
 
       <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Aún no tienes cuenta?{" "}
-        <Link href="/registro" className="font-medium text-sep-600 hover:underline">
+        <Link href="/registro" className="font-medium text-acento hover:underline">
           Crear cuenta gratis
         </Link>
       </p>

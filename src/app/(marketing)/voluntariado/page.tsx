@@ -14,7 +14,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -48,7 +48,7 @@ export default function VoluntariadoPage() {
   return (
     <>
       {/* Hero */}
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.45]"
@@ -62,7 +62,7 @@ export default function VoluntariadoPage() {
             <Badge>{totalPositions} vacantes abiertas</Badge>
             <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Forma parte del equipo que{" "}
-              <span className="text-sep-700">democratiza la innovación</span>
+              <span className="text-acento">democratiza la innovación</span>
             </h1>
             <p className="mt-4 text-body-lg leading-relaxed text-slate-ui">
               Tu trabajo llega a jóvenes que nadie más está atendiendo. A cambio recibes
@@ -88,7 +88,7 @@ export default function VoluntariadoPage() {
               [String(totalPositions), "Vacantes abiertas"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dd className="tabular font-display text-h2 font-semibold leading-none text-sep-700">
+                <dd className="tabular font-display text-h2 font-semibold leading-none text-acento">
                   {value}
                 </dd>
                 <dt className="mt-2 text-body-sm text-slate-ui">{label}</dt>
@@ -115,10 +115,10 @@ export default function VoluntariadoPage() {
                   <div className="grid gap-8 p-7 lg:grid-cols-[1.2fr_1fr]">
                     <div>
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-sep-50 text-sep-600">
+                        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-violeta-50 text-acento">
                           <Icon className="size-5" />
                         </span>
-                        <Badge tone="gold">
+                        <Badge tone="neon">
                           {role.openPositions}{" "}
                           {role.openPositions === 1 ? "vacante" : "vacantes"}
                         </Badge>
@@ -128,7 +128,7 @@ export default function VoluntariadoPage() {
                         {role.name}
                       </h2>
                       {role.exclusive && (
-                        <p className="mt-1 text-caption font-medium text-gold-700">
+                        <p className="mt-1 text-caption font-medium text-turquesa-800">
                           {role.exclusive}
                         </p>
                       )}
@@ -145,7 +145,7 @@ export default function VoluntariadoPage() {
                             key={r}
                             className="flex items-start gap-2.5 text-body-sm text-graphite"
                           >
-                            <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                            <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                             {r}
                           </li>
                         ))}
@@ -196,7 +196,7 @@ export default function VoluntariadoPage() {
             eyebrow="Para todos"
             title={
               <>
-                Beneficios que recibe <GoldUnderline>cada voluntario</GoldUnderline>
+                Beneficios que recibe <AccentUnderline>cada voluntario</AccentUnderline>
               </>
             }
             description="Independientemente del rol, esto es tuyo desde el primer día."
@@ -208,7 +208,7 @@ export default function VoluntariadoPage() {
               const Icon = benefitIcons[i] ?? Award;
               return (
                 <Card key={b.title} className="p-6">
-                  <Icon className="size-5 text-sep-600" />
+                  <Icon className="size-5 text-acento" />
                   <h3 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                     {b.title}
                   </h3>
@@ -232,7 +232,7 @@ export default function VoluntariadoPage() {
           <ol className="mt-10 space-y-4">
             {volunteerProcess.map((s) => (
               <li key={s.step} className="flex gap-4">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-body-sm font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-body-sm font-semibold text-white">
                   {s.step}
                 </span>
                 <div className="pt-1">
@@ -245,10 +245,10 @@ export default function VoluntariadoPage() {
             ))}
           </ol>
 
-          <Card className="mt-10 border-sep-200 bg-sep-50/40 text-center">
+          <Card className="mt-10 border-violeta-200 bg-violeta-50/40 text-center">
             <p className="text-body-sm leading-relaxed text-graphite">
               ¿Tu colegio quiere recibir a nuestros voluntarios?{" "}
-              <Link href="/colegios" className="font-medium text-sep-600 hover:underline">
+              <Link href="/colegios" className="font-medium text-acento hover:underline">
                 Inscríbelo a la red SEP
               </Link>{" "}
               — es completamente gratuito.

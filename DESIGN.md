@@ -1,200 +1,236 @@
 # DESIGN.md — SEP (Semillero de Emprendedores Perú)
 
-> Sistema visual **«Aurora nocturna»** (noviembre de 2026). Los tokens están en `@theme`, dentro de `src/app/globals.css`, y los componentes base en `src/components/ui`. Si cambias un token en `globals.css`, actualízalo aquí también.
-> Un solo tema claro de base, con **bloques noche** (`theme-night`) para heros, bandas, navbar, footer y sidebar.
+> Sistema visual **«Lavanda neón»** (noviembre de 2026; reemplaza a «Aurora nocturna»). Es la fuente de verdad.
+> Tokens en `@theme` de `src/app/globals.css`; componentes base en `src/components/ui`. Si cambias un token, actualízalo aquí.
+> Página de muestra (sin enlazar ni indexar): `/dev/estilo` (en producción solo con `SEP_ESTILO=1`).
+> Método completo y fases: `REDISENO-COMO-ECOING.md`. Textos con fuente: `contenido/`.
 
 ---
 
 ## 1. Principios
 
-1. **Noche para la identidad, claro para leer.** Los heros, las bandas de cierre, el navbar, el footer y el sidebar del panel van en noche (`night-950`) con el halo aurora. El contenido largo, los formularios y las tablas van sobre claro (`surface-0/1`).
-2. **Un solo gesto memorable: el halo aurora.** Violeta arriba y magenta abajo detrás de los bloques noche. No sumes brillos, partículas ni degradados en otros lugares.
-3. **Una acción principal por pantalla.** `Button variant="primary"` o, en conversión de marketing, `variant="gradient"`.
-4. **Accesible por defecto.** Contraste AA (verificado con axe), foco visible (`outline 2px sep-500`), objetivos táctiles de 44px (`h-control`) y `prefers-reduced-motion` respetado globalmente.
-5. **Reutiliza antes de crear.** Usa primero `src/components/ui` (`Button`, `Container`, `Section`, `SectionHeader`, `PageHero`, `Card`, `Badge`, `EmptyState`, `ProgressBar`, `Stat`, `FilterPills`, `ArrowLink`, `BackLink`, `toast`) y `src/components/forms/field.tsx`.
+1. **Noche para la identidad, claro para leer.** Heros, bandas de cierre, navbar, footer y sidebar en noche con el halo.
+   Formularios, tablas y lecciones largas sobre claro (`surface-1` de fondo, tarjetas `surface-0`).
+2. **Un solo gesto memorable: el halo «Lavanda neón».** Violeta arriba a la izquierda y cian abajo a la derecha detrás
+   de los bloques noche. No sumes otros brillos.
+3. **Violeta para actuar, turquesa para avanzar, cian para lo que brilla sobre oscuro.**
+4. **Una acción principal por pantalla.** `Button variant="primary"`; en la conversión principal del marketing, sobre
+   noche, `variant="neon"` (máximo uno por pantalla).
+5. **Accesible por defecto y verificado con números** (§3). Foco visible, objetivos táctiles ≥ 44 px,
+   `prefers-reduced-motion` global.
+6. **Reutiliza antes de crear** (`src/components/ui`, `src/components/forms/field.tsx`).
 
 ---
 
-## 2. Color
+## 2. Paleta
 
-Todos los colores son tokens de Tailwind v4 (`bg-*`, `text-*`, `border-*`, `ring-*`). **Nunca** escribas `#hex`, `rgb()` ni colores por defecto de Tailwind (`bg-red-50`, `text-purple-600`).
+### 2.1 Colores base (fijos)
+| Color | Hex | Token | Rol |
+|---|---|---|---|
+| Violeta lavanda | `#7265FF` | `violeta-500` | Marca: acentos, brillo de botones, anillo de foco, bordes activos, íconos, degradado y títulos grandes |
+| Cian neón | `#04FFE1` | `cian-500` | **Solo sobre oscuro**: hover, highlights, íconos activos, indicador de pestaña, «en vivo», botón neón |
+| Verde turquesa | `#0BC6AB` | `turquesa-500` | Secundario: éxito, progreso completado, badges y enlaces sobre oscuro |
+| Azul pizarra | `#374658` | `noche-700` | Tarjetas, inputs y bordes en bloques oscuros |
+| Azul noche | `#212B38` | `noche-900` | Fondo oscuro principal: hero, navbar, panel de marca del login |
 
-### 2.1 Marca: violeta eléctrico calibrado
-| Token | Valor | Para qué |
-|---|---|---|
-| `sep-50` / `sep-100` / `sep-200` | `#f3f0ff` / `#e6e0ff` / `#cfc4ff` | Tints: badge `brand`, pastillas de ícono, bordes suaves |
-| `sep-300` | `#ae9bff` | Borde hover de `Card interactive`; texto de acento **sobre noche** (8.2:1) |
-| `sep-400` | `#8f75ff` | Violeta luminoso sobre noche (5.7:1) |
-| `sep-500` | `#7c5cff` | **Anillo de foco** y halo. No lo uses como texto sobre blanco (4.35:1) |
-| **`sep-600`** | `#6440f0` | **Color de acción:** botón primary, links, iconos activos (5.9:1 sobre blanco) |
-| `sep-700` | `#5230d6` | Hover del primario, texto de badge `brand`, eyebrows (7.6:1) |
-| `sep-800` … `sep-950` | `#3e22a8` … `#170d40` | Active del primario y velos sobre fotos |
-| `violet-brand` / `purple-brand` | `#7c5cff` / `#c026d3` | Paradas del degradado. `purple-brand` admite texto blanco (4.7:1) |
-| `magenta` | `#e040fb` | **Solo** en el halo aurora. Nunca como texto ni fondo de texto |
+### 2.2 Escalas (`bg-*`, `text-*`, `border-*`, `ring-*`)
+| Paso | `violeta-*` | `turquesa-*` | `noche-*` |
+|---|---|---|---|
+| 50 | `#F4F3FF` | `#EBFAF8` | `#F5F7FA` fondo claro «hielo» |
+| 100 | `#E8E6FF` | `#D8F6F2` | `#EEF1F5` |
+| 200 | `#D2CEFF` | `#B1EDE4` | `#E2E7EE` bordes sobre claro |
+| 300 | `#B1AAFF` | `#79E0D1` | `#B6C2D1` texto secundario sobre oscuro |
+| 400 | `#9187FF` | `#41D3BD` | `#8D9AAB` terciario sobre noche (no sobre pizarra) |
+| 500 | **`#7265FF`** | **`#0BC6AB`** | `#5B6878` metadatos sobre claro |
+| 600 | `#6257DB` acción | `#09AA93` | `#4A5869` texto secundario sobre claro |
+| 700 | `#5249B8` | `#088F7B` íconos sobre claro | **`#374658`** pizarra |
+| 800 | `#423B94` | `#067363` texto éxito | `#2A3545` |
+| 900 | `#322C70` | `#05574B` | **`#212B38`** noche |
+| 950 | — | — | `#151C24` sidebar y footer |
 
-### 2.2 Noche
-| Token | Valor | Para qué |
-|---|---|---|
-| **`night-950`** | `#0d0b1e` | Fondo de heros, bandas, navbar, footer y sidebar |
-| `night-900` / `800` / `700` | `#15122b` / `#1e1a3a` / `#2b2650` | Superficies y bordes dentro de noche; `.app-shell .sep-gradient` usa `night-900` |
-| `haze` | `#b9b5d0` | Texto secundario sobre noche (9.8:1) |
-| `haze-muted` | `#9c97b8` | Texto terciario sobre noche (7:1) |
+Cian: solo `cian-500` `#04FFE1` y `cian-600` `#03DBC2` (hover).
+La paleta por defecto de Tailwind está **desactivada** (`--color-*: initial`): `bg-blue-500` no existe. Solo hay `white` y `black` además de lo anterior.
 
-### 2.3 Acentos
-| Token | Valor | Para qué |
-|---|---|---|
-| **`gold-500`** | `#ffc629` | Chispa SEP: botón `gold`, puntos de estado, subrayado `.gold-underline`, `::selection`. **Siempre con texto `night-950`** (no `ink`: dentro de `theme-night`, `ink` es blanco) |
-| `gold-50` / `gold-300` / `gold-400` / `gold-700` / `gold-800` | — | Fondo de badge, hovers y texto dorado legible sobre claro |
-| `seed-50` / `seed-400` / `seed-700` / `seed-800` | `#eef8e4` … `#28550d` | Verde "brote" del logo: badge `seed`, "Acceso sin costo", franja de acento |
+### 2.3 Roles (lo que usan los componentes)
+Los componentes usan **roles**, no pasos de escala: `.theme-night` los reasigna y el mismo componente se lee bien sobre
+claro y sobre noche.
 
-### 2.4 Neutrales (fríos, con un toque violeta)
-| Token | Valor | Para qué |
-|---|---|---|
-| **`ink`** | `#0f0d1f` | Títulos y texto principal |
-| `graphite` | `#34314a` | Texto secundario fuerte, botón `ghost` |
-| **`slate-ui`** | `#5f5b75` | Cuerpo secundario, descripciones y labels |
-| `mist` | `#6b6783` | Metadatos. Es el tono más claro que pasa AA sobre blanco (5.0:1) y hielo (4.8:1) |
-| **`line`** | `#e6e3f2` | Bordes de tarjetas, inputs y separadores |
-| `surface-0` | `#ffffff` | Fondo de tarjetas, inputs y botón `outline` (**usa `bg-surface-0`, no `bg-white`**, para que se adapte dentro de noche) |
-| `surface-1` | `#f7f6fc` | "Hielo": fondo del producto y secciones `muted` |
-| `surface-2` | `#efedf8` | Hover de `ghost`, pistas de progreso, skeleton |
+| Rol | Sobre claro | Dentro de `.theme-night` | Uso |
+|---|---|---|---|
+| `ink` | `noche-900` | blanco | Títulos y texto principal |
+| `graphite` | `noche-800` | blanco 86 % | Texto fuerte secundario, botón `ghost` |
+| `slate-ui` | `noche-600` | `noche-300` | Cuerpo secundario, descripciones, labels |
+| `mist` | `noche-500` | `noche-400` 65 % + `noche-300` | Metadatos (el tono más claro permitido) |
+| `line` | `noche-200` | blanco 12 % | Bordes y separadores |
+| `surface-0` | blanco | blanco 6 % | Tarjetas, inputs, botón `outline` (**usa `bg-surface-0`, no `bg-white`**) |
+| `surface-1` | `noche-50` | blanco 4 % | Fondo del producto y secciones `muted` |
+| `surface-2` | `noche-100` | blanco 10 % | Hover de `ghost`, pistas de progreso, skeleton |
+| `acento` | `violeta-700` | `violeta-300` | **Todo texto violeta**: enlaces, eyebrows, íconos activos |
+| `success` / `-bg` | `turquesa-800` / `turquesa-50` | `turquesa-500` / turquesa 14 % | Éxito y progreso |
+| `danger` / `-bg` | `#C9354A` / `#FDEEF0` | `#FF7A88` / 14 % | Error |
+| `warning` / `-bg` | `#A15C00` / `#FFF4E5` | `#FFC266` / 14 % | Advertencia |
+| `info` / `-bg` | `violeta-700` / `violeta-50` | — | Información |
 
-### 2.5 Semánticos (texto + fondo)
-`success`/`success-bg`, `warning`/`warning-bg`, `danger`/`danger-bg`, `info`/`info-bg` (con `success-700`, `danger-700`, `danger-800` para hovers). Usa siempre el par: `text-<estado>` sobre `bg-<estado>-bg`.
+La escala violeta **no** se reasigna dentro de noche (salvo los tintes 50/100): el hover `violeta-700` del botón
+primario sigue siendo oscuro. Para texto violeta usa siempre `text-acento`, no `text-violeta-*`.
+`.theme-light` restaura el claro dentro de un bloque noche (menús y diálogos que flotan).
 
-### 2.6 Bloques noche: `theme-night` + `aurora`
-- **`.aurora`** pinta `night-950` con el halo (`--sep-aurora`). **`.aurora-grid`** añade una malla tenue (solo en el hero de la home).
-- **`.theme-night`** reasigna los tokens neutros dentro del bloque: `ink`→blanco, `slate-ui`→`haze`, `mist`→`haze-muted`, `line` y `surface-*`→blancos translúcidos, `sep-50/100`→violeta translúcido, `sep-700`→`sep-300`. Así `SectionHeader`, `Card`, `Badge`, `Button outline` e `Input` funcionan sobre noche **sin variantes nuevas**.
-- **`.theme-light`** restaura el tema claro dentro de un bloque noche (menús desplegables y diálogos).
-- Atajos: `<Section tone="night">` (alias histórico: `tone="gradient"`) aplica `theme-night aurora`. El navbar, la barra móvil del panel y los heros ya lo usan.
-- Dentro de noche **no uses `bg-white`** (queda blanco con texto blanco). Usa `bg-surface-0`.
+### 2.4 Degradado y halo
+- **`--grad-marca`** (`.grad-marca`): `linear-gradient(135deg, #7265FF 0%, #0BC6AB 65%, #04FFE1 100%)`. **Decorativo**:
+  bordes encendidos, reglas, barra de progreso, punto del eyebrow, anillo de logro y halo. **Nunca** lleva texto encima
+  ni se usa como color de texto. `AccentUnderline` (`.subrayado-marca`) subraya una palabra con este trazo.
+- **`--halo-marca`** (`.halo`): radial violeta 35 % arriba a la izquierda + radial cian 12 % abajo a la derecha sobre
+  `noche-900`. Atajos: `<Section tone="night">`, `PageHero tone="gradient"` y `className="theme-night halo"`.
+  `.halo-grid` añade una malla tenue (solo en el hero de la home).
+- **Proporción por pantalla:** ~60 % neutros, ~25 % violeta, ~10 % turquesa, ≤ 5 % cian.
 
-### 2.7 Degradado de marca
-`--sep-gradient` (`sep-600 → violet-brand → purple-brand`, 115°) con `.sep-gradient`. **Dónde sí:** botón `variant="gradient"` (uno por vista), franjas de acento de 4px, la barra de `ProgressBar`, el punto de los eyebrows, números de paso y el halo detrás de la foto del hero. **Dónde no:** fondos de sección (usa `aurora`), tarjetas en grilla, párrafos.
+### 2.5 Excepciones con hex (no pueden usar clases)
+`opengraph-image.tsx`, `manifest.ts`, `layout.tsx` (`themeColor`), `global-error.tsx` (se pinta sin `globals.css`),
+`components/brand/illustrations.tsx` (atributos SVG) y los estilos de impresión. Usan los hex de esta tabla.
+**Pendiente (fase 6):** `lib/pdf/certificate.ts` y `lib/excel/diagnostic-workbook.ts` siguen con la paleta anterior.
 
 ---
 
-## 3. Tipografía
+## 3. Contraste verificado (WCAG 2.1)
 
-- **Sora** (`font-display`, variable): títulos de marketing y del producto (`PageHeader`, cifras de `Kpi`, `Stat`, `StatBlock`). Geométrica y técnica: es la voz "futurista" de SEP.
-- **Geist** (`font-sans`, variable, por defecto): cuerpo, UI, formularios y tablas.
+AA = 4.5:1 texto normal; 3:1 texto grande (≥ 24 px o ≥ 18.66 px en negrita), íconos y bordes.
+Recalcula con `node .claude/skills/ui-review/scripts/contrast.mjs <fg> <bg>`.
 
-### Escala semántica
+| Par | Razón | Veredicto |
+|---|---|---|
+| Blanco sobre `violeta-600` (botón primario) | 5.38 | ✅ |
+| Blanco sobre `violeta-700` (hover) | 6.99 | ✅ |
+| Blanco sobre `violeta-500` | 4.18 | ❌ texto normal · ✅ solo grande |
+| `violeta-500` sobre blanco / `noche-50` | 4.18 / 3.90 | Solo títulos grandes, íconos, bordes y foco |
+| `acento` (`violeta-700`) sobre blanco / `noche-50` / `violeta-50` | 6.99 / 6.51 / 6.36 | ✅ |
+| `acento` (`violeta-300`) sobre `noche-900` / tarjeta translúcida | 6.86 / 5.70 | ✅ |
+| `noche-900` sobre cian (botón neón) / `cian-600` (hover) | 11.17 / 8.12 | ✅ |
+| Cian sobre `noche-900` / `noche-950` | 11.17 / 13.40 | ✅ |
+| Cian sobre blanco | 1.28 | ❌ **nunca** |
+| `turquesa-800` sobre blanco / `turquesa-50` | 5.77 / 5.37 | ✅ (blanco sobre `turquesa-800`: 5.77) |
+| `turquesa-700` sobre blanco | 4.02 | Íconos y barras (≥ 3:1) |
+| `turquesa-500` sobre blanco | 2.17 | ❌ como texto · blanco encima ❌ → texto noche (6.60) |
+| `turquesa-500` sobre `noche-900` | 6.60 | ✅ |
+| `ink` sobre blanco / `noche-50` | 14.31 / 13.34 | ✅ |
+| `graphite` sobre blanco | 12.40 | ✅ |
+| `slate-ui` sobre blanco / `noche-50` | 7.26 / 6.77 | ✅ |
+| `mist` sobre blanco / `noche-50` / `noche-100` | 5.68 / 5.29 / 5.01 | ✅ |
+| `noche-300` sobre `noche-900` / tarjeta translúcida (`#2E3844`) | 7.92 / 6.59 | ✅ |
+| `noche-400` sobre `noche-900` / tarjeta translúcida | 5.00 / 4.16 | ❌ en tarjeta → por eso `mist` en noche usa la mezcla (5.9 / 4.9) |
+| Blanco 75 % / 65 % sobre `noche-900` | 8.71 / 6.94 | ✅ |
+| `danger` sobre blanco / `danger-bg` | 5.13 / 4.56 | ✅ |
+| `warning` sobre blanco / `warning-bg` | 5.19 / 4.78 | ✅ |
+| `#FF7A88` / `#FFC266` sobre `noche-900` | 5.72 / 8.97 | ✅ |
+| Foco `violeta-500` sobre blanco · cian sobre noche | 4.18 · 11.17 | ✅ (≥ 3:1) |
+
+---
+
+## 4. Tipografía
+
+- **Sora** (`font-display`, variable): títulos de marketing y del producto, cifras (`Stat`, `StatBlock`, `Kpi`).
+- **Geist** (`font-sans`, por defecto): cuerpo, UI, formularios y tablas.
+- Cargadas con `next/font/google` en `src/app/layout.tsx`. No se cambian sin aprobación.
+
 | Token | Tamaño / interlineado / tracking | Uso |
 |---|---|---|
 | `text-display` | clamp(41.6→72px) / 1.02 / -0.04em | H1 de la home, cifras de `StatBlock` |
-| `text-hero` | 56px / 1.02 / -0.04em | H1 de páginas de marketing en desktop: `text-h1 lg:text-hero` |
-| `text-h1` | clamp(34→44px) / 1.08 / -0.035em | Título de página, cifras del hero |
-| `text-h2` | clamp(30→40px) / 1.12 / -0.03em | Título de sección, `PageHeader` en desktop |
-| `text-h3` | 24px / 1.25 / -0.02em | Subtítulos, `PageHeader` en móvil, cifras de `Kpi` |
+| `text-hero` | 56px / 1.02 / -0.04em | H1 de marketing en desktop: `text-h1 lg:text-hero` |
+| `text-h1` | clamp(34→44px) / 1.08 / -0.035em | Título de página |
+| `text-h2` | clamp(30→40px) / 1.12 / -0.03em | Título de sección |
+| `text-h3` | 24px / 1.25 / -0.02em | Subtítulos, cifras de `Kpi` |
 | `text-h4` | 20px / 1.35 / -0.01em | Título de tarjeta y de `EmptyState` |
 | `text-body-lg` / `body` / `body-sm` / `caption` | 18 / 16 / 14 / 12px | Bajadas, cuerpo, UI y metadatos |
 
-### Patrones fijos
-- **Eyebrow** (etiqueta sobre el título): **frase normal**, nunca en MAYÚSCULAS espaciadas. En `SectionHeader`: `text-body-sm font-medium text-sep-700` con un punto `sep-gradient` de 6px. Etiquetas sueltas: `text-body-sm font-semibold tracking-eyebrow`.
-- Títulos en `font-semibold` (600); `font-bold` no se usa con Sora.
-- Ancho de lectura: `max-w-prose` (65ch). `text-wrap: balance` en títulos y `pretty` en párrafos (global).
+- **Eyebrow:** frase normal (nunca MAYÚSCULAS espaciadas), `text-body-sm font-medium text-acento` con punto `grad-marca`
+  de 6 px. Úsalo poco: no en todas las secciones.
+- Títulos en `font-semibold`. Ancho de lectura `max-w-prose`. `text-wrap: balance` en títulos y `pretty` en párrafos.
+- En `cn()`, el `leading-*` va después del `text-*` (tailwind-merge descarta un `leading` previo).
 
 ---
 
-## 4. Espaciado, tamaños y layout
-
-**Escala:** la de Tailwind (4px), con medios pasos para ajustes finos. Sin valores arbitrarios (`p-[13px]`).
+## 5. Espaciado, tamaños, radios y elevación
 
 | Elemento | Valor |
 |---|---|
 | Sección vertical (`Section`) | `py-14 md:py-20 lg:py-24` |
-| Padding de `Card` | `p-5` (tarjetas destacadas `p-6`/`p-7`) |
-| `Kpi` | `p-4 sm:p-5`, cifra `text-h3 sm:text-h2` |
+| Padding de `Card` | `p-5` (destacadas `p-6`/`p-7`) |
 | Gutter de `Container` | `px-4 sm:px-6 md:px-8` |
 
-**Tokens de tamaño:** `h-control` 44px (objetivo táctil mínimo), `h-control-lg` 52px, `h-nav` 56px, `size-icon-sm/md/lg/xl` 16/18/20/24px, `max-w-reading/content/wide` 48/72/80rem.
+**Tokens:** `h-control` 44 px, `h-control-lg` 52 px, `h-nav` 56 px, `size-icon-sm/md/lg/xl` 16/18/20/24 px,
+`max-w-reading/content/wide` 48/72/80 rem. Sin valores arbitrarios (`p-[13px]`).
 
-**Breakpoints:** `sm` 640, `md` 768, `lg` 1024, `xl` 1280. Diseña primero para 375px y verifica en 375, 768 y 1440px.
+**Radios** (control < tarjeta < superficie): `rounded-full` botones, badges, avatares y píldoras · `rounded-sm` 10 px
+inputs y nav · `rounded-md` 16 px tarjetas · `rounded-lg` 22 px diálogos, menús y fotos · `rounded-xl` 28 px halos.
 
----
-
-## 5. Radios y elevación
-
-Jerarquía por tamaño: **control < tarjeta < superficie**.
-
-| Token | Valor | Para qué |
-|---|---|---|
-| `rounded-full` | — | **Botones** (píldora), badges, avatares, píldoras de filtro, pastillas de ícono |
-| `rounded-sm` | 10px | Inputs, ítems de navegación, contenedores de ícono cuadrados |
-| `rounded-md` | 16px | **Tarjetas** (`Card`), `EmptyState`, `Kpi`, `StatBlock` |
-| `rounded-lg` | 22px | **Superficies flotantes y fotos:** diálogos, menús, fotos del hero |
-| `rounded-xl` | 28px | Halos decorativos (no en contenido) |
-
-**Elevación (siempre con tinte violeta, nunca gris):**
-- `shadow-soft`: KPI, hover de `Card interactive`, pastillas de ícono.
-- `shadow-elevated`: diálogos, menús, toasts y fotos del hero.
-- `shadow-glow` / `shadow-glow-gold`: hover de botones `primary`/`gradient` y `gold`.
-- `shadow-highlight`: filo de luz superior de los botones rellenos.
-- Las tarjetas en reposo van con `border border-line` y sin sombra.
+**Elevación** (tinte noche/violeta, nunca gris): `shadow-soft` (hover de tarjeta, KPI), `shadow-elevated` (diálogos,
+menús, toasts), `shadow-glow` (botón primario: `0 10px 30px -10px #7265FF`), `shadow-glow-neon` (botón neón),
+`shadow-highlight` (filo de luz de botones rellenos). Tarjetas en reposo: `border border-line`, sin sombra.
 
 ---
 
-## 6. Componentes y estados
+## 6. Componentes
 
-- **Botones** (`Button`): variantes `primary` (por defecto), `gradient`, `gold`, `outline`, `outline-white`, `ghost`, `link` y `danger`; tamaños `sm`, `md`, `lg` e `icon`. Todos de 44px o más, en píldora (`rounded-full`). `gold` lleva texto `night-950`. Acepta `href` (usa `Link` interno o `<a target=_blank>` para enlaces externos).
-- **Enlaces de texto** (`src/components/ui/arrow-link.tsx`): `ArrowLink` ("Ver detalle →", amplía el área táctil con un pseudo-elemento; `stretched` hace clicable toda la `Card`) y `BackLink` ("← Todos los cursos", `min-h-control`). No escribas a mano el enlace "volver" con `ArrowLeft`.
-- **Filtros en píldora** (`FilterPills`): pestañas de una lista con conteo ("Por revisar 1", "Aprobados 3"); 44px, `aria-pressed` y `label` para el grupo.
-- **Cabecera de página:** `PageHero` en marketing y `PageHeader` en el producto. Si la cabecera es un `SectionHeader`, pásale `as="h1"` (misma escala que el h1 de `PageHero`). **Toda página tiene exactamente un `h1`** y los niveles no saltan (`FaqAccordion` y `NewsCard` aceptan `headingLevel` para colgar directo del h1).
-- **Enlaces dentro de un párrafo:** siempre subrayados (`underline underline-offset-4`), porque el color solo no distingue el enlace del texto (WCAG 1.4.1).
-- **Fechas:** usa `formatDate` / `formatDateTime` de `@/lib/utils` (hora de Lima, iguales en servidor y cliente). Para la mayúscula inicial usa `first-letter:uppercase`, no `capitalize` (pondría "P. M.").
-- **Badges** (`Badge`): tonos `brand`, `gold`, `seed`, `neutral`, `success`, `warning`, `danger` y `white`; `rounded-full text-caption font-semibold`.
-- **Formularios:** `src/components/forms/field.tsx` con `react-hook-form` + `zod`; inputs `rounded-sm border border-line bg-surface-0 min-h-control` (se adaptan dentro de noche).
-- **Estados obligatorios** en toda vista con datos: **vacío** (`EmptyState`: ícono + título `h4` + descripción + acción), **cargando** (`loading.tsx` con `.skeleton`), **error** (`error.tsx` con mensaje claro y reintentar) y **éxito** (`toast`).
-- **Si falta un componente:** créalo en `src/components/ui` siguiendo el mismo estilo y API que los existentes (`cva` para variantes, `cn()` para combinar clases, props `className` y `tone`/`variant`). **No instales shadcn/ui ni otra librería de componentes sin preguntar.**
+- **`Button`**: `primary` (por defecto), `neon`, `outline`, `outline-white`, `ghost`, `link`, `danger`; tamaños `sm`,
+  `md`, `lg`, `icon`; todos ≥ 44 px, en píldora. `neon` solo sobre noche y uno por pantalla. Acepta `href`.
+  La variante `gradient` y `gold` **ya no existen**.
+- **`Badge`** tonos: `brand`, `neon` (chip noche con texto cian; sirve sobre claro y noche), `success`, `neutral`,
+  `warning`, `danger`, `white`. (`gold` → `neon`, `seed` → `success`.)
+- **`ProgressBar`** tonos: `brand` (degradado) y `success` (`turquesa-700`).
+- **`StatBlock`** (ilustraciones) tonos: `brand`, `neon` (franja cian, solo sobre noche), `success`.
+- **`AccentUnderline`**: subraya una palabra con el trazo de marca (antes `GoldUnderline`).
+- **Cabeceras:** `PageHero` en marketing, `PageHeader` en el producto, `SectionHeader as="h1"` cuando hace de cabecera.
+  **Un solo `h1` por página**, niveles sin saltos.
+- **Enlaces** dentro de párrafos siempre subrayados. `ArrowLink` y `BackLink` para «Ver detalle →» y «← Volver».
+- **`FilterPills`**, **`EmptyState`**, `toast`, `Field`/`Input`/`Select`/`Textarea`/`Checkbox`/`FormAlert`.
+- **Fechas:** `formatDate` / `formatDateTime` de `@/lib/utils` (hora de Lima).
+- **Estados obligatorios** en toda vista con datos: vacío, cargando (`loading.tsx` con `.skeleton`), error (con
+  reintentar) y éxito (`toast`).
+- **Faltan** (fase 3): modal con `<dialog>`, tabs, tabla adaptable, skeletons por ruta, botón con estado de carga,
+  tarjeta con borde encendido, enlace con trazo. Créalos en `src/components/ui` con `cva` + `cn()`.
+- **Íconos:** solo `lucide-react`, `strokeWidth` 1.75. Nunca emojis.
 
 ---
 
 ## 7. Movimiento
 
-- Transiciones de UI: `duration-150` (hover y color) a `duration-200` (íconos, navbar). Máximo 300ms en interacciones (zoom de imágenes, barras de progreso).
-- Entradas: `animate-fade-up` y `animate-fade-in` (500ms, `ease-out-soft`/`ease-out`), solo en marketing. No animes íconos en reposo (nada que "se menee"): el movimiento responde a una acción. Los diálogos usan `animate-scale-in` (220ms).
-- `prefers-reduced-motion` ya está desactivado globalmente en `globals.css`; no agregues animaciones que dependan de JS sin respetarlo.
+- Solo `transform` y `opacity`; ≤ 300 ms en la interfaz. Tokens: `--duration-fast` 150 ms, `--duration-base` 200 ms,
+  `--duration-slow` 300 ms; curvas `--ease-out` y `--ease-out-soft`.
+- `prefers-reduced-motion` apaga todo globalmente. El contenido nunca queda oculto si falla el JS.
+- La fase 4 añade `RevealObserver`, animaciones pausadas fuera de pantalla y el motivo de marca animado.
 
 ---
 
-## 8. Inconsistencias a unificar
+## 8. Responsive
 
-> Inventario medido en el código (noviembre de 2026). Los 13 puntos se unificaron en la rama `design/unificacion`, un commit por punto.
+Breakpoints `sm` 640, `md` 768, `lg` 1024, `xl` 1280. Diseña primero para 375 px y verifica en 375, 768 y 1440 px
+(`node .claude/skills/ui-review/scripts/shoot.mjs`). Sin scroll horizontal.
 
-| # | Inconsistencia | Hoy | Propuesta |
-|---|---|---|---|
-| 1 | **Dos escalas de texto mezcladas** — ✅ **Resuelta** | `text-xs` (296) y `text-sm` (294) de Tailwind convivían con `text-caption` (63) y `text-body-sm` (164), junto con `text-lg` (36), `text-xl`, `text-2xl`, `text-3xl` y `text-base`. | Hecho: 643 clases migradas en 105 archivos (`xs→caption`, `sm→body-sm`, `base→body`, `lg→body-lg`, `xl→h4`, `2xl→h3`). **Más cercano:** `text-3xl` (30px, 1 uso) → `text-h2` (28–32px). Ya no quedan tamaños de Tailwind en el código. |
-| 2 | **H1 del hero escrito a mano** — ✅ **Resuelta** | `text-h1 lg:text-[3.5rem]` estaba repetido en 5 archivos, con `leading-[1.04]`, `[1.06]` y `[1.08]` | Hecho: token `--text-hero: 3.5rem` (lh 1.06, -0.03em), registrado en `cn()`. Los 5 h1 usan `text-h1 lg:text-hero` y se quitaron los `leading`/`tracking` a mano. **Hallazgo:** la regla base `h1–h4 { line-height; letter-spacing }` de `globals.css` está fuera de `@layer` y le gana a toda utilidad de Tailwind, así que esos `leading` nunca se aplicaban. Ver #13. |
-| 13 | **Base fuera de `@layer`** — ✅ **Resuelta** | `h1–h4 { line-height; letter-spacing }` y `button, input, select, textarea { font: inherit }` estaban sin capa y anulaban toda utilidad: los títulos ignoraban el interlineado de su token y los botones ignoraban `font-medium` (se veían con peso 400) | Hecho: la base (`*`, `html`, `body`, medios, `font: inherit`, títulos y párrafos) vive en `@layer base`. Quedan sin capa a propósito `:focus-visible` (que un `outline-none` no borre el foco de teclado), `prefers-reduced-motion` y `::selection`. Los 49 títulos con tamaño de cuerpo usan `leading-snug`. **Regla:** en `cn()`, el `leading-*` va después del `text-*`, porque tailwind-merge descarta un `leading` previo. |
-| 3 | **Radios fuera de escala** — ✅ **Resuelta** | Había `rounded-xl` (5), `rounded-2xl` (1, en `(app)/error.tsx`), `rounded-t/b-[24px]` (fair-diagnostic) y `.skeleton` con 8px fijos | Hecho: paneles y diálogos de `apoya-hoy` → `rounded-lg` (con header/footer `rounded-t/b-lg`); alerta de `logout-dialog` → `rounded-md`; `.skeleton` → `var(--radius-sm)`. **Más cercano:** foto del hero (`real-photo`, 18px) → `rounded-lg`; ícono de `(app)/error.tsx` → `rounded-full`, igual que el ícono de `EmptyState`. Quedan 4 valores: sm, md, lg y full. |
-| 4 | **Colores hex en clases** — ✅ **Resuelta** | Había 21 usos: `text-[#8A5A00]` (6, idéntico a `warning`), `bg-[#FFFBF0]` / `[#fff6de]` / `[#FFF6DE]` (tint dorado), `bg-[#eef8e4]` / `[#F5FBEF]` (tint verde), `bg-[#852d31]` / `[#70262a]` (hover del botón danger), `bg-[#066331]` y `bg-[#f5f3fb]`, más `bg-red-50` en `(app)/error.tsx`. | Hecho: tokens nuevos `gold-50`, `seed-50`, `danger-700`, `danger-800` y `success-700` (hover del botón de aprobar pago). `#8A5A00 → text-warning`; `#FFFBF0 → bg-gold-50/50` y `#F5FBEF → bg-seed-50/60` (mismo color resultante); `red-50 → danger-bg`. **Más cercano:** `#f5f3fb` (fondo de `(campaign)`) → `surface-2` (`#f4f3f6`). Los hex del CSS (degradado, selección, foco, subrayado, malla, scrollbar, autofill) ahora usan `var()` o `color-mix()` sobre tokens. **Excepciones:** estilos de impresión, imágenes generadas (`icon`, `apple-icon`, `opengraph-image`), `global-error.tsx`, `manifest.ts`, el QR, el Excel y la paleta SVG de `illustrations.tsx` (no pueden usar clases; su `line` quedó sincronizado con el token). |
-| 5 | **Variables duplicadas en `:root`** — ✅ **Resuelta** | `--bg`, `--bg-1/2`, `--fg`, `--fg-2/3` y `--border` repetían los neutrales con **otros valores** (`--border #e6e4f0` frente a `line #e5e4e9`; `--fg-3 #6e6a85` frente a `mist #74717c`). | Hecho: `body` usa `surface-0`/`ink`, `.skeleton` usa `surface-2`, los fondos punteados de `/nosotros` y `/voluntariado` usan `var(--color-line)`, y se borraron `--bg*`, `--fg*` y `--border`. Excepción: `global-error.tsx` mantiene hex en línea porque se pinta sin `globals.css`. |
-| 6 | **Tokens con el mismo valor** — ✅ **Resuelta** | `gold-600` = `gold-700` = `#735000`; `seed-500` = `seed-700` = `#326912` | Hecho: `gold-600 → gold-700` (9 usos) y `seed-500 → seed-700` (31 usos), y se borraron `gold-600` y `seed-500` de `@theme`. Sin cambio visual (mismo valor). |
-| 7 | **Tracking de eyebrows** — ✅ **Resuelta** | `0.12em` (54), `0.1em` (17), `0.14em` (11), `0.08em` (9) y `0.06em` (1) | Hecho: token `--tracking-eyebrow: 0.12em` (clase `tracking-eyebrow`, registrada en `cn()`), aplicado en los 93 usos. No se creó el componente `<Eyebrow>` para no tocar 44 archivos de estructura; queda como mejora opcional. |
-| 8 | **Sombras sin uso** — ✅ **Resuelta** | `shadow-subtle` y `shadow-card` estaban definidas con 0 usos | Hecho: se borraron de `@theme`. Queda una sola sombra de sistema: `shadow-elevated` (10 usos). |
-| 9 | **`font-display` dentro del producto** — ✅ **Resuelta** | Las vistas de `(app)` pedían `font-display`, que `.app-shell` neutraliza por CSS | Hecho: se quitaron 71 `font-display` de `src/app/(app)` y `src/components/app` (35 archivos). La regla `.app-shell .font-display` queda como red de seguridad para componentes compartidos (`EmptyState`, `Stat`). Efecto lateral buscado: `LogoutDialog`, que se pinta fuera de `.app-shell`, ahora también usa Inter. |
-| 10 | **Alturas de control** — ✅ **Resuelta** | `h-11` (24 usos = `h-control`), `h-12`, `h-10`, `h-9` y `h-13` en controles | Hecho: `h-11 → h-control` en 21 controles y skeletons de control; input del feed de comunidad `h-9 → h-control` (subió a 44px táctiles); newsletter (input y botón) `h-12 → h-control`; botón de `apoya-hoy` `h-13 → h-control-lg`. **Más cercano:** input de `apoya-hoy` `h-14` (56px) → `h-control-lg` (52px). Se dejaron a propósito los `h-9…h-14` de logos, skeletons de texto y los cuadros de ícono `size-11`, porque no son controles. |
-| 11 | **Anchos máximos arbitrarios** — ✅ **Resuelta** | `max-w-[65ch]`, `[62ch]`, `[60ch]`, `[620px]`, `[440px]` y `[280px]` | Hecho: no hizo falta un token nuevo porque Tailwind v4 ya trae `max-w-prose` (65ch). `65ch/62ch/60ch → max-w-prose`. **Más cercano:** formulario de auth `440px → max-w-md` (448px); foto del hero `620px → max-w-xl` (576px; en la práctica la limita su columna, de unos 560px); QR de apoyo `280px → max-w-2xs` (288px). Se mantienen los porcentajes `max-w-[60%]` y `[85%]` porque son relativos al contenedor, no anchos fijos. |
-| 12 | **Duraciones** — ✅ **Resuelta** | `duration-150/200/300/500/700` | Hecho: zoom de imágenes al pasar el cursor `500/700ms → 300ms` (cursos, `course-media`, `news-card`, `real-photo`); chevron del FAQ y fondo del navbar `300 → 200ms`; `animate-fade-up` `600 → 500ms`. Las barras de progreso se quedan en 300ms (dentro del máximo). Los bucles (`shimmer`, `float`, `marquee`) no son transiciones y quedan fuera de esta regla. |
+## 9. Maquetas
+
+Maquetas de la plataforma en código (fase 5): marcos `Telefono` y `Laptop` dibujados con CSS, **datos ficticios**
+(«Ana Q.», cursos de ejemplo), `role="img"` + `aria-label`, pausadas fuera de pantalla. Nunca capturas con datos reales.
 
 ---
 
-## 9. Hacer / No hacer
+## 10. Hacer / No hacer
 
 ✅ **Hacer**
-- Reutilizar los componentes de `src/components/ui` y los tokens de `globals.css`.
-- Un solo CTA principal por vista, en `sep-600` o, si es de conversión, con degradado.
-- Heros y bandas de cierre en noche (`theme-night aurora` o `<Section tone="night">`).
-- Texto secundario en `slate-ui` y metadatos en `mist`.
-- Tarjetas con borde `line` y sin sombra.
-- Mantener los objetivos táctiles en 44px o más.
+- Usar roles (`ink`, `slate-ui`, `mist`, `line`, `surface-*`, `acento`, `success`…) y las escalas de §2.2.
+- Un solo CTA principal por vista: `primary`, o `neon` sobre noche en la conversión del marketing.
+- Heros y bandas de cierre en noche (`<Section tone="night">` o `theme-night halo`).
+- Turquesa para éxito y progreso; texto turquesa sobre claro en `turquesa-800`.
+- Tarjetas con borde `line` y sin sombra; objetivos táctiles ≥ 44 px.
 
 ❌ **No hacer**
-- Escribir `#hex`, `rgb()`, `bg-red-*`, `text-purple-*` ni otros colores por defecto de Tailwind.
-- Usar el degradado en el producto autenticado o más de una vez por viewport.
-- Poner texto blanco sobre `gold-500`, o texto más claro que `mist` sobre blanco (o que `haze-muted` sobre noche).
-- Agregar fuentes nuevas, radios fuera de la escala o sombras grises.
-- Usar `bg-white` o `text-ink` sobre dorado dentro de un bloque noche (usa `bg-surface-0` y `text-night-950`).
-- Etiquetas en MAYÚSCULAS espaciadas sobre los títulos.
-- Instalar shadcn/ui u otra librería de componentes sin preguntar.
+- Escribir `#hex`, `rgb()` o colores de Tailwind por defecto en componentes (no existen).
+- **Cian sobre fondo claro**, ni como texto ni como relleno. Cian > 5 % de la pantalla.
+- **Texto blanco normal sobre `violeta-500`** (4.18) o **sobre turquesa** (2.17): usa `violeta-600` o texto noche.
+- **Texto sobre el degradado**, o el degradado como color de texto, fondo de sección o de tarjeta.
+- Intercambiar cian (interactivo/destacado) y turquesa (estado/éxito).
+- Usar `noche-400` como texto sobre pizarra o tarjetas translúcidas (3.37 / 4.16).
+- `text-violeta-*` para texto: usa `text-acento` (se adapta a noche).
+- `bg-white` dentro de un bloque noche (usa `bg-surface-0`).
+- Añadir brillos, partículas o degradados además del halo; glassmorphism sin motivo; sombras grises.
+- Eyebrows en todas las secciones; grillas de tarjetas idénticas; emojis.
+- Fuentes nuevas, radios fuera de escala, librerías de componentes o de animación sin preguntar.
+- Datos inventados: cifras, testimonios, logos o alumnos sin fuente en `contenido/`.

@@ -60,7 +60,7 @@ export default async function MentorCanalPage() {
               return (
                 <Card key={p.id} className="p-5">
                   <div className="flex gap-3">
-                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                    <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                       {initials(a?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0">
@@ -96,7 +96,7 @@ export default async function MentorCanalPage() {
           <ul className="divide-y divide-line">
             {team.map((m) => (
               <li key={m.user_id} className="flex items-center gap-3 px-5 py-3.5">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                   {initials(m.full_name)}
                 </span>
                 <div className="min-w-0 flex-1">

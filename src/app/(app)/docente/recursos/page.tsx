@@ -40,7 +40,7 @@ export default async function DocenteRecursosPage() {
             {g.items.map((r) => (
               <Card key={r.name} className="flex flex-col p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
                     <FolderOpen className="size-4" />
                   </span>
                   <Badge tone="neutral">{r.level}</Badge>
@@ -57,7 +57,7 @@ export default async function DocenteRecursosPage() {
         </PanelSection>
       ))}
 
-      <Card className="mt-8 border-sep-200 bg-sep-50/40">
+      <Card className="mt-8 border-violeta-200 bg-violeta-50/40">
         <p className="text-body-sm leading-relaxed text-graphite">
           <strong className="font-medium text-ink">¿Te falta algo?</strong> Escríbenos qué
           material necesitas para tu clase y lo diseñamos con el equipo de aprendizaje.

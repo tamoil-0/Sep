@@ -52,7 +52,7 @@ export function Field({
 }
 
 const controlBase =
-  "w-full rounded-sm border border-line bg-surface-0 px-3.5 text-body-sm text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-mist focus:border-sep-500 focus:ring-4 focus:ring-sep-500/10 disabled:cursor-not-allowed disabled:bg-surface-1 disabled:opacity-70";
+  "w-full rounded-sm border border-line bg-surface-0 px-3.5 text-body-sm text-ink outline-none transition-[border-color,box-shadow,background-color] duration-150 placeholder:text-mist focus:border-violeta-500 focus:ring-4 focus:ring-violeta-500/10 disabled:cursor-not-allowed disabled:bg-surface-1 disabled:opacity-70";
 
 export const Input = React.forwardRef<
   HTMLInputElement,
@@ -121,7 +121,7 @@ export function Checkbox({
         type="checkbox"
         defaultChecked={defaultChecked}
         required={required}
-        className="mt-0.5 size-5 shrink-0 cursor-pointer rounded-sm border-line accent-sep-600"
+        className="mt-0.5 size-5 shrink-0 cursor-pointer rounded-sm border-line accent-violeta-600"
       />
       <span className="text-body-sm leading-relaxed text-graphite">{label}</span>
     </label>

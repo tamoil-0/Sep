@@ -56,7 +56,7 @@ export default async function ProyectosPage() {
               <Card key={p.id} className="p-5">
                 <div className="flex flex-wrap items-center gap-1.5">
                   {p.region && <Badge tone="brand">{p.region}</Badge>}
-                  {p.is_public ? <Badge tone="seed">Público</Badge> : <Badge tone="neutral">Privado</Badge>}
+                  {p.is_public ? <Badge tone="success">Público</Badge> : <Badge tone="neutral">Privado</Badge>}
                 </div>
                 <h3 className="mt-3 text-body leading-snug font-semibold text-ink">{p.title}</h3>
                 {p.problem && (
@@ -67,7 +67,7 @@ export default async function ProyectosPage() {
                 )}
                 {p.solution && (
                   <>
-                    <p className="mt-3 text-caption font-medium tracking-eyebrow text-seed-700">La solución</p>
+                    <p className="mt-3 text-caption font-medium tracking-eyebrow text-turquesa-800">La solución</p>
                     <p className="mt-1 text-body-sm leading-relaxed text-graphite">{p.solution}</p>
                   </>
                 )}

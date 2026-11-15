@@ -24,7 +24,7 @@ export default function RootError({ error, reset }: { error: Error & { digest?: 
           <Button type="button" onClick={reset}><RotateCcw />Reintentar</Button>
           <Button href="/" variant="outline">Ir al inicio</Button>
         </div>
-        <a className="mt-3 inline-flex min-h-control items-center text-body-sm font-medium text-sep-600 underline-offset-4 hover:underline" href={`mailto:${siteConfig.contact.email}`}>Contactar a soporte SEP</a>
+        <a className="mt-3 inline-flex min-h-control items-center text-body-sm font-medium text-acento underline-offset-4 hover:underline" href={`mailto:${siteConfig.contact.email}`}>Contactar a soporte SEP</a>
       </div>
     </main>
   );

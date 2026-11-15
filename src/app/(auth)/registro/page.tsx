@@ -34,9 +34,9 @@ export default function RegistroPage() {
             <li key={role}>
               <Link
                 href={`/registro/${role}`}
-                className="group flex min-h-control items-start gap-4 rounded-md border border-line bg-white p-5 transition-colors duration-150 hover:border-sep-300 hover:bg-surface-1/50"
+                className="group flex min-h-control items-start gap-4 rounded-md border border-line bg-white p-5 transition-colors duration-150 hover:border-violeta-300 hover:bg-surface-1/50"
               >
-                <span className="flex size-control shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600 transition-colors duration-150 group-hover:bg-sep-600 group-hover:text-white">
+                <span className="flex size-control shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento transition-colors duration-150 group-hover:bg-violeta-600 group-hover:text-white">
                   <Icon aria-hidden className="size-icon-lg" />
                 </span>
                 <span className="flex-1">
@@ -44,7 +44,7 @@ export default function RegistroPage() {
                     <span className="font-display text-body font-semibold text-ink">
                       {meta.label}
                     </span>
-                    <ArrowRight aria-hidden className="size-icon-sm shrink-0 text-mist transition-[color,transform] duration-150 group-hover:translate-x-0.5 group-hover:text-sep-600" />
+                    <ArrowRight aria-hidden className="size-icon-sm shrink-0 text-mist transition-[color,transform] duration-150 group-hover:translate-x-0.5 group-hover:text-acento" />
                   </span>
                   <span className="mt-1 block text-body-sm leading-relaxed text-slate-ui">
                     {meta.description}
@@ -63,11 +63,11 @@ export default function RegistroPage() {
           </strong>{" "}
           Esos roles se otorgan tras una postulación. Crea tu cuenta de estudiante y
           postula desde{" "}
-          <Link href="/voluntariado" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+          <Link href="/voluntariado" className="text-acento underline underline-offset-4 hover:text-acento">
             voluntariado
           </Link>{" "}
           o{" "}
-          <Link href="/speakers" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+          <Link href="/speakers" className="text-acento underline underline-offset-4 hover:text-acento">
             la red de speakers
           </Link>
           .
@@ -76,7 +76,7 @@ export default function RegistroPage() {
 
       <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Ya tienes cuenta?{" "}
-        <Link href="/login" className="font-medium text-sep-600 hover:underline">
+        <Link href="/login" className="font-medium text-acento hover:underline">
           Iniciar sesión
         </Link>
       </p>

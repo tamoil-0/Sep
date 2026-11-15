@@ -34,7 +34,7 @@ export function ArrowLink({
         "group/arrow inline-flex w-fit items-center gap-1.5 text-body-sm font-medium underline-offset-4 hover:underline",
         "after:absolute after:content-['']",
         stretched ? "after:inset-0" : "relative after:-inset-x-1 after:-inset-y-3",
-        tone === "brand" ? "text-sep-600 hover:text-sep-700" : "text-white hover:text-white/90",
+        tone === "brand" ? "text-acento hover:text-acento" : "text-white hover:text-white/90",
         className,
       )}
     >

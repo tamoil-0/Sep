@@ -72,7 +72,7 @@ export function MediaImage({
         )}
       />
       {kind === "photo" && (
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/65 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noche-950/65 via-transparent to-transparent" />
       )}
       {label && (
         <figcaption
@@ -81,7 +81,7 @@ export function MediaImage({
             kind === "photo" ? "text-white" : "bg-white text-graphite",
           )}
         >
-          <MapPin className={cn("size-3.5", kind === "photo" ? "text-gold-500" : "text-sep-600")} />
+          <MapPin className={cn("size-3.5", kind === "photo" ? "text-cian-500" : "text-acento")} />
           {label}
         </figcaption>
       )}
@@ -97,7 +97,7 @@ export function HeroPhoto() {
   return (
     <div className="relative mx-auto w-full max-w-xl">
       {/* Halo de marca detrás de la foto: el único brillo del hero. */}
-      <div aria-hidden className="absolute -inset-6 rounded-xl sep-gradient opacity-35 blur-3xl" />
+      <div aria-hidden className="absolute -inset-6 rounded-xl grad-marca opacity-35 blur-3xl" />
       <RealPhoto
         src={SEP_PHOTOS.heroPresentation}
         alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"

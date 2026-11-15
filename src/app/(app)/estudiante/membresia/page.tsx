@@ -26,7 +26,7 @@ export default async function MembresiaPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="aurora px-7 py-6 text-white">
+        <div className="halo px-7 py-6 text-white">
           <p className="text-caption font-medium tracking-eyebrow text-white/70">Tu plan actual</p>
           <h2 className="mt-2 text-h2 font-semibold">
             {membership?.plan?.name ?? "Semilla"}
@@ -47,7 +47,7 @@ export default async function MembresiaPage() {
             return (
               <Card
                 key={p.id}
-                className={isCurrent ? "flex flex-col border-sep-300 bg-sep-50/40" : "flex flex-col"}
+                className={isCurrent ? "flex flex-col border-violeta-300 bg-violeta-50/40" : "flex flex-col"}
               >
                 <div className="flex items-center justify-between gap-2">
                   <h3 className="text-body leading-snug font-semibold text-ink">{p.name}</h3>
@@ -64,7 +64,7 @@ export default async function MembresiaPage() {
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-4">
                   {benefits.map((b) => (
                     <li key={b} className="flex items-start gap-2 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-3.5 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-3.5 shrink-0 text-turquesa-800" />
                       {b}
                     </li>
                   ))}
@@ -75,9 +75,9 @@ export default async function MembresiaPage() {
         </div>
       </PanelSection>
 
-      <Card className="mt-8 border-gold-500/35 bg-gold-50/50">
+      <Card className="mt-8 border-turquesa-200 bg-turquesa-50/60">
         <div className="flex items-start gap-3.5">
-          <Sprout className="mt-0.5 size-5 shrink-0 text-gold-700" />
+          <Sprout className="mt-0.5 size-5 shrink-0 text-turquesa-800" />
           <div>
             <h3 className="text-body leading-snug font-semibold text-ink">
               Los voluntarios tienen todo gratis

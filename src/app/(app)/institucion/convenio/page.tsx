@@ -44,8 +44,8 @@ export default async function InstitucionConvenioPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="aurora px-7 py-6 text-white">
-          <FileSignature className="size-6 text-gold-500" />
+        <div className="halo px-7 py-6 text-white">
+          <FileSignature className="size-6 text-cian-500" />
           <h2 className="mt-4 text-h3 font-semibold">
             {i?.name ?? "Tu institución"}
           </h2>
@@ -63,7 +63,7 @@ export default async function InstitucionConvenioPage() {
           <ul className="mt-4 space-y-2.5">
             {TERMS.map((t) => (
               <li key={t} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                 {t}
               </li>
             ))}

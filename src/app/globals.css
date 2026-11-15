@@ -6,73 +6,83 @@
    ============================================================ */
 
 @theme {
-  /* ── Marca «Aurora nocturna»: violeta eléctrico calibrado para AA ──
-     600 es la acción sobre fondo claro (5.9:1 con blanco); 500 y 400 son
-     el violeta luminoso, solo sobre noche o como decoración. */
-  --color-sep-50: #f3f0ff;
-  --color-sep-100: #e6e0ff;
-  --color-sep-200: #cfc4ff;
-  --color-sep-300: #ae9bff;
-  --color-sep-400: #8f75ff;
-  --color-sep-500: #7c5cff;
-  --color-sep-600: #6440f0;
-  --color-sep-700: #5230d6;
-  --color-sep-800: #3e22a8;
-  --color-sep-900: #2a1873;
-  --color-sep-950: #170d40;
+  /* Sin la paleta por defecto de Tailwind: nadie puede usar bg-blue-500.
+     Solo existen los colores de abajo (verificados en DESIGN.md §2). */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
 
-  /* Paradas del degradado de marca. purple-brand es el final legible con
-     texto blanco (4.7:1); magenta solo para halos y brillos. */
-  --color-violet-brand: #7c5cff;
-  --color-purple-brand: #c026d3;
-  --color-magenta: #e040fb;
+  /* ── «Lavanda neón» — escalas de marca ───────────────────────
+     Violeta lavanda: marca. Acción en 600 (blanco 5.38:1). El 500 (#7265FF)
+     solo en títulos grandes, íconos, bordes y foco (4.18 con blanco). */
+  --color-violeta-50: #f4f3ff;
+  --color-violeta-100: #e8e6ff;
+  --color-violeta-200: #d2ceff;
+  --color-violeta-300: #b1aaff;
+  --color-violeta-400: #9187ff;
+  --color-violeta-500: #7265ff;
+  --color-violeta-600: #6257db;
+  --color-violeta-700: #5249b8;
+  --color-violeta-800: #423b94;
+  --color-violeta-900: #322c70;
 
-  /* ── Noche: heros, bandas, navbar, footer y sidebar ── */
-  --color-night-950: #0d0b1e;
-  --color-night-900: #15122b;
-  --color-night-800: #1e1a3a;
-  --color-night-700: #2b2650;
-  /* Texto secundario sobre noche (9.8:1) y terciario (7:1) */
-  --color-haze: #b9b5d0;
-  --color-haze-muted: #9c97b8;
+  /* Verde turquesa: éxito, progreso y acento secundario. Sobre claro el
+     texto va en 800 (5.77:1); un relleno turquesa lleva texto noche. */
+  --color-turquesa-50: #ebfaf8;
+  --color-turquesa-100: #d8f6f2;
+  --color-turquesa-200: #b1ede4;
+  --color-turquesa-300: #79e0d1;
+  --color-turquesa-400: #41d3bd;
+  --color-turquesa-500: #0bc6ab;
+  --color-turquesa-600: #09aa93;
+  --color-turquesa-700: #088f7b;
+  --color-turquesa-800: #067363;
+  --color-turquesa-900: #05574b;
 
-  /* ── Acento: amarillo SEP ── */
-  --color-gold-50: #fff6de;
-  --color-gold-300: #ffdc7a;
-  --color-gold-400: #ffd24d;
-  --color-gold-500: #ffc629;
-  --color-gold-700: #735000;
-  --color-gold-800: #5c4000;
+  /* Cian neón: SOLO sobre oscuro (1.28:1 con blanco). ≤ 5 % de la pantalla. */
+  --color-cian-500: #04ffe1;
+  --color-cian-600: #03dbc2;
 
-  /* ── Acento: verde semilla (el brote del logo) ── */
-  --color-seed-50: #eef8e4;
-  --color-seed-400: #9bd46a;
-  --color-seed-700: #326912;
-  --color-seed-800: #28550d;
+  /* Noche: neutros fríos. 900 es el fondo oscuro, 950 sidebar y footer,
+     700 «pizarra» para tarjetas e inputs en bloques oscuros. */
+  --color-noche-50: #f5f7fa;
+  --color-noche-100: #eef1f5;
+  --color-noche-200: #e2e7ee;
+  --color-noche-300: #b6c2d1;
+  --color-noche-400: #8d9aab;
+  --color-noche-500: #5b6878;
+  --color-noche-600: #4a5869;
+  --color-noche-700: #374658;
+  --color-noche-800: #2a3545;
+  --color-noche-900: #212b38;
+  --color-noche-950: #151c24;
 
-  /* ── Neutrales fríos con un toque violeta ── */
-  --color-ink: #0f0d1f;
-  --color-graphite: #34314a;
-  --color-slate-ui: #5f5b75;
-  /* El tono más sutil que todavía supera AA sobre blanco (5.0:1) y hielo (4.8:1). */
-  --color-mist: #6b6783;
-  --color-line: #e6e3f2;
-  --color-surface-2: #efedf8;
-  --color-surface-1: #f7f6fc;
-  --color-surface-0: #ffffff;
+  /* ── Roles neutros ──────────────────────────────────────────
+     Los componentes usan roles, no pasos de escala: `.theme-night` los
+     reasigna y el mismo componente se lee bien sobre claro y sobre noche. */
+  --color-ink: var(--color-noche-900); /* títulos y texto: 14.31 blanco · 13.34 noche-50 */
+  --color-graphite: var(--color-noche-800); /* texto fuerte secundario: 12.40 */
+  --color-slate-ui: var(--color-noche-600); /* cuerpo secundario: 7.26 · 6.77 noche-50 */
+  --color-mist: var(--color-noche-500); /* metadatos: 5.68 · 5.29 noche-50 · 5.01 noche-100 */
+  --color-line: var(--color-noche-200); /* bordes y separadores */
+  --color-surface-0: var(--color-white); /* tarjetas, inputs */
+  --color-surface-1: var(--color-noche-50); /* fondo «hielo» del producto */
+  --color-surface-2: var(--color-noche-100); /* hover, pistas de progreso, skeleton */
+  /* Texto violeta (enlaces, eyebrows, íconos activos): 6.99 blanco · 6.36 violeta-50. */
+  --color-acento: var(--color-violeta-700);
 
-  /* ── Semánticos ── */
-  --color-success: #08783b;
-  --color-success-bg: #e6f6ed;
-  --color-success-700: #066331;
-  --color-warning: #8a5a00;
-  --color-warning-bg: #fef4e4;
-  --color-danger: #a3373b;
-  --color-danger-bg: #fdecec;
-  --color-danger-700: #852d31;
-  --color-danger-800: #70262a;
-  --color-info: #245fbd;
-  --color-info-bg: #eaf2fe;
+  /* ── Funcionales (solo estados) ── */
+  --color-success: var(--color-turquesa-800); /* 5.77 · 5.37 sobre success-bg; blanco encima 5.77 */
+  --color-success-bg: var(--color-turquesa-50);
+  --color-success-700: var(--color-turquesa-900);
+  --color-warning: #a15c00; /* 5.19 · 4.78 sobre warning-bg */
+  --color-warning-bg: #fff4e5;
+  --color-danger: #c9354a; /* 5.13 · 4.56 sobre danger-bg; blanco encima 5.13 */
+  --color-danger-bg: #fdeef0;
+  --color-danger-700: #a82c3e;
+  --color-danger-800: #8c2433;
+  --color-info: var(--color-violeta-700);
+  --color-info-bg: var(--color-violeta-50);
 
   /* ── Tipografía ── */
   --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
@@ -117,13 +127,16 @@
   --radius-lg: 22px;
   --radius-xl: 28px;
 
-  /* Elevación con tinte violeta, nunca gris. */
-  --shadow-elevated: 0 18px 48px -12px rgba(23, 13, 64, 0.28);
-  --shadow-soft: 0 1px 2px rgba(23, 13, 64, 0.06), 0 8px 24px -12px rgba(23, 13, 64, 0.14);
-  --shadow-glow: 0 10px 32px -8px rgba(100, 64, 240, 0.55);
-  --shadow-glow-gold: 0 10px 32px -8px rgba(255, 198, 41, 0.6);
+  /* Elevación con tinte de marca (noche + violeta), nunca gris. */
+  --shadow-elevated: 0 18px 48px -12px color-mix(in srgb, var(--color-noche-900) 30%, transparent);
+  --shadow-soft:
+    0 1px 2px color-mix(in srgb, var(--color-noche-900) 6%, transparent),
+    0 10px 28px -12px color-mix(in srgb, var(--color-violeta-500) 22%, transparent);
+  /* Brillo del botón primario (REDISEÑO §4.1, regla 1). */
+  --shadow-glow: 0 10px 30px -10px var(--color-violeta-500);
+  --shadow-glow-neon: 0 10px 30px -10px color-mix(in srgb, var(--color-cian-500) 70%, transparent);
   /* Filo de luz superior de los botones rellenos. */
-  --shadow-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  --shadow-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-white) 20%, transparent);
 
   /* Alturas y anchos compartidos. */
   --spacing-control: 2.75rem;
@@ -137,8 +150,12 @@
   --container-content: 72rem;
   --container-wide: 80rem;
 
-  /* ── Motion ── */
+  /* ── Motion ── solo transform y opacity; ≤ 300 ms en la interfaz. */
   --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
 }
 
 /* ============================================================
@@ -148,23 +165,27 @@
 /* Solo valores compuestos que @theme no puede expresar. Los colores
    planos (fondo, texto, bordes) viven únicamente en @theme. */
 :root {
-  --sep-gradient: linear-gradient(
-    115deg,
-    var(--color-sep-600) 0%,
-    var(--color-violet-brand) 45%,
-    var(--color-purple-brand) 100%
+  /* Degradado «Lavanda neón». DECORATIVO: bordes encendidos, reglas, barra
+     de progreso, anillo de logro y halo. Nunca lleva texto encima ni se usa
+     como color de texto. */
+  --grad-marca: linear-gradient(
+    135deg,
+    var(--color-violeta-500) 0%,
+    var(--color-turquesa-500) 65%,
+    var(--color-cian-500) 100%
   );
-  /* Aurora: noche con un halo violeta arriba y uno magenta abajo. Es el
-     único gesto decorativo del sistema: heros oscuros y banda de cierre. */
-  --sep-aurora:
-    radial-gradient(55% 60% at 85% 0%, color-mix(in srgb, var(--color-sep-500) 42%, transparent), transparent 70%),
-    radial-gradient(45% 55% at 0% 100%, color-mix(in srgb, var(--color-magenta) 22%, transparent), transparent 70%),
-    var(--color-night-950);
-  --sep-gradient-soft: linear-gradient(
-    100deg,
-    color-mix(in srgb, var(--color-sep-600) 6%, transparent) 0%,
-    color-mix(in srgb, var(--color-purple-brand) 6%, transparent) 100%
-  );
+  /* Halo: violeta al 35 % arriba a la izquierda y cian al 12 % abajo a la
+     derecha, sobre noche-900. Es el único gesto memorable del sistema. */
+  --halo-marca:
+    radial-gradient(60% 65% at 0% 0%, color-mix(in srgb, var(--color-violeta-500) 35%, transparent), transparent 70%),
+    radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--color-cian-500) 12%, transparent), transparent 70%),
+    var(--color-noche-900);
+
+  /* Semánticos para CSS propio (no clases). */
+  --bg: var(--color-surface-0);
+  --text: var(--color-ink);
+  --brand: var(--color-violeta-600);
+  --brand-glow: var(--color-violeta-500);
 }
 
 /* ============================================================
@@ -215,7 +236,7 @@
   select,
   textarea,
   summary {
-    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-sep-600) 12%, transparent);
+    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-violeta-600) 12%, transparent);
   }
 
   h1,
@@ -247,112 +268,116 @@
   }
 }
 
+/* Selección: cian sobre noche (11.17:1). */
 ::selection {
-  background: var(--color-gold-500);
-  color: var(--color-ink);
+  background: var(--color-cian-500);
+  color: var(--color-noche-900);
 }
 
 /* Red de seguridad de accesibilidad: un `outline-none` en un input no
-   debe borrar el foco de teclado. */
+   debe borrar el foco de teclado. Anillo violeta sobre claro (4.18:1)
+   y cian dentro de bloques noche (11.17:1). */
 :focus-visible {
-  outline: 2px solid var(--color-sep-500);
+  outline: 2px solid var(--color-violeta-500);
   outline-offset: 3px;
 }
-
-/* El producto usa Sora solo donde se pide `font-display` (títulos de página,
-   cifras); el resto de la UI va en Geist. */
-.app-shell .sep-gradient {
-  background: var(--color-night-900);
-}
-
-.app-shell .sep-gradient-text {
-  background: none;
-  color: var(--color-ink);
+.theme-night :focus-visible {
+  outline-color: var(--color-cian-500);
 }
 
 /* ============================================================
    Utilidades de marca
    ============================================================ */
 
-.sep-gradient {
-  background: var(--sep-gradient);
+/* Degradado decorativo: líneas, barras, puntos y brillos. Nunca con texto. */
+.grad-marca {
+  background: var(--grad-marca);
 }
 
 /* ── Tema noche por sección ────────────────────────────────────
-   Reasigna los tokens neutros dentro de un bloque oscuro: el mismo
-   componente (SectionHeader, Card, Badge, Button outline…) se pinta bien
-   sobre noche sin variantes nuevas. Contrastes verificados sobre night-950:
-   ink→blanco 19.4:1, slate-ui→haze 9.8:1, mist→haze-muted 7:1,
-   sep-700→sep-300 8.2:1. */
+   Reasigna los ROLES dentro de un bloque oscuro: el mismo componente
+   (SectionHeader, Card, Badge, Button outline…) se pinta bien sobre noche
+   sin variantes nuevas. Contrastes sobre noche-900 / sobre una tarjeta
+   translúcida (#2e3844): ink→blanco 14.31 · slate-ui→noche-300 7.92 / 6.59 ·
+   mist→(noche-400 65 % + noche-300) 5.9 / 4.9 · acento→violeta-300 6.86 / 5.70.
+   La escala violeta NO se reasigna (el hover del botón sigue oscuro). */
 .theme-night {
   --color-ink: var(--color-white);
-  --color-graphite: color-mix(in srgb, var(--color-white) 86%, var(--color-night-950));
-  --color-slate-ui: var(--color-haze);
-  --color-mist: var(--color-haze-muted);
+  --color-graphite: color-mix(in srgb, var(--color-white) 86%, var(--color-noche-900));
+  --color-slate-ui: var(--color-noche-300);
+  --color-mist: color-mix(in srgb, var(--color-noche-400) 65%, var(--color-noche-300));
   --color-line: color-mix(in srgb, var(--color-white) 12%, transparent);
   --color-surface-0: color-mix(in srgb, var(--color-white) 6%, transparent);
   --color-surface-1: color-mix(in srgb, var(--color-white) 4%, transparent);
   --color-surface-2: color-mix(in srgb, var(--color-white) 10%, transparent);
-  --color-sep-50: color-mix(in srgb, var(--color-sep-500) 18%, transparent);
-  --color-sep-100: color-mix(in srgb, var(--color-sep-500) 26%, transparent);
-  --color-sep-700: var(--color-sep-300);
+  --color-violeta-50: color-mix(in srgb, var(--color-violeta-500) 18%, transparent);
+  --color-violeta-100: color-mix(in srgb, var(--color-violeta-500) 26%, transparent);
+  --color-acento: var(--color-violeta-300);
+  --color-success: var(--color-turquesa-500); /* 6.60 */
+  --color-success-bg: color-mix(in srgb, var(--color-turquesa-500) 14%, transparent);
+  --color-turquesa-50: color-mix(in srgb, var(--color-turquesa-500) 14%, transparent);
+  --color-turquesa-800: var(--color-turquesa-400);
+  --color-danger: #ff7a88; /* 5.72 */
+  --color-danger-bg: color-mix(in srgb, #ff7a88 14%, transparent);
+  --color-warning: #ffc266; /* 8.97 */
+  --color-warning-bg: color-mix(in srgb, #ffc266 14%, transparent);
   color: var(--color-ink);
 }
 
-/* Restaura el tema claro dentro de un bloque noche (menús y diálogos que flotan). */
+/* Restaura el tema claro dentro de un bloque noche (menús y diálogos que
+   flotan). Los valores son los de @theme: aquí van literales porque los
+   nombres están reasignados por .theme-night. */
 .theme-light {
-  --color-ink: #0f0d1f;
-  --color-graphite: #34314a;
-  --color-slate-ui: #5f5b75;
-  --color-mist: #6b6783;
-  --color-line: #e6e3f2;
+  --color-ink: #212b38;
+  --color-graphite: #2a3545;
+  --color-slate-ui: #4a5869;
+  --color-mist: #5b6878;
+  --color-line: #e2e7ee;
   --color-surface-0: #ffffff;
-  --color-surface-1: #f7f6fc;
-  --color-surface-2: #efedf8;
-  --color-sep-50: #f3f0ff;
-  --color-sep-100: #e6e0ff;
-  --color-sep-700: #5230d6;
+  --color-surface-1: #f5f7fa;
+  --color-surface-2: #eef1f5;
+  --color-violeta-50: #f4f3ff;
+  --color-violeta-100: #e8e6ff;
+  --color-acento: #5249b8;
+  --color-success: #067363;
+  --color-success-bg: #ebfaf8;
+  --color-turquesa-50: #ebfaf8;
+  --color-turquesa-800: #067363;
+  --color-danger: #c9354a;
+  --color-danger-bg: #fdeef0;
+  --color-warning: #a15c00;
+  --color-warning-bg: #fff4e5;
   color: var(--color-ink);
 }
 
-/* Fondo noche con halo. Sobre él solo van white, haze, sep-300/400 y gold-500. */
-.aurora {
-  background: var(--sep-aurora);
-  color: var(--color-surface-0);
+/* Fondo noche con el halo de marca. Sobre él: blanco, noche-300, violeta-300,
+   turquesa-500 y cian. */
+.halo {
+  background: var(--halo-marca);
+  color: var(--color-white);
 }
 
 /* Malla tenue para fondos noche: da profundidad sin otro color. */
-.aurora-grid {
+.halo-grid {
   background-image:
-    linear-gradient(to right, color-mix(in srgb, var(--color-surface-0) 6%, transparent) 1px, transparent 1px),
-    linear-gradient(to bottom, color-mix(in srgb, var(--color-surface-0) 6%, transparent) 1px, transparent 1px);
+    linear-gradient(to right, color-mix(in srgb, var(--color-white) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-white) 6%, transparent) 1px, transparent 1px);
   background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 70% 70% at 70% 20%, #000 20%, transparent 75%);
+  mask-image: radial-gradient(ellipse 70% 70% at 30% 20%, #000 20%, transparent 75%);
 }
 
-.sep-gradient-text {
-  background: var(--sep-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Subrayado amarillo trazado a mano, como en el logo */
-.gold-underline {
+/* Palabra subrayada con el trazo de marca (decorativo, bajo el texto). */
+.subrayado-marca {
   position: relative;
-  display: inline-block;
-}
-.gold-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 38%;
-  bottom: -0.06em;
-  height: 0.12em;
-  background: var(--color-gold-500);
-  border-radius: 999px;
-  z-index: -1;
-  opacity: 1;
+  /* Fondo en lugar de pseudo-elemento: si la frase ocupa varias líneas, cada
+     fragmento lleva su propio trazo y no se sale de las palabras. */
+  background-image: var(--grad-marca);
+  background-repeat: no-repeat;
+  background-size: 100% 0.1em;
+  background-position: 0 96%;
+  padding-bottom: 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .tabular {
@@ -576,7 +601,8 @@ input:-webkit-autofill:focus {
   }
 
   /* El degradado de marca sí se imprime: es la identidad del documento */
-  .sep-gradient {
+  .grad-marca,
+  .halo {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

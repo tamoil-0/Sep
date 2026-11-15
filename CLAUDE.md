@@ -7,9 +7,9 @@
 
 ## Stack
 - **Framework:** Next.js 16.3 (App Router, carpeta `src/`, `src/proxy.ts` en lugar de middleware) + React 19.2 + TypeScript 5. Lee `node_modules/next/dist/docs/` antes de usar APIs de Next (ver `AGENTS.md`).
-- **Estilos:** Tailwind CSS v4 (`@tailwindcss/postcss`, sin `tailwind.config`). Los tokens de marca están en `@theme` dentro de `src/app/globals.css` (`--color-sep-*` azul→violeta, `--color-violet-brand`, `--color-purple-brand`, acento `--color-gold-*`). Sin tema oscuro por ahora.
+- **Estilos:** Tailwind CSS v4 (`@tailwindcss/postcss`, sin `tailwind.config`). Paleta «Lavanda neón» en `@theme` de `src/app/globals.css` (escalas `violeta-*`, `turquesa-*`, `noche-*`, `cian-500/600`, roles `ink`, `slate-ui`, `mist`, `line`, `surface-*`, `acento`; la paleta por defecto de Tailwind está desactivada). Tema claro con bloques noche (`theme-night halo`); sin modo oscuro global. Muestra en `/dev/estilo`.
 - **Componentes:** **no usa shadcn/ui**. Hay componentes propios en `src/components/ui` (`button`, `primitives`, `toast`, `contextual-help`) construidos con `class-variance-authority` + `clsx` + `tailwind-merge` (`src/lib/utils.ts`).
-- **Íconos y fuentes:** lucide-react; Inter + Poppins vía `next/font/google`.
+- **Íconos y fuentes:** lucide-react; Sora (títulos y cifras) + Geist (cuerpo) vía `next/font/google`.
 - **Formularios:** react-hook-form + zod 4 (`src/lib/validations`).
 - **Base de datos y auth:** Supabase (Postgres + Auth + RLS) con `@supabase/ssr` y `@supabase/supabase-js`. Migraciones en `supabase/migrations`, seeds en `supabase/seed.sql`, tipos en `src/types/database.ts`. Server actions en `src/server/actions` y consultas en `src/server/queries`.
 - **Documentos:** pdf-lib (certificados, `src/lib/pdf`), qrcode, write-excel-file (`src/lib/excel`), date-fns.
@@ -33,9 +33,13 @@
 6. Para auditar accesibilidad y UX, usa **web-design-guidelines**.
 
 ## Comandos disponibles
-- `/paleta` — propone 3 direcciones visuales y actualiza DESIGN.md con la elegida
+- `/paleta` — audita el contraste de «Lavanda neón» y propone ajustes mínimos (los 5 colores base son fijos)
 - `/redisenar <pantalla>` — rediseña una pantalla siguiendo DESIGN.md
 - `/revisar-ui [ruta]` — revisión visual con screenshots y lista de problemas
 
 ## Subagentes
-- **design-reviewer** — revisa la UI con ojos frescos (sin editar)
+- **design-reviewer** — revisor visual con ojos frescos: capturas 375/768/1440 y hallazgos por severidad (sin editar)
+- **disenador-web** — construye o rediseña una pantalla completa siguiendo DESIGN.md
+- **maquetador-mockups** — maquetas animadas de la plataforma con datos ficticios
+- **auditor-calidad** — Lighthouse, axe, SEO y peso por página (sin editar)
+- **investigador-contenido** — fichas de hechos con fuente en `contenido/`

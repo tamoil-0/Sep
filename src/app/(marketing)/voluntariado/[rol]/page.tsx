@@ -46,7 +46,7 @@ export default async function PostularPage({
           {/* Info del rol */}
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <Badge tone="gold">
+              <Badge tone="neon">
                 {role.openPositions}{" "}
                 {role.openPositions === 1 ? "vacante abierta" : "vacantes abiertas"}
               </Badge>
@@ -73,7 +73,7 @@ export default async function PostularPage({
                 <ul className="mt-3.5 space-y-2.5">
                   {role.requirements.map((r) => (
                     <li key={r} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                       {r}
                     </li>
                   ))}
@@ -87,7 +87,7 @@ export default async function PostularPage({
                 <ol className="mt-3.5 space-y-3">
                   {volunteerProcess.map((s) => (
                     <li key={s.step} className="flex gap-2.5">
-                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
+                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                         {s.step}
                       </span>
                       <div>

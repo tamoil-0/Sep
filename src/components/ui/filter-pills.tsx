@@ -39,7 +39,7 @@ export function FilterPills<K extends string>({
             className={cn(
               "inline-flex min-h-control items-center gap-1.5 rounded-full px-4 text-body-sm font-medium transition-colors duration-150",
               active
-                ? "bg-sep-600 text-white"
+                ? "bg-violeta-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
             )}
           >

@@ -85,9 +85,9 @@ export default async function SpeakerParticipacionesPage() {
         )}
       </PanelSection>
 
-      <Card className="mt-8 border-gold-500/35 bg-gold-50/50">
+      <Card className="mt-8 border-turquesa-200 bg-turquesa-50/60">
         <div className="flex items-start gap-3.5">
-          <Award className="mt-0.5 size-5 shrink-0 text-gold-700" />
+          <Award className="mt-0.5 size-5 shrink-0 text-turquesa-800" />
           <div>
             <h3 className="text-body leading-snug font-semibold text-ink">
               Tu constancia de speaker

@@ -53,7 +53,7 @@ export default async function AdminImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-6 overflow-hidden p-0">
-        <div className="aurora px-7 py-6 text-white">
+        <div className="halo px-7 py-6 text-white">
           <p className="text-caption font-medium tracking-eyebrow text-white/70">
             Semillero de Emprendedores Perú
           </p>
@@ -132,7 +132,7 @@ export default async function AdminImpactoPage() {
                   </div>
                   <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-surface-2">
                     <div
-                      className="h-full rounded-full bg-sep-700"
+                      className="h-full rounded-full bg-violeta-700"
                       style={{ width: `${(Number(r.users) / maxUsers) * 100}%` }}
                     />
                   </div>
@@ -229,7 +229,7 @@ export default async function AdminImpactoPage() {
             [10, "Reducción de las desigualdades"],
           ].map(([goal, name]) => (
             <Card key={goal} className="p-5">
-              <p className="tabular text-h2 font-bold leading-none text-sep-700">
+              <p className="tabular text-h2 font-bold leading-none text-acento">
                 ODS {goal}
               </p>
               <p className="mt-2 text-body-sm font-medium text-ink">{name}</p>

@@ -103,9 +103,9 @@ export default async function SpeakerPerfilPage() {
             </Card>
           )}
 
-          <Card className="border-sep-200 bg-sep-50/40">
+          <Card className="border-violeta-200 bg-violeta-50/40">
             <div className="flex items-start gap-3">
-              <UserRound className="mt-0.5 size-5 shrink-0 text-sep-600" />
+              <UserRound className="mt-0.5 size-5 shrink-0 text-acento" />
               <p className="text-body-sm leading-relaxed text-graphite">
                 Para actualizar tu perfil escríbenos. Los cambios los revisa el equipo antes
                 de publicarlos, para mantener la calidad de la red.

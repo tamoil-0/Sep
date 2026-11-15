@@ -14,7 +14,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-violeta-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Enviando perfil…" : "Registrarme en la red"}
@@ -116,7 +116,7 @@ export function SpeakerForm() {
           {speakerTopics.map((t) => (
             <label
               key={t}
-              className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
+              className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-violeta-500 has-[:checked]:bg-violeta-50 has-[:checked]:text-acento"
             >
               <input type="checkbox" name="topics" value={t} className="sr-only" />
               {t}

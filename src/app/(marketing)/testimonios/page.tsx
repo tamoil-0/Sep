@@ -74,7 +74,7 @@ export default async function TestimoniosPage() {
 
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.9fr]">
           <SectionHeader
@@ -101,13 +101,13 @@ export default async function TestimoniosPage() {
             {stories.map((s) => (
               <li key={s.name} className="min-w-0">
                 <Card className="relative flex h-full flex-col overflow-hidden p-6 ">
-                  <span className="absolute left-0 top-0 h-full w-1 sep-gradient" />
-                  <Quote className="size-5 text-gold-500" />
+                  <span className="absolute left-0 top-0 h-full w-1 grad-marca" />
+                  <Quote className="size-5 text-violeta-500" />
                   <p className="mt-4 flex-1 text-body-sm leading-relaxed text-graphite">
                     {s.quote}
                   </p>
                   <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                       {initials(s.name)}
                     </span>
                     <div className="min-w-0">
@@ -153,7 +153,7 @@ export default async function TestimoniosPage() {
                     )}
                     {p.solution && (
                       <>
-                        <p className="mt-3 text-caption font-medium tracking-eyebrow text-seed-700">
+                        <p className="mt-3 text-caption font-medium tracking-eyebrow text-turquesa-800">
                           La solución
                         </p>
                         <p className="mt-1 flex-1 text-body-sm leading-relaxed text-graphite">
@@ -179,7 +179,7 @@ export default async function TestimoniosPage() {
               Los cursos son gratuitos y empiezan cada mes. No importa tu región ni tu
               punto de partida.
             </p>
-            <Button href="/registro" variant="gradient" className="mt-6">
+            <Button href="/registro" variant="primary" className="mt-6">
               Crear mi cuenta gratis
             </Button>
           </Card>

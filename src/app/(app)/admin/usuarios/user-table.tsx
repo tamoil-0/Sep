@@ -22,11 +22,11 @@ interface Row {
   roles: UserRole[];
 }
 
-const roleTone: Record<UserRole, "brand" | "gold" | "seed" | "neutral" | "danger"> = {
+const roleTone: Record<UserRole, "brand" | "neon" | "success" | "neutral" | "danger"> = {
   estudiante: "neutral",
-  docente: "seed",
+  docente: "success",
   institucion: "brand",
-  mentor: "gold",
+  mentor: "neon",
   speaker: "brand",
   admin: "danger",
   super_admin: "danger",
@@ -162,7 +162,7 @@ export function UserTable({
             <button
               type="button"
               onClick={clearFilters}
-              className="inline-flex min-h-control items-center gap-1.5 font-semibold text-sep-700 hover:underline"
+              className="inline-flex min-h-control items-center gap-1.5 font-semibold text-acento hover:underline"
             >
               <X className="size-icon-sm" /> Limpiar filtros
             </button>
@@ -191,7 +191,7 @@ export function UserTable({
             {visible.map((user) => (
               <li key={user.id} className="p-4">
                 <div className="flex items-start gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                     {initials(user.name || user.email)}
                   </span>
                   <div className="min-w-0 flex-1">
@@ -242,7 +242,7 @@ export function UserTable({
                   <tr key={u.id} className="hover:bg-surface-1">
                     <td className="px-5 py-3.5">
                       <div className="flex items-center gap-3">
-                        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                        <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                           {initials(u.name || u.email)}
                         </span>
                         <div className="min-w-0">
@@ -384,7 +384,7 @@ export function UserTable({
                         "inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm px-3 text-caption font-semibold transition-colors disabled:opacity-40",
                         has
                           ? "border border-danger/30 text-danger hover:bg-danger-bg"
-                          : "bg-sep-600 text-white hover:bg-sep-700",
+                          : "bg-violeta-600 text-white hover:bg-violeta-700",
                       )}
                     >
                       {busy === key && <Loader2 className="size-3.5 animate-spin" />}

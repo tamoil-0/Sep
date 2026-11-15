@@ -51,7 +51,7 @@ export default async function CertificadosPage() {
           <div className="grid gap-3 md:grid-cols-2">
             {issued.map((c) => (
               <Card key={c.id} className="overflow-hidden p-0">
-                <div className="aurora px-5 py-4">
+                <div className="halo px-5 py-4">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
                       <p className="truncate text-body-sm font-semibold text-white">
@@ -63,7 +63,7 @@ export default async function CertificadosPage() {
                         </p>
                       )}
                     </div>
-                    <Award className="size-5 shrink-0 text-gold-500" />
+                    <Award className="size-5 shrink-0 text-cian-500" />
                   </div>
                 </div>
 
@@ -76,7 +76,7 @@ export default async function CertificadosPage() {
                   </p>
 
                   <div className="mt-4 flex items-center gap-2 rounded-lg bg-surface-1 px-3 py-2">
-                    <ShieldCheck className="size-4 shrink-0 text-seed-700" />
+                    <ShieldCheck className="size-4 shrink-0 text-turquesa-800" />
                     <code className="tabular flex-1 truncate text-caption font-medium text-ink">
                       {c.verification_code}
                     </code>
@@ -203,7 +203,7 @@ export default async function CertificadosPage() {
                       Completa las {e.course?.sessions_count} sesiones para desbloquearlo
                     </p>
                   </div>
-                  <span className="tabular shrink-0 text-body-sm font-semibold text-sep-600">
+                  <span className="tabular shrink-0 text-body-sm font-semibold text-acento">
                     {e.progress_pct}%
                   </span>
                 </div>

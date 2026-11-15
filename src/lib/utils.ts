@@ -17,7 +17,7 @@ const twMerge = extendTailwindMerge({
         "caption",
       ],
       tracking: ["eyebrow"],
-      shadow: ["elevated", "soft", "glow", "glow-gold", "highlight"],
+      shadow: ["elevated", "soft", "glow", "glow-neon", "highlight"],
     },
   },
 });

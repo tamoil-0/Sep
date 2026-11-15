@@ -35,7 +35,7 @@ export function Section({
 }: {
   className?: string;
   children: React.ReactNode;
-  /** `night` (y `gradient`, su alias histórico) pinta la sección en noche con halo aurora. */
+  /** `night` (y `gradient`, su alias histórico) pinta la sección en noche con el halo de marca. */
   tone?: "base" | "muted" | "gradient" | "night";
   id?: string;
 }) {
@@ -45,7 +45,7 @@ export function Section({
       className={cn(
         "py-14 md:py-20 lg:py-24",
         tone === "muted" && "bg-surface-1",
-        (tone === "gradient" || tone === "night") && "theme-night aurora relative overflow-hidden",
+        (tone === "gradient" || tone === "night") && "theme-night halo relative overflow-hidden",
         className,
       )}
     >
@@ -87,11 +87,11 @@ export function SectionHeader({
         <p
           className={cn(
             "mb-4 inline-flex items-center gap-2 text-body-sm font-medium",
-            inverted ? "text-gold-500" : "text-sep-700",
+            inverted ? "text-violeta-300" : "text-acento",
           )}
         >
           {/* Punto de marca: marca la sección sin mayúsculas ni tracking. */}
-          <span aria-hidden className="size-1.5 rounded-full sep-gradient" />
+          <span aria-hidden className="size-1.5 rounded-full grad-marca" />
           {eyebrow}
         </p>
       )}
@@ -148,7 +148,7 @@ export function PageHero({
     <section
       className={cn(
         "relative overflow-hidden",
-        inverted ? "sep-gradient" : "border-b border-line bg-surface-1",
+        inverted ? "theme-night halo" : "border-b border-line bg-surface-1",
       )}
     >
       <Container size="wide" className="relative py-10 md:py-14 lg:py-16">
@@ -234,7 +234,7 @@ export function Card({
       className={cn(
         "min-w-0 rounded-md border border-line bg-surface-0 p-5",
         interactive &&
-          "transition-[border-color,box-shadow] duration-200 hover:border-sep-300 hover:shadow-soft",
+          "transition-[border-color,box-shadow] duration-200 hover:border-violeta-300 hover:shadow-soft",
         className,
       )}
       {...rest}
@@ -247,9 +247,9 @@ export function Card({
 /* ── Badges ───────────────────────────────────────────────── */
 
 const badgeTones = {
-  brand: "bg-sep-50 text-sep-700",
-  gold: "bg-gold-50 text-gold-700",
-  seed: "bg-seed-50 text-seed-700",
+  brand: "bg-violeta-50 text-acento",
+  /* Chip neón: fondo noche con texto cian (11.17:1). Funciona sobre claro y sobre noche. */
+  neon: "bg-noche-900 text-cian-500 ring-1 ring-inset ring-cian-500/30",
   neutral: "bg-surface-2 text-graphite",
   success: "bg-success-bg text-success",
   warning: "bg-warning-bg text-warning",
@@ -281,9 +281,9 @@ export function Badge({
 
 /* ── Tipografía de marca ──────────────────────────────────── */
 
-/** Palabra con el subrayado amarillo trazado a mano del logo. */
-export function GoldUnderline({ children }: { children: React.ReactNode }) {
-  return <span className="gold-underline relative z-0">{children}</span>;
+/** Palabra subrayada con el trazo del degradado de marca (decorativo). */
+export function AccentUnderline({ children }: { children: React.ReactNode }) {
+  return <span className="subrayado-marca relative z-0">{children}</span>;
 }
 
 /* ── Estados ──────────────────────────────────────────────── */
@@ -300,9 +300,9 @@ export function EmptyState({
   action?: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-sep-200 bg-sep-50/40 px-4 py-8 text-center sm:px-6 sm:py-10">
+    <div className="flex flex-col items-center justify-center rounded-md border border-dashed border-violeta-200 bg-violeta-50/40 px-4 py-8 text-center sm:px-6 sm:py-10">
       {icon && (
-        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-surface-0 text-sep-600 shadow-soft ring-1 ring-sep-100">
+        <div className="mb-4 flex size-12 items-center justify-center rounded-full bg-surface-0 text-acento shadow-soft ring-1 ring-violeta-100">
           {icon}
         </div>
       )}
@@ -325,7 +325,7 @@ export function ProgressBar({
 }: {
   value: number;
   className?: string;
-  tone?: "brand" | "gold" | "seed";
+  tone?: "brand" | "success";
   label?: string;
 }) {
   const pct = Math.max(0, Math.min(100, value));
@@ -341,9 +341,9 @@ export function ProgressBar({
       <div
         className={cn(
           "h-full rounded-full transition-[width] duration-200",
-          tone === "brand" && "sep-gradient",
-          tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-700",
+          tone === "brand" && "grad-marca",
+          // turquesa-700: 4.02:1 sobre blanco (objeto gráfico ≥ 3:1).
+          tone === "success" && "bg-turquesa-700",
         )}
         style={{ width: `${pct}%` }}
       />
@@ -369,7 +369,7 @@ export function Stat({
       <p
         className={cn(
           "tabular font-display text-h1 font-semibold leading-none",
-          inverted ? "text-gold-500" : "text-ink",
+          inverted ? "text-white" : "text-ink",
         )}
       >
         {value}

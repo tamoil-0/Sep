@@ -149,7 +149,7 @@ export default async function CheckoutPage({
               <Card className="p-0">
                 <div className="border-b border-line px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                       1
                     </span>
                     <h2 className="text-body leading-snug font-semibold text-ink">
@@ -193,7 +193,7 @@ export default async function CheckoutPage({
                       <p className="text-caption font-medium tracking-eyebrow text-slate-ui">
                         Monto exacto
                       </p>
-                      <p className="tabular mt-1 text-h2 font-bold leading-none text-sep-700">
+                      <p className="tabular mt-1 text-h2 font-bold leading-none text-acento">
                         {formatSoles(order.amount_cents)}
                       </p>
                     </div>
@@ -220,7 +220,7 @@ export default async function CheckoutPage({
               <Card className="mt-4 p-0">
                 <div className="border-b border-line px-6 py-4">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-7 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                    <span className="flex size-7 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                       2
                     </span>
                     <h2 className="text-body leading-snug font-semibold text-ink">
@@ -299,7 +299,7 @@ export default async function CheckoutPage({
                   key={f.text}
                   className="flex items-start gap-2.5 text-caption leading-relaxed text-slate-ui"
                 >
-                  <f.icon className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                  <f.icon className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                   {f.text}
                 </p>
               ))}

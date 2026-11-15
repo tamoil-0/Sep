@@ -55,7 +55,7 @@ export function SupportQrDialog() {
             >
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-caption font-semibold uppercase text-sep-600">Comparte SEP</p>
+                  <p className="text-caption font-semibold uppercase text-acento">Comparte SEP</p>
                   <h2
                     id="support-qr-title"
                     className="mt-1 font-display text-h4 font-semibold text-ink"
@@ -110,7 +110,7 @@ export function SupportQrDialog() {
                 </a>
                 <a
                   href={SUPPORT_URL}
-                  className="inline-flex h-control items-center justify-center gap-1.5 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
+                  className="inline-flex h-control items-center justify-center gap-1.5 rounded-sm bg-violeta-600 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700"
                 >
                   Abrir
                   <ArrowUpRight className="size-4" />

@@ -61,7 +61,7 @@ export default async function CursoPage({
               <Badge tone="neutral">No inscrito</Badge>
             )}
             {course.category && <Badge tone="neutral">{course.category}</Badge>}
-            {course.is_free && <Badge tone="seed">Gratuito</Badge>}
+            {course.is_free && <Badge tone="success">Gratuito</Badge>}
           </div>
 
           <h1 className="mt-3.5 text-h2 font-semibold leading-tight text-ink">

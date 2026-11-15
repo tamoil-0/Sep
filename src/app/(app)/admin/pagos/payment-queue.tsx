@@ -177,7 +177,7 @@ export function PaymentQueue({ payments }: { payments: PaymentRow[] }) {
           {visible.map((p) => (
             <Card key={p.id} className="p-0">
               <div className="flex flex-wrap items-start gap-4 p-5">
-                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                   {initials(p.buyerName)}
                 </span>
 

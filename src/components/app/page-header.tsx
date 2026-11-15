@@ -49,7 +49,7 @@ export function Kpi({
       <div className="flex items-center justify-between gap-3">
         <p className="text-caption leading-snug text-slate-ui sm:text-body-sm">{label}</p>
         {icon && (
-          <span className="hidden size-9 items-center justify-center rounded-full bg-sep-50 text-sep-600 sm:flex [&_svg]:size-4">
+          <span className="hidden size-9 items-center justify-center rounded-full bg-violeta-50 text-acento sm:flex [&_svg]:size-4">
             {icon}
           </span>
         )}

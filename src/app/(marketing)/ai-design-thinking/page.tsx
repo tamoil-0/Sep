@@ -95,7 +95,7 @@ export default function AiDesignThinkingPage() {
             { icon: Bot, title: "Herramientas accesibles", text: "Se priorizan opciones gratuitas o de bajo costo para no ampliar la brecha digital." },
           ].map((item) => (
             <div key={item.title}>
-              <item.icon className="size-6 text-sep-600" />
+              <item.icon className="size-6 text-acento" />
               <h2 className="mt-4 font-display text-h4 font-semibold text-ink">{item.title}</h2>
               <p className="mt-2 text-body-sm text-slate-ui">{item.text}</p>
             </div>

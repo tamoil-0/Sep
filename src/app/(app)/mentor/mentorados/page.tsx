@@ -83,7 +83,7 @@ export default async function MentoradosPage() {
               return (
                 <Card key={m.id} className="p-5">
                   <div className="flex items-center gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                       {initials(m.mentee?.full_name ?? "?")}
                     </span>
                     <div className="min-w-0 flex-1">

@@ -63,7 +63,7 @@ export default function ContactoPage() {
               interactive={Boolean(c.href)}
               className="relative flex flex-col p-6 text-center"
             >
-              <c.icon className="mx-auto size-5 text-sep-600" />
+              <c.icon className="mx-auto size-5 text-acento" />
               <p className="mt-4 text-caption font-medium tracking-eyebrow text-slate-ui">
                 {c.label}
               </p>
@@ -72,7 +72,7 @@ export default function ContactoPage() {
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="mt-1.5 break-words text-body-sm font-medium text-ink after:absolute after:inset-0 after:content-[''] hover:text-sep-600"
+                  className="mt-1.5 break-words text-body-sm font-medium text-ink after:absolute after:inset-0 after:content-[''] hover:text-acento"
                 >
                   {c.value}
                 </a>
@@ -116,7 +116,7 @@ export default function ContactoPage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-sep-600 hover:underline"
+                    className="font-medium text-acento hover:underline"
                   >
                     {label}
                   </a>

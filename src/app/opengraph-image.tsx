@@ -22,7 +22,9 @@ export default async function OpenGraphImage() {
         flexDirection: "column",
         justifyContent: "space-between",
         overflow: "hidden",
-        background: "linear-gradient(115deg, #2e0be8 0%, #6a0dd9 55%, #a50fc6 100%)",
+        // Halo «Lavanda neón» (no admite variables CSS: se renderiza fuera de globals.css).
+        background:
+          "radial-gradient(60% 65% at 0% 0%, rgba(114,101,255,0.35), transparent 70%), radial-gradient(50% 60% at 100% 100%, rgba(4,255,225,0.12), transparent 70%), #212b38",
         padding: "72px 78px",
         color: "white",
         fontFamily: "Arial, sans-serif",
@@ -79,7 +81,7 @@ export default async function OpenGraphImage() {
       </div>
 
       <div style={{ display: "flex", alignItems: "center", gap: 12, fontSize: 20 }}>
-        <span style={{ color: "#ffd24d", fontWeight: 800 }}>●</span>
+        <span style={{ color: "#04ffe1", fontWeight: 800 }}>●</span>
         Organización juvenil reconocida por SENAJU
       </div>
     </div>,

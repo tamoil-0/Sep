@@ -15,7 +15,7 @@ function SubmitButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
+      className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-violeta-600 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Enviando comprobante…" : "Enviar comprobante"}
@@ -126,7 +126,7 @@ export function VoucherForm({ orderId }: { orderId: string }) {
             "relative rounded-md border border-dashed p-5 transition-colors",
             fieldErrors?.voucher
               ? "border-danger bg-danger-bg/30"
-              : "border-line bg-surface-1 hover:border-sep-300",
+              : "border-line bg-surface-1 hover:border-violeta-300",
           )}
         >
           <input

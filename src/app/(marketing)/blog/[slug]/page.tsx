@@ -83,7 +83,7 @@ export default async function BlogPostPage({
           </p>
 
           {post.excerpt && (
-            <p className="mt-7 border-l-2 border-gold-500 pl-5 text-body-lg leading-relaxed text-graphite">
+            <p className="mt-7 border-l-2 border-violeta-500 pl-5 text-body-lg leading-relaxed text-graphite">
               {post.excerpt}
             </p>
           )}

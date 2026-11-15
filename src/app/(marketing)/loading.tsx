@@ -1,7 +1,7 @@
 export default function MarketingLoading() {
   return (
     <div className="animate-fade-in" role="status" aria-label="Cargando contenido">
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <div className="mx-auto grid w-full max-w-7xl items-center gap-10 px-5 py-14 sm:px-8 sm:py-20 lg:grid-cols-[1fr_0.85fr]">
           <div>
             <div className="skeleton h-6 w-32 rounded-full" />

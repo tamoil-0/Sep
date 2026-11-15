@@ -74,7 +74,7 @@ export default async function DocentePage() {
         <div className="grid gap-3 sm:grid-cols-2">
           {resources.map((r) => (
             <Card key={r.title} interactive className="flex gap-3.5 p-5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
                 <FolderOpen className="size-4" />
               </span>
               <div>
@@ -89,7 +89,7 @@ export default async function DocentePage() {
       </section>
 
       <section className="mt-8">
-        <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
+        <Card className="flex flex-wrap items-center justify-between gap-5 border-violeta-200 bg-violeta-50/40 p-6">
           <div>
             <h2 className="text-body-lg leading-snug font-semibold text-ink">
               ¿Tu colegio quiere recibir a nuestros voluntarios?

@@ -35,11 +35,11 @@ export default async function CursosPage() {
 
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-10 md:py-14 lg:py-16">
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_0.86fr] lg:gap-12">
           <div className="max-w-2xl">
-            <Badge tone="seed">Catálogo abierto</Badge>
+            <Badge tone="success">Catálogo abierto</Badge>
             <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Cursos para convertir ideas en acción
             </h1>
@@ -119,12 +119,12 @@ export default async function CursosPage() {
                   />
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (
-                      <Badge tone="seed">Disponible</Badge>
+                      <Badge tone="success">Disponible</Badge>
                     ) : (
                       <Badge tone="neutral">Próximamente</Badge>
                     )}
-                    {c.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
-                    {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
+                    {c.audience === "docente" && <Badge tone="neon">Docentes</Badge>}
+                    {c.category === "SILP" && <Badge tone="neon">Insignia</Badge>}
                   </div>
 
                   <div className="flex flex-1 flex-col px-1">
@@ -151,10 +151,10 @@ export default async function CursosPage() {
                   </div>
 
                   <p className="mt-4 flex items-center justify-between text-body-sm">
-                    <span className="font-medium text-seed-700">
+                    <span className="font-medium text-turquesa-800">
                       {c.is_free ? "Gratuito" : formatSoles(c.price_cents)}
                     </span>
-                    <span className="inline-flex items-center gap-1 text-sep-600">
+                    <span className="inline-flex items-center gap-1 text-acento">
                       Ver detalle
                       <ArrowRight aria-hidden className="size-icon-sm" />
                     </span>
@@ -180,7 +180,7 @@ export default async function CursosPage() {
           <CertificateOptions className="mx-auto mt-10 grid max-w-2xl gap-4 sm:grid-cols-2" />
 
           <div className="mt-8 text-center">
-            <Button href="/registro" variant="gradient" size="lg">
+            <Button href="/registro" variant="primary" size="lg">
               Crear cuenta y empezar
               <ArrowRight className="size-4" />
             </Button>

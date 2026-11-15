@@ -15,7 +15,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -72,14 +72,14 @@ export default async function HomePage() {
   return (
     <>
       {/* ═══ 1 · HERO ═══════════════════════════════════════ */}
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         {/* Malla tenue: profundidad sin sumar otro color. */}
-        <div aria-hidden className="aurora-grid pointer-events-none absolute inset-0" />
+        <div aria-hidden className="halo-grid pointer-events-none absolute inset-0" />
         <Container size="wide" className="relative">
           <div className="grid items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 lg:pb-16 lg:pt-20">
             <div className="max-w-2xl">
               <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface-0 px-3.5 py-1.5 text-caption text-slate-ui backdrop-blur-sm sm:text-body-sm">
-                <span aria-hidden className="size-1.5 rounded-full bg-gold-500" />
+                <span aria-hidden className="size-1.5 rounded-full bg-cian-500" />
                 Emprendimiento y liderazgo juvenil desde las regiones del Perú
               </p>
 
@@ -206,7 +206,7 @@ export default async function HomePage() {
               },
             ].map((audience) => (
               <Card key={audience.title} interactive className="relative flex h-full flex-col p-6">
-                <span className="flex size-11 items-center justify-center rounded-md bg-sep-50 text-sep-700">
+                <span className="flex size-11 items-center justify-center rounded-md bg-violeta-50 text-acento">
                   <audience.icon className="size-5" />
                 </span>
                 <h3 className="mt-5 font-display text-body-lg leading-snug font-semibold text-ink">
@@ -233,7 +233,7 @@ export default async function HomePage() {
               <>
                 El talento está en regiones.
                 <br />
-                Las <GoldUnderline>oportunidades</GoldUnderline> se quedan en Lima.
+                Las <AccentUnderline>oportunidades</AccentUnderline> se quedan en Lima.
               </>
             }
           />
@@ -248,13 +248,13 @@ export default async function HomePage() {
               figure="9×"
               label="Menos probabilidad de éxito"
               detail="Para un emprendedor fuera de la capital."
-              tone="gold"
+              tone="neon"
             />
             <StatBlock
               figure="70%"
               label="Del talento vive en regiones"
               detail="Sin acceso a mentores ni referentes cercanos."
-              tone="seed"
+              tone="success"
             />
           </div>
         </Container>
@@ -269,7 +269,7 @@ export default async function HomePage() {
               title="Ideas que salen del papel"
               description="Talleres, equipos y proyectos construidos por jóvenes desde sus propias regiones. Personas reales aprendiendo juntas, no fotografías de catálogo."
             />
-            <Badge tone="seed" className="w-fit sm:mb-1">
+            <Badge tone="success" className="w-fit sm:mb-1">
               Experiencias reales
             </Badge>
           </div>
@@ -293,7 +293,7 @@ export default async function HomePage() {
           <ol className="relative mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
             <div
               aria-hidden
-              className="absolute left-[12%] right-[12%] top-7 hidden h-px sep-gradient opacity-60 lg:block"
+              className="absolute left-[12%] right-[12%] top-7 hidden h-px grad-marca opacity-60 lg:block"
             />
             {[
               { icon: Sparkles, title: "SEP", detail: "Diseña la formación y la abre en línea para todo el país." },
@@ -302,9 +302,9 @@ export default async function HomePage() {
               { icon: Sprout, title: "Impacto", detail: "Proyectos locales que siguen andando sin depender de Lima." },
             ].map(({ icon: Icon, title, detail }, i) => (
               <li key={title} className="relative flex flex-col items-start lg:items-center lg:text-center">
-                <span className="relative flex size-14 items-center justify-center rounded-full border border-sep-200 bg-surface-0 text-sep-600 shadow-soft">
+                <span className="relative flex size-14 items-center justify-center rounded-full border border-violeta-200 bg-surface-0 text-acento shadow-soft">
                   <Icon aria-hidden className="size-6" />
-                  <span className="tabular absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full sep-gradient text-caption font-semibold text-white">
+                  <span className="tabular absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-violeta-600 text-caption font-semibold text-white">
                     {i + 1}
                   </span>
                 </span>
@@ -351,11 +351,11 @@ export default async function HomePage() {
                 <div className="mt-4 flex flex-1 flex-col px-1 pb-1">
                   <div className="flex flex-wrap items-center gap-1.5">
                     {course.status === "disponible" ? (
-                      <Badge tone="seed">Disponible</Badge>
+                      <Badge tone="success">Disponible</Badge>
                     ) : (
                       <Badge tone="neutral">Pronto</Badge>
                     )}
-                    {course.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
+                    {course.audience === "docente" && <Badge tone="neon">Docentes</Badge>}
                   </div>
 
                   <h3 className="mt-3 font-display text-body font-semibold leading-snug text-ink">
@@ -366,7 +366,7 @@ export default async function HomePage() {
                   </p>
 
                   <p className="mt-4 flex items-center justify-between border-t border-line pt-3 text-body-sm">
-                    <span className="font-medium text-seed-700">
+                    <span className="font-medium text-turquesa-800">
                       {course.is_free ? "Acceso sin costo" : formatSoles(course.price_cents)}
                     </span>
                     <span className="text-caption text-slate-ui">
@@ -386,7 +386,7 @@ export default async function HomePage() {
           <div className="overflow-hidden rounded-lg border border-line bg-white">
             <div className="grid items-center gap-8 lg:grid-cols-[1fr_320px]">
               <div className="p-8 sm:p-10">
-                <Badge tone="gold">
+                <Badge tone="neon">
                   <Sparkles className="size-3.5" />
                   Programa insignia
                 </Badge>
@@ -400,7 +400,7 @@ export default async function HomePage() {
 
                 <div className="mt-6 flex flex-wrap items-center gap-6">
                   <div>
-                    <p className="tabular font-display text-h2 font-bold leading-none text-sep-700">
+                    <p className="tabular font-display text-h2 font-bold leading-none text-acento">
                       {formatSoles(20000)}
                     </p>
                     <p className="mt-1 text-caption text-slate-ui">Tarifa social</p>
@@ -454,7 +454,7 @@ export default async function HomePage() {
                 body: "Mentor, community manager u organizador. Con certificación y carta de recomendación.",
                 cta: "Ver los 3 roles",
                 href: "/voluntariado",
-                tone: "gold" as const,
+                tone: "neon" as const,
               },
               {
                 icon: School,
@@ -462,7 +462,7 @@ export default async function HomePage() {
                 body: "Universitarios de tu región dictan talleres a tus estudiantes. Gratis.",
                 cta: "Inscribir colegio",
                 href: "/colegios",
-                tone: "seed" as const,
+                tone: "success" as const,
               },
               {
                 icon: Building2,
@@ -476,11 +476,11 @@ export default async function HomePage() {
               <Card key={c.title} interactive className="relative flex flex-col p-6">
                 <span
                   className={`flex size-11 items-center justify-center rounded-md ${
-                    c.tone === "gold"
-                      ? "bg-gold-50 text-gold-700"
-                      : c.tone === "seed"
-                        ? "bg-seed-50 text-seed-700"
-                        : "bg-sep-50 text-sep-700"
+                    c.tone === "neon"
+                      ? "bg-noche-900 text-cian-500"
+                      : c.tone === "success"
+                        ? "bg-turquesa-50 text-turquesa-800"
+                        : "bg-violeta-50 text-acento"
                   }`}
                 >
                   <c.icon className="size-5" />
@@ -544,7 +544,7 @@ export default async function HomePage() {
                     <span className="min-w-0 text-body-sm font-medium text-graphite">
                       {partner.name}
                     </span>
-                    <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-caption font-medium text-sep-700 ring-1 ring-inset ring-sep-100">
+                    <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-caption font-medium text-acento ring-1 ring-inset ring-violeta-100">
                       {partnerCategoryLabels[partner.category]}
                     </span>
                   </li>
@@ -587,7 +587,7 @@ export default async function HomePage() {
       </Section>
 
       {/* ═══ CTA FINAL ════════════════════════════════════ */}
-      <section className="theme-night aurora relative overflow-hidden border-b border-line">
+      <section className="theme-night halo relative overflow-hidden border-b border-line">
         <Container size="wide" className="relative py-20 text-center">
           <h2 className="mx-auto max-w-2xl font-display text-h1 font-bold leading-tight text-white sm:text-display">
             ¿Listos para sembrar el cambio?
@@ -597,7 +597,7 @@ export default async function HomePage() {
           </p>
 
           <div className="mt-9 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/registro" variant="gold" size="lg" prefetch>
+            <Button href="/registro" variant="neon" size="lg" prefetch>
               Crear cuenta gratis
               <ArrowRight className="size-4" />
             </Button>

@@ -16,12 +16,12 @@ export function AppLoadingSplash({ overlay = false }: { overlay?: boolean }) {
   if (overlay) {
     return (
       <div
-        className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-1 overflow-hidden bg-sep-100 lg:left-[232px]"
+        className="pointer-events-none fixed inset-x-0 top-0 z-[90] h-1 overflow-hidden bg-violeta-100 lg:left-[232px]"
         role="status"
         aria-live="polite"
         aria-label="Cargando la siguiente pantalla"
       >
-        <span className="block h-full w-2/3 animate-[navigation-progress_1.2s_ease-in-out_infinite] bg-sep-600" />
+        <span className="block h-full w-2/3 animate-[navigation-progress_1.2s_ease-in-out_infinite] bg-violeta-600" />
       </div>
     );
   }

@@ -37,7 +37,7 @@ export default async function EventosPage() {
 
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-14 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.86fr]">
           <SectionHeader
@@ -74,17 +74,17 @@ export default async function EventosPage() {
           ) : (
             <div className="grid gap-4 md:grid-cols-2">
               {upcoming.map((e) => (
-                <Card key={e.id} className="relative flex flex-col overflow-hidden border-sep-100 p-6">
-                  <span className="absolute inset-x-0 top-0 h-1 sep-gradient" />
+                <Card key={e.id} className="relative flex flex-col overflow-hidden border-violeta-100 p-6">
+                  <span className="absolute inset-x-0 top-0 h-1 grad-marca" />
                   <div className="flex flex-wrap items-center gap-2">
                     <Badge tone="brand">{kindLabels[e.kind ?? ""] ?? "Evento"}</Badge>
                     {e.is_online ? (
-                      <Badge tone="seed">
+                      <Badge tone="success">
                         <Video className="size-3.5" />
                         Virtual
                       </Badge>
                     ) : (
-                      <Badge tone="gold">
+                      <Badge tone="neon">
                         <MapPin className="size-3.5" />
                         Presencial
                       </Badge>

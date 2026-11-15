@@ -10,10 +10,10 @@ export default async function NotFound() {
     <main id="contenido" className="flex min-h-dvh items-center justify-center bg-surface-1 px-4 py-12">
       <div className="w-full max-w-lg text-center">
         <Logo className="mx-auto h-12" />
-        <span className="mx-auto mt-10 flex size-14 items-center justify-center rounded-lg bg-sep-50 text-sep-600">
+        <span className="mx-auto mt-10 flex size-14 items-center justify-center rounded-lg bg-violeta-50 text-acento">
           <Compass className="size-6" />
         </span>
-        <p className="mt-6 text-body-sm font-semibold tracking-eyebrow text-sep-600">Error 404</p>
+        <p className="mt-6 text-body-sm font-semibold tracking-eyebrow text-acento">Error 404</p>
         <h1 className="mt-2 font-display text-h1 font-semibold text-ink">Esta página no está aquí</h1>
         <p className="mx-auto mt-3 max-w-md text-body text-slate-ui">
           Puede que el enlace haya cambiado o ya no esté disponible. Puedes volver al inicio o explorar los programas de SEP.

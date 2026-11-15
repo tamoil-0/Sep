@@ -11,15 +11,15 @@ export default function GlobalError({ error, reset }: { error: Error & { digest?
   return (
     <html lang="es-PE">
       <body>
-        <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "24px", fontFamily: "system-ui, sans-serif", color: "#12101c" }}>
+        <main style={{ minHeight: "100vh", display: "grid", placeItems: "center", padding: "24px", fontFamily: "system-ui, sans-serif", color: "#212b38" }}>
           <div style={{ maxWidth: 520, textAlign: "center" }}>
-            <p style={{ color: "#2e0be8", fontWeight: 700 }}>SEP</p>
+            <p style={{ color: "#6257db", fontWeight: 700 }}>SEP</p>
             <h1 style={{ fontSize: 32, lineHeight: 1.2 }}>Algo interrumpió la plataforma</h1>
-            <p style={{ color: "#3a3550", lineHeight: 1.6 }}>No pudimos mostrar la plataforma completa. Intenta cargar de nuevo; si el problema continúa, vuelve al inicio.</p>
-            <button type="button" onClick={reset} style={{ minHeight: 44, marginTop: 16, border: 0, borderRadius: 8, padding: "0 20px", background: "#2e0be8", color: "white", fontWeight: 600, cursor: "pointer" }}>Cargar de nuevo</button>
-            <p style={{ marginTop: 20, color: "#6e6a85", fontSize: 14 }}>
+            <p style={{ color: "#4a5869", lineHeight: 1.6 }}>No pudimos mostrar la plataforma completa. Intenta cargar de nuevo; si el problema continúa, vuelve al inicio.</p>
+            <button type="button" onClick={reset} style={{ minHeight: 44, marginTop: 16, border: 0, borderRadius: 8, padding: "0 20px", background: "#6257db", color: "white", fontWeight: 600, cursor: "pointer" }}>Cargar de nuevo</button>
+            <p style={{ marginTop: 20, color: "#5b6878", fontSize: 14 }}>
               Si continúa, escribe a{" "}
-              <a href={`mailto:${siteConfig.contact.email}`} style={{ color: "#2e0be8", fontWeight: 600 }}>
+              <a href={`mailto:${siteConfig.contact.email}`} style={{ color: "#6257db", fontWeight: 600 }}>
                 soporte SEP
               </a>
               {error.digest ? ` e indica el código ${error.digest}` : " y cuéntanos qué intentabas hacer"}.

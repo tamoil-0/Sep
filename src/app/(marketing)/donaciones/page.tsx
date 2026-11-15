@@ -3,7 +3,7 @@ import { HeartHandshake, School, Sprout, Users } from "lucide-react";
 import {
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -38,13 +38,13 @@ const impact = [
 export default function DonacionesPage() {
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
-            <HeartHandshake className="size-9 text-gold-700" />
+            <HeartHandshake className="size-9 text-turquesa-800" />
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Tu donación llega a{" "}
-              <GoldUnderline>quien nadie está atendiendo</GoldUnderline>
+              <AccentUnderline>quien nadie está atendiendo</AccentUnderline>
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               El 100 % de lo que recibimos se usa en formación, mentoría y talleres en
@@ -67,7 +67,7 @@ export default function DonacionesPage() {
                 {impact.map((i) => (
                   <li key={i.amount}>
                     <Card className="flex items-start gap-4 p-5">
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
                         <i.icon className="size-5" />
                       </span>
                       <div>
@@ -83,7 +83,7 @@ export default function DonacionesPage() {
                 ))}
               </ul>
 
-              <Card className="mt-8 border-sep-200 bg-sep-50/40">
+              <Card className="mt-8 border-violeta-200 bg-violeta-50/40">
                 <h2 className="font-display text-body leading-snug font-semibold text-ink">
                   Transparencia
                 </h2>

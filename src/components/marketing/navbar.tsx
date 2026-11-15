@@ -90,8 +90,8 @@ export function Navbar() {
         // Barra noche: continúa los heros oscuros y, al bajar, se vuelve vidrio.
         "theme-night sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200",
         scrolled
-          ? "border-b border-line bg-night-950/95 backdrop-blur-xl"
-          : "border-b border-transparent bg-night-950",
+          ? "border-b border-line bg-noche-900/95 backdrop-blur-xl"
+          : "border-b border-transparent bg-noche-900",
       )}
     >
       <Container size="wide">
@@ -209,7 +209,7 @@ export function Navbar() {
           aria-modal="true"
           aria-labelledby="mobile-navigation-title"
           tabIndex={-1}
-          className="aurora fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line outline-none lg:hidden"
+          className="halo fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line outline-none lg:hidden"
         >
           <h2 id="mobile-navigation-title" className="sr-only">Navegación principal</h2>
           <Container className="py-6">
@@ -245,7 +245,7 @@ export function Navbar() {
             </ul>
 
             <div className="mt-6 flex flex-col gap-2.5 border-t border-line pt-6">
-              <Button href="/registro" variant="gradient" size="lg">
+              <Button href="/registro" variant="primary" size="lg">
                 Crear cuenta gratis
               </Button>
               <Button href="/login" variant="outline" size="lg">

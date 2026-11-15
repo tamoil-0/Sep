@@ -108,7 +108,7 @@ export function DataTable<T>({
 
 const STATUS_TONES: Record<
   string,
-  "brand" | "gold" | "seed" | "neutral" | "success" | "warning" | "danger"
+  "brand" | "neon" | "neutral" | "success" | "warning" | "danger"
 > = {
   // pagos y órdenes
   pendiente: "neutral",
@@ -178,7 +178,7 @@ export function PanelSection({
         {action && (
           <Link
             href={action.href}
-            className="inline-flex items-center gap-1 text-caption font-medium text-sep-600 hover:underline"
+            className="inline-flex items-center gap-1 text-caption font-medium text-acento hover:underline"
           >
             {action.label}
             <ArrowRight className="size-3" />
@@ -206,7 +206,7 @@ export function ComingSoon({
   return (
     <Card className="p-5 sm:p-8">
       <div className="mx-auto max-w-lg text-center">
-        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-sep-50 text-sep-600">
+        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-50 text-acento">
           {icon}
         </span>
         <h2 className="mt-5 text-h4 font-semibold text-ink">
@@ -223,7 +223,7 @@ export function ComingSoon({
                 key={b}
                 className="flex items-start gap-2.5 rounded-sm bg-surface-1 px-4 py-3 text-body-sm text-graphite"
               >
-                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold-500" />
+                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-violeta-500" />
                 {b}
               </li>
             ))}

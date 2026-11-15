@@ -67,8 +67,8 @@ export function AppSidebar({
         <Link href="/" aria-label="Inicio" className="inline-flex">
           <Logo className="h-11" variant="white" />
         </Link>
-        <p className="mt-4 flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-caption font-medium text-haze">
-          <span aria-hidden className="size-1.5 rounded-full bg-gold-500" />
+        <p className="mt-4 flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-caption font-medium text-noche-300">
+          <span aria-hidden className="size-1.5 rounded-full bg-cian-500" />
           Panel de {ROLE_META[routeRole].shortLabel.toLowerCase()}
         </p>
       </div>
@@ -90,8 +90,8 @@ export function AppSidebar({
                   className={cn(
                     "group/nav relative flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm transition-colors duration-150",
                     active
-                      ? "bg-white/10 font-medium text-white ring-1 ring-inset ring-white/10 [&_svg]:text-sep-300"
-                      : "text-haze hover:bg-white/5 hover:text-white",
+                      ? "bg-white/10 font-medium text-white ring-1 ring-inset ring-white/10 [&_svg]:text-violeta-300"
+                      : "text-noche-300 hover:bg-white/5 hover:text-white",
                   )}
                 >
                   <NavIcon name={item.icon} />
@@ -104,7 +104,7 @@ export function AppSidebar({
 
         {otherRoles.length > 0 && (
           <div className="mt-6 border-t border-white/10 pt-4">
-            <p className="px-3 pb-2 text-caption font-medium text-haze-muted">
+            <p className="px-3 pb-2 text-caption font-medium text-noche-400">
               Cambiar de panel
             </p>
             <ul className="space-y-0.5">
@@ -115,7 +115,7 @@ export function AppSidebar({
                     onPointerEnter={() => prepareNavigation(ROLE_META[r].home)}
                     onFocus={() => prepareNavigation(ROLE_META[r].home)}
                     onClick={() => startNavigation(ROLE_META[r].home)}
-                    className="flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm text-haze transition-colors hover:bg-white/5 hover:text-white"
+                    className="flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm text-noche-300 transition-colors hover:bg-white/5 hover:text-white"
                   >
                     <Icons.Repeat className="size-4" />
                     {ROLE_META[r].shortLabel}
@@ -135,14 +135,14 @@ export function AppSidebar({
           onClick={() => startNavigation("/cuenta")}
           className="flex min-h-control items-center gap-2.5 rounded-sm px-2 py-2 transition-colors hover:bg-white/8"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-caption font-semibold text-night-950">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-cian-500 text-caption font-semibold text-noche-900">
             {initials(fullName || email)}
           </span>
           <span className="min-w-0 flex-1">
             <span className="block truncate text-body-sm font-medium text-white">
               {fullName || "Mi cuenta"}
             </span>
-            <span className="block truncate text-caption text-haze-muted">{email}</span>
+            <span className="block truncate text-caption text-noche-400">{email}</span>
           </span>
         </Link>
 
@@ -156,7 +156,7 @@ export function AppSidebar({
   return (
     <>
       {/* Barra móvil */}
-      <header className="theme-night sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-night-950 px-4 lg:hidden">
+      <header className="theme-night sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-noche-900 px-4 lg:hidden">
         <Link href="/" aria-label="Inicio" className="flex min-h-control items-center">
           <Logo className="h-9" variant="white" />
         </Link>
@@ -186,7 +186,7 @@ export function AppSidebar({
         aria-labelledby="app-navigation-title"
         tabIndex={mobileOpen ? -1 : undefined}
         className={cn(
-          "aurora z-50 flex w-[min(88vw,320px)] shrink-0 flex-col py-5 shadow-elevated outline-none lg:w-[240px] lg:shadow-none",
+          "halo z-50 flex w-[min(88vw,320px)] shrink-0 flex-col py-5 shadow-elevated outline-none lg:w-[240px] lg:shadow-none",
           "fixed inset-y-0 left-0 transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}

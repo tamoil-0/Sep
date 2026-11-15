@@ -167,7 +167,7 @@ export function ApplicationBoard({
             {volunteers.map((v) => (
               <Card key={v.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                     {initials(v.name)}
                   </span>
 
@@ -179,7 +179,7 @@ export function ApplicationBoard({
                       <Badge tone={statusTone[v.status as keyof typeof statusTone] ?? "neutral"}>
                         {statusLabel[v.status] ?? v.status}
                       </Badge>
-                      <Badge tone="gold">{v.roleName}</Badge>
+                      <Badge tone="neon">{v.roleName}</Badge>
                       {!v.hasAccount && <Badge tone="warning">Sin cuenta</Badge>}
                     </div>
 
@@ -190,7 +190,7 @@ export function ApplicationBoard({
                     <button
                       type="button"
                       onClick={() => setExpanded(expanded === v.id ? null : v.id)}
-                      className="mt-2 text-caption font-medium text-sep-600 hover:underline"
+                      className="mt-2 text-caption font-medium text-acento hover:underline"
                     >
                       {expanded === v.id ? "Ocultar detalle" : "Ver postulación completa"}
                     </button>
@@ -298,7 +298,7 @@ export function ApplicationBoard({
             {speakers.map((s) => (
               <Card key={s.id} className="p-5">
                 <div className="flex flex-wrap items-start gap-4">
-                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                  <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                     {initials(s.name)}
                   </span>
 

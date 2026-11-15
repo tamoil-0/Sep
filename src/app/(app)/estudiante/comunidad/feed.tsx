@@ -41,7 +41,7 @@ function PostButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex min-h-control items-center gap-2 rounded-sm bg-violeta-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700 disabled:opacity-60"
     >
       {pending ? <Loader2 className="size-4 animate-spin" /> : <Send className="size-3.5" />}
       {pending ? "Publicando…" : "Publicar"}
@@ -113,7 +113,7 @@ export function Feed({
       <Card className="mb-5">
         <form ref={formRef} action={action}>
           <div className="flex gap-3">
-            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+            <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
               {initials(currentUserName)}
             </span>
             <div className="min-w-0 flex-1">
@@ -159,14 +159,14 @@ export function Feed({
           {posts.map((p) => (
             <Card key={p.id} className="p-5">
               {p.isPinned && (
-                <Badge tone="gold" className="mb-3">
+                <Badge tone="neon" className="mb-3">
                   <Pin className="size-3" />
                   Fijado por el equipo SEP
                 </Badge>
               )}
 
               <div className="flex gap-3">
-                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                <span className="flex size-9 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                   {initials(p.authorName)}
                 </span>
 
@@ -255,13 +255,13 @@ export function Feed({
                             placeholder="Escribe un comentario…"
                             maxLength={2000}
                             aria-label="Escribe un comentario"
-                            className="h-control flex-1 rounded-sm border border-line bg-white px-3 text-body-sm outline-none placeholder:text-mist focus:border-sep-400"
+                            className="h-control flex-1 rounded-sm border border-line bg-white px-3 text-body-sm outline-none placeholder:text-mist focus:border-violeta-400"
                           />
                           <button
                             type="button"
                             onClick={() => comment(p.id)}
                             disabled={busy === p.id || commentText.trim().length < 1}
-                            className="inline-flex size-control items-center justify-center rounded-sm bg-sep-600 text-white transition-colors hover:bg-sep-700 disabled:opacity-40"
+                            className="inline-flex size-control items-center justify-center rounded-sm bg-violeta-600 text-white transition-colors hover:bg-violeta-700 disabled:opacity-40"
                             aria-label="Enviar comentario"
                           >
                             {busy === p.id ? (

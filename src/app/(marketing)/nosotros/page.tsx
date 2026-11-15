@@ -4,7 +4,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -36,7 +36,7 @@ const team = [
 export default function NosotrosPage() {
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <div
           aria-hidden
           className="pointer-events-none absolute inset-0 opacity-[0.45]"
@@ -51,7 +51,7 @@ export default function NosotrosPage() {
             <Badge>Desde Casma, Áncash · 7 de abril de 2024</Badge>
             <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
               Llevamos la innovación al{" "}
-              <span className="text-sep-700">territorio del talento</span>, no al revés.
+              <span className="text-acento">territorio del talento</span>, no al revés.
             </h1>
             <p className="mt-4 text-body-lg leading-relaxed text-slate-ui">
               SEP es la primera organización peruana especializada en programas de
@@ -92,9 +92,9 @@ export default function NosotrosPage() {
             ].map((c) => (
               <Card
                 key={c.label}
-                className={c.highlight ? "border-gold-500/35 bg-gold-50/50" : ""}
+                className={c.highlight ? "border-turquesa-200 bg-turquesa-50/60" : ""}
               >
-                <p className="text-body-sm font-semibold tracking-eyebrow text-sep-600">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-acento">
                   {c.label}
                 </p>
                 <p className="mt-3.5 text-body leading-relaxed text-graphite">
@@ -114,14 +114,14 @@ export default function NosotrosPage() {
             title={
               <>
                 El talento está en regiones. Las{" "}
-                <GoldUnderline>oportunidades</GoldUnderline> se quedan en Lima.
+                <AccentUnderline>oportunidades</AccentUnderline> se quedan en Lima.
               </>
             }
           />
           <div className="mt-12 grid gap-5 md:grid-cols-3">
             {problemStats.map((s) => (
               <Card key={s.title}>
-                <p className="tabular font-display text-display font-bold leading-none text-sep-700">
+                <p className="tabular font-display text-display font-bold leading-none text-acento">
                   {s.figure}
                 </p>
                 <h3 className="mt-5 text-body-lg leading-snug font-semibold text-ink">{s.title}</h3>
@@ -147,7 +147,7 @@ export default function NosotrosPage() {
             {impactChain.map((node, i) => (
               <li key={node.step} className="relative">
                 <Card className="h-full">
-                  <span className="tabular text-caption font-semibold tracking-eyebrow text-gold-700">
+                  <span className="tabular text-caption font-semibold tracking-eyebrow text-turquesa-800">
                     0{i + 1}
                   </span>
                   <h3 className="mt-3 font-display text-body-lg leading-snug font-semibold text-ink">
@@ -160,7 +160,7 @@ export default function NosotrosPage() {
                 {i < impactChain.length - 1 && (
                   <ArrowRight
                     aria-hidden
-                    className="absolute -right-3.5 top-1/2 hidden size-6 -translate-y-1/2 text-gold-500 md:block"
+                    className="absolute -right-3.5 top-1/2 hidden size-6 -translate-y-1/2 text-violeta-500 md:block"
                   />
                 )}
               </li>
@@ -181,7 +181,7 @@ export default function NosotrosPage() {
             {team.map((m) => (
               <li key={m.name}>
                 <Card className="flex items-center gap-4 p-5">
-                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-sep-700 text-body-sm font-semibold text-white">
+                  <span className="flex size-12 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-body-sm font-semibold text-white">
                     {initials(m.name)}
                   </span>
                   <div className="min-w-0">
@@ -219,14 +219,14 @@ export default function NosotrosPage() {
       </Section>
 
       {/* Cierre */}
-      <section className="sep-gradient">
+      <section className="theme-night halo">
         <Container size="wide" className="py-16 text-center">
-          <Sprout className="mx-auto size-8 text-gold-500" />
+          <Sprout className="mx-auto size-8 text-cian-500" />
           <h2 className="mx-auto mt-5 max-w-xl font-display text-h2 font-bold leading-tight text-white">
             ¿Quieres construir esto con nosotros?
           </h2>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href="/voluntariado" variant="gold" size="lg">
+            <Button href="/voluntariado" variant="neon" size="lg">
               Ser voluntario
             </Button>
             <Button href={siteConfig.contact.whatsappUrl} variant="outline-white" size="lg">

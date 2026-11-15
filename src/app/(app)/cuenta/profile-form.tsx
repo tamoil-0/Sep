@@ -14,7 +14,7 @@ function SaveButton() {
     <button
       type="submit"
       disabled={pending}
-      className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-6 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+      className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-violeta-600 px-6 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700 disabled:opacity-60"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
       {pending ? "Guardando cambios…" : "Guardar cambios"}
@@ -87,7 +87,7 @@ export function ProfileForm({
         <legend className="mb-2 text-body-sm font-medium text-graphite">Áreas de interés</legend>
         <div className="flex flex-wrap gap-2">
           {INTEREST_AREAS.map((a) => (
-            <label key={a} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700">
+            <label key={a} className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-violeta-500 has-[:checked]:bg-violeta-50 has-[:checked]:text-acento">
               <input type="checkbox" name="interests" value={a} defaultChecked={defaults.interests.includes(a)} className="sr-only" />
               {a}
             </label>

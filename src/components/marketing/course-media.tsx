@@ -55,7 +55,7 @@ export function CourseMedia({
     return (
       <figure
         className={cn(
-          "group relative isolate overflow-hidden rounded-md bg-sep-950",
+          "group relative isolate overflow-hidden rounded-md bg-noche-950",
           className,
         )}
       >
@@ -68,7 +68,7 @@ export function CourseMedia({
           className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
           style={{ objectPosition: mappedPhoto?.position }}
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/45 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noche-950/45 via-transparent to-transparent" />
       </figure>
     );
   }
@@ -78,7 +78,7 @@ export function CourseMedia({
       role="img"
       aria-label={`Portada visual SEP para ${title}`}
       className={cn(
-        "relative isolate overflow-hidden rounded-md sep-gradient text-white",
+        "theme-night halo relative isolate overflow-hidden rounded-md text-white",
         className,
       )}
     >
@@ -93,7 +93,7 @@ export function CourseMedia({
       />
       <div aria-hidden className="absolute -right-12 -top-16 size-44 rounded-full border-[24px] border-white/10" />
       <div className="relative flex h-full min-h-36 flex-col justify-between p-5">
-        <span className="text-body-sm font-semibold tracking-eyebrow text-gold-500">
+        <span className="text-body-sm font-semibold tracking-eyebrow text-cian-500">
           {category ?? "Programa SEP"}
         </span>
         <div>

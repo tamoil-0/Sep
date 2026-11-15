@@ -67,7 +67,7 @@ export default async function MisCursosPage() {
                             {e.course?.subtitle}
                           </p>
                         </div>
-                        <span className="tabular shrink-0 text-body-lg font-semibold text-sep-600">
+                        <span className="tabular shrink-0 text-body-lg font-semibold text-acento">
                           {e.progress_pct}%
                         </span>
                       </div>

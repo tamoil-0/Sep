@@ -4,7 +4,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -32,14 +32,14 @@ export default async function ColegiosPage() {
 
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">
-            <Badge tone="seed">100 % gratuito para el colegio</Badge>
+            <Badge tone="success">100 % gratuito para el colegio</Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Conectamos colegios con{" "}
-              <GoldUnderline>universitarios de su región</GoldUnderline>
+              <AccentUnderline>universitarios de su región</AccentUnderline>
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Universitarios formados por SEP dictan talleres de innovación social a tus
@@ -63,7 +63,7 @@ export default async function ColegiosPage() {
               [String(regions.size), "Regiones activas"],
             ].map(([value, label]) => (
               <div key={label}>
-                <dd className="tabular font-display text-h2 font-semibold leading-none text-sep-700">
+                <dd className="tabular font-display text-h2 font-semibold leading-none text-acento">
                   {value}
                 </dd>
                 <dt className="mt-2 text-body-sm text-slate-ui">{label}</dt>
@@ -86,7 +86,7 @@ export default async function ColegiosPage() {
               <ul className="mt-10 space-y-5">
                 {schoolBenefits.map((b, i) => (
                   <li key={b.title} className="flex gap-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
+                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                       {i + 1}
                     </span>
                     <div>
@@ -109,7 +109,7 @@ export default async function ColegiosPage() {
                 <ol className="mt-5 grid gap-4 sm:grid-cols-2">
                   {schoolProcess.map((s) => (
                     <li key={s.step} className="rounded-md border border-line p-5">
-                      <span className="tabular text-caption font-semibold text-gold-700">
+                      <span className="tabular text-caption font-semibold text-turquesa-800">
                         Paso {s.step}
                       </span>
                       <p className="mt-2 text-body-sm font-medium text-ink">
@@ -135,7 +135,7 @@ export default async function ColegiosPage() {
                         key={s.id}
                         className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3"
                       >
-                        <School className="size-4 shrink-0 text-seed-700" />
+                        <School className="size-4 shrink-0 text-turquesa-800" />
                         <div className="min-w-0">
                           <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
                           <p className="truncate text-caption text-slate-ui">
@@ -155,7 +155,7 @@ export default async function ColegiosPage() {
                 <h2 className="font-display text-h4 font-semibold text-ink">
                   Inscribe tu colegio
                 </h2>
-                <Badge tone="seed">Gratis</Badge>
+                <Badge tone="success">Gratis</Badge>
               </div>
               <p className="mt-1.5 text-body-sm text-slate-ui">
                 Te contactamos en menos de 72 horas.
@@ -172,7 +172,7 @@ export default async function ColegiosPage() {
       <Section tone="muted" className="py-14">
         <Container size="narrow">
           <Card className="text-center">
-            <Check className="mx-auto size-8 text-seed-700" />
+            <Check className="mx-auto size-8 text-turquesa-800" />
             <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
               Sin letra chica
             </h2>

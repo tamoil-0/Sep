@@ -29,9 +29,9 @@ type Answer = string | string[];
 type Answers = Record<number, Answer>;
 
 const MODULES = [
-  { title: "Tu realidad", color: "bg-sep-600" },
-  { title: "Lo que buscas", color: "bg-gold-500" },
-  { title: "Tu impacto", color: "bg-seed-700" },
+  { title: "Tu realidad", color: "bg-violeta-600" },
+  { title: "Lo que buscas", color: "bg-violeta-300" },
+  { title: "Tu impacto", color: "bg-turquesa-800" },
 ] as const;
 
 function answered(value: Answer | undefined) {
@@ -136,12 +136,12 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
   if (stage === "done") {
     return (
       <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-4 py-10 sm:px-6">
-        <div aria-hidden className="absolute inset-0 sep-gradient opacity-[0.06]" />
+        <div aria-hidden className="absolute inset-0 grad-marca opacity-[0.06]" />
         <div className="relative w-full max-w-lg rounded-lg border border-line bg-white px-6 py-10 text-center shadow-elevated sm:px-10">
-          <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-seed-700 text-white ">
+          <span className="mx-auto flex size-16 items-center justify-center rounded-lg bg-turquesa-800 text-white ">
             <PartyPopper className="size-8" />
           </span>
-          <p className="mt-6 text-body-sm font-semibold tracking-eyebrow text-seed-700">
+          <p className="mt-6 text-body-sm font-semibold tracking-eyebrow text-turquesa-800">
             Participación registrada
           </p>
           <h1 className="mt-2 font-display text-h2 font-bold leading-tight text-ink sm:text-h1">
@@ -150,7 +150,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
           <p className="mx-auto mt-4 max-w-sm text-body leading-relaxed text-slate-ui">
             Tu voz nos ayuda a construir oportunidades que sí respondan a lo que los jóvenes necesitan.
           </p>
-          <div className="mt-7 rounded-md bg-sep-50 px-4 py-4 text-body-sm leading-relaxed text-sep-800">
+          <div className="mt-7 rounded-md bg-violeta-50 px-4 py-4 text-body-sm leading-relaxed text-acento">
             Ya guardamos tus 15 respuestas. Puedes devolver el equipo al personal de SEP.
           </div>
           <Link
@@ -167,14 +167,14 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
   if (stage === "welcome") {
     return (
       <div className="relative min-h-dvh overflow-hidden px-4 py-5 sm:flex sm:items-center sm:justify-center sm:px-6 sm:py-10">
-        <div aria-hidden className="absolute inset-x-0 top-0 h-[48%] sep-gradient" />
+        <div aria-hidden className="absolute inset-x-0 top-0 h-[48%] grad-marca" />
         <div className="relative mx-auto w-full max-w-lg overflow-hidden rounded-lg border border-white/20 bg-white shadow-elevated">
-          <div className="sep-gradient px-6 pb-8 pt-6 text-white sm:px-9 sm:pt-8">
+          <div className="theme-night halo px-6 pb-8 pt-6 text-white sm:px-9 sm:pt-8">
             <Logo variant="white" className="h-14" />
-            <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-gold-500 text-night-950 ">
+            <span className="mt-8 flex size-12 items-center justify-center rounded-lg bg-cian-500 text-noche-900 ">
               <HeartHandshake className="size-6" />
             </span>
-            <p className="mt-5 text-body-sm font-semibold tracking-eyebrow text-gold-500">
+            <p className="mt-5 text-body-sm font-semibold tracking-eyebrow text-cian-500">
               Tu voz importa
             </p>
             <h1 className="mt-2 font-display text-h2 font-bold leading-[1.08] sm:text-h1">
@@ -201,7 +201,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               autoFocus
               maxLength={120}
               placeholder="Tu nombre y apellido"
-              className="mt-3 h-control-lg w-full rounded-md border border-line bg-white px-4 text-body text-ink outline-none transition focus:border-sep-500 focus:ring-4 focus:ring-sep-100"
+              className="mt-3 h-control-lg w-full rounded-md border border-line bg-white px-4 text-body text-ink outline-none transition focus:border-violeta-500 focus:ring-4 focus:ring-violeta-100"
             />
             <div className="absolute -left-[9999px]" aria-hidden="true">
               <label htmlFor="company-website">Sitio web</label>
@@ -218,7 +218,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
 
             <button
               type="submit"
-              className="mt-5 inline-flex h-control-lg w-full items-center justify-center gap-2 rounded-md sep-gradient px-5 text-body font-semibold text-white  transition-transform active:scale-[.99]"
+              className="mt-5 inline-flex h-control-lg w-full items-center justify-center gap-2 rounded-md bg-violeta-600 hover:bg-violeta-700 px-5 text-body font-semibold text-white  transition-transform active:scale-[.99]"
             >
               Comenzar ahora <ArrowRight className="size-5" />
             </button>
@@ -227,7 +227,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
             </p>
             <p className="mt-2 text-center text-caption leading-relaxed text-mist">
               Al continuar aceptas nuestro{" "}
-              <Link href="/legal/privacidad" target="_blank" className="text-sep-600 underline underline-offset-2">
+              <Link href="/legal/privacidad" target="_blank" className="text-acento underline underline-offset-2">
                 aviso de privacidad
               </Link>
               .
@@ -254,7 +254,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
         </div>
         <div className="mt-3 h-2 overflow-hidden rounded-full bg-surface-2">
           <div
-            className="h-full rounded-full bg-sep-700 transition-[width] duration-300"
+            className="h-full rounded-full bg-violeta-700 transition-[width] duration-300"
             style={{ width: `${Math.max(3, progress)}%` }}
           />
         </div>
@@ -269,7 +269,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
 
       <section className="flex flex-1 flex-col px-4 py-6 sm:px-8 sm:py-8">
         {current.isKey && (
-          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-gold-50 px-2.5 py-1 text-caption font-semibold text-gold-700">
+          <span className="mb-3 inline-flex w-fit items-center gap-1.5 rounded-full bg-turquesa-50 px-2.5 py-1 text-caption font-semibold text-turquesa-800">
             <Sparkles className="size-3.5" /> Pregunta clave
           </span>
         )}
@@ -304,8 +304,8 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
                 className={cn(
                   "group flex min-h-14 w-full items-center gap-3 rounded-md border px-4 py-3 text-left text-body-sm leading-snug transition-colors active:scale-[.99]",
                   selected
-                    ? "border-sep-500 bg-sep-50 text-sep-800 "
-                    : "border-line bg-white text-graphite hover:border-sep-300 hover:bg-surface-1",
+                    ? "border-violeta-500 bg-violeta-50 text-acento "
+                    : "border-line bg-white text-graphite hover:border-violeta-300 hover:bg-surface-1",
                   current.inputType === "scale_1_5" && "sm:min-h-24 sm:flex-col sm:justify-center sm:text-center",
                 )}
               >
@@ -313,7 +313,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
                   className={cn(
                     "flex size-6 shrink-0 items-center justify-center border-2",
                     multiple ? "rounded-sm" : "rounded-full",
-                    selected ? "border-sep-600 bg-sep-600 text-white" : "border-line bg-white",
+                    selected ? "border-violeta-600 bg-violeta-600 text-white" : "border-line bg-white",
                   )}
                 >
                   {selected && <Check className="size-3.5" strokeWidth={3} />}
@@ -347,7 +347,7 @@ export function FairDiagnostic({ questions }: { questions: FairQuestion[] }) {
               type="button"
               onClick={() => (index === questions.length - 1 ? finish() : goTo(index + 1))}
               disabled={!answered(currentAnswer) || busy}
-              className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
+              className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-violeta-600 px-5 text-body-sm font-semibold text-white  disabled:cursor-not-allowed disabled:opacity-40"
             >
               {busy ? (
                 <><Loader2 className="size-4 animate-spin" /> Guardando</>

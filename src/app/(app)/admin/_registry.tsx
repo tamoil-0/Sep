@@ -49,7 +49,7 @@ export interface AdminView {
 
 const person = (name?: string | null, sub?: string | null) => (
   <div className="flex items-center gap-2.5">
-    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+    <span className="flex size-7 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
       {initials(name ?? "?")}
     </span>
     <div className="min-w-0">
@@ -113,7 +113,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         key: "p",
         header: "Precio",
         render: (c: AdminRow) =>
-          c["is_free"] ? <span className="text-seed-700">Gratis</span> : formatSoles(c["price_cents"]),
+          c["is_free"] ? <span className="text-turquesa-800">Gratis</span> : formatSoles(c["price_cents"]),
       },
       { key: "e", header: "Inscritos", numeric: true, render: (c: AdminRow) => c["stat"]?.enrollments ?? 0 },
       { key: "r", header: "Completan", numeric: true, render: (c: AdminRow) => `${c["stat"]?.completion_rate ?? 0}%` },
@@ -228,7 +228,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
               href={`${siteConfig.url}/verificar/${c["verification_code"]}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="tabular text-caption text-sep-600 hover:underline"
+              className="tabular text-caption text-acento hover:underline"
             >
               {c["verification_code"]}
             </a>
@@ -348,7 +348,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
         key: "m",
         header: "Modalidad",
         render: (e: AdminRow) =>
-          e["is_online"] ? <Badge tone="seed">Virtual</Badge> : <Badge tone="gold">Presencial</Badge>,
+          e["is_online"] ? <Badge tone="success">Virtual</Badge> : <Badge tone="neon">Presencial</Badge>,
       },
       {
         key: "p",
@@ -514,7 +514,7 @@ export const ADMIN_VIEWS: Record<string, AdminView> = {
           p["is_hidden"] ? (
             <Badge tone="danger">Oculta</Badge>
           ) : p["is_pinned"] ? (
-            <Badge tone="gold">Fijada</Badge>
+            <Badge tone="neon">Fijada</Badge>
           ) : (
             <Badge tone="success">Visible</Badge>
           ),

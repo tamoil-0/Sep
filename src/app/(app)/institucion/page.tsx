@@ -150,9 +150,9 @@ export default async function InstitucionPage() {
       </section>
 
       <section className="mt-8">
-        <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
+        <Card className="flex flex-wrap items-center justify-between gap-5 border-violeta-200 bg-violeta-50/40 p-6">
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-sep-600 ring-1 ring-inset ring-line">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-acento ring-1 ring-inset ring-line">
               <ChartNoAxesCombined className="size-5" />
             </span>
             <div>

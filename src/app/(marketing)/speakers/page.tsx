@@ -5,7 +5,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -44,12 +44,12 @@ export default async function SpeakersPage() {
 
   return (
     <>
-      <section className="theme-night aurora relative overflow-hidden">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
             <Badge tone="brand">{count ?? 0} speakers en la red</Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
-              ¿Tienes algo que <GoldUnderline>contar</GoldUnderline>?
+              ¿Tienes algo que <AccentUnderline>contar</AccentUnderline>?
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               ¿Eres especialista en metodologías ágiles, innovación social o un referente
@@ -77,7 +77,7 @@ export default async function SpeakersPage() {
               },
             ].map((c) => (
               <Card key={c.title} className="p-6">
-                <c.icon className="size-5 text-sep-600" />
+                <c.icon className="size-5 text-acento" />
                 <h2 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {c.title}
                 </h2>
@@ -105,7 +105,7 @@ export default async function SpeakersPage() {
                       <li key={s.id}>
                         <Card className="flex h-full flex-col p-5">
                           <div className="flex items-center gap-3">
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                               {initials(s.full_name)}
                             </span>
                             <div className="min-w-0">
@@ -121,7 +121,7 @@ export default async function SpeakersPage() {
                           </div>
 
                           {s.expertise && (
-                            <p className="mt-3 text-caption font-medium text-sep-600">
+                            <p className="mt-3 text-caption font-medium text-acento">
                               {s.expertise}
                             </p>
                           )}
@@ -170,7 +170,7 @@ export default async function SpeakersPage() {
                 <h2 className="font-display text-h4 font-semibold text-ink">
                   Únete a la red
                 </h2>
-                <Badge tone="seed">Gratuito</Badge>
+                <Badge tone="success">Gratuito</Badge>
               </div>
               <p className="mt-1.5 text-body-sm text-slate-ui">
                 Cuéntanos tu historia. Revisamos cada perfil.

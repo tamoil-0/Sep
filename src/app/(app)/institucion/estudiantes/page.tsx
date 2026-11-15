@@ -73,7 +73,7 @@ export default async function InstitucionEstudiantesPage() {
         <Kpi label="Talleres" value={workshops?.length ?? 0} />
       </KpiGrid>
 
-      <Card className="mt-8 border-sep-200 bg-sep-50/40">
+      <Card className="mt-8 border-violeta-200 bg-violeta-50/40">
         <p className="text-body-sm leading-relaxed text-graphite">
           <strong className="font-medium text-ink">Sobre la privacidad:</strong> son menores
           de edad, así que SEP no crea cuentas para ellos ni guarda más que su nombre y grado,
@@ -106,7 +106,7 @@ export default async function InstitucionEstudiantesPage() {
                       </p>
                     </div>
                     {a.certificate_id && <Badge tone="success">Constancia</Badge>}
-                    {a.attended ? <Badge tone="seed">Asistió</Badge> : <Badge tone="neutral">Faltó</Badge>}
+                    {a.attended ? <Badge tone="success">Asistió</Badge> : <Badge tone="neutral">Faltó</Badge>}
                   </li>
                 );
               })}

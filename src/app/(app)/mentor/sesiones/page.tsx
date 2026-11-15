@@ -96,7 +96,7 @@ export default async function MentorSesionesPage() {
                 const c = Array.isArray(s.courses) ? s.courses[0] : s.courses;
                 return (
                   <li key={s.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
+                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                       {s.number}
                     </span>
                     <div className="min-w-0 flex-1">
@@ -110,7 +110,7 @@ export default async function MentorSesionesPage() {
                         href={s.meet_url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-body-sm font-medium text-white hover:bg-sep-700"
+                        className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-violeta-600 px-3.5 text-body-sm font-medium text-white hover:bg-violeta-700"
                       >
                         <Video className="size-3.5" />
                         Unirme

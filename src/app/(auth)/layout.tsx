@@ -19,7 +19,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
   return (
     <div className="grid min-h-dvh bg-white lg:grid-cols-[minmax(340px,0.78fr)_minmax(520px,1.22fr)]">
       {/* Panel de marca */}
-      <aside className="relative hidden min-h-dvh overflow-hidden aurora lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-12">
+      <aside className="relative hidden min-h-dvh overflow-hidden halo lg:sticky lg:top-0 lg:flex lg:max-h-dvh lg:flex-col lg:justify-between lg:p-10 xl:p-12">
         <Link href="/" className="relative">
           <Logo className="h-14" variant="white" />
         </Link>
@@ -28,13 +28,13 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <h2 className="max-w-sm font-display text-h2 font-semibold text-white">
             El talento está en regiones.
             <br />
-            <span className="text-gold-500">Aquí empieza tu camino.</span>
+            <span className="text-cian-500">Aquí empieza tu camino.</span>
           </h2>
 
           <ul className="mt-7 space-y-3">
             {highlights.map((h) => (
               <li key={h.text} className="flex items-center gap-3 text-white/80">
-                <h.icon className="size-4 shrink-0 text-gold-500" />
+                <h.icon className="size-4 shrink-0 text-cian-500" />
                 <span className="text-body-sm">{h.text}</span>
               </li>
             ))}

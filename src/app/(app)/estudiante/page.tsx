@@ -76,7 +76,7 @@ export default async function EstudiantePage() {
         }
         action={
           <Badge tone="brand">
-            <span className="size-1.5 rounded-full bg-seed-700" />
+            <span className="size-1.5 rounded-full bg-turquesa-800" />
             Plan Semilla
           </Badge>
         }
@@ -146,7 +146,7 @@ export default async function EstudiantePage() {
                         {course?.subtitle}
                       </p>
                     </div>
-                    <span className="tabular shrink-0 text-body-sm font-semibold text-sep-600">
+                    <span className="tabular shrink-0 text-body-sm font-semibold text-acento">
                       {e.progress_pct}%
                     </span>
                   </div>
@@ -188,7 +188,7 @@ export default async function EstudiantePage() {
             </div>
             <Link
               href="/estudiante/comunidad"
-              className="relative text-caption font-medium text-sep-600 hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
+              className="relative text-caption font-medium text-acento hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
             >
               Ver todo
             </Link>
@@ -208,7 +208,7 @@ export default async function EstudiantePage() {
               },
             ].map((p) => (
               <li key={p.name} className="flex gap-3">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                   {initials(p.name)}
                 </span>
                 <div className="min-w-0">
@@ -238,7 +238,7 @@ export default async function EstudiantePage() {
                   <h3 className="text-body-sm leading-snug font-semibold text-ink">
                     {c.name}
                   </h3>
-                  {c.recommended && <Badge tone="gold">Recomendado</Badge>}
+                  {c.recommended && <Badge tone="neon">Recomendado</Badge>}
                 </div>
                 <p className="mt-1.5 text-caption leading-relaxed text-slate-ui">
                   {c.description}

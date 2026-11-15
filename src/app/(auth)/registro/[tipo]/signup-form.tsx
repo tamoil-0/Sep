@@ -42,7 +42,7 @@ function SubmitButton() {
     <Button
       type="submit"
       disabled={pending}
-      variant="gradient"
+      variant="primary"
       className="w-full"
     >
       {pending && <Loader2 className="size-4 animate-spin" />}
@@ -192,7 +192,7 @@ export function SignupForm({ role }: { role: SignupRole }) {
               {INTEREST_AREAS.map((area) => (
                 <label
                   key={area}
-                  className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-sep-500 has-[:checked]:bg-sep-50 has-[:checked]:text-sep-700"
+                  className="cursor-pointer rounded-full border border-line px-3 py-1.5 text-caption text-graphite transition-colors has-[:checked]:border-violeta-500 has-[:checked]:bg-violeta-50 has-[:checked]:text-acento"
                 >
                   <input type="checkbox" name="interests" value={area} className="sr-only" />
                   {area}
@@ -350,11 +350,11 @@ export function SignupForm({ role }: { role: SignupRole }) {
           label={
             <>
               Acepto los{" "}
-              <Link href="/legal/terminos" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+              <Link href="/legal/terminos" className="text-acento underline underline-offset-4 hover:text-acento">
                 términos y condiciones
               </Link>{" "}
               y la{" "}
-              <Link href="/legal/privacidad" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+              <Link href="/legal/privacidad" className="text-acento underline underline-offset-4 hover:text-acento">
                 política de privacidad
               </Link>
               .

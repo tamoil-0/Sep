@@ -41,11 +41,11 @@ export default async function DocenteProgramaPage() {
       <Card>
         <div className="flex flex-wrap items-center gap-2">
           {course.status === "disponible" ? (
-            <Badge tone="seed">Disponible</Badge>
+            <Badge tone="success">Disponible</Badge>
           ) : (
             <Badge tone="neutral">Próximamente</Badge>
           )}
-          <Badge tone="gold">Para docentes</Badge>
+          <Badge tone="neon">Para docentes</Badge>
           <Badge tone="neutral">{course.total_hours} horas</Badge>
         </div>
 
@@ -77,7 +77,7 @@ export default async function DocenteProgramaPage() {
             <ul className="divide-y divide-line">
               {sessions.map((s) => (
                 <li key={s.id} className="flex gap-4 p-5">
-                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
+                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                     {s.number}
                   </span>
                   <div>
