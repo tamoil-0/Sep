@@ -6,7 +6,6 @@ import {
   GraduationCap,
   Presentation,
   School,
-  Sprout,
   Sparkles,
   Users,
 } from "lucide-react";
@@ -16,7 +15,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Eyebrow,
   Skeleton,
   Section,
@@ -136,59 +134,82 @@ export default function HomePage() {
       {/* ═══ 4 · PÚBLICOS ═════════════════════════════════════════════════ */}
       <Section id="publicos" tone="muted">
         <Container size="wide">
-          <SectionHeader
-            eyebrow="Una comunidad, distintas rutas"
-            title="¿Para quién es SEP?"
-            description="Impulsamos el emprendimiento desde la etapa escolar hasta la universidad y articulamos a quienes hacen posible ese recorrido."
-            align="center"
-          />
+          <div className="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16">
+            <div className="lg:sticky lg:top-28 lg:self-start">
+              <SectionHeader
+                eyebrow="Una comunidad, distintas rutas"
+                title="¿Para quién es SEP?"
+                description="Del colegio a la universidad, y con quienes hacen posible ese camino. Elige tu punto de partida."
+              />
+            </div>
 
-          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              {
-                icon: GraduationCap,
-                title: "Jóvenes y universitarios",
-                body: "Cursos, mentoría, voluntariado y programas para convertir una idea en un proyecto de impacto.",
-                cta: "Explorar cursos",
-                href: "/cursos",
-              },
-              {
-                icon: School,
-                title: "Escolares",
-                body: "Talleres prácticos de innovación social que llegan a sus aulas a través de la red de colegios SEP.",
-                cta: "Conocer la red",
-                href: "/colegios",
-              },
-              {
-                icon: Presentation,
-                title: "Docentes y colegios",
-                body: "Formación, recursos y facilitadores de su propia región para fortalecer experiencias de aprendizaje.",
-                cta: "Ver programa docente",
-                href: "/docentes",
-              },
-              {
-                icon: Building2,
-                title: "Empresas y aliados",
-                body: "Programas de impacto juvenil con alcance regional, alianzas y resultados verificables.",
-                cta: "Crear una alianza",
-                href: "/empresas",
-              },
-            ].map((audience) => (
-              <Card key={audience.title} interactive className="relative flex h-full flex-col p-6">
-                <span className="flex size-11 items-center justify-center rounded-md bg-violeta-50 text-acento">
-                  <audience.icon className="size-5" />
-                </span>
-                <h3 className="mt-5 font-display text-body-lg leading-snug font-semibold text-ink">
-                  {audience.title}
-                </h3>
-                <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
-                  {audience.body}
-                </p>
-                <ArrowLink href={audience.href} stretched className="mt-5">
-                  {audience.cta}
-                </ArrowLink>
-              </Card>
-            ))}
+            {/* Filas-enlace: cada público es un solo clic, sin tarjetas repetidas. */}
+            <ul className="divide-y divide-line border-y border-line">
+              {[
+                {
+                  icon: GraduationCap,
+                  title: "Jóvenes y universitarios",
+                  body: "Cursos gratuitos, mentoría, voluntariado y programas para llevar una idea a un proyecto con impacto.",
+                  cta: "Explorar cursos",
+                  href: "/cursos",
+                  tono: "bg-violeta-50 text-acento",
+                },
+                {
+                  icon: School,
+                  title: "Escolares",
+                  body: "Talleres de innovación social en su propia aula, dictados por universitarios de su región.",
+                  cta: "Conocer la red de colegios",
+                  href: "/colegios",
+                  tono: "bg-turquesa-50 text-turquesa-800",
+                },
+                {
+                  icon: Presentation,
+                  title: "Docentes y colegios",
+                  body: "Formación en metodologías ágiles, recursos para el aula y facilitadores cercanos.",
+                  cta: "Ver el programa docente",
+                  href: "/docentes",
+                  tono: "bg-noche-900 text-cian-500",
+                },
+                {
+                  icon: Users,
+                  title: "Voluntarios",
+                  body: "Mentor, community manager u organizador de eventos. Con certificado y carta de recomendación.",
+                  cta: "Ver los 3 roles",
+                  href: "/voluntariado",
+                  tono: "bg-turquesa-50 text-turquesa-800",
+                },
+                {
+                  icon: Building2,
+                  title: "Empresas y aliados",
+                  body: "Programas de impacto juvenil en regiones, con métricas que tu directorio puede verificar.",
+                  cta: "Crear una alianza",
+                  href: "/empresas",
+                  tono: "bg-violeta-50 text-acento",
+                },
+              ].map((audience) => (
+                <li key={audience.title}>
+                  <Link
+                    href={audience.href}
+                    className="group flex items-start gap-5 px-2 py-6 transition-colors duration-300 hover:bg-surface-1 sm:items-center sm:px-4"
+                  >
+                    <span className={`flex size-12 shrink-0 items-center justify-center rounded-full ${audience.tono}`}>
+                      <audience.icon className="size-5" strokeWidth={1.75} aria-hidden />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block font-display text-h4 font-semibold text-ink transition-colors duration-300 group-hover:text-acento">
+                        {audience.title}
+                      </span>
+                      <span className="mt-1 block max-w-prose text-body-sm leading-relaxed text-slate-ui">{audience.body}</span>
+                      <span className="mt-2 block text-body-sm font-medium text-acento sm:hidden">{audience.cta}</span>
+                    </span>
+                    <span className="hidden shrink-0 items-center gap-2 text-body-sm font-medium text-acento sm:flex">
+                      {audience.cta}
+                      <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                    </span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
           </div>
         </Container>
       </Section>
@@ -202,7 +223,7 @@ export default function HomePage() {
               <>
                 El talento está en regiones.
                 <br />
-                Las <AccentUnderline>oportunidades</AccentUnderline> se quedan en Lima.
+                Las oportunidades se quedan en Lima.
               </>
             }
           />
@@ -248,40 +269,47 @@ export default function HomePage() {
         </Container>
       </Section>
 
+      {/* Cómo funciona: la semilla de marca ES el diagrama (1 → 3 → 9). */}
       <Section>
         <Container size="wide">
-          <SectionHeader
-            eyebrow="Cómo funciona"
-            title="Formamos a quien formará a diez más"
-            description="Los universitarios que capacitamos vuelven como mentores a los colegios de su propia comunidad."
-            align="center"
-          />
-
-          {/* Cadena de 4 etapas: es una secuencia real, por eso va numerada.
-              La línea con degradado une las etapas en escritorio. */}
-          <ol className="relative mx-auto mt-14 grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
-            <div
-              aria-hidden
-              className="absolute left-[12%] right-[12%] top-7 hidden h-px grad-marca opacity-60 lg:block"
-            />
-            {[
-              { icon: Sparkles, title: "SEP", detail: "Diseña la formación y la abre en línea para todo el país." },
-              { icon: GraduationCap, title: "Universitarios", detail: "Aprenden desde cualquier región y se vuelven mentores." },
-              { icon: School, title: "Escolares", detail: "Reciben talleres de mentores de su propia comunidad." },
-              { icon: Sprout, title: "Impacto", detail: "Proyectos locales que siguen andando sin depender de Lima." },
-            ].map(({ icon: Icon, title, detail }, i) => (
-              <li key={title} className="relative flex flex-col items-start lg:items-center lg:text-center">
-                <span className="relative flex size-14 items-center justify-center rounded-full border border-violeta-200 bg-surface-0 text-acento shadow-soft">
-                  <Icon aria-hidden className="size-6" />
-                  <span className="tabular absolute -right-1 -top-1 flex size-6 items-center justify-center rounded-full bg-violeta-600 text-caption font-semibold text-white">
-                    {i + 1}
-                  </span>
-                </span>
-                <p className="mt-5 font-display text-h4 font-semibold text-ink">{title}</p>
-                <p className="mt-2 max-w-60 text-body-sm text-slate-ui">{detail}</p>
-              </li>
-            ))}
-          </ol>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-16">
+            <div>
+              <SectionHeader
+                eyebrow="Cómo funciona"
+                title="Formamos a quien formará a diez más"
+                description="Cada universitario que se forma en SEP vuelve como mentor a los colegios de su propia comunidad. Así una persona se convierte en una red."
+              />
+              <ol className="mt-8 space-y-0 border-l border-line">
+                {[
+                  { title: "SEP abre la formación", detail: "Cursos gratuitos y 100 % virtuales, desde cualquier región." },
+                  { title: "Universitarios que se forman", detail: "Aprenden Design Thinking, Scrum y liderazgo con proyectos reales." },
+                  { title: "Mentores en su colegio", detail: "Llevan talleres a escolares de su propia comunidad." },
+                  { title: "Proyectos que se quedan", detail: "Ideas locales que siguen andando sin depender de Lima." },
+                ].map((step, i) => (
+                  <li key={step.title} className="relative py-4 pl-8">
+                    <span
+                      aria-hidden
+                      className="absolute -left-1.5 top-5.5 size-3 rounded-full bg-surface-0 ring-2 ring-violeta-500"
+                    />
+                    <p className="font-display text-body-lg font-semibold text-ink">
+                      <span className="tabular mr-2 text-acento">{i + 1}</span>
+                      {step.title}
+                    </p>
+                    <p className="mt-1 text-body-sm text-slate-ui">{step.detail}</p>
+                  </li>
+                ))}
+              </ol>
+            </div>
+            <div className="theme-night halo relative overflow-hidden rounded-lg p-8 sm:p-12">
+              <MotivoSemilla
+                className="mx-auto w-full max-w-sm"
+                label="Diagrama: una semilla (SEP) forma a tres universitarios y cada uno forma a tres escolares: nueve nodos de impacto."
+              />
+              <p className="relative mt-4 text-center text-body-sm text-slate-ui">
+                1 semilla → 3 mentores → 9 escolares, y la red sigue creciendo.
+              </p>
+            </div>
+          </div>
         </Container>
       </Section>
 
@@ -359,71 +387,6 @@ export default function HomePage() {
                 <PantallaCertificado />
               </Laptop>
             </div>
-          </div>
-        </Container>
-      </Section>
-
-      {/* ═══ 8 · TRES CAMINOS ═════════════════════════════ */}
-      <Section tone="muted">
-        <Container size="wide">
-          <SectionHeader
-            eyebrow="Súmate"
-            title="Hay más de una forma de entrar"
-            align="center"
-          />
-
-          <div className="mt-12 grid gap-4 md:grid-cols-3">
-            {[
-              {
-                icon: Users,
-                title: "Sé voluntario",
-                body: "Mentor, community manager u organizador. Con certificación y carta de recomendación.",
-                cta: "Ver los 3 roles",
-                href: "/voluntariado",
-                tone: "neon" as const,
-              },
-              {
-                icon: School,
-                title: "Inscribe tu colegio",
-                body: "Universitarios de tu región dictan talleres a tus estudiantes. Gratis.",
-                cta: "Inscribir colegio",
-                href: "/colegios",
-                tone: "success" as const,
-              },
-              {
-                icon: Building2,
-                title: "Alía tu empresa",
-                body: "Convierte tu inversión RSE en métricas verificables alineadas a los ODS.",
-                cta: "Hablar con el equipo",
-                href: "/empresas",
-                tone: "brand" as const,
-              },
-            ].map((c) => (
-              <Card key={c.title} interactive className="relative flex flex-col p-6">
-                <span
-                  className={`flex size-11 items-center justify-center rounded-md ${
-                    c.tone === "neon"
-                      ? "bg-noche-900 text-cian-500"
-                      : c.tone === "success"
-                        ? "bg-turquesa-50 text-turquesa-800"
-                        : "bg-violeta-50 text-acento"
-                  }`}
-                >
-                  <c.icon className="size-5" />
-                </span>
-
-                <h3 className="mt-5 font-display text-h4 font-semibold text-ink">
-                  {c.title}
-                </h3>
-                <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
-                  {c.body}
-                </p>
-
-                <ArrowLink href={c.href} prefetch={false} stretched className="mt-5">
-                  {c.cta}
-                </ArrowLink>
-              </Card>
-            ))}
           </div>
         </Container>
       </Section>

@@ -4,7 +4,6 @@ import { connection } from "next/server";
 import { ArrowRight, Award, Check, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
-  AccentUnderline,
   Badge,
   Card,
   Container,
@@ -121,7 +120,7 @@ export default async function EstiloPage() {
             <Sparkles className="size-3.5" aria-hidden /> Sistema visual interno
           </Badge>
           <h1 className="mt-6 max-w-3xl font-display text-h1 font-semibold text-white lg:text-hero">
-            Lavanda <AccentUnderline>neón</AccentUnderline>
+            Lavanda neón
           </h1>
           <p className="mt-4 max-w-prose text-body-lg text-slate-ui">
             Tokens, contraste verificado y componentes base de SEP. Noche para la identidad, claro para

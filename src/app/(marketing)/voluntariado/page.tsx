@@ -14,7 +14,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -196,7 +195,7 @@ export default function VoluntariadoPage() {
             eyebrow="Para todos"
             title={
               <>
-                Beneficios que recibe <AccentUnderline>cada voluntario</AccentUnderline>
+                Beneficios que recibe cada voluntario
               </>
             }
             description="Independientemente del rol, esto es tuyo desde el primer día."

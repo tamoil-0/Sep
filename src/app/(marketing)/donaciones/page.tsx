@@ -3,7 +3,6 @@ import { HeartHandshake, School, Sprout, Users } from "lucide-react";
 import {
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -45,7 +44,7 @@ export default function DonacionesPage() {
             <HeartHandshake className="size-9 text-turquesa-800" />
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Tu donación llega a{" "}
-              <AccentUnderline>quien nadie está atendiendo</AccentUnderline>
+              quien nadie está atendiendo
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               El 100 % de lo que recibimos se usa en formación, mentoría y talleres en

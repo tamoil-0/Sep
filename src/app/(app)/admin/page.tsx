@@ -84,7 +84,7 @@ export default async function AdminPage() {
 
       {/* 1 · Lo que pide acción */}
       <section aria-labelledby="pendientes-titulo">
-        <h2 id="pendientes-titulo" className="mb-3 text-caption font-semibold uppercase tracking-marca text-slate-ui">
+        <h2 id="pendientes-titulo" className="mb-3 text-body-sm font-medium text-slate-ui">
           Requiere tu atención
         </h2>
         <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
@@ -212,7 +212,7 @@ export default async function AdminPage() {
 
       {/* 4 · Impacto */}
       <section className="theme-night halo mt-8 overflow-hidden rounded-md p-5 sm:p-6" data-reveal aria-labelledby="impacto-titulo">
-        <h2 id="impacto-titulo" className="text-caption font-semibold uppercase tracking-marca text-violeta-300">
+        <h2 id="impacto-titulo" className="text-body-sm font-medium text-violeta-300">
           Impacto en territorio
         </h2>
         <dl className="mt-4 grid grid-cols-2 gap-x-6 gap-y-5 sm:grid-cols-3 xl:grid-cols-6">

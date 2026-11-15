@@ -17,7 +17,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
@@ -158,7 +157,7 @@ export function DiagnosticWizard({
             <Badge tone="success">Fase piloto · 2026 · Áncash, Perú</Badge>
             <h1 className="mx-auto mt-6 max-w-2xl font-display text-h1 font-bold leading-[1.12] text-ink sm:text-h1">
               Estamos construyendo algo para jóvenes de regiones.{" "}
-              <AccentUnderline>Ayúdanos a hacerlo bien.</AccentUnderline>
+              Ayúdanos a hacerlo bien.
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-body leading-relaxed text-slate-ui">
               Antes de abrir las puertas queremos entender tu realidad: qué te frena, qué

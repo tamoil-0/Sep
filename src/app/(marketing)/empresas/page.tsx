@@ -12,7 +12,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -43,7 +42,7 @@ export default function EmpresasPage() {
             </Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Convierte tu inversión social en{" "}
-              <AccentUnderline>resultados medibles</AccentUnderline>
+              resultados medibles
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Somos el aliado que ejecuta en las regiones donde tu empresa quiere estar y

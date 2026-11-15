@@ -5,7 +5,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -44,7 +43,7 @@ export default function PreciosPage() {
         <Container size="wide" className="py-16 text-center sm:py-20">
           <Badge tone="success">Transparencia total</Badge>
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
-            Formación clara, <AccentUnderline>precios transparentes</AccentUnderline>
+            Formación clara, precios transparentes
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-body-lg leading-relaxed text-slate-ui">
             El catálogo de cursos no tiene costo de acceso. Los pagos corresponden a la

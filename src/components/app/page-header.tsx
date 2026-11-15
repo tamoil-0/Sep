@@ -1,5 +1,11 @@
 import { cn } from "@/lib/utils";
+import { MotivoSemilla } from "@/components/brand/motivo-semilla";
 
+/**
+ * Cabecera de cada pantalla del panel: banda noche con el halo y la semilla de
+ * marca de fondo. Es la firma visual del producto. Si la sigue un `KpiGrid`,
+ * las métricas se montan sobre su borde inferior (globals.css: `.cabecera-panel`).
+ */
 export function PageHeader({
   title,
   description,
@@ -12,20 +18,21 @@ export function PageHeader({
   className?: string;
 }) {
   return (
-    <div
+    <header
       className={cn(
-        "mb-6 flex min-w-0 flex-col items-stretch gap-3 sm:mb-8 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between",
+        "cabecera-panel theme-night halo relative mb-6 overflow-hidden rounded-lg px-5 py-6 sm:mb-8 sm:px-8 sm:py-8",
         className,
       )}
     >
-      <div className="min-w-0 flex-1">
-        <h1 className="break-words font-display text-h3 font-semibold text-ink sm:text-h2">{title}</h1>
-        {description && (
-          <p className="mt-2 max-w-prose text-body text-slate-ui">{description}</p>
-        )}
+      <MotivoSemilla decorativo className="motivo-logro pointer-events-none absolute -right-8 -top-6 hidden w-48 opacity-35 md:block" />
+      <div className="relative flex min-w-0 flex-col items-stretch gap-4 sm:flex-row sm:flex-wrap sm:items-end sm:justify-between">
+        <div className="min-w-0 flex-1 md:pr-40">
+          <h1 className="break-words font-display text-h3 font-semibold text-ink sm:text-h2">{title}</h1>
+          {description && <p className="mt-2 max-w-prose text-body text-slate-ui">{description}</p>}
+        </div>
+        {action && <div className="relative shrink-0">{action}</div>}
       </div>
-      {action}
-    </div>
+    </header>
   );
 }
 
@@ -53,24 +60,25 @@ export function Kpi({
     <div
       className={cn(
         "relative min-w-0 overflow-hidden rounded-md p-4 sm:p-5",
-        destacada ? "theme-night halo ring-1 ring-white/10" : "border border-line bg-surface-0 shadow-soft",
+        destacada ? "border border-violeta-200 bg-surface-0 shadow-elevated" : "border border-line bg-surface-0 shadow-soft",
       )}
       data-reveal
     >
+      {destacada && <span aria-hidden className="absolute inset-x-0 top-0 h-1 grad-marca" />}
       <div className="flex items-center justify-between gap-3">
         <p className="text-caption leading-snug text-slate-ui sm:text-body-sm">{label}</p>
         {icon && (
           <span
             className={cn(
               "hidden size-9 items-center justify-center rounded-full sm:flex [&_svg]:size-4",
-              destacada ? "bg-white/10 text-cian-500" : "kpi-icono bg-violeta-50 text-acento",
+              destacada ? "bg-noche-900 text-cian-500" : "kpi-icono bg-violeta-50 text-acento",
             )}
           >
             {icon}
           </span>
         )}
       </div>
-      <p className="tabular mt-3 truncate font-display text-h3 font-semibold leading-none text-ink sm:text-h2">
+      <p className={cn("tabular mt-3 truncate font-display text-h3 font-semibold leading-none sm:text-h2", destacada ? "text-acento" : "text-ink")}>
         {value}
       </p>
       {hint && <p className="mt-1 line-clamp-2 text-caption leading-snug text-mist sm:mt-1.5">{hint}</p>}

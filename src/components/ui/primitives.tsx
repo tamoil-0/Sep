@@ -287,7 +287,7 @@ export function Eyebrow({
   as?: "p" | "span";
 }) {
   return (
-    <Tag className={cn("text-caption font-semibold uppercase tracking-marca text-acento", className)}>
+    <Tag className={cn("text-body-sm font-medium text-acento", className)}>
       {children}
     </Tag>
   );

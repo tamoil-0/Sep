@@ -4,7 +4,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -39,7 +38,7 @@ export default async function ColegiosPage() {
             <Badge tone="success">100 % gratuito para el colegio</Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Conectamos colegios con{" "}
-              <AccentUnderline>universitarios de su región</AccentUnderline>
+              universitarios de su región
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Universitarios formados por SEP dictan talleres de innovación social a tus

@@ -4,7 +4,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -41,7 +40,7 @@ export default function DocentesPage() {
             </Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Metodologías activas que{" "}
-              <AccentUnderline>puedes usar el lunes</AccentUnderline>
+              puedes usar el lunes
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               No teoría pedagógica: plantillas, guías y dinámicas probadas en aulas reales
