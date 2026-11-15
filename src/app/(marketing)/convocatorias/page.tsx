@@ -45,7 +45,7 @@ export default async function ConvocatoriasPage() {
     ...(courses ?? []).map((c) => ({
       key: `course-${c.slug}`,
       kind: "Curso",
-      tone: "seed" as const,
+      tone: "success" as const,
       icon: CalendarDays,
       title: c.title,
       detail: c.subtitle ?? "",
@@ -56,7 +56,7 @@ export default async function ConvocatoriasPage() {
     ...(roles ?? []).map((r) => ({
       key: `role-${r.slug}`,
       kind: "Voluntariado",
-      tone: "gold" as const,
+      tone: "neon" as const,
       icon: Users,
       title: r.name,
       detail: r.description ?? "",
@@ -92,7 +92,7 @@ export default async function ConvocatoriasPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16">
           <SectionHeader
             as="h1"
@@ -110,7 +110,7 @@ export default async function ConvocatoriasPage() {
               <li key={c.key}>
                 <Card className="flex h-full flex-col p-6">
                   <div className="flex items-start justify-between gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
                       <c.icon className="size-5" />
                     </span>
                     <Badge tone={c.tone}>{c.kind}</Badge>

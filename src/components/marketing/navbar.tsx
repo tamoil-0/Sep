@@ -87,10 +87,11 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200",
+        // Barra noche: continúa los heros oscuros y, al bajar, se vuelve vidrio.
+        "theme-night sticky top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-200",
         scrolled
-          ? "border-b border-line bg-white "
-          : "border-b border-transparent bg-white",
+          ? "border-b border-line bg-noche-900/95 backdrop-blur-xl"
+          : "border-b border-transparent bg-noche-900",
       )}
     >
       <Container size="wide">
@@ -100,7 +101,7 @@ export function Navbar() {
             className="flex min-h-control shrink-0 items-center transition-opacity hover:opacity-80"
             aria-label="Inicio — SEP"
           >
-            <Logo className="h-10" />
+            <Logo className="h-10" variant="white" />
           </Link>
 
           {/* ── Escritorio ── */}
@@ -124,8 +125,8 @@ export function Navbar() {
                     className={cn(
                       "flex min-h-control items-center gap-1 rounded-sm px-3 py-2 text-body-sm font-medium transition-colors duration-150",
                       isActive(item.href)
-                        ? "text-sep-600"
-                        : "text-graphite hover:text-ink",
+                        ? "text-white"
+                        : "text-slate-ui hover:text-ink",
                       expanded && "text-ink",
                     )}
                   >
@@ -151,7 +152,7 @@ export function Navbar() {
                           : "pointer-events-none -translate-y-1 opacity-0",
                       )}
                     >
-                      <div className="overflow-hidden rounded-lg border border-line bg-white p-2 shadow-elevated">
+                      <div className="theme-light overflow-hidden rounded-lg border border-line bg-white p-2 shadow-elevated">
                         {item.children.map((child) => (
                           <Link
                             key={child.href}
@@ -208,7 +209,7 @@ export function Navbar() {
           aria-modal="true"
           aria-labelledby="mobile-navigation-title"
           tabIndex={-1}
-          className="fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line bg-white outline-none lg:hidden"
+          className="halo fixed inset-x-0 bottom-0 top-16 z-40 animate-fade-in overflow-y-auto border-t border-line outline-none lg:hidden"
         >
           <h2 id="mobile-navigation-title" className="sr-only">Navegación principal</h2>
           <Container className="py-6">
@@ -244,7 +245,7 @@ export function Navbar() {
             </ul>
 
             <div className="mt-6 flex flex-col gap-2.5 border-t border-line pt-6">
-              <Button href="/registro" variant="gradient" size="lg">
+              <Button href="/registro" variant="primary" size="lg">
                 Crear cuenta gratis
               </Button>
               <Button href="/login" variant="outline" size="lg">

@@ -12,7 +12,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -33,7 +33,7 @@ export const metadata = createPageMetadata({
 export default function EmpresasPage() {
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="grid items-center gap-10 lg:grid-cols-[1fr_0.85fr]">
             <div className="max-w-2xl">
@@ -43,7 +43,7 @@ export default function EmpresasPage() {
             </Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
               Convierte tu inversión social en{" "}
-              <GoldUnderline>resultados medibles</GoldUnderline>
+              <AccentUnderline>resultados medibles</AccentUnderline>
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               Somos el aliado que ejecuta en las regiones donde tu empresa quiere estar y
@@ -51,7 +51,7 @@ export default function EmpresasPage() {
             </p>
             <Button
               href={siteConfig.contact.whatsappUrl}
-              variant="gradient"
+              variant="primary"
               size="lg"
               className="mt-8"
             >
@@ -83,7 +83,7 @@ export default function EmpresasPage() {
               {
                 icon: Globe,
                 title: "Alcance regional real",
-                body: "10+ regiones fuera de Lima, con presencia validada en Áncash desde 2024.",
+                body: "Participantes de 13 regiones del Perú y presencia validada en Áncash desde 2024.",
               },
               {
                 icon: ChartNoAxesCombined,
@@ -102,7 +102,7 @@ export default function EmpresasPage() {
               },
             ].map((f) => (
               <Card key={f.title} className="p-6">
-                <f.icon className="size-5 text-sep-600" />
+                <f.icon className="size-5 text-acento" />
                 <h3 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {f.title}
                 </h3>
@@ -139,7 +139,7 @@ export default function EmpresasPage() {
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
                   {p.deliverables.map((d) => (
                     <li key={d} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                       {d}
                     </li>
                   ))}
@@ -155,7 +155,7 @@ export default function EmpresasPage() {
         </Container>
       </Section>
 
-      <section className="sep-gradient">
+      <section className="theme-night halo">
         <Container size="wide" className="py-16 text-center">
           <h2 className="mx-auto max-w-2xl font-display text-h2 font-bold leading-tight text-white">
             Conversemos sobre el impacto que quieres demostrar
@@ -165,7 +165,7 @@ export default function EmpresasPage() {
             semana.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
-            <Button href={siteConfig.contact.whatsappUrl} variant="gold" size="lg">
+            <Button href={siteConfig.contact.whatsappUrl} variant="neon" size="lg">
               Escribir por WhatsApp
             </Button>
             <Button

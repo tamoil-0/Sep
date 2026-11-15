@@ -35,7 +35,7 @@ export function ContextualHelp({
         <a
           href={`mailto:${siteConfig.contact.email}`}
           className={cn(
-            "inline-flex min-h-control items-center gap-2 text-caption font-semibold text-sep-700 hover:underline",
+            "inline-flex min-h-control items-center gap-2 text-caption font-semibold text-acento hover:underline",
             inverse && "text-white",
           )}
         >
@@ -46,7 +46,7 @@ export function ContextualHelp({
           target="_blank"
           rel="noreferrer"
           className={cn(
-            "inline-flex min-h-control items-center gap-2 text-caption font-semibold text-sep-700 hover:underline",
+            "inline-flex min-h-control items-center gap-2 text-caption font-semibold text-acento hover:underline",
             inverse && "text-white",
           )}
         >

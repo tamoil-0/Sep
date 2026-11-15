@@ -1,19 +1,20 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Poppins } from "next/font/google";
+import { Geist, Sora } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { ToastProvider } from "@/components/ui/toast";
+import { RevealObserver } from "@/components/ui/reveal-observer";
 import "./globals.css";
 
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
+// Cuerpo y UI: Geist, sobria y técnica. Títulos: Sora, geométrica y de aire futurista.
+const geist = Geist({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-geist",
   display: "swap",
 });
 
-const poppins = Poppins({
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-  variable: "--font-poppins",
+const sora = Sora({
+  subsets: ["latin", "latin-ext"],
+  variable: "--font-sora",
   display: "swap",
 });
 
@@ -76,16 +77,17 @@ export default function RootLayout({
     <html
       lang="es-PE"
       data-scroll-behavior="smooth"
-      className={`${inter.variable} ${poppins.variable}`}
+      className={`${geist.variable} ${sora.variable}`}
     >
       <body className="antialiased">
         <a
           href="#contenido"
-          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-sep-600 focus:px-4 focus:py-2 focus:text-body-sm focus:font-medium focus:text-white"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-lg focus:bg-violeta-600 focus:px-4 focus:py-2 focus:text-body-sm focus:font-medium focus:text-white"
         >
           Saltar al contenido
         </a>
         <ToastProvider>{children}</ToastProvider>
+        <RevealObserver />
       </body>
     </html>
   );

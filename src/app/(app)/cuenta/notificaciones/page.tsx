@@ -53,7 +53,7 @@ export default async function NotificacionesPage() {
                   <span
                     className={cn(
                       "mt-1.5 size-2 shrink-0 rounded-full",
-                      n.read_at ? "bg-line" : "bg-sep-600",
+                      n.read_at ? "bg-line" : "bg-violeta-600",
                     )}
                     aria-hidden
                   />

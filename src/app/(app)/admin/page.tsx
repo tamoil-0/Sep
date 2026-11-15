@@ -62,7 +62,7 @@ export default async function AdminPage() {
       />
 
       <KpiGrid>
-        <Kpi label="Usuarios registrados" value={users} icon={<Users className="size-4" />} />
+        <Kpi tone="destacada" label="Usuarios registrados" value={users} icon={<Users className="size-4" />} />
         <Kpi label="Inscripciones" value={enrollments} icon={<BookOpen className="size-4" />} />
         <Kpi label="Certificados" value={certificates} icon={<Award className="size-4" />} />
         <Kpi

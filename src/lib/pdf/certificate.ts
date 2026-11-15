@@ -21,12 +21,18 @@ export interface CertificateData {
 }
 
 // Paleta de marca (Plan Maestro §2.2)
-const BLUE = rgb(0x2e / 255, 0x0b / 255, 0xe8 / 255);
-const PURPLE = rgb(0xa5 / 255, 0x0f / 255, 0xc6 / 255);
-const GOLD = rgb(1, 0xc6 / 255, 0x29 / 255);
-const INK = rgb(0x12 / 255, 0x10 / 255, 0x1c / 255);
-const SLATE = rgb(0x6e / 255, 0x6a / 255, 0x85 / 255);
-const LINE = rgb(0xe6 / 255, 0xe4 / 255, 0xf0 / 255);
+// Paleta «Lavanda neón» (DESIGN.md §2). pdf-lib no lee CSS: valores en hex → rgb.
+const hex = (h: string) => rgb(parseInt(h.slice(1, 3), 16) / 255, parseInt(h.slice(3, 5), 16) / 255, parseInt(h.slice(5, 7), 16) / 255);
+// Banda superior: noche-900 → violeta-600 (texto blanco y cian encima: AA).
+const BLUE = hex("#212B38");
+const PURPLE = hex("#6257DB");
+// Acento: cian sobre la banda oscura; en el cuerpo blanco se usa ACCENT_LIGHT.
+const GOLD = hex("#04FFE1");
+const ACCENT_LIGHT = hex("#0BC6AB"); // turquesa-500: solo decorativo (subrayado del nombre)
+const BRAND = hex("#6257DB"); // violeta-600: título del curso (5.38:1 sobre blanco)
+const INK = hex("#212B38"); // noche-900
+const SLATE = hex("#4A5869"); // noche-600
+const LINE = hex("#E2E7EE"); // noche-200
 
 const W = 842; // A4 horizontal
 const H = 595;
@@ -161,7 +167,7 @@ export async function buildCertificatePdf(
     y: y - 9,
     width: nameWidth,
     height: 4,
-    color: GOLD,
+    color: ACCENT_LIGHT,
   });
 
   y -= 44;
@@ -182,7 +188,7 @@ export async function buildCertificatePdf(
     y,
     size: courseSize,
     font: bold,
-    color: BLUE,
+    color: BRAND,
   });
 
   y -= 30;

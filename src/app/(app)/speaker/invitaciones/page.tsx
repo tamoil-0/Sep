@@ -50,7 +50,7 @@ export default async function SpeakerInvitacionesPage() {
         <Kpi label="Pendientes" value={pending.length} icon={<Clock className="size-4" />} />
         <Kpi label="Aceptadas" value={rows.filter((r) => r.status === "aceptada").length} icon={<Check className="size-4" />} />
         <Kpi label="Total" value={rows.length} icon={<Mail className="size-4" />} />
-        <Kpi label="Alcance estimado" value="1,000+" hint="jóvenes en 10+ regiones" />
+        <Kpi label="Alcance estimado" value="1,000+" hint="jóvenes en 13 regiones" />
       </KpiGrid>
 
       <PanelSection title="Todas las invitaciones">

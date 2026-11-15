@@ -121,7 +121,7 @@ export default async function AdminDiagnosticoPage({
           <div className="flex flex-wrap gap-2">
             <a
               href={`/api/admin/diagnostico/export?${query()}`}
-              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-sep-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
+              className="inline-flex min-h-control items-center gap-2 rounded-sm bg-violeta-600 px-4 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700"
             >
               <FileSpreadsheet className="size-4" />
               Descargar Excel
@@ -172,7 +172,7 @@ export default async function AdminDiagnosticoPage({
             className={cn(
               "shrink-0 rounded-full px-4 py-2 text-body-sm font-medium transition-colors",
               active === profile.key
-                ? "bg-sep-600 text-white"
+                ? "bg-violeta-600 text-white"
                 : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
             )}
           >
@@ -214,7 +214,7 @@ export default async function AdminDiagnosticoPage({
               name="q"
               defaultValue={search}
               placeholder="Buscar nombre, correo o región"
-              className="h-control w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-body-sm text-ink outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 pl-10 pr-3 text-body-sm text-ink outline-none transition focus:border-violeta-400 focus:bg-white focus:ring-4 focus:ring-violeta-50"
             />
           </label>
           <label>
@@ -222,7 +222,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="origen"
               defaultValue={origin}
-              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-violeta-400 focus:bg-white focus:ring-4 focus:ring-violeta-50"
             >
               <option value="todos">Todos los orígenes</option>
               <option value="feria">{ORIGIN_LABELS.feria}</option>
@@ -235,7 +235,7 @@ export default async function AdminDiagnosticoPage({
             <select
               name="datos"
               defaultValue={dataset}
-              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-sep-400 focus:bg-white focus:ring-4 focus:ring-sep-50"
+              className="h-control w-full rounded-sm border border-line bg-surface-1 px-3 text-body-sm text-graphite outline-none transition focus:border-violeta-400 focus:bg-white focus:ring-4 focus:ring-violeta-50"
             >
               <option value="reales">Solo respuestas reales</option>
               <option value="todos">Incluir datos de demostración</option>
@@ -243,7 +243,7 @@ export default async function AdminDiagnosticoPage({
           </label>
           <button
             type="submit"
-            className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white transition hover:bg-sep-700"
+            className="inline-flex h-control items-center justify-center gap-2 rounded-sm bg-violeta-600 px-5 text-body-sm font-medium text-white transition hover:bg-violeta-700"
           >
             Aplicar filtros
           </button>
@@ -266,7 +266,7 @@ export default async function AdminDiagnosticoPage({
               search || origin !== "todos" ? (
                 <Link
                   href={`/admin/diagnostico?perfil=${active}`}
-                  className="text-body-sm font-medium text-sep-600 hover:underline"
+                  className="text-body-sm font-medium text-acento hover:underline"
                 >
                   Limpiar filtros
                 </Link>
@@ -275,7 +275,7 @@ export default async function AdminDiagnosticoPage({
           />
         ) : (
           <Card className="overflow-hidden p-0">
-            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui md:grid">
+            <div className="hidden grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] gap-4 border-b border-line bg-surface-1 px-5 py-3 text-body-sm font-semibold tracking-eyebrow text-slate-ui md:grid">
               <span>Participante</span>
               <span>Región</span>
               <span>Completado</span>
@@ -289,18 +289,18 @@ export default async function AdminDiagnosticoPage({
                     aria-current={selected?.id === person.id ? "true" : undefined}
                     className={cn(
                       "group grid gap-2 px-5 py-4 transition-colors hover:bg-surface-1 md:grid-cols-[minmax(0,1.4fr)_minmax(0,1fr)_140px_32px] md:items-center md:gap-4",
-                      selected?.id === person.id && "bg-sep-50/70",
+                      selected?.id === person.id && "bg-violeta-50/70",
                     )}
                   >
                     <span className="min-w-0">
                       <span className="flex items-center gap-2 font-medium text-ink">
                         <span className="truncate">{person.name}</span>
                         {person.origin === "feria" ? (
-                          <Badge tone="gold" className="shrink-0">
+                          <Badge tone="neon" className="shrink-0">
                             Feria
                           </Badge>
                         ) : person.origin === "cuenta" ? (
-                          <Badge tone="seed" className="shrink-0">
+                          <Badge tone="success" className="shrink-0">
                             Cuenta SEP
                           </Badge>
                         ) : (
@@ -326,7 +326,7 @@ export default async function AdminDiagnosticoPage({
                       <CalendarDays className="size-3.5 text-mist md:hidden" />
                       {formatDate(person.completedAt)}
                     </span>
-                    <ChevronRight className="hidden size-4 text-mist transition-transform group-hover:translate-x-0.5 group-hover:text-sep-600 md:block" />
+                    <ChevronRight className="hidden size-4 text-mist transition-transform group-hover:translate-x-0.5 group-hover:text-acento md:block" />
                   </Link>
                 </li>
               ))}
@@ -337,11 +337,11 @@ export default async function AdminDiagnosticoPage({
 
       {selected && (
         <section className="mt-6" aria-labelledby="response-detail-title">
-          <Card className="overflow-hidden border-sep-200 p-0">
-            <div className="bg-sep-800 px-5 py-6 text-white sm:px-7">
+          <Card className="overflow-hidden border-violeta-200 p-0">
+            <div className="halo px-5 py-6 text-white sm:px-7">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <p className="text-caption font-semibold uppercase tracking-eyebrow text-white/65">
+                  <p className="text-body-sm font-semibold tracking-eyebrow text-white/65">
                     Respuesta individual · {activeMeta.singular}
                   </p>
                   <h2
@@ -363,19 +363,19 @@ export default async function AdminDiagnosticoPage({
               <div className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-white/75">
                 {selected.email ? (
                   <span className="inline-flex items-center gap-1.5">
-                    <Mail className="size-4 text-gold-500" /> {selected.email}
+                    <Mail className="size-4 text-turquesa-700" /> {selected.email}
                   </span>
                 ) : (
                   <span className="inline-flex items-center gap-1.5">
-                    <HeartHandshake className="size-4 text-gold-500" /> Participación de feria
+                    <HeartHandshake className="size-4 text-turquesa-700" /> Participación de feria
                   </span>
                 )}
                 <span className="inline-flex items-center gap-1.5">
-                  <MapPin className="size-4 text-gold-500" />
+                  <MapPin className="size-4 text-turquesa-700" />
                   {selected.region || "Región no indicada"}
                 </span>
                 <span className="inline-flex items-center gap-1.5">
-                  <CalendarDays className="size-4 text-gold-500" />
+                  <CalendarDays className="size-4 text-turquesa-700" />
                   {formatDate(selected.completedAt)}
                 </span>
               </div>
@@ -404,7 +404,7 @@ export default async function AdminDiagnosticoPage({
                 return (
                   <div key={moduleTitle}>
                     <div className="mb-3 flex items-center gap-3">
-                      <span className="flex size-7 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
+                      <span className="flex size-7 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                         {moduleIndex + 1}
                       </span>
                       <h3 className="text-body-lg leading-snug font-semibold text-ink">
@@ -420,7 +420,7 @@ export default async function AdminDiagnosticoPage({
                             className="rounded-md border border-line bg-surface-1 px-4 py-3.5"
                           >
                             <dt className="text-body-sm leading-relaxed text-slate-ui">
-                              <span className="tabular mr-1.5 font-semibold text-sep-600">
+                              <span className="tabular mr-1.5 font-semibold text-acento">
                                 {question.number}.
                               </span>
                               {question.question}
@@ -465,7 +465,7 @@ export default async function AdminDiagnosticoPage({
                 <Card key={number} className="p-5 sm:p-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="flex-1">
-                      <p className="tabular text-caption font-semibold text-gold-700">
+                      <p className="tabular text-caption font-semibold text-turquesa-800">
                         PREGUNTA {number}
                       </p>
                       <h3 className="mt-1.5 text-body font-semibold leading-snug text-ink">
@@ -474,7 +474,7 @@ export default async function AdminDiagnosticoPage({
                     </div>
                     <div className="flex shrink-0 gap-1.5">
                       {question.isKey && (
-                        <Badge tone="gold">
+                        <Badge tone="neon">
                           <Sparkles className="size-3" /> Clave
                         </Badge>
                       )}
@@ -496,7 +496,7 @@ export default async function AdminDiagnosticoPage({
                           <div
                             className={cn(
                               "h-full rounded-full",
-                              option.votes === max ? "bg-sep-600" : "bg-sep-200",
+                              option.votes === max ? "bg-violeta-600" : "bg-violeta-200",
                             )}
                             style={{ width: `${Math.max(2, option.pct)}%` }}
                           />

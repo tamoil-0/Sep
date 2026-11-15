@@ -100,13 +100,13 @@ export function SessionList({
                     className={cn(
                       "relative mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors after:absolute after:-inset-2 after:content-['']",
                       s.isCompleted
-                        ? "border-seed-700 bg-seed-700 text-white"
-                        : "border-line bg-white text-transparent hover:border-sep-400",
+                        ? "border-turquesa-800 bg-turquesa-800 text-white"
+                        : "border-line bg-white text-transparent hover:border-violeta-400",
                       busy === s.id && "opacity-60",
                     )}
                   >
                     {busy === s.id ? (
-                      <Loader2 className="size-3.5 animate-spin text-sep-600" />
+                      <Loader2 className="size-3.5 animate-spin text-acento" />
                     ) : (
                       <Check className="size-4" />
                     )}
@@ -160,7 +160,7 @@ export function SessionList({
                     href={s.meetUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-sep-600 px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-sep-700"
+                    className="inline-flex min-h-control shrink-0 items-center gap-1.5 rounded-sm bg-violeta-600 px-3.5 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700"
                   >
                     <ExternalLink className="size-3.5" />
                     Unirme

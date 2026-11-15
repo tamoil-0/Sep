@@ -26,7 +26,7 @@ export default async function InstitucionConvenioPage() {
 
   const result = await supabase
     .from("profiles")
-    .select("institutions(name, type, region, agreement_signed_at, agreement_url, is_verified)")
+    .select("institutions!profiles_institution_id_fkey(name, type, region, agreement_signed_at, agreement_url, is_verified)")
     .eq("id", user.id)
     .maybeSingle();
   assertQueryResults("institucion:convenio", result);
@@ -44,8 +44,8 @@ export default async function InstitucionConvenioPage() {
       />
 
       <Card className="overflow-hidden p-0">
-        <div className="bg-sep-800 px-7 py-6 text-white">
-          <FileSignature className="size-6 text-gold-500" />
+        <div className="halo px-7 py-6 text-white">
+          <FileSignature className="size-6 text-cian-500" />
           <h2 className="mt-4 text-h3 font-semibold">
             {i?.name ?? "Tu institución"}
           </h2>
@@ -57,13 +57,13 @@ export default async function InstitucionConvenioPage() {
         </div>
 
         <div className="p-7">
-          <h3 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h3 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Qué acordamos
           </h3>
           <ul className="mt-4 space-y-2.5">
             {TERMS.map((t) => (
               <li key={t} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                 {t}
               </li>
             ))}

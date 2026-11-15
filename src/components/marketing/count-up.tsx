@@ -12,6 +12,13 @@ import * as React from "react";
  *
  * Respeta `prefers-reduced-motion`.
  */
+/** Ejecuta `fn` después de `load` y en un momento ocioso del hilo principal. */
+function cuandoLibre(fn: () => void) {
+  const ric = window.requestIdleCallback ?? ((cb: () => void) => window.setTimeout(cb, 200));
+  if (document.readyState === "complete") ric(fn);
+  else window.addEventListener("load", () => ric(fn), { once: true });
+}
+
 export function CountUp({
   value,
   prefix = "",
@@ -42,7 +49,15 @@ export function CountUp({
         if (!entry.isIntersecting || started) return;
         started = true;
         observer.disconnect();
+        // Espera a que la página termine de cargar y el hilo quede libre: el
+        // conteo no compite con la carga (REDISEÑO §6.2).
+        cuandoLibre(animar);
+      },
+      { threshold: 0.4 },
+    );
 
+    function animar() {
+        if (!node) return;
         const start = performance.now();
         const tick = (now: number) => {
           const t = Math.min(1, (now - start) / duration);
@@ -53,9 +68,7 @@ export function CountUp({
 
         node.textContent = format(0);
         frame = requestAnimationFrame(tick);
-      },
-      { threshold: 0.4 },
-    );
+    }
 
     observer.observe(node);
 

@@ -40,3 +40,6 @@ docs/CUENTAS-DEMO.md
 
 # capturas de revisión visual (locales)
 .ui-review/
+
+# Encuestas con datos personales (correos): nunca al repositorio. Ficha anónima en contenido/testimonios.md
+encuesta_satisfaccion_de_webinars/

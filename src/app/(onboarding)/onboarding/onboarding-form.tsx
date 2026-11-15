@@ -180,12 +180,12 @@ export function OnboardingForm({
   return (
     <div className="mx-auto max-w-6xl pb-6">
       <header className="overflow-hidden rounded-md border border-line bg-white">
-        <div className="h-1 sep-gradient" aria-hidden />
+        <div className="h-1 grad-marca" aria-hidden />
         <div className="flex items-start gap-4 px-4 py-4 sm:items-center sm:px-6 sm:py-5">
           <Logo className="mt-0.5 h-10 sm:mt-0 sm:h-11" />
           <div className="min-w-0 flex-1">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-acento">
                 Diagnóstico de entrada · {profileLabel}
               </p>
               <span className="inline-flex items-center gap-1 text-caption text-slate-ui">
@@ -206,10 +206,10 @@ export function OnboardingForm({
         <aside className="lg:sticky lg:top-6">
           <Card className="p-3 sm:p-4">
             <div className="flex items-center justify-between gap-3">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Tu avance
               </p>
-              <span className="tabular text-caption font-medium text-sep-700">{progress}%</span>
+              <span className="tabular text-caption font-medium text-acento">{progress}%</span>
             </div>
             <ProgressBar value={progress} label={`${answeredCount} de ${questions.length} preguntas respondidas`} className="mt-2.5" />
             <div className="mt-2 flex items-center justify-between gap-3 text-caption">
@@ -236,7 +236,7 @@ export function OnboardingForm({
                       aria-current={active ? "step" : undefined}
                       className={cn(
                         "flex min-h-10 w-full items-center justify-center gap-2 rounded-sm px-2 py-2 text-center transition-colors lg:justify-start lg:text-left",
-                        active && "bg-sep-50 text-sep-700",
+                        active && "bg-violeta-50 text-acento",
                         !active && index < module && "text-graphite hover:bg-surface-1",
                         index > module && "cursor-default text-mist",
                       )}
@@ -244,8 +244,8 @@ export function OnboardingForm({
                       <span
                         className={cn(
                           "flex size-7 shrink-0 items-center justify-center rounded-full border text-caption font-semibold",
-                          complete && "border-seed-700 bg-seed-700 text-white",
-                          active && !complete && "border-sep-500 bg-white text-sep-700",
+                          complete && "border-turquesa-800 bg-turquesa-800 text-white",
+                          active && !complete && "border-violeta-500 bg-white text-acento",
                           !active && !complete && "border-line bg-white",
                         )}
                       >
@@ -263,7 +263,7 @@ export function OnboardingForm({
         <main className="min-w-0">
           <Card className="overflow-hidden p-0 max-sm:rounded-sm">
             <div className="border-b border-line bg-surface-1 px-4 py-4 sm:px-6 sm:py-5">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-acento">
                 Módulo {module + 1} de 3 · Preguntas {module * 5 + 1}–{module * 5 + 5}
               </p>
               <h2
@@ -285,14 +285,14 @@ export function OnboardingForm({
                   <fieldset key={question.number} className="py-4 sm:py-5">
                     <legend className="w-full">
                       <span className="flex items-start gap-3">
-                        <span className="tabular mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-700">
+                        <span className="tabular mt-0.5 flex size-7 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                           {question.number}
                         </span>
                         <span className="min-w-0 flex-1">
                           <span className="flex flex-wrap items-center gap-2 font-display text-body font-semibold leading-snug text-ink sm:text-body">
                             {question.question}
                             {question.isKey && (
-                              <span className="inline-flex items-center gap-1 rounded-full bg-gold-50 px-2 py-0.5 font-sans text-caption font-semibold uppercase tracking-wide text-gold-700">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-turquesa-50 px-2 py-0.5 font-sans text-caption font-semibold uppercase tracking-wide text-turquesa-800">
                                 <Sparkles className="size-3" /> Clave
                               </span>
                             )}
@@ -324,8 +324,8 @@ export function OnboardingForm({
                             className={cn(
                               "group flex min-h-11 cursor-pointer items-center gap-3 rounded-sm border px-3 py-2.5 text-body-sm leading-snug transition-colors",
                               selected
-                                ? "border-sep-500 bg-sep-50 text-sep-800 "
-                                : "border-line bg-white text-graphite hover:border-sep-300 hover:bg-surface-1",
+                                ? "border-violeta-500 bg-violeta-50 text-acento "
+                                : "border-line bg-white text-graphite hover:border-violeta-300 hover:bg-surface-1",
                               question.inputType === "scale_1_5" &&
                                 "sm:min-h-16 sm:flex-col sm:justify-center sm:px-2 sm:text-center",
                             )}
@@ -348,8 +348,8 @@ export function OnboardingForm({
                                 "flex size-5 shrink-0 items-center justify-center border-2 transition-colors",
                                 multiple ? "rounded-sm" : "rounded-full",
                                 selected
-                                  ? "border-sep-600 bg-sep-600 text-white"
-                                  : "border-line bg-white group-hover:border-sep-300",
+                                  ? "border-violeta-600 bg-violeta-600 text-white"
+                                  : "border-line bg-white group-hover:border-violeta-300",
                               )}
                             >
                               {selected && <Check className="size-3" strokeWidth={3} />}
@@ -389,7 +389,7 @@ export function OnboardingForm({
                     type="button"
                     onClick={() => (module === 2 ? finish() : moveTo(module + 1))}
                     disabled={!moduleComplete || busy}
-                    className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
+                    className="inline-flex h-control w-full items-center justify-center gap-2 rounded-sm bg-violeta-600 px-5 text-body-sm font-semibold text-white  transition-colors  disabled:cursor-not-allowed disabled:opacity-45 sm:w-auto"
                   >
                     {busy ? (
                       <>

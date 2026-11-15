@@ -14,7 +14,7 @@ const socials = [
 
 export function Footer() {
   return (
-    <footer className="bg-ink text-white">
+    <footer className="bg-noche-900 text-white">
       <Container size="wide" className="py-16">
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2.7fr]">
           {/* Marca */}
@@ -29,7 +29,7 @@ export function Footer() {
             <div className="mt-5 text-body-sm">
               <a
                 href={`mailto:${siteConfig.contact.email}`}
-                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
+                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-cian-500"
               >
                 <Mail className="size-4 shrink-0" />
                 <span className="break-all">{siteConfig.contact.email}</span>
@@ -38,7 +38,7 @@ export function Footer() {
                 href={siteConfig.contact.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-gold-500"
+                className="flex min-h-control items-center gap-2.5 text-white/70 transition-colors hover:text-cian-500"
               >
                 <MessageCircle className="size-4 shrink-0" />
                 {siteConfig.contact.whatsappDisplay}
@@ -46,7 +46,7 @@ export function Footer() {
             </div>
 
             <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-white/8 px-3 py-1.5 ring-1 ring-inset ring-white/15">
-              <span className="size-1.5 rounded-full bg-seed-700" />
+              <span className="size-1.5 rounded-full bg-turquesa-800" />
               <span className="text-caption text-white/70">
                 Organización juvenil reconocida por SENAJU
               </span>
@@ -57,7 +57,7 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
             {Object.entries(footerNav).map(([group, links]) => (
               <div key={group}>
-                <p className="mb-4 text-caption font-semibold uppercase tracking-eyebrow text-gold-500">
+                <p className="mb-4 text-body-sm font-semibold tracking-eyebrow text-cian-500">
                   {group}
                 </p>
                 <ul className="space-y-2.5">
@@ -88,7 +88,7 @@ export function Footer() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-caption text-white/60 transition-colors hover:text-gold-500"
+                  className="text-caption text-white/60 transition-colors hover:text-cian-500"
                 >
                   {s.label}
                 </a>

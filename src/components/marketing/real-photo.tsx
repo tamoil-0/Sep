@@ -1,3 +1,4 @@
+import { MotivoSemilla } from "@/components/brand/motivo-semilla";
 import Image from "next/image";
 import { MapPin } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -24,6 +25,14 @@ export const SEP_PHOTOS = {
   northStarMediaPartner: "/img/new_images/2d6ab556-c603-4fe0-bdae-e322cf78f5cf.jpg",
   innovationMediaPartner: "/img/new_images/54e4f2cf-6422-4e2f-b1ea-27da7283063e.jpg",
   virtualBootcamp: "/img/new_images/287d0326-b7d0-4f21-b888-970b2c31d205.jpg",
+  // Comunidad celebrando junto al banner de SEP (2560 px).
+  celebration: "/img/39564a3e-33c2-49cd-8fa1-eeb746de5170.jpg",
+  // Sesiones 100 % virtuales: participantes de varias regiones en Zoom.
+  virtualSession: "/img/31684365-609f-42da-8e26-b055b022d388.jpg",
+  virtualClass: "/img/eb4d428b-3074-4486-9224-88361927e129.jpg",
+  virtualTeams: "/img/9e42a809-0fed-4693-8b78-8ba996f2a277.jpg",
+  // Afiche de ponentes de un bootcamp de SEP.
+  speakersPoster: "/img/new_images/4e53aeeb-c025-4799-a221-3ac34e1bbdf6.jpg",
   virtualTourism: "/img/new_images/e74d9629-0a1d-4e95-9a2f-b486731526e4.jpg",
   recognitionEvent: "/img/new_images/f65374c2-41a0-4c34-9874-28be325374e0.jpg",
 } as const;
@@ -72,7 +81,7 @@ export function MediaImage({
         )}
       />
       {kind === "photo" && (
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/65 via-transparent to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noche-950/65 via-transparent to-transparent" />
       )}
       {label && (
         <figcaption
@@ -81,7 +90,7 @@ export function MediaImage({
             kind === "photo" ? "text-white" : "bg-white text-graphite",
           )}
         >
-          <MapPin className={cn("size-3.5", kind === "photo" ? "text-gold-500" : "text-sep-600")} />
+          <MapPin className={cn("size-3.5", kind === "photo" ? "text-cian-500" : "text-acento")} />
           {label}
         </figcaption>
       )}
@@ -95,15 +104,18 @@ export function RealPhoto(props: Omit<MediaImageProps, "kind">) {
 
 export function HeroPhoto() {
   return (
-    <div className="relative mx-auto w-full max-w-xl">
+    // En móvil la foto queda bajo el pliegue y competía por el LCP: se oculta y, como es
+    // `lazy`, ni se descarga. En escritorio está en pantalla y carga de inmediato.
+    <div className="relative mx-auto hidden w-full max-w-xl lg:block lg:pt-28">
+      {/* Motivo de marca: la red brota desde la esquina de la foto, completa y a la vista. */}
+      <MotivoSemilla className="pointer-events-none absolute -right-4 top-0 hidden w-60 lg:block xl:w-64" />
       <RealPhoto
-        src={SEP_PHOTOS.heroPresentation}
-        alt="Expositora durante una actividad presencial de Semillero de Emprendedores Perú"
-        priority
+        src={SEP_PHOTOS.celebration}
+        alt="Jóvenes de la comunidad SEP celebran con globos junto al banner de Semillero de Emprendedores Perú"
         sizes="(min-width: 1280px) 560px, (min-width: 1024px) 46vw, 92vw"
-        label="Formación y liderazgo en acción"
-        className="aspect-[4/3] min-h-0 rounded-lg border border-white/20"
-        imageClassName="object-[52%_50%]"
+        label="La comunidad SEP"
+        className="relative aspect-[4/3] min-h-0 rounded-lg shadow-elevated ring-1 ring-white/15 lg:w-4/5"
+        imageClassName="object-[50%_45%]"
       />
     </div>
   );

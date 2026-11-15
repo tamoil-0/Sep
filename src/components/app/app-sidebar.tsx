@@ -10,7 +10,6 @@ import { appNav } from "@/config/navigation";
 import { ROLE_META, type UserRole } from "@/types/roles";
 import { cn, initials } from "@/lib/utils";
 import { LogoutDialog } from "@/components/app/logout-dialog";
-import { AppLoadingSplash } from "@/components/app/app-loading-splash";
 import { useDialogA11y } from "@/components/ui/use-dialog-a11y";
 
 type IconName = keyof typeof Icons;
@@ -19,7 +18,7 @@ function NavIcon({ name }: { name?: string }) {
   if (!name) return null;
   const Cmp = Icons[name as IconName] as React.ComponentType<{ className?: string }>;
   if (!Cmp) return null;
-  return <Cmp className="size-[18px] shrink-0" />;
+  return <Cmp className="size-icon-md shrink-0" />;
 }
 
 export function AppSidebar({
@@ -52,6 +51,14 @@ export function AppSidebar({
     onClose: () => setMobileOpen(false),
   });
 
+  // Indicador único que se desliza (transform) hasta el ítem activo.
+  const listRef = React.useRef<HTMLUListElement>(null);
+  const [indicator, setIndicator] = React.useState<{ y: number; h: number } | null>(null);
+  React.useLayoutEffect(() => {
+    const el = listRef.current?.querySelector<HTMLElement>('[aria-current="page"]');
+    setIndicator(el ? { y: el.offsetTop, h: el.offsetHeight } : null);
+  }, [pathname, routeRole]);
+
   function prepareNavigation(href: string) {
     if (href !== pathname) router.prefetch(href);
   }
@@ -67,17 +74,28 @@ export function AppSidebar({
         <Link href="/" aria-label="Inicio" className="inline-flex">
           <Logo className="h-11" variant="white" />
         </Link>
-        <p className="mt-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
-          Panel activo · {ROLE_META[routeRole].shortLabel}
+        <p className="mt-4 flex w-fit items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-caption font-medium text-noche-300">
+          <span aria-hidden className="size-1.5 rounded-full bg-cian-500" />
+          Panel de {ROLE_META[routeRole].shortLabel.toLowerCase()}
         </p>
       </div>
 
       <nav className="flex-1 overflow-y-auto px-2 pb-4">
-        <ul className="space-y-0.5">
+        <ul ref={listRef} className="relative space-y-0.5">
+          {indicator && (
+            <li
+              aria-hidden
+              className="pointer-events-none absolute inset-x-0 top-0 rounded-sm bg-white/10 ring-1 ring-inset ring-white/10 transition-transform duration-300 ease-out"
+              style={{ transform: `translateY(${indicator.y}px)`, height: indicator.h }}
+            >
+              <span className="absolute inset-y-2 left-0 w-0.5 rounded-full grad-marca" />
+            </li>
+          )}
           {items.map((item) => {
+            // El inicio del rol solo se marca en su ruta exacta; el resto, también en sus subrutas.
+            const home = ROLE_META[routeRole].home;
             const active =
-              pathname === item.href ||
-              (item.href !== "/admin" && pathname.startsWith(`${item.href}/`));
+              pathname === item.href || (item.href !== home && pathname.startsWith(`${item.href}/`));
             return (
               <li key={item.href}>
                 <Link
@@ -87,10 +105,10 @@ export function AppSidebar({
                   onClick={() => startNavigation(item.href)}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "flex min-h-control items-center gap-2.5 rounded-sm border-l-2 px-3 py-2 text-body-sm transition-colors",
+                    "group/nav relative flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm transition-colors duration-150",
                     active
-                      ? "border-gold-500 bg-white/12 font-medium text-white"
-                      : "border-transparent text-white/60 hover:bg-white/8 hover:text-white",
+                      ? "font-medium text-white [&_svg]:text-cian-500"
+                      : "text-noche-300 hover:bg-white/5 hover:text-white",
                   )}
                 >
                   <NavIcon name={item.icon} />
@@ -103,7 +121,7 @@ export function AppSidebar({
 
         {otherRoles.length > 0 && (
           <div className="mt-6 border-t border-white/10 pt-4">
-            <p className="px-3 pb-2 text-caption font-semibold uppercase tracking-eyebrow text-white/70">
+            <p className="px-3 pb-2 text-caption font-medium text-noche-400">
               Cambiar de panel
             </p>
             <ul className="space-y-0.5">
@@ -114,7 +132,7 @@ export function AppSidebar({
                     onPointerEnter={() => prepareNavigation(ROLE_META[r].home)}
                     onFocus={() => prepareNavigation(ROLE_META[r].home)}
                     onClick={() => startNavigation(ROLE_META[r].home)}
-                    className="flex min-h-control items-center gap-2.5 rounded-sm px-3 py-2 text-body-sm text-white/70 transition-colors hover:bg-white/8 hover:text-white"
+                    className="flex min-h-control items-center gap-3 rounded-sm px-3 py-2 text-body-sm text-noche-300 transition-colors hover:bg-white/5 hover:text-white"
                   >
                     <Icons.Repeat className="size-4" />
                     {ROLE_META[r].shortLabel}
@@ -134,14 +152,14 @@ export function AppSidebar({
           onClick={() => startNavigation("/cuenta")}
           className="flex min-h-control items-center gap-2.5 rounded-sm px-2 py-2 transition-colors hover:bg-white/8"
         >
-          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-gold-500 text-caption font-semibold text-ink">
+          <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-cian-500 text-caption font-semibold text-noche-900">
             {initials(fullName || email)}
           </span>
           <span className="min-w-0 flex-1">
             <span className="block truncate text-body-sm font-medium text-white">
               {fullName || "Mi cuenta"}
             </span>
-            <span className="block truncate text-caption text-white/70">{email}</span>
+            <span className="block truncate text-caption text-noche-400">{email}</span>
           </span>
         </Link>
 
@@ -155,9 +173,9 @@ export function AppSidebar({
   return (
     <>
       {/* Barra móvil */}
-      <header className="sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-white px-4 lg:hidden">
+      <header className="theme-night sticky top-0 z-40 flex h-nav w-full items-center justify-between border-b border-line bg-noche-900 px-4 lg:hidden">
         <Link href="/" aria-label="Inicio" className="flex min-h-control items-center">
-          <Logo className="h-9" />
+          <Logo className="h-9" variant="white" />
         </Link>
         <button
           type="button"
@@ -185,7 +203,7 @@ export function AppSidebar({
         aria-labelledby="app-navigation-title"
         tabIndex={mobileOpen ? -1 : undefined}
         className={cn(
-          "z-50 flex w-[min(88vw,320px)] shrink-0 flex-col bg-sep-800 py-4 shadow-elevated outline-none lg:w-[232px] lg:shadow-none",
+          "halo z-50 flex w-[min(88vw,320px)] shrink-0 flex-col py-5 shadow-elevated outline-none lg:w-[240px] lg:shadow-none",
           "fixed inset-y-0 left-0 transition-transform duration-200 lg:sticky lg:top-0 lg:h-screen lg:translate-x-0",
           mobileOpen ? "translate-x-0" : "-translate-x-full",
         )}
@@ -197,7 +215,13 @@ export function AppSidebar({
       {navigatingTo !== null &&
         navigatingTo !== pathname &&
         typeof document !== "undefined" &&
-        createPortal(<AppLoadingSplash overlay />, document.body)}
+        createPortal(
+          // Barra fina de navegación: no tapa el skeleton de la página que carga.
+          <div role="progressbar" aria-label="Cargando la página" className="fixed inset-x-0 top-0 z-50 h-0.5 overflow-hidden">
+            <div className="h-full w-1/3 grad-marca" style={{ animation: "navigation-progress 1.1s ease-in-out infinite" }} />
+          </div>,
+          document.body,
+        )}
     </>
   );
 }

@@ -5,19 +5,20 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
 import { speakerBenefits } from "@/config/volunteering";
 import { initials } from "@/lib/utils";
 import { SpeakerForm } from "./speaker-form";
+import { MediaImage, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata = createPageMetadata({
   title: "Red de speakers",
   description:
-    "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 10+ regiones del Perú.",
+    "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 13 regiones del Perú.",
   path: "/speakers",
   keywords: ["speakers Perú", "ponentes emprendimiento", "red de mentores Perú"],
 });
@@ -44,12 +45,12 @@ export default async function SpeakersPage() {
 
   return (
     <>
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 sm:py-20">
           <div className="max-w-2xl">
             <Badge tone="brand">{count ?? 0} speakers en la red</Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
-              ¿Tienes algo que <GoldUnderline>contar</GoldUnderline>?
+              ¿Tienes algo que <AccentUnderline>contar</AccentUnderline>?
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               ¿Eres especialista en metodologías ágiles, innovación social o un referente
@@ -77,7 +78,7 @@ export default async function SpeakersPage() {
               },
             ].map((c) => (
               <Card key={c.title} className="p-6">
-                <c.icon className="size-5 text-sep-600" />
+                <c.icon className="size-5 text-acento" />
                 <h2 className="mt-4 font-display text-body-sm leading-snug font-semibold text-ink">
                   {c.title}
                 </h2>
@@ -87,6 +88,27 @@ export default async function SpeakersPage() {
           </div>
         </Container>
       </section>
+
+      {/* Pieza real de un ciclo de ponencias de SEP */}
+      <Section className="pb-0 md:pb-0 lg:pb-0">
+        <Container size="wide">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]" data-reveal>
+            <SectionHeader
+              eyebrow="Cómo se ve"
+              title="Tu charla, frente a jóvenes de todo el país"
+              description="Cada ciclo de ponencias se difunde con piezas propias y se transmite en vivo. Así presentamos a los ponentes de un bootcamp de SEP."
+            />
+            <MediaImage
+              src={SEP_PHOTOS.speakersPoster}
+              alt="Afiche de SEP que presenta a cuatro ponentes de un bootcamp"
+              kind="poster"
+              label="Ponentes de un bootcamp SEP"
+              className="aspect-[16/10] min-h-0"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          </div>
+        </Container>
+      </Section>
 
       <Section>
         <Container size="wide">
@@ -105,7 +127,7 @@ export default async function SpeakersPage() {
                       <li key={s.id}>
                         <Card className="flex h-full flex-col p-5">
                           <div className="flex items-center gap-3">
-                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
+                            <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
                               {initials(s.full_name)}
                             </span>
                             <div className="min-w-0">
@@ -121,7 +143,7 @@ export default async function SpeakersPage() {
                           </div>
 
                           {s.expertise && (
-                            <p className="mt-3 text-caption font-medium text-sep-600">
+                            <p className="mt-3 text-caption font-medium text-acento">
                               {s.expertise}
                             </p>
                           )}
@@ -149,7 +171,7 @@ export default async function SpeakersPage() {
               )}
 
               <div className="mt-12">
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                   ¿Qué ganas al unirte?
                 </p>
                 <ul className="mt-5 grid gap-4 sm:grid-cols-2">
@@ -170,7 +192,7 @@ export default async function SpeakersPage() {
                 <h2 className="font-display text-h4 font-semibold text-ink">
                   Únete a la red
                 </h2>
-                <Badge tone="seed">Gratuito</Badge>
+                <Badge tone="success">Gratuito</Badge>
               </div>
               <p className="mt-1.5 text-body-sm text-slate-ui">
                 Cuéntanos tu historia. Revisamos cada perfil.

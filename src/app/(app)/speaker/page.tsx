@@ -50,9 +50,9 @@ export default async function SpeakerPage() {
       />
 
       <KpiGrid>
-        <Kpi label="Invitaciones pendientes" value={pending.length} icon={<Mail className="size-4" />} />
+        <Kpi tone="destacada" label="Invitaciones pendientes" value={pending.length} icon={<Mail className="size-4" />} />
         <Kpi label="Charlas confirmadas" value={accepted.length} icon={<Mic className="size-4" />} />
-        <Kpi label="Jóvenes alcanzables" value="1,000+" hint="En 10+ regiones" icon={<Globe className="size-4" />} />
+        <Kpi label="Jóvenes alcanzables" value="1,000+" hint="En 13 regiones" icon={<Globe className="size-4" />} />
         <Kpi
           label="Perfil público"
           value={speaker?.is_public ? "Visible" : "Oculto"}
@@ -62,7 +62,7 @@ export default async function SpeakerPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Invitaciones
           </h2>
           <Button href="/speaker/invitaciones" variant="link" size="sm">
@@ -111,7 +111,7 @@ export default async function SpeakerPage() {
 
       {speaker?.topics?.length ? (
         <section className="mt-8">
-          <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Mis temas
           </h2>
           <div className="flex flex-wrap gap-2">

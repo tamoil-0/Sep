@@ -26,7 +26,7 @@ export default async function SeguridadPage() {
       <div className="grid gap-5 lg:grid-cols-2">
         <Card>
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
               <KeyRound className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
@@ -45,7 +45,7 @@ export default async function SeguridadPage() {
 
         <Card className={needsMfa ? "border-warning/30 bg-warning-bg/40" : ""}>
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
               <Smartphone className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
@@ -93,7 +93,7 @@ export default async function SeguridadPage() {
               },
             ].map((f) => (
               <li key={f.title} className="flex items-start gap-3.5">
-                <f.icon className="mt-0.5 size-5 shrink-0 text-seed-700" />
+                <f.icon className="mt-0.5 size-5 shrink-0 text-turquesa-800" />
                 <div>
                   <p className="text-body-sm font-medium text-ink">{f.title}</p>
                   <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{f.detail}</p>

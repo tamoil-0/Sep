@@ -46,7 +46,7 @@ const shortcuts = [
 
 export default function ContactoPage() {
   return (
-    <Section>
+    <Section tone="night">
       <Container size="wide">
         <SectionHeader
           as="h1"
@@ -63,8 +63,8 @@ export default function ContactoPage() {
               interactive={Boolean(c.href)}
               className="relative flex flex-col p-6 text-center"
             >
-              <c.icon className="mx-auto size-5 text-sep-600" />
-              <p className="mt-4 text-caption uppercase tracking-eyebrow text-slate-ui">
+              <c.icon className="mx-auto size-5 text-acento" />
+              <p className="mt-4 text-caption font-medium tracking-eyebrow text-slate-ui">
                 {c.label}
               </p>
               {c.href ? (
@@ -72,7 +72,7 @@ export default function ContactoPage() {
                   href={c.href}
                   target={c.href.startsWith("http") ? "_blank" : undefined}
                   rel="noopener noreferrer"
-                  className="mt-1.5 break-words text-body-sm font-medium text-ink after:absolute after:inset-0 after:content-[''] hover:text-sep-600"
+                  className="mt-1.5 break-words text-body-sm font-medium text-ink after:absolute after:inset-0 after:content-[''] hover:text-acento"
                 >
                   {c.value}
                 </a>
@@ -87,7 +87,7 @@ export default function ContactoPage() {
         </div>
 
         <div className="mx-auto mt-12 max-w-3xl">
-          <p className="text-center text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-center text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             ¿Qué te trae por aquí?
           </p>
           <ul className="mt-5 flex flex-wrap justify-center gap-2.5">
@@ -116,7 +116,7 @@ export default function ContactoPage() {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-sep-600 hover:underline"
+                    className="font-medium text-acento hover:underline"
                   >
                     {label}
                   </a>

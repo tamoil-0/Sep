@@ -17,7 +17,7 @@ export default async function DocenteMiColegioPage() {
 
   const profileResult = await supabase
     .from("profiles")
-    .select("institution_id, institutions(id, name, type, region, province, is_verified, agreement_signed_at, students_count)")
+    .select("institution_id, institutions!profiles_institution_id_fkey(id, name, type, region, province, is_verified, agreement_signed_at, students_count)")
     .eq("id", user.id)
     .maybeSingle();
   assertQueryResults("docente:colegio", profileResult);

@@ -45,7 +45,7 @@ export function DataTable<T>({
                   key={column.key}
                   className="grid grid-cols-[minmax(7rem,.7fr)_minmax(0,1.3fr)] gap-3"
                 >
-                  <dt className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                  <dt className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                     {column.header || "Acciones"}
                   </dt>
                   <dd
@@ -72,7 +72,7 @@ export function DataTable<T>({
                   key={c.key}
                   scope="col"
                   className={cn(
-                    "px-4 py-2.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui",
+                    "px-4 py-2.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui",
                     c.numeric && "text-right",
                   )}
                 >
@@ -108,7 +108,7 @@ export function DataTable<T>({
 
 const STATUS_TONES: Record<
   string,
-  "brand" | "gold" | "seed" | "neutral" | "success" | "warning" | "danger"
+  "brand" | "neon" | "neutral" | "success" | "warning" | "danger"
 > = {
   // pagos y órdenes
   pendiente: "neutral",
@@ -172,13 +172,13 @@ export function PanelSection({
   return (
     <section className={cn("mt-6 first:mt-0 sm:mt-8", className)}>
       <div className="mb-3.5 flex items-center justify-between gap-4">
-        <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           {title}
         </h2>
         {action && (
           <Link
             href={action.href}
-            className="inline-flex items-center gap-1 text-caption font-medium text-sep-600 hover:underline"
+            className="inline-flex items-center gap-1 text-caption font-medium text-acento hover:underline"
           >
             {action.label}
             <ArrowRight className="size-3" />
@@ -206,7 +206,7 @@ export function ComingSoon({
   return (
     <Card className="p-5 sm:p-8">
       <div className="mx-auto max-w-lg text-center">
-        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-sep-50 text-sep-600">
+        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-50 text-acento">
           {icon}
         </span>
         <h2 className="mt-5 text-h4 font-semibold text-ink">
@@ -223,7 +223,7 @@ export function ComingSoon({
                 key={b}
                 className="flex items-start gap-2.5 rounded-sm bg-surface-1 px-4 py-3 text-body-sm text-graphite"
               >
-                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-gold-500" />
+                <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-violeta-500" />
                 {b}
               </li>
             ))}

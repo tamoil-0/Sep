@@ -49,7 +49,7 @@ export function EnrollCta({
           type="button"
           onClick={enroll}
           disabled={busy}
-          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-sep-600 px-5 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
+          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-violeta-600 px-5 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
         >
           {busy && <Loader2 className="size-4 animate-spin" />}
           Inscribirme gratis

@@ -47,9 +47,9 @@ export default async function CuentaPage() {
 
       {/* Identidad */}
       <Card className="overflow-hidden p-0">
-        <div className="bg-sep-800 px-7 py-7">
+        <div className="halo px-7 py-7">
           <div className="flex flex-wrap items-center gap-5">
-            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-gold-500 text-body-lg font-semibold text-ink">
+            <span className="flex size-16 shrink-0 items-center justify-center rounded-full bg-noche-900 text-cian-500 text-body-lg font-semibold">
               {initials(profile?.full_name || user.email)}
             </span>
             <div className="min-w-0">
@@ -98,7 +98,7 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/seguridad" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-sep-50 text-sep-600">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
             <ShieldCheck className="size-5" />
           </span>
           <div className="min-w-0">
@@ -115,7 +115,7 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/notificaciones" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
             <Bell className="size-5" />
           </span>
           <div className="min-w-0 flex-1">
@@ -162,7 +162,7 @@ export default async function CuentaPage() {
                 corregirlos, cancelarlos u oponerte a su tratamiento. Escríbenos a{" "}
                 <a
                   href="mailto:semilleroemprendedorperu@gmail.com?subject=Derechos%20ARCO"
-                  className="font-medium text-sep-600 hover:underline"
+                  className="font-medium text-acento hover:underline"
                 >
                   semilleroemprendedorperu@gmail.com
                 </a>{" "}

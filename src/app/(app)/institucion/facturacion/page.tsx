@@ -17,7 +17,7 @@ export default async function InstitucionFacturacionPage() {
   const supabase = await createClient();
 
   const profileResult = await supabase
-    .from("profiles").select("institution_id, institutions(name, ruc)").eq("id", user.id).maybeSingle();
+    .from("profiles").select("institution_id, institutions!profiles_institution_id_fkey(name, ruc)").eq("id", user.id).maybeSingle();
   assertQueryResults("institucion:facturacion:perfil", profileResult);
   const profile = profileResult.data;
 

@@ -40,7 +40,7 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
       <p
         className={cn(
           "flex items-center gap-2 text-body-sm font-medium",
-          inverted ? "text-gold-500" : "text-success",
+          inverted ? "text-cian-500" : "text-success",
         )}
       >
         <Check className="size-4" />
@@ -65,8 +65,8 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           className={cn(
             "h-control w-full rounded-sm border px-4 text-body-sm sm:w-auto sm:flex-1 outline-none transition-colors",
             inverted
-              ? "border-white/25 bg-white/10 text-white placeholder:text-white/45 focus:border-gold-500"
-              : "border-line bg-white text-ink placeholder:text-mist focus:border-sep-400",
+              ? "border-white/25 bg-white/10 text-white placeholder:text-white/45 focus:border-cian-500"
+              : "border-line bg-white text-ink placeholder:text-mist focus:border-violeta-400",
           )}
         />
         <button
@@ -75,8 +75,8 @@ export function NewsletterForm({ inverted = false }: { inverted?: boolean }) {
           className={cn(
             "inline-flex h-control items-center justify-center gap-2 rounded-sm px-6 text-body-sm font-medium transition-colors disabled:opacity-60",
             inverted
-              ? "bg-gold-500 text-ink hover:bg-gold-400"
-              : "bg-sep-600 text-white hover:bg-sep-700",
+              ? "bg-cian-500 text-noche-900 hover:bg-cian-600"
+              : "bg-violeta-600 text-white hover:bg-violeta-700",
           )}
         >
           {state === "loading" ? (

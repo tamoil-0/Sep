@@ -43,14 +43,14 @@ export default async function DocentePage() {
       />
 
       <KpiGrid>
-        <Kpi label="Programa docente" value="0%" hint="Metodologías ágiles en el aula" icon={<BookOpen className="size-4" />} />
+        <Kpi tone="destacada" label="Programa docente" value="0%" hint="Metodologías ágiles en el aula" icon={<BookOpen className="size-4" />} />
         <Kpi label="Talleres solicitados" value={0} icon={<School className="size-4" />} />
         <Kpi label="Estudiantes impactados" value={0} icon={<Users className="size-4" />} />
         <Kpi label="Certificados" value={0} icon={<Award className="size-4" />} />
       </KpiGrid>
 
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Mi programa
         </h2>
         <EmptyState
@@ -63,7 +63,7 @@ export default async function DocentePage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Recursos para el aula
           </h2>
           <Button href="/docente/recursos" variant="link" size="sm">
@@ -74,7 +74,7 @@ export default async function DocentePage() {
         <div className="grid gap-3 sm:grid-cols-2">
           {resources.map((r) => (
             <Card key={r.title} interactive className="flex gap-3.5 p-5">
-              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-gold-500/15 text-gold-700">
+              <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
                 <FolderOpen className="size-4" />
               </span>
               <div>
@@ -89,7 +89,7 @@ export default async function DocentePage() {
       </section>
 
       <section className="mt-8">
-        <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
+        <Card className="flex flex-wrap items-center justify-between gap-5 border-violeta-200 bg-violeta-50/40 p-6">
           <div>
             <h2 className="text-body-lg leading-snug font-semibold text-ink">
               ¿Tu colegio quiere recibir a nuestros voluntarios?

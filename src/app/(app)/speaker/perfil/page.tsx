@@ -63,7 +63,7 @@ export default async function SpeakerPerfilPage() {
 
       <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
         <Card>
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Datos del perfil
           </h2>
           <dl className="mt-4 divide-y divide-line">
@@ -80,7 +80,7 @@ export default async function SpeakerPerfilPage() {
 
         <div className="space-y-5">
           <Card>
-            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+            <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
               Mis temas
             </h2>
             {s.topics?.length ? (
@@ -96,16 +96,16 @@ export default async function SpeakerPerfilPage() {
 
           {s.story && (
             <Card>
-              <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Mi historia
               </h2>
               <p className="mt-3 text-body-sm leading-relaxed text-graphite">{s.story}</p>
             </Card>
           )}
 
-          <Card className="border-sep-200 bg-sep-50/40">
+          <Card className="border-violeta-200 bg-violeta-50/40">
             <div className="flex items-start gap-3">
-              <UserRound className="mt-0.5 size-5 shrink-0 text-sep-600" />
+              <UserRound className="mt-0.5 size-5 shrink-0 text-acento" />
               <p className="text-body-sm leading-relaxed text-graphite">
                 Para actualizar tu perfil escríbenos. Los cambios los revisa el equipo antes
                 de publicarlos, para mantener la calidad de la red.

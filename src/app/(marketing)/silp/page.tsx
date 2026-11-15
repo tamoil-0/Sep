@@ -95,7 +95,7 @@ export default function SilpPage() {
 
           <Card className="p-0">
             <div className="border-b border-line p-5">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Programa completo
               </p>
               <p className="tabular mt-2 font-display text-h1 font-semibold leading-none text-ink">
@@ -117,7 +117,7 @@ export default function SilpPage() {
                 Postular al SILP <ArrowRight />
               </Button>
               <p className="mt-3 flex items-start gap-2 text-caption leading-relaxed text-slate-ui">
-                <Award className="mt-0.5 size-icon-sm shrink-0 text-gold-700" />
+                <Award className="mt-0.5 size-icon-sm shrink-0 text-turquesa-800" />
                 Los voluntarios activos de SEP acceden sin costo.
               </p>
             </div>
@@ -126,8 +126,8 @@ export default function SilpPage() {
       </Section>
 
       <Section>
-        <Container size="narrow" className="border-l-2 border-sep-600 pl-6 sm:pl-8">
-          <Users className="size-icon-xl text-sep-700" />
+        <Container size="narrow" className="border-l-2 border-violeta-600 pl-6 sm:pl-8">
+          <Users className="size-icon-xl text-acento" />
           <h2 className="mt-4 font-display text-h3 font-semibold text-ink">
             El SILP abre la ruta hacia la mentoría
           </h2>

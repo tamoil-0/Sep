@@ -16,7 +16,7 @@ export default async function DocenteTalleresPage() {
   const supabase = await createClient();
 
   const [profileResult, requestsResult] = await Promise.all([
-    supabase.from("profiles").select("institution_id, institutions(name)").eq("id", user.id).maybeSingle(),
+    supabase.from("profiles").select("institution_id, institutions!profiles_institution_id_fkey(name)").eq("id", user.id).maybeSingle(),
     supabase
       .from("workshops")
       .select("id, title, topic, scheduled_at, status, students_count, grade")

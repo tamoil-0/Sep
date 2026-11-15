@@ -54,9 +54,9 @@ export default async function EstudianteEventosPage() {
                 <div className="flex flex-wrap items-center gap-1.5">
                   <Badge tone="brand">{e.kind ?? "evento"}</Badge>
                   {e.is_online ? (
-                    <Badge tone="seed"><Video className="size-3" />Virtual</Badge>
+                    <Badge tone="success"><Video className="size-3" />Virtual</Badge>
                   ) : (
-                    <Badge tone="gold"><MapPin className="size-3" />Presencial</Badge>
+                    <Badge tone="neon"><MapPin className="size-3" />Presencial</Badge>
                   )}
                 </div>
                 <h3 className="mt-3.5 text-body leading-snug font-semibold text-ink">{e.title}</h3>

@@ -42,14 +42,15 @@ export const siteConfig = {
   },
 } as const;
 
-/** Métricas reales de tracción — Plan Maestro §1.5 */
-export const impactStats = [
-  { value: 135, prefix: "+", label: "Jóvenes líderes formados" },
-  { value: 10, suffix: "+", label: "Regiones del Perú" },
-  { value: 5, label: "Colegios aliados" },
+/** Métricas reales de tracción: +135 y 5 colegios del pitch; 13 regiones de las encuestas (contenido/cifras.md). */
+export const impactStats: { value: number; label: string; prefix?: string; suffix?: string }[] = [
+  { value: 135, prefix: "+", label: "Jóvenes líderes capacitados" },
+  // 13 regiones del Perú entre quienes respondieron las encuestas de los webinars (contenido/testimonios.md).
+  { value: 13, label: "Regiones con participantes" },
+  { value: 5, label: "Colegios impactados" },
   { value: 18, label: "Talleres realizados" },
   { value: 48, label: "Speakers en la red" },
-] as const;
+];
 
 /** El problema — datos del pitch, §1.3 */
 export const problemStats = [
@@ -78,8 +79,18 @@ export const impactChain = [
   { step: "Impactan a", detail: "Estudiantes de secundaria en sus propias regiones" },
 ] as const;
 
-/** Aliados y respaldo — §1.7 */
-export const partners = [
+/**
+ * Aliados y respaldo — §1.7. Logos autorizados por el equipo (15 nov. 2026):
+ * deja el archivo en `public/aliados/` (SVG o PNG con fondo transparente) y
+ * agrega `logo: "/aliados/<archivo>"`. Sin logo, se muestra el nombre.
+ */
+export type Partner = {
+  name: string;
+  category: "red" | "alianza" | "mentoria" | "premio" | "aval";
+  logo?: string;
+};
+
+export const partners: Partner[] = [
   { name: "SENAJU", category: "red" },
   { name: "Proa", category: "red" },
   { name: "CONEII", category: "alianza" },
@@ -92,7 +103,7 @@ export const partners = [
   { name: "UPN", category: "mentoria" },
   { name: "Huánuco Innova", category: "mentoria" },
   { name: "SpinOut Awards 2025", category: "premio" },
-] as const;
+];
 
 /** FAQs oficiales — §1.14 */
 export const faqs = [

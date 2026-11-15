@@ -17,7 +17,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
@@ -155,10 +155,10 @@ export function DiagnosticWizard({
       <Section>
         <Container size="narrow">
           <div className="text-center">
-            <Badge tone="seed">Fase piloto · 2026 · Áncash, Perú</Badge>
+            <Badge tone="success">Fase piloto · 2026 · Áncash, Perú</Badge>
             <h1 className="mx-auto mt-6 max-w-2xl font-display text-h1 font-bold leading-[1.12] text-ink sm:text-h1">
               Estamos construyendo algo para jóvenes de regiones.{" "}
-              <GoldUnderline>Ayúdanos a hacerlo bien.</GoldUnderline>
+              <AccentUnderline>Ayúdanos a hacerlo bien.</AccentUnderline>
             </h1>
             <p className="mx-auto mt-5 max-w-lg text-body leading-relaxed text-slate-ui">
               Antes de abrir las puertas queremos entender tu realidad: qué te frena, qué
@@ -168,7 +168,7 @@ export function DiagnosticWizard({
 
             <Button
               onClick={() => setStep("profile")}
-              variant="gradient"
+              variant="primary"
               size="lg"
               className="mt-9"
             >
@@ -178,13 +178,13 @@ export function DiagnosticWizard({
 
             <p className="mt-4 flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-body-sm text-slate-ui">
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-700" /> 3 minutos
+                <Check className="size-4 text-turquesa-800" /> 3 minutos
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-700" /> Sin crear cuenta
+                <Check className="size-4 text-turquesa-800" /> Sin crear cuenta
               </span>
               <span className="inline-flex items-center gap-1.5">
-                <Check className="size-4 text-seed-700" /> Cualquier región
+                <Check className="size-4 text-turquesa-800" /> Cualquier región
               </span>
             </p>
           </div>
@@ -226,7 +226,7 @@ export function DiagnosticWizard({
     return (
       <Section>
         <Container size="narrow">
-          <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Paso 1 de 3 · Perfil
           </p>
           <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
@@ -247,7 +247,7 @@ export function DiagnosticWizard({
                     setAnswers({});
                     setStep("questions");
                   }}
-                  className="group flex w-full items-start gap-4 rounded-md border border-line bg-white p-5 text-left transition-colors hover:border-sep-300 "
+                  className="group flex w-full items-start gap-4 rounded-md border border-line bg-white p-5 text-left transition-colors hover:border-violeta-300 "
                 >
                   <span className="text-h3 leading-none">{p.emoji}</span>
                   <span className="flex-1">
@@ -255,7 +255,7 @@ export function DiagnosticWizard({
                       <span className="font-display text-body font-semibold text-ink">
                         {p.title}
                       </span>
-                      <ArrowRight className="size-4 shrink-0 text-mist transition-colors group-hover:translate-x-0.5 group-hover:text-sep-600" />
+                      <ArrowRight className="size-4 shrink-0 text-mist transition-colors group-hover:translate-x-0.5 group-hover:text-acento" />
                     </span>
                     <span className="mt-1 block text-body-sm leading-relaxed text-slate-ui">
                       {p.body}
@@ -291,14 +291,14 @@ export function DiagnosticWizard({
             </div>
             <div className="mt-2 h-1 overflow-hidden rounded-full bg-surface-2">
               <div
-                className="h-full rounded-full bg-sep-700 transition-[width] duration-300"
+                className="h-full rounded-full bg-violeta-700 transition-[width] duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
           </div>
 
           {current.isKey && (
-            <Badge tone="gold" className="mb-4">
+            <Badge tone="neon" className="mb-4">
               <Sparkles className="size-3.5" />
               Pregunta clave
             </Badge>
@@ -332,15 +332,15 @@ export function DiagnosticWizard({
                     className={cn(
                       "flex w-full items-center gap-3 rounded-md border p-4 text-left text-body-sm transition-colors",
                       selected
-                        ? "border-sep-500 bg-sep-50 text-sep-700"
-                        : "border-line bg-white text-graphite hover:border-sep-300",
+                        ? "border-violeta-500 bg-violeta-50 text-acento"
+                        : "border-line bg-white text-graphite hover:border-violeta-300",
                     )}
                   >
                     <span
                       className={cn(
                         "flex size-5 shrink-0 items-center justify-center border-2 transition-colors",
                         current.inputType === "multiple" ? "rounded-sm" : "rounded-full",
-                        selected ? "border-sep-600 bg-sep-600 text-white" : "border-line",
+                        selected ? "border-violeta-600 bg-violeta-600 text-white" : "border-line",
                       )}
                     >
                       {selected && <Check className="size-3" />}
@@ -377,7 +377,7 @@ export function DiagnosticWizard({
     return (
       <Section>
         <Container size="narrow">
-          <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Paso final
           </p>
           <h1 className="mt-3 font-display text-h2 font-semibold leading-tight text-ink">
@@ -421,7 +421,7 @@ export function DiagnosticWizard({
             <Button
               onClick={submit}
               disabled={busy || !email.includes("@")}
-              variant="gradient"
+              variant="primary"
               size="lg"
               className="w-full"
             >
@@ -443,8 +443,8 @@ export function DiagnosticWizard({
     <Section>
       <Container size="narrow">
         <div className="overflow-hidden rounded-lg border border-line">
-          <div className="sep-gradient px-8 py-10 text-center text-white">
-            <p className="text-caption uppercase tracking-eyebrow text-white/70">
+          <div className="theme-night halo px-8 py-10 text-center text-white">
+            <p className="text-caption font-medium tracking-eyebrow text-white/70">
               Construido exactamente para lo que nos contaste
             </p>
             <h1 className="mt-4 font-display text-h2 font-bold leading-tight">
@@ -467,11 +467,11 @@ export function DiagnosticWizard({
                   key={label}
                   className="flex flex-wrap items-center gap-3 border-b border-line pb-4 last:border-0 last:pb-0"
                 >
-                  <span className="w-28 shrink-0 text-caption uppercase tracking-eyebrow text-slate-ui">
+                  <span className="w-28 shrink-0 text-caption font-medium tracking-eyebrow text-slate-ui">
                     {label}
                   </span>
                   <span className="text-body-sm text-slate-ui">{from}</span>
-                  <ArrowRight className="size-4 text-gold-500" />
+                  <ArrowRight className="size-4 text-acento" />
                   <span className="text-body-sm font-medium text-ink">{to}</span>
                 </li>
               ))}
@@ -480,11 +480,11 @@ export function DiagnosticWizard({
             <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6 text-center">
               {[
                 ["S/ 0", "Costo de acceso"],
-                ["135+", "Jóvenes formados"],
-                ["10+", "Regiones alcanzadas"],
+                ["+135", "Jóvenes capacitados"],
+                ["13", "Regiones con participantes"],
               ].map(([value, label]) => (
                 <div key={label}>
-                  <dd className="tabular font-display text-h2 font-bold leading-none text-sep-700">
+                  <dd className="tabular font-display text-h2 font-bold leading-none text-acento">
                     {value}
                   </dd>
                   <dt className="mt-1.5 text-caption text-slate-ui">{label}</dt>
@@ -493,7 +493,7 @@ export function DiagnosticWizard({
             </dl>
 
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Button href="/registro" variant="gradient" size="lg" className="flex-1">
+              <Button href="/registro" variant="primary" size="lg" className="flex-1">
                 Quiero ser parte del piloto
                 <ArrowRight className="size-4" />
               </Button>
@@ -506,7 +506,7 @@ export function DiagnosticWizard({
 
         <p className="mt-6 text-center text-body-sm text-slate-ui">
           Gracias por tus 3 minutos.{" "}
-          <Link href="/" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+          <Link href="/" className="text-acento underline underline-offset-4 hover:text-acento">
             Volver al inicio
           </Link>
         </p>

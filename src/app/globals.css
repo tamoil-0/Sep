@@ -6,78 +6,104 @@
    ============================================================ */
 
 @theme {
-  /* ── Marca: azul → violeta → púrpura ── */
-  --color-sep-50: #efecfe;
-  --color-sep-100: #dcd5fd;
-  --color-sep-200: #bcacfb;
-  --color-sep-300: #9880f7;
-  --color-sep-400: #7050f2;
-  --color-sep-500: #4a26ec;
-  --color-sep-600: #2e0be8;
-  --color-sep-700: #2409b8;
-  --color-sep-800: #1b078a;
-  --color-sep-900: #12055c;
-  --color-sep-950: #0a0333;
+  /* Sin la paleta por defecto de Tailwind: nadie puede usar bg-blue-500.
+     Solo existen los colores de abajo (verificados en DESIGN.md §2). */
+  --color-*: initial;
+  --color-white: #ffffff;
+  --color-black: #000000;
 
-  --color-violet-brand: #6a0dd9;
-  --color-purple-brand: #a50fc6;
+  /* ── «Lavanda neón» — escalas de marca ───────────────────────
+     Violeta lavanda: marca. Acción en 600 (blanco 5.38:1). El 500 (#7265FF)
+     solo en títulos grandes, íconos, bordes y foco (4.18 con blanco). */
+  --color-violeta-50: #f4f3ff;
+  --color-violeta-100: #e8e6ff;
+  --color-violeta-200: #d2ceff;
+  --color-violeta-300: #b1aaff;
+  --color-violeta-400: #9187ff;
+  --color-violeta-500: #7265ff;
+  --color-violeta-600: #6257db;
+  --color-violeta-700: #5249b8;
+  --color-violeta-800: #423b94;
+  --color-violeta-900: #322c70;
 
-  /* ── Acento: amarillo SEP ── */
-  --color-gold-50: #fff6de;
-  --color-gold-300: #ffdc7a;
-  --color-gold-400: #ffd24d;
-  --color-gold-500: #ffc629;
-  --color-gold-700: #735000;
-  --color-gold-800: #5c4000;
+  /* Verde turquesa: éxito, progreso y acento secundario. Sobre claro el
+     texto va en 800 (5.77:1); un relleno turquesa lleva texto noche. */
+  --color-turquesa-50: #ebfaf8;
+  --color-turquesa-100: #d8f6f2;
+  --color-turquesa-200: #b1ede4;
+  --color-turquesa-300: #79e0d1;
+  --color-turquesa-400: #41d3bd;
+  --color-turquesa-500: #0bc6ab;
+  --color-turquesa-600: #09aa93;
+  --color-turquesa-700: #088f7b;
+  --color-turquesa-800: #067363;
+  --color-turquesa-900: #05574b;
 
-  /* ── Acento: verde semilla (el brote del logo) ── */
-  --color-seed-50: #eef8e4;
-  --color-seed-400: #9bd46a;
-  --color-seed-700: #326912;
-  --color-seed-800: #28550d;
+  /* Cian neón: SOLO sobre oscuro (1.28:1 con blanco). ≤ 5 % de la pantalla. */
+  --color-cian-500: #04ffe1;
+  --color-cian-600: #03dbc2;
 
-  /* ── Neutrales minimal ── */
-  --color-ink: #12101c;
-  --color-graphite: #373541;
-  --color-slate-ui: #666370;
-  /* El tono más sutil que todavía supera AA sobre blanco (4.65:1). */
-  --color-mist: #74717c;
-  --color-line: #e5e4e9;
-  --color-surface-2: #f4f3f6;
-  --color-surface-1: #faf9fb;
-  --color-surface-0: #ffffff;
+  /* Noche: neutros fríos. 900 es el fondo oscuro, 950 sidebar y footer,
+     700 «pizarra» para tarjetas e inputs en bloques oscuros. */
+  --color-noche-50: #f5f7fa;
+  --color-noche-100: #eef1f5;
+  --color-noche-200: #e2e7ee;
+  --color-noche-300: #b6c2d1;
+  --color-noche-400: #8d9aab;
+  --color-noche-500: #5b6878;
+  --color-noche-600: #4a5869;
+  --color-noche-700: #374658;
+  --color-noche-800: #2a3545;
+  --color-noche-900: #212b38;
+  --color-noche-950: #151c24;
 
-  /* ── Semánticos ── */
-  --color-success: #08783b;
-  --color-success-bg: #e6f6ed;
-  --color-success-700: #066331;
-  --color-warning: #8a5a00;
-  --color-warning-bg: #fef4e4;
-  --color-danger: #a3373b;
-  --color-danger-bg: #fdecec;
-  --color-danger-700: #852d31;
-  --color-danger-800: #70262a;
-  --color-info: #245fbd;
-  --color-info-bg: #eaf2fe;
+  /* ── Roles neutros ──────────────────────────────────────────
+     Los componentes usan roles, no pasos de escala: `.theme-night` los
+     reasigna y el mismo componente se lee bien sobre claro y sobre noche. */
+  --color-ink: var(--color-noche-900); /* títulos y texto: 14.31 blanco · 13.34 noche-50 */
+  --color-graphite: var(--color-noche-800); /* texto fuerte secundario: 12.40 */
+  --color-slate-ui: var(--color-noche-600); /* cuerpo secundario: 7.26 · 6.77 noche-50 */
+  --color-mist: var(--color-noche-500); /* metadatos: 5.68 · 5.29 noche-50 · 5.01 noche-100 */
+  --color-line: var(--color-noche-200); /* bordes y separadores */
+  --color-surface-0: var(--color-white); /* tarjetas, inputs */
+  --color-surface-1: var(--color-noche-50); /* fondo «hielo» del producto */
+  --color-surface-2: var(--color-noche-100); /* hover, pistas de progreso, skeleton */
+  /* Texto violeta (enlaces, eyebrows, íconos activos): 6.99 blanco · 6.36 violeta-50. */
+  --color-acento: var(--color-violeta-700);
+
+  /* ── Funcionales (solo estados) ── */
+  --color-success: var(--color-turquesa-800); /* 5.77 · 5.37 sobre success-bg; blanco encima 5.77 */
+  --color-success-bg: var(--color-turquesa-50);
+  --color-success-700: var(--color-turquesa-900);
+  --color-warning: #a15c00; /* 5.19 · 4.78 sobre warning-bg */
+  --color-warning-bg: #fff4e5;
+  --color-danger: #c9354a; /* 5.13 · 4.56 sobre danger-bg; blanco encima 5.13 */
+  --color-danger-bg: #fdeef0;
+  --color-danger-700: #a82c3e;
+  --color-danger-800: #8c2433;
+  --color-info: var(--color-violeta-700);
+  --color-info-bg: var(--color-violeta-50);
 
   /* ── Tipografía ── */
-  --font-display: var(--font-poppins), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
 
-  /* Escala semántica: títulos fluidos, UI estable y líneas legibles. */
-  --text-display: clamp(2.5rem, 6vw, 4.25rem);
-  --text-display--line-height: 1.06;
-  --text-display--letter-spacing: -0.035em;
-  --text-h1: clamp(2rem, 5vw, 2.5rem);
-  --text-h1--line-height: 1.15;
-  --text-h1--letter-spacing: -0.025em;
-  --text-h2: clamp(1.75rem, 4vw, 2rem);
-  --text-h2--line-height: 1.2;
-  --text-h2--letter-spacing: -0.02em;
+  /* Escala semántica: títulos fluidos (razón ~1.25), UI estable y líneas legibles. */
+  --text-display: clamp(2.6rem, 5.6vw, 4.5rem);
+  --text-display--line-height: 1.02;
+  --text-display--letter-spacing: -0.04em;
+  --text-h1: clamp(2.125rem, 4.6vw, 2.75rem);
+  --text-h1--line-height: 1.08;
+  --text-h1--letter-spacing: -0.035em;
+  --text-h2: clamp(1.875rem, 4vw, 2.5rem);
+  --text-h2--line-height: 1.12;
+  --text-h2--letter-spacing: -0.03em;
   --text-h3: 1.5rem;
-  --text-h3--line-height: 1.33;
+  --text-h3--line-height: 1.25;
+  --text-h3--letter-spacing: -0.02em;
   --text-h4: 1.25rem;
-  --text-h4--line-height: 1.4;
+  --text-h4--line-height: 1.35;
+  --text-h4--letter-spacing: -0.01em;
   --text-body-lg: 1.125rem;
   --text-body-lg--line-height: 1.67;
   --text-body: 1rem;
@@ -89,20 +115,30 @@
   --text-caption--letter-spacing: 0.02em;
   /* H1 de los heros de marketing en desktop (se usa como lg:text-hero). */
   --text-hero: 3.5rem;
-  --text-hero--line-height: 1.06;
-  --text-hero--letter-spacing: -0.03em;
+  --text-hero--line-height: 1.02;
+  --text-hero--letter-spacing: -0.04em;
 
-  /* Etiquetas en mayúsculas sobre los títulos (eyebrows). */
-  --tracking-eyebrow: 0.12em;
+  /* Etiquetas sobre los títulos: frase normal, sin mayúsculas espaciadas. */
+  --tracking-eyebrow: 0.005em;
+  /* Eyebrow de marca: mayúsculas pequeñas con aire (REDISEÑO §5). */
+  --tracking-marca: 0.15em;
 
-  /* ── Radios ── */
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
-  --radius-xl: 18px;
+  /* ── Radios: jerarquía por tamaño (control < tarjeta < superficie) ── */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+  --radius-xl: 28px;
 
-  /* Elevación: solo cuando comunica jerarquía o superposición. */
-  --shadow-elevated: 0 12px 32px rgba(18, 16, 28, 0.14);
+  /* Elevación con tinte de marca (noche + violeta), nunca gris. */
+  --shadow-elevated: 0 18px 48px -12px color-mix(in srgb, var(--color-noche-900) 30%, transparent);
+  --shadow-soft:
+    0 1px 2px color-mix(in srgb, var(--color-noche-900) 6%, transparent),
+    0 10px 28px -12px color-mix(in srgb, var(--color-violeta-500) 22%, transparent);
+  /* Brillo del botón primario (REDISEÑO §4.1, regla 1). */
+  --shadow-glow: 0 10px 30px -10px var(--color-violeta-500);
+  --shadow-glow-neon: 0 10px 30px -10px color-mix(in srgb, var(--color-cian-500) 70%, transparent);
+  /* Filo de luz superior de los botones rellenos. */
+  --shadow-highlight: inset 0 1px 0 color-mix(in srgb, var(--color-white) 20%, transparent);
 
   /* Alturas y anchos compartidos. */
   --spacing-control: 2.75rem;
@@ -116,8 +152,12 @@
   --container-content: 72rem;
   --container-wide: 80rem;
 
-  /* ── Motion ── */
+  /* ── Motion ── solo transform y opacity; ≤ 300 ms en la interfaz. */
   --ease-out-soft: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 150ms;
+  --duration-base: 200ms;
+  --duration-slow: 300ms;
 }
 
 /* ============================================================
@@ -127,17 +167,27 @@
 /* Solo valores compuestos que @theme no puede expresar. Los colores
    planos (fondo, texto, bordes) viven únicamente en @theme. */
 :root {
-  --sep-gradient: linear-gradient(
-    100deg,
-    var(--color-sep-600) 0%,
-    var(--color-violet-brand) 52%,
-    var(--color-purple-brand) 100%
+  /* Degradado «Lavanda neón». DECORATIVO: bordes encendidos, reglas, barra
+     de progreso, anillo de logro y halo. Nunca lleva texto encima ni se usa
+     como color de texto. */
+  --grad-marca: linear-gradient(
+    135deg,
+    var(--color-violeta-500) 0%,
+    var(--color-turquesa-500) 65%,
+    var(--color-cian-500) 100%
   );
-  --sep-gradient-soft: linear-gradient(
-    100deg,
-    color-mix(in srgb, var(--color-sep-600) 6%, transparent) 0%,
-    color-mix(in srgb, var(--color-purple-brand) 6%, transparent) 100%
-  );
+  /* Halo: violeta al 35 % arriba a la izquierda y cian al 12 % abajo a la
+     derecha, sobre noche-900. Es el único gesto memorable del sistema. */
+  --halo-marca:
+    radial-gradient(60% 65% at 0% 0%, color-mix(in srgb, var(--color-violeta-500) 35%, transparent), transparent 70%),
+    radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--color-cian-500) 12%, transparent), transparent 70%),
+    var(--color-noche-900);
+
+  /* Semánticos para CSS propio (no clases). */
+  --bg: var(--color-surface-0);
+  --text: var(--color-ink);
+  --brand: var(--color-violeta-600);
+  --brand-glow: var(--color-violeta-500);
 }
 
 /* ============================================================
@@ -188,7 +238,7 @@
   select,
   textarea,
   summary {
-    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-sep-600) 12%, transparent);
+    -webkit-tap-highlight-color: color-mix(in srgb, var(--color-violeta-600) 12%, transparent);
   }
 
   h1,
@@ -220,64 +270,116 @@
   }
 }
 
+/* Selección: cian sobre noche (11.17:1). */
 ::selection {
-  background: var(--color-gold-500);
-  color: var(--color-ink);
+  background: var(--color-cian-500);
+  color: var(--color-noche-900);
 }
 
 /* Red de seguridad de accesibilidad: un `outline-none` en un input no
-   debe borrar el foco de teclado. */
+   debe borrar el foco de teclado. Anillo violeta sobre claro (4.18:1)
+   y cian dentro de bloques noche (11.17:1). */
 :focus-visible {
-  outline: 2px solid var(--color-sep-500);
+  outline: 2px solid var(--color-violeta-500);
   outline-offset: 3px;
 }
-
-/* El producto autenticado usa Inter incluso cuando una vista heredada pide
-   `font-display`: Poppins queda reservado para hitos editoriales de marketing. */
-.app-shell .font-display {
-  font-family: var(--font-sans);
-}
-
-.app-shell .sep-gradient {
-  background: var(--color-sep-800);
-}
-
-.app-shell .sep-gradient-text {
-  background: none;
-  color: var(--color-ink);
+.theme-night :focus-visible {
+  outline-color: var(--color-cian-500);
 }
 
 /* ============================================================
    Utilidades de marca
    ============================================================ */
 
-.sep-gradient {
-  background: var(--sep-gradient);
+/* Degradado decorativo: líneas, barras, puntos y brillos. Nunca con texto. */
+.grad-marca {
+  background: var(--grad-marca);
 }
 
-.sep-gradient-text {
-  background: var(--sep-gradient);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+/* ── Tema noche por sección ────────────────────────────────────
+   Reasigna los ROLES dentro de un bloque oscuro: el mismo componente
+   (SectionHeader, Card, Badge, Button outline…) se pinta bien sobre noche
+   sin variantes nuevas. Contrastes sobre noche-900 / sobre una tarjeta
+   translúcida (#2e3844): ink→blanco 14.31 · slate-ui→noche-300 7.92 / 6.59 ·
+   mist→(noche-400 65 % + noche-300) 5.9 / 4.9 · acento→violeta-300 6.86 / 5.70.
+   La escala violeta NO se reasigna (el hover del botón sigue oscuro). */
+.theme-night {
+  --color-ink: var(--color-white);
+  --color-graphite: color-mix(in srgb, var(--color-white) 86%, var(--color-noche-900));
+  --color-slate-ui: var(--color-noche-300);
+  --color-mist: color-mix(in srgb, var(--color-noche-400) 65%, var(--color-noche-300));
+  --color-line: color-mix(in srgb, var(--color-white) 12%, transparent);
+  --color-surface-0: color-mix(in srgb, var(--color-white) 6%, transparent);
+  --color-surface-1: color-mix(in srgb, var(--color-white) 4%, transparent);
+  --color-surface-2: color-mix(in srgb, var(--color-white) 10%, transparent);
+  --color-violeta-50: color-mix(in srgb, var(--color-violeta-500) 18%, transparent);
+  --color-violeta-100: color-mix(in srgb, var(--color-violeta-500) 26%, transparent);
+  --color-acento: var(--color-violeta-300);
+  --color-success: var(--color-turquesa-500); /* 6.60 */
+  --color-success-bg: color-mix(in srgb, var(--color-turquesa-500) 14%, transparent);
+  --color-turquesa-50: color-mix(in srgb, var(--color-turquesa-500) 14%, transparent);
+  --color-turquesa-800: var(--color-turquesa-400);
+  --color-danger: #ff7a88; /* 5.72 */
+  --color-danger-bg: color-mix(in srgb, #ff7a88 14%, transparent);
+  --color-warning: #ffc266; /* 8.97 */
+  --color-warning-bg: color-mix(in srgb, #ffc266 14%, transparent);
+  color: var(--color-ink);
 }
 
-/* Subrayado amarillo trazado a mano, como en el logo */
-.gold-underline {
+/* Restaura el tema claro dentro de un bloque noche (menús y diálogos que
+   flotan). Los valores son los de @theme: aquí van literales porque los
+   nombres están reasignados por .theme-night. */
+.theme-light {
+  --color-ink: #212b38;
+  --color-graphite: #2a3545;
+  --color-slate-ui: #4a5869;
+  --color-mist: #5b6878;
+  --color-line: #e2e7ee;
+  --color-surface-0: #ffffff;
+  --color-surface-1: #f5f7fa;
+  --color-surface-2: #eef1f5;
+  --color-violeta-50: #f4f3ff;
+  --color-violeta-100: #e8e6ff;
+  --color-acento: #5249b8;
+  --color-success: #067363;
+  --color-success-bg: #ebfaf8;
+  --color-turquesa-50: #ebfaf8;
+  --color-turquesa-800: #067363;
+  --color-danger: #c9354a;
+  --color-danger-bg: #fdeef0;
+  --color-warning: #a15c00;
+  --color-warning-bg: #fff4e5;
+  color: var(--color-ink);
+}
+
+/* Fondo noche con el halo de marca. Sobre él: blanco, noche-300, violeta-300,
+   turquesa-500 y cian. */
+.halo {
+  background: var(--halo-marca);
+  color: var(--color-white);
+}
+
+/* Malla tenue para fondos noche: da profundidad sin otro color. */
+.halo-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-white) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-white) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 70% 70% at 30% 20%, #000 20%, transparent 75%);
+}
+
+/* Palabra subrayada con el trazo de marca (decorativo, bajo el texto). */
+.subrayado-marca {
   position: relative;
-  display: inline-block;
-}
-.gold-underline::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 38%;
-  bottom: -0.06em;
-  height: 0.12em;
-  background: var(--color-gold-500);
-  border-radius: 999px;
-  z-index: -1;
-  opacity: 1;
+  /* Fondo en lugar de pseudo-elemento: si la frase ocupa varias líneas, cada
+     fragmento lleva su propio trazo y no se sale de las palabras. */
+  background-image: var(--grad-marca);
+  background-repeat: no-repeat;
+  background-size: 100% 0.1em;
+  background-position: 0 96%;
+  padding-bottom: 0.06em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .tabular {
@@ -311,6 +413,326 @@
 ::-webkit-scrollbar-thumb:hover {
   background: color-mix(in srgb, var(--color-mist) 50%, var(--color-surface-0));
   background-clip: content-box;
+}
+
+/* ============================================================
+   Fase 3 · Utilidades de componentes (REDISEÑO §5)
+   Solo transform, opacity, background-position y sombras; 300 ms.
+   ============================================================ */
+
+/* Botón relleno: el fondo se desliza dentro de un degradado violeta
+   (600→700→800: el blanco pasa AA en todo el recorrido, ≥ 5.38), sube 2 px
+   y gana el brillo de marca. Al presionar, scale(0.98). */
+@utility btn-desliza {
+  background-image: linear-gradient(
+    110deg,
+    var(--color-violeta-600) 0%,
+    var(--color-violeta-600) 45%,
+    var(--color-violeta-700) 70%,
+    var(--color-violeta-800) 100%
+  );
+  background-size: 220% 100%;
+  background-position: 0% 50%;
+  transition:
+    background-position var(--duration-slow) var(--ease-out),
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
+  &:hover {
+    background-position: 100% 50%;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-glow);
+  }
+  &:active {
+    transform: translateY(0) scale(0.98);
+  }
+}
+
+/* Tarjeta viva: borde de 1 px que se enciende con el degradado de marca al
+   pasar el mouse, sube 4 px y gana sombra con tinte. El relleno sólido
+   (--relleno-tarjeta) evita que el degradado del borde se vea por dentro. */
+:root {
+  --relleno-tarjeta: var(--color-white);
+}
+.theme-night {
+  --relleno-tarjeta: var(--color-noche-800);
+}
+.theme-light {
+  --relleno-tarjeta: #ffffff;
+}
+@utility tarjeta-viva {
+  border: 1px solid transparent;
+  background:
+    linear-gradient(var(--relleno-tarjeta), var(--relleno-tarjeta)) padding-box,
+    linear-gradient(var(--color-line), var(--color-line)) border-box;
+  transition:
+    transform var(--duration-slow) var(--ease-out),
+    box-shadow var(--duration-slow) var(--ease-out);
+  &:hover,
+  &:focus-within {
+    background:
+      linear-gradient(var(--relleno-tarjeta), var(--relleno-tarjeta)) padding-box,
+      var(--grad-marca) border-box;
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-soft);
+  }
+}
+
+/* Enlace con trazo: subrayado en degradado que se dibuja de izquierda a derecha. */
+@utility enlace-trazo {
+  background-image: var(--grad-marca);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  padding-bottom: 2px;
+  transition: background-size var(--duration-slow) var(--ease-out);
+  &:hover,
+  &:focus-visible,
+  &[aria-current="page"] {
+    background-size: 100% 2px;
+  }
+}
+
+/* Regla de 3 px en degradado para separar o subrayar títulos. */
+@utility regla-marca {
+  display: block;
+  height: 3px;
+  width: 3rem;
+  border-radius: 999px;
+  background: var(--grad-marca);
+}
+
+/* Velo sobre fotos: noche abajo para leer texto blanco encima. */
+@utility velo-foto {
+  background: linear-gradient(
+    180deg,
+    transparent 35%,
+    color-mix(in srgb, var(--color-noche-950) 82%, transparent) 100%
+  );
+}
+
+/* ============================================================
+   Fase 4 · Movimiento (REDISEÑO §6)
+   El contenido NUNCA queda oculto sin JS: `.js` lo pone RevealObserver.
+   ============================================================ */
+
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(12px);
+    transition:
+      opacity var(--duration-slow) var(--ease-out),
+      transform var(--duration-slow) var(--ease-out);
+  }
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Transición entre páginas: solo al navegar (la primera carga no espera). */
+  .navegado .pagina-entra:not(.ya-vista) {
+    animation: pagina-entra var(--duration-slow) var(--ease-out) both;
+  }
+}
+
+/* Animaciones decorativas: arrancan después de `load` + `requestIdleCallback`
+   (RevealObserver pone `.anim-listo`), para no competir con la carga. Sin JS
+   (sin `.js`) corren normalmente. */
+.js:not(.anim-listo) .motivo-semilla *,
+.js:not(.anim-listo) .escena * {
+  animation-play-state: paused !important;
+}
+
+/* Maquetas y motivos animados: corren solo cuando se ven. */
+.js [data-anim]:not(.is-visible),
+.js [data-anim]:not(.is-visible) * {
+  animation-play-state: paused !important;
+}
+
+@keyframes pagina-entra {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Barra de progreso: se llena con transform al entrar en pantalla. */
+@keyframes progreso-llena {
+  from {
+    transform: scaleX(0);
+  }
+}
+.barra-progreso {
+  transform-origin: left center;
+  animation: progreso-llena 700ms var(--ease-out) both;
+}
+
+/* Diálogo nativo: entra con fade + escala + 8 px (200 ms) y sale en 150 ms.
+   En móvil se presenta como hoja inferior. */
+dialog.dialogo {
+  margin: auto;
+  max-height: min(88dvh, 44rem);
+  width: min(100% - 2rem, 32rem);
+  border: 0;
+  padding: 0;
+  color: var(--color-ink);
+  background: var(--color-surface-0);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-elevated);
+  opacity: 0;
+  transform: translateY(8px) scale(0.96);
+  transition:
+    opacity 150ms var(--ease-out),
+    transform 150ms var(--ease-out),
+    overlay 150ms allow-discrete,
+    display 150ms allow-discrete;
+}
+dialog.dialogo[open] {
+  opacity: 1;
+  transform: none;
+  transition-duration: 200ms;
+}
+@starting-style {
+  dialog.dialogo[open] {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+dialog.dialogo::backdrop {
+  background: color-mix(in srgb, var(--color-noche-950) 60%, transparent);
+  backdrop-filter: blur(4px);
+}
+@media (max-width: 639px) {
+  dialog.dialogo {
+    margin: auto 0 0;
+    width: 100%;
+    max-width: none;
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+    transform: translateY(24px);
+  }
+  @starting-style {
+    dialog.dialogo[open] {
+      transform: translateY(24px);
+    }
+  }
+}
+
+/* ── Escenas de maquetas (components/maquetas) ───────────────
+   Ciclo compartido --d; cada pieza con su retraso --t. Mismo vocabulario
+   que ECOING: crecer-x, check, emerger, aparecer, pulso, sello. */
+.escena [class*="esc-"] {
+  animation-duration: var(--d, 10s);
+  animation-delay: var(--t, 0s);
+  animation-iteration-count: infinite;
+  animation-timing-function: var(--ease-out);
+  animation-fill-mode: both;
+}
+.escena .esc-crecer-x { animation-name: esc-crecer-x; transform-origin: left center; }
+.escena .esc-check { animation-name: esc-check; transform-box: fill-box; }
+.escena .esc-emerger { animation-name: esc-emerger; }
+.escena .esc-emerger-fijo { animation-name: esc-emerger-fijo; }
+.escena .esc-aparecer { animation-name: esc-aparecer; }
+.escena .esc-pulso { animation-name: esc-pulso; animation-timing-function: ease-in-out; }
+.escena .esc-sello { animation-name: esc-sello; }
+@keyframes esc-crecer-x {
+  0%, 15% { transform: scaleX(var(--desde, 0)); }
+  35%, 100% { transform: scaleX(1); }
+}
+@keyframes esc-check {
+  0%, 20% { opacity: 0; transform: scale(0.4); }
+  28%, 100% { opacity: 1; transform: none; }
+}
+@keyframes esc-emerger {
+  0%, 25% { opacity: 0; transform: translateY(8px) scale(0.96); }
+  32%, 85% { opacity: 1; transform: none; }
+  95%, 100% { opacity: 0; transform: translateY(4px); }
+}
+@keyframes esc-emerger-fijo {
+  0% { opacity: 0; transform: translateY(8px) scale(0.98); }
+  8%, 100% { opacity: 1; transform: none; }
+}
+@keyframes esc-aparecer {
+  0%, 5% { opacity: 0; }
+  12%, 100% { opacity: 1; }
+}
+@keyframes esc-pulso {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+@keyframes esc-sello {
+  0%, 30% { opacity: 0; transform: scale(0.6); }
+  36% { opacity: 1; transform: scale(1.08); }
+  42%, 100% { opacity: 1; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .escena [class*="esc-"] { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+/* ── Motivo «Semilla en cadena» (components/brand/motivo-semilla.tsx) ──
+   Ramas que se dibujan una vez, nodos que aparecen y un pulso que recorre la
+   red en bucle (--d). Colores por token; pensado para fondos noche. */
+.motivo-semilla .ms-trazo {
+  fill: none;
+  stroke-width: 2.25;
+  stroke-linecap: round;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: ms-dibujar 900ms var(--ease-out) var(--t, 0s) forwards;
+}
+.motivo-semilla .ms-tronco { stroke: var(--color-violeta-500); stroke-width: 3; }
+.motivo-semilla .ms-rama1 { stroke: var(--color-violeta-400); }
+.motivo-semilla .ms-rama2 { stroke: var(--color-turquesa-500); stroke-width: 1.75; }
+.motivo-semilla .ms-pulso {
+  fill: none;
+  stroke: var(--color-cian-500);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-dasharray: 0.08 1.2;
+  stroke-dashoffset: 1.1;
+  opacity: 0.9;
+  animation: ms-recorrer var(--d, 9s) linear var(--t, 0s) infinite;
+}
+.motivo-semilla .ms-nodo {
+  transform-box: fill-box;
+  transform-origin: center;
+  opacity: 0;
+  animation: ms-aparecer 500ms var(--ease-out) var(--t, 0s) forwards;
+}
+.motivo-semilla .ms-semilla { fill: var(--color-violeta-500); }
+.motivo-semilla .ms-n1 { fill: var(--color-turquesa-500); }
+.motivo-semilla .ms-n2 {
+  fill: var(--color-cian-500);
+  animation:
+    ms-aparecer 500ms var(--ease-out) var(--t, 0s) forwards,
+    ms-respirar 3.2s ease-in-out calc(var(--t, 0s) + 0.6s) infinite;
+}
+@keyframes ms-dibujar { to { stroke-dashoffset: 0; } }
+/* Logro (curso completado): se dibuja una vez en ~800 ms y queda quieto. */
+.motivo-logro .ms-trazo { animation-duration: 450ms; }
+.motivo-logro .ms-pulso { display: none; }
+.motivo-logro .ms-n2 { animation: ms-aparecer 300ms var(--ease-out) var(--t, 0s) forwards; }
+.motivo-logro .ms-trazo,
+.motivo-logro .ms-nodo { animation-delay: calc(var(--t, 0s) * 0.25); }
+@keyframes ms-aparecer {
+  from { opacity: 0; transform: scale(0.3); }
+  to { opacity: 1; transform: none; }
+}
+/* El pulso ocupa ~25 % del ciclo y descansa el resto: calma, no ruido. */
+@keyframes ms-recorrer {
+  0% { stroke-dashoffset: 1.1; }
+  25%, 100% { stroke-dashoffset: -0.15; }
+}
+@keyframes ms-respirar {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.55; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .motivo-semilla .ms-trazo { stroke-dashoffset: 0; animation: none; }
+  .motivo-semilla .ms-nodo { opacity: 1; animation: none; }
+  .motivo-semilla .ms-pulso { display: none; }
 }
 
 /* ============================================================
@@ -501,7 +923,8 @@ input:-webkit-autofill:focus {
   }
 
   /* El degradado de marca sí se imprime: es la identidad del documento */
-  .sep-gradient {
+  .grad-marca,
+  .halo {
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
   }

@@ -54,6 +54,26 @@ export default async function EstudiantePage() {
   assertQueryResults("estudiante:panel:certificados", certificatesResult);
   const certificatesCount = certificatesResult.count;
 
+  // Últimas publicaciones reales de la comunidad (antes eran textos de ejemplo fijos).
+  const postsResult = await supabase
+    .from("posts")
+    .select("id, content, profiles:public_profiles!posts_user_id_fkey(full_name, region)")
+    .eq("is_hidden", false)
+    .order("created_at", { ascending: false })
+    .limit(2);
+  assertQueryResults("estudiante:panel:comunidad", postsResult);
+  const latestPosts = (postsResult.data ?? []).map((p) => {
+    const author = Array.isArray(p.profiles) ? p.profiles[0] : p.profiles;
+    // «Nombre A.»: basta para reconocerse en la comunidad sin exponer el nombre completo.
+    const [first = "Miembro", last] = (author?.full_name ?? "").trim().split(/\s+/);
+    return {
+      id: p.id,
+      name: last ? `${first} ${last[0]}.` : first || "Miembro SEP",
+      region: author?.region ?? null,
+      text: p.content,
+    };
+  });
+
   const active = (enrollments ?? []).filter((e) => e.status === "activo");
   const hoursDone = (enrollments ?? []).reduce(
     (sum, e) => sum + Math.round(((e.progress_pct ?? 0) / 100) * 8),
@@ -76,14 +96,14 @@ export default async function EstudiantePage() {
         }
         action={
           <Badge tone="brand">
-            <span className="size-1.5 rounded-full bg-seed-700" />
+            <span className="size-1.5 rounded-full bg-turquesa-800" />
             Plan Semilla
           </Badge>
         }
       />
 
       <KpiGrid>
-        <Kpi
+        <Kpi tone="destacada"
           label="Cursos en progreso"
           value={active.length}
           icon={<BookOpen className="size-4" />}
@@ -99,16 +119,16 @@ export default async function EstudiantePage() {
           icon={<Clock className="size-4" />}
         />
         <Kpi
-          label="Regiones activas"
-          value="10+"
-          hint="En toda la comunidad SEP"
+          label="Regiones en SEP"
+          value="13"
+          hint="Con participantes en los webinars"
           icon={<CalendarDays className="size-4" />}
         />
       </KpiGrid>
 
       {/* Continúa aprendiendo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Continúa aprendiendo
         </h2>
 
@@ -146,7 +166,7 @@ export default async function EstudiantePage() {
                         {course?.subtitle}
                       </p>
                     </div>
-                    <span className="tabular shrink-0 text-body-sm font-semibold text-sep-600">
+                    <span className="tabular shrink-0 text-body-sm font-semibold text-acento">
                       {e.progress_pct}%
                     </span>
                   </div>
@@ -165,7 +185,7 @@ export default async function EstudiantePage() {
       <div className="mt-8 grid gap-3 lg:grid-cols-2">
         {/* Próxima sesión */}
         <Card className="p-5">
-          <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <div className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             <Video className="size-4" />
             Próxima sesión en vivo
           </div>
@@ -182,52 +202,48 @@ export default async function EstudiantePage() {
         {/* Comunidad */}
         <Card className="p-5">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+            <div className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
               <MessageSquare className="size-4" />
               Comunidad SEP
             </div>
             <Link
               href="/estudiante/comunidad"
-              className="relative text-caption font-medium text-sep-600 hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
+              className="relative text-caption font-medium text-acento hover:underline after:absolute after:-inset-x-2 after:-inset-y-3.5 after:content-['']"
             >
               Ver todo
             </Link>
           </div>
 
-          <ul className="mt-4 space-y-3.5">
-            {[
-              {
-                name: "Andrea N.",
-                region: "Arequipa",
-                text: "Compartí mi prototipo de DT con mi colegio. Fue increíble verlos reaccionar.",
-              },
-              {
-                name: "Ricardo M.",
-                region: "Cusco",
-                text: "¿Alguien se suma al grupo de práctica de Scrum antes del Demo Day?",
-              },
-            ].map((p) => (
-              <li key={p.name} className="flex gap-3">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-sep-700 text-caption font-semibold text-white">
-                  {initials(p.name)}
-                </span>
-                <div className="min-w-0">
-                  <p className="text-caption font-medium text-ink">
-                    {p.name} · <span className="font-normal text-slate-ui">{p.region}</span>
-                  </p>
-                  <p className="mt-0.5 text-body-sm leading-relaxed text-slate-ui">
-                    {p.text}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {latestPosts.length === 0 ? (
+            <p className="mt-4 text-body-sm text-slate-ui">
+              Todavía no hay publicaciones. Sé la primera persona en contar qué estás construyendo.
+            </p>
+          ) : (
+            <ul className="mt-4 space-y-3.5">
+              {latestPosts.map((p) => (
+                <li key={p.id} className="flex gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
+                    {initials(p.name)}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-caption font-medium text-ink">
+                      {p.name}
+                      {p.region && <span className="font-normal text-slate-ui"> · {p.region}</span>}
+                    </p>
+                    <p className="mt-0.5 line-clamp-2 text-body-sm leading-relaxed text-slate-ui">
+                      {p.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </Card>
       </div>
 
       {/* Certificados */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Certificados al finalizar
         </h2>
         <div className="grid gap-3 sm:grid-cols-2">
@@ -238,7 +254,7 @@ export default async function EstudiantePage() {
                   <h3 className="text-body-sm leading-snug font-semibold text-ink">
                     {c.name}
                   </h3>
-                  {c.recommended && <Badge tone="gold">Recomendado</Badge>}
+                  {c.recommended && <Badge tone="neon">Recomendado</Badge>}
                 </div>
                 <p className="mt-1.5 text-caption leading-relaxed text-slate-ui">
                   {c.description}

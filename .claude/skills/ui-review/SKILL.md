@@ -24,7 +24,7 @@ Para cada ruta:
 2. Redimensiona y toma un screenshot en **375×812**, **768×1024** y **1440×900**.
 3. Si la vista tiene datos, captura también el estado vacío, de carga y de error cuando sea posible.
 4. Revisa la consola del navegador: cualquier error o warning cuenta como hallazgo.
-5. Recorre la página con `Tab`: el foco debe ser visible (`outline sep-500`) y seguir un orden lógico.
+5. Recorre la página con `Tab`: el foco debe ser visible (anillo `violeta-500` sobre claro, cian sobre noche) y seguir un orden lógico.
 
 ## 3. Evaluar con esta checklist
 | Área | Qué mirar |
@@ -32,9 +32,9 @@ Para cada ruta:
 | Jerarquía | ¿Se entiende en 3 segundos qué es y qué hacer? ¿Hay una sola acción principal? |
 | Consistencia | ¿Radios (sm/md/lg/full), alturas de botón (44px), tamaños de fuente y espaciado iguales en componentes iguales? |
 | Tokens | ¿Hay colores fuera de `DESIGN.md`? Busca `#`, `rgb(`, `bg-<color>-<n>` de Tailwind y `text-xs`/`text-sm` en los archivos tocados. |
-| Degradado | ¿Se usa solo donde lo permite `DESIGN.md` §2.5? ¿Nunca en el panel autenticado ni dos veces por viewport? |
+| Degradado y cian | ¿El degradado `grad-marca` es solo decorativo (nunca con texto encima, `DESIGN.md` §2.4)? ¿El cian aparece solo sobre oscuro y en ≤ 5 % de la pantalla? |
 | Espaciado | ¿Alineaciones correctas? ¿Hay aire suficiente? ¿Sin valores arbitrarios? |
-| Contraste | Texto ≥ 4.5:1 y texto grande e íconos ≥ 3:1. Atención a `mist`, a `white/65–75` sobre el degradado y a nada blanco sobre `gold-500`. |
+| Contraste | Texto ≥ 4.5:1 y texto grande e íconos ≥ 3:1. Atención a `mist`, a `white/65–75` sobre noche, a nada blanco sobre `violeta-500` o turquesa y a nada cian sobre claro. Verifica con `scripts/contrast.mjs`. |
 | Responsive | ¿Nada se desborda ni se corta en 375px? ¿Los objetivos táctiles son de al menos 44px? |
 | Estados | ¿Existen vacío, carga y error? |
 | Movimiento | ¿Las animaciones de UI duran 300ms o menos? ¿Se respeta `prefers-reduced-motion`? |

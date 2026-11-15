@@ -70,7 +70,7 @@ export function RequestCertificateButtons({
               "group flex items-start justify-between gap-3 rounded-md border p-4 text-left transition-colors",
               t.owned
                 ? "cursor-default border-success/30 bg-success-bg"
-                : "border-line bg-white hover:border-sep-300  disabled:opacity-60",
+                : "border-line bg-white hover:border-violeta-300  disabled:opacity-60",
             )}
           >
             <div className="min-w-0">
@@ -89,7 +89,7 @@ export function RequestCertificateButtons({
                 {formatSoles(t.priceCents)}
               </p>
               {!t.owned && (
-                <p className="mt-1 text-caption font-medium text-sep-600">
+                <p className="mt-1 text-caption font-medium text-acento">
                   {loading === t.id ? (
                     <Loader2 className="ml-auto size-3.5 animate-spin" />
                   ) : (

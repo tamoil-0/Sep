@@ -23,7 +23,7 @@ export default async function InstitucionPage() {
 
   const profileResult = await supabase
     .from("profiles")
-    .select("institution_id, institutions(id, name, type, region, is_verified, agreement_signed_at)")
+    .select("institution_id, institutions!profiles_institution_id_fkey(id, name, type, region, is_verified, agreement_signed_at)")
     .eq("id", user.id)
     .single();
   assertQueryResults("institucion:panel:perfil", profileResult);
@@ -69,14 +69,14 @@ export default async function InstitucionPage() {
       <KpiGrid>
         {isCompany ? (
           <>
-            <Kpi label="Cohortes patrocinadas" value={0} icon={<GraduationCap className="size-4" />} />
+            <Kpi tone="destacada" label="Cohortes patrocinadas" value={0} icon={<GraduationCap className="size-4" />} />
             <Kpi label="Jóvenes formados" value={students} icon={<Building2 className="size-4" />} />
             <Kpi label="Regiones alcanzadas" value={0} icon={<Globe className="size-4" />} />
             <Kpi label="ODS alineados" value="4, 8, 10" icon={<ChartNoAxesCombined className="size-4" />} />
           </>
         ) : (
           <>
-            <Kpi label="Talleres realizados" value={done.length} icon={<Presentation className="size-4" />} />
+            <Kpi tone="destacada" label="Talleres realizados" value={done.length} icon={<Presentation className="size-4" />} />
             <Kpi label="Estudiantes impactados" value={students} icon={<GraduationCap className="size-4" />} />
             <Kpi
               label="Talleres programados"
@@ -93,7 +93,7 @@ export default async function InstitucionPage() {
 
       <section className="mt-8">
         <div className="mb-3.5 flex items-center justify-between">
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Talleres
           </h2>
           <Button href="/institucion/talleres" variant="link" size="sm">
@@ -150,9 +150,9 @@ export default async function InstitucionPage() {
       </section>
 
       <section className="mt-8">
-        <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
+        <Card className="flex flex-wrap items-center justify-between gap-5 border-violeta-200 bg-violeta-50/40 p-6">
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-sep-600 ring-1 ring-inset ring-line">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-acento ring-1 ring-inset ring-line">
               <ChartNoAxesCombined className="size-5" />
             </span>
             <div>

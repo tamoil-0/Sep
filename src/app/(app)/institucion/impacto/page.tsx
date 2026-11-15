@@ -65,8 +65,8 @@ export default async function ImpactoPage() {
 
       {/* Cabecera imprimible */}
       <Card className="mb-5 overflow-hidden p-0 print:border-0">
-        <div className="bg-sep-800 px-7 py-6 text-white">
-          <p className="text-caption uppercase tracking-eyebrow text-white/70">
+        <div className="halo px-7 py-6 text-white">
+          <p className="text-caption font-medium tracking-eyebrow text-white/70">
             Reporte de impacto social
           </p>
           <h2 className="mt-2 text-h2 font-semibold leading-tight">
@@ -82,7 +82,7 @@ export default async function ImpactoPage() {
           <p className="text-caption text-slate-ui">
             Generado el {formatDate(new Date())} · Semillero de Emprendedores Perú
           </p>
-          <Badge tone="seed">Datos verificables en plataforma</Badge>
+          <Badge tone="success">Datos verificables en plataforma</Badge>
         </div>
       </Card>
 
@@ -112,7 +112,7 @@ export default async function ImpactoPage() {
 
       {/* Línea de tiempo */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Línea de tiempo
         </h2>
 
@@ -130,7 +130,7 @@ export default async function ImpactoPage() {
                   <span
                     className={
                       w.status === "realizado"
-                        ? "size-2 shrink-0 rounded-full bg-seed-700"
+                        ? "size-2 shrink-0 rounded-full bg-turquesa-800"
                         : "size-2 shrink-0 rounded-full bg-mist"
                     }
                     aria-hidden
@@ -154,13 +154,13 @@ export default async function ImpactoPage() {
 
       {/* ODS */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Alineación con los Objetivos de Desarrollo Sostenible
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
           {report.sdg.map((g) => (
             <Card key={g.goal} className="p-5">
-              <p className="tabular text-h2 font-bold leading-none text-sep-700">
+              <p className="tabular text-h2 font-bold leading-none text-acento">
                 ODS {g.goal}
               </p>
               <p className="mt-2.5 text-body-sm font-medium text-ink">{g.name}</p>

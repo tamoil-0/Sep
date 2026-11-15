@@ -16,14 +16,14 @@ export default async function ComunidadPage() {
       supabase
         .from("posts")
         .select(
-          "id, content, created_at, likes_count, is_pinned, user_id, profiles!posts_user_id_fkey(full_name, region, avatar_url)",
+          "id, content, created_at, likes_count, is_pinned, user_id, profiles:public_profiles!posts_user_id_fkey(full_name, region, avatar_url)",
         )
         .eq("is_hidden", false)
         .order("is_pinned", { ascending: false })
         .order("created_at", { ascending: false })
         .limit(40),
-      supabase.from("profiles").select("id", { count: "exact", head: true }),
-      supabase.from("profiles").select("region").not("region", "is", null),
+      supabase.from("public_profiles").select("id", { count: "exact", head: true }),
+      supabase.from("public_profiles").select("region").not("region", "is", null),
       supabase.from("post_likes").select("post_id").eq("user_id", user.id),
     ]);
   assertQueryResults("estudiante:comunidad", postsResult, membersResult, regionsResult, likesResult);
@@ -38,7 +38,7 @@ export default async function ComunidadPage() {
   const commentsResult = postIds.length
     ? await supabase
         .from("comments")
-        .select("id, post_id, content, created_at, profiles(full_name)")
+        .select("id, post_id, content, created_at, profiles:public_profiles(full_name)")
         .in("post_id", postIds)
         .eq("is_hidden", false)
         .order("created_at")

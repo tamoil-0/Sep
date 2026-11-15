@@ -11,6 +11,7 @@ import { BackLink } from "@/components/ui/arrow-link";
 import { requireRole } from "@/lib/auth/session";
 import { getCourseWithProgress } from "@/server/queries/courses";
 import { Badge, Card, ProgressBar } from "@/components/ui/primitives";
+import { MotivoSemilla } from "@/components/brand/motivo-semilla";
 import { Button } from "@/components/ui/button";
 import { formatDateTime } from "@/lib/utils";
 import { SessionList } from "./session-list";
@@ -61,7 +62,7 @@ export default async function CursoPage({
               <Badge tone="neutral">No inscrito</Badge>
             )}
             {course.category && <Badge tone="neutral">{course.category}</Badge>}
-            {course.is_free && <Badge tone="seed">Gratuito</Badge>}
+            {course.is_free && <Badge tone="success">Gratuito</Badge>}
           </div>
 
           <h1 className="mt-3.5 text-h2 font-semibold leading-tight text-ink">
@@ -114,12 +115,19 @@ export default async function CursoPage({
                 )}
               </p>
             ) : (
-              <div className="mt-4 flex flex-wrap items-center gap-3 rounded-sm border border-success/25 bg-success-bg px-4 py-3">
-                <Award className="size-5 shrink-0 text-success" />
-                <p className="flex-1 text-body-sm text-graphite">
-                  ¡Completaste el curso! Ya puedes obtener tu certificado.
-                </p>
-                <Button href="/estudiante/certificados" size="sm">
+              /* Celebración discreta: el motivo de marca se dibuja una vez (sin bucle de pulso). */
+              <div className="theme-night halo mt-4 flex flex-wrap items-center gap-4 overflow-hidden rounded-md px-4 py-4 sm:px-5">
+                <MotivoSemilla
+                  className="motivo-logro -my-2 h-16 w-16 shrink-0"
+                  label="Ilustración: la semilla de SEP se ramifica, celebrando el curso completado."
+                />
+                <div className="min-w-0 flex-1 basis-48">
+                  <p className="flex items-center gap-1.5 font-display text-body-lg font-semibold text-ink">
+                    <Award className="size-5 shrink-0 text-cian-500" aria-hidden /> ¡Completaste el curso!
+                  </p>
+                  <p className="mt-0.5 text-body-sm text-slate-ui">Ya puedes obtener tu certificado con código verificable.</p>
+                </div>
+                <Button href="/estudiante/certificados" variant="neon" size="sm">
                   Obtener certificado
                 </Button>
               </div>
@@ -134,7 +142,7 @@ export default async function CursoPage({
 
       {/* Sesiones */}
       <section className="mt-8">
-        <h2 className="mb-3.5 text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+        <h2 className="mb-3.5 text-body-sm font-semibold tracking-eyebrow text-slate-ui">
           Contenido del curso
         </h2>
 

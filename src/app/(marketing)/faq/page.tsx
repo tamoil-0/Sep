@@ -14,7 +14,8 @@ export const metadata = createPageMetadata({
 
 export default function FaqPage() {
   return (
-    <Section>
+    <>
+    <Section tone="night">
       <Container size="narrow">
         <SectionHeader
           as="h1"
@@ -22,8 +23,12 @@ export default function FaqPage() {
           title="Lo que suelen preguntarnos"
           align="center"
         />
+      </Container>
+    </Section>
 
-        <div className="mt-10">
+    <Section>
+      <Container size="narrow">
+        <div>
           <FaqAccordion items={faqs} headingLevel="h2" />
         </div>
 
@@ -60,5 +65,6 @@ export default function FaqPage() {
         }}
       />
     </Section>
+    </>
   );
 }

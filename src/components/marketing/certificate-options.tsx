@@ -23,7 +23,7 @@ export function CertificateOptions({
         <p className="mt-1 text-caption text-slate-ui">Semillero de Emprendedores Perú</p>
         {showVerification && (
           <p className="mt-4 flex items-center gap-2 border-t border-line pt-4 text-caption text-slate-ui">
-            <Check aria-hidden className="size-icon-sm text-seed-700" />
+            <Check aria-hidden className="size-icon-sm text-turquesa-800" />
             Código de verificación público
           </p>
         )}

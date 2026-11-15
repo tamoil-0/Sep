@@ -144,7 +144,7 @@ export default async function LegalPage({
   return (
     <Section>
       <Container size="narrow">
-        <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-600">
+        <p className="text-body-sm font-semibold tracking-eyebrow text-acento">
           Legal
         </p>
         <h1 className="mt-3 font-display text-h1 font-bold leading-tight text-ink">
@@ -172,7 +172,7 @@ export default async function LegalPage({
             ¿Tienes dudas sobre este documento? Escríbenos a{" "}
             <a
               href={`mailto:${siteConfig.contact.email}`}
-              className="font-medium text-sep-600 hover:underline"
+              className="font-medium text-acento hover:underline"
             >
               {siteConfig.contact.email}
             </a>

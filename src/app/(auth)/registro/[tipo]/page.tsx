@@ -48,7 +48,7 @@ export default async function SignupTypePage({
 
       <p className="mt-8 text-center text-body-sm text-slate-ui">
         ¿Ya tienes cuenta?{" "}
-        <Link href="/login" className="font-medium text-sep-600 hover:underline">
+        <Link href="/login" className="font-medium text-acento hover:underline">
           Iniciar sesión
         </Link>
       </p>

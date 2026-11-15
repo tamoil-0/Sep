@@ -619,6 +619,15 @@ export interface Database {
     };
     /** Vistas de analítica (migración 0009). Solo lectura. */
     Views: {
+      /** Ficha pública mínima (migración 0015). Sin correo, teléfono ni documento. */
+      public_profiles: Table<{
+        id: string;
+        full_name: string;
+        region: string | null;
+        avatar_url: string | null;
+        university: string | null;
+        career: string | null;
+      }>;
       course_stats: Table<{
         id: string;
         slug: string;

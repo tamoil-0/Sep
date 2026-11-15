@@ -21,7 +21,7 @@ export default async function MentorPage() {
         .maybeSingle(),
       supabase
         .from("mentorships")
-        .select("id, mentee_id, started_at, profiles!mentorships_mentee_id_fkey(full_name, region)")
+        .select("id, mentee_id, started_at, profiles:public_profiles!mentorships_mentee_id_fkey(full_name, region)")
         .eq("mentor_id", user.id)
         .is("ended_at", null),
       supabase
@@ -51,14 +51,14 @@ export default async function MentorPage() {
         title={`Hola, ${user.fullName.split(" ")[0] || "mentor"}`}
         description="Gracias por sostener la red. Aquí está tu mes."
         action={
-          <Badge tone="gold">
+          <Badge tone="neon">
             {typeLabels[volunteer?.type ?? "mentor_junior"] ?? "Voluntario SEP"}
           </Badge>
         }
       />
 
       <KpiGrid>
-        <Kpi
+        <Kpi tone="destacada"
           label="Mentorados activos"
           value={mentorships?.length ?? 0}
           icon={<UsersRound className="size-4" />}
@@ -86,7 +86,7 @@ export default async function MentorPage() {
       <section className="mt-8 grid gap-3 lg:grid-cols-3">
         <Card className="lg:col-span-2">
           <div className="flex items-center justify-between">
-            <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+            <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
               Mis mentorados
             </h2>
             <Button href="/mentor/mentorados" variant="link" size="sm">
@@ -123,7 +123,7 @@ export default async function MentorPage() {
         </Card>
 
         <Card>
-          <h2 className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+          <h2 className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
             Progreso del mes
           </h2>
           <p className="tabular mt-4 text-h2 font-semibold leading-none text-ink">
@@ -133,7 +133,7 @@ export default async function MentorPage() {
           <ProgressBar
             value={committed ? (monthHours / committed) * 100 : 0}
             className="mt-4"
-            tone="gold"
+            tone="success"
           />
           <p className="mt-3 text-caption leading-relaxed text-slate-ui">
             Tus horas registradas y aprobadas alimentan tu certificado de voluntariado y
@@ -146,9 +146,9 @@ export default async function MentorPage() {
       </section>
 
       <section className="mt-8">
-        <Card className="flex flex-wrap items-center justify-between gap-5 border-sep-200 bg-sep-50/40 p-6">
+        <Card className="flex flex-wrap items-center justify-between gap-5 border-violeta-200 bg-violeta-50/40 p-6">
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-sep-600 ring-1 ring-inset ring-line">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-white text-acento ring-1 ring-inset ring-line">
               <MessagesSquare className="size-5" />
             </span>
             <div>

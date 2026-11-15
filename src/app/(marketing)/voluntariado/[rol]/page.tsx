@@ -46,7 +46,7 @@ export default async function PostularPage({
           {/* Info del rol */}
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <Badge tone="gold">
+              <Badge tone="neon">
                 {role.openPositions}{" "}
                 {role.openPositions === 1 ? "vacante abierta" : "vacantes abiertas"}
               </Badge>
@@ -67,13 +67,13 @@ export default async function PostularPage({
 
             <div className="mt-8 grid gap-5 sm:grid-cols-2">
               <Card className="p-6">
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                   Requisitos
                 </p>
                 <ul className="mt-3.5 space-y-2.5">
                   {role.requirements.map((r) => (
                     <li key={r} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                       {r}
                     </li>
                   ))}
@@ -81,13 +81,13 @@ export default async function PostularPage({
               </Card>
 
               <Card className="p-6">
-                <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                   Proceso
                 </p>
                 <ol className="mt-3.5 space-y-3">
                   {volunteerProcess.map((s) => (
                     <li key={s.step} className="flex gap-2.5">
-                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-sep-50 text-caption font-semibold text-sep-600">
+                      <span className="tabular flex size-5 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
                         {s.step}
                       </span>
                       <div>
@@ -101,7 +101,7 @@ export default async function PostularPage({
             </div>
 
             <Card className="mt-5 p-6">
-              <p className="text-caption font-semibold uppercase tracking-eyebrow text-slate-ui">
+              <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
                 Lo que ganas
               </p>
               <ul className="mt-4 grid gap-4 sm:grid-cols-2">

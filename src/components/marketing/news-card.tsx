@@ -61,7 +61,7 @@ export function NewsCard({
           }
           className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.025]"
         />
-        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-sep-950/20 to-transparent" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-noche-950/20 to-transparent" />
       </Link>
 
       <div className={cn("flex flex-1 flex-col px-1 pb-1 pt-4", featured && "md:p-6")}>
@@ -84,7 +84,7 @@ export function NewsCard({
             "leading-snug",
           )}
         >
-          <Link href={`/blog/${post.slug}`} className="hover:text-sep-700">
+          <Link href={`/blog/${post.slug}`} className="hover:text-acento">
             {post.title}
           </Link>
         </Heading>

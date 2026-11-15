@@ -5,7 +5,7 @@ import {
   Badge,
   Card,
   Container,
-  GoldUnderline,
+  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -40,11 +40,11 @@ export default function PreciosPage() {
   return (
     <>
       {/* Hero */}
-      <section className="border-b border-line bg-surface-1">
+      <section className="theme-night halo relative overflow-hidden">
         <Container size="wide" className="py-16 text-center sm:py-20">
-          <Badge tone="seed">Transparencia total</Badge>
+          <Badge tone="success">Transparencia total</Badge>
           <h1 className="mx-auto mt-5 max-w-3xl font-display text-h1 font-bold leading-[1.1] text-ink sm:text-display">
-            Formación clara, <GoldUnderline>precios transparentes</GoldUnderline>
+            Formación clara, <AccentUnderline>precios transparentes</AccentUnderline>
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-body-lg leading-relaxed text-slate-ui">
             El catálogo de cursos no tiene costo de acceso. Los pagos corresponden a la
@@ -56,9 +56,9 @@ export default function PreciosPage() {
       {/* Cursos */}
       <Section>
         <Container size="wide">
-          <Card className="flex flex-wrap items-center justify-between gap-6 border-seed-400/40 bg-seed-50/60 p-8">
+          <Card className="flex flex-wrap items-center justify-between gap-6 border-turquesa-400/40 bg-turquesa-50/60 p-8">
             <div>
-              <Badge tone="seed">Todo el catálogo</Badge>
+              <Badge tone="success">Todo el catálogo</Badge>
               <h2 className="mt-3.5 font-display text-h2 font-semibold text-ink">
                 Cursos: S/ 0
               </h2>
@@ -92,12 +92,12 @@ export default function PreciosPage() {
                 key={cert.slug}
                 className={
                   cert.recommended
-                    ? "relative border-sep-200 "
+                    ? "relative border-violeta-200 "
                     : ""
                 }
               >
                 {cert.recommended && (
-                  <span className="absolute -top-3 left-6 rounded-full bg-gold-500 px-3 py-1 text-caption font-semibold text-ink">
+                  <span className="absolute -top-3 left-6 rounded-full bg-noche-900 px-3 py-1 text-caption font-semibold text-cian-500">
                     Recomendado
                   </span>
                 )}
@@ -114,7 +114,7 @@ export default function PreciosPage() {
                 <ul className="mt-5 space-y-2.5 border-t border-line pt-5">
                   {cert.features.map((f) => (
                     <li key={f} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                       {f}
                     </li>
                   ))}
@@ -147,7 +147,7 @@ export default function PreciosPage() {
                   {tier.label}
                   {!tier.confirmed && <ProposedTag />}
                 </p>
-                <p className="tabular mt-3 font-display text-h2 font-bold leading-none text-sep-700">
+                <p className="tabular mt-3 font-display text-h2 font-bold leading-none text-acento">
                   {tier.priceCents === 0 ? "Gratis" : formatSoles(tier.priceCents)}
                 </p>
               </Card>
@@ -155,7 +155,7 @@ export default function PreciosPage() {
           </div>
 
           <p className="mt-5 flex items-start gap-2 text-body-sm text-slate-ui">
-            <Sparkles className="mt-0.5 size-4 shrink-0 text-gold-700" />
+            <Sparkles className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
             Los voluntarios activos de SEP acceden al SILP sin costo. Es parte de lo que
             reciben por sostener la red.
           </p>
@@ -178,12 +178,12 @@ export default function PreciosPage() {
                   key={plan.slug}
                   className={
                     plan.highlight
-                      ? "relative flex flex-col border-sep-300 "
+                      ? "relative flex flex-col border-violeta-300 "
                       : "flex flex-col"
                   }
                 >
                   {plan.highlight && (
-                    <span className="absolute -top-3 left-6 rounded-full bg-sep-700 px-3 py-1 text-caption font-semibold text-white">
+                    <span className="absolute -top-3 left-6 rounded-full bg-violeta-700 px-3 py-1 text-caption font-semibold text-white">
                       El más elegido
                     </span>
                   )}
@@ -209,7 +209,7 @@ export default function PreciosPage() {
                   <ul className="mt-5 flex-1 space-y-2.5 border-t border-line pt-5">
                     {plan.benefits.map((b) => (
                       <li key={b} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                        <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                        <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                         {b}
                       </li>
                     ))}
@@ -217,7 +217,7 @@ export default function PreciosPage() {
 
                   <Button
                     href="/registro"
-                    variant={plan.highlight ? "gradient" : "outline"}
+                    variant={plan.highlight ? "primary" : "outline"}
                     size="sm"
                     className="mt-6 w-full"
                   >
@@ -227,7 +227,7 @@ export default function PreciosPage() {
               ))}
           </div>
 
-          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-gold-500/35 bg-gold-50/50">
+          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-turquesa-200 bg-turquesa-50/60">
             <div>
               <h3 className="font-display text-body-lg leading-snug font-semibold text-ink">
                 ⭐ Membresía de voluntario — gratis
@@ -274,7 +274,7 @@ export default function PreciosPage() {
                 <ul className="mt-5 flex-1 space-y-2 border-t border-line pt-5">
                   {pkg.deliverables.map((d) => (
                     <li key={d} className="flex items-start gap-2.5 text-body-sm text-graphite">
-                      <Check className="mt-0.5 size-4 shrink-0 text-seed-700" />
+                      <Check className="mt-0.5 size-4 shrink-0 text-turquesa-800" />
                       {d}
                     </li>
                   ))}
@@ -283,7 +283,7 @@ export default function PreciosPage() {
             ))}
           </div>
 
-          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-seed-400/40 bg-seed-50/60">
+          <Card className="mt-5 flex flex-wrap items-center justify-between gap-5 border-turquesa-400/40 bg-turquesa-50/60">
             <div>
               <h3 className="font-display text-body-lg leading-snug font-semibold text-ink">
                 Talleres sin costo para colegios de la red SEP
@@ -305,7 +305,7 @@ export default function PreciosPage() {
         <Container size="wide">
           <div className="grid gap-5 lg:grid-cols-2">
             <Card className="p-8">
-              <div className="flex size-11 items-center justify-center rounded-md bg-gold-500/15 text-gold-700">
+              <div className="flex size-11 items-center justify-center rounded-md bg-turquesa-50 text-turquesa-800">
                 <HeartHandshake className="size-5" />
               </div>
               <h2 className="mt-5 font-display text-h3 font-semibold text-ink">
@@ -332,7 +332,7 @@ export default function PreciosPage() {
 
               <p className="mt-3 text-caption text-slate-ui">Donación única o mensual.</p>
 
-              <Button href="/donaciones" variant="gradient" className="mt-6">
+              <Button href="/donaciones" variant="primary" className="mt-6">
                 Quiero donar
               </Button>
             </Card>
@@ -379,7 +379,7 @@ export default function PreciosPage() {
                   Los precios de certificados y la tarifa social del SILP están
                   confirmados. Los de membresías y programas institucionales son una
                   propuesta que estamos calibrando con las respuestas del{" "}
-                  <a href="/conocenos" className="text-sep-600 underline underline-offset-4 hover:text-sep-700">
+                  <a href="/conocenos" className="text-acento underline underline-offset-4 hover:text-acento">
                     diagnóstico público
                   </a>
                   . Preferimos decirlo antes que fingir certeza.

@@ -12,14 +12,15 @@ import { cn } from "@/lib/utils";
  * una a una sin tocar el layout: todas ocupan un contenedor con aspect-ratio.
  */
 
+// Paleta «Lavanda neón» en hex: los atributos SVG no leen variables CSS.
 const GRAD = {
-  blue: "#2E0BE8",
-  violet: "#6A0DD9",
-  purple: "#A50FC6",
-  gold: "#FFC629",
-  seed: "#7CC242",
-  line: "#E5E4E9",
-  mist: "#A8A4BC",
+  blue: "#6257DB", // violeta-600
+  violet: "#7265FF", // violeta-500
+  purple: "#0BC6AB", // turquesa-500 (fin del degradado)
+  accent: "#41D3BD", // turquesa-400 (sin cian: van sobre claro)
+  success: "#0BC6AB", // turquesa-500
+  line: "#E2E7EE", // noche-200
+  mist: "#B6C2D1", // noche-300
 };
 
 /** Definiciones compartidas: un solo <defs> por ilustración. */
@@ -95,22 +96,22 @@ export function HeroIllustration({ className }: { className?: string }) {
       {/* Nodos */}
       {nodes.map((n, i) => (
         <g key={i}>
-          {n.main && <circle cx={n.x} cy={n.y} r={n.r + 7} fill={GRAD.gold} opacity="0.25" />}
+          {n.main && <circle cx={n.x} cy={n.y} r={n.r + 7} fill={GRAD.accent} opacity="0.25" />}
           <circle
             cx={n.x}
             cy={n.y}
             r={n.r}
-            fill={n.main ? GRAD.gold : "#fff"}
+            fill={n.main ? GRAD.accent : "#fff"}
             opacity={n.main ? 1 : 0.9}
           />
         </g>
       ))}
 
       {/* Brote creciendo desde el nodo principal */}
-      <g stroke={GRAD.seed} strokeWidth="2.4" strokeLinecap="round" fill="none">
+      <g stroke={GRAD.success} strokeWidth="2.4" strokeLinecap="round" fill="none">
         <path d="M118 121 v-16" />
-        <path d="M118 110 c-9 -2 -13 -9 -12 -16 8 0 13 6 12 16z" fill={GRAD.seed} stroke="none" />
-        <path d="M118 114 c9 -3 12 -10 10 -17 -8 1 -12 8 -10 17z" fill={GRAD.seed} stroke="none" opacity="0.75" />
+        <path d="M118 110 c-9 -2 -13 -9 -12 -16 8 0 13 6 12 16z" fill={GRAD.success} stroke="none" />
+        <path d="M118 114 c9 -3 12 -10 10 -17 -8 1 -12 8 -10 17z" fill={GRAD.success} stroke="none" opacity="0.75" />
       </g>
     </svg>
   );
@@ -166,16 +167,16 @@ export function ImpactChainIllustration({ className }: { className?: string }) {
             cx={540 + Math.cos(angle) * rr}
             cy={100 + Math.sin(angle) * rr * 0.75}
             r={3.5}
-            fill={GRAD.seed}
+            fill={GRAD.success}
             opacity={0.35 + (i % 4) * 0.15}
           />
         );
       })}
-      <circle cx="540" cy="100" r="14" fill={GRAD.gold} />
+      <circle cx="540" cy="100" r="14" fill={GRAD.accent} />
 
       {/* Flechas */}
       {[[100, 168], [230, 328], [412, 492]].map(([x1, x2], i) => (
-        <g key={i} stroke={GRAD.gold} strokeWidth="2" strokeLinecap="round" fill="none">
+        <g key={i} stroke={GRAD.accent} strokeWidth="2" strokeLinecap="round" fill="none">
           <line x1={x1} y1="100" x2={x2 - 8} y2="100" />
           <path d={`M${x2 - 14} 94 l7 6 -7 6`} />
         </g>
@@ -225,7 +226,7 @@ export function CourseCover({
                 width="34"
                 height="34"
                 rx="4"
-                fill={i % 3 === 0 ? GRAD.gold : i % 3 === 1 ? GRAD.violet : GRAD.seed}
+                fill={i % 3 === 0 ? GRAD.accent : i % 3 === 1 ? GRAD.violet : GRAD.success}
                 opacity={i % 3 === 1 ? 0.35 : 0.55}
                 transform={`rotate(${r} ${x + 17} ${y + 17})`}
               />
@@ -239,7 +240,7 @@ export function CourseCover({
             {[22, 40, 58, 76, 94].map((r, i) => (
               <circle key={r} cx="70" cy="60" r={r} strokeWidth="2" opacity={0.5 - i * 0.08} />
             ))}
-            <circle cx="70" cy="60" r="11" fill={GRAD.gold} stroke="none" />
+            <circle cx="70" cy="60" r="11" fill={GRAD.accent} stroke="none" />
           </g>
         )}
 
@@ -254,12 +255,12 @@ export function CourseCover({
                 width={i === 2 ? 150 : 200 - i * 12}
                 height="7"
                 rx="3.5"
-                fill={i === 2 ? GRAD.gold : GRAD.mist}
+                fill={i === 2 ? GRAD.accent : GRAD.mist}
                 opacity={i === 2 ? 0.9 : 0.3}
               />
             ))}
-            <circle cx="252" cy="65" r="26" fill={GRAD.seed} opacity="0.4" />
-            <circle cx="252" cy="65" r="12" fill={GRAD.seed} opacity="0.7" />
+            <circle cx="252" cy="65" r="26" fill={GRAD.success} opacity="0.4" />
+            <circle cx="252" cy="65" r="12" fill={GRAD.success} opacity="0.7" />
           </g>
         )}
 
@@ -278,7 +279,7 @@ export function CourseCover({
                 opacity={0.28 + i * 0.16}
               />
             ))}
-            <circle cx="288" cy="24" r="13" fill={GRAD.gold} />
+            <circle cx="288" cy="24" r="13" fill={GRAD.accent} />
           </g>
         )}
       </svg>
@@ -324,30 +325,24 @@ export function StatBlock({
   figure: string;
   label: string;
   detail?: string;
-  tone?: "brand" | "gold" | "seed";
+  tone?: "brand" | "neon" | "success";
 }) {
   return (
-    <div className="relative overflow-hidden rounded-lg border border-line bg-white p-6">
+    <div className="relative overflow-hidden rounded-md border border-line bg-surface-0 p-6 sm:p-7">
+      {/* Franja de acento de 4px: el color distingue la cifra sin teñir el número. */}
       <div
         aria-hidden
         className={cn(
-          "absolute -right-6 -top-6 size-24 rounded-full opacity-[0.09]",
-          tone === "brand" && "sep-gradient",
-          tone === "gold" && "bg-gold-500",
-          tone === "seed" && "bg-seed-700",
+          "absolute inset-x-0 top-0 h-1",
+          tone === "brand" && "grad-marca",
+          tone === "neon" && "bg-cian-500",
+          tone === "success" && "bg-turquesa-500",
         )}
       />
-      <p
-        className={cn(
-          "tabular relative font-display text-h1 font-bold leading-none",
-          tone === "brand" && "text-sep-700",
-          tone === "gold" && "text-gold-700",
-          tone === "seed" && "text-seed-700",
-        )}
-      >
+      <p className="tabular relative font-display text-display font-semibold leading-none text-ink">
         {figure}
       </p>
-      <p className="relative mt-3 font-display text-body font-semibold text-ink">
+      <p className="relative mt-4 font-display text-body-lg font-semibold text-ink">
         {label}
       </p>
       {detail && (
@@ -376,7 +371,7 @@ export function AvatarStack({
         {initials.map((i, idx) => (
           <span
             key={i + idx}
-            className="flex size-9 items-center justify-center rounded-full border-2 border-white sep-gradient text-caption font-semibold text-white"
+            className="flex size-9 items-center justify-center rounded-full border-2 border-white bg-violeta-600 text-caption font-semibold text-white"
             style={{ opacity: 1 - idx * 0.12 }}
           >
             {i}

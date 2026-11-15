@@ -92,7 +92,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
               className={cn(
                 "min-h-control rounded-sm px-3.5 py-2 text-body-sm font-medium transition-colors",
                 category === c
-                  ? "bg-sep-600 text-white"
+                  ? "bg-violeta-600 text-white"
                   : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
               )}
             >
@@ -109,7 +109,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
             <button
               type="button"
               onClick={clearFilters}
-              className="inline-flex min-h-control items-center gap-1.5 font-semibold text-sep-700 hover:underline"
+              className="inline-flex min-h-control items-center gap-1.5 font-semibold text-acento hover:underline"
             >
               <X className="size-icon-sm" /> Limpiar filtros
             </button>
@@ -160,12 +160,12 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                         Inscrito
                       </Badge>
                     ) : available ? (
-                      <Badge tone="seed">Disponible</Badge>
+                      <Badge tone="success">Disponible</Badge>
                     ) : (
                       <Badge tone="neutral">Próximamente</Badge>
                     )}
-                    {c.audience === "docente" && <Badge tone="gold">Docentes</Badge>}
-                    {c.category === "SILP" && <Badge tone="gold">Insignia</Badge>}
+                    {c.audience === "docente" && <Badge tone="neon">Docentes</Badge>}
+                    {c.category === "SILP" && <Badge tone="neon">Insignia</Badge>}
                   </div>
 
                   <h2 className="mt-3.5 text-body font-semibold leading-snug text-ink">
@@ -192,7 +192,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
 
                   <p className="mt-3 text-body-sm font-medium text-ink">
                     {c.isFree ? (
-                      <span className="text-seed-700">Gratuito</span>
+                      <span className="text-turquesa-800">Gratuito</span>
                     ) : (
                       formatSoles(c.priceCents)
                     )}
@@ -211,7 +211,7 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
                         type="button"
                         onClick={() => enroll(c.slug)}
                         disabled={busy !== null}
-                        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-sep-600 text-body-sm font-medium text-white transition-colors hover:bg-sep-700 disabled:opacity-60"
+                        className="inline-flex min-h-control w-full items-center justify-center gap-2 rounded-sm bg-violeta-600 text-body-sm font-medium text-white transition-colors hover:bg-violeta-700 disabled:opacity-60"
                       >
                         {busy === c.slug && <Loader2 className="size-4 animate-spin" />}
                         {c.isFree ? "Inscribirme gratis" : "Continuar"}

@@ -22,7 +22,7 @@ export function ProgramHero({
   aside?: React.ReactNode;
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-line bg-surface-1">
+    <section className="theme-night halo relative overflow-hidden">
       <Container size="wide" className="relative grid items-center gap-8 py-10 md:py-14 lg:grid-cols-[1.05fr_.95fr] lg:py-16">
         <div className="max-w-2xl">
           <Badge><Sparkles className="size-icon-sm" />{eyebrow}</Badge>
@@ -31,7 +31,7 @@ export function ProgramHero({
           <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-graphite">
             {facts.map((fact) => (
               <li key={fact} className="flex items-center gap-2">
-                <Check className="size-icon-sm text-seed-700" />{fact}
+                <Check className="size-icon-sm text-turquesa-800" />{fact}
               </li>
             ))}
           </ul>
@@ -64,7 +64,7 @@ export function ProgramAudience({ audiences }: { audiences: ProgramAudienceData[
         <div className="mt-10 grid border-y border-line md:grid-cols-2 md:divide-x md:divide-line">
           {audiences.map((audience, index) => (
             <div key={audience.id} className="flex h-full flex-col py-7 md:px-8 md:py-9 first:md:pl-0 last:md:pr-0">
-              <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-sep-700">
+              <p className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-acento">
                 {index === 0 ? <Users className="size-icon-sm" /> : <BookOpen className="size-icon-sm" />}
                 Recorrido {index + 1}
               </p>
@@ -90,7 +90,7 @@ export function ProgramTimeline({ steps }: { steps: { title: string; description
         <ol className="mt-10 grid gap-0 md:grid-cols-3">
           {steps.map((step, index) => (
             <li key={step.title} className="relative border-l border-line pb-8 pl-7 last:pb-0 md:border-l-0 md:border-t md:pb-0 md:pl-0 md:pt-7">
-              <span className="absolute -left-3 top-0 flex size-6 items-center justify-center rounded-full bg-sep-600 text-caption font-bold text-white md:-top-3 md:left-0">
+              <span className="absolute -left-3 top-0 flex size-6 items-center justify-center rounded-full bg-violeta-600 text-caption font-bold text-white md:-top-3 md:left-0">
                 {index + 1}
               </span>
               <div className="md:pr-8">
@@ -125,7 +125,7 @@ export function ProgramCurriculum({ audience }: { audience: ProgramAudienceData 
                   href={`#${audience.id}-clase-${session.number}`}
                   className="flex min-h-control items-center gap-2 border-r border-line px-4 text-body-sm text-slate-ui transition-colors hover:bg-surface-1 hover:text-ink"
                 >
-                  <span className="tabular font-semibold text-sep-700">
+                  <span className="tabular font-semibold text-acento">
                     {String(session.number).padStart(2, "0")}
                   </span>
                   <span className="hidden max-w-36 truncate sm:block">{session.title}</span>
@@ -143,7 +143,7 @@ export function ProgramCurriculum({ audience }: { audience: ProgramAudienceData 
             >
               <details className="group bg-white open:bg-surface-1/45">
                 <summary className="grid min-h-20 cursor-pointer list-none grid-cols-[2.5rem_1fr_auto] items-center gap-3 py-4 marker:hidden sm:grid-cols-[3rem_minmax(12rem,.8fr)_minmax(16rem,1.2fr)_auto] sm:gap-5">
-                  <span className="tabular text-body-sm font-semibold text-sep-700">
+                  <span className="tabular text-body-sm font-semibold text-acento">
                     {String(session.number).padStart(2, "0")}
                   </span>
                   <span className="min-w-0">
@@ -156,20 +156,20 @@ export function ProgramCurriculum({ audience }: { audience: ProgramAudienceData 
                   <span className="flex items-center gap-2 text-caption font-medium text-slate-ui">
                     <Clock3 className="hidden size-icon-sm sm:block" />
                     <span className="hidden sm:inline">{session.duration}</span>
-                    <span aria-hidden className="ml-1 text-h4 font-light text-sep-700 transition-transform group-open:rotate-45">+</span>
+                    <span aria-hidden className="ml-1 text-h4 font-light text-acento transition-transform group-open:rotate-45">+</span>
                   </span>
                 </summary>
                 <div className="grid gap-5 border-t border-line py-5 pl-[3.25rem] sm:grid-cols-2 sm:pl-[4.25rem]">
                   <div>
-                    <p className="text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:hidden">Resultado de aprendizaje</p>
+                    <p className="text-body-sm font-semibold tracking-eyebrow text-acento sm:hidden">Resultado de aprendizaje</p>
                     <p className="mt-1.5 text-body-sm text-graphite sm:hidden">{session.learning}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-sep-700 sm:mt-0">Actividad</p>
+                    <p className="mt-4 text-body-sm font-semibold tracking-eyebrow text-acento sm:mt-0">Actividad</p>
                     <p className="mt-1.5 text-body-sm text-graphite">{session.activity}</p>
                   </div>
                   <div className="border-l border-line pl-4">
-                    <p className="flex items-center gap-2 text-caption font-semibold uppercase tracking-eyebrow text-graphite"><FileText className="size-icon-sm" />Materiales</p>
+                    <p className="flex items-center gap-2 text-body-sm font-semibold tracking-eyebrow text-graphite"><FileText className="size-icon-sm" />Materiales</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.materials.join(" · ")}</p>
-                    <p className="mt-4 text-caption font-semibold uppercase tracking-eyebrow text-graphite">Tarea</p>
+                    <p className="mt-4 text-body-sm font-semibold tracking-eyebrow text-graphite">Tarea</p>
                     <p className="mt-2 text-body-sm text-slate-ui">{session.task}</p>
                   </div>
                 </div>
@@ -208,7 +208,7 @@ export function ProgramModuleList({
               key={module.number}
               className="grid grid-cols-[2.5rem_1fr] gap-3 border-b border-line py-5 last:border-b-0 sm:grid-cols-[3rem_minmax(12rem,.75fr)_minmax(16rem,1.25fr)_auto] sm:items-baseline sm:gap-5"
             >
-              <span className="tabular text-body-sm font-semibold text-sep-700">
+              <span className="tabular text-body-sm font-semibold text-acento">
                 {String(module.number).padStart(2, "0")}
               </span>
               <h3 className="font-display text-body leading-snug font-semibold text-ink">{module.theme}</h3>
@@ -232,7 +232,7 @@ export function ProgramBenefits({ benefits }: { benefits: { title: string; descr
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {benefits.map((benefit) => (
             <div key={benefit.title}>
-              <Check className="size-icon-xl text-seed-700" />
+              <Check className="size-icon-xl text-turquesa-800" />
               <h3 className="mt-4 font-display text-h4 font-semibold text-ink">{benefit.title}</h3>
               <p className="mt-2 text-body-sm text-slate-ui">{benefit.description}</p>
             </div>
@@ -250,7 +250,7 @@ export function ProgramRequirements({ items }: { items: string[] }) {
         <Card className="p-6 sm:p-8">
           <SectionHeader eyebrow="Antes de empezar" title="Qué necesitas para aprovecharlo" />
           <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-            {items.map((item) => <li key={item} className="flex items-start gap-2.5 text-body-sm text-graphite"><Check className="mt-0.5 size-icon-sm shrink-0 text-seed-700" />{item}</li>)}
+            {items.map((item) => <li key={item} className="flex items-start gap-2.5 text-body-sm text-graphite"><Check className="mt-0.5 size-icon-sm shrink-0 text-turquesa-800" />{item}</li>)}
           </ul>
         </Card>
       </Container>
@@ -267,7 +267,7 @@ export function ProgramFAQ({ items }: { items: { question: string; answer: strin
           {items.map((item) => (
             <details key={item.question} className="group py-1">
               <summary className="flex min-h-control cursor-pointer list-none items-center justify-between gap-4 py-4 font-medium text-ink marker:hidden">
-                {item.question}<span aria-hidden className="text-sep-600 group-open:rotate-45">+</span>
+                {item.question}<span aria-hidden className="text-acento group-open:rotate-45">+</span>
               </summary>
               <p className="max-w-prose pb-5 text-body-sm text-slate-ui">{item.answer}</p>
             </details>
@@ -285,7 +285,7 @@ export function ProgramCTA({ title, description, actions }: { title: string; des
         <h2 className="font-display text-h1 font-semibold text-white">{title}</h2>
         <p className="mx-auto mt-4 max-w-prose text-body text-white/80">{description}</p>
         <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
-          {actions.map((action, index) => <Button key={action.href} href={action.href} variant={index === 0 ? "gold" : "outline-white"} size="lg">{action.label}<ArrowRight /></Button>)}
+          {actions.map((action, index) => <Button key={action.href} href={action.href} variant={index === 0 ? "neon" : "outline-white"} size="lg">{action.label}<ArrowRight /></Button>)}
         </div>
         <ContextualHelp
           inverse

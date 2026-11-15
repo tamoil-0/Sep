@@ -1,0 +1,6 @@
+Logos de aliados de SEP (autorizados por el equipo, 15 nov. 2026).
+Formato: SVG o PNG con fondo transparente, mínimo 200 px de alto.
+Nombre sugerido: senaju.svg, proa.svg, coneii.svg, code.svg, start-lima.svg,
+innovation-challenge-pucp.svg, hult-prize-peru.svg, utp.svg, cientifica-del-sur.svg,
+upn.svg, huanuco-innova.svg, spinout-awards-2025.svg.
+Luego agrega `logo: "/aliados/<archivo>"` al aliado en src/config/site.ts.
