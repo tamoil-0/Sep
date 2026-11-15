@@ -33,7 +33,16 @@ try {
       const h = w < 500 ? 812 : w < 1000 ? 1024 : 900;
       const ctx = await browser.newContext({ viewport: { width: w, height: h }, deviceScaleFactor: 1, storageState: state, locale: "es-PE" });
       const page = await ctx.newPage();
-      const res = await page.goto(base + route, { waitUntil: "networkidle", timeout: 60_000 });
+      // Algunas vistas (comunidad, realtime) nunca llegan a "networkidle": se captura igual tras el load.
+      let res;
+      let idle = "";
+      try {
+        res = await page.goto(base + route, { waitUntil: "networkidle", timeout: 30_000 });
+      } catch {
+        idle = "sin networkidle";
+        res = await page.goto(base + route, { waitUntil: "load", timeout: 60_000 });
+        await page.waitForTimeout(1500);
+      }
       // Recorre la página para disparar lazy-load y apariciones, luego vuelve arriba.
       // SEP usa scroll-behavior: smooth; se fuerza "instant" para que la captura no salga a mitad de una animación.
       await page.addStyleTag({ content: "html{scroll-behavior:auto!important}" });
@@ -49,7 +58,7 @@ try {
       await page.waitForTimeout(700);
       const overflow = await page.evaluate(() => document.documentElement.scrollWidth - window.innerWidth);
       const final = new URL(page.url()).pathname;
-      const notes = [res?.status(), final !== route ? `→ ${final}` : "", overflow > 0 ? `overflow ${overflow}px` : ""].filter(Boolean).join(" ");
+      const notes = [res?.status(), final !== route ? `→ ${final}` : "", overflow > 0 ? `overflow ${overflow}px` : "", idle].filter(Boolean).join(" ");
       if (section) {
         const box = await page.locator(section).first().evaluate((el) => {
           const r = el.getBoundingClientRect();
