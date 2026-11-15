@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
+import { VideoPresentacion } from "@/components/marketing/video-presentacion";
 import { impactChain, partners, problemStats, siteConfig } from "@/config/site";
 import { initials } from "@/lib/utils";
 
@@ -70,6 +71,20 @@ export default function NosotrosPage() {
           </div>
         </Container>
       </section>
+
+      {/* Video de presentación */}
+      <Section className="pb-0 md:pb-0 lg:pb-0">
+        <Container size="wide">
+          <div className="grid items-center gap-10 lg:grid-cols-[0.8fr_1.2fr]" data-reveal>
+            <SectionHeader
+              eyebrow="Desde Casma, 2024"
+              title="Así empezó todo"
+              description="SEP nació el 7 de abril de 2024 en Casma, Áncash, para llevar la innovación directo al territorio del talento, no al revés."
+            />
+            <VideoPresentacion />
+          </div>
+        </Container>
+      </Section>
 
       {/* Misión / Visión */}
       <Section>

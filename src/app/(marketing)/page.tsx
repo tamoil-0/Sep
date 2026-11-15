@@ -467,9 +467,12 @@ export default function HomePage() {
                     key={partner.name}
                     className="flex min-w-0 items-center justify-between gap-3 rounded-sm border border-line bg-surface-1 px-3.5 py-3"
                   >
-                    <span className="min-w-0 text-body-sm font-medium text-graphite">
-                      {partner.name}
-                    </span>
+                    {partner.logo ? (
+                      // eslint-disable-next-line @next/next/no-img-element
+                      <img src={partner.logo} alt={partner.name} className="h-7 w-auto max-w-32 object-contain" loading="lazy" />
+                    ) : (
+                      <span className="min-w-0 text-body-sm font-medium text-graphite">{partner.name}</span>
+                    )}
                     <span className="shrink-0 rounded-full bg-white px-2.5 py-1 text-caption font-medium text-acento ring-1 ring-inset ring-violeta-100">
                       {partnerCategoryLabels[partner.category]}
                     </span>

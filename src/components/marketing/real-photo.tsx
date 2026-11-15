@@ -30,6 +30,9 @@ export const SEP_PHOTOS = {
   // Sesiones 100 % virtuales: participantes de varias regiones en Zoom.
   virtualSession: "/img/31684365-609f-42da-8e26-b055b022d388.jpg",
   virtualClass: "/img/eb4d428b-3074-4486-9224-88361927e129.jpg",
+  virtualTeams: "/img/9e42a809-0fed-4693-8b78-8ba996f2a277.jpg",
+  // Afiche de ponentes de un bootcamp de SEP.
+  speakersPoster: "/img/new_images/4e53aeeb-c025-4799-a221-3ac34e1bbdf6.jpg",
   virtualTourism: "/img/new_images/e74d9629-0a1d-4e95-9a2f-b486731526e4.jpg",
   recognitionEvent: "/img/new_images/f65374c2-41a0-4c34-9874-28be325374e0.jpg",
 } as const;

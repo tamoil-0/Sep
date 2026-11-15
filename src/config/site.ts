@@ -79,8 +79,18 @@ export const impactChain = [
   { step: "Impactan a", detail: "Estudiantes de secundaria en sus propias regiones" },
 ] as const;
 
-/** Aliados y respaldo — §1.7 */
-export const partners = [
+/**
+ * Aliados y respaldo — §1.7. Logos autorizados por el equipo (15 nov. 2026):
+ * deja el archivo en `public/aliados/` (SVG o PNG con fondo transparente) y
+ * agrega `logo: "/aliados/<archivo>"`. Sin logo, se muestra el nombre.
+ */
+export type Partner = {
+  name: string;
+  category: "red" | "alianza" | "mentoria" | "premio" | "aval";
+  logo?: string;
+};
+
+export const partners: Partner[] = [
   { name: "SENAJU", category: "red" },
   { name: "Proa", category: "red" },
   { name: "CONEII", category: "alianza" },
@@ -93,7 +103,7 @@ export const partners = [
   { name: "UPN", category: "mentoria" },
   { name: "Huánuco Innova", category: "mentoria" },
   { name: "SpinOut Awards 2025", category: "premio" },
-] as const;
+];
 
 /** FAQs oficiales — §1.14 */
 export const faqs = [

@@ -12,6 +12,7 @@ import {
 import { speakerBenefits } from "@/config/volunteering";
 import { initials } from "@/lib/utils";
 import { SpeakerForm } from "./speaker-form";
+import { MediaImage, SEP_PHOTOS } from "@/components/marketing/real-photo";
 import { assertQueryResults } from "@/lib/supabase/query";
 
 export const metadata = createPageMetadata({
@@ -87,6 +88,27 @@ export default async function SpeakersPage() {
           </div>
         </Container>
       </section>
+
+      {/* Pieza real de un ciclo de ponencias de SEP */}
+      <Section className="pb-0 md:pb-0 lg:pb-0">
+        <Container size="wide">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]" data-reveal>
+            <SectionHeader
+              eyebrow="Cómo se ve"
+              title="Tu charla, frente a jóvenes de todo el país"
+              description="Cada ciclo de ponencias se difunde con piezas propias y se transmite en vivo. Así presentamos a los ponentes de un bootcamp de SEP."
+            />
+            <MediaImage
+              src={SEP_PHOTOS.speakersPoster}
+              alt="Afiche de SEP que presenta a cuatro ponentes de un bootcamp"
+              kind="poster"
+              label="Ponentes de un bootcamp SEP"
+              className="aspect-[16/10] min-h-0"
+              sizes="(min-width: 1024px) 40vw, 100vw"
+            />
+          </div>
+        </Container>
+      </Section>
 
       <Section>
         <Container size="wide">

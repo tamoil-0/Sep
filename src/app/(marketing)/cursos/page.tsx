@@ -168,6 +168,28 @@ export default async function CursosPage() {
         </Container>
       </Section>
 
+      {/* Clases 100 % virtuales: fotos reales de sesiones por Zoom */}
+      <Section>
+        <Container size="wide">
+          <SectionHeader
+            eyebrow="100 % virtual"
+            title="Clases en vivo, desde cualquier región"
+            description="Las sesiones son por videollamada: te conectas desde tu ciudad y trabajas en equipo con jóvenes de otras regiones."
+          />
+          <div className="mt-10 grid gap-3 sm:grid-cols-3">
+            {[
+              { src: SEP_PHOTOS.virtualSession, alt: "Sesión virtual de SEP con participantes conectados por videollamada", label: "Sesión en vivo" },
+              { src: SEP_PHOTOS.virtualTeams, alt: "Participantes de distintas regiones en una clase virtual de SEP", label: "Equipos de varias regiones" },
+              { src: SEP_PHOTOS.virtualClass, alt: "Diapositiva de una clase virtual sobre cómo validar una idea con un producto mínimo viable", label: "Contenido práctico" },
+            ].map((f, i) => (
+              <div key={f.src} data-reveal style={{ transitionDelay: `${i * 60}ms` }}>
+                <RealPhoto src={f.src} alt={f.alt} label={f.label} className="aspect-[16/10] min-h-0" sizes="(min-width: 640px) 33vw, 100vw" />
+              </div>
+            ))}
+          </div>
+        </Container>
+      </Section>
+
       <Section tone="muted">
         <Container size="wide">
           <SectionHeader
