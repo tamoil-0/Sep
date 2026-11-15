@@ -70,7 +70,7 @@ export function SignupForm({ role }: { role: SignupRole }) {
         </p>
         <ol className="mx-auto mt-4 max-w-sm space-y-2 text-left text-caption leading-relaxed text-slate-ui">
           <li><strong className="text-graphite">1.</strong> Abre el mensaje de SEP y confirma tu correo.</li>
-          <li><strong className="text-graphite">2.</strong> Inicia sesión y completa el diagnóstico de 4–6 minutos.</li>
+          <li><strong className="text-graphite">2.</strong> El enlace te deja con la sesión iniciada: completa el diagnóstico de 4–6 minutos.</li>
           <li><strong className="text-graphite">3.</strong> Entrarás al panel correspondiente a tu perfil.</li>
         </ol>
         <p className="mt-4 text-caption leading-relaxed text-slate-ui">

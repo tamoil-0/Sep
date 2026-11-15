@@ -671,6 +671,26 @@ dialog.dialogo::backdrop {
   .escena [class*="esc-"] { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
+/* ── Ritmo de color en las métricas de los paneles ──
+   Violeta (1.º), turquesa (2.º) y chip neón (3.º): color con intención sin
+   romper la proporción 60/25/10/5. */
+.kpi-grid > :nth-child(3n + 2) .kpi-icono {
+  background: var(--color-turquesa-50);
+  color: var(--color-turquesa-800);
+}
+.kpi-grid > :nth-child(3n + 3) .kpi-icono {
+  background: var(--color-noche-900);
+  color: var(--color-cian-500);
+}
+/* Las métricas reaccionan al pasar el mouse: suben 2 px. */
+.kpi-grid > * {
+  transition: transform var(--duration-slow) var(--ease-out), box-shadow var(--duration-slow) var(--ease-out);
+}
+.kpi-grid > *:hover,
+.js .kpi-grid > [data-reveal].is-visible:hover {
+  transform: translateY(-2px);
+}
+
 /* ── Motivo «Semilla en cadena» (components/brand/motivo-semilla.tsx) ──
    Ramas que se dibujan una vez, nodos que aparecen y un pulso que recorre la
    red en bucle (--d). Colores por token; pensado para fondos noche. */
