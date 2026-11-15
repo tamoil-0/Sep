@@ -16,7 +16,7 @@ export default async function MentoradosPage() {
 
   const mentorshipsResult = await supabase
     .from("mentorships")
-    .select("id, started_at, ended_at, notes, mentee_id, profiles!mentorships_mentee_id_fkey(full_name, region, university, career)")
+    .select("id, started_at, ended_at, notes, mentee_id, profiles:public_profiles!mentorships_mentee_id_fkey(full_name, region, university, career)")
     .eq("mentor_id", user.id)
     .order("started_at", { ascending: false });
   assertQueryResults("mentor:mentorados", mentorshipsResult);

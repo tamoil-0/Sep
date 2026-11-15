@@ -18,7 +18,7 @@ export default async function ProyectosPage() {
     supabase.from("projects").select("*").eq("user_id", user.id).order("created_at", { ascending: false }),
     supabase
       .from("projects")
-      .select("id, title, problem, solution, region, profiles(full_name)")
+      .select("id, title, problem, solution, region, profiles:public_profiles(full_name)")
       .eq("is_public", true)
       .neq("user_id", user.id)
       .limit(6),

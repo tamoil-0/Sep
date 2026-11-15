@@ -26,7 +26,7 @@ export default async function InstitucionConvenioPage() {
 
   const result = await supabase
     .from("profiles")
-    .select("institutions(name, type, region, agreement_signed_at, agreement_url, is_verified)")
+    .select("institutions!profiles_institution_id_fkey(name, type, region, agreement_signed_at, agreement_url, is_verified)")
     .eq("id", user.id)
     .maybeSingle();
   assertQueryResults("institucion:convenio", result);

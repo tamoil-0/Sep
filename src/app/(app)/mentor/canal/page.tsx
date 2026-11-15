@@ -25,7 +25,7 @@ export default async function MentorCanalPage() {
     supabase.from("volunteer_leaderboard").select("*").limit(20),
     supabase
       .from("posts")
-      .select("id, content, created_at, profiles!posts_user_id_fkey(full_name, region)")
+      .select("id, content, created_at, profiles:public_profiles!posts_user_id_fkey(full_name, region)")
       .eq("is_pinned", true)
       .order("created_at", { ascending: false })
       .limit(10),

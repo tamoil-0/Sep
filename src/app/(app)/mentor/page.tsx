@@ -21,7 +21,7 @@ export default async function MentorPage() {
         .maybeSingle(),
       supabase
         .from("mentorships")
-        .select("id, mentee_id, started_at, profiles!mentorships_mentee_id_fkey(full_name, region)")
+        .select("id, mentee_id, started_at, profiles:public_profiles!mentorships_mentee_id_fkey(full_name, region)")
         .eq("mentor_id", user.id)
         .is("ended_at", null),
       supabase

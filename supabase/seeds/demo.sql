@@ -15,6 +15,11 @@
 -- Para limpiar:  select public.demo_reset();
 -- ═══════════════════════════════════════════════════════════
 
+-- Las cuentas demo representan usuarios que completaron su incorporación antes de la
+-- regla de la migración 0013 (diagnóstico obligatorio): se pausa ese trigger solo
+-- mientras corre este seed y se reactiva al final del archivo.
+alter table public.profiles disable trigger profiles_guard_onboarding_completion;
+
 -- ── Helper: crear un usuario de demo con su perfil ────────
 create or replace function public.demo_user(
   p_id        uuid,
@@ -984,7 +989,7 @@ begin
   raise notice '';
   raise notice ' Contraseña de todas las cuentas: SepDemo2026!';
   raise notice '';
-  raise notice '  celeste@demo → super_admin + mentor + estudiante';
+  raise notice '  celeste@sep.pe → super_admin + mentor + estudiante';
   raise notice '  diana@sep.pe → admin';
   raise notice '  andrea@demo.sep.pe → estudiante + mentor';
   raise notice '  rosa@demo.sep.pe → docente';
@@ -993,3 +998,6 @@ begin
   raise notice '  empresa@demo.sep.pe → institución (empresa RSE)';
   raise notice '═══════════════════════════════════════════════';
 end $$;
+
+-- Reactiva la regla de diagnóstico obligatorio (migración 0013).
+alter table public.profiles enable trigger profiles_guard_onboarding_completion;

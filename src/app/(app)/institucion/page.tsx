@@ -23,7 +23,7 @@ export default async function InstitucionPage() {
 
   const profileResult = await supabase
     .from("profiles")
-    .select("institution_id, institutions(id, name, type, region, is_verified, agreement_signed_at)")
+    .select("institution_id, institutions!profiles_institution_id_fkey(id, name, type, region, is_verified, agreement_signed_at)")
     .eq("id", user.id)
     .single();
   assertQueryResults("institucion:panel:perfil", profileResult);

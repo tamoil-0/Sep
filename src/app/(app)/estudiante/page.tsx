@@ -54,6 +54,26 @@ export default async function EstudiantePage() {
   assertQueryResults("estudiante:panel:certificados", certificatesResult);
   const certificatesCount = certificatesResult.count;
 
+  // Últimas publicaciones reales de la comunidad (antes eran textos de ejemplo fijos).
+  const postsResult = await supabase
+    .from("posts")
+    .select("id, content, profiles:public_profiles!posts_user_id_fkey(full_name, region)")
+    .eq("is_hidden", false)
+    .order("created_at", { ascending: false })
+    .limit(2);
+  assertQueryResults("estudiante:panel:comunidad", postsResult);
+  const latestPosts = (postsResult.data ?? []).map((p) => {
+    const author = Array.isArray(p.profiles) ? p.profiles[0] : p.profiles;
+    // «Nombre A.»: basta para reconocerse en la comunidad sin exponer el nombre completo.
+    const [first = "Miembro", last] = (author?.full_name ?? "").trim().split(/\s+/);
+    return {
+      id: p.id,
+      name: last ? `${first} ${last[0]}.` : first || "Miembro SEP",
+      region: author?.region ?? null,
+      text: p.content,
+    };
+  });
+
   const active = (enrollments ?? []).filter((e) => e.status === "activo");
   const hoursDone = (enrollments ?? []).reduce(
     (sum, e) => sum + Math.round(((e.progress_pct ?? 0) / 100) * 8),
@@ -194,34 +214,30 @@ export default async function EstudiantePage() {
             </Link>
           </div>
 
-          <ul className="mt-4 space-y-3.5">
-            {[
-              {
-                name: "Andrea N.",
-                region: "Arequipa",
-                text: "Compartí mi prototipo de DT con mi colegio. Fue increíble verlos reaccionar.",
-              },
-              {
-                name: "Ricardo M.",
-                region: "Cusco",
-                text: "¿Alguien se suma al grupo de práctica de Scrum antes del Demo Day?",
-              },
-            ].map((p) => (
-              <li key={p.name} className="flex gap-3">
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
-                  {initials(p.name)}
-                </span>
-                <div className="min-w-0">
-                  <p className="text-caption font-medium text-ink">
-                    {p.name} · <span className="font-normal text-slate-ui">{p.region}</span>
-                  </p>
-                  <p className="mt-0.5 text-body-sm leading-relaxed text-slate-ui">
-                    {p.text}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
+          {latestPosts.length === 0 ? (
+            <p className="mt-4 text-body-sm text-slate-ui">
+              Todavía no hay publicaciones. Sé la primera persona en contar qué estás construyendo.
+            </p>
+          ) : (
+            <ul className="mt-4 space-y-3.5">
+              {latestPosts.map((p) => (
+                <li key={p.id} className="flex gap-3">
+                  <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
+                    {initials(p.name)}
+                  </span>
+                  <div className="min-w-0">
+                    <p className="text-caption font-medium text-ink">
+                      {p.name}
+                      {p.region && <span className="font-normal text-slate-ui"> · {p.region}</span>}
+                    </p>
+                    <p className="mt-0.5 line-clamp-2 text-body-sm leading-relaxed text-slate-ui">
+                      {p.text}
+                    </p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
         </Card>
       </div>
 
