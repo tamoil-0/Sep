@@ -15,6 +15,8 @@ const eslintConfig = defineConfig([
     // Artefactos que genera el CLI de Supabase al levantar el entorno local.
     "supabase/.temp/**",
     "supabase/.branches/**",
+    // Scripts de terceros (minificados) que trae la skill impeccable; no son código del proyecto.
+    ".claude/skills/impeccable/**",
   ]),
 ]);
 
