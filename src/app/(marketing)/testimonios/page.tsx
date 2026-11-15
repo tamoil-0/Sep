@@ -8,65 +8,26 @@ import {
   SectionHeader,
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
-import { initials } from "@/lib/utils";
+import { formatDate } from "@/lib/utils";
+import { webinarSurveyStats, webinarTestimonials } from "@/config/testimonials";
 import { getPublicProjects } from "@/server/queries/public-content";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
 export const metadata = createPageMetadata({
   title: "Testimonios",
   description:
-    "Historias reales de jóvenes de regiones del Perú que pasaron por SEP y hoy están construyendo en sus propias comunidades.",
+    "Opiniones reales de jóvenes de 13 regiones del Perú en los webinars de SEP: 59 respuestas y una experiencia promedio de 4,7 sobre 5.",
   path: "/testimonios",
   keywords: ["jóvenes emprendedores Perú", "historias de emprendimiento", "testimonios SEP"],
 });
 
 export const dynamic = "force-dynamic";
 
-/** ISR: la página se sirve estática y se regenera cada 5 min. */
-
-const stories = [
-  {
-    quote:
-      "Compartí mi prototipo de Design Thinking con mi colegio esta semana. Los escolares llegaron con ideas increíbles para mejorar la biblioteca del barrio. Nunca subestimen a un chico de 15 años con una hoja en blanco.",
-    name: "Andrea Núñez",
-    region: "Arequipa",
-    role: "Mentora SEP · Ingeniería Industrial",
-  },
-  {
-    quote:
-      "Vengo de una región sin recursos y la innovación social fue mi trampolín. Hoy hablo en conferencias de todo Latinoamérica.",
-    name: "Valeria Ríos",
-    region: "Bogotá, Colombia",
-    role: "Speaker · Scrum y agilidad",
-  },
-  {
-    quote:
-      "Llegué sin experiencia a un taller de liderazgo. Hoy tengo mi propio programa y fui speaker en Star Lima.",
-    name: "Jorge Medina",
-    region: "Arequipa",
-    role: "Liderazgo social",
-  },
-  {
-    quote:
-      "El mapa de empatía me voló la cabeza: llevaba meses asumiendo lo que necesitaba mi comunidad sin haberle preguntado nunca.",
-    name: "Kevin Quispe",
-    region: "Puno",
-    role: "Economía · 2do ciclo",
-  },
-  {
-    quote:
-      "Mis estudiantes de 4to hicieron su primer prototipo con papel y cinta. Dos de ellos ahora quieren estudiar ingeniería. Eso no lo logré en veinte años de clase magistral.",
-    name: "Rosa Chávez",
-    region: "Casma, Áncash",
-    role: "Directora · I.E. San Bartolomé",
-  },
-  {
-    quote:
-      "Desde Huánuco, primera sesión hecha y ya tengo tres ideas para el proyecto de residuos de mi barrio. Vamos con todo.",
-    name: "Diego Paredes",
-    region: "Huánuco",
-    role: "Ingeniería Ambiental · 3ro",
-  },
+const stats = [
+  { value: String(webinarSurveyStats.responses), label: `respuestas en ${webinarSurveyStats.webinars} webinars` },
+  { value: `${webinarSurveyStats.averageExperience}/5`, label: "experiencia promedio" },
+  { value: webinarSurveyStats.recommendShare, label: "recomendaría los webinars de SEP" },
+  { value: String(webinarSurveyStats.regions), label: "regiones del Perú entre quienes respondieron" },
 ];
 
 export default async function TestimoniosPage() {
@@ -81,7 +42,7 @@ export default async function TestimoniosPage() {
             as="h1"
             eyebrow="La comunidad"
             title="Lo que dicen quienes ya pasaron por aquí"
-            description="Sin retoques ni testimonios de stock. Personas reales de regiones reales."
+            description={`Respuestas textuales de las encuestas de satisfacción de nuestros webinars (${webinarSurveyStats.period}). Publicamos rol, región y sesión; no nombres.`}
           />
           <RealPhoto
             src={SEP_PHOTOS.community}
@@ -97,30 +58,43 @@ export default async function TestimoniosPage() {
 
       <Section>
         <Container size="wide">
-          <ul className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-            {stories.map((s) => (
-              <li key={s.name} className="min-w-0">
-                <Card className="relative flex h-full flex-col overflow-hidden p-6 ">
-                  <span className="absolute left-0 top-0 h-full w-1 grad-marca" />
-                  <Quote className="size-5 text-violeta-500" />
-                  <p className="mt-4 flex-1 text-body-sm leading-relaxed text-graphite">
-                    {s.quote}
-                  </p>
-                  <div className="mt-6 flex items-center gap-3 border-t border-line pt-5">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-full bg-violeta-700 text-caption font-semibold text-white">
-                      {initials(s.name)}
-                    </span>
-                    <div className="min-w-0">
-                      <p className="truncate text-body-sm font-medium text-ink">{s.name}</p>
-                      <p className="truncate text-caption text-slate-ui">
-                        {s.region} · {s.role}
-                      </p>
-                    </div>
-                  </div>
-                </Card>
+          {/* Cifras agregadas de las mismas encuestas: prueba social con fuente. */}
+          <dl className="grid grid-cols-2 gap-x-6 gap-y-8 border-b border-line pb-10 lg:grid-cols-4">
+            {stats.map((s) => (
+              <div key={s.label}>
+                <dd className="tabular font-display text-h2 font-semibold text-ink">{s.value}</dd>
+                <dt className="mt-1 text-body-sm text-slate-ui">{s.label}</dt>
+              </div>
+            ))}
+          </dl>
+
+          <h2 className="sr-only">Lo que nos escribieron</h2>
+          <ul className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+            {webinarTestimonials.map((t) => (
+              <li key={t.quote} className="min-w-0">
+                <figure className="relative flex h-full flex-col overflow-hidden rounded-md border border-line bg-surface-0 p-6">
+                  <span aria-hidden className="absolute left-0 top-0 h-full w-1 grad-marca" />
+                  <Quote aria-hidden className="size-5 text-violeta-500" strokeWidth={1.75} />
+                  <blockquote className="mt-4 flex-1 text-body leading-relaxed text-graphite">
+                    «{t.quote}»
+                  </blockquote>
+                  <figcaption className="mt-6 border-t border-line pt-4">
+                    <p className="text-body-sm font-medium text-ink">
+                      {t.role} · {t.region}
+                    </p>
+                    <p className="mt-0.5 text-caption text-mist">
+                      Webinar «{t.webinar}» ·{" "}
+                      <time dateTime={t.date}>{formatDate(t.date)}</time>
+                    </p>
+                  </figcaption>
+                </figure>
               </li>
             ))}
           </ul>
+          <p className="mt-6 text-caption text-mist">
+            Citas textuales de la encuesta de satisfacción posterior a cada sesión ({webinarSurveyStats.responses}{" "}
+            respuestas, escala de 1 a 5). Solo se corrigieron tildes y mayúsculas.
+          </p>
         </Container>
       </Section>
 

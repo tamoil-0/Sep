@@ -35,5 +35,4 @@ cursos exclusivos. («10+ regiones» → ver `cifras.md`: la fuente dice 6–10.
 6. ¿Cómo accedo a una asesoría para mi emprendimiento? — CV por redes o correo.
 
 ## Testimonios
-**No hay testimonios con fuente.** `/testimonios` no debe mostrar citas inventadas. → [COMPLETAR] pedir 3–5 testimonios
-reales con nombre, región y permiso de publicación.
+Ver `testimonios.md`: 59 respuestas de 5 webinars [encuestas], citas anónimas (rol · región · webinar).

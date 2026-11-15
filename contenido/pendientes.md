@@ -4,11 +4,7 @@ Ordenados por urgencia. Ninguno se resuelve inventando: si no hay respuesta, la 
 
 ## Alta — afecta la confianza o la exactitud de lo publicado hoy
 
-1. **Testimonios ficticios publicados como reales.** `src/app/(marketing)/testimonios/page.tsx:26-69` muestra 6 citas
-   bajo el texto «Sin retoques ni testimonios de stock. Personas reales de regiones reales.» Cinco nombres son personajes
-   del seed de demo (`supabase/seeds/demo.sql`: Andrea Núñez, Valeria Ríos, Kevin Quispe, Rosa Chávez, Diego Paredes) y
-   «Jorge Medina» no aparece en ninguna fuente. **Propuesta:** retirar las citas y dejar solo los proyectos reales de la
-   base hasta tener testimonios con permiso. ¿Lo aprueban?
+1. ✅ **Resuelto (15 nov.):** `/testimonios` ya no muestra las citas ficticias; ahora usa 6 citas anónimas y las cifras de las encuestas de los webinars (`testimonios.md`).
 2. **«10+ regiones»** aparece en 9 lugares; la fuente dice «6–10 regiones activas» [plan §1.5]. ¿Cuántas regiones
    activas hay hoy, con nombre? (Mientras tanto: «presencia en regiones del Perú», sin número.)
 3. **«Comunidad de 75+ jóvenes formados»** (login) contradice «+135 jóvenes formados» (home). La fuente dice +135
@@ -32,5 +28,5 @@ Ordenados por urgencia. Ninguno se resuelve inventando: si no hay respuesta, la 
 11. **Logos de aliados:** ¿hay autorización escrita para mostrar logos (SENAJU, CONEII, Hult Prize, UTP…)? Sin eso, se
     listan como texto, no como cinta de logos.
 12. Misión y visión: vienen de la web anterior; ¿siguen vigentes?
-13. Testimonios reales: 3–5 citas con nombre, región, rol y permiso firmado.
+13. Testimonios **con nombre y foto**: hace falta permiso firmado (hoy son anónimos, de las encuestas).
 14. Certificado internacional (S/ 50, Instituto Internacional de Ingeniería): ¿convenio firmado? Hasta entonces sigue «En trámite».

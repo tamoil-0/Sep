@@ -7,6 +7,7 @@
 | `[plan]` | `D:\SEP\PLAN-MAESTRO-SEP.md` v1.0 (7 ago. 2026); copia en `docs/PLAN-MAESTRO-SEP.md` | Secundaria | Consolida pitch, deck y la web anterior (`sep-emprendedores.vercel.app`). Tracción §1.5, equipo §1.6, alianzas §1.7, voluntariado §1.9, colegios §1.10, FAQ §1.14, precios §10 |
 | `[web]` | Código actual: `src/config/*.ts` y páginas de `src/app/(marketing)` | Implementación | Lo que hoy se publica |
 | `[datos]` | `D:\SEP\data.txt` | Referencias | mayugo.net (referencia EdTech), Instituto Internacional de Ingeniería (aval), PMI, Agile Alliance |
+| `[encuestas]` | `encuesta_satisfaccion_de_webinars/…todas las respuestas.xlsx` (59 respuestas, 5 webinars, oct.–nov. 2026) | Primaria | Ignorada en git (tiene correos). Ficha anónima: `testimonios.md` |
 | `[equipo]` | Respuestas del equipo SEP | Primaria | Pendiente — ver `pendientes.md` |
 
 No se leyó: `docs/CREDENCIALES.md`, `.env*` (secretos).

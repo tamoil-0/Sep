@@ -24,4 +24,5 @@ Todo texto visible del sitio y de la plataforma sale de estas fichas. Igual que 
 | `cifras.md` | Cada número visible en la web, dónde aparece, fuente y estado |
 | `programas.md` | Cursos, malla, SILP, certificados y membresías |
 | `comunidad.md` | Voluntariado, red de colegios, speakers, newsletter, FAQ |
+| `testimonios.md` | Encuestas de los webinars: cifras y citas anónimas |
 | `pendientes.md` | Preguntas para el equipo SEP |
