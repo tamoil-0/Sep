@@ -9,7 +9,7 @@
 - **Framework:** Next.js 16.3 (App Router, carpeta `src/`, `src/proxy.ts` en lugar de middleware) + React 19.2 + TypeScript 5. Lee `node_modules/next/dist/docs/` antes de usar APIs de Next (ver `AGENTS.md`).
 - **Estilos:** Tailwind CSS v4 (`@tailwindcss/postcss`, sin `tailwind.config`). Paleta «Lavanda neón» en `@theme` de `src/app/globals.css` (escalas `violeta-*`, `turquesa-*`, `noche-*`, `cian-500/600`, roles `ink`, `slate-ui`, `mist`, `line`, `surface-*`, `acento`; la paleta por defecto de Tailwind está desactivada). Tema claro con bloques noche (`theme-night halo`); sin modo oscuro global. Muestra en `/dev/estilo`.
 - **Componentes:** **no usa shadcn/ui**. Hay componentes propios en `src/components/ui` (`button`, `primitives`, `toast`, `contextual-help`) construidos con `class-variance-authority` + `clsx` + `tailwind-merge` (`src/lib/utils.ts`).
-- **Íconos y fuentes:** lucide-react; Sora (títulos y cifras) + Geist (cuerpo) vía `next/font/google`.
+- **Íconos y fuentes:** lucide-react; Bricolage Grotesque (títulos y cifras) + Geist (cuerpo) vía `next/font/google`.
 - **Formularios:** react-hook-form + zod 4 (`src/lib/validations`).
 - **Base de datos y auth:** Supabase (Postgres + Auth + RLS) con `@supabase/ssr` y `@supabase/supabase-js`. Migraciones en `supabase/migrations`, seeds en `supabase/seed.sql`, tipos en `src/types/database.ts`. Server actions en `src/server/actions` y consultas en `src/server/queries`.
 - **Documentos:** pdf-lib (certificados, `src/lib/pdf`), qrcode, write-excel-file (`src/lib/excel`), date-fns.

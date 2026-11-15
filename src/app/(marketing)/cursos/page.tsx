@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { COURSE_FORMAT } from "@/config/courses";
-import { formatSoles } from "@/lib/utils";
+import { cn, formatSoles } from "@/lib/utils";
 import { CertificateOptions } from "@/components/marketing/certificate-options";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
@@ -40,7 +40,7 @@ export default async function CursosPage() {
           <div className="grid items-center gap-8 lg:grid-cols-[1fr_0.86fr] lg:gap-12">
           <div className="max-w-2xl">
             <Badge tone="success">Catálogo abierto</Badge>
-            <h1 className="mt-4 font-display text-h1 font-bold text-ink lg:text-hero">
+            <h1 className="mt-4 font-display text-h1 font-semibold text-ink lg:text-hero">
               Cursos para convertir ideas en acción
             </h1>
             <p className="mt-4 max-w-prose text-body-lg text-slate-ui">
@@ -52,28 +52,30 @@ export default async function CursosPage() {
           <RealPhoto
             src={SEP_PHOTOS.communityTeam}
             alt="Comunidad juvenil reunida durante una actividad de formación"
-            priority
             label="Formación dentro y fuera del aula"
-            className="aspect-[16/10] min-h-0"
+            className="hidden aspect-[16/10] min-h-0 lg:block"
             imageClassName="object-[50%_46%]"
           />
           </div>
 
-          <dl className="mt-9 grid grid-cols-2 gap-x-4 gap-y-5 rounded-md border border-line bg-surface-0 p-5 backdrop-blur-sm sm:p-6 lg:grid-cols-4">
-            {[
-              ["Duración", `${COURSE_FORMAT.weeks} semanas`],
-              ["Frecuencia", COURSE_FORMAT.frequency],
-              ["Sesiones", `${COURSE_FORMAT.sessionsCount} de ${COURSE_FORMAT.sessionMinutes} min`],
-              ["Modalidad", COURSE_FORMAT.modality],
-            ].map(([label, value]) => (
-              <div key={label}>
-                <dt className="text-caption font-medium tracking-eyebrow text-slate-ui">
-                  {label}
-                </dt>
-                <dd className="mt-1.5 text-body-sm font-medium text-ink">{value}</dd>
-              </div>
-            ))}
-          </dl>
+          {/* Formato común a todos los cursos (antes parecía la ficha de uno solo). */}
+          <div className="mt-9 rounded-md border border-line bg-surface-0 p-5 sm:p-6">
+            <p className="text-body-sm font-medium text-acento">Así es cada curso</p>
+            <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-5 lg:grid-cols-4">
+              {[
+                { label: "Duración", value: `${COURSE_FORMAT.weeks} semanas · ${COURSE_FORMAT.totalHours} horas`, icon: CalendarDays },
+                { label: "Ritmo", value: COURSE_FORMAT.frequency, icon: Clock },
+                { label: "Sesiones en vivo", value: `${COURSE_FORMAT.sessionsCount} de ${COURSE_FORMAT.sessionMinutes} minutos`, icon: BookOpen },
+                { label: "Costo", value: "Acceso gratuito; el certificado es opcional", icon: Sprout },
+              ].map(({ label, value, icon: Icon }) => (
+                <div key={label} className="relative pl-8">
+                  <Icon className="absolute left-0 top-0.5 size-5 text-cian-500" strokeWidth={1.75} aria-hidden />
+                  <dt className="text-caption text-slate-ui">{label}</dt>
+                  <dd className="mt-0.5 text-body-sm font-medium text-ink">{value}</dd>
+                </div>
+              ))}
+            </dl>
+          </div>
         </Container>
       </section>
 
@@ -100,13 +102,21 @@ export default async function CursosPage() {
             </div>
           ) : (
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {courses.map((c) => {
+            {[...courses]
+              .sort((a, b) => Number(b.status === "disponible") - Number(a.status === "disponible"))
+              .map((c, index) => {
               const available = c.status === "disponible";
+              // El primer curso disponible se destaca: ocupa dos columnas con la foto al lado.
+              const destacado = available && index === 0;
               return (
                 <Card
                   key={c.id}
                   interactive
-                  className="group flex flex-col overflow-hidden p-4"
+                  className={cn(
+                    "group flex flex-col overflow-hidden p-4",
+                    destacado && "sm:col-span-2 lg:grid lg:grid-cols-[1.15fr_1fr] lg:gap-6",
+                    !available && "opacity-90",
+                  )}
                   as={Link}
                   {...{ href: `/cursos/${c.slug}`, prefetch: true }}
                 >
@@ -115,8 +125,12 @@ export default async function CursosPage() {
                     title={c.title}
                     category={c.category}
                     coverUrl={c.cover_url}
-                    className="mb-4 aspect-[16/9] w-full transition-transform duration-300 group-hover:scale-[1.015]"
+                    className={cn(
+                      "mb-4 aspect-[16/9] w-full transition-transform duration-300 group-hover:scale-[1.015]",
+                      destacado && "lg:mb-0 lg:aspect-auto lg:h-full lg:min-h-72",
+                    )}
                   />
+                  <div className="flex flex-1 flex-col">
                   <div className="flex flex-wrap items-center gap-1.5 px-1">
                     {available ? (
                       <Badge tone="success">Disponible</Badge>
@@ -128,7 +142,7 @@ export default async function CursosPage() {
                   </div>
 
                   <div className="flex flex-1 flex-col px-1">
-                  <h3 className="mt-4 font-display text-body-lg font-semibold leading-snug text-ink">
+                  <h3 className={cn("mt-4 font-display font-semibold leading-snug text-ink", destacado ? "text-h3" : "text-body-lg")}>
                     {c.title}
                   </h3>
                   <p className="mt-2 flex-1 text-body-sm leading-relaxed text-slate-ui">
@@ -159,6 +173,7 @@ export default async function CursosPage() {
                       <ArrowRight aria-hidden className="size-icon-sm" />
                     </span>
                   </p>
+                  </div>
                   </div>
                 </Card>
               );

@@ -31,7 +31,7 @@ Si esta skill y `DESIGN.md` no coinciden, manda `DESIGN.md`.
 - **Degradado `grad-marca` decorativo**: nunca con texto encima. Bloques oscuros con `theme-night halo`.
 - **Componentes:** reutiliza `src/components/ui` y `src/components/forms/field.tsx`; si falta uno, créalo ahí con
   `cva` + `cn()` y la misma API. Nunca instales shadcn/ui ni librerías de animación sin preguntar.
-- **Tipografía:** Sora (`font-display`) para títulos y cifras; Geist para el resto. Escala semántica
+- **Tipografía:** Bricolage Grotesque (`font-display`) para títulos y cifras; Geist para el resto. Escala semántica
   (`text-display`…`text-caption`), nada de `text-sm`/`text-lg`.
 - **Radios:** botones y badges `rounded-full`, inputs `rounded-sm`, tarjetas `rounded-md`, flotantes `rounded-lg`.
 - **Movimiento:** solo `transform`/`opacity`, ≤ 300 ms, respetando `prefers-reduced-motion`.

@@ -127,7 +127,7 @@ Recalcula con `node .claude/skills/ui-review/scripts/contrast.mjs <fg> <bg>`.
 
 ## 4. Tipografía
 
-- **Sora** (`font-display`, variable): títulos de marketing y del producto, cifras (`Stat`, `StatBlock`, `Kpi`).
+- **Bricolage Grotesque** (`font-display`, variable con eje óptico `opsz`): títulos y cifras. Trazos con carácter que dan voz propia a SEP (cambio aprobado el 15 nov. 2026; antes Sora).
 - **Geist** (`font-sans`, por defecto): cuerpo, UI, formularios y tablas.
 - Cargadas con `next/font/google` en `src/app/layout.tsx`. No se cambian sin aprobación.
 
@@ -143,7 +143,7 @@ Recalcula con `node .claude/skills/ui-review/scripts/contrast.mjs <fg> <bg>`.
 
 - **Eyebrow:** frase normal (nunca MAYÚSCULAS espaciadas), `text-body-sm font-medium text-acento` con punto `grad-marca`
   de 6 px. Úsalo poco: no en todas las secciones.
-- Títulos en `font-semibold`. Ancho de lectura `max-w-prose`. `text-wrap: balance` en títulos y `pretty` en párrafos.
+- Títulos en `font-semibold`; nada de una palabra resaltada sola en un título. Eyebrows en minúscula normal, nunca MAYÚSCULAS espaciadas. Ancho de lectura `max-w-prose`. `text-wrap: balance` en títulos y `pretty` en párrafos.
 - En `cn()`, el `leading-*` va después del `text-*` (tailwind-merge descarta un `leading` previo).
 
 ---
