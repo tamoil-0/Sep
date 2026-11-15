@@ -53,7 +53,28 @@ export default function PreciosPage() {
       </section>
 
       {/* Cursos */}
-      <Section>
+      {/* Índice fijo: orienta en una página con cinco bloques de precios. */}
+      <nav aria-label="Secciones de precios" className="sticky top-14 z-30 border-b border-line bg-surface-0/90 backdrop-blur-md">
+        <Container size="wide">
+          <ul className="-mx-2 flex gap-1 overflow-x-auto py-2">
+            {[
+              ["#cursos", "Cursos"],
+              ["#certificados", "Certificados"],
+              ["#silp", "SILP"],
+              ["#membresias", "Membresías"],
+              ["#empresas", "Instituciones"],
+            ].map(([href, label]) => (
+              <li key={href}>
+                <a href={href} className="flex min-h-control items-center whitespace-nowrap rounded-full px-4 text-body-sm font-medium text-slate-ui transition-colors hover:bg-violeta-50 hover:text-acento">
+                  {label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </nav>
+
+      <Section id="cursos" className="scroll-mt-28">
         <Container size="wide">
           <Card className="flex flex-wrap items-center justify-between gap-6 border-turquesa-400/40 bg-turquesa-50/60 p-8">
             <div>
@@ -76,7 +97,7 @@ export default function PreciosPage() {
       </Section>
 
       {/* Certificados */}
-      <Section tone="muted" id="certificados">
+      <Section tone="muted" id="certificados" className="scroll-mt-28">
         <Container size="wide">
           <SectionHeader
             eyebrow="Certificados"
@@ -131,7 +152,7 @@ export default function PreciosPage() {
       </Section>
 
       {/* SILP */}
-      <Section>
+      <Section id="silp" className="scroll-mt-28">
         <Container size="wide">
           <SectionHeader
             eyebrow="Programa insignia"
@@ -162,7 +183,7 @@ export default function PreciosPage() {
       </Section>
 
       {/* Membresías */}
-      <Section tone="muted" id="membresias">
+      <Section tone="muted" id="membresias" className="scroll-mt-28">
         <Container size="wide">
           <SectionHeader
             eyebrow="Membresías"
@@ -244,7 +265,7 @@ export default function PreciosPage() {
       </Section>
 
       {/* B2B */}
-      <Section id="empresas">
+      <Section id="empresas" className="scroll-mt-28">
         <Container size="wide">
           <SectionHeader
             eyebrow="Programas institucionales"

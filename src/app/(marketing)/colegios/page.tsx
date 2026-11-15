@@ -60,7 +60,10 @@ export default async function ColegiosPage() {
               [String(students ?? 0), "Estudiantes impactados"],
               [String(workshops ?? 0), "Talleres realizados"],
               [String(regions.size), "Regiones activas"],
-            ].map(([value, label]) => (
+            ]
+              // Un cero en público resta confianza: solo se muestran cifras con avance.
+              .filter(([value]) => value !== "0")
+              .map(([value, label]) => (
               <div key={label}>
                 <dd className="tabular font-display text-h2 font-semibold leading-none text-acento">
                   {value}
@@ -83,10 +86,11 @@ export default async function ColegiosPage() {
               />
 
               <ul className="mt-10 space-y-5">
-                {schoolBenefits.map((b, i) => (
+                {schoolBenefits.map((b) => (
                   <li key={b.title} className="flex gap-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
-                      {i + 1}
+                    {/* Los beneficios no son una secuencia: check, no números. */}
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-turquesa-50 text-turquesa-800">
+                      <Check className="size-4" strokeWidth={2.25} aria-hidden />
                     </span>
                     <div>
                       <p className="font-display text-body font-semibold text-ink">
@@ -102,21 +106,17 @@ export default async function ColegiosPage() {
 
               {/* Proceso */}
               <div className="mt-12">
-                <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
-                  ¿Cómo funciona?
-                </p>
-                <ol className="mt-5 grid gap-4 sm:grid-cols-2">
+                <h2 className="font-display text-h4 font-semibold text-ink">¿Cómo funciona?</h2>
+                {/* El proceso SÍ es una secuencia: línea de tiempo numerada. */}
+                <ol className="mt-5 border-l border-line">
                   {schoolProcess.map((s) => (
-                    <li key={s.step} className="rounded-md border border-line p-5">
-                      <span className="tabular text-caption font-semibold text-turquesa-800">
-                        Paso {s.step}
-                      </span>
-                      <p className="mt-2 text-body-sm font-medium text-ink">
+                    <li key={s.step} className="relative py-3 pl-8">
+                      <span aria-hidden className="absolute -left-1.5 top-4.5 size-3 rounded-full bg-surface-0 ring-2 ring-turquesa-500" />
+                      <p className="text-body font-semibold text-ink">
+                        <span className="tabular mr-2 text-turquesa-800">{s.step}</span>
                         {s.title}
                       </p>
-                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">
-                        {s.detail}
-                      </p>
+                      <p className="mt-1 text-body-sm leading-relaxed text-slate-ui">{s.detail}</p>
                     </li>
                   ))}
                 </ol>
@@ -125,14 +125,12 @@ export default async function ColegiosPage() {
               {/* Colegios activos */}
               {schools.length > 0 && (
                 <div className="mt-12">
-                  <p className="text-body-sm font-semibold tracking-eyebrow text-slate-ui">
-                    Colegios en la red
-                  </p>
+                  <h2 className="font-display text-h4 font-semibold text-ink">Colegios en la red</h2>
                   <ul className="mt-4 grid gap-2.5 sm:grid-cols-2">
                     {schools.map((s) => (
                       <li
                         key={s.id}
-                        className="flex items-center gap-3 rounded-sm border border-line bg-white px-4 py-3"
+                        className="flex items-center gap-3 rounded-sm border border-line bg-surface-0 px-4 py-3"
                       >
                         <School className="size-4 shrink-0 text-turquesa-800" />
                         <div className="min-w-0">

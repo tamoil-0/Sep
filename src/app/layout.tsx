@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Sora } from "next/font/google";
+import { Bricolage_Grotesque, Geist } from "next/font/google";
 import { siteConfig } from "@/config/site";
 import { ToastProvider } from "@/components/ui/toast";
 import { RevealObserver } from "@/components/ui/reveal-observer";
@@ -14,10 +14,13 @@ const geist = Geist({
   display: "swap",
 });
 
-const sora = Sora({
+// Títulos: Bricolage Grotesque, con trazos de carácter que le dan voz propia a
+// SEP; el eje óptico (opsz) ajusta el dibujo a cada tamaño. Cuerpo: Geist.
+const titulo = Bricolage_Grotesque({
   subsets: ["latin"],
-  variable: "--font-sora",
+  variable: "--font-titulo",
   display: "swap",
+  axes: ["opsz"],
 });
 
 export const metadata: Metadata = {
@@ -79,7 +82,7 @@ export default function RootLayout({
     <html
       lang="es-PE"
       data-scroll-behavior="smooth"
-      className={`${geist.variable} ${sora.variable}`}
+      className={`${geist.variable} ${titulo.variable}`}
     >
       <body className="antialiased">
         <a

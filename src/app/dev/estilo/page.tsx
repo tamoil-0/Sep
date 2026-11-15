@@ -218,7 +218,7 @@ export default async function EstiloPage() {
       {/* ── Tipografía ── */}
       <Section>
         <Container size="wide">
-          <SectionHeader as="h2" title="Tipografía" description="Sora para títulos y cifras; Geist para cuerpo, interfaz y tablas." />
+          <SectionHeader as="h2" title="Tipografía" description="Bricolage Grotesque para títulos y cifras; Geist para cuerpo, interfaz y tablas." />
           <ul className="mt-8 divide-y divide-line border-y border-line">
             {tipos.map(([token, texto, clase]) => (
               <li key={token} className="grid gap-2 py-4 md:grid-cols-[10rem_1fr] md:items-baseline">
