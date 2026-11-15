@@ -70,7 +70,7 @@ export default function DocentesPage() {
               <SectionHeader
                 eyebrow="El programa"
                 title="Metodologías ágiles en el aula"
-                description="6 sesiones de 2 horas, interdiario, 100 % virtual. Al terminar tienes diseñado un proyecto real para tu próximo bimestre."
+                description="6 sesiones de 80 minutos (8 horas), interdiario, 100 % virtual. Al terminar tienes diseñado un proyecto real para tu próximo bimestre."
               />
 
               <ul className="mt-8 space-y-3">

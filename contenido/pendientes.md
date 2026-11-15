@@ -14,7 +14,7 @@ Ordenados por urgencia. Ninguno se resuelve inventando: si no hay respuesta, la 
 5. 18 talleres realizados y 48 speakers en la red: ¿fecha de corte y fuente?
 6. 1,200+ suscriptores y 89–94 % de apertura del newsletter; 1,000+ jóvenes de alcance para speakers; 300+ escolares
    (el pitch da 5 × 15 = 75).
-7. Duración de los cursos: «6 sesiones de 2 h» suman 12 h, pero se publica «8 h». ¿Cuál es la correcta?
+7. ✅ Duración: 8 h (6 sesiones de 80 min), decisión del equipo.
 8. SILP: ¿18 sesiones en vivo? (solo está en el código). ¿Tarifa comercial S/ 350 confirmada?
 9. Equipo: ¿son 9 personas incluyendo al CTO (Jhon Aracayo)? El pitch muestra 8 nombres.
 

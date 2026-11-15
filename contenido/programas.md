@@ -4,8 +4,8 @@
 2 semanas · interdiario (3 sesiones/semana) · sesiones de 2 h · **8 h por curso** · 100 % virtual, plataforma SEP ·
 **acceso gratuito siempre**. (En la web: `src/config/courses.ts:38-42`.)
 
-> El [deck] dice «2 h por sesión» y «8 h en total» con 6 sesiones: 6 × 2 = 12 h, no 8. La web muestra «8 h · 6 sesiones».
-> → [COMPLETAR] confirmar si son 8 h (6 sesiones de ~80 min) o 12 h.
+> ✅ Decisión del equipo (15 nov. 2026): **8 h = 6 sesiones de 80 min**. El [deck] decía «2 h por sesión» (12 h);
+> la web ya no lo muestra.
 
 ## Catálogo [deck] [plan §1.8] → `src/config/courses.ts`
 | Curso | Público | Estado en la web | Fuente |
@@ -22,7 +22,7 @@ Semana 2 — Ideación, prototipado y testeo: 4) Brainstorming sin límites (SCA
 rápido («fallar rápido para aprender rápido») 6) Testeo + presentación de proyectos (mini-pitch).
 
 ## SILP — Social Impact Leadership Program
-- Programa de liderazgo de **6 semanas** [deck]; «18 sesiones en vivo» en `silp/page.tsx:64` y `courses.ts:170` ⚠️.
+- Programa de liderazgo de **6 semanas** [deck]; temario y entregables por semana en `docs/SILP_Programa_y_Cronograma.xlsx` ✅ (publicado en `/silp`). «18 sesiones» = 6 semanas × 3 interdiario.
 - Tarifa social **S/ 200** [pitch] ✅ (`pricing.ts`, `confirmed: true`). Tarifa comercial S/ 350 (`confirmed: false`) ⚠️.
   Becado para voluntarios activos ✅ (`confirmed: true`).
 

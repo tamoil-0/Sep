@@ -70,7 +70,7 @@ export default async function DocenteProgramaPage() {
           <EmptyState
             icon={<Clock className="size-5" />}
             title="La malla se publica al abrir la cohorte"
-            description="Serán 6 sesiones de 2 horas, interdiario, 100 % virtuales."
+            description="Serán 6 sesiones de 80 minutos (8 horas), interdiario, 100 % virtuales."
           />
         ) : (
           <Card className="p-0">
