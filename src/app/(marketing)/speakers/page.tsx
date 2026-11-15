@@ -5,7 +5,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -50,7 +49,7 @@ export default async function SpeakersPage() {
           <div className="max-w-2xl">
             <Badge tone="brand">{count ?? 0} speakers en la red</Badge>
             <h1 className="mt-5 font-display text-h1 font-bold leading-[1.08] text-ink sm:text-display">
-              ¿Tienes algo que <AccentUnderline>contar</AccentUnderline>?
+              ¿Tienes algo que contar?
             </h1>
             <p className="mt-5 text-body-lg leading-relaxed text-slate-ui">
               ¿Eres especialista en metodologías ágiles, innovación social o un referente

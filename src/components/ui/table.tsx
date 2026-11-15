@@ -83,7 +83,7 @@ export function DataTable<T>({
                 <th
                   key={c.key}
                   scope="col"
-                  className={cn("px-4 py-3 text-caption font-semibold uppercase tracking-marca text-slate-ui", c.numeric && "text-right")}
+                  className={cn("px-4 py-3 text-body-sm font-medium text-slate-ui", c.numeric && "text-right")}
                 >
                   {c.header || <span className="sr-only">Acciones</span>}
                 </th>

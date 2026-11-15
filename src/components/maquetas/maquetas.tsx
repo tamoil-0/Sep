@@ -65,7 +65,7 @@ export function PantallaLeccion() {
   const sesiones = ["¿Qué es Design Thinking?", "Empatía: conoce a tu usuario", "Definición del problema", "Ideación sin límites"];
   return (
     <div className="px-4 pb-5 pt-2">
-      <p className="text-caption font-semibold uppercase tracking-marca text-acento">Curso de ejemplo</p>
+      <p className="text-body-sm font-medium text-acento">Curso de ejemplo</p>
       <p className="mt-1 font-display text-body font-semibold leading-snug text-ink">Design Thinking aplicado</p>
       {/* Video */}
       <div className="halo relative mt-3 flex aspect-video items-center justify-center rounded-md">
@@ -124,10 +124,10 @@ export function PantallaCertificado() {
     }
   return (
     <div className="grid gap-4 p-5 sm:grid-cols-[1fr_auto] sm:items-center">
-      <div className="esc-emerger-fijo rounded-md border border-line bg-surface-0 p-4" style={t(0)}>
+      <div className="rounded-md border border-line bg-surface-0 p-4">
         <div className="flex items-center gap-2">
           <Award className="size-4 text-acento" />
-          <p className="text-caption font-semibold uppercase tracking-marca text-acento">Certificado SEP</p>
+          <p className="text-body-sm font-medium text-acento">Certificado SEP</p>
         </div>
         <p className="mt-3 text-caption text-slate-ui">Se certifica que</p>
         <p className="font-display text-h4 font-semibold text-ink">Ana Q.</p>

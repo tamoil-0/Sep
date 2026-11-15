@@ -671,6 +671,20 @@ dialog.dialogo::backdrop {
   .escena [class*="esc-"] { animation: none !important; opacity: 1 !important; transform: none !important; }
 }
 
+/* ── Cabecera del panel: las métricas se montan sobre su borde ── */
+.cabecera-panel:has(+ .kpi-grid) {
+  margin-bottom: 0;
+  padding-bottom: 4.5rem;
+}
+.cabecera-panel + .kpi-grid {
+  position: relative;
+  margin-top: -3rem;
+  padding-inline: 0.75rem;
+}
+@media (min-width: 640px) {
+  .cabecera-panel + .kpi-grid { padding-inline: 1.5rem; }
+}
+
 /* ── Ritmo de color en las métricas de los paneles ──
    Violeta (1.º), turquesa (2.º) y chip neón (3.º): color con intención sin
    romper la proporción 60/25/10/5. */

@@ -4,7 +4,6 @@ import {
   Badge,
   Card,
   Container,
-  AccentUnderline,
   Section,
   SectionHeader,
 } from "@/components/ui/primitives";
@@ -129,7 +128,7 @@ export default function NosotrosPage() {
             title={
               <>
                 El talento está en regiones. Las{" "}
-                <AccentUnderline>oportunidades</AccentUnderline> se quedan en Lima.
+                oportunidades se quedan en Lima.
               </>
             }
           />

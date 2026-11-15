@@ -41,9 +41,12 @@ export function MotivoSemilla({
   className,
   label = "Ilustración: una semilla brota y se ramifica en una red de nueve nodos, el impacto en cadena de SEP.",
   ciclo = 9,
+  decorativo = false,
 }: {
   className?: string;
   label?: string;
+  /** Solo ornamento (lo oculta a lectores de pantalla). */
+  decorativo?: boolean;
   /** Duración del ciclo del pulso, en segundos. */
   ciclo?: number;
 }) {
@@ -53,8 +56,9 @@ export function MotivoSemilla({
   return (
     <svg
       viewBox="0 0 400 400"
-      role="img"
-      aria-label={label}
+      role={decorativo ? undefined : "img"}
+      aria-label={decorativo ? undefined : label}
+      aria-hidden={decorativo || undefined}
       data-anim
       className={cn("motivo-semilla overflow-visible", className)}
       style={{ ["--d" as string]: `${ciclo}s` }}
