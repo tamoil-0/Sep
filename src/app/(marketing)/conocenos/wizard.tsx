@@ -480,8 +480,8 @@ export function DiagnosticWizard({
             <dl className="mt-8 grid grid-cols-3 gap-4 border-t border-line pt-6 text-center">
               {[
                 ["S/ 0", "Costo de acceso"],
-                ["135+", "Jóvenes formados"],
-                ["10+", "Regiones alcanzadas"],
+                ["+135", "Jóvenes capacitados"],
+                ["13", "Regiones con participantes"],
               ].map(([value, label]) => (
                 <div key={label}>
                   <dd className="tabular font-display text-h2 font-bold leading-none text-acento">

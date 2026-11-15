@@ -52,7 +52,7 @@ export default async function SpeakerPage() {
       <KpiGrid>
         <Kpi label="Invitaciones pendientes" value={pending.length} icon={<Mail className="size-4" />} />
         <Kpi label="Charlas confirmadas" value={accepted.length} icon={<Mic className="size-4" />} />
-        <Kpi label="Jóvenes alcanzables" value="1,000+" hint="En 10+ regiones" icon={<Globe className="size-4" />} />
+        <Kpi label="Jóvenes alcanzables" value="1,000+" hint="En 13 regiones" icon={<Globe className="size-4" />} />
         <Kpi
           label="Perfil público"
           value={speaker?.is_public ? "Visible" : "Oculto"}

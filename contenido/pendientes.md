@@ -5,12 +5,9 @@ Ordenados por urgencia. Ninguno se resuelve inventando: si no hay respuesta, la 
 ## Alta — afecta la confianza o la exactitud de lo publicado hoy
 
 1. ✅ **Resuelto (15 nov.):** `/testimonios` ya no muestra las citas ficticias; ahora usa 6 citas anónimas y las cifras de las encuestas de los webinars (`testimonios.md`).
-2. **«10+ regiones»** aparece en 9 lugares; la fuente dice «6–10 regiones activas» [plan §1.5]. ¿Cuántas regiones
-   activas hay hoy, con nombre? (Mientras tanto: «presencia en regiones del Perú», sin número.)
-3. **«Comunidad de 75+ jóvenes formados»** (login) contradice «+135 jóvenes formados» (home). La fuente dice +135
-   capacitados en Áncash [pitch] y 75+ *miembros de comunidad* [plan]. ¿Cuál es la cifra vigente de cada cosa?
-4. **«5 colegios aliados»**: el pitch dice 5 colegios *impactados*; el plan nombra solo 2 activos (San Bartolomé y
-   República de Perú). ¿Cuáles son los 5 y cuáles siguen activos?
+2. ✅ Regiones: «13 regiones con participantes» [encuestas] (decisión del equipo, 15 nov.).
+3. ✅ Comunidad: «+135 jóvenes líderes capacitados» [pitch].
+4. ✅ Colegios: «5 colegios impactados» [pitch]; la página `/colegios` lista los de la base.
 
 ## Media — cifras sin fuente primaria (se pueden mantener si las confirman)
 
@@ -25,8 +22,8 @@ Ordenados por urgencia. Ninguno se resuelve inventando: si no hay respuesta, la 
 
 10. **Fotos:** hay 10 fotos reales en `public/img/`. Para el rediseño hacen falta: 1 foto horizontal fuerte para el hero
     (grupo en acción, buena luz), 2–3 retratos de mentores/universitarios en taller, 1 foto de colegio. Con permiso de uso.
-11. **Logos de aliados:** ¿hay autorización escrita para mostrar logos (SENAJU, CONEII, Hult Prize, UTP…)? Sin eso, se
-    listan como texto, no como cinta de logos.
+11. **Logos de aliados:** autorizados por el equipo (15 nov.), pero **no hay archivos** en el repo. Envíen los logos en
+    SVG o PNG (fondo transparente) y se arma la cinta; mientras tanto, se listan como texto.
 12. Misión y visión: vienen de la web anterior; ¿siguen vigentes?
 13. Testimonios **con nombre y foto**: hace falta permiso firmado (hoy son anónimos, de las encuestas).
 14. Certificado internacional (S/ 50, Instituto Internacional de Ingeniería): ¿convenio firmado? Hasta entonces sigue «En trámite».

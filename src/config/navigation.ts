@@ -58,7 +58,7 @@ export const marketingNav: NavItem[] = [
       {
         label: "Red de speakers",
         href: "/speakers",
-        description: "Comparte tu historia con jóvenes de 10+ regiones.",
+        description: "Comparte tu historia con jóvenes de 13 regiones.",
       },
       {
         label: "Convocatorias",

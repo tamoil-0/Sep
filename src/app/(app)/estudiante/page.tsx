@@ -119,9 +119,9 @@ export default async function EstudiantePage() {
           icon={<Clock className="size-4" />}
         />
         <Kpi
-          label="Regiones activas"
-          value="10+"
-          hint="En toda la comunidad SEP"
+          label="Regiones en SEP"
+          value="13"
+          hint="Con participantes en los webinars"
           icon={<CalendarDays className="size-4" />}
         />
       </KpiGrid>

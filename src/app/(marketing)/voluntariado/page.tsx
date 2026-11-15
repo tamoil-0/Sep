@@ -84,7 +84,7 @@ export default function VoluntariadoPage() {
             {[
               ["3", "Roles disponibles"],
               ["12", "Voluntarios activos"],
-              ["10+", "Regiones alcanzadas"],
+              ["13", "Regiones con participantes"],
               [String(totalPositions), "Vacantes abiertas"],
             ].map(([value, label]) => (
               <div key={label}>

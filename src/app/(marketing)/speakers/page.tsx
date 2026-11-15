@@ -17,7 +17,7 @@ import { assertQueryResults } from "@/lib/supabase/query";
 export const metadata = createPageMetadata({
   title: "Red de speakers",
   description:
-    "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 10+ regiones del Perú.",
+    "¿Eres especialista en metodologías ágiles o innovación social? Únete a la red de speakers de SEP e inspira a jóvenes de 13 regiones del Perú.",
   path: "/speakers",
   keywords: ["speakers Perú", "ponentes emprendimiento", "red de mentores Perú"],
 });

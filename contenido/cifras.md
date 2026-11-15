@@ -16,11 +16,11 @@ Estado: ✅ verificada en pitch/deck · ⚠️ solo en el Plan Maestro (web ante
 |---|---|---|---|---|
 | +135 jóvenes líderes formados | `site.ts:47` (hero de la home); «135+ Jóvenes formados» en `conocenos/wizard.tsx:483` | [pitch] «+135 jóvenes líderes capacitados y validados en Áncash» | ✅ | Texto fiel: «capacitados en Áncash» |
 | 60 universitarios | — | [pitch] | ✅ | Disponible |
-| 5 colegios aliados | `site.ts:49` | [pitch] «5 colegios impactados (15 escolares por colegio)» | ✅ | «impactados», no «aliados»: el [plan §1.10] lista solo 2 colegios activos |
-| 10+ regiones | `site.ts:48`, `(auth)/layout.tsx:13`, `navigation.ts:61`, `empresas/page.tsx:86`, `voluntariado/page.tsx:87`, `conocenos/wizard.tsx:484`, `speakers/page.tsx:20`, `speaker/invitaciones/page.tsx:53`, `estudiante/page.tsx:103` | [plan §1.5] «Regiones activas 6–10» | ❌ | La fuente dice **6 a 10**, no «10+». Aparece en 9 lugares |
+| 5 colegios aliados | `site.ts:49` | [pitch] «5 colegios impactados (15 escolares por colegio)» | ✅ | Etiqueta corregida a «Colegios impactados» [pitch]; `/colegios` lista los de la base |
+| 10+ regiones | `site.ts:48`, `(auth)/layout.tsx:13`, `navigation.ts:61`, `empresas/page.tsx:86`, `voluntariado/page.tsx:87`, `conocenos/wizard.tsx:484`, `speakers/page.tsx:20`, `speaker/invitaciones/page.tsx:53`, `estudiante/page.tsx:103` | [plan §1.5] «Regiones activas 6–10» | ✅ (15 nov.) | Decisión del equipo: usar el dato real **13 regiones** con participantes [encuestas], con esa etiqueta. Reemplazado en los 9 lugares |
 | 18 talleres realizados | `site.ts:50` | [plan §1.5] | ⚠️ | No está en los PDF |
 | 48 speakers en la red | `site.ts:51` | [plan §1.5] | ⚠️ | No está en los PDF |
-| Comunidad de 75+ jóvenes formados | `(auth)/layout.tsx:15` | [plan §1.5] «Miembros de comunidad 75+» | ❌ | La fuente habla de **miembros de comunidad**, no de formados; y choca con «+135 formados» de la home |
+| Comunidad de 75+ jóvenes formados | `(auth)/layout.tsx:15` | [plan §1.5] «Miembros de comunidad 75+» | ✅ (15 nov.) | Reemplazado por «+135 jóvenes líderes capacitados» [pitch], el dato más reciente |
 | 1,000+ jóvenes de alcance | `speaker/invitaciones/page.tsx:53` | [plan §1.11] | ⚠️ | |
 | 1,200+ suscriptores / apertura 89–94 % | (no visible hoy) | [plan §1.12] | ⚠️ | No usar sin confirmar |
 | 300+ escolares | — | [plan §1.5] | ⚠️ | El pitch da 5 × 15 = 75; no cuadra con 300+ |

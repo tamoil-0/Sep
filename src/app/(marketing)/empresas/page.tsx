@@ -83,7 +83,7 @@ export default function EmpresasPage() {
               {
                 icon: Globe,
                 title: "Alcance regional real",
-                body: "10+ regiones fuera de Lima, con presencia validada en Áncash desde 2024.",
+                body: "Participantes de 13 regiones del Perú y presencia validada en Áncash desde 2024.",
               },
               {
                 icon: ChartNoAxesCombined,
