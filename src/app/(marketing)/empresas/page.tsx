@@ -21,6 +21,10 @@ import { formatSoles } from "@/lib/utils";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Para empresas y organizaciones",
   description:

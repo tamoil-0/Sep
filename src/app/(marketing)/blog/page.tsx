@@ -18,7 +18,9 @@ export const metadata = createPageMetadata({
   keywords: ["blog de emprendimiento Perú", "innovación social", "liderazgo juvenil"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 

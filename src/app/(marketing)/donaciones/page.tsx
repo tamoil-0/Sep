@@ -9,6 +9,10 @@ import {
 import { DonationForm } from "./donation-form";
 import { SupportQrDialog } from "@/components/marketing/support-qr-dialog";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Dona y apoya a jóvenes emprendedores",
   description:

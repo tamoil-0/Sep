@@ -20,7 +20,9 @@ export const metadata = createPageMetadata({
   keywords: ["convocatorias para jóvenes Perú", "convocatorias emprendimiento", "oportunidades universitarios Perú"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 export default async function ConvocatoriasPage() {
   const supabase = createPublicClient();

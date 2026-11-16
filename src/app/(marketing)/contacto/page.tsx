@@ -4,6 +4,10 @@ import { Card, Container, Section, SectionHeader } from "@/components/ui/primiti
 import { Button } from "@/components/ui/button";
 import { siteConfig } from "@/config/site";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Contacto",
   description:

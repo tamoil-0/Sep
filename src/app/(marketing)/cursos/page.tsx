@@ -18,6 +18,9 @@ import { CertificateOptions } from "@/components/marketing/certificate-options";
 import { siteConfig } from "@/config/site";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+
 export const metadata = createPageMetadata({
   title: "Cursos de emprendimiento y liderazgo",
   description:

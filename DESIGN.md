@@ -34,6 +34,13 @@
 | Azul noche | `#212B38` | `noche-900` | Fondo oscuro principal: hero, navbar, panel de marca del login |
 
 ### 2.2 Escalas (`bg-*`, `text-*`, `border-*`, `ring-*`)
+
+> **Actualización (15 nov. 2026, feedback del equipo):** la escala `noche-*` pasó de azul pizarra (se veía «plomo») a
+> **noche índigo** con tinte violeta: 50 `#F6F5FB` · 100 `#EFEDF7` · 200 `#E3E0EF` · 300 `#BEB8D6` · 400 `#9891B5` ·
+> 500 `#5E5880` · 600 `#4A4466` · 700 `#36315A` · 800 `#26223F` · **900 `#1B1832`** · 950 `#120F22`. Contrastes
+> recalculados: ink 17.17 sobre blanco · slate-ui 9.09 · mist 6.60 (6.09 sobre noche-50) · noche-300 sobre noche-900 9.01 ·
+> mist en noche 5.78 sobre tarjeta · cian 13.40. Las tablas de abajo conservan los valores anteriores como referencia.
+
 | Paso | `violeta-*` | `turquesa-*` | `noche-*` |
 |---|---|---|---|
 | 50 | `#F4F3FF` | `#EBFAF8` | `#F5F7FA` fondo claro «hielo» |

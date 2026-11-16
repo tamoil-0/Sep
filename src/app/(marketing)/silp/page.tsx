@@ -7,6 +7,10 @@ import { Card, Container, Section, SectionHeader } from "@/components/ui/primiti
 import { silpPricing } from "@/config/pricing";
 import { formatSoles } from "@/lib/utils";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "SILP — Social Impact Leadership Program",
   description:

@@ -8,6 +8,9 @@ import { Logo } from "@/components/brand/logo";
 import { formatDate } from "@/lib/utils";
 import { assertQueryResults } from "@/lib/supabase/query";
 
+// Siempre en vivo: un certificado revocado o recién emitido debe verse al instante.
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Resultado de verificación",
   robots: { index: false, follow: false },

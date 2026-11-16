@@ -21,7 +21,9 @@ export const metadata = createPageMetadata({
   keywords: ["eventos de emprendimiento Perú", "webinars gratuitos", "ferias de innovación"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 

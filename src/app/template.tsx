@@ -1,26 +1,10 @@
-"use client";
-
-import { useEffect, useRef } from "react";
+import { PaginaEntra } from "@/components/ui/pagina-entra";
 
 /**
- * Transición entre páginas (REDISEÑO §6.3): fade + 8 px en 300 ms, SOLO al
- * navegar. La primera carga se marca `ya-vista` para no retrasar el LCP;
- * después, `<html class="navegado">` activa la animación en cada página nueva.
+ * Template de SERVIDOR: solo pasa `children` al componente cliente. Si el
+ * template fuera "use client", Next le serializa sus props y eso impide
+ * prerenderizar las páginas (todas quedaban dinámicas y lentas).
  */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const ref = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const html = document.documentElement;
-    if (!html.classList.contains("navegado")) {
-      ref.current?.classList.add("ya-vista");
-      html.classList.add("navegado");
-    }
-  }, []);
-
-  return (
-    <div ref={ref} className="pagina-entra">
-      {children}
-    </div>
-  );
+  return <PaginaEntra>{children}</PaginaEntra>;
 }
