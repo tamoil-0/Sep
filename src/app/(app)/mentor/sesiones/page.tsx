@@ -96,7 +96,7 @@ export default async function MentorSesionesPage() {
                 const c = Array.isArray(s.courses) ? s.courses[0] : s.courses;
                 return (
                   <li key={s.id} className="flex flex-wrap items-center gap-3 px-5 py-4">
-                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
+                    <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-100 text-caption font-semibold text-acento">
                       {s.number}
                     </span>
                     <div className="min-w-0 flex-1">

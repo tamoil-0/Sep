@@ -12,6 +12,7 @@ import {
 import { BackLink } from "@/components/ui/arrow-link";
 import { createPublicClient } from "@/lib/supabase/public";
 import { getCourseBySlug } from "@/server/queries/courses";
+import { courses, silp } from "@/config/courses";
 import { Badge, Card, Container, Section } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import { CourseMedia } from "@/components/marketing/course-media";
@@ -22,7 +23,13 @@ import { assertQueryResults } from "@/lib/supabase/query";
 
 // La ruta se resuelve con una solicitud real: un fallo de datos nunca se publica como 404.
 // Las consultas conservan su caché de 5 minutos en `server/queries/courses`.
-export const dynamic = "force-dynamic";
+// ISR: cada curso se genera en el build y se sirve al instante desde la CDN;
+// se regenera cada 5 min (antes `force-dynamic` consultaba la base en cada visita).
+export const revalidate = 300;
+
+export async function generateStaticParams() {
+  return [...courses.map((c) => ({ slug: c.slug })), { slug: silp.slug }];
+}
 
 export async function generateMetadata({
   params,
@@ -100,7 +107,7 @@ export default async function CursoPublicoPage({
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <CalendarDays className="size-4 text-mist" />
-                  {course.sessions_count} sesiones de 80 min
+                  {course.sessions_count} sesiones de {Math.round((course.total_hours * 60) / Math.max(1, course.sessions_count))} min
                 </span>
                 <span className="inline-flex items-center gap-2">
                   <Repeat className="size-4 text-mist" />
@@ -186,7 +193,7 @@ export default async function CursoPublicoPage({
                       .filter((s) => s.week === week)
                       .map((s) => (
                         <li key={s.id} className="flex gap-4 p-5">
-                          <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
+                          <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-100 text-caption font-semibold text-acento">
                             {s.number}
                           </span>
                           <div>

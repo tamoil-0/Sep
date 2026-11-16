@@ -89,7 +89,7 @@ export default async function ColegiosPage() {
                 {schoolBenefits.map((b) => (
                   <li key={b.title} className="flex gap-4">
                     {/* Los beneficios no son una secuencia: check, no números. */}
-                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-turquesa-50 text-turquesa-800">
+                    <span className="flex size-8 shrink-0 items-center justify-center rounded-full bg-turquesa-100 text-turquesa-800">
                       <Check className="size-4" strokeWidth={2.25} aria-hidden />
                     </span>
                     <div>

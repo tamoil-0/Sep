@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import {
   ArrowRight,
+  Check,
   Building2,
   GraduationCap,
   Presentation,
@@ -38,6 +39,7 @@ import {
 } from "@/components/marketing/real-photo";
 import { faqs, impactStats, partners, siteConfig } from "@/config/site";
 import { getCatalog } from "@/server/queries/courses";
+import { courses } from "@/config/courses";
 import { getPublishedPosts } from "@/server/queries/public-content";
 
 // Los bloques con datos reales se resuelven por solicitud para no publicar un
@@ -65,6 +67,9 @@ const partnerCategoryLabels = {
   aval: "Aval",
 } as const;
 
+// Curso que el hero ofrece: el primero disponible (datos estáticos: no frena la carga).
+const cursoAbierto = courses.find((c) => c.status === "disponible") ?? courses[0];
+
 export default function HomePage() {
 
   return (
@@ -74,35 +79,60 @@ export default function HomePage() {
         <Container size="wide" className="relative">
           <div className="grid items-center gap-10 pb-12 pt-12 sm:pt-16 lg:grid-cols-[1.2fr_0.8fr] lg:gap-14 lg:pb-16 lg:pt-20">
             <div className="max-w-2xl">
-              <MotivoSemilla className="-ml-3 mb-2 w-20 lg:hidden" ciclo={8} />
-              <Eyebrow className="text-cian-500">Desde las regiones del Perú</Eyebrow>
+              <Eyebrow className="text-cian-500">Formación gratuita para jóvenes de todo el Perú</Eyebrow>
 
+              {/* La oferta, dicha en la primera línea (feedback: «el hero tiene que vender»). */}
               <h1 className="mt-5 font-display text-h1 font-semibold text-ink sm:text-display">
-                Ideas jóvenes que se convierten en proyectos con impacto.
+                Aprende a emprender y liderar. Gratis, en vivo y desde tu región.
               </h1>
 
               <p className="mt-6 max-w-xl text-body-lg text-slate-ui">
-                Cursos gratuitos de Design Thinking, Scrum y liderazgo, 100 % virtuales. Te formas, y
-                luego llevas lo aprendido a los colegios de tu propia región.
+                Cursos cortos de Design Thinking, Scrum y liderazgo con proyectos reales. Terminas con un
+                certificado verificable y una red de jóvenes que, como tú, quieren cambiar su comunidad.
               </p>
 
-              <div className="mt-9 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
+              <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
                 <Button href="/registro" variant="neon" size="lg" prefetch>
-                  Crea tu cuenta gratis <ArrowRight aria-hidden />
+                  Empieza gratis hoy <ArrowRight aria-hidden />
                 </Button>
-                <Button href="/nosotros" variant="outline-white" size="lg" prefetch>
-                  Conoce SEP
+                <Button href="/cursos" variant="outline-white" size="lg" prefetch>
+                  Ver los cursos
                 </Button>
               </div>
-              <p className="mt-5 text-body-sm text-slate-ui">
-                ¿Quieres sostener esta red?{" "}
-                <Link href="/donaciones" className="enlace-trazo font-medium text-ink">
-                  Apoya a SEP con una donación
-                </Link>
-              </p>
+
+              <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-body-sm text-slate-ui">
+                {["Acceso 100 % gratuito", "Certificado con código verificable", "+135 jóvenes capacitados"].map((t) => (
+                  <li key={t} className="flex items-center gap-2">
+                    <span className="flex size-5 items-center justify-center rounded-full bg-turquesa-500 text-noche-900">
+                      <Check className="size-3" strokeWidth={3} aria-hidden />
+                    </span>
+                    {t}
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            <HeroPhoto />
+            {/* La oferta concreta: el curso abierto ahora, a un clic. */}
+            <div className="relative">
+              <HeroPhoto />
+              <Link
+                href={`/cursos/${cursoAbierto.slug}`}
+                className="tarjeta-viva group relative mt-2 block rounded-lg p-5 shadow-elevated lg:absolute lg:-bottom-6 lg:-left-10 lg:mt-0 lg:w-80"
+              >
+                <span className="flex items-center gap-2 text-caption font-medium text-success">
+                  <span className="size-2 rounded-full bg-turquesa-500 motion-safe:animate-pulse" aria-hidden />
+                  Inscripciones abiertas
+                </span>
+                <span className="mt-2 block font-display text-h4 font-semibold text-ink">{cursoAbierto.title}</span>
+                <span className="mt-1 block text-body-sm text-slate-ui">
+                  {cursoAbierto.sessionsCount} sesiones en vivo · {cursoAbierto.totalHours} horas · Gratis
+                </span>
+                <span className="mt-4 inline-flex items-center gap-1.5 text-body-sm font-semibold text-acento">
+                  Inscríbete
+                  <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                </span>
+              </Link>
+            </div>
           </div>
 
           {/* ═══ 2 · MÉTRICAS: dentro del hero, separadas por filetes ═══ */}

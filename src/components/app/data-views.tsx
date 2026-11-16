@@ -118,7 +118,7 @@ export function ComingSoon({
   return (
     <Card className="p-5 sm:p-8">
       <div className="mx-auto max-w-lg text-center">
-        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-50 text-acento">
+        <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-100 text-acento">
           {icon}
         </span>
         <h2 className="mt-5 text-h4 font-semibold text-ink">

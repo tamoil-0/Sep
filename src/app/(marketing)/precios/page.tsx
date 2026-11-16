@@ -325,7 +325,7 @@ export default function PreciosPage() {
         <Container size="wide">
           <div className="grid gap-5 lg:grid-cols-2">
             <Card className="p-8">
-              <div className="flex size-11 items-center justify-center rounded-md bg-turquesa-50 text-turquesa-800">
+              <div className="flex size-11 items-center justify-center rounded-md bg-turquesa-100 text-turquesa-800">
                 <HeartHandshake className="size-5" />
               </div>
               <h2 className="mt-5 font-display text-h3 font-semibold text-ink">

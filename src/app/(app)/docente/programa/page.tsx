@@ -77,7 +77,7 @@ export default async function DocenteProgramaPage() {
             <ul className="divide-y divide-line">
               {sessions.map((s) => (
                 <li key={s.id} className="flex gap-4 p-5">
-                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-50 text-caption font-semibold text-acento">
+                  <span className="tabular flex size-8 shrink-0 items-center justify-center rounded-full bg-violeta-100 text-caption font-semibold text-acento">
                     {s.number}
                   </span>
                   <div>

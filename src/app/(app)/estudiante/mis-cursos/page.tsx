@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, BookOpen, Check, Clock } from "lucide-react";
 import { requireRole } from "@/lib/auth/session";
-import { getMyEnrollments } from "@/server/queries/courses";
+import { getCatalog, getMyEnrollments } from "@/server/queries/courses";
 import { PageHeader } from "@/components/app/page-header";
 import { Badge, Card, EmptyState, ProgressBar } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
@@ -12,7 +12,12 @@ export const metadata: Metadata = { title: "Mis cursos" };
 
 export default async function MisCursosPage() {
   const user = await requireRole(["estudiante", "mentor", "admin", "super_admin"]);
-  const enrollments = await getMyEnrollments(user.id);
+  const [enrollments, catalog] = await Promise.all([getMyEnrollments(user.id), getCatalog()]);
+  // Cursos que se pueden empezar ya: disponibles, primero los gratuitos.
+  const startable = catalog
+    .filter((c) => c.status === "disponible")
+    .sort((a, b) => Number(b.is_free) - Number(a.is_free))
+    .slice(0, 4);
 
   const active = enrollments.filter((e) => e.status === "activo");
   const completed = enrollments.filter((e) => e.status === "completado");
@@ -31,12 +36,51 @@ export default async function MisCursosPage() {
       />
 
       {enrollments.length === 0 ? (
-        <EmptyState
-          icon={<BookOpen className="size-5" />}
-          title="Aún no estás en ningún curso"
-          description="Explora el catálogo y revisa la modalidad, disponibilidad y condiciones de cada curso."
-          action={<Button href="/estudiante/catalogo">Ver el catálogo</Button>}
-        />
+        <>
+          {/* Vacío con dirección: los cursos que puede empezar hoy, a un clic. */}
+          <EmptyState
+            icon={<BookOpen className="size-5" />}
+            title="Aún no te inscribes en ningún curso"
+            description="Aquí verás los cursos en los que te inscribas, con tu avance. Empieza por uno de estos: son gratuitos."
+          />
+          {startable.length > 0 && (
+            <section className="mt-6" aria-labelledby="empezar-titulo">
+              <h2 id="empezar-titulo" className="mb-3 font-display text-h4 font-semibold text-ink">
+                Puedes empezar hoy
+              </h2>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {startable.map((c) => (
+                  <li key={c.slug}>
+                    <Link
+                      href={`/estudiante/curso/${c.slug}`}
+                      className="tarjeta-viva group flex h-full items-center gap-4 rounded-md p-4"
+                    >
+                      <span className="flex size-11 shrink-0 items-center justify-center rounded-full bg-violeta-600 text-white">
+                        <BookOpen className="size-5" strokeWidth={1.75} aria-hidden />
+                      </span>
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-medium text-ink">{c.title}</span>
+                        <span className="block text-caption text-slate-ui">
+                          {c.total_hours} h · {c.sessions_count} sesiones · {c.is_free ? "Gratuito" : "Con costo"}
+                        </span>
+                      </span>
+                      <span className="flex shrink-0 items-center gap-1 text-body-sm font-medium text-acento">
+                        Empezar
+                        <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-1" aria-hidden />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+              <p className="mt-4 text-body-sm text-slate-ui">
+                ¿Buscas otro tema?{" "}
+                <Link href="/estudiante/catalogo" className="font-medium text-acento underline underline-offset-4">
+                  Ver todo el catálogo
+                </Link>
+              </p>
+            </section>
+          )}
+        </>
       ) : (
         <>
           {active.length > 0 && (

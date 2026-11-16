@@ -29,11 +29,19 @@ export interface CatalogCourse {
 }
 
 const CATEGORIES = ["Todos", "Metodologías ágiles", "Liderazgo", "Para docentes", "SILP"];
+/** Filtro por costo: lo más pedido en la prueba con voluntarios. */
+const COSTOS = [
+  { value: "todos", label: "Todos" },
+  { value: "gratis", label: "Gratuitos" },
+  { value: "pago", label: "Con costo" },
+] as const;
+type Costo = (typeof COSTOS)[number]["value"];
 
 export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
   const router = useRouter();
   const [query, setQuery] = React.useState("");
   const [category, setCategory] = React.useState("Todos");
+  const [costo, setCosto] = React.useState<Costo>("todos");
   const [busy, setBusy] = React.useState<string | null>(null);
   const [error, setError] = React.useState<string | null>(null);
 
@@ -45,13 +53,15 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
       c.title.toLowerCase().includes(q) ||
       (c.description ?? "").toLowerCase().includes(q) ||
       (c.subtitle ?? "").toLowerCase().includes(q);
-    return matchesCategory && matchesQuery;
+    const matchesCosto = costo === "todos" || (costo === "gratis" ? c.isFree : !c.isFree);
+    return matchesCategory && matchesQuery && matchesCosto;
   });
-  const hasFilters = query.trim().length > 0 || category !== "Todos";
+  const hasFilters = query.trim().length > 0 || category !== "Todos" || costo !== "todos";
 
   function clearFilters() {
     setQuery("");
     setCategory("Todos");
+    setCosto("todos");
   }
 
   async function enroll(slug: string) {
@@ -83,17 +93,36 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
           />
         </div>
 
-        <div className="flex flex-wrap gap-1.5">
+        {/* Costo: control segmentado, separado de los temas */}
+        <div role="group" aria-label="Filtrar por costo" className="inline-flex rounded-full bg-surface-2 p-1">
+          {COSTOS.map((o) => (
+            <button
+              key={o.value}
+              type="button"
+              aria-pressed={costo === o.value}
+              onClick={() => setCosto(o.value)}
+              className={cn(
+                "min-h-control rounded-full px-4 text-body-sm font-medium transition-colors duration-200",
+                costo === o.value ? "bg-surface-0 text-ink shadow-soft" : "text-slate-ui hover:text-ink",
+              )}
+            >
+              {o.label}
+            </button>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-1.5" role="group" aria-label="Filtrar por tema">
           {CATEGORIES.map((c) => (
             <button
               key={c}
               type="button"
               onClick={() => setCategory(c)}
+              aria-pressed={category === c}
               className={cn(
-                "min-h-control rounded-sm px-3.5 py-2 text-body-sm font-medium transition-colors",
+                "min-h-control rounded-full px-4 py-2 text-body-sm font-medium transition-colors",
                 category === c
                   ? "bg-violeta-600 text-white"
-                  : "bg-white text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
+                  : "bg-surface-0 text-graphite ring-1 ring-inset ring-line hover:bg-surface-2",
               )}
             >
               {c}
@@ -104,7 +133,8 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
           <div className="flex flex-wrap items-center gap-3 text-caption text-slate-ui" role="status">
             <span>
               Mostrando {visible.length} de {courses.length} cursos
-              {category !== "Todos" ? ` en “${category}”` : ""}.
+              {category !== "Todos" ? ` en “${category}”` : ""}
+              {costo !== "todos" ? (costo === "gratis" ? ", gratuitos" : ", con costo") : ""}.
             </span>
             <button
               type="button"

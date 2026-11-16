@@ -26,7 +26,7 @@ export default async function SeguridadPage() {
       <div className="grid gap-5 lg:grid-cols-2">
         <Card>
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-100 text-acento">
               <KeyRound className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
@@ -45,7 +45,7 @@ export default async function SeguridadPage() {
 
         <Card className={needsMfa ? "border-warning/30 bg-warning-bg/40" : ""}>
           <div className="flex items-start gap-3.5">
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-100 text-turquesa-800">
               <Smartphone className="size-5" />
             </span>
             <div className="min-w-0 flex-1">
