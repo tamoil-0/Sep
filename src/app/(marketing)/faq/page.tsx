@@ -4,6 +4,10 @@ import { Button } from "@/components/ui/button";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
 import { faqs, siteConfig } from "@/config/site";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Preguntas frecuentes",
   description:

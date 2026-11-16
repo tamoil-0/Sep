@@ -7,6 +7,10 @@ import { VolunteerForm } from "./volunteer-form";
 import { createPageMetadata } from "@/lib/seo";
 import { BackLink } from "@/components/ui/arrow-link";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export function generateStaticParams() {
   return volunteerRoles.map((r) => ({ rol: r.slug }));
 }

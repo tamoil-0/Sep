@@ -8,7 +8,9 @@ import { siteConfig } from "@/config/site";
 import { assertQueryResults } from "@/lib/supabase/query";
 import { BackLink } from "@/components/ui/arrow-link";
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 export async function generateMetadata({
   params,

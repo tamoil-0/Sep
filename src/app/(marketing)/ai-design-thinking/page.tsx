@@ -13,6 +13,10 @@ import {
 } from "@/components/marketing/program";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "AI Design Thinking para universitarios y docentes",
   description:

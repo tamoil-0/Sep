@@ -1,6 +1,6 @@
-import { CourseSkeleton } from "@/components/ui/course-skeleton";
+import { CargandoSEP } from "@/components/ui/cargando-sep";
 
-/** Aula del curso: silueta inmediata mientras se cargan sesiones y progreso. */
+/** Aula del curso: carga de marca mientras llegan sesiones y progreso. */
 export default function CursoLoading() {
-  return <CourseSkeleton />;
+  return <CargandoSEP mensaje="Abriendo tu curso…" />;
 }

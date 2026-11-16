@@ -8,6 +8,7 @@ import { enrollAction } from "@/server/actions/learning";
 import { Badge, Card, EmptyState } from "@/components/ui/primitives";
 import { Input } from "@/components/forms/field";
 import { CourseMedia } from "@/components/marketing/course-media";
+import { CargandoSEP } from "@/components/ui/cargando-sep";
 import { formatSoles, cn } from "@/lib/utils";
 
 export interface CatalogCourse {
@@ -69,17 +70,22 @@ export function CourseCatalog({ courses }: { courses: CatalogCourse[] }) {
     setError(null);
     try {
       const result = await enrollAction(slug);
-      if (result.ok) router.push(`/estudiante/curso/${slug}`);
-      else setError(result.error);
+      if (result.ok) {
+        // Se mantiene la carga de marca hasta que abre el aula (no se limpia `busy`).
+        router.push(`/estudiante/curso/${slug}`);
+        return;
+      }
+      setError(result.error);
+      setBusy(null);
     } catch {
       setError("No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.");
-    } finally {
       setBusy(null);
     }
   }
 
   return (
     <>
+      {busy && <CargandoSEP variant="overlay" mensaje="Inscribiéndote en el curso…" />}
       {/* Filtros */}
       <div className="mb-6 space-y-3">
         <div className="relative max-w-sm">

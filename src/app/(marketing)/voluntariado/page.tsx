@@ -25,6 +25,10 @@ import {
   volunteerRoles,
 } from "@/config/volunteering";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Voluntariado juvenil en Perú",
   description:

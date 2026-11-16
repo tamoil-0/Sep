@@ -22,7 +22,9 @@ export const metadata = createPageMetadata({
   keywords: ["speakers Perú", "ponentes emprendimiento", "red de mentores Perú"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 export default async function SpeakersPage() {
   const supabase = createPublicClient();

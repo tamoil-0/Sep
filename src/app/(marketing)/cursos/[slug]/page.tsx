@@ -21,6 +21,9 @@ import { siteConfig } from "@/config/site";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 import { assertQueryResults } from "@/lib/supabase/query";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+
 // La ruta se resuelve con una solicitud real: un fallo de datos nunca se publica como 404.
 // Las consultas conservan su caché de 5 minutos en `server/queries/courses`.
 // ISR: cada curso se genera en el build y se sirve al instante desde la CDN;

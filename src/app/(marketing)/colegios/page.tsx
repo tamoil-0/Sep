@@ -20,7 +20,9 @@ export const metadata = createPageMetadata({
   keywords: ["talleres gratuitos para colegios", "innovación escolar Perú", "red de colegios SEP"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 

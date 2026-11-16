@@ -10,6 +10,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { RealPhoto, SEP_PHOTOS } from "@/components/marketing/real-photo";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Programa gratuito para docentes",
   description:

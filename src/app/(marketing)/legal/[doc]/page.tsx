@@ -4,6 +4,10 @@ import { Container, Section } from "@/components/ui/primitives";
 import { siteConfig } from "@/config/site";
 import { createPageMetadata } from "@/lib/seo";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 const DOCS = ["terminos", "privacidad", "cookies"] as const;
 type Doc = (typeof DOCS)[number];
 

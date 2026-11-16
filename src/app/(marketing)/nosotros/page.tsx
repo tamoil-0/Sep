@@ -13,6 +13,10 @@ import { VideoPresentacion } from "@/components/marketing/video-presentacion";
 import { impactChain, partners, problemStats, siteConfig } from "@/config/site";
 import { initials } from "@/lib/utils";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Quiénes somos",
   description:

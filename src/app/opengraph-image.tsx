@@ -24,7 +24,7 @@ export default async function OpenGraphImage() {
         overflow: "hidden",
         // Halo «Lavanda neón» (no admite variables CSS: se renderiza fuera de globals.css).
         background:
-          "radial-gradient(60% 65% at 0% 0%, rgba(114,101,255,0.35), transparent 70%), radial-gradient(50% 60% at 100% 100%, rgba(4,255,225,0.12), transparent 70%), #212b38",
+          "radial-gradient(60% 65% at 0% 0%, rgba(114,101,255,0.35), transparent 70%), radial-gradient(50% 60% at 100% 100%, rgba(4,255,225,0.12), transparent 70%), #1b1832",
         padding: "72px 78px",
         color: "white",
         fontFamily: "Arial, sans-serif",

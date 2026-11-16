@@ -3,6 +3,10 @@ import { ShieldCheck } from "lucide-react";
 import { Container, Section, SectionHeader } from "@/components/ui/primitives";
 import { VerifyForm } from "./verify-form";
 
+// Estática con ISR: no lee la petición; se sirve desde la CDN.
+export const dynamic = "force-static";
+export const revalidate = 300;
+
 export const metadata = createPageMetadata({
   title: "Verificar certificado",
   description:

@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
+import { Button } from "@/components/ui/button";
+import { CargandoSEP } from "@/components/ui/cargando-sep";
 import { useRouter } from "next/navigation";
-import { Loader2 } from "lucide-react";
 
 export function EnrollCta({
   slug,
@@ -13,6 +14,8 @@ export function EnrollCta({
 }) {
   const router = useRouter();
   const [busy, setBusy] = React.useState(false);
+  // La carga de marca sigue visible hasta que el aula termina de actualizarse.
+  const [refreshing, startTransition] = React.useTransition();
   const [error, setError] = React.useState<string | null>(null);
 
   async function enroll() {
@@ -21,7 +24,7 @@ export function EnrollCta({
     try {
       const { enrollAction } = await import("@/server/actions/learning");
       const result = await enrollAction(slug);
-      if (result.ok) router.refresh();
+      if (result.ok) startTransition(() => router.refresh());
       else setError(result.error);
     } catch {
       setError("No pudimos conectarnos. Revisa tu conexión e inténtalo nuevamente.");
@@ -40,20 +43,15 @@ export function EnrollCta({
 
   return (
     <div>
+      {(busy || refreshing) && <CargandoSEP variant="overlay" mensaje="Inscribiéndote en el curso…" />}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <p className="text-body-sm text-graphite">
           El curso es <strong className="font-medium text-ink">gratuito</strong>. Solo el
           certificado tiene costo, y es opcional.
         </p>
-        <button
-          type="button"
-          onClick={enroll}
-          disabled={busy}
-          className="inline-flex min-h-control items-center justify-center gap-2 rounded-sm bg-violeta-600 px-5 text-body-sm font-medium text-white  transition-colors  disabled:opacity-60"
-        >
-          {busy && <Loader2 className="size-4 animate-spin" />}
+        <Button onClick={enroll} loading={busy || refreshing}>
           Inscribirme gratis
-        </button>
+        </Button>
       </div>
 
       {error && (

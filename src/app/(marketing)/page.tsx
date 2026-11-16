@@ -44,7 +44,8 @@ import { getPublishedPosts } from "@/server/queries/public-content";
 
 // Los bloques con datos reales se resuelven por solicitud para no publicar un
 // catálogo vacío si la fuente está temporalmente inaccesible durante el build.
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
 import { formatSoles } from "@/lib/utils";
 import { createPageMetadata, serializeJsonLd } from "@/lib/seo";
 

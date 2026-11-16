@@ -21,7 +21,9 @@ export const metadata = createPageMetadata({
   keywords: ["jóvenes emprendedores Perú", "historias de emprendimiento", "testimonios SEP"],
 });
 
-export const dynamic = "force-dynamic";
+// Estática con ISR: no lee la petición (cookies ni parámetros) y sus datos son públicos.
+export const dynamic = "force-static";
+export const revalidate = 300;
 
 const stats = [
   { value: String(webinarSurveyStats.responses), label: `respuestas en ${webinarSurveyStats.webinars} webinars` },
