@@ -122,7 +122,7 @@ export const appNav: Record<UserRole, NavItem[]> = {
   estudiante: [
     { label: "Inicio", href: "/estudiante", icon: "LayoutDashboard" },
     { label: "Mis cursos", href: "/estudiante/mis-cursos", icon: "BookOpen" },
-    { label: "Catálogo", href: "/estudiante/catalogo", icon: "LibraryBig" },
+    { label: "Explorar cursos", href: "/estudiante/catalogo", icon: "LibraryBig" },
     { label: "Comunidad", href: "/estudiante/comunidad", icon: "Users" },
     { label: "Certificados", href: "/estudiante/certificados", icon: "Award" },
     { label: "Eventos", href: "/estudiante/eventos", icon: "CalendarDays" },

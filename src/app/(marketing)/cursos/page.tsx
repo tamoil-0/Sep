@@ -26,7 +26,8 @@ export const metadata = createPageMetadata({
   keywords: ["cursos de emprendimiento", "Design Thinking Perú", "Scrum Perú"],
 });
 
-export const dynamic = "force-dynamic";
+// ISR: el catálogo se sirve estático y se regenera cada 5 min.
+export const revalidate = 300;
 
 /** ISR: la página se sirve estática y se regenera cada 5 min. */
 

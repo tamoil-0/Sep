@@ -171,6 +171,12 @@
      de progreso, anillo de logro y halo. Nunca lleva texto encima ni se usa
      como color de texto. */
   --grad-marca: linear-gradient(
+    120deg,
+    var(--color-violeta-600) 0%,
+    var(--color-violeta-500) 100%
+  );
+  /* El degradado completo de la marca vive solo en la semilla (firma). */
+  --grad-semilla: linear-gradient(
     135deg,
     var(--color-violeta-500) 0%,
     var(--color-turquesa-500) 65%,
@@ -179,8 +185,8 @@
   /* Halo: violeta al 35 % arriba a la izquierda y cian al 12 % abajo a la
      derecha, sobre noche-900. Es el único gesto memorable del sistema. */
   --halo-marca:
-    radial-gradient(60% 65% at 0% 0%, color-mix(in srgb, var(--color-violeta-500) 35%, transparent), transparent 70%),
-    radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--color-cian-500) 12%, transparent), transparent 70%),
+    radial-gradient(60% 65% at 0% 0%, color-mix(in srgb, var(--color-violeta-500) 22%, transparent), transparent 70%),
+    radial-gradient(50% 60% at 100% 100%, color-mix(in srgb, var(--color-cian-500) 6%, transparent), transparent 70%),
     var(--color-noche-900);
 
   /* Semánticos para CSS propio (no clases). */
@@ -689,7 +695,7 @@ dialog.dialogo::backdrop {
    Violeta (1.º), turquesa (2.º) y chip neón (3.º): color con intención sin
    romper la proporción 60/25/10/5. */
 .kpi-grid > :nth-child(3n + 2) .kpi-icono {
-  background: var(--color-turquesa-50);
+  background: var(--color-turquesa-100);
   color: var(--color-turquesa-800);
 }
 .kpi-grid > :nth-child(3n + 3) .kpi-icono {

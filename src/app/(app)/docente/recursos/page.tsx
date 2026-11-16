@@ -40,7 +40,7 @@ export default async function DocenteRecursosPage() {
             {g.items.map((r) => (
               <Card key={r.name} className="flex flex-col p-5">
                 <div className="flex items-start justify-between gap-3">
-                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
+                  <span className="flex size-9 shrink-0 items-center justify-center rounded-sm bg-turquesa-100 text-turquesa-800">
                     <FolderOpen className="size-4" />
                   </span>
                   <Badge tone="neutral">{r.level}</Badge>

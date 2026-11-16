@@ -98,7 +98,7 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/seguridad" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-100 text-acento">
             <ShieldCheck className="size-5" />
           </span>
           <div className="min-w-0">
@@ -115,7 +115,7 @@ export default async function CuentaPage() {
           as={Link}
           {...{ href: "/cuenta/notificaciones" }}
         >
-          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-100 text-turquesa-800">
             <Bell className="size-5" />
           </span>
           <div className="min-w-0 flex-1">

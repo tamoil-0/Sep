@@ -114,7 +114,7 @@ export default function VoluntariadoPage() {
                   <div className="grid gap-8 p-7 lg:grid-cols-[1.2fr_1fr]">
                     <div>
                       <div className="flex items-start justify-between gap-4">
-                        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-violeta-50 text-acento">
+                        <span className="flex size-11 shrink-0 items-center justify-center rounded-md bg-violeta-100 text-acento">
                           <Icon className="size-5" />
                         </span>
                         <Badge tone="neon">

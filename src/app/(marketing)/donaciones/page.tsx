@@ -67,7 +67,7 @@ export default function DonacionesPage() {
                 {impact.map((i) => (
                   <li key={i.amount}>
                     <Card className="flex items-start gap-4 p-5">
-                      <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-50 text-turquesa-800">
+                      <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-turquesa-100 text-turquesa-800">
                         <i.icon className="size-5" />
                       </span>
                       <div>

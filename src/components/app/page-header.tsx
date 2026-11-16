@@ -71,7 +71,7 @@ export function Kpi({
           <span
             className={cn(
               "hidden size-9 items-center justify-center rounded-full sm:flex [&_svg]:size-4",
-              destacada ? "bg-noche-900 text-cian-500" : "kpi-icono bg-violeta-50 text-acento",
+              destacada ? "bg-noche-900 text-cian-500" : "kpi-icono bg-violeta-100 text-acento",
             )}
           >
             {icon}

@@ -110,7 +110,7 @@ export default async function ConvocatoriasPage() {
               <li key={c.key}>
                 <Card className="flex h-full flex-col p-6">
                   <div className="flex items-start justify-between gap-3">
-                    <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-50 text-acento">
+                    <span className="flex size-10 shrink-0 items-center justify-center rounded-sm bg-violeta-100 text-acento">
                       <c.icon className="size-5" />
                     </span>
                     <Badge tone={c.tone}>{c.kind}</Badge>

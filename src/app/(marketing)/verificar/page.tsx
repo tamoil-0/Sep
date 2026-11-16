@@ -16,7 +16,7 @@ export default function VerificarPage() {
     <Section tone="night" className="py-20 md:py-28 lg:py-32">
       <Container size="narrow">
         <div className="text-center">
-          <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-50 text-acento">
+          <span className="mx-auto flex size-12 items-center justify-center rounded-md bg-violeta-100 text-acento">
             <ShieldCheck className="size-6" />
           </span>
           <div className="mt-6">

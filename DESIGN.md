@@ -76,10 +76,10 @@ primario sigue siendo oscuro. Para texto violeta usa siempre `text-acento`, no `
 `.theme-light` restaura el claro dentro de un bloque noche (menús y diálogos que flotan).
 
 ### 2.4 Degradado y halo
-- **`--grad-marca`** (`.grad-marca`): `linear-gradient(135deg, #7265FF 0%, #0BC6AB 65%, #04FFE1 100%)`. **Decorativo**:
+- **`--grad-marca`** (`.grad-marca`): violeta sobrio `linear-gradient(120deg, violeta-600, violeta-500)` (feedback de voluntarios, 15 nov.: el morado→turquesa→cian en toda la interfaz «parecía IA»). El degradado completo vive solo en la semilla (`--grad-semilla`). **Decorativo**:
   bordes encendidos, reglas, barra de progreso, punto del eyebrow, anillo de logro y halo. **Nunca** lleva texto encima
   ni se usa como color de texto. `AccentUnderline` (`.subrayado-marca`) subraya una palabra con este trazo.
-- **`--halo-marca`** (`.halo`): radial violeta 35 % arriba a la izquierda + radial cian 12 % abajo a la derecha sobre
+- **`--halo-marca`** (`.halo`): radial violeta 22 % arriba a la izquierda + radial cian 6 % abajo a la derecha (más sobrio) sobre
   `noche-900`. Atajos: `<Section tone="night">`, `PageHero tone="gradient"` y `className="theme-night halo"`.
   `.halo-grid` añade una malla tenue (solo en el hero de la home).
 - **Proporción por pantalla:** ~60 % neutros, ~25 % violeta, ~10 % turquesa, ≤ 5 % cian.

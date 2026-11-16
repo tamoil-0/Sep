@@ -10,7 +10,7 @@ export default async function NotFound() {
     <main id="contenido" className="flex min-h-dvh items-center justify-center bg-surface-1 px-4 py-12">
       <div className="w-full max-w-lg text-center">
         <Logo className="mx-auto h-12" />
-        <span className="mx-auto mt-10 flex size-14 items-center justify-center rounded-lg bg-violeta-50 text-acento">
+        <span className="mx-auto mt-10 flex size-14 items-center justify-center rounded-lg bg-violeta-100 text-acento">
           <Compass className="size-6" />
         </span>
         <p className="mt-6 text-body-sm font-semibold tracking-eyebrow text-acento">Error 404</p>
